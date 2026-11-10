@@ -84,6 +84,12 @@ export const CATEGORIES: Category[] = [
     "name": "Cartoons",
     "hue": 48,
     "description": "Saturday morning cartoons, indie animation series & classic toons"
+  },
+  {
+    "id": "industry",
+    "name": "Industry",
+    "hue": 32,
+    "description": "How things are made, factory production lines, CNC machining & mass manufacturing"
   }
 ];
 
@@ -5725,6 +5731,414 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Cartoon Network",
         "thumbnailUrl": "https://i.ytimg.com/vi/brWNC87c3Ac/hqdefault.jpg",
         "durationSec": 1097
+      }
+    ]
+  },
+  "industry": {
+    "categoryId": "industry",
+    "categoryName": "Industry",
+    "hue": 32,
+    "builtAt": 1794347206006,
+    "videos": [
+      {
+        "youtubeVideoId": "ZMf6mL9xehI",
+        "title": "PARM（パルム）を大量生産するプロセス。「なめらかなアイス」と「口どけの良いチョコ」が同時にとけ合う、大人のための上質なバーアイス。",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZMf6mL9xehI/hqdefault.jpg",
+        "durationSec": 1107
+      },
+      {
+        "youtubeVideoId": "l5eLV1zblvA",
+        "title": "Inside a Factory Mass Producing Laminated Bread",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/l5eLV1zblvA/hqdefault.jpg",
+        "durationSec": 948
+      },
+      {
+        "youtubeVideoId": "mrlx7CN6sUA",
+        "title": "Funny Instagram vid deeeze haha breakfast MDB styles",
+        "sourceChannelId": "UCNP1mwtQKwZ2At6QRkJk4tw",
+        "sourceChannelTitle": "FACTORYmonster",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mrlx7CN6sUA/hqdefault.jpg",
+        "durationSec": 890
+      },
+      {
+        "youtubeVideoId": "C626UsA5m3U",
+        "title": "Vietnam Bag Mass Production Factory Running Hundreds of Sewing Machines Nonstop",
+        "sourceChannelId": "UCSNIT8Z40XgB4RKk9Vhf1eA",
+        "sourceChannelTitle": "All process of world",
+        "thumbnailUrl": "https://i.ytimg.com/vi/C626UsA5m3U/hqdefault.jpg",
+        "durationSec": 774
+      },
+      {
+        "youtubeVideoId": "g1ObfIJ9iHY",
+        "title": "Awesome Process Live Stream",
+        "sourceChannelId": "UCB9PwFQwTg9ig42xwKsfSEg",
+        "sourceChannelTitle": "Awesome Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/g1ObfIJ9iHY/hqdefault.jpg",
+        "durationSec": 1185
+      },
+      {
+        "youtubeVideoId": "0r9FLr9Quhw",
+        "title": "How Korea Builds Miniature Bullet Trains from Real Train Blueprints",
+        "sourceChannelId": "UCbW5tOCMJcgGGK6YtVqCLuA",
+        "sourceChannelTitle": "king process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0r9FLr9Quhw/hqdefault.jpg",
+        "durationSec": 641
+      },
+      {
+        "youtubeVideoId": "sJ2njpdz6AM",
+        "title": "CNC Machining an Aston Martin",
+        "sourceChannelId": "UCc2lUKVOTXKlQR7Fm7h1JfQ",
+        "sourceChannelTitle": "TITANS of CNC MACHINING",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sJ2njpdz6AM/hqdefault.jpg",
+        "durationSec": 1489
+      },
+      {
+        "youtubeVideoId": "uZhpH5LOK_M",
+        "title": "Steak That's STILL Alive?! | Strange Evidence | Science Channel",
+        "sourceChannelId": "UCvJiYiBUbw4tmpRSZT2r1Hw",
+        "sourceChannelTitle": "Science Channel",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uZhpH5LOK_M/hqdefault.jpg",
+        "durationSec": 612
+      },
+      {
+        "youtubeVideoId": "gi1ivBzadTs",
+        "title": "Inside the World’s Biggest Stage | Friedrichstadt-Palast Secrets! | WELT Documentary",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gi1ivBzadTs/hqdefault.jpg",
+        "durationSec": 1086
+      },
+      {
+        "youtubeVideoId": "347FNmhBVLM",
+        "title": "3,300 Women, Just 20 Guards | Inside the Philippines' Largest Women's Prison | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/347FNmhBVLM/hqdefault.jpg",
+        "durationSec": 654
+      },
+      {
+        "youtubeVideoId": "ZZTC_dXcC2o",
+        "title": "Do you think Hard Disk Drives are Slow? Think again.",
+        "sourceChannelId": "UCdp4_l1vPmpN-gDbUwhaRUQ",
+        "sourceChannelTitle": "Branch Education",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZZTC_dXcC2o/hqdefault.jpg",
+        "durationSec": 1073
+      },
+      {
+        "youtubeVideoId": "BuRyQYf03xA",
+        "title": "My dog won't stay out of mud so I made this...",
+        "sourceChannelId": "UCj1VqrHhDte54oLgPG4xpuQ",
+        "sourceChannelTitle": "Stuff Made Here",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BuRyQYf03xA/hqdefault.jpg",
+        "durationSec": 1008
+      },
+      {
+        "youtubeVideoId": "hksOKMqCqZs",
+        "title": "Vampires?  I'M READY!",
+        "sourceChannelId": "UC5NO8MgTQKHAWXp6z8Xl7yQ",
+        "sourceChannelTitle": "This Old Tony",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hksOKMqCqZs/hqdefault.jpg",
+        "durationSec": 1423
+      },
+      {
+        "youtubeVideoId": "Sc9H0aCIrmU",
+        "title": "Blown Head Gasket - Datsun 240Z Engine Restoration (Part 1)",
+        "sourceChannelId": "UCMrMVIBtqFW6O0-MWq26gqw",
+        "sourceChannelTitle": "my mechanics",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Sc9H0aCIrmU/hqdefault.jpg",
+        "durationSec": 652
+      },
+      {
+        "youtubeVideoId": "_CtsnmZFjVE",
+        "title": "A Wedge-Style Hand Vise - Part 5 (Making the Jaw Ends & Final Assembly)",
+        "sourceChannelId": "UCworsKCR-Sx6R6-BnIjS2MA",
+        "sourceChannelTitle": "Clickspring",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_CtsnmZFjVE/hqdefault.jpg",
+        "durationSec": 677
+      },
+      {
+        "youtubeVideoId": "2XR7pX45LFw",
+        "title": "Suction Nozzle Repair for Industrial Water Pump",
+        "sourceChannelId": "UCw3UZn1tcVe7pH3R6C3Gcng",
+        "sourceChannelTitle": "Abom79",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2XR7pX45LFw/hqdefault.jpg",
+        "durationSec": 983
+      },
+      {
+        "youtubeVideoId": "NoVq4BieIDI",
+        "title": "Our Monster Megabore Lathe Gets Put to Work! | CAT 777F Hub Repair",
+        "sourceChannelId": "UC2wdo5vU7bPBNzyC2nnwmNQ",
+        "sourceChannelTitle": "Cutting Edge Engineering Australia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NoVq4BieIDI/hqdefault.jpg",
+        "durationSec": 1220
+      },
+      {
+        "youtubeVideoId": "sxqa-V9rFSA",
+        "title": "創業200年の神技！この世で最も美しい音色を奏でる「佐波理おりん」と日本の金属職人たち",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sxqa-V9rFSA/hqdefault.jpg",
+        "durationSec": 1493
+      },
+      {
+        "youtubeVideoId": "10E4u59_5dg",
+        "title": "How China Mass Produces Gel Pens Full Process",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/10E4u59_5dg/hqdefault.jpg",
+        "durationSec": 724
+      },
+      {
+        "youtubeVideoId": "8eZ0fwmVj70",
+        "title": "From sth Auckland to Minnesota haha MDBWORLDWIDE",
+        "sourceChannelId": "UCNP1mwtQKwZ2At6QRkJk4tw",
+        "sourceChannelTitle": "FACTORYmonster",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8eZ0fwmVj70/hqdefault.jpg",
+        "durationSec": 866
+      },
+      {
+        "youtubeVideoId": "8NgRwNFwArk",
+        "title": "Process of Coconut Husks Becoming Walkway Mats. Vietnamese Coir Factory",
+        "sourceChannelId": "UCSNIT8Z40XgB4RKk9Vhf1eA",
+        "sourceChannelTitle": "All process of world",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8NgRwNFwArk/hqdefault.jpg",
+        "durationSec": 1061
+      },
+      {
+        "youtubeVideoId": "PEgGXzHBGVs",
+        "title": "From Fallproof Ladders to Ladder Trucks for High Rise Moves! Amazing Korean Ladder Technology",
+        "sourceChannelId": "UCbW5tOCMJcgGGK6YtVqCLuA",
+        "sourceChannelTitle": "king process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PEgGXzHBGVs/hqdefault.jpg",
+        "durationSec": 917
+      },
+      {
+        "youtubeVideoId": "RsQjRqgiatM",
+        "title": "The Final Operation on Our MASSIVE Blisk",
+        "sourceChannelId": "UCc2lUKVOTXKlQR7Fm7h1JfQ",
+        "sourceChannelTitle": "TITANS of CNC MACHINING",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RsQjRqgiatM/hqdefault.jpg",
+        "durationSec": 1355
+      },
+      {
+        "youtubeVideoId": "Uadcj9NHUr8",
+        "title": "Parthenon, Machu Picchu and Stonehenge | If We Built It Today | Science Channel",
+        "sourceChannelId": "UCvJiYiBUbw4tmpRSZT2r1Hw",
+        "sourceChannelTitle": "Science Channel",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Uadcj9NHUr8/hqdefault.jpg",
+        "durationSec": 1143
+      },
+      {
+        "youtubeVideoId": "mZkpSpvOeNE",
+        "title": "SPACETIME TO SLEEP: Sail through the infinite Sea of Stars | Season 7 I WELT HD Documentary",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mZkpSpvOeNE/hqdefault.jpg",
+        "durationSec": 1276
+      },
+      {
+        "youtubeVideoId": "H4jRIXwVDKs",
+        "title": "The Ayoreo People | Paraguay: Fighting to Remain Uncontacted | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/H4jRIXwVDKs/hqdefault.jpg",
+        "durationSec": 714
+      },
+      {
+        "youtubeVideoId": "N_6k_jd5pnA",
+        "title": "How does Tap to Pay Work?",
+        "sourceChannelId": "UCdp4_l1vPmpN-gDbUwhaRUQ",
+        "sourceChannelTitle": "Branch Education",
+        "thumbnailUrl": "https://i.ytimg.com/vi/N_6k_jd5pnA/hqdefault.jpg",
+        "durationSec": 1013
+      },
+      {
+        "youtubeVideoId": "RpslsMqPFWA",
+        "title": "I made an apple peel itself",
+        "sourceChannelId": "UCj1VqrHhDte54oLgPG4xpuQ",
+        "sourceChannelTitle": "Stuff Made Here",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpslsMqPFWA/hqdefault.jpg",
+        "durationSec": 984
+      },
+      {
+        "youtubeVideoId": "wyBkLyGWZyU",
+        "title": "Magnets Aren't Always Right!",
+        "sourceChannelId": "UC5NO8MgTQKHAWXp6z8Xl7yQ",
+        "sourceChannelTitle": "This Old Tony",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wyBkLyGWZyU/hqdefault.jpg",
+        "durationSec": 1170
+      },
+      {
+        "youtubeVideoId": "24KolOaqA6Q",
+        "title": "The Datsun 240Z Restoration So Far - 2.5 Years in One Video (Part 1-8)",
+        "sourceChannelId": "UCMrMVIBtqFW6O0-MWq26gqw",
+        "sourceChannelTitle": "my mechanics",
+        "thumbnailUrl": "https://i.ytimg.com/vi/24KolOaqA6Q/hqdefault.jpg",
+        "durationSec": 919
+      },
+      {
+        "youtubeVideoId": "-Xchbq3PGZc",
+        "title": "A Wedge-Style Hand Vise - Part 4 (Making the Vise Jaws)",
+        "sourceChannelId": "UCworsKCR-Sx6R6-BnIjS2MA",
+        "sourceChannelTitle": "Clickspring",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-Xchbq3PGZc/hqdefault.jpg",
+        "durationSec": 1224
+      },
+      {
+        "youtubeVideoId": "qn2DhXLKwN4",
+        "title": "Thread Milling 3/4-10 with Conversational Programming",
+        "sourceChannelId": "UCw3UZn1tcVe7pH3R6C3Gcng",
+        "sourceChannelTitle": "Abom79",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qn2DhXLKwN4/hqdefault.jpg",
+        "durationSec": 879
+      },
+      {
+        "youtubeVideoId": "nAB85zQpzC4",
+        "title": "In Loving Memory of Homey | 2012 ~ 2026",
+        "sourceChannelId": "UC2wdo5vU7bPBNzyC2nnwmNQ",
+        "sourceChannelTitle": "Cutting Edge Engineering Australia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nAB85zQpzC4/hqdefault.jpg",
+        "durationSec": 1402
+      },
+      {
+        "youtubeVideoId": "888H_cEwueM",
+        "title": "サメ水揚げから財布ができるまで！命を無駄なく生かす日本の職人",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/888H_cEwueM/hqdefault.jpg",
+        "durationSec": 1225
+      },
+      {
+        "youtubeVideoId": "SnutX0cu8LY",
+        "title": "China’s Biggest Armored Door Factory: Real Footage",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SnutX0cu8LY/hqdefault.jpg",
+        "durationSec": 1187
+      },
+      {
+        "youtubeVideoId": "uraLpjKExdQ",
+        "title": "BROWNHILL -ganja farmer live",
+        "sourceChannelId": "UCNP1mwtQKwZ2At6QRkJk4tw",
+        "sourceChannelTitle": "FACTORYmonster",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uraLpjKExdQ/hqdefault.jpg",
+        "durationSec": 1351
+      },
+      {
+        "youtubeVideoId": "JG8xOoSFHnI",
+        "title": "Korea's First Premium Sheep Wool Comforter. Fluffy Bedding Mass Produced from Raw Fleece",
+        "sourceChannelId": "UCSNIT8Z40XgB4RKk9Vhf1eA",
+        "sourceChannelTitle": "All process of world",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JG8xOoSFHnI/hqdefault.jpg",
+        "durationSec": 1031
+      },
+      {
+        "youtubeVideoId": "NpeA-fnhKKQ",
+        "title": "A Man Making Glass Bottles in Stifling Heat",
+        "sourceChannelId": "UCbW5tOCMJcgGGK6YtVqCLuA",
+        "sourceChannelTitle": "king process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NpeA-fnhKKQ/hqdefault.jpg",
+        "durationSec": 1176
+      },
+      {
+        "youtubeVideoId": "95ovLUV9LRY",
+        "title": "Have you ever seen 3D Printing like this?",
+        "sourceChannelId": "UCc2lUKVOTXKlQR7Fm7h1JfQ",
+        "sourceChannelTitle": "TITANS of CNC MACHINING",
+        "thumbnailUrl": "https://i.ytimg.com/vi/95ovLUV9LRY/hqdefault.jpg",
+        "durationSec": 824
+      },
+      {
+        "youtubeVideoId": "WbxjeySougg",
+        "title": "Why Was this Victorian Hat Made with 80 Human Teeth?! | Strangest Things | Science Channel",
+        "sourceChannelId": "UCvJiYiBUbw4tmpRSZT2r1Hw",
+        "sourceChannelTitle": "Science Channel",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WbxjeySougg/hqdefault.jpg",
+        "durationSec": 748
+      },
+      {
+        "youtubeVideoId": "8DkmlhGKlqQ",
+        "title": "NATO TIGER MEET: How European Tornado Crews Train for Combat | Full Documentary",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8DkmlhGKlqQ/hqdefault.jpg",
+        "durationSec": 946
+      },
+      {
+        "youtubeVideoId": "04uEBj0ftj8",
+        "title": "World's Toughest Cruise Ships | Extreme Voyages: Sailing to the Ends of the Earth | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/04uEBj0ftj8/hqdefault.jpg",
+        "durationSec": 1104
+      },
+      {
+        "youtubeVideoId": "9kM3mnxrMMM",
+        "title": "How do microSD Cards Store 2 TB in such a TINY space?",
+        "sourceChannelId": "UCdp4_l1vPmpN-gDbUwhaRUQ",
+        "sourceChannelTitle": "Branch Education",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9kM3mnxrMMM/hqdefault.jpg",
+        "durationSec": 638
+      },
+      {
+        "youtubeVideoId": "2OfjZ3ORJfc",
+        "title": "Robot golf vs holes that keep getting harder",
+        "sourceChannelId": "UCj1VqrHhDte54oLgPG4xpuQ",
+        "sourceChannelTitle": "Stuff Made Here",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2OfjZ3ORJfc/hqdefault.jpg",
+        "durationSec": 1494
+      },
+      {
+        "youtubeVideoId": "ThSLfcZfS8A",
+        "title": "Advanced Welding For Dummies!",
+        "sourceChannelId": "UC5NO8MgTQKHAWXp6z8Xl7yQ",
+        "sourceChannelTitle": "This Old Tony",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ThSLfcZfS8A/hqdefault.jpg",
+        "durationSec": 986
+      },
+      {
+        "youtubeVideoId": "PasrD1id2r4",
+        "title": "Filthy Datsun 240Z Differential",
+        "sourceChannelId": "UCMrMVIBtqFW6O0-MWq26gqw",
+        "sourceChannelTitle": "my mechanics",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PasrD1id2r4/hqdefault.jpg",
+        "durationSec": 1484
+      },
+      {
+        "youtubeVideoId": "ZJHWZqEYkM0",
+        "title": "A Wedge-Style Hand Vise - Part 3 (Making the Springs & Fasteners)",
+        "sourceChannelId": "UCworsKCR-Sx6R6-BnIjS2MA",
+        "sourceChannelTitle": "Clickspring",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZJHWZqEYkM0/hqdefault.jpg",
+        "durationSec": 624
+      },
+      {
+        "youtubeVideoId": "kp-NvPwGbKQ",
+        "title": "Turning Welding Table Leg Extensions",
+        "sourceChannelId": "UCw3UZn1tcVe7pH3R6C3Gcng",
+        "sourceChannelTitle": "Abom79",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kp-NvPwGbKQ/hqdefault.jpg",
+        "durationSec": 1444
+      },
+      {
+        "youtubeVideoId": "xbSiqMQ6qhc",
+        "title": "This Excavator Is the Gift That Keeps on Giving! | Hitachi ZX225",
+        "sourceChannelId": "UC2wdo5vU7bPBNzyC2nnwmNQ",
+        "sourceChannelTitle": "Cutting Edge Engineering Australia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xbSiqMQ6qhc/hqdefault.jpg",
+        "durationSec": 1305
+      },
+      {
+        "youtubeVideoId": "H9TM5ObQrPU",
+        "title": "さば照焼を大量生産するプロセス。毎月２００トンのさばを捌く！日本最高のさば工場。",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/H9TM5ObQrPU/hqdefault.jpg",
+        "durationSec": 1060
       }
     ]
   }

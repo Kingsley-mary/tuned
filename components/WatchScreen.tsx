@@ -40,6 +40,7 @@ interface WatchScreenProps {
   theme: 'dark' | 'light' | 'system';
   sleepTimerMode: SleepTimerMode;
   sleepRemainingSec: number | null;
+  behindLiveSeconds?: number;
   onCycleSleepTimer: () => void;
   onToggleTheme: () => void;
   onSelectChannel: (channelIndex: number) => void;
@@ -66,6 +67,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   theme,
   sleepTimerMode,
   sleepRemainingSec,
+  behindLiveSeconds = 0,
   onCycleSleepTimer,
   onToggleTheme,
   onSelectChannel,
@@ -811,7 +813,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 <button
                   onClick={onJumpToLive}
                   className="btn-pill"
-                  title="Sync to real-time live broadcast"
+                  title={
+                    behindLiveSeconds > 0
+                      ? `You are ${behindLiveSeconds}s behind live broadcast — click to catch up`
+                      : 'Synced to live broadcast'
+                  }
                   style={{
                     padding: '6px 14px',
                     fontSize: 12,
@@ -820,11 +826,17 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 6,
-                    color: '#22c55e',
-                    border: '1px solid rgba(34, 197, 94, 0.35)',
-                    background: 'rgba(34, 197, 94, 0.08)',
+                    color: behindLiveSeconds > 0 ? '#f59e0b' : '#22c55e',
+                    border:
+                      behindLiveSeconds > 0
+                        ? '1px solid rgba(245, 158, 11, 0.45)'
+                        : '1px solid rgba(34, 197, 94, 0.35)',
+                    background:
+                      behindLiveSeconds > 0
+                        ? 'rgba(245, 158, 11, 0.12)'
+                        : 'rgba(34, 197, 94, 0.08)',
                     borderRadius: '9999px',
-                    cursor: 'pointer',
+                    cursor: behindLiveSeconds > 0 ? 'pointer' : 'default',
                     transition: 'all 0.15s ease',
                   }}
                 >
@@ -833,13 +845,18 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                       width: 6,
                       height: 6,
                       borderRadius: '50%',
-                      background: '#22c55e',
-                      boxShadow: '0 0 6px #22c55e',
+                      background: behindLiveSeconds > 0 ? '#f59e0b' : '#22c55e',
+                      boxShadow:
+                        behindLiveSeconds > 0 ? '0 0 6px #f59e0b' : '0 0 6px #22c55e',
                       display: 'inline-block',
                       animation: 'pulse 2s infinite',
                     }}
                   />
-                  <span>LIVE</span>
+                  <span>
+                    {behindLiveSeconds > 0
+                      ? `JUMP TO LIVE (+${formatTime(behindLiveSeconds)})`
+                      : 'LIVE'}
+                  </span>
                 </button>
               )}
 

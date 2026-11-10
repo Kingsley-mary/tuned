@@ -95,7 +95,13 @@ export function getLiveBroadcastState(
     };
   }
 
-  const durations = videos.map((v) => getVideoDuration(v));
+  // Use stable catalog durations for cycle math so live player updates never scramble the modulo
+  const durations = videos.map((v) => {
+    if (v.durationSec && v.durationSec > 60 && v.durationSec !== 600) {
+      return v.durationSec;
+    }
+    return getVideoDuration(v);
+  });
   const totalCycleSec = durations.reduce((acc, d) => acc + d, 0);
 
   if (totalCycleSec <= 0) {
@@ -109,7 +115,8 @@ export function getLiveBroadcastState(
   }
 
   const channelOffset = getChannelTimeOffset(categoryId);
-  const cycleTime = (nowEpochSec + channelOffset) % totalCycleSec;
+  const secondsInBroadcastWindow = nowEpochSec % 604800; // 7-day rolling broadcast window
+  const cycleTime = (secondsInBroadcastWindow + channelOffset) % totalCycleSec;
 
   let accumulated = 0;
   for (let i = 0; i < videos.length; i++) {

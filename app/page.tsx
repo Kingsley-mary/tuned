@@ -14,8 +14,8 @@ import { OffAirScreen } from '../components/OffAirScreen';
 
 const STORAGE_KEY = 'tuned_user_state_v1';
 const PLAYBACK_STORAGE_KEY = 'tuned_playback_session_v1';
-const ENTERTAINMENT_MIGRATION_KEY = 'tuned_movies_cartoons_v1';
-const DEFAULT_CATEGORIES = ['tech', 'movies', 'cartoons', 'music', 'science', 'food'];
+const ENTERTAINMENT_MIGRATION_KEY = 'tuned_movies_cartoons_industry_v2';
+const DEFAULT_CATEGORIES = ['tech', 'movies', 'cartoons', 'industry', 'music', 'science', 'food'];
 
 export default function TunedApp() {
   const [screenMode, setScreenMode] = useState<ScreenMode>('power');
@@ -36,6 +36,7 @@ export default function TunedApp() {
   // Sleep Timer state
   const [sleepTimerMode, setSleepTimerMode] = useState<SleepTimerMode>('off');
   const [sleepRemainingSec, setSleepRemainingSec] = useState<number | null>(null);
+  const [behindLiveSeconds, setBehindLiveSeconds] = useState<number>(0);
 
   const isDirtyRef = useRef(false);
   const currentPlaybackTimeRef = useRef<number>(0);
@@ -86,7 +87,7 @@ export default function TunedApp() {
         if (parsed.pickedCategoryIds && parsed.pickedCategoryIds.length >= 3) {
           let nextCats = [...parsed.pickedCategoryIds];
           if (!localStorage.getItem(ENTERTAINMENT_MIGRATION_KEY)) {
-            for (const newCh of ['movies', 'cartoons']) {
+            for (const newCh of ['movies', 'cartoons', 'industry']) {
               if (!nextCats.includes(newCh) && nextCats.length < 8) {
                 nextCats.push(newCh);
               }
@@ -295,6 +296,17 @@ export default function TunedApp() {
     else setSleepRemainingSec(null);
   }, [sleepTimerMode]);
 
+  // Track seconds accumulated behind live broadcast while paused
+  useEffect(() => {
+    if (!hasEnteredWatch || isPlaying || screenMode === 'power') return;
+
+    const pauseTimer = setInterval(() => {
+      setBehindLiveSeconds((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(pauseTimer);
+  }, [hasEnteredWatch, isPlaying, screenMode]);
+
   // Handlers for Power Screen
   const handleTurnOn = () => {
     if (isReturningUser) {
@@ -307,6 +319,7 @@ export default function TunedApp() {
         currentPlaybackTimeRef.current = pos.seekSeconds;
         setTuneKey((k) => k + 1);
       }
+      setBehindLiveSeconds(0);
       setHasEnteredWatch(true);
       setScreenMode('watch');
       setIsPlaying(true);
@@ -402,6 +415,7 @@ export default function TunedApp() {
         currentPlaybackTimeRef.current = 0;
       }
 
+      setBehindLiveSeconds(0);
       setTuneKey((k) => k + 1);
       setIsPlaying(true);
       persistState({ lastChannelIndex: channelIndex });
@@ -448,6 +462,7 @@ export default function TunedApp() {
     setCurrentVideoIndex(nextIdx);
     setStartSeconds(0);
     currentPlaybackTimeRef.current = 0;
+    setBehindLiveSeconds(0);
     setTuneKey((k) => k + 1);
     setIsPlaying(true);
 
@@ -460,28 +475,44 @@ export default function TunedApp() {
   }, [channels, currentChannelIndex, currentVideoIndex, persistPlaybackSession]);
 
   const handleJumpToLive = useCallback(() => {
+    // If already at live edge (haven't paused), do not switch or reload video!
+    if (behindLiveSeconds <= 0) {
+      if (!isPlaying) setIsPlaying(true);
+      return;
+    }
+
     const active = channels[currentChannelIndex];
     if (!active || !active.videos?.length) return;
 
-    const live = getLiveBroadcastState(
+    // Fast-forward current channel by the exact seconds accumulated while paused
+    const adv = advanceChannelPlayback(
       active.videos,
-      active.categoryId,
-      Math.floor(Date.now() / 1000),
+      currentVideoIndex,
+      currentPlaybackTimeRef.current,
+      behindLiveSeconds,
       completedVideoIdsRef.current
     );
-    setCurrentVideoIndex(live.videoIndex);
-    setStartSeconds(live.seekSeconds);
-    currentPlaybackTimeRef.current = live.seekSeconds;
+    setCurrentVideoIndex(adv.videoIndex);
+    setStartSeconds(adv.seekSeconds);
+    currentPlaybackTimeRef.current = adv.seekSeconds;
+    setBehindLiveSeconds(0);
     setTuneKey((k) => k + 1);
     setIsPlaying(true);
 
     channelPlaybackStatesRef.current.set(active.categoryId, {
-      videoIndex: live.videoIndex,
-      seekSeconds: live.seekSeconds,
+      videoIndex: adv.videoIndex,
+      seekSeconds: adv.seekSeconds,
       leftAt: Date.now(),
     });
     persistPlaybackSession();
-  }, [channels, currentChannelIndex, persistPlaybackSession]);
+  }, [
+    behindLiveSeconds,
+    isPlaying,
+    channels,
+    currentChannelIndex,
+    currentVideoIndex,
+    persistPlaybackSession,
+  ]);
 
   const handleShortDetected = useCallback(
     (videoId: string) => {
@@ -706,6 +737,7 @@ export default function TunedApp() {
           theme={theme}
           sleepTimerMode={sleepTimerMode}
           sleepRemainingSec={sleepRemainingSec}
+          behindLiveSeconds={behindLiveSeconds}
           onCycleSleepTimer={handleCycleSleepTimer}
           onToggleTheme={handleToggleTheme}
           onSelectChannel={handleSelectChannel}

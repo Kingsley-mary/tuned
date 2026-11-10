@@ -795,6 +795,76 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "id": "UCCn62cYVpl0e_GN-yo1H9yQ",
       "name": "mashed"
     }
+  ],
+  "industry": [
+    {
+      "id": "UChZgikssAJkmiQOv_sO-ngQ",
+      "name": "ProcessX"
+    },
+    {
+      "id": "UC-b5z1biw_Qra-eOfC4kuqQ",
+      "name": "Miracle Process"
+    },
+    {
+      "id": "UCNP1mwtQKwZ2At6QRkJk4tw",
+      "name": "FACTORYmonster"
+    },
+    {
+      "id": "UCSNIT8Z40XgB4RKk9Vhf1eA",
+      "name": "All process of world"
+    },
+    {
+      "id": "UCB9PwFQwTg9ig42xwKsfSEg",
+      "name": "Awesome Process"
+    },
+    {
+      "id": "UCbW5tOCMJcgGGK6YtVqCLuA",
+      "name": "King Process"
+    },
+    {
+      "id": "UCc2lUKVOTXKlQR7Fm7h1JfQ",
+      "name": "TITANS of CNC MACHINING"
+    },
+    {
+      "id": "UCvJiYiBUbw4tmpRSZT2r1Hw",
+      "name": "Science Channel"
+    },
+    {
+      "id": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+      "name": "WELT Documentary"
+    },
+    {
+      "id": "UCijcd0GR0fkxCAZwkiuWqtQ",
+      "name": "Free Documentary"
+    },
+    {
+      "id": "UCdp4_l1vPmpN-gDbUwhaRUQ",
+      "name": "Branch Education"
+    },
+    {
+      "id": "UCj1VqrHhDte54oLgPG4xpuQ",
+      "name": "Stuff Made Here"
+    },
+    {
+      "id": "UC5NO8MgTQKHAWXp6z8Xl7yQ",
+      "name": "This Old Tony"
+    },
+    {
+      "id": "UCMrMVIBtqFW6O0-MWq26gqw",
+      "name": "my mechanics"
+    },
+    {
+      "id": "UCworsKCR-Sx6R6-BnIjS2MA",
+      "name": "Clickspring"
+    },
+    {
+      "id": "UCw3UZn1tcVe7pH3R6C3Gcng",
+      "name": "Abom79"
+    },
+    {
+      "id": "UC2wdo5vU7bPBNzyC2nnwmNQ",
+      "name": "Cutting Edge Engineering"
+    }
   ]
 };
 
