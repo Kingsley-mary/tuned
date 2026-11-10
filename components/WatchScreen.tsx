@@ -23,6 +23,7 @@ interface WatchScreenProps {
   channels: ChannelLineup[];
   currentChannelIndex: number;
   currentVideoIndex: number;
+  startSeconds?: number;
   isPlaying: boolean;
   theme: 'dark' | 'light' | 'system';
   onToggleTheme: () => void;
@@ -39,6 +40,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   channels,
   currentChannelIndex,
   currentVideoIndex,
+  startSeconds = 0,
   isPlaying,
   theme,
   onToggleTheme,
@@ -218,6 +220,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             {activeVideo?.youtubeVideoId ? (
               <YouTubePlayer
                 videoId={activeVideo.youtubeVideoId}
+                startSeconds={startSeconds}
                 isPlaying={isPlaying}
                 onEnded={onNextVideo}
                 onError={(errCode) => {

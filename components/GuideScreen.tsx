@@ -3,6 +3,7 @@
 import React from 'react';
 import { ChannelLineup } from '../lib/types';
 import { ArrowLeft, Play } from 'lucide-react';
+import { getLiveBroadcastState } from '../lib/broadcast-clock';
 
 interface GuideScreenProps {
   channels: ChannelLineup[];
@@ -57,6 +58,7 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
       {/* Guide EPG Timeline (PRD G-2, G-5) */}
       <div className="guide-container">
         {channels.map((ch, chIdx) => {
+          const liveState = getLiveBroadcastState(ch.videos, ch.categoryId);
           return (
             <div key={ch.categoryId + chIdx} className="guide-row">
               {/* Sticky Channel Header */}
@@ -82,8 +84,9 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
               <div style={{ display: 'flex', gap: 8, flex: 1, paddingLeft: 12 }}>
                 {ch.videos.map((vid, vidIdx) => {
                   const isCurrent = chIdx === currentChannelIndex && vidIdx === currentVideoIndex;
+                  const isLive = vidIdx === liveState.videoIndex;
                   // Min width 140px, scaling with video duration
-                  const blockWidth = Math.max(140, Math.min(360, (vid.durationSec || 600) * 0.16));
+                  const blockWidth = Math.max(150, Math.min(360, (vid.durationSec || 600) * 0.16));
 
                   return (
                     <button
@@ -96,10 +99,12 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                         flexShrink: 0,
                         borderRadius: 'var(--radius-md)',
                         padding: '8px 12px',
-                        background: isCurrent ? 'var(--ink)' : 'var(--subtle-bg)',
+                        background: isCurrent ? 'var(--ink)' : isLive ? 'var(--panel)' : 'var(--subtle-bg)',
                         color: isCurrent ? 'var(--bg)' : 'var(--ink)',
                         border: isCurrent
                           ? '2px solid var(--accent)'
+                          : isLive
+                          ? '2px solid #22c55e'
                           : '1px solid var(--border)',
                         textAlign: 'left',
                         display: 'flex',
@@ -111,13 +116,13 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                       onMouseEnter={(e) => {
                         if (!isCurrent) {
                           e.currentTarget.style.background = 'var(--panel-hover)';
-                          e.currentTarget.style.borderColor = 'var(--border-focus)';
+                          e.currentTarget.style.borderColor = isLive ? '#22c55e' : 'var(--border-focus)';
                         }
                       }}
                       onMouseLeave={(e) => {
                         if (!isCurrent) {
-                          e.currentTarget.style.background = 'var(--subtle-bg)';
-                          e.currentTarget.style.borderColor = 'var(--border)';
+                          e.currentTarget.style.background = isLive ? 'var(--panel)' : 'var(--subtle-bg)';
+                          e.currentTarget.style.borderColor = isLive ? '#22c55e' : 'var(--border)';
                         }
                       }}
                     >
@@ -135,6 +140,19 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                         }}
                       >
                         {isCurrent && <Play size={11} fill="currentColor" style={{ flexShrink: 0 }} />}
+                        {isLive && !isCurrent && (
+                          <span
+                            style={{
+                              width: 6,
+                              height: 6,
+                              borderRadius: '50%',
+                              background: '#22c55e',
+                              boxShadow: '0 0 6px #22c55e',
+                              flexShrink: 0,
+                              display: 'inline-block',
+                            }}
+                          />
+                        )}
                         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{vid.title}</span>
                       </div>
 
@@ -148,7 +166,7 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                         }}
                       >
                         <span>{vid.sourceChannelTitle}</span>
-                        <span>{formatDuration(vid.durationSec)}</span>
+                        <span>{isLive ? 'ON AIR' : formatDuration(vid.durationSec)}</span>
                       </div>
                     </button>
                   );

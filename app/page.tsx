@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
+import { getLiveBroadcastState } from '../lib/broadcast-clock';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
 import { TuningScreen } from '../components/TuningScreen';
@@ -21,6 +22,7 @@ export default function TunedApp() {
   const [channels, setChannels] = useState<ChannelLineup[]>([]);
   const [currentChannelIndex, setCurrentChannelIndex] = useState<number>(0);
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
+  const [startSeconds, setStartSeconds] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [theme, setTheme] = useState<'dark' | 'light' | 'system'>('system');
   const [offAirReason, setOffAirReason] = useState<string>('Nothing playable on this channel right now.');
@@ -107,16 +109,28 @@ export default function TunedApp() {
     });
   }, []);
 
-  // Preload lineups immediately so playback can start without delay
+  // Preload lineups immediately and sync to live broadcast schedule
   useEffect(() => {
     loadLineups(pickedCategoryIds).then((loaded) => {
       setChannels(loaded);
+      const active = loaded[currentChannelIndex] || loaded[0];
+      if (active && active.videos?.length > 0) {
+        const live = getLiveBroadcastState(active.videos, active.categoryId);
+        setCurrentVideoIndex(live.videoIndex);
+        setStartSeconds(live.seekSeconds);
+      }
     });
   }, [pickedCategoryIds, loadLineups]);
 
   // Handlers for Power Screen
   const handleTurnOn = () => {
     if (isReturningUser) {
+      const active = channels[currentChannelIndex] || channels[0];
+      if (active && active.videos?.length > 0) {
+        const live = getLiveBroadcastState(active.videos, active.categoryId);
+        setCurrentVideoIndex(live.videoIndex);
+        setStartSeconds(live.seekSeconds);
+      }
       setScreenMode('watch');
       setIsPlaying(true);
     } else {
@@ -163,8 +177,11 @@ export default function TunedApp() {
       return;
     }
 
+    const firstCh = loaded[0];
+    const live = getLiveBroadcastState(firstCh.videos, firstCh.categoryId);
     setCurrentChannelIndex(0);
-    setCurrentVideoIndex(0);
+    setCurrentVideoIndex(live.videoIndex);
+    setStartSeconds(live.seekSeconds);
     setIsPlaying(true);
     setIsReturningUser(true);
     persistState({ isReturningUser: true, lastChannelIndex: 0 });
@@ -174,13 +191,22 @@ export default function TunedApp() {
   // Handlers for Watch Screen
   const handleSelectChannel = (channelIndex: number) => {
     setCurrentChannelIndex(channelIndex);
-    setCurrentVideoIndex(0);
+    const target = channels[channelIndex];
+    if (target && target.videos?.length > 0) {
+      const live = getLiveBroadcastState(target.videos, target.categoryId);
+      setCurrentVideoIndex(live.videoIndex);
+      setStartSeconds(live.seekSeconds);
+    } else {
+      setCurrentVideoIndex(0);
+      setStartSeconds(0);
+    }
     setIsPlaying(true);
     persistState({ lastChannelIndex: channelIndex });
   };
 
   const handleSelectVideo = (videoIndex: number) => {
     setCurrentVideoIndex(videoIndex);
+    setStartSeconds(0);
     setIsPlaying(true);
   };
 
@@ -189,6 +215,7 @@ export default function TunedApp() {
     if (!active || !active.videos.length) return;
     const nextIdx = (currentVideoIndex + 1) % active.videos.length;
     setCurrentVideoIndex(nextIdx);
+    setStartSeconds(0);
     setIsPlaying(true);
   };
 
@@ -364,6 +391,7 @@ export default function TunedApp() {
           channels={channels}
           currentChannelIndex={currentChannelIndex}
           currentVideoIndex={currentVideoIndex}
+          startSeconds={startSeconds}
           isPlaying={isPlaying}
           theme={theme}
           onToggleTheme={handleToggleTheme}
@@ -386,6 +414,17 @@ export default function TunedApp() {
           onSelectProgram={(chIdx, vidIdx) => {
             setCurrentChannelIndex(chIdx);
             setCurrentVideoIndex(vidIdx);
+            const target = channels[chIdx];
+            if (target) {
+              const live = getLiveBroadcastState(target.videos, target.categoryId);
+              if (live.videoIndex === vidIdx) {
+                setStartSeconds(live.seekSeconds);
+              } else {
+                setStartSeconds(0);
+              }
+            } else {
+              setStartSeconds(0);
+            }
             setIsPlaying(true);
             setScreenMode('watch');
           }}

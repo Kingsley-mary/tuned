@@ -11,6 +11,7 @@ declare global {
 
 interface YouTubePlayerProps {
   videoId: string;
+  startSeconds?: number;
   isPlaying: boolean;
   onEnded: () => void;
   onError: (errorCode: number) => void;
@@ -21,6 +22,7 @@ interface YouTubePlayerProps {
 
 export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   videoId,
+  startSeconds = 0,
   isPlaying,
   onEnded,
   onError,
@@ -54,6 +56,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             rel: 0,
             playsinline: 1, // PRD P-5: required for iOS Safari
             fs: 1, // Enable fullscreen
+            start: Math.floor(startSeconds || 0),
             iv_load_policy: 3,
             origin: typeof window !== 'undefined' ? window.location.origin : undefined,
           },
@@ -73,6 +76,11 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
               onReady?.();
               if (isPlaying) {
+                if (startSeconds && startSeconds > 0) {
+                  try {
+                    playerRef.current?.seekTo?.(startSeconds, true);
+                  } catch {}
+                }
                 playerRef.current?.playVideo();
               }
             },
@@ -124,21 +132,27 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     };
   }, []);
 
-  // Update videoId when changed
+  // Update videoId or start position when changed
   useEffect(() => {
     if (!playerRef.current || !isReadyRef.current || !videoId) return;
 
     hasStartedRef.current = false;
     try {
       if (isPlaying) {
-        playerRef.current.loadVideoById(videoId);
+        playerRef.current.loadVideoById({
+          videoId,
+          startSeconds: Math.floor(startSeconds || 0),
+        });
       } else {
-        playerRef.current.cueVideoById(videoId);
+        playerRef.current.cueVideoById({
+          videoId,
+          startSeconds: Math.floor(startSeconds || 0),
+        });
       }
     } catch (e) {
       console.warn('Error cueing/loading video:', e);
     }
-  }, [videoId]);
+  }, [videoId, startSeconds]);
 
   // Watchdog: If video is supposed to play but fails to start or gets stuck in unstarted state
   useEffect(() => {
