@@ -39,6 +39,22 @@ export interface CustomSource {
   title: string;
 }
 
+export interface SavedCustomChannel {
+  id: string;
+  title: string;
+  hue: number;
+  youtubeChannelId: string;
+  videos: Video[];
+}
+
+export interface QuotaStatus {
+  used: number;
+  limit: number;
+  remaining: number;
+  isExceeded: boolean;
+  resetAt: number;
+}
+
 export interface UserState {
   pickedCategoryIds: string[];
   customSources: CustomSource[];

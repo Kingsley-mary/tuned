@@ -265,6 +265,32 @@ button:focus-visible, input:focus-visible {
   transition: box-shadow 0.3s ease;
 }
 
+.player-tv-frame:fullscreen,
+.player-tv-frame:-webkit-full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  border-radius: 0 !important;
+  background: #000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.player-tv-frame:fullscreen .yt-aspect-ratio-box,
+.player-tv-frame:-webkit-full-screen .yt-aspect-ratio-box {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 177.78vh !important;
+  max-height: 56.25vw !important;
+  aspect-ratio: 16 / 9;
+  margin: auto !important;
+}
+
 .player-tv-frame.pulse-glow {
   animation: tv-frame-pulse 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

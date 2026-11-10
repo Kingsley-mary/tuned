@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer } from './YouTubePlayer';
 import {
@@ -15,6 +15,8 @@ import {
   Sun,
   Moon,
   Loader2,
+  Maximize,
+  Minimize,
 } from 'lucide-react';
 
 interface WatchScreenProps {
@@ -53,6 +55,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [isBuffering, setIsBuffering] = useState<boolean>(false);
   const [isChannelPulsing, setIsChannelPulsing] = useState<boolean>(false);
   const [isBadgeFlipping, setIsBadgeFlipping] = useState<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+
+  const playerFrameRef = useRef<HTMLDivElement>(null);
 
   const activeChannel = channels[currentChannelIndex] || channels[0];
   const videos = activeChannel?.videos || [];
@@ -74,6 +79,44 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     return () => clearTimeout(timer);
   }, [currentChannelIndex, activeChannel?.hue]);
 
+  // Fullscreen toggle handler
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) {
+        if (playerFrameRef.current) {
+          if (playerFrameRef.current.requestFullscreen) {
+            await playerFrameRef.current.requestFullscreen();
+          } else if ((playerFrameRef.current as any).webkitRequestFullscreen) {
+            await (playerFrameRef.current as any).webkitRequestFullscreen();
+          }
+        }
+      } else {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if ((document as any).webkitExitFullscreen) {
+          await (document as any).webkitExitFullscreen();
+        }
+      }
+    } catch (err) {
+      console.warn('Fullscreen request failed:', err);
+    }
+  }, []);
+
+  // Listen for fullscreen state changes
+  useEffect(() => {
+    const handleFsChange = () => {
+      const isFs = !!(document.fullscreenElement || (document as any).webkitFullscreenElement);
+      setIsFullscreen(isFs);
+    };
+
+    document.addEventListener('fullscreenchange', handleFsChange);
+    document.addEventListener('webkitfullscreenchange', handleFsChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFsChange);
+      document.removeEventListener('webkitfullscreenchange', handleFsChange);
+    };
+  }, []);
+
   // Format seconds to mm:ss or hh:mm:ss
   const formatTime = (seconds: number) => {
     if (isNaN(seconds) || seconds < 0) return '0:00';
@@ -87,7 +130,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     return `${mins}:${String(secs).padStart(2, '0')}`;
   };
 
-  // Keyboard navigation (PRD W-10)
+  // Keyboard navigation (PRD W-10 + 'F' for Fullscreen)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Don't intercept if user is typing in an input field
@@ -107,21 +150,26 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         e.preventDefault();
         const nextIdx = (currentChannelIndex + 1) % channels.length;
         onSelectChannel(nextIdx);
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentChannelIndex, channels.length, onTogglePlay, onNextVideo, onSelectChannel]);
+  }, [currentChannelIndex, channels.length, onTogglePlay, onNextVideo, onSelectChannel, toggleFullscreen]);
 
   // Compute up next list (3 videos)
-  const upNextList = [1, 2, 3].map((offset) => {
-    const idx = (currentVideoIndex + offset) % (videos.length || 1);
-    return {
-      index: idx,
-      video: videos[idx],
-    };
-  }).filter((item) => !!item.video);
+  const upNextList = [1, 2, 3]
+    .map((offset) => {
+      const idx = (currentVideoIndex + offset) % (videos.length || 1);
+      return {
+        index: idx,
+        video: videos[idx],
+      };
+    })
+    .filter((item) => !!item.video);
 
   const progressPercent = duration > 0 ? Math.min(100, (currentTime / duration) * 100) : 0;
 
@@ -163,7 +211,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         {/* Main Column: Player + Info & Controls */}
         <main>
           {/* YouTube Player Frame (PRD D-1: Never overlap anything on top of player) */}
-          <div className={`player-tv-frame ${isChannelPulsing ? 'pulse-glow' : ''}`}>
+          <div
+            ref={playerFrameRef}
+            className={`player-tv-frame ${isChannelPulsing ? 'pulse-glow' : ''}`}
+          >
             {activeVideo?.youtubeVideoId ? (
               <YouTubePlayer
                 videoId={activeVideo.youtubeVideoId}
@@ -193,6 +244,36 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               >
                 No video available on this channel
               </div>
+            )}
+
+            {/* Exit Fullscreen Floating Button when Fullscreen */}
+            {isFullscreen && (
+              <button
+                onClick={toggleFullscreen}
+                aria-label="Exit Fullscreen"
+                style={{
+                  position: 'absolute',
+                  top: 20,
+                  right: 20,
+                  zIndex: 100,
+                  background: 'rgba(0, 0, 0, 0.75)',
+                  color: '#ffffff',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  borderRadius: '9999px',
+                  padding: '8px 16px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  backdropFilter: 'blur(8px)',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.6)',
+                }}
+              >
+                <Minimize size={15} />
+                <span>Exit Fullscreen (F)</span>
+              </button>
             )}
           </div>
 
@@ -281,7 +362,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 onClick={onNextVideo}
                 className="icon-btn"
                 aria-label="Skip to next video"
-                title="Next video"
+                title="Next video (Arrow Right)"
               >
                 <SkipForward size={18} />
               </button>
@@ -349,6 +430,17 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               >
                 {formatTime(currentTime)} / {formatTime(duration || activeVideo?.durationSec || 0)}
               </span>
+
+              {/* Fullscreen Button */}
+              <button
+                onClick={toggleFullscreen}
+                className="icon-btn"
+                title={isFullscreen ? 'Exit Fullscreen (F)' : 'Enter Fullscreen (F)'}
+                aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
+                style={{ width: 38, height: 38, flexShrink: 0, marginLeft: 2 }}
+              >
+                {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+              </button>
             </div>
           </div>
         </main>
