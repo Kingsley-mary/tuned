@@ -731,7 +731,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 gap: 10,
                 marginTop: 20,
                 padding: '12px 18px',
-                background: 'var(--panel)',
+                background: 'var(--glass)',
+                backdropFilter: 'blur(20px) saturate(1.3)',
                 borderRadius: 'var(--radius-lg)',
                 border: '1px solid var(--border)',
                 flexWrap: 'wrap',
@@ -877,7 +878,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   style={{
                     height: '100%',
                     width: `${progressPercent}%`,
-                    background: 'var(--ink)',
+                    background: 'var(--accent)',
                     borderRadius: 99,
                     transition: 'width 0.25s linear',
                   }}
@@ -974,12 +975,12 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                       textAlign: 'left',
                       fontSize: 14,
                       fontWeight: isActive ? 600 : 500,
-                      background: isActive ? 'var(--ink)' : 'var(--panel)',
-                      color: isActive ? 'var(--bg)' : 'var(--ink)',
+                      background: isActive ? `linear-gradient(90deg, hsla(${ch.hue}, 80%, 50%, 0.28), hsla(${ch.hue}, 80%, 50%, 0.08))` : 'var(--glass)',
+                      color: 'var(--ink)',
                       border: '1px solid',
-                      borderColor: isActive ? 'transparent' : 'var(--border)',
+                      borderColor: isActive ? `hsla(${ch.hue}, 80%, 60%, 0.55)` : 'var(--border)',
                       transition: 'all 0.15s ease',
-                      boxShadow: isActive ? '0 4px 12px rgba(0,0,0,0.1)' : 'none',
+                      boxShadow: isActive ? `0 6px 20px -6px hsla(${ch.hue}, 80%, 50%, 0.5)` : 'none',
                     }}
                   >
                     <span

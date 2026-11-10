@@ -73,7 +73,7 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
                 aria-pressed={isSelected}
                 style={{
                   position: 'relative',
-                  height: 130,
+                  height: 150,
                   borderRadius: 'var(--radius-lg)',
                   padding: '16px',
                   color: '#ffffff',
@@ -163,7 +163,8 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
           right: 16,
           maxWidth: 900,
           margin: '0 auto',
-          background: 'var(--panel)',
+          background: 'var(--glass-strong)',
+          backdropFilter: 'blur(20px) saturate(1.3)',
           border: '1px solid var(--border)',
           borderRadius: 'var(--radius-pill)',
           padding: '10px 16px 10px 24px',
