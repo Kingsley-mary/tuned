@@ -88,7 +88,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
         "sourceChannelTitle": "AppleInsider",
         "thumbnailUrl": "https://i.ytimg.com/vi/3t0dUbh14Lc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 481
       },
       {
         "youtubeVideoId": "mGvHmBs8OfA",
@@ -104,7 +104,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
         "thumbnailUrl": "https://i.ytimg.com/vi/GCUHLVD9uZo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 433
       },
       {
         "youtubeVideoId": "rbWqk3x8lGI",
@@ -112,7 +112,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
         "sourceChannelTitle": "Engadget",
         "thumbnailUrl": "https://i.ytimg.com/vi/rbWqk3x8lGI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 269
       },
       {
         "youtubeVideoId": "_x58r9TBois",
@@ -120,7 +120,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
         "sourceChannelTitle": "Marques Brownlee",
         "thumbnailUrl": "https://i.ytimg.com/vi/_x58r9TBois/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 480
       },
       {
         "youtubeVideoId": "clJCDHml2cA",
@@ -128,7 +128,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC2Xd-TjJByJyK2w1zNwY0zQ",
         "sourceChannelTitle": "Beyond Fireship",
         "thumbnailUrl": "https://i.ytimg.com/vi/clJCDHml2cA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 422
       },
       {
         "youtubeVideoId": "1FurWDiK9A4",
@@ -136,7 +136,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsBjURrPoezykLs9EqgamOA",
         "sourceChannelTitle": "Fireship",
         "thumbnailUrl": "https://i.ytimg.com/vi/1FurWDiK9A4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 333
       },
       {
         "youtubeVideoId": "K_AvLm5TOws",
@@ -144,7 +144,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCdBK94H6oZT2Q7l0-b0xmMg",
         "sourceChannelTitle": "ShortCircuit",
         "thumbnailUrl": "https://i.ytimg.com/vi/K_AvLm5TOws/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1561
       },
       {
         "youtubeVideoId": "afoJu8f9GMA",
@@ -152,7 +152,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
         "sourceChannelTitle": "The Verge",
         "thumbnailUrl": "https://i.ytimg.com/vi/afoJu8f9GMA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2231
       },
       {
         "youtubeVideoId": "HVLUtJWlcJY",
@@ -160,7 +160,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMiJRAwDNSNzuYeN2uWa0pA",
         "sourceChannelTitle": "Mrwhosetheboss",
         "thumbnailUrl": "https://i.ytimg.com/vi/HVLUtJWlcJY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2240
       },
       {
         "youtubeVideoId": "k8W0Eb7sKss",
@@ -168,7 +168,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWFKCr40YwOZQx8FHU_ZqqQ",
         "sourceChannelTitle": "JerryRigEverything",
         "thumbnailUrl": "https://i.ytimg.com/vi/k8W0Eb7sKss/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 776
       },
       {
         "youtubeVideoId": "ARreuKEUQuE",
@@ -176,7 +176,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1IQIspOkCeV3WnYm32SBFQ",
         "sourceChannelTitle": "This Is",
         "thumbnailUrl": "https://i.ytimg.com/vi/ARreuKEUQuE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 720
       },
       {
         "youtubeVideoId": "7soMd19QQo0",
@@ -184,7 +184,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG7J20LhUeLl6y_Emi7OJrA",
         "sourceChannelTitle": "The Studio",
         "thumbnailUrl": "https://i.ytimg.com/vi/7soMd19QQo0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 955
       },
       {
         "youtubeVideoId": "D3y2h-LhCKw",
@@ -192,7 +192,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXv-co3EYHF7aOH4A93qAHQ",
         "sourceChannelTitle": "Lew Later",
         "thumbnailUrl": "https://i.ytimg.com/vi/D3y2h-LhCKw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2928
       },
       {
         "youtubeVideoId": "kNY9zrl5DYY",
@@ -200,7 +200,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9fSZHEh6XsRpX-xJc6lT3A",
         "sourceChannelTitle": "UrAvgConsumer",
         "thumbnailUrl": "https://i.ytimg.com/vi/kNY9zrl5DYY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 799
       },
       {
         "youtubeVideoId": "qor9EDdmNa0",
@@ -208,7 +208,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
         "sourceChannelTitle": "AppleInsider",
         "thumbnailUrl": "https://i.ytimg.com/vi/qor9EDdmNa0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4064
       },
       {
         "youtubeVideoId": "RavEFW5vb54",
@@ -216,7 +216,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
         "sourceChannelTitle": "CNET",
         "thumbnailUrl": "https://i.ytimg.com/vi/RavEFW5vb54/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 14592
       },
       {
         "youtubeVideoId": "Ig497BH7d0E",
@@ -224,7 +224,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
         "thumbnailUrl": "https://i.ytimg.com/vi/Ig497BH7d0E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1135
       },
       {
         "youtubeVideoId": "xkUiXkGsnPI",
@@ -232,7 +232,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
         "sourceChannelTitle": "Engadget",
         "thumbnailUrl": "https://i.ytimg.com/vi/xkUiXkGsnPI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 244
       },
       {
         "youtubeVideoId": "g6Die8gVFn0",
@@ -240,7 +240,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
         "sourceChannelTitle": "Marques Brownlee",
         "thumbnailUrl": "https://i.ytimg.com/vi/g6Die8gVFn0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 779
       },
       {
         "youtubeVideoId": "xWkozeculPo",
@@ -248,7 +248,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC2Xd-TjJByJyK2w1zNwY0zQ",
         "sourceChannelTitle": "Beyond Fireship",
         "thumbnailUrl": "https://i.ytimg.com/vi/xWkozeculPo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 495
       },
       {
         "youtubeVideoId": "pf5tXJZM1Rw",
@@ -256,7 +256,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsBjURrPoezykLs9EqgamOA",
         "sourceChannelTitle": "Fireship",
         "thumbnailUrl": "https://i.ytimg.com/vi/pf5tXJZM1Rw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 390
       },
       {
         "youtubeVideoId": "dSS8c0ehMHQ",
@@ -264,7 +264,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCdBK94H6oZT2Q7l0-b0xmMg",
         "sourceChannelTitle": "ShortCircuit",
         "thumbnailUrl": "https://i.ytimg.com/vi/dSS8c0ehMHQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 753
       },
       {
         "youtubeVideoId": "-U4thshDTL8",
@@ -272,7 +272,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
         "sourceChannelTitle": "The Verge",
         "thumbnailUrl": "https://i.ytimg.com/vi/-U4thshDTL8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5990
       },
       {
         "youtubeVideoId": "Yg2t5w8vj5Q",
@@ -280,7 +280,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMiJRAwDNSNzuYeN2uWa0pA",
         "sourceChannelTitle": "Mrwhosetheboss",
         "thumbnailUrl": "https://i.ytimg.com/vi/Yg2t5w8vj5Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1288
       },
       {
         "youtubeVideoId": "5O-vCJW1b8g",
@@ -288,7 +288,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWFKCr40YwOZQx8FHU_ZqqQ",
         "sourceChannelTitle": "JerryRigEverything",
         "thumbnailUrl": "https://i.ytimg.com/vi/5O-vCJW1b8g/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 577
       },
       {
         "youtubeVideoId": "Aj00weTl3JM",
@@ -296,7 +296,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1IQIspOkCeV3WnYm32SBFQ",
         "sourceChannelTitle": "This Is",
         "thumbnailUrl": "https://i.ytimg.com/vi/Aj00weTl3JM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1195
       },
       {
         "youtubeVideoId": "G3z8mL2_oJo",
@@ -304,7 +304,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG7J20LhUeLl6y_Emi7OJrA",
         "sourceChannelTitle": "The Studio",
         "thumbnailUrl": "https://i.ytimg.com/vi/G3z8mL2_oJo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1066
       },
       {
         "youtubeVideoId": "zhfFgJRn0cU",
@@ -312,7 +312,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXv-co3EYHF7aOH4A93qAHQ",
         "sourceChannelTitle": "Lew Later",
         "thumbnailUrl": "https://i.ytimg.com/vi/zhfFgJRn0cU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5082
       },
       {
         "youtubeVideoId": "rSMgft_byEA",
@@ -320,7 +320,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9fSZHEh6XsRpX-xJc6lT3A",
         "sourceChannelTitle": "UrAvgConsumer",
         "thumbnailUrl": "https://i.ytimg.com/vi/rSMgft_byEA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1012
       },
       {
         "youtubeVideoId": "SEeWJMxPIBk",
@@ -328,7 +328,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
         "sourceChannelTitle": "AppleInsider",
         "thumbnailUrl": "https://i.ytimg.com/vi/SEeWJMxPIBk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 655
       },
       {
         "youtubeVideoId": "QIxUyt2up7o",
@@ -336,7 +336,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
         "sourceChannelTitle": "CNET",
         "thumbnailUrl": "https://i.ytimg.com/vi/QIxUyt2up7o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 438
       },
       {
         "youtubeVideoId": "34wPouxB9sY",
@@ -344,7 +344,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
         "thumbnailUrl": "https://i.ytimg.com/vi/34wPouxB9sY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 626
       },
       {
         "youtubeVideoId": "5LUiY0obYOs",
@@ -352,7 +352,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
         "sourceChannelTitle": "Engadget",
         "thumbnailUrl": "https://i.ytimg.com/vi/5LUiY0obYOs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 406
       },
       {
         "youtubeVideoId": "2reQut8WNGc",
@@ -360,7 +360,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
         "sourceChannelTitle": "Marques Brownlee",
         "thumbnailUrl": "https://i.ytimg.com/vi/2reQut8WNGc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 654
       },
       {
         "youtubeVideoId": "_pWA4rbzvIg",
@@ -368,7 +368,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC2Xd-TjJByJyK2w1zNwY0zQ",
         "sourceChannelTitle": "Beyond Fireship",
         "thumbnailUrl": "https://i.ytimg.com/vi/_pWA4rbzvIg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 500
       },
       {
         "youtubeVideoId": "iw9SZgyahqg",
@@ -376,7 +376,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsBjURrPoezykLs9EqgamOA",
         "sourceChannelTitle": "Fireship",
         "thumbnailUrl": "https://i.ytimg.com/vi/iw9SZgyahqg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 360
       },
       {
         "youtubeVideoId": "8YClr7M-fsI",
@@ -384,7 +384,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCdBK94H6oZT2Q7l0-b0xmMg",
         "sourceChannelTitle": "ShortCircuit",
         "thumbnailUrl": "https://i.ytimg.com/vi/8YClr7M-fsI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 536
       },
       {
         "youtubeVideoId": "CAYWoVi0rkw",
@@ -392,7 +392,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
         "sourceChannelTitle": "The Verge",
         "thumbnailUrl": "https://i.ytimg.com/vi/CAYWoVi0rkw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2161
       },
       {
         "youtubeVideoId": "Xrxy_W78SKk",
@@ -400,7 +400,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMiJRAwDNSNzuYeN2uWa0pA",
         "sourceChannelTitle": "Mrwhosetheboss",
         "thumbnailUrl": "https://i.ytimg.com/vi/Xrxy_W78SKk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1231
       },
       {
         "youtubeVideoId": "_Xe2JAoMwIA",
@@ -408,7 +408,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWFKCr40YwOZQx8FHU_ZqqQ",
         "sourceChannelTitle": "JerryRigEverything",
         "thumbnailUrl": "https://i.ytimg.com/vi/_Xe2JAoMwIA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1044
       },
       {
         "youtubeVideoId": "jUj_wMtm8w0",
@@ -416,7 +416,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1IQIspOkCeV3WnYm32SBFQ",
         "sourceChannelTitle": "This Is",
         "thumbnailUrl": "https://i.ytimg.com/vi/jUj_wMtm8w0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1288
       },
       {
         "youtubeVideoId": "ZrAkCJS9H1s",
@@ -424,7 +424,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG7J20LhUeLl6y_Emi7OJrA",
         "sourceChannelTitle": "The Studio",
         "thumbnailUrl": "https://i.ytimg.com/vi/ZrAkCJS9H1s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 863
       },
       {
         "youtubeVideoId": "4GhEtEjIIuU",
@@ -432,7 +432,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXv-co3EYHF7aOH4A93qAHQ",
         "sourceChannelTitle": "Lew Later",
         "thumbnailUrl": "https://i.ytimg.com/vi/4GhEtEjIIuU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4170
       },
       {
         "youtubeVideoId": "XWyAA48n_TU",
@@ -440,7 +440,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9fSZHEh6XsRpX-xJc6lT3A",
         "sourceChannelTitle": "UrAvgConsumer",
         "thumbnailUrl": "https://i.ytimg.com/vi/XWyAA48n_TU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 505
       },
       {
         "youtubeVideoId": "B84L0wWr93U",
@@ -448,7 +448,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
         "sourceChannelTitle": "AppleInsider",
         "thumbnailUrl": "https://i.ytimg.com/vi/B84L0wWr93U/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 574
       },
       {
         "youtubeVideoId": "V5CYMpUAzl0",
@@ -464,7 +464,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
         "thumbnailUrl": "https://i.ytimg.com/vi/WTNFAWm3QWI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 683
       },
       {
         "youtubeVideoId": "2rfk0aa60e0",
@@ -472,7 +472,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
         "sourceChannelTitle": "Engadget",
         "thumbnailUrl": "https://i.ytimg.com/vi/2rfk0aa60e0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 210
       },
       {
         "youtubeVideoId": "ESABTN4VtrA",
@@ -480,7 +480,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
         "sourceChannelTitle": "Marques Brownlee",
         "thumbnailUrl": "https://i.ytimg.com/vi/ESABTN4VtrA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1744
       }
     ]
   },
@@ -496,7 +496,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCqJ-Xo29CKyLTjn6z2XwYAw",
         "sourceChannelTitle": "Game Maker's Toolkit",
         "thumbnailUrl": "https://i.ytimg.com/vi/8LMau1qXPYE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1228
       },
       {
         "youtubeVideoId": "Byibb4onvGE",
@@ -504,7 +504,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGiJeCKTVKIxtaYZOidh19g",
         "sourceChannelTitle": "Dunk Tank",
         "thumbnailUrl": "https://i.ytimg.com/vi/Byibb4onvGE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3394
       },
       {
         "youtubeVideoId": "I7IaqRJMi9w",
@@ -512,7 +512,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
         "sourceChannelTitle": "PewDiePie",
         "thumbnailUrl": "https://i.ytimg.com/vi/I7IaqRJMi9w/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 605
       },
       {
         "youtubeVideoId": "3Wr72H2pnfM",
@@ -520,7 +520,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNvzD7Z-g64bPXxGzaQaa4g",
         "sourceChannelTitle": "gameranx",
         "thumbnailUrl": "https://i.ytimg.com/vi/3Wr72H2pnfM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2604
       },
       {
         "youtubeVideoId": "0FIMFMxODIE",
@@ -528,7 +528,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7AeeVbyslLM_8-nVy2B8Q",
         "sourceChannelTitle": "Skill Up",
         "thumbnailUrl": "https://i.ytimg.com/vi/0FIMFMxODIE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1231
       },
       {
         "youtubeVideoId": "PkaZzWmQQ3M",
@@ -536,7 +536,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
         "thumbnailUrl": "https://i.ytimg.com/vi/PkaZzWmQQ3M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1278
       },
       {
         "youtubeVideoId": "ECHvbbpEP_M",
@@ -544,7 +544,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
         "thumbnailUrl": "https://i.ytimg.com/vi/ECHvbbpEP_M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 12715
       },
       {
         "youtubeVideoId": "KIQnIBi7SjU",
@@ -552,7 +552,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
         "sourceChannelTitle": "Easy Allies Plays",
         "thumbnailUrl": "https://i.ytimg.com/vi/KIQnIBi7SjU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 35952
       },
       {
         "youtubeVideoId": "krj0RHn_6SY",
@@ -560,7 +560,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYt9E2d_GCrPzquW-5MZwmQ",
         "sourceChannelTitle": "The Guru Meditation",
         "thumbnailUrl": "https://i.ytimg.com/vi/krj0RHn_6SY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 14218
       },
       {
         "youtubeVideoId": "wcTUDQbNhGE",
@@ -568,7 +568,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHDRlTIaDXGGYduDDNrBmTw",
         "sourceChannelTitle": "TopicArlo",
         "thumbnailUrl": "https://i.ytimg.com/vi/wcTUDQbNhGE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 745
       },
       {
         "youtubeVideoId": "soTTh20_dYs",
@@ -576,7 +576,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDTV8DckMvn7mlgtdxTyR-g",
         "sourceChannelTitle": "Spawn Wave Plus",
         "thumbnailUrl": "https://i.ytimg.com/vi/soTTh20_dYs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 485
       },
       {
         "youtubeVideoId": "3Ae0gNYzaSQ",
@@ -584,7 +584,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsvn_Po0SmunchJYOWpOxMg",
         "sourceChannelTitle": "videogamedunkey",
         "thumbnailUrl": "https://i.ytimg.com/vi/3Ae0gNYzaSQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 993
       },
       {
         "youtubeVideoId": "9Xi118VLFfs",
@@ -592,15 +592,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC2eEGT06FrWFU6VBnPOR9lg",
         "sourceChannelTitle": "Girlfriend Reviews",
         "thumbnailUrl": "https://i.ytimg.com/vi/9Xi118VLFfs/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "91G_5eFTnUE",
-        "title": "Black Cat Book Club Steam Trailer",
-        "sourceChannelId": "UCKMkV9T20tUOBqwsi5xh7HA",
-        "sourceChannelTitle": "Wholesome Games",
-        "thumbnailUrl": "https://i.ytimg.com/vi/91G_5eFTnUE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 544
       },
       {
         "youtubeVideoId": "Dbgdi7BzMR0",
@@ -608,7 +600,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCqJ-Xo29CKyLTjn6z2XwYAw",
         "sourceChannelTitle": "Game Maker's Toolkit",
         "thumbnailUrl": "https://i.ytimg.com/vi/Dbgdi7BzMR0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 8318
       },
       {
         "youtubeVideoId": "NF7ELVJUiKM",
@@ -616,7 +608,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGiJeCKTVKIxtaYZOidh19g",
         "sourceChannelTitle": "Dunk Tank",
         "thumbnailUrl": "https://i.ytimg.com/vi/NF7ELVJUiKM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 6537
       },
       {
         "youtubeVideoId": "U6I5PkZjWZU",
@@ -624,7 +616,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
         "sourceChannelTitle": "PewDiePie",
         "thumbnailUrl": "https://i.ytimg.com/vi/U6I5PkZjWZU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 704
       },
       {
         "youtubeVideoId": "ASY-TjQNOeM",
@@ -632,7 +624,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNvzD7Z-g64bPXxGzaQaa4g",
         "sourceChannelTitle": "gameranx",
         "thumbnailUrl": "https://i.ytimg.com/vi/ASY-TjQNOeM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1346
       },
       {
         "youtubeVideoId": "PP9WeyvDdF8",
@@ -640,7 +632,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7AeeVbyslLM_8-nVy2B8Q",
         "sourceChannelTitle": "Skill Up",
         "thumbnailUrl": "https://i.ytimg.com/vi/PP9WeyvDdF8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 7142
       },
       {
         "youtubeVideoId": "8j-ecLCywxU",
@@ -648,7 +640,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
         "thumbnailUrl": "https://i.ytimg.com/vi/8j-ecLCywxU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 305
       },
       {
         "youtubeVideoId": "mfBeP8318YA",
@@ -656,7 +648,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
         "thumbnailUrl": "https://i.ytimg.com/vi/mfBeP8318YA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 12718
       },
       {
         "youtubeVideoId": "AMxL-Hc8ROE",
@@ -664,7 +656,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
         "sourceChannelTitle": "Easy Allies Plays",
         "thumbnailUrl": "https://i.ytimg.com/vi/AMxL-Hc8ROE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 7844
       },
       {
         "youtubeVideoId": "_g6WN2yR0kg",
@@ -672,7 +664,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYt9E2d_GCrPzquW-5MZwmQ",
         "sourceChannelTitle": "The Guru Meditation",
         "thumbnailUrl": "https://i.ytimg.com/vi/_g6WN2yR0kg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5595
       },
       {
         "youtubeVideoId": "VrsUj4j-iWM",
@@ -680,7 +672,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHDRlTIaDXGGYduDDNrBmTw",
         "sourceChannelTitle": "TopicArlo",
         "thumbnailUrl": "https://i.ytimg.com/vi/VrsUj4j-iWM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 720
       },
       {
         "youtubeVideoId": "htHVQalXShA",
@@ -688,7 +680,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDTV8DckMvn7mlgtdxTyR-g",
         "sourceChannelTitle": "Spawn Wave Plus",
         "thumbnailUrl": "https://i.ytimg.com/vi/htHVQalXShA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 726
       },
       {
         "youtubeVideoId": "-Y6Cp6e-VbI",
@@ -696,7 +688,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsvn_Po0SmunchJYOWpOxMg",
         "sourceChannelTitle": "videogamedunkey",
         "thumbnailUrl": "https://i.ytimg.com/vi/-Y6Cp6e-VbI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 564
       },
       {
         "youtubeVideoId": "aVXbYwJnm7s",
@@ -704,7 +696,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC2eEGT06FrWFU6VBnPOR9lg",
         "sourceChannelTitle": "Girlfriend Reviews",
         "thumbnailUrl": "https://i.ytimg.com/vi/aVXbYwJnm7s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 604
       },
       {
         "youtubeVideoId": "dFsQxTpsEas",
@@ -712,7 +704,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKMkV9T20tUOBqwsi5xh7HA",
         "sourceChannelTitle": "Wholesome Games",
         "thumbnailUrl": "https://i.ytimg.com/vi/dFsQxTpsEas/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 64
       },
       {
         "youtubeVideoId": "awegilW3DTc",
@@ -720,7 +712,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCqJ-Xo29CKyLTjn6z2XwYAw",
         "sourceChannelTitle": "Game Maker's Toolkit",
         "thumbnailUrl": "https://i.ytimg.com/vi/awegilW3DTc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1250
       },
       {
         "youtubeVideoId": "Iyj1-8iuWXw",
@@ -728,7 +720,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGiJeCKTVKIxtaYZOidh19g",
         "sourceChannelTitle": "Dunk Tank",
         "thumbnailUrl": "https://i.ytimg.com/vi/Iyj1-8iuWXw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4264
       },
       {
         "youtubeVideoId": "ODDJXGY_1kQ",
@@ -744,7 +736,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNvzD7Z-g64bPXxGzaQaa4g",
         "sourceChannelTitle": "gameranx",
         "thumbnailUrl": "https://i.ytimg.com/vi/UjB432B1Pg4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1375
       },
       {
         "youtubeVideoId": "RrBtNPw4hBg",
@@ -752,7 +744,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7AeeVbyslLM_8-nVy2B8Q",
         "sourceChannelTitle": "Skill Up",
         "thumbnailUrl": "https://i.ytimg.com/vi/RrBtNPw4hBg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2037
       },
       {
         "youtubeVideoId": "v7j8BvbNpIY",
@@ -760,7 +752,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
         "thumbnailUrl": "https://i.ytimg.com/vi/v7j8BvbNpIY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 269
       },
       {
         "youtubeVideoId": "WXTWK_MuuPo",
@@ -768,7 +760,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
         "thumbnailUrl": "https://i.ytimg.com/vi/WXTWK_MuuPo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5822
       },
       {
         "youtubeVideoId": "kGFXjeq_nHY",
@@ -776,7 +768,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
         "sourceChannelTitle": "Easy Allies Plays",
         "thumbnailUrl": "https://i.ytimg.com/vi/kGFXjeq_nHY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 29872
       },
       {
         "youtubeVideoId": "MvZRGvouhdQ",
@@ -784,7 +776,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYt9E2d_GCrPzquW-5MZwmQ",
         "sourceChannelTitle": "The Guru Meditation",
         "thumbnailUrl": "https://i.ytimg.com/vi/MvZRGvouhdQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 465
       },
       {
         "youtubeVideoId": "6215y2Q2T10",
@@ -792,7 +784,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHDRlTIaDXGGYduDDNrBmTw",
         "sourceChannelTitle": "TopicArlo",
         "thumbnailUrl": "https://i.ytimg.com/vi/6215y2Q2T10/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 871
       },
       {
         "youtubeVideoId": "ZX_DzbPF_6E",
@@ -800,7 +792,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDTV8DckMvn7mlgtdxTyR-g",
         "sourceChannelTitle": "Spawn Wave Plus",
         "thumbnailUrl": "https://i.ytimg.com/vi/ZX_DzbPF_6E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 537
       },
       {
         "youtubeVideoId": "kjUabhk54gg",
@@ -808,7 +800,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsvn_Po0SmunchJYOWpOxMg",
         "sourceChannelTitle": "videogamedunkey",
         "thumbnailUrl": "https://i.ytimg.com/vi/kjUabhk54gg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 749
       },
       {
         "youtubeVideoId": "EbZcrOsFjOw",
@@ -816,7 +808,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC2eEGT06FrWFU6VBnPOR9lg",
         "sourceChannelTitle": "Girlfriend Reviews",
         "thumbnailUrl": "https://i.ytimg.com/vi/EbZcrOsFjOw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1949
       },
       {
         "youtubeVideoId": "5venGClMwdo",
@@ -824,7 +816,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKMkV9T20tUOBqwsi5xh7HA",
         "sourceChannelTitle": "Wholesome Games",
         "thumbnailUrl": "https://i.ytimg.com/vi/5venGClMwdo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 97
       },
       {
         "youtubeVideoId": "JFG0GMCMLgs",
@@ -832,7 +824,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCqJ-Xo29CKyLTjn6z2XwYAw",
         "sourceChannelTitle": "Game Maker's Toolkit",
         "thumbnailUrl": "https://i.ytimg.com/vi/JFG0GMCMLgs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 139
       },
       {
         "youtubeVideoId": "bF_zv3H6XgQ",
@@ -840,7 +832,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGiJeCKTVKIxtaYZOidh19g",
         "sourceChannelTitle": "Dunk Tank",
         "thumbnailUrl": "https://i.ytimg.com/vi/bF_zv3H6XgQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 8098
       },
       {
         "youtubeVideoId": "H8g4B5ZN7LM",
@@ -848,7 +840,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
         "sourceChannelTitle": "PewDiePie",
         "thumbnailUrl": "https://i.ytimg.com/vi/H8g4B5ZN7LM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2206
       },
       {
         "youtubeVideoId": "rk20dVV-AH0",
@@ -856,7 +848,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNvzD7Z-g64bPXxGzaQaa4g",
         "sourceChannelTitle": "gameranx",
         "thumbnailUrl": "https://i.ytimg.com/vi/rk20dVV-AH0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1658
       },
       {
         "youtubeVideoId": "7d93ySOiHMw",
@@ -864,7 +856,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7AeeVbyslLM_8-nVy2B8Q",
         "sourceChannelTitle": "Skill Up",
         "thumbnailUrl": "https://i.ytimg.com/vi/7d93ySOiHMw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1318
       },
       {
         "youtubeVideoId": "bLY4y-3J7Dc",
@@ -872,7 +864,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
         "thumbnailUrl": "https://i.ytimg.com/vi/bLY4y-3J7Dc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 560
       },
       {
         "youtubeVideoId": "EsuIE09kie4",
@@ -880,7 +872,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
         "thumbnailUrl": "https://i.ytimg.com/vi/EsuIE09kie4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 6427
       },
       {
         "youtubeVideoId": "xZ-S0-2zPbM",
@@ -888,7 +880,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
         "sourceChannelTitle": "Easy Allies Plays",
         "thumbnailUrl": "https://i.ytimg.com/vi/xZ-S0-2zPbM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 17297
       }
     ]
   },
@@ -904,7 +896,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/LtUDeizHqKk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1547
       },
       {
         "youtubeVideoId": "fIeVKrWIoSM",
@@ -912,7 +904,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
         "sourceChannelTitle": "World Cafe",
         "thumbnailUrl": "https://i.ytimg.com/vi/fIeVKrWIoSM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 229
       },
       {
         "youtubeVideoId": "qbYI8cixutY",
@@ -920,7 +912,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/qbYI8cixutY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1429
       },
       {
         "youtubeVideoId": "4Z2a2Iaj48M",
@@ -928,7 +920,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
         "sourceChannelTitle": "Mahogany",
         "thumbnailUrl": "https://i.ytimg.com/vi/4Z2a2Iaj48M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 236
       },
       {
         "youtubeVideoId": "oIgHjxeQn3k",
@@ -936,7 +928,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
         "thumbnailUrl": "https://i.ytimg.com/vi/oIgHjxeQn3k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 315
       },
       {
         "youtubeVideoId": "F8E0y5xiyso",
@@ -944,7 +936,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
         "sourceChannelTitle": "triple j talks",
         "thumbnailUrl": "https://i.ytimg.com/vi/F8E0y5xiyso/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2508
       },
       {
         "youtubeVideoId": "u1GtMLZMlDA",
@@ -952,7 +944,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWjmAUHmajb1-eo5WKk_22A",
         "sourceChannelTitle": "Audiotree",
         "thumbnailUrl": "https://i.ytimg.com/vi/u1GtMLZMlDA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 182
       },
       {
         "youtubeVideoId": "VibtPvPxohQ",
@@ -968,7 +960,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
         "thumbnailUrl": "https://i.ytimg.com/vi/z28UbGAPteA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3561
       },
       {
         "youtubeVideoId": "b7jc67izCKU",
@@ -976,7 +968,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCRLZb8PpI9N7COmYqHiDH7A",
         "sourceChannelTitle": "Sofar Sounds",
         "thumbnailUrl": "https://i.ytimg.com/vi/b7jc67izCKU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 252
       },
       {
         "youtubeVideoId": "h1QTWtUx81w",
@@ -984,7 +976,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCAKcSON6PSG_JkTbXh2WdIg",
         "sourceChannelTitle": "The Current",
         "thumbnailUrl": "https://i.ytimg.com/vi/h1QTWtUx81w/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 190
       },
       {
         "youtubeVideoId": "qwEvePgqS3E",
@@ -992,7 +984,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
         "sourceChannelTitle": "Paste Magazine",
         "thumbnailUrl": "https://i.ytimg.com/vi/qwEvePgqS3E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1004
       },
       {
         "youtubeVideoId": "mk-UTm2zvNk",
@@ -1000,7 +992,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
         "sourceChannelTitle": "KCRW",
         "thumbnailUrl": "https://i.ytimg.com/vi/mk-UTm2zvNk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3419
       },
       {
         "youtubeVideoId": "73wCQRQb7v0",
@@ -1008,7 +1000,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/73wCQRQb7v0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1093
       },
       {
         "youtubeVideoId": "KAAOVrm6Q4Q",
@@ -1016,7 +1008,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
         "sourceChannelTitle": "World Cafe",
         "thumbnailUrl": "https://i.ytimg.com/vi/KAAOVrm6Q4Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 211
       },
       {
         "youtubeVideoId": "GRunLx0PZKk",
@@ -1024,7 +1016,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/GRunLx0PZKk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 316
       },
       {
         "youtubeVideoId": "_sf68tCJtXY",
@@ -1032,7 +1024,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
         "sourceChannelTitle": "Mahogany",
         "thumbnailUrl": "https://i.ytimg.com/vi/_sf68tCJtXY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 203
       },
       {
         "youtubeVideoId": "gwLLvuVitx0",
@@ -1040,7 +1032,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
         "thumbnailUrl": "https://i.ytimg.com/vi/gwLLvuVitx0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 162
       },
       {
         "youtubeVideoId": "UiR_wdpxNIk",
@@ -1048,7 +1040,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
         "sourceChannelTitle": "triple j talks",
         "thumbnailUrl": "https://i.ytimg.com/vi/UiR_wdpxNIk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1876
       },
       {
         "youtubeVideoId": "19oaAYqgiU0",
@@ -1056,7 +1048,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWjmAUHmajb1-eo5WKk_22A",
         "sourceChannelTitle": "Audiotree",
         "thumbnailUrl": "https://i.ytimg.com/vi/19oaAYqgiU0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 236
       },
       {
         "youtubeVideoId": "j04AQUOx9yY",
@@ -1064,7 +1056,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-FQUIVQ-bZiefzBiQAa8Fw",
         "sourceChannelTitle": "BBC Radio 1",
         "thumbnailUrl": "https://i.ytimg.com/vi/j04AQUOx9yY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 8079
       },
       {
         "youtubeVideoId": "rGjgyjKBhDs",
@@ -1072,7 +1064,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
         "thumbnailUrl": "https://i.ytimg.com/vi/rGjgyjKBhDs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3649
       },
       {
         "youtubeVideoId": "FHuAfvoQB-c",
@@ -1080,7 +1072,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCAKcSON6PSG_JkTbXh2WdIg",
         "sourceChannelTitle": "The Current",
         "thumbnailUrl": "https://i.ytimg.com/vi/FHuAfvoQB-c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 187
       },
       {
         "youtubeVideoId": "KDvG_hN_8o8",
@@ -1088,7 +1080,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
         "sourceChannelTitle": "Paste Magazine",
         "thumbnailUrl": "https://i.ytimg.com/vi/KDvG_hN_8o8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 605
       },
       {
         "youtubeVideoId": "KZ2OEZArv5g",
@@ -1096,7 +1088,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
         "sourceChannelTitle": "KCRW",
         "thumbnailUrl": "https://i.ytimg.com/vi/KZ2OEZArv5g/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 534
       },
       {
         "youtubeVideoId": "XoH44mH5laY",
@@ -1104,7 +1096,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/XoH44mH5laY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 966
       },
       {
         "youtubeVideoId": "UdJNUNiXKQs",
@@ -1112,7 +1104,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
         "sourceChannelTitle": "World Cafe",
         "thumbnailUrl": "https://i.ytimg.com/vi/UdJNUNiXKQs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 188
       },
       {
         "youtubeVideoId": "UNE8a-AGo3Q",
@@ -1120,7 +1112,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/UNE8a-AGo3Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 221
       },
       {
         "youtubeVideoId": "vD5_ys2KurU",
@@ -1128,7 +1120,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
         "sourceChannelTitle": "Mahogany",
         "thumbnailUrl": "https://i.ytimg.com/vi/vD5_ys2KurU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 268
       },
       {
         "youtubeVideoId": "F6IiTdG83Y4",
@@ -1136,7 +1128,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
         "thumbnailUrl": "https://i.ytimg.com/vi/F6IiTdG83Y4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 171
       },
       {
         "youtubeVideoId": "IEoIAMl87RA",
@@ -1144,7 +1136,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
         "sourceChannelTitle": "triple j talks",
         "thumbnailUrl": "https://i.ytimg.com/vi/IEoIAMl87RA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1754
       },
       {
         "youtubeVideoId": "fPnkAfXeArM",
@@ -1152,7 +1144,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWjmAUHmajb1-eo5WKk_22A",
         "sourceChannelTitle": "Audiotree",
         "thumbnailUrl": "https://i.ytimg.com/vi/fPnkAfXeArM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1557
       },
       {
         "youtubeVideoId": "AL75DHREheM",
@@ -1160,7 +1152,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
         "thumbnailUrl": "https://i.ytimg.com/vi/AL75DHREheM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3512
       },
       {
         "youtubeVideoId": "j58aOarW_YA",
@@ -1168,7 +1160,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
         "sourceChannelTitle": "Paste Magazine",
         "thumbnailUrl": "https://i.ytimg.com/vi/j58aOarW_YA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 939
       },
       {
         "youtubeVideoId": "cfNiSsYBki0",
@@ -1184,7 +1176,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/xPIMk4d4ulI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1452
       },
       {
         "youtubeVideoId": "bRjijIUxLOQ",
@@ -1192,7 +1184,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
         "sourceChannelTitle": "World Cafe",
         "thumbnailUrl": "https://i.ytimg.com/vi/bRjijIUxLOQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1924
       },
       {
         "youtubeVideoId": "OGBXbNoFWEw",
@@ -1200,7 +1192,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/OGBXbNoFWEw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 392
       },
       {
         "youtubeVideoId": "N4OIOudIROo",
@@ -1208,7 +1200,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
         "sourceChannelTitle": "Mahogany",
         "thumbnailUrl": "https://i.ytimg.com/vi/N4OIOudIROo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 178
       },
       {
         "youtubeVideoId": "KlGEta2Pp-o",
@@ -1216,7 +1208,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
         "thumbnailUrl": "https://i.ytimg.com/vi/KlGEta2Pp-o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 254
       },
       {
         "youtubeVideoId": "duAln9SSHgU",
@@ -1224,7 +1216,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
         "sourceChannelTitle": "triple j talks",
         "thumbnailUrl": "https://i.ytimg.com/vi/duAln9SSHgU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1031
       },
       {
         "youtubeVideoId": "AjoHm2q6jos",
@@ -1232,7 +1224,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWjmAUHmajb1-eo5WKk_22A",
         "sourceChannelTitle": "Audiotree",
         "thumbnailUrl": "https://i.ytimg.com/vi/AjoHm2q6jos/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 172
       },
       {
         "youtubeVideoId": "svo1fX_il9k",
@@ -1240,7 +1232,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
         "thumbnailUrl": "https://i.ytimg.com/vi/svo1fX_il9k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3493
       },
       {
         "youtubeVideoId": "8GmD549VT2o",
@@ -1248,7 +1240,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
         "sourceChannelTitle": "Paste Magazine",
         "thumbnailUrl": "https://i.ytimg.com/vi/8GmD549VT2o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1291
       },
       {
         "youtubeVideoId": "MQi0WJcps9w",
@@ -1256,7 +1248,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
         "sourceChannelTitle": "KCRW",
         "thumbnailUrl": "https://i.ytimg.com/vi/MQi0WJcps9w/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 28909
       },
       {
         "youtubeVideoId": "_Mp_bpIZKlI",
@@ -1264,7 +1256,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/_Mp_bpIZKlI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1195
       },
       {
         "youtubeVideoId": "i0w641Yo0ys",
@@ -1272,7 +1264,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
         "sourceChannelTitle": "World Cafe",
         "thumbnailUrl": "https://i.ytimg.com/vi/i0w641Yo0ys/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 307
       },
       {
         "youtubeVideoId": "EeI8OkqYbbQ",
@@ -1280,7 +1272,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/EeI8OkqYbbQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 247
       },
       {
         "youtubeVideoId": "CgXxYPAJU-s",
@@ -1288,7 +1280,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
         "sourceChannelTitle": "Mahogany",
         "thumbnailUrl": "https://i.ytimg.com/vi/CgXxYPAJU-s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 212
       },
       {
         "youtubeVideoId": "_n49Uzm9DCM",
@@ -1296,7 +1288,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
         "thumbnailUrl": "https://i.ytimg.com/vi/_n49Uzm9DCM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 291
       }
     ]
   },
@@ -1312,7 +1304,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
         "sourceChannelTitle": "Tasty",
         "thumbnailUrl": "https://i.ytimg.com/vi/3r5aoFrXNRY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 485
       },
       {
         "youtubeVideoId": "dUtnimSrLSQ",
@@ -1320,7 +1312,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
         "sourceChannelTitle": "Binging with Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/dUtnimSrLSQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2281
       },
       {
         "youtubeVideoId": "-H3pjmp_aDg",
@@ -1328,7 +1320,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUAg71CJEvFdOnujmep1Svw",
         "sourceChannelTitle": "Joshua Weissman Recipes",
         "thumbnailUrl": "https://i.ytimg.com/vi/-H3pjmp_aDg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 678
       },
       {
         "youtubeVideoId": "sif3mn9UFH4",
@@ -1336,7 +1328,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCIEv3lZ_tNXHzL3ox-_uUGQ",
         "sourceChannelTitle": "Gordon Ramsay",
         "thumbnailUrl": "https://i.ytimg.com/vi/sif3mn9UFH4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2606
       },
       {
         "youtubeVideoId": "xS02sPTgWc8",
@@ -1344,7 +1336,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbpMy0Fg74eXXkvxJrtEn3w",
         "sourceChannelTitle": "Bon Appétit",
         "thumbnailUrl": "https://i.ytimg.com/vi/xS02sPTgWc8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 960
       },
       {
         "youtubeVideoId": "ZOhcENWpock",
@@ -1352,7 +1344,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4avs5jYd_FvzQ8f0XYziqw",
         "sourceChannelTitle": "Beyond Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/ZOhcENWpock/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1700
       },
       {
         "youtubeVideoId": "5z4TqEFrRYQ",
@@ -1360,7 +1352,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfyehHM_eo4g5JUyWmms2LA",
         "sourceChannelTitle": "Sorted Food",
         "thumbnailUrl": "https://i.ytimg.com/vi/5z4TqEFrRYQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1355
       },
       {
         "youtubeVideoId": "mXUG-m6QgKs",
@@ -1368,7 +1360,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCekQr9znsk2vWxBo3YiLq2w",
         "sourceChannelTitle": "You Suck At Cooking",
         "thumbnailUrl": "https://i.ytimg.com/vi/mXUG-m6QgKs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 298
       },
       {
         "youtubeVideoId": "yYWBELSNb2g",
@@ -1376,7 +1368,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbRj3Tcy1Zoz3rcf83nW5kw",
         "sourceChannelTitle": "SAM THE COOKING GUY",
         "thumbnailUrl": "https://i.ytimg.com/vi/yYWBELSNb2g/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1146
       },
       {
         "youtubeVideoId": "N6JDgJmiMFM",
@@ -1384,7 +1376,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
         "sourceChannelTitle": "Epicurious",
         "thumbnailUrl": "https://i.ytimg.com/vi/N6JDgJmiMFM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 514
       },
       {
         "youtubeVideoId": "H1-JB28hzyE",
@@ -1392,7 +1384,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
         "sourceChannelTitle": "Jamie Oliver",
         "thumbnailUrl": "https://i.ytimg.com/vi/H1-JB28hzyE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 770
       },
       {
         "youtubeVideoId": "R3o8NLYZMeU",
@@ -1400,7 +1392,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
         "sourceChannelTitle": "Maangchi",
         "thumbnailUrl": "https://i.ytimg.com/vi/R3o8NLYZMeU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 747
       },
       {
         "youtubeVideoId": "jlyuqWBo_W0",
@@ -1408,7 +1400,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
         "sourceChannelTitle": "Mythical Kitchen",
         "thumbnailUrl": "https://i.ytimg.com/vi/jlyuqWBo_W0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3725
       },
       {
         "youtubeVideoId": "COvngm7VbZs",
@@ -1416,7 +1408,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
         "sourceChannelTitle": "Binging with Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/COvngm7VbZs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2162
       },
       {
         "youtubeVideoId": "kd6lUmbj5ig",
@@ -1424,7 +1416,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUAg71CJEvFdOnujmep1Svw",
         "sourceChannelTitle": "Joshua Weissman Recipes",
         "thumbnailUrl": "https://i.ytimg.com/vi/kd6lUmbj5ig/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 497
       },
       {
         "youtubeVideoId": "69-fHxLSToA",
@@ -1432,7 +1424,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCIEv3lZ_tNXHzL3ox-_uUGQ",
         "sourceChannelTitle": "Gordon Ramsay",
         "thumbnailUrl": "https://i.ytimg.com/vi/69-fHxLSToA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1353
       },
       {
         "youtubeVideoId": "Nx2V2yC-ei4",
@@ -1440,7 +1432,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbpMy0Fg74eXXkvxJrtEn3w",
         "sourceChannelTitle": "Bon Appétit",
         "thumbnailUrl": "https://i.ytimg.com/vi/Nx2V2yC-ei4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 15561
       },
       {
         "youtubeVideoId": "5lcYUY8yUZc",
@@ -1448,7 +1440,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4avs5jYd_FvzQ8f0XYziqw",
         "sourceChannelTitle": "Beyond Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/5lcYUY8yUZc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3778
       },
       {
         "youtubeVideoId": "qs9U08mUxIQ",
@@ -1456,7 +1448,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfyehHM_eo4g5JUyWmms2LA",
         "sourceChannelTitle": "Sorted Food",
         "thumbnailUrl": "https://i.ytimg.com/vi/qs9U08mUxIQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1188
       },
       {
         "youtubeVideoId": "TRF14lFwB7I",
@@ -1464,7 +1456,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCekQr9znsk2vWxBo3YiLq2w",
         "sourceChannelTitle": "You Suck At Cooking",
         "thumbnailUrl": "https://i.ytimg.com/vi/TRF14lFwB7I/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 268
       },
       {
         "youtubeVideoId": "K-WfZ-VaKgc",
@@ -1472,7 +1464,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbRj3Tcy1Zoz3rcf83nW5kw",
         "sourceChannelTitle": "SAM THE COOKING GUY",
         "thumbnailUrl": "https://i.ytimg.com/vi/K-WfZ-VaKgc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 512
       },
       {
         "youtubeVideoId": "BrLTf27eUL0",
@@ -1480,7 +1472,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
         "sourceChannelTitle": "Epicurious",
         "thumbnailUrl": "https://i.ytimg.com/vi/BrLTf27eUL0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1143
       },
       {
         "youtubeVideoId": "1NldsAtQlOc",
@@ -1488,7 +1480,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
         "sourceChannelTitle": "Jamie Oliver",
         "thumbnailUrl": "https://i.ytimg.com/vi/1NldsAtQlOc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 612
       },
       {
         "youtubeVideoId": "xrTMJbjUJCA",
@@ -1496,7 +1488,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
         "sourceChannelTitle": "Maangchi",
         "thumbnailUrl": "https://i.ytimg.com/vi/xrTMJbjUJCA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 311
       },
       {
         "youtubeVideoId": "AQbpUILs8So",
@@ -1504,7 +1496,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
         "sourceChannelTitle": "Mythical Kitchen",
         "thumbnailUrl": "https://i.ytimg.com/vi/AQbpUILs8So/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3388
       },
       {
         "youtubeVideoId": "HGWICoR6n2s",
@@ -1512,7 +1504,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
         "sourceChannelTitle": "Binging with Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/HGWICoR6n2s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2057
       },
       {
         "youtubeVideoId": "7YmQDbJOelY",
@@ -1520,7 +1512,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUAg71CJEvFdOnujmep1Svw",
         "sourceChannelTitle": "Joshua Weissman Recipes",
         "thumbnailUrl": "https://i.ytimg.com/vi/7YmQDbJOelY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 605
       },
       {
         "youtubeVideoId": "I-kx4seyE7w",
@@ -1528,7 +1520,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCIEv3lZ_tNXHzL3ox-_uUGQ",
         "sourceChannelTitle": "Gordon Ramsay",
         "thumbnailUrl": "https://i.ytimg.com/vi/I-kx4seyE7w/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2356
       },
       {
         "youtubeVideoId": "-YP3OCTy3lg",
@@ -1536,7 +1528,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbpMy0Fg74eXXkvxJrtEn3w",
         "sourceChannelTitle": "Bon Appétit",
         "thumbnailUrl": "https://i.ytimg.com/vi/-YP3OCTy3lg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1097
       },
       {
         "youtubeVideoId": "razoqJjP8K8",
@@ -1544,7 +1536,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4avs5jYd_FvzQ8f0XYziqw",
         "sourceChannelTitle": "Beyond Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/razoqJjP8K8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1771
       },
       {
         "youtubeVideoId": "HeGHIqv7Vds",
@@ -1552,7 +1544,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfyehHM_eo4g5JUyWmms2LA",
         "sourceChannelTitle": "Sorted Food",
         "thumbnailUrl": "https://i.ytimg.com/vi/HeGHIqv7Vds/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5795
       },
       {
         "youtubeVideoId": "Bp2r-gleRws",
@@ -1560,7 +1552,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbRj3Tcy1Zoz3rcf83nW5kw",
         "sourceChannelTitle": "SAM THE COOKING GUY",
         "thumbnailUrl": "https://i.ytimg.com/vi/Bp2r-gleRws/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 555
       },
       {
         "youtubeVideoId": "OxuHuukJq3c",
@@ -1568,7 +1560,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
         "sourceChannelTitle": "Epicurious",
         "thumbnailUrl": "https://i.ytimg.com/vi/OxuHuukJq3c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 958
       },
       {
         "youtubeVideoId": "fQdHTDKlWM0",
@@ -1576,7 +1568,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
         "sourceChannelTitle": "Jamie Oliver",
         "thumbnailUrl": "https://i.ytimg.com/vi/fQdHTDKlWM0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2855
       },
       {
         "youtubeVideoId": "3EeQR3D5Ks0",
@@ -1584,7 +1576,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
         "sourceChannelTitle": "Maangchi",
         "thumbnailUrl": "https://i.ytimg.com/vi/3EeQR3D5Ks0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 370
       },
       {
         "youtubeVideoId": "zQ_4it9GRWE",
@@ -1592,7 +1584,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
         "sourceChannelTitle": "Mythical Kitchen",
         "thumbnailUrl": "https://i.ytimg.com/vi/zQ_4it9GRWE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2108
       },
       {
         "youtubeVideoId": "oWhnytD3QoA",
@@ -1600,7 +1592,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
         "sourceChannelTitle": "Binging with Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/oWhnytD3QoA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2459
       },
       {
         "youtubeVideoId": "mjJQetAQwW4",
@@ -1608,7 +1600,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUAg71CJEvFdOnujmep1Svw",
         "sourceChannelTitle": "Joshua Weissman Recipes",
         "thumbnailUrl": "https://i.ytimg.com/vi/mjJQetAQwW4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 576
       },
       {
         "youtubeVideoId": "2NAzRDjcdRk",
@@ -1616,7 +1608,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCIEv3lZ_tNXHzL3ox-_uUGQ",
         "sourceChannelTitle": "Gordon Ramsay",
         "thumbnailUrl": "https://i.ytimg.com/vi/2NAzRDjcdRk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2362
       },
       {
         "youtubeVideoId": "4D4pAvxy9lo",
@@ -1624,7 +1616,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbpMy0Fg74eXXkvxJrtEn3w",
         "sourceChannelTitle": "Bon Appétit",
         "thumbnailUrl": "https://i.ytimg.com/vi/4D4pAvxy9lo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 791
       },
       {
         "youtubeVideoId": "2upn2jhwMsU",
@@ -1632,7 +1624,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC4avs5jYd_FvzQ8f0XYziqw",
         "sourceChannelTitle": "Beyond Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/2upn2jhwMsU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2347
       },
       {
         "youtubeVideoId": "hN_jM5_eooc",
@@ -1640,7 +1632,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfyehHM_eo4g5JUyWmms2LA",
         "sourceChannelTitle": "Sorted Food",
         "thumbnailUrl": "https://i.ytimg.com/vi/hN_jM5_eooc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 947
       },
       {
         "youtubeVideoId": "RE-eipdL68k",
@@ -1648,7 +1640,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCbRj3Tcy1Zoz3rcf83nW5kw",
         "sourceChannelTitle": "SAM THE COOKING GUY",
         "thumbnailUrl": "https://i.ytimg.com/vi/RE-eipdL68k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 480
       },
       {
         "youtubeVideoId": "r9eTNJHskSU",
@@ -1656,7 +1648,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
         "sourceChannelTitle": "Epicurious",
         "thumbnailUrl": "https://i.ytimg.com/vi/r9eTNJHskSU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1543
       },
       {
         "youtubeVideoId": "3zdNUrZaqvA",
@@ -1664,7 +1656,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
         "sourceChannelTitle": "Jamie Oliver",
         "thumbnailUrl": "https://i.ytimg.com/vi/3zdNUrZaqvA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 508
       },
       {
         "youtubeVideoId": "U-oN4yYCVgA",
@@ -1672,7 +1664,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
         "sourceChannelTitle": "Maangchi",
         "thumbnailUrl": "https://i.ytimg.com/vi/U-oN4yYCVgA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 433
       },
       {
         "youtubeVideoId": "SMe38JQJbAs",
@@ -1680,7 +1672,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
         "sourceChannelTitle": "Mythical Kitchen",
         "thumbnailUrl": "https://i.ytimg.com/vi/SMe38JQJbAs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2681
       },
       {
         "youtubeVideoId": "iZi0yEY60zE",
@@ -1688,7 +1680,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
         "sourceChannelTitle": "Binging with Babish",
         "thumbnailUrl": "https://i.ytimg.com/vi/iZi0yEY60zE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1307
       },
       {
         "youtubeVideoId": "ILArlisjE3k",
@@ -1696,7 +1688,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUAg71CJEvFdOnujmep1Svw",
         "sourceChannelTitle": "Joshua Weissman Recipes",
         "thumbnailUrl": "https://i.ytimg.com/vi/ILArlisjE3k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 741
       },
       {
         "youtubeVideoId": "0Nxldbd3oQ0",
@@ -1704,7 +1696,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCIEv3lZ_tNXHzL3ox-_uUGQ",
         "sourceChannelTitle": "Gordon Ramsay",
         "thumbnailUrl": "https://i.ytimg.com/vi/0Nxldbd3oQ0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2037
       }
     ]
   },
@@ -1720,7 +1712,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/KfODG5REyss/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3955
       },
       {
         "youtubeVideoId": "QQXCC6o_LHU",
@@ -1728,7 +1720,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
         "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
         "thumbnailUrl": "https://i.ytimg.com/vi/QQXCC6o_LHU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1152
       },
       {
         "youtubeVideoId": "TTipD_G73iQ",
@@ -1744,7 +1736,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
         "thumbnailUrl": "https://i.ytimg.com/vi/4fvkgAJiBQI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1003
       },
       {
         "youtubeVideoId": "2pJY7kBXBb4",
@@ -1752,7 +1744,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUdettijNYvLAm4AixZv4RA",
         "sourceChannelTitle": "SciShow Psych",
         "thumbnailUrl": "https://i.ytimg.com/vi/2pJY7kBXBb4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1686
       },
       {
         "youtubeVideoId": "744fHerowJ4",
@@ -1760,7 +1752,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
         "thumbnailUrl": "https://i.ytimg.com/vi/744fHerowJ4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 475
       },
       {
         "youtubeVideoId": "fwW3XVFrm9c",
@@ -1768,7 +1760,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/fwW3XVFrm9c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2740
       },
       {
         "youtubeVideoId": "RG5WhPmwGgk",
@@ -1776,7 +1768,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7_gcs09iThXybpVgjHZ_7g",
         "sourceChannelTitle": "PBS Space Time",
         "thumbnailUrl": "https://i.ytimg.com/vi/RG5WhPmwGgk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 7096
       },
       {
         "youtubeVideoId": "YgoiujmwLKI",
@@ -1784,7 +1776,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCH4BNI0-FOK2dMXoFtViWHw",
         "sourceChannelTitle": "Be Smart",
         "thumbnailUrl": "https://i.ytimg.com/vi/YgoiujmwLKI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2563
       },
       {
         "youtubeVideoId": "ID-K64Jk6JM",
@@ -1792,7 +1784,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCFhXFikryT4aFcLkLw2LBLA",
         "sourceChannelTitle": "NileRed",
         "thumbnailUrl": "https://i.ytimg.com/vi/ID-K64Jk6JM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5411
       },
       {
         "youtubeVideoId": "99rI-nOCajM",
@@ -1800,7 +1792,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1VLQPn9cYSqx8plbk9RxxQ",
         "sourceChannelTitle": "The Action Lab",
         "thumbnailUrl": "https://i.ytimg.com/vi/99rI-nOCajM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 677
       },
       {
         "youtubeVideoId": "AJIKyn24Upc",
@@ -1808,7 +1800,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1yNl2E66ZzKApQdRuTQ4tw",
         "sourceChannelTitle": "Sabine Hossenfelder",
         "thumbnailUrl": "https://i.ytimg.com/vi/AJIKyn24Upc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 376
       },
       {
         "youtubeVideoId": "eyZEqSPeMwg",
@@ -1816,7 +1808,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/eyZEqSPeMwg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2067
       },
       {
         "youtubeVideoId": "HfaO94_KZ3c",
@@ -1824,7 +1816,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
         "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
         "thumbnailUrl": "https://i.ytimg.com/vi/HfaO94_KZ3c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1073
       },
       {
         "youtubeVideoId": "3L-_HyXdGP4",
@@ -1832,7 +1824,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
         "sourceChannelTitle": "Smarter Every Day 2",
         "thumbnailUrl": "https://i.ytimg.com/vi/3L-_HyXdGP4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 152
       },
       {
         "youtubeVideoId": "vr_ADr-XrR4",
@@ -1840,7 +1832,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
         "thumbnailUrl": "https://i.ytimg.com/vi/vr_ADr-XrR4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 982
       },
       {
         "youtubeVideoId": "cIH1FyNTzMw",
@@ -1848,7 +1840,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUdettijNYvLAm4AixZv4RA",
         "sourceChannelTitle": "SciShow Psych",
         "thumbnailUrl": "https://i.ytimg.com/vi/cIH1FyNTzMw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1672
       },
       {
         "youtubeVideoId": "9PJvV5PYDm0",
@@ -1856,7 +1848,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
         "thumbnailUrl": "https://i.ytimg.com/vi/9PJvV5PYDm0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 163
       },
       {
         "youtubeVideoId": "CTUqmUHvd2Y",
@@ -1864,7 +1856,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/CTUqmUHvd2Y/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2214
       },
       {
         "youtubeVideoId": "eb8x2tz_pgc",
@@ -1872,7 +1864,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7_gcs09iThXybpVgjHZ_7g",
         "sourceChannelTitle": "PBS Space Time",
         "thumbnailUrl": "https://i.ytimg.com/vi/eb8x2tz_pgc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1146
       },
       {
         "youtubeVideoId": "w6hK2PML6Uc",
@@ -1880,7 +1872,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCH4BNI0-FOK2dMXoFtViWHw",
         "sourceChannelTitle": "Be Smart",
         "thumbnailUrl": "https://i.ytimg.com/vi/w6hK2PML6Uc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1494
       },
       {
         "youtubeVideoId": "GmwaJnj6pfY",
@@ -1888,7 +1880,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCFhXFikryT4aFcLkLw2LBLA",
         "sourceChannelTitle": "NileRed",
         "thumbnailUrl": "https://i.ytimg.com/vi/GmwaJnj6pfY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3332
       },
       {
         "youtubeVideoId": "qB7d062jcNg",
@@ -1896,7 +1888,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1VLQPn9cYSqx8plbk9RxxQ",
         "sourceChannelTitle": "The Action Lab",
         "thumbnailUrl": "https://i.ytimg.com/vi/qB7d062jcNg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 515
       },
       {
         "youtubeVideoId": "fu5xB5ls2sU",
@@ -1904,7 +1896,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1yNl2E66ZzKApQdRuTQ4tw",
         "sourceChannelTitle": "Sabine Hossenfelder",
         "thumbnailUrl": "https://i.ytimg.com/vi/fu5xB5ls2sU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 367
       },
       {
         "youtubeVideoId": "NiCgcUTL9_Q",
@@ -1912,7 +1904,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/NiCgcUTL9_Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2072
       },
       {
         "youtubeVideoId": "kGvF7ATAqoo",
@@ -1920,7 +1912,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
         "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
         "thumbnailUrl": "https://i.ytimg.com/vi/kGvF7ATAqoo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 410
       },
       {
         "youtubeVideoId": "Q9JcpSJwEK0",
@@ -1928,7 +1920,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
         "sourceChannelTitle": "Smarter Every Day 2",
         "thumbnailUrl": "https://i.ytimg.com/vi/Q9JcpSJwEK0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 614
       },
       {
         "youtubeVideoId": "iSbLf1iOcZQ",
@@ -1936,7 +1928,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
         "thumbnailUrl": "https://i.ytimg.com/vi/iSbLf1iOcZQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1118
       },
       {
         "youtubeVideoId": "MX3RLigD-UA",
@@ -1944,7 +1936,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUdettijNYvLAm4AixZv4RA",
         "sourceChannelTitle": "SciShow Psych",
         "thumbnailUrl": "https://i.ytimg.com/vi/MX3RLigD-UA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1546
       },
       {
         "youtubeVideoId": "kIXkIBWo6vE",
@@ -1952,7 +1944,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
         "thumbnailUrl": "https://i.ytimg.com/vi/kIXkIBWo6vE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 217
       },
       {
         "youtubeVideoId": "eczB0uUx_k8",
@@ -1960,7 +1952,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/eczB0uUx_k8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2785
       },
       {
         "youtubeVideoId": "w6229Ivy_Lo",
@@ -1968,7 +1960,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC7_gcs09iThXybpVgjHZ_7g",
         "sourceChannelTitle": "PBS Space Time",
         "thumbnailUrl": "https://i.ytimg.com/vi/w6229Ivy_Lo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 959
       },
       {
         "youtubeVideoId": "KLmtn_xwgS4",
@@ -1976,7 +1968,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCH4BNI0-FOK2dMXoFtViWHw",
         "sourceChannelTitle": "Be Smart",
         "thumbnailUrl": "https://i.ytimg.com/vi/KLmtn_xwgS4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1033
       },
       {
         "youtubeVideoId": "WzHKEXc-8f4",
@@ -1984,7 +1976,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1VLQPn9cYSqx8plbk9RxxQ",
         "sourceChannelTitle": "The Action Lab",
         "thumbnailUrl": "https://i.ytimg.com/vi/WzHKEXc-8f4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 627
       },
       {
         "youtubeVideoId": "mh-e78kaQ8o",
@@ -1992,7 +1984,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1yNl2E66ZzKApQdRuTQ4tw",
         "sourceChannelTitle": "Sabine Hossenfelder",
         "thumbnailUrl": "https://i.ytimg.com/vi/mh-e78kaQ8o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 390
       },
       {
         "youtubeVideoId": "ONAuUyml0yI",
@@ -2000,7 +1992,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/ONAuUyml0yI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 307
       },
       {
         "youtubeVideoId": "AcjDyzYcIkc",
@@ -2008,7 +2000,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
         "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
         "thumbnailUrl": "https://i.ytimg.com/vi/AcjDyzYcIkc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 470
       },
       {
         "youtubeVideoId": "i7_hi00ktgY",
@@ -2016,7 +2008,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
         "sourceChannelTitle": "Smarter Every Day 2",
         "thumbnailUrl": "https://i.ytimg.com/vi/i7_hi00ktgY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 368
       },
       {
         "youtubeVideoId": "9QldsLTaQHo",
@@ -2024,7 +2016,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
         "thumbnailUrl": "https://i.ytimg.com/vi/9QldsLTaQHo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1167
       },
       {
         "youtubeVideoId": "TR1jAlI_VYw",
@@ -2032,7 +2024,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUdettijNYvLAm4AixZv4RA",
         "sourceChannelTitle": "SciShow Psych",
         "thumbnailUrl": "https://i.ytimg.com/vi/TR1jAlI_VYw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2015
       },
       {
         "youtubeVideoId": "jsAFbi4HgFg",
@@ -2040,7 +2032,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
         "thumbnailUrl": "https://i.ytimg.com/vi/jsAFbi4HgFg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 236
       },
       {
         "youtubeVideoId": "SsYKLXIU7no",
@@ -2048,7 +2040,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/SsYKLXIU7no/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 92
       },
       {
         "youtubeVideoId": "jXzARHsTBQY",
@@ -2056,7 +2048,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1VLQPn9cYSqx8plbk9RxxQ",
         "sourceChannelTitle": "The Action Lab",
         "thumbnailUrl": "https://i.ytimg.com/vi/jXzARHsTBQY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 660
       },
       {
         "youtubeVideoId": "t3CvQRH-mFg",
@@ -2064,7 +2056,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1yNl2E66ZzKApQdRuTQ4tw",
         "sourceChannelTitle": "Sabine Hossenfelder",
         "thumbnailUrl": "https://i.ytimg.com/vi/t3CvQRH-mFg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 398
       },
       {
         "youtubeVideoId": "JsBZOcqZerk",
@@ -2072,7 +2064,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
         "thumbnailUrl": "https://i.ytimg.com/vi/JsBZOcqZerk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2861
       },
       {
         "youtubeVideoId": "205swuI0JlY",
@@ -2080,7 +2072,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
         "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
         "thumbnailUrl": "https://i.ytimg.com/vi/205swuI0JlY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 946
       },
       {
         "youtubeVideoId": "jVDPOPWarDU",
@@ -2088,7 +2080,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
         "sourceChannelTitle": "Smarter Every Day 2",
         "thumbnailUrl": "https://i.ytimg.com/vi/jVDPOPWarDU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 837
       },
       {
         "youtubeVideoId": "QMFrtyT5a2k",
@@ -2096,7 +2088,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
         "thumbnailUrl": "https://i.ytimg.com/vi/QMFrtyT5a2k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1247
       },
       {
         "youtubeVideoId": "LNBXhocsQyY",
@@ -2104,7 +2096,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCUdettijNYvLAm4AixZv4RA",
         "sourceChannelTitle": "SciShow Psych",
         "thumbnailUrl": "https://i.ytimg.com/vi/LNBXhocsQyY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1337
       },
       {
         "youtubeVideoId": "x-vpfrs7RIs",
@@ -2112,7 +2104,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
         "thumbnailUrl": "https://i.ytimg.com/vi/x-vpfrs7RIs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 163
       }
     ]
   },
@@ -2128,7 +2120,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCRijo3ddMTht_IHyNSNXpNQ",
         "sourceChannelTitle": "Dude Perfect",
         "thumbnailUrl": "https://i.ytimg.com/vi/4MZHXB6UX-c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1644
       },
       {
         "youtubeVideoId": "0VCpPloplNY",
@@ -2136,7 +2128,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
         "sourceChannelTitle": "Red Bull Esports",
         "thumbnailUrl": "https://i.ytimg.com/vi/0VCpPloplNY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 712
       },
       {
         "youtubeVideoId": "jRnRoHv23KU",
@@ -2144,7 +2136,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
         "thumbnailUrl": "https://i.ytimg.com/vi/jRnRoHv23KU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 310
       },
       {
         "youtubeVideoId": "Ixb4d-8HNeQ",
@@ -2152,7 +2144,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
         "sourceChannelTitle": "Olympics Gymnastics",
         "thumbnailUrl": "https://i.ytimg.com/vi/Ixb4d-8HNeQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 94
       },
       {
         "youtubeVideoId": "DrjpFEoaSOw",
@@ -2160,7 +2152,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
         "sourceChannelTitle": "Almost Athletes with Dude Perfect",
         "thumbnailUrl": "https://i.ytimg.com/vi/DrjpFEoaSOw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 925
       },
       {
         "youtubeVideoId": "krXg6yqZU5A",
@@ -2168,7 +2160,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
         "sourceChannelTitle": "Nitro Circus",
         "thumbnailUrl": "https://i.ytimg.com/vi/krXg6yqZU5A/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 159
       },
       {
         "youtubeVideoId": "7EyJnj-rpcQ",
@@ -2176,7 +2168,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
         "thumbnailUrl": "https://i.ytimg.com/vi/7EyJnj-rpcQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 551
       },
       {
         "youtubeVideoId": "9rZmV1XAGm4",
@@ -2184,7 +2176,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
         "sourceChannelTitle": "NBA",
         "thumbnailUrl": "https://i.ytimg.com/vi/9rZmV1XAGm4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1696
       },
       {
         "youtubeVideoId": "Jf0wDZBEutM",
@@ -2195,28 +2187,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "rz4vPnJW9GQ",
-        "title": "Steph Curry Drops a NO-LOOK DIME & Gets HYPED After the Warriors’ Amazing Sequence 🔥",
-        "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
-        "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rz4vPnJW9GQ/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
         "youtubeVideoId": "N4Rvj7VF800",
         "title": "Fighting a House Fire | GoPro POV",
         "sourceChannelId": "UCqhnX4jA0A5paNd1v-zEysw",
         "sourceChannelTitle": "GoPro",
         "thumbnailUrl": "https://i.ytimg.com/vi/N4Rvj7VF800/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "NBN-p0ZZkXc",
-        "title": "Battletoads? We tried...!",
-        "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
-        "sourceChannelTitle": "Secret Base",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NBN-p0ZZkXc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 418
       },
       {
         "youtubeVideoId": "zTBCMBS0UEo",
@@ -2224,7 +2200,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
         "sourceChannelTitle": "FORMULA 1",
         "thumbnailUrl": "https://i.ytimg.com/vi/zTBCMBS0UEo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1155
       },
       {
         "youtubeVideoId": "Q4xRXBVvHU4",
@@ -2232,7 +2208,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
         "sourceChannelTitle": "Sky Sports Football",
         "thumbnailUrl": "https://i.ytimg.com/vi/Q4xRXBVvHU4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 125
       },
       {
         "youtubeVideoId": "UgUuZelE4gs",
@@ -2240,7 +2216,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
         "sourceChannelTitle": "Olympic Games",
         "thumbnailUrl": "https://i.ytimg.com/vi/UgUuZelE4gs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 10324
       },
       {
         "youtubeVideoId": "qoAj4fBA5AI",
@@ -2248,7 +2224,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
         "sourceChannelTitle": "Red Bull Esports",
         "thumbnailUrl": "https://i.ytimg.com/vi/qoAj4fBA5AI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 919
       },
       {
         "youtubeVideoId": "Fiz7podqPUA",
@@ -2256,7 +2232,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
         "thumbnailUrl": "https://i.ytimg.com/vi/Fiz7podqPUA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 764
       },
       {
         "youtubeVideoId": "qjxdqn7fOjY",
@@ -2264,7 +2240,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
         "sourceChannelTitle": "Olympics Gymnastics",
         "thumbnailUrl": "https://i.ytimg.com/vi/qjxdqn7fOjY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 135
       },
       {
         "youtubeVideoId": "mq-uDRYTi6g",
@@ -2272,7 +2248,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
         "sourceChannelTitle": "Almost Athletes with Dude Perfect",
         "thumbnailUrl": "https://i.ytimg.com/vi/mq-uDRYTi6g/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5037
       },
       {
         "youtubeVideoId": "nXiFBPABGsQ",
@@ -2280,7 +2256,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
         "sourceChannelTitle": "Nitro Circus",
         "thumbnailUrl": "https://i.ytimg.com/vi/nXiFBPABGsQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 742
       },
       {
         "youtubeVideoId": "duQzkyrxmgs",
@@ -2296,7 +2272,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
         "sourceChannelTitle": "NBA",
         "thumbnailUrl": "https://i.ytimg.com/vi/ETVUBCD7-Bk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1662
       },
       {
         "youtubeVideoId": "x36-dlSgzpo",
@@ -2304,7 +2280,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
         "sourceChannelTitle": "NFL",
         "thumbnailUrl": "https://i.ytimg.com/vi/x36-dlSgzpo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 355
       },
       {
         "youtubeVideoId": "13YuMKeCtuE",
@@ -2312,7 +2288,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
         "sourceChannelTitle": "House of Highlights",
         "thumbnailUrl": "https://i.ytimg.com/vi/13YuMKeCtuE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 88
       },
       {
         "youtubeVideoId": "OVRba175OpU",
@@ -2320,7 +2296,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
         "sourceChannelTitle": "Secret Base",
         "thumbnailUrl": "https://i.ytimg.com/vi/OVRba175OpU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 81
       },
       {
         "youtubeVideoId": "y23pvZMQCPI",
@@ -2328,7 +2304,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
         "sourceChannelTitle": "FORMULA 1",
         "thumbnailUrl": "https://i.ytimg.com/vi/y23pvZMQCPI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1000
       },
       {
         "youtubeVideoId": "XR21JDFQv-E",
@@ -2336,7 +2312,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
         "sourceChannelTitle": "Sky Sports Football",
         "thumbnailUrl": "https://i.ytimg.com/vi/XR21JDFQv-E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 223
       },
       {
         "youtubeVideoId": "074I4964nGw",
@@ -2344,7 +2320,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
         "sourceChannelTitle": "Olympic Games",
         "thumbnailUrl": "https://i.ytimg.com/vi/074I4964nGw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 173
       },
       {
         "youtubeVideoId": "jWVzGoSXHPU",
@@ -2352,7 +2328,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
         "sourceChannelTitle": "Red Bull Esports",
         "thumbnailUrl": "https://i.ytimg.com/vi/jWVzGoSXHPU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1031
       },
       {
         "youtubeVideoId": "JWKUr2rFmxk",
@@ -2360,7 +2336,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
         "thumbnailUrl": "https://i.ytimg.com/vi/JWKUr2rFmxk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 873
       },
       {
         "youtubeVideoId": "ShpQZ-RLibQ",
@@ -2368,7 +2344,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
         "sourceChannelTitle": "Olympics Gymnastics",
         "thumbnailUrl": "https://i.ytimg.com/vi/ShpQZ-RLibQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 137
       },
       {
         "youtubeVideoId": "mqeTIFCNwiE",
@@ -2376,7 +2352,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
         "sourceChannelTitle": "Almost Athletes with Dude Perfect",
         "thumbnailUrl": "https://i.ytimg.com/vi/mqeTIFCNwiE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1306
       },
       {
         "youtubeVideoId": "CuhVdH5QGbg",
@@ -2384,7 +2360,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
         "sourceChannelTitle": "Nitro Circus",
         "thumbnailUrl": "https://i.ytimg.com/vi/CuhVdH5QGbg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 999
       },
       {
         "youtubeVideoId": "JnX9xgJu3q4",
@@ -2392,7 +2368,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
         "thumbnailUrl": "https://i.ytimg.com/vi/JnX9xgJu3q4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 10170
       },
       {
         "youtubeVideoId": "y-jR93AytPc",
@@ -2400,7 +2376,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
         "sourceChannelTitle": "NBA",
         "thumbnailUrl": "https://i.ytimg.com/vi/y-jR93AytPc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1693
       },
       {
         "youtubeVideoId": "QxO8kEPVmC0",
@@ -2408,7 +2384,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
         "sourceChannelTitle": "NFL",
         "thumbnailUrl": "https://i.ytimg.com/vi/QxO8kEPVmC0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 689
       },
       {
         "youtubeVideoId": "x13U7HIJGHg",
@@ -2416,7 +2392,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
         "sourceChannelTitle": "Secret Base",
         "thumbnailUrl": "https://i.ytimg.com/vi/x13U7HIJGHg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 79
       },
       {
         "youtubeVideoId": "_09gPxeE_gc",
@@ -2424,7 +2400,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
         "sourceChannelTitle": "FORMULA 1",
         "thumbnailUrl": "https://i.ytimg.com/vi/_09gPxeE_gc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 565
       },
       {
         "youtubeVideoId": "DSicuQmGksI",
@@ -2432,7 +2408,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
         "sourceChannelTitle": "Sky Sports Football",
         "thumbnailUrl": "https://i.ytimg.com/vi/DSicuQmGksI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 199
       },
       {
         "youtubeVideoId": "B_IwF-sh0LI",
@@ -2440,7 +2416,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
         "sourceChannelTitle": "Olympic Games",
         "thumbnailUrl": "https://i.ytimg.com/vi/B_IwF-sh0LI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 10547
       },
       {
         "youtubeVideoId": "1_91kDYtHbo",
@@ -2448,7 +2424,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
         "sourceChannelTitle": "Red Bull Esports",
         "thumbnailUrl": "https://i.ytimg.com/vi/1_91kDYtHbo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1074
       },
       {
         "youtubeVideoId": "QmLsn_JrPbo",
@@ -2456,15 +2432,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
         "thumbnailUrl": "https://i.ytimg.com/vi/QmLsn_JrPbo/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "HRMCWVyr5ss",
-        "title": "Minamino Yume's Vault! 🇯🇵 | Dakar Youth Olympics",
-        "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
-        "sourceChannelTitle": "Olympics Gymnastics",
-        "thumbnailUrl": "https://i.ytimg.com/vi/HRMCWVyr5ss/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 292
       },
       {
         "youtubeVideoId": "YvYBloAS3_Y",
@@ -2480,7 +2448,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
         "sourceChannelTitle": "NBA",
         "thumbnailUrl": "https://i.ytimg.com/vi/B5VNBCvu4E0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 149
       },
       {
         "youtubeVideoId": "BN_-u78ur0I",
@@ -2488,7 +2456,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
         "sourceChannelTitle": "NFL",
         "thumbnailUrl": "https://i.ytimg.com/vi/BN_-u78ur0I/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 319
       },
       {
         "youtubeVideoId": "8TvF1hxB7c0",
@@ -2496,7 +2464,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
         "sourceChannelTitle": "Secret Base",
         "thumbnailUrl": "https://i.ytimg.com/vi/8TvF1hxB7c0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 283
       },
       {
         "youtubeVideoId": "q16mDWoytf0",
@@ -2504,7 +2472,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
         "sourceChannelTitle": "FORMULA 1",
         "thumbnailUrl": "https://i.ytimg.com/vi/q16mDWoytf0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 536
       },
       {
         "youtubeVideoId": "LVhbeQDt5RM",
@@ -2512,7 +2480,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
         "sourceChannelTitle": "Sky Sports Football",
         "thumbnailUrl": "https://i.ytimg.com/vi/LVhbeQDt5RM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 189
       },
       {
         "youtubeVideoId": "ta-sP-EY8aM",
@@ -2520,7 +2488,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
         "sourceChannelTitle": "Olympic Games",
         "thumbnailUrl": "https://i.ytimg.com/vi/ta-sP-EY8aM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 16855
       }
     ]
   },
@@ -2536,7 +2504,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
         "sourceChannelTitle": "Daily Drop",
         "thumbnailUrl": "https://i.ytimg.com/vi/42M_CnizJxc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 627
       },
       {
         "youtubeVideoId": "cBGSUS7iOgg",
@@ -2544,7 +2512,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
         "sourceChannelTitle": "Seek Discomfort",
         "thumbnailUrl": "https://i.ytimg.com/vi/cBGSUS7iOgg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5771
       },
       {
         "youtubeVideoId": "CE0GHFSc2p8",
@@ -2552,7 +2520,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCi7KXaqqW_h6ifNVnudH0kQ",
         "sourceChannelTitle": "Christian LeBlanc",
         "thumbnailUrl": "https://i.ytimg.com/vi/CE0GHFSc2p8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1007
       },
       {
         "youtubeVideoId": "IqXl0JxxHx8",
@@ -2560,7 +2528,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCodVXWu3aFyE1hGmbJrJJLQ",
         "sourceChannelTitle": "Drew Binsky Top Videos",
         "thumbnailUrl": "https://i.ytimg.com/vi/IqXl0JxxHx8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 8272
       },
       {
         "youtubeVideoId": "sWBMwr3y9c4",
@@ -2568,7 +2536,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
         "thumbnailUrl": "https://i.ytimg.com/vi/sWBMwr3y9c4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 774
       },
       {
         "youtubeVideoId": "5wypCQp11wo",
@@ -2576,7 +2544,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCxDZs_ltFFvn0FDHT6kmoXA",
         "sourceChannelTitle": "bald and bankrupt",
         "thumbnailUrl": "https://i.ytimg.com/vi/5wypCQp11wo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2644
       },
       {
         "youtubeVideoId": "W4lTVLOwzQQ",
@@ -2584,7 +2552,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJ7FVLKSOlpTNbuyvqOjPqw",
         "sourceChannelTitle": "RickStevesEurope",
         "thumbnailUrl": "https://i.ytimg.com/vi/W4lTVLOwzQQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 71
       },
       {
         "youtubeVideoId": "kYyxSvOcr4k",
@@ -2592,7 +2560,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
         "thumbnailUrl": "https://i.ytimg.com/vi/kYyxSvOcr4k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1706
       },
       {
         "youtubeVideoId": "lz06lrFWgmQ",
@@ -2600,7 +2568,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCyEd6QBSgat5kkC6svyjudA",
         "sourceChannelTitle": "Mark Wiens",
         "thumbnailUrl": "https://i.ytimg.com/vi/lz06lrFWgmQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2025
       },
       {
         "youtubeVideoId": "q7thhitQoww",
@@ -2608,7 +2576,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_DmOS_FBvO4H27U7X0OtRg",
         "sourceChannelTitle": "Fearless &amp; Far",
         "thumbnailUrl": "https://i.ytimg.com/vi/q7thhitQoww/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2823
       },
       {
         "youtubeVideoId": "Rp2pJ9EfFAU",
@@ -2616,7 +2584,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXulruMI7BHj3kGyosNa0jA",
         "sourceChannelTitle": "Indigo Traveller",
         "thumbnailUrl": "https://i.ytimg.com/vi/Rp2pJ9EfFAU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2679
       },
       {
         "youtubeVideoId": "fTXEa-lERGc",
@@ -2624,7 +2592,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCD5v3wL-6NMG0SMMeR6TxsA",
         "sourceChannelTitle": "Extra Chopsticks",
         "thumbnailUrl": "https://i.ytimg.com/vi/fTXEa-lERGc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1245
       },
       {
         "youtubeVideoId": "4u9kJEYyk_o",
@@ -2632,7 +2600,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiAq_SU0ED1C6vWFMnw8Ekg",
         "sourceChannelTitle": "The Food Ranger",
         "thumbnailUrl": "https://i.ytimg.com/vi/4u9kJEYyk_o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1741
       },
       {
         "youtubeVideoId": "61XiQ9ahJjA",
@@ -2640,7 +2608,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
         "sourceChannelTitle": "Daily Drop",
         "thumbnailUrl": "https://i.ytimg.com/vi/61XiQ9ahJjA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 652
       },
       {
         "youtubeVideoId": "K3tG371iWhs",
@@ -2648,7 +2616,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
         "sourceChannelTitle": "Seek Discomfort",
         "thumbnailUrl": "https://i.ytimg.com/vi/K3tG371iWhs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 694
       },
       {
         "youtubeVideoId": "PnnjlMu-uyI",
@@ -2656,7 +2624,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCi7KXaqqW_h6ifNVnudH0kQ",
         "sourceChannelTitle": "Christian LeBlanc",
         "thumbnailUrl": "https://i.ytimg.com/vi/PnnjlMu-uyI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1631
       },
       {
         "youtubeVideoId": "rwX1YVzRn4M",
@@ -2664,7 +2632,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCodVXWu3aFyE1hGmbJrJJLQ",
         "sourceChannelTitle": "Drew Binsky Top Videos",
         "thumbnailUrl": "https://i.ytimg.com/vi/rwX1YVzRn4M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 8175
       },
       {
         "youtubeVideoId": "pG4ru332TYc",
@@ -2672,7 +2640,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
         "thumbnailUrl": "https://i.ytimg.com/vi/pG4ru332TYc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 960
       },
       {
         "youtubeVideoId": "ktb5PTSVSNg",
@@ -2680,7 +2648,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCxDZs_ltFFvn0FDHT6kmoXA",
         "sourceChannelTitle": "bald and bankrupt",
         "thumbnailUrl": "https://i.ytimg.com/vi/ktb5PTSVSNg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1846
       },
       {
         "youtubeVideoId": "2vZA83_gQCA",
@@ -2688,7 +2656,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJ7FVLKSOlpTNbuyvqOjPqw",
         "sourceChannelTitle": "RickStevesEurope",
         "thumbnailUrl": "https://i.ytimg.com/vi/2vZA83_gQCA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 75
       },
       {
         "youtubeVideoId": "vofF8V-40dU",
@@ -2696,7 +2664,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
         "thumbnailUrl": "https://i.ytimg.com/vi/vofF8V-40dU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1488
       },
       {
         "youtubeVideoId": "8tEXcv-8pIw",
@@ -2704,7 +2672,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCyEd6QBSgat5kkC6svyjudA",
         "sourceChannelTitle": "Mark Wiens",
         "thumbnailUrl": "https://i.ytimg.com/vi/8tEXcv-8pIw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1552
       },
       {
         "youtubeVideoId": "BPHjquSgzMQ",
@@ -2712,7 +2680,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXulruMI7BHj3kGyosNa0jA",
         "sourceChannelTitle": "Indigo Traveller",
         "thumbnailUrl": "https://i.ytimg.com/vi/BPHjquSgzMQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2594
       },
       {
         "youtubeVideoId": "gUHDGLVph9Y",
@@ -2720,7 +2688,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCD5v3wL-6NMG0SMMeR6TxsA",
         "sourceChannelTitle": "Extra Chopsticks",
         "thumbnailUrl": "https://i.ytimg.com/vi/gUHDGLVph9Y/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1201
       },
       {
         "youtubeVideoId": "VBcwjyBzAdo",
@@ -2728,7 +2696,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiAq_SU0ED1C6vWFMnw8Ekg",
         "sourceChannelTitle": "The Food Ranger",
         "thumbnailUrl": "https://i.ytimg.com/vi/VBcwjyBzAdo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1212
       },
       {
         "youtubeVideoId": "zgHOkzd7lrs",
@@ -2736,7 +2704,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
         "sourceChannelTitle": "Daily Drop",
         "thumbnailUrl": "https://i.ytimg.com/vi/zgHOkzd7lrs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 751
       },
       {
         "youtubeVideoId": "OPg97iP7klM",
@@ -2744,7 +2712,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
         "sourceChannelTitle": "Seek Discomfort",
         "thumbnailUrl": "https://i.ytimg.com/vi/OPg97iP7klM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1363
       },
       {
         "youtubeVideoId": "-ZfrST8diaY",
@@ -2752,7 +2720,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCi7KXaqqW_h6ifNVnudH0kQ",
         "sourceChannelTitle": "Christian LeBlanc",
         "thumbnailUrl": "https://i.ytimg.com/vi/-ZfrST8diaY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1332
       },
       {
         "youtubeVideoId": "pZYuphYyMrA",
@@ -2760,7 +2728,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCodVXWu3aFyE1hGmbJrJJLQ",
         "sourceChannelTitle": "Drew Binsky Top Videos",
         "thumbnailUrl": "https://i.ytimg.com/vi/pZYuphYyMrA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4961
       },
       {
         "youtubeVideoId": "7XxKCSS_iZ4",
@@ -2768,7 +2736,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
         "thumbnailUrl": "https://i.ytimg.com/vi/7XxKCSS_iZ4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 708
       },
       {
         "youtubeVideoId": "3eykcScdqJM",
@@ -2776,15 +2744,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCxDZs_ltFFvn0FDHT6kmoXA",
         "sourceChannelTitle": "bald and bankrupt",
         "thumbnailUrl": "https://i.ytimg.com/vi/3eykcScdqJM/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "rA2EkEbClfg",
-        "title": "Down the Grand Canal...",
-        "sourceChannelId": "UCJ7FVLKSOlpTNbuyvqOjPqw",
-        "sourceChannelTitle": "RickStevesEurope",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rA2EkEbClfg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3235
       },
       {
         "youtubeVideoId": "uuJpJ6sAULE",
@@ -2792,7 +2752,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
         "thumbnailUrl": "https://i.ytimg.com/vi/uuJpJ6sAULE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1137
       },
       {
         "youtubeVideoId": "gM5hAO3bW7s",
@@ -2800,7 +2760,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCyEd6QBSgat5kkC6svyjudA",
         "sourceChannelTitle": "Mark Wiens",
         "thumbnailUrl": "https://i.ytimg.com/vi/gM5hAO3bW7s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1974
       },
       {
         "youtubeVideoId": "LiIraJl0bBU",
@@ -2808,7 +2768,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXulruMI7BHj3kGyosNa0jA",
         "sourceChannelTitle": "Indigo Traveller",
         "thumbnailUrl": "https://i.ytimg.com/vi/LiIraJl0bBU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1660
       },
       {
         "youtubeVideoId": "_SoZEcucEXg",
@@ -2816,7 +2776,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiAq_SU0ED1C6vWFMnw8Ekg",
         "sourceChannelTitle": "The Food Ranger",
         "thumbnailUrl": "https://i.ytimg.com/vi/_SoZEcucEXg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1457
       },
       {
         "youtubeVideoId": "M1y8jNjOqHs",
@@ -2824,7 +2784,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
         "sourceChannelTitle": "Daily Drop",
         "thumbnailUrl": "https://i.ytimg.com/vi/M1y8jNjOqHs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 526
       },
       {
         "youtubeVideoId": "0KxZNNjuGOc",
@@ -2832,7 +2792,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
         "sourceChannelTitle": "Seek Discomfort",
         "thumbnailUrl": "https://i.ytimg.com/vi/0KxZNNjuGOc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 997
       },
       {
         "youtubeVideoId": "5Y7KLAn0QAg",
@@ -2840,7 +2800,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCi7KXaqqW_h6ifNVnudH0kQ",
         "sourceChannelTitle": "Christian LeBlanc",
         "thumbnailUrl": "https://i.ytimg.com/vi/5Y7KLAn0QAg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 903
       },
       {
         "youtubeVideoId": "EwiNn8un55c",
@@ -2848,7 +2808,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCodVXWu3aFyE1hGmbJrJJLQ",
         "sourceChannelTitle": "Drew Binsky Top Videos",
         "thumbnailUrl": "https://i.ytimg.com/vi/EwiNn8un55c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 6101
       },
       {
         "youtubeVideoId": "xWT89PEpAXU",
@@ -2856,7 +2816,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
         "thumbnailUrl": "https://i.ytimg.com/vi/xWT89PEpAXU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 603
       },
       {
         "youtubeVideoId": "Ez3rzTM3IgQ",
@@ -2864,15 +2824,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCxDZs_ltFFvn0FDHT6kmoXA",
         "sourceChannelTitle": "bald and bankrupt",
         "thumbnailUrl": "https://i.ytimg.com/vi/Ez3rzTM3IgQ/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "2K9Raloi9AY",
-        "title": "Rome in 180°",
-        "sourceChannelId": "UCJ7FVLKSOlpTNbuyvqOjPqw",
-        "sourceChannelTitle": "RickStevesEurope",
-        "thumbnailUrl": "https://i.ytimg.com/vi/2K9Raloi9AY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2191
       },
       {
         "youtubeVideoId": "D8dAqVe6m0E",
@@ -2880,7 +2832,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
         "thumbnailUrl": "https://i.ytimg.com/vi/D8dAqVe6m0E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1264
       },
       {
         "youtubeVideoId": "Tk_0L_vS5Y4",
@@ -2888,7 +2840,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCyEd6QBSgat5kkC6svyjudA",
         "sourceChannelTitle": "Mark Wiens",
         "thumbnailUrl": "https://i.ytimg.com/vi/Tk_0L_vS5Y4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3233
       },
       {
         "youtubeVideoId": "xNXA8CRnZXY",
@@ -2896,7 +2848,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXulruMI7BHj3kGyosNa0jA",
         "sourceChannelTitle": "Indigo Traveller",
         "thumbnailUrl": "https://i.ytimg.com/vi/xNXA8CRnZXY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1744
       },
       {
         "youtubeVideoId": "-7BUwQH6bAY",
@@ -2904,7 +2856,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiAq_SU0ED1C6vWFMnw8Ekg",
         "sourceChannelTitle": "The Food Ranger",
         "thumbnailUrl": "https://i.ytimg.com/vi/-7BUwQH6bAY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1351
       },
       {
         "youtubeVideoId": "jZb8qTrR5lk",
@@ -2912,7 +2864,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
         "sourceChannelTitle": "Daily Drop",
         "thumbnailUrl": "https://i.ytimg.com/vi/jZb8qTrR5lk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 785
       },
       {
         "youtubeVideoId": "CKDGkhQDLjQ",
@@ -2920,7 +2872,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
         "sourceChannelTitle": "Seek Discomfort",
         "thumbnailUrl": "https://i.ytimg.com/vi/CKDGkhQDLjQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 943
       },
       {
         "youtubeVideoId": "EFczZrLwS_I",
@@ -2928,7 +2880,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCi7KXaqqW_h6ifNVnudH0kQ",
         "sourceChannelTitle": "Christian LeBlanc",
         "thumbnailUrl": "https://i.ytimg.com/vi/EFczZrLwS_I/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1639
       }
     ]
   },
@@ -2944,7 +2896,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-hehDTvO4X8d9M7MVtpElg",
         "sourceChannelTitle": "Seeing Through Our Screens - Thomas Flight",
         "thumbnailUrl": "https://i.ytimg.com/vi/ZzaAa6yDvVk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 231
       },
       {
         "youtubeVideoId": "Dz7LH5YfYc0",
@@ -2952,15 +2904,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDylnpLJWDj2gKWujjwap9w",
         "sourceChannelTitle": "StudioBinder Academy",
         "thumbnailUrl": "https://i.ytimg.com/vi/Dz7LH5YfYc0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "AgLOYGvPJoQ",
-        "title": "DreamWorks Shrek 2 Remastered - Official Launch Trailer",
-        "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
-        "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/AgLOYGvPJoQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 327
       },
       {
         "youtubeVideoId": "-LDXBGgs1QI",
@@ -2968,7 +2912,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCErSSa3CaP_GJxmFpdjG9Jw",
         "sourceChannelTitle": "Lessons from the Screenplay",
         "thumbnailUrl": "https://i.ytimg.com/vi/-LDXBGgs1QI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3601
       },
       {
         "youtubeVideoId": "utJ4ld9n9vE",
@@ -2976,7 +2920,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCzjbia0NqUsSL1_-loJihMg",
         "sourceChannelTitle": "CinemaStix",
         "thumbnailUrl": "https://i.ytimg.com/vi/utJ4ld9n9vE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 650
       },
       {
         "youtubeVideoId": "b6b_uVA1ZSo",
@@ -2984,7 +2928,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCuPgdqQKpq4T4zeqmTelnFg",
         "sourceChannelTitle": "kaptainkristian",
         "thumbnailUrl": "https://i.ytimg.com/vi/b6b_uVA1ZSo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 373
       },
       {
         "youtubeVideoId": "V04X299hq9c",
@@ -2992,7 +2936,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWTFGPpNQ0Ms6afXhaWDiRw",
         "sourceChannelTitle": "Now You See It",
         "thumbnailUrl": "https://i.ytimg.com/vi/V04X299hq9c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 249
       },
       {
         "youtubeVideoId": "a2jlDGZJRBI",
@@ -3000,7 +2944,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJkMlOu7faDgqh4PfzbpLdg",
         "sourceChannelTitle": "Nerdwriter1",
         "thumbnailUrl": "https://i.ytimg.com/vi/a2jlDGZJRBI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 495
       },
       {
         "youtubeVideoId": "ei1QhjvNnVM",
@@ -3008,7 +2952,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCx0L2ZdYfiq-tsAXb8IXpQg",
         "sourceChannelTitle": "Just Write",
         "thumbnailUrl": "https://i.ytimg.com/vi/ei1QhjvNnVM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2569
       },
       {
         "youtubeVideoId": "Jobvn4xLGRU",
@@ -3016,7 +2960,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSpFnDQr88xCZ80N-X7t0nQ",
         "sourceChannelTitle": "Corridor Crew",
         "thumbnailUrl": "https://i.ytimg.com/vi/Jobvn4xLGRU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 965
       },
       {
         "youtubeVideoId": "obxiFt-FROk",
@@ -3024,7 +2968,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSFAYalJ2Q7Tm_WmLgetmeg",
         "sourceChannelTitle": "Filmmaker IQ",
         "thumbnailUrl": "https://i.ytimg.com/vi/obxiFt-FROk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 6554
       },
       {
         "youtubeVideoId": "ZXUBoI9eHfQ",
@@ -3032,7 +2976,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCjFqcJQXGZ6T6sxyFB-5i6A",
         "sourceChannelTitle": "Every Frame a Painting",
         "thumbnailUrl": "https://i.ytimg.com/vi/ZXUBoI9eHfQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3268
       },
       {
         "youtubeVideoId": "TibHDhxlEzc",
@@ -3040,7 +2984,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfjaAUlTZRHJapJmCT6eyIg",
         "sourceChannelTitle": "Spacedock",
         "thumbnailUrl": "https://i.ytimg.com/vi/TibHDhxlEzc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 544
       },
       {
         "youtubeVideoId": "Cd4vtY-uY9I",
@@ -3048,7 +2992,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCs7nPQIEba0T3tGOWWsZpJQ",
         "sourceChannelTitle": "Like Stories of Old",
         "thumbnailUrl": "https://i.ytimg.com/vi/Cd4vtY-uY9I/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1736
       },
       {
         "youtubeVideoId": "LdbmF1bzaUI",
@@ -3056,7 +3000,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-hehDTvO4X8d9M7MVtpElg",
         "sourceChannelTitle": "Seeing Through Our Screens - Thomas Flight",
         "thumbnailUrl": "https://i.ytimg.com/vi/LdbmF1bzaUI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3604
       },
       {
         "youtubeVideoId": "Wq8_S3drQg8",
@@ -3064,7 +3008,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDylnpLJWDj2gKWujjwap9w",
         "sourceChannelTitle": "StudioBinder Academy",
         "thumbnailUrl": "https://i.ytimg.com/vi/Wq8_S3drQg8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 486
       },
       {
         "youtubeVideoId": "5REIludod7c",
@@ -3072,7 +3016,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
         "thumbnailUrl": "https://i.ytimg.com/vi/5REIludod7c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 376
       },
       {
         "youtubeVideoId": "IuaaTJxhSEc",
@@ -3080,7 +3024,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCErSSa3CaP_GJxmFpdjG9Jw",
         "sourceChannelTitle": "Lessons from the Screenplay",
         "thumbnailUrl": "https://i.ytimg.com/vi/IuaaTJxhSEc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 66
       },
       {
         "youtubeVideoId": "yAHnEXHMACA",
@@ -3088,7 +3032,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCzjbia0NqUsSL1_-loJihMg",
         "sourceChannelTitle": "CinemaStix",
         "thumbnailUrl": "https://i.ytimg.com/vi/yAHnEXHMACA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 823
       },
       {
         "youtubeVideoId": "01BrRGEzPaQ",
@@ -3096,7 +3040,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCuPgdqQKpq4T4zeqmTelnFg",
         "sourceChannelTitle": "kaptainkristian",
         "thumbnailUrl": "https://i.ytimg.com/vi/01BrRGEzPaQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 637
       },
       {
         "youtubeVideoId": "uS-CXPJVtFI",
@@ -3104,7 +3048,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWTFGPpNQ0Ms6afXhaWDiRw",
         "sourceChannelTitle": "Now You See It",
         "thumbnailUrl": "https://i.ytimg.com/vi/uS-CXPJVtFI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 692
       },
       {
         "youtubeVideoId": "1AdRE5qFzuE",
@@ -3112,7 +3056,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJkMlOu7faDgqh4PfzbpLdg",
         "sourceChannelTitle": "Nerdwriter1",
         "thumbnailUrl": "https://i.ytimg.com/vi/1AdRE5qFzuE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 467
       },
       {
         "youtubeVideoId": "YtEYWMuw5c8",
@@ -3128,7 +3072,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSpFnDQr88xCZ80N-X7t0nQ",
         "sourceChannelTitle": "Corridor Crew",
         "thumbnailUrl": "https://i.ytimg.com/vi/FBV-leryHu8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1071
       },
       {
         "youtubeVideoId": "hDZ0DyHfpkI",
@@ -3136,7 +3080,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSFAYalJ2Q7Tm_WmLgetmeg",
         "sourceChannelTitle": "Filmmaker IQ",
         "thumbnailUrl": "https://i.ytimg.com/vi/hDZ0DyHfpkI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2508
       },
       {
         "youtubeVideoId": "CahiJhFxrTE",
@@ -3144,7 +3088,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCjFqcJQXGZ6T6sxyFB-5i6A",
         "sourceChannelTitle": "Every Frame a Painting",
         "thumbnailUrl": "https://i.ytimg.com/vi/CahiJhFxrTE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1005
       },
       {
         "youtubeVideoId": "NajjQV0ljTo",
@@ -3152,7 +3096,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfjaAUlTZRHJapJmCT6eyIg",
         "sourceChannelTitle": "Spacedock",
         "thumbnailUrl": "https://i.ytimg.com/vi/NajjQV0ljTo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 551
       },
       {
         "youtubeVideoId": "J56XPMA6KHI",
@@ -3160,7 +3104,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCs7nPQIEba0T3tGOWWsZpJQ",
         "sourceChannelTitle": "Like Stories of Old",
         "thumbnailUrl": "https://i.ytimg.com/vi/J56XPMA6KHI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2070
       },
       {
         "youtubeVideoId": "zfem5233D_8",
@@ -3168,7 +3112,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-hehDTvO4X8d9M7MVtpElg",
         "sourceChannelTitle": "Seeing Through Our Screens - Thomas Flight",
         "thumbnailUrl": "https://i.ytimg.com/vi/zfem5233D_8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 640
       },
       {
         "youtubeVideoId": "NK5wsSLY5-o",
@@ -3176,7 +3120,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDylnpLJWDj2gKWujjwap9w",
         "sourceChannelTitle": "StudioBinder Academy",
         "thumbnailUrl": "https://i.ytimg.com/vi/NK5wsSLY5-o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 435
       },
       {
         "youtubeVideoId": "zjIXBESV0ew",
@@ -3184,7 +3128,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
         "thumbnailUrl": "https://i.ytimg.com/vi/zjIXBESV0ew/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 74
       },
       {
         "youtubeVideoId": "-elPKyfpJrM",
@@ -3192,7 +3136,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCErSSa3CaP_GJxmFpdjG9Jw",
         "sourceChannelTitle": "Lessons from the Screenplay",
         "thumbnailUrl": "https://i.ytimg.com/vi/-elPKyfpJrM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1231
       },
       {
         "youtubeVideoId": "tWa7Rkpm5rg",
@@ -3200,7 +3144,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCzjbia0NqUsSL1_-loJihMg",
         "sourceChannelTitle": "CinemaStix",
         "thumbnailUrl": "https://i.ytimg.com/vi/tWa7Rkpm5rg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 572
       },
       {
         "youtubeVideoId": "4O9RY2n-ckg",
@@ -3208,7 +3152,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCuPgdqQKpq4T4zeqmTelnFg",
         "sourceChannelTitle": "kaptainkristian",
         "thumbnailUrl": "https://i.ytimg.com/vi/4O9RY2n-ckg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 781
       },
       {
         "youtubeVideoId": "omn9OXRwTro",
@@ -3216,7 +3160,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWTFGPpNQ0Ms6afXhaWDiRw",
         "sourceChannelTitle": "Now You See It",
         "thumbnailUrl": "https://i.ytimg.com/vi/omn9OXRwTro/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 776
       },
       {
         "youtubeVideoId": "41UQ1JIvXtI",
@@ -3224,7 +3168,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJkMlOu7faDgqh4PfzbpLdg",
         "sourceChannelTitle": "Nerdwriter1",
         "thumbnailUrl": "https://i.ytimg.com/vi/41UQ1JIvXtI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 674
       },
       {
         "youtubeVideoId": "AcBVlsholwA",
@@ -3232,7 +3176,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCx0L2ZdYfiq-tsAXb8IXpQg",
         "sourceChannelTitle": "Just Write",
         "thumbnailUrl": "https://i.ytimg.com/vi/AcBVlsholwA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 945
       },
       {
         "youtubeVideoId": "TOfKSbaM4wM",
@@ -3240,7 +3184,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSpFnDQr88xCZ80N-X7t0nQ",
         "sourceChannelTitle": "Corridor Crew",
         "thumbnailUrl": "https://i.ytimg.com/vi/TOfKSbaM4wM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 79
       },
       {
         "youtubeVideoId": "fVABEb4l7xs",
@@ -3248,7 +3192,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSFAYalJ2Q7Tm_WmLgetmeg",
         "sourceChannelTitle": "Filmmaker IQ",
         "thumbnailUrl": "https://i.ytimg.com/vi/fVABEb4l7xs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2837
       },
       {
         "youtubeVideoId": "Mfz6tj_Ep1E",
@@ -3256,7 +3200,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCjFqcJQXGZ6T6sxyFB-5i6A",
         "sourceChannelTitle": "Every Frame a Painting",
         "thumbnailUrl": "https://i.ytimg.com/vi/Mfz6tj_Ep1E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 970
       },
       {
         "youtubeVideoId": "BbyEGvL57_M",
@@ -3264,7 +3208,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfjaAUlTZRHJapJmCT6eyIg",
         "sourceChannelTitle": "Spacedock",
         "thumbnailUrl": "https://i.ytimg.com/vi/BbyEGvL57_M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 585
       },
       {
         "youtubeVideoId": "UVA7phJ4iTc",
@@ -3272,7 +3216,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCs7nPQIEba0T3tGOWWsZpJQ",
         "sourceChannelTitle": "Like Stories of Old",
         "thumbnailUrl": "https://i.ytimg.com/vi/UVA7phJ4iTc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1533
       },
       {
         "youtubeVideoId": "hygub3ScCbQ",
@@ -3280,7 +3224,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-hehDTvO4X8d9M7MVtpElg",
         "sourceChannelTitle": "Seeing Through Our Screens - Thomas Flight",
         "thumbnailUrl": "https://i.ytimg.com/vi/hygub3ScCbQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 667
       },
       {
         "youtubeVideoId": "3ew1FTNK4K0",
@@ -3288,15 +3232,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDylnpLJWDj2gKWujjwap9w",
         "sourceChannelTitle": "StudioBinder Academy",
         "thumbnailUrl": "https://i.ytimg.com/vi/3ew1FTNK4K0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "PbvwXckJKrw",
-        "title": "Minerva Rising - Official Launch Trailer",
-        "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
-        "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/PbvwXckJKrw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 400
       },
       {
         "youtubeVideoId": "Y5S4PyBR364",
@@ -3304,7 +3240,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCErSSa3CaP_GJxmFpdjG9Jw",
         "sourceChannelTitle": "Lessons from the Screenplay",
         "thumbnailUrl": "https://i.ytimg.com/vi/Y5S4PyBR364/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 993
       },
       {
         "youtubeVideoId": "KbQVhxtbCso",
@@ -3312,7 +3248,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCzjbia0NqUsSL1_-loJihMg",
         "sourceChannelTitle": "CinemaStix",
         "thumbnailUrl": "https://i.ytimg.com/vi/KbQVhxtbCso/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 566
       },
       {
         "youtubeVideoId": "2qZjAnUqZBM",
@@ -3320,7 +3256,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCuPgdqQKpq4T4zeqmTelnFg",
         "sourceChannelTitle": "kaptainkristian",
         "thumbnailUrl": "https://i.ytimg.com/vi/2qZjAnUqZBM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 601
       },
       {
         "youtubeVideoId": "taRU6iMQrhY",
@@ -3328,7 +3264,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCWTFGPpNQ0Ms6afXhaWDiRw",
         "sourceChannelTitle": "Now You See It",
         "thumbnailUrl": "https://i.ytimg.com/vi/taRU6iMQrhY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 432
       },
       {
         "youtubeVideoId": "XUmgIQIpg-E",
@@ -3336,7 +3272,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJkMlOu7faDgqh4PfzbpLdg",
         "sourceChannelTitle": "Nerdwriter1",
         "thumbnailUrl": "https://i.ytimg.com/vi/XUmgIQIpg-E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 679
       }
     ]
   },
@@ -3352,7 +3288,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/xVuvVmZdIpQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 834
       },
       {
         "youtubeVideoId": "hzoaClKPAUs",
@@ -3360,7 +3296,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
         "sourceChannelTitle": "ATHLEAN-X™",
         "thumbnailUrl": "https://i.ytimg.com/vi/hzoaClKPAUs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 260
       },
       {
         "youtubeVideoId": "dP5SxmMNjAE",
@@ -3368,7 +3304,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCZIIRX8rkNjVpP-oLMHpeDw",
         "sourceChannelTitle": "Calisthenicmovement",
         "thumbnailUrl": "https://i.ytimg.com/vi/dP5SxmMNjAE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 440
       },
       {
         "youtubeVideoId": "Dg26eIEgH50",
@@ -3376,7 +3312,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
         "thumbnailUrl": "https://i.ytimg.com/vi/Dg26eIEgH50/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1764
       },
       {
         "youtubeVideoId": "2dn-mcgyC8s",
@@ -3384,7 +3320,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
         "sourceChannelTitle": "Yoga With Adriene",
         "thumbnailUrl": "https://i.ytimg.com/vi/2dn-mcgyC8s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 432
       },
       {
         "youtubeVideoId": "eP1AEH9P2XE",
@@ -3392,7 +3328,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCadiU6WTKl65HUwEih1XLYg",
         "sourceChannelTitle": "PictureFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/eP1AEH9P2XE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 251
       },
       {
         "youtubeVideoId": "aCH0eUXFMk0",
@@ -3400,7 +3336,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
         "thumbnailUrl": "https://i.ytimg.com/vi/aCH0eUXFMk0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1741
       },
       {
         "youtubeVideoId": "NDX4pSQZVYA",
@@ -3408,7 +3344,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCM2ra7Od2jliHB9TLPKt76w",
         "sourceChannelTitle": "MovementbyDavid",
         "thumbnailUrl": "https://i.ytimg.com/vi/NDX4pSQZVYA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 483
       },
       {
         "youtubeVideoId": "j2xY50x-zr4",
@@ -3416,7 +3352,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCgLoMYIyP0U56dEhEL1wXQ",
         "sourceChannelTitle": "Chloe Ting",
         "thumbnailUrl": "https://i.ytimg.com/vi/j2xY50x-zr4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1219
       },
       {
         "youtubeVideoId": "H90XDZVHKHI",
@@ -3424,7 +3360,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/H90XDZVHKHI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1555
       },
       {
         "youtubeVideoId": "dQqezMeNspA",
@@ -3432,7 +3368,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UChVRfsT_ASBZk10o0An7Ucg",
         "sourceChannelTitle": "Pamela Reif",
         "thumbnailUrl": "https://i.ytimg.com/vi/dQqezMeNspA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1271
       },
       {
         "youtubeVideoId": "QVJDTBX_8Po",
@@ -3440,7 +3376,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgFItI58gEggW1-39DxjVbA",
         "sourceChannelTitle": "CALISTHENICS FAMILY",
         "thumbnailUrl": "https://i.ytimg.com/vi/QVJDTBX_8Po/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 710
       },
       {
         "youtubeVideoId": "CoWcu2b498g",
@@ -3448,7 +3384,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/CoWcu2b498g/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 899
       },
       {
         "youtubeVideoId": "GOxz6bLRMsk",
@@ -3456,7 +3392,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
         "sourceChannelTitle": "ATHLEAN-X™",
         "thumbnailUrl": "https://i.ytimg.com/vi/GOxz6bLRMsk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 489
       },
       {
         "youtubeVideoId": "xGSLQ1ynZjQ",
@@ -3464,7 +3400,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
         "thumbnailUrl": "https://i.ytimg.com/vi/xGSLQ1ynZjQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1031
       },
       {
         "youtubeVideoId": "E9AwOaDbclg",
@@ -3472,7 +3408,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
         "sourceChannelTitle": "Yoga With Adriene",
         "thumbnailUrl": "https://i.ytimg.com/vi/E9AwOaDbclg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 805
       },
       {
         "youtubeVideoId": "k0E1uGBFxv4",
@@ -3480,7 +3416,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCadiU6WTKl65HUwEih1XLYg",
         "sourceChannelTitle": "PictureFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/k0E1uGBFxv4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 217
       },
       {
         "youtubeVideoId": "uldb_2pKxvA",
@@ -3488,7 +3424,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
         "thumbnailUrl": "https://i.ytimg.com/vi/uldb_2pKxvA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 693
       },
       {
         "youtubeVideoId": "p-_Dfw5XbmI",
@@ -3496,7 +3432,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCgLoMYIyP0U56dEhEL1wXQ",
         "sourceChannelTitle": "Chloe Ting",
         "thumbnailUrl": "https://i.ytimg.com/vi/p-_Dfw5XbmI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 928
       },
       {
         "youtubeVideoId": "rbUl0AyD1Dk",
@@ -3504,7 +3440,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/rbUl0AyD1Dk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 530
       },
       {
         "youtubeVideoId": "cwXDfR3AO9o",
@@ -3512,7 +3448,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UChVRfsT_ASBZk10o0An7Ucg",
         "sourceChannelTitle": "Pamela Reif",
         "thumbnailUrl": "https://i.ytimg.com/vi/cwXDfR3AO9o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 915
       },
       {
         "youtubeVideoId": "hR6R0oVl6_U",
@@ -3520,7 +3456,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgFItI58gEggW1-39DxjVbA",
         "sourceChannelTitle": "CALISTHENICS FAMILY",
         "thumbnailUrl": "https://i.ytimg.com/vi/hR6R0oVl6_U/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 897
       },
       {
         "youtubeVideoId": "hzU-Zy1aAgM",
@@ -3528,7 +3464,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/hzU-Zy1aAgM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 741
       },
       {
         "youtubeVideoId": "hRg-HRt0flU",
@@ -3536,7 +3472,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
         "sourceChannelTitle": "ATHLEAN-X™",
         "thumbnailUrl": "https://i.ytimg.com/vi/hRg-HRt0flU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 383
       },
       {
         "youtubeVideoId": "6QBodF49E1s",
@@ -3544,7 +3480,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
         "thumbnailUrl": "https://i.ytimg.com/vi/6QBodF49E1s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1256
       },
       {
         "youtubeVideoId": "aA9EI3NKUS4",
@@ -3552,7 +3488,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
         "sourceChannelTitle": "Yoga With Adriene",
         "thumbnailUrl": "https://i.ytimg.com/vi/aA9EI3NKUS4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1523
       },
       {
         "youtubeVideoId": "nuIkrzh7H9M",
@@ -3560,7 +3496,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCadiU6WTKl65HUwEih1XLYg",
         "sourceChannelTitle": "PictureFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/nuIkrzh7H9M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 377
       },
       {
         "youtubeVideoId": "r4NRilxu4WA",
@@ -3568,7 +3504,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
         "thumbnailUrl": "https://i.ytimg.com/vi/r4NRilxu4WA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1210
       },
       {
         "youtubeVideoId": "pbCNzNhTOuI",
@@ -3576,7 +3512,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCgLoMYIyP0U56dEhEL1wXQ",
         "sourceChannelTitle": "Chloe Ting",
         "thumbnailUrl": "https://i.ytimg.com/vi/pbCNzNhTOuI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 621
       },
       {
         "youtubeVideoId": "OIpQ9jnUH1c",
@@ -3584,7 +3520,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/OIpQ9jnUH1c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2792
       },
       {
         "youtubeVideoId": "Qaytn3391Ao",
@@ -3592,7 +3528,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UChVRfsT_ASBZk10o0An7Ucg",
         "sourceChannelTitle": "Pamela Reif",
         "thumbnailUrl": "https://i.ytimg.com/vi/Qaytn3391Ao/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 648
       },
       {
         "youtubeVideoId": "M3MnGJ-RCDk",
@@ -3600,7 +3536,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgFItI58gEggW1-39DxjVbA",
         "sourceChannelTitle": "CALISTHENICS FAMILY",
         "thumbnailUrl": "https://i.ytimg.com/vi/M3MnGJ-RCDk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 694
       },
       {
         "youtubeVideoId": "pcvzzVeE4c8",
@@ -3608,7 +3544,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/pcvzzVeE4c8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 855
       },
       {
         "youtubeVideoId": "j_5du-KhOu4",
@@ -3616,7 +3552,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
         "sourceChannelTitle": "ATHLEAN-X™",
         "thumbnailUrl": "https://i.ytimg.com/vi/j_5du-KhOu4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 218
       },
       {
         "youtubeVideoId": "WRIOtDa2tG0",
@@ -3624,7 +3560,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
         "thumbnailUrl": "https://i.ytimg.com/vi/WRIOtDa2tG0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1336
       },
       {
         "youtubeVideoId": "oqqcuzv0wJ4",
@@ -3632,7 +3568,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
         "sourceChannelTitle": "Yoga With Adriene",
         "thumbnailUrl": "https://i.ytimg.com/vi/oqqcuzv0wJ4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 414
       },
       {
         "youtubeVideoId": "qdUg4vvDxGI",
@@ -3640,7 +3576,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCadiU6WTKl65HUwEih1XLYg",
         "sourceChannelTitle": "PictureFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/qdUg4vvDxGI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 251
       },
       {
         "youtubeVideoId": "PKxOEoZGDZI",
@@ -3648,7 +3584,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
         "thumbnailUrl": "https://i.ytimg.com/vi/PKxOEoZGDZI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 743
       },
       {
         "youtubeVideoId": "q0TeIERTaSo",
@@ -3656,7 +3592,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCgLoMYIyP0U56dEhEL1wXQ",
         "sourceChannelTitle": "Chloe Ting",
         "thumbnailUrl": "https://i.ytimg.com/vi/q0TeIERTaSo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 935
       },
       {
         "youtubeVideoId": "uMJ_HdFusWs",
@@ -3664,7 +3600,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/uMJ_HdFusWs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1543
       },
       {
         "youtubeVideoId": "var0HjTAFhA",
@@ -3672,7 +3608,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UChVRfsT_ASBZk10o0An7Ucg",
         "sourceChannelTitle": "Pamela Reif",
         "thumbnailUrl": "https://i.ytimg.com/vi/var0HjTAFhA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1170
       },
       {
         "youtubeVideoId": "KtCbv0U_e8A",
@@ -3680,7 +3616,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/KtCbv0U_e8A/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 573
       },
       {
         "youtubeVideoId": "X6LXOWzmUmY",
@@ -3688,7 +3624,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
         "sourceChannelTitle": "ATHLEAN-X™",
         "thumbnailUrl": "https://i.ytimg.com/vi/X6LXOWzmUmY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 308
       },
       {
         "youtubeVideoId": "eQeNhnAHXP4",
@@ -3696,7 +3632,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
         "sourceChannelTitle": "Yoga With Adriene",
         "thumbnailUrl": "https://i.ytimg.com/vi/eQeNhnAHXP4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1513
       },
       {
         "youtubeVideoId": "Hf_NBDid0d0",
@@ -3704,7 +3640,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCadiU6WTKl65HUwEih1XLYg",
         "sourceChannelTitle": "PictureFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/Hf_NBDid0d0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 301
       },
       {
         "youtubeVideoId": "W--SWugwi_M",
@@ -3712,7 +3648,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
         "thumbnailUrl": "https://i.ytimg.com/vi/W--SWugwi_M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 121
       },
       {
         "youtubeVideoId": "2_VXktb_2ag",
@@ -3720,7 +3656,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCCgLoMYIyP0U56dEhEL1wXQ",
         "sourceChannelTitle": "Chloe Ting",
         "thumbnailUrl": "https://i.ytimg.com/vi/2_VXktb_2ag/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1266
       },
       {
         "youtubeVideoId": "o9l63Vr0HRs",
@@ -3728,7 +3664,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
         "thumbnailUrl": "https://i.ytimg.com/vi/o9l63Vr0HRs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 189
       },
       {
         "youtubeVideoId": "4Mn8O9szfKo",
@@ -3736,7 +3672,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UChVRfsT_ASBZk10o0An7Ucg",
         "sourceChannelTitle": "Pamela Reif",
         "thumbnailUrl": "https://i.ytimg.com/vi/4Mn8O9szfKo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 781
       },
       {
         "youtubeVideoId": "RtLUWw0IViI",
@@ -3744,7 +3680,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/RtLUWw0IViI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 728
       }
     ]
   },
@@ -3760,7 +3696,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UClM2LuQ1q5WEc23462tQzBg",
         "sourceChannelTitle": "Proko",
         "thumbnailUrl": "https://i.ytimg.com/vi/qLzw6r2ORk0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 6754
       },
       {
         "youtubeVideoId": "InAA1SRpGAo",
@@ -3768,7 +3704,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3BCGz72VQcFdoBiZtKfOpg",
         "sourceChannelTitle": "[INSERT ART]",
         "thumbnailUrl": "https://i.ytimg.com/vi/InAA1SRpGAo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 810
       },
       {
         "youtubeVideoId": "Yb3BgyloqcU",
@@ -3776,7 +3712,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoal_hpPIPAnWlG-kWHLheA",
         "sourceChannelTitle": "Drawfee Show",
         "thumbnailUrl": "https://i.ytimg.com/vi/Yb3BgyloqcU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2178
       },
       {
         "youtubeVideoId": "-CfS7iOJmr8",
@@ -3784,7 +3720,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
         "thumbnailUrl": "https://i.ytimg.com/vi/-CfS7iOJmr8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3873
       },
       {
         "youtubeVideoId": "tzvG7qcVAxY",
@@ -3792,7 +3728,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCh-ArhaGOqFsBPrR2yQd42w",
         "sourceChannelTitle": "Ten Hundred",
         "thumbnailUrl": "https://i.ytimg.com/vi/tzvG7qcVAxY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2062
       },
       {
         "youtubeVideoId": "w02M1vjrqZ0",
@@ -3800,7 +3736,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvZe6ZCbF9xgbbbdkiodPKQ",
         "sourceChannelTitle": "Baumgartner Restoration",
         "thumbnailUrl": "https://i.ytimg.com/vi/w02M1vjrqZ0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2079
       },
       {
         "youtubeVideoId": "wtzzVe_jCoc",
@@ -3808,7 +3744,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCno-YPZ8BiLrN0Wbl8qICFA",
         "sourceChannelTitle": "markcrilley",
         "thumbnailUrl": "https://i.ytimg.com/vi/wtzzVe_jCoc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 229
       },
       {
         "youtubeVideoId": "kS2n12ATeMI",
@@ -3816,7 +3752,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCx-mMlEegnZ-SjWPS73Tgvw",
         "sourceChannelTitle": "Baylee Jae",
         "thumbnailUrl": "https://i.ytimg.com/vi/kS2n12ATeMI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 20364
       },
       {
         "youtubeVideoId": "3zqkmOKJy3c",
@@ -3824,7 +3760,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvcEBQ0K3UsQ8bzWKHKQmbw",
         "sourceChannelTitle": "struthless",
         "thumbnailUrl": "https://i.ytimg.com/vi/3zqkmOKJy3c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1141
       },
       {
         "youtubeVideoId": "alI9_07IFqg",
@@ -3832,7 +3768,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmRm1xtLIpBhuWjTyD411pA",
         "sourceChannelTitle": "Trent Kaniuga",
         "thumbnailUrl": "https://i.ytimg.com/vi/alI9_07IFqg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 693
       },
       {
         "youtubeVideoId": "AoL4cD93Shw",
@@ -3840,7 +3776,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLcxo0ysMP27XTiRKqrdASg",
         "sourceChannelTitle": "Minnie Small",
         "thumbnailUrl": "https://i.ytimg.com/vi/AoL4cD93Shw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1889
       },
       {
         "youtubeVideoId": "zo-kwu5NGOE",
@@ -3848,7 +3784,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSl51TSNCxLQJqLTQp0B6Cg",
         "sourceChannelTitle": "Kirsty Partridge Art",
         "thumbnailUrl": "https://i.ytimg.com/vi/zo-kwu5NGOE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1388
       },
       {
         "youtubeVideoId": "sTuD_8UD7Kg",
@@ -3856,7 +3792,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UClM2LuQ1q5WEc23462tQzBg",
         "sourceChannelTitle": "Proko",
         "thumbnailUrl": "https://i.ytimg.com/vi/sTuD_8UD7Kg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4082
       },
       {
         "youtubeVideoId": "h7TCCPboS7c",
@@ -3864,7 +3800,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3BCGz72VQcFdoBiZtKfOpg",
         "sourceChannelTitle": "[INSERT ART]",
         "thumbnailUrl": "https://i.ytimg.com/vi/h7TCCPboS7c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 737
       },
       {
         "youtubeVideoId": "o9uewrsg_FY",
@@ -3872,7 +3808,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoal_hpPIPAnWlG-kWHLheA",
         "sourceChannelTitle": "Drawfee Show",
         "thumbnailUrl": "https://i.ytimg.com/vi/o9uewrsg_FY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2648
       },
       {
         "youtubeVideoId": "YO5axY8wHGk",
@@ -3880,7 +3816,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
         "thumbnailUrl": "https://i.ytimg.com/vi/YO5axY8wHGk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 6681
       },
       {
         "youtubeVideoId": "CSNhgaw3tcg",
@@ -3888,7 +3824,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCh-ArhaGOqFsBPrR2yQd42w",
         "sourceChannelTitle": "Ten Hundred",
         "thumbnailUrl": "https://i.ytimg.com/vi/CSNhgaw3tcg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1873
       },
       {
         "youtubeVideoId": "HxLRqJv3wNg",
@@ -3896,7 +3832,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvZe6ZCbF9xgbbbdkiodPKQ",
         "sourceChannelTitle": "Baumgartner Restoration",
         "thumbnailUrl": "https://i.ytimg.com/vi/HxLRqJv3wNg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1335
       },
       {
         "youtubeVideoId": "KpZfki9CFoc",
@@ -3904,7 +3840,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCno-YPZ8BiLrN0Wbl8qICFA",
         "sourceChannelTitle": "markcrilley",
         "thumbnailUrl": "https://i.ytimg.com/vi/KpZfki9CFoc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 182
       },
       {
         "youtubeVideoId": "YRncWBLOst0",
@@ -3912,7 +3848,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCx-mMlEegnZ-SjWPS73Tgvw",
         "sourceChannelTitle": "Baylee Jae",
         "thumbnailUrl": "https://i.ytimg.com/vi/YRncWBLOst0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4303
       },
       {
         "youtubeVideoId": "aLPrNSFLb2U",
@@ -3920,7 +3856,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvcEBQ0K3UsQ8bzWKHKQmbw",
         "sourceChannelTitle": "struthless",
         "thumbnailUrl": "https://i.ytimg.com/vi/aLPrNSFLb2U/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3069
       },
       {
         "youtubeVideoId": "OioegWLBlS0",
@@ -3928,7 +3864,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmRm1xtLIpBhuWjTyD411pA",
         "sourceChannelTitle": "Trent Kaniuga",
         "thumbnailUrl": "https://i.ytimg.com/vi/OioegWLBlS0/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 585
       },
       {
         "youtubeVideoId": "rELxufvhKJo",
@@ -3936,7 +3872,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLcxo0ysMP27XTiRKqrdASg",
         "sourceChannelTitle": "Minnie Small",
         "thumbnailUrl": "https://i.ytimg.com/vi/rELxufvhKJo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 864
       },
       {
         "youtubeVideoId": "W74JgVN5rKw",
@@ -3944,7 +3880,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSl51TSNCxLQJqLTQp0B6Cg",
         "sourceChannelTitle": "Kirsty Partridge Art",
         "thumbnailUrl": "https://i.ytimg.com/vi/W74JgVN5rKw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1446
       },
       {
         "youtubeVideoId": "y5Yy7pQacAY",
@@ -3952,7 +3888,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UClM2LuQ1q5WEc23462tQzBg",
         "sourceChannelTitle": "Proko",
         "thumbnailUrl": "https://i.ytimg.com/vi/y5Yy7pQacAY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 7282
       },
       {
         "youtubeVideoId": "ISMZzNHjnf4",
@@ -3960,7 +3896,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3BCGz72VQcFdoBiZtKfOpg",
         "sourceChannelTitle": "[INSERT ART]",
         "thumbnailUrl": "https://i.ytimg.com/vi/ISMZzNHjnf4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 474
       },
       {
         "youtubeVideoId": "VE3gIgdYG5A",
@@ -3968,7 +3904,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoal_hpPIPAnWlG-kWHLheA",
         "sourceChannelTitle": "Drawfee Show",
         "thumbnailUrl": "https://i.ytimg.com/vi/VE3gIgdYG5A/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2487
       },
       {
         "youtubeVideoId": "xjXqmNqukEY",
@@ -3976,7 +3912,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
         "thumbnailUrl": "https://i.ytimg.com/vi/xjXqmNqukEY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5994
       },
       {
         "youtubeVideoId": "JLhhXQ0qYz8",
@@ -3984,7 +3920,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCh-ArhaGOqFsBPrR2yQd42w",
         "sourceChannelTitle": "Ten Hundred",
         "thumbnailUrl": "https://i.ytimg.com/vi/JLhhXQ0qYz8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2068
       },
       {
         "youtubeVideoId": "2N8j6slomko",
@@ -3992,7 +3928,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvZe6ZCbF9xgbbbdkiodPKQ",
         "sourceChannelTitle": "Baumgartner Restoration",
         "thumbnailUrl": "https://i.ytimg.com/vi/2N8j6slomko/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1789
       },
       {
         "youtubeVideoId": "z4L3Gd76xaE",
@@ -4000,7 +3936,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCno-YPZ8BiLrN0Wbl8qICFA",
         "sourceChannelTitle": "markcrilley",
         "thumbnailUrl": "https://i.ytimg.com/vi/z4L3Gd76xaE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 148
       },
       {
         "youtubeVideoId": "fUlIDtIDOKs",
@@ -4008,7 +3944,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCx-mMlEegnZ-SjWPS73Tgvw",
         "sourceChannelTitle": "Baylee Jae",
         "thumbnailUrl": "https://i.ytimg.com/vi/fUlIDtIDOKs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 34138
       },
       {
         "youtubeVideoId": "XJa7sE5Q1QA",
@@ -4016,7 +3952,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvcEBQ0K3UsQ8bzWKHKQmbw",
         "sourceChannelTitle": "struthless",
         "thumbnailUrl": "https://i.ytimg.com/vi/XJa7sE5Q1QA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1196
       },
       {
         "youtubeVideoId": "HfHW53KY2po",
@@ -4024,7 +3960,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmRm1xtLIpBhuWjTyD411pA",
         "sourceChannelTitle": "Trent Kaniuga",
         "thumbnailUrl": "https://i.ytimg.com/vi/HfHW53KY2po/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 640
       },
       {
         "youtubeVideoId": "08d2-yedTWA",
@@ -4032,7 +3968,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLcxo0ysMP27XTiRKqrdASg",
         "sourceChannelTitle": "Minnie Small",
         "thumbnailUrl": "https://i.ytimg.com/vi/08d2-yedTWA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 221
       },
       {
         "youtubeVideoId": "1gRO_hedmv4",
@@ -4040,7 +3976,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSl51TSNCxLQJqLTQp0B6Cg",
         "sourceChannelTitle": "Kirsty Partridge Art",
         "thumbnailUrl": "https://i.ytimg.com/vi/1gRO_hedmv4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 559
       },
       {
         "youtubeVideoId": "CrYJxU9st8Y",
@@ -4056,7 +3992,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3BCGz72VQcFdoBiZtKfOpg",
         "sourceChannelTitle": "[INSERT ART]",
         "thumbnailUrl": "https://i.ytimg.com/vi/-2KUCMYsQsI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 749
       },
       {
         "youtubeVideoId": "V2Q6m8Pv6wM",
@@ -4064,7 +4000,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoal_hpPIPAnWlG-kWHLheA",
         "sourceChannelTitle": "Drawfee Show",
         "thumbnailUrl": "https://i.ytimg.com/vi/V2Q6m8Pv6wM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1915
       },
       {
         "youtubeVideoId": "Dgf66X_dRVI",
@@ -4072,7 +4008,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
         "thumbnailUrl": "https://i.ytimg.com/vi/Dgf66X_dRVI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4466
       },
       {
         "youtubeVideoId": "PAne696jokM",
@@ -4088,7 +4024,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvZe6ZCbF9xgbbbdkiodPKQ",
         "sourceChannelTitle": "Baumgartner Restoration",
         "thumbnailUrl": "https://i.ytimg.com/vi/r5q5Db64EHo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1917
       },
       {
         "youtubeVideoId": "OlryHR_l19E",
@@ -4096,7 +4032,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCno-YPZ8BiLrN0Wbl8qICFA",
         "sourceChannelTitle": "markcrilley",
         "thumbnailUrl": "https://i.ytimg.com/vi/OlryHR_l19E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 340
       },
       {
         "youtubeVideoId": "GE4fmuyA85Y",
@@ -4104,7 +4040,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCx-mMlEegnZ-SjWPS73Tgvw",
         "sourceChannelTitle": "Baylee Jae",
         "thumbnailUrl": "https://i.ytimg.com/vi/GE4fmuyA85Y/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4604
       },
       {
         "youtubeVideoId": "11FIIPmdpHo",
@@ -4112,7 +4048,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCvcEBQ0K3UsQ8bzWKHKQmbw",
         "sourceChannelTitle": "struthless",
         "thumbnailUrl": "https://i.ytimg.com/vi/11FIIPmdpHo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3575
       },
       {
         "youtubeVideoId": "hESa-TDTJEs",
@@ -4120,7 +4056,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCmRm1xtLIpBhuWjTyD411pA",
         "sourceChannelTitle": "Trent Kaniuga",
         "thumbnailUrl": "https://i.ytimg.com/vi/hESa-TDTJEs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 942
       },
       {
         "youtubeVideoId": "Isjn9u57Suc",
@@ -4128,7 +4064,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLcxo0ysMP27XTiRKqrdASg",
         "sourceChannelTitle": "Minnie Small",
         "thumbnailUrl": "https://i.ytimg.com/vi/Isjn9u57Suc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1015
       },
       {
         "youtubeVideoId": "89-gBfVF18s",
@@ -4136,7 +4072,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSl51TSNCxLQJqLTQp0B6Cg",
         "sourceChannelTitle": "Kirsty Partridge Art",
         "thumbnailUrl": "https://i.ytimg.com/vi/89-gBfVF18s/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 5981
       },
       {
         "youtubeVideoId": "NIXL6uEMFJk",
@@ -4144,7 +4080,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UClM2LuQ1q5WEc23462tQzBg",
         "sourceChannelTitle": "Proko",
         "thumbnailUrl": "https://i.ytimg.com/vi/NIXL6uEMFJk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1433
       },
       {
         "youtubeVideoId": "ceKjmYH1D8k",
@@ -4152,7 +4088,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3BCGz72VQcFdoBiZtKfOpg",
         "sourceChannelTitle": "[INSERT ART]",
         "thumbnailUrl": "https://i.ytimg.com/vi/ceKjmYH1D8k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 375
       }
     ]
   },
@@ -4168,7 +4104,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_zQ777U6YTyatP3P1wi3xw",
         "sourceChannelTitle": "NEVER TOO SMALL",
         "thumbnailUrl": "https://i.ytimg.com/vi/yUzgb0RYpfc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 579
       },
       {
         "youtubeVideoId": "MYM0Q_6sbEc",
@@ -4176,7 +4112,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
         "thumbnailUrl": "https://i.ytimg.com/vi/MYM0Q_6sbEc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 8578
       },
       {
         "youtubeVideoId": "UsmyL3K7Uvk",
@@ -4184,7 +4120,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgxg48_pay4R67s-7WOgWFA",
         "sourceChannelTitle": "The Local Project",
         "thumbnailUrl": "https://i.ytimg.com/vi/UsmyL3K7Uvk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 467
       },
       {
         "youtubeVideoId": "Re-60bdrzow",
@@ -4192,7 +4128,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDsElQQt_gCZ9LgnW-7v-cQ",
         "sourceChannelTitle": "Kirsten Dirksen",
         "thumbnailUrl": "https://i.ytimg.com/vi/Re-60bdrzow/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1553
       },
       {
         "youtubeVideoId": "fkcW4VqJqbw",
@@ -4200,7 +4136,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-b3c7kxa5vU-bnmaROgvog",
         "sourceChannelTitle": "The Futur",
         "thumbnailUrl": "https://i.ytimg.com/vi/fkcW4VqJqbw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3259
       },
       {
         "youtubeVideoId": "fyYo1jxj5Io",
@@ -4208,7 +4144,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJ_2hNMxOzNjviJBiLWHMqg",
         "sourceChannelTitle": "DamiLee",
         "thumbnailUrl": "https://i.ytimg.com/vi/fyYo1jxj5Io/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1399
       },
       {
         "youtubeVideoId": "EJgVjxM4Rno",
@@ -4216,7 +4152,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYAm24PkejQR2xMgJgn7xwg",
         "sourceChannelTitle": "Stewart Hicks",
         "thumbnailUrl": "https://i.ytimg.com/vi/EJgVjxM4Rno/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 656
       },
       {
         "youtubeVideoId": "rUsO5hIqIME",
@@ -4224,7 +4160,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_kjXjYwOlMZeLMkAanRn3g",
         "sourceChannelTitle": "Design Theory",
         "thumbnailUrl": "https://i.ytimg.com/vi/rUsO5hIqIME/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 441
       },
       {
         "youtubeVideoId": "EIpN8NPczqc",
@@ -4232,7 +4168,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSb-xYOELhIqVr2n9s-b_4w",
         "sourceChannelTitle": "Linus Boman",
         "thumbnailUrl": "https://i.ytimg.com/vi/EIpN8NPczqc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 191
       },
       {
         "youtubeVideoId": "uZZ_Dz9sPTA",
@@ -4240,7 +4176,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoNTMWgGuXtGPLv9UeJZwBw",
         "sourceChannelTitle": "Living Big In A Tiny House",
         "thumbnailUrl": "https://i.ytimg.com/vi/uZZ_Dz9sPTA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1319
       },
       {
         "youtubeVideoId": "Ebn1Ju6fjEo",
@@ -4248,7 +4184,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsWG9ANbrmgR0z-eFk_A3YQ",
         "sourceChannelTitle": "Dezeen",
         "thumbnailUrl": "https://i.ytimg.com/vi/Ebn1Ju6fjEo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 102
       },
       {
         "youtubeVideoId": "WtpkjcbdvF8",
@@ -4256,7 +4192,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3r_kdJocuqtDYb2GgM42Ng",
         "sourceChannelTitle": "ArchDaily",
         "thumbnailUrl": "https://i.ytimg.com/vi/WtpkjcbdvF8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1037
       },
       {
         "youtubeVideoId": "-Dcz_fJdL80",
@@ -4264,7 +4200,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCv6JHGYnS74viHnZ-6zR2Jg",
         "sourceChannelTitle": "designboom",
         "thumbnailUrl": "https://i.ytimg.com/vi/-Dcz_fJdL80/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1790
       },
       {
         "youtubeVideoId": "bKmUQcFlDPI",
@@ -4272,7 +4208,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
         "thumbnailUrl": "https://i.ytimg.com/vi/bKmUQcFlDPI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 519
       },
       {
         "youtubeVideoId": "2z2W4NvoJXk",
@@ -4280,7 +4216,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgxg48_pay4R67s-7WOgWFA",
         "sourceChannelTitle": "The Local Project",
         "thumbnailUrl": "https://i.ytimg.com/vi/2z2W4NvoJXk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 429
       },
       {
         "youtubeVideoId": "aITGbdW-67Q",
@@ -4288,7 +4224,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDsElQQt_gCZ9LgnW-7v-cQ",
         "sourceChannelTitle": "Kirsten Dirksen",
         "thumbnailUrl": "https://i.ytimg.com/vi/aITGbdW-67Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1403
       },
       {
         "youtubeVideoId": "WrehiIId62U",
@@ -4296,7 +4232,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-b3c7kxa5vU-bnmaROgvog",
         "sourceChannelTitle": "The Futur",
         "thumbnailUrl": "https://i.ytimg.com/vi/WrehiIId62U/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 3053
       },
       {
         "youtubeVideoId": "TPTtcV3qJ4U",
@@ -4304,7 +4240,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCJ_2hNMxOzNjviJBiLWHMqg",
         "sourceChannelTitle": "DamiLee",
         "thumbnailUrl": "https://i.ytimg.com/vi/TPTtcV3qJ4U/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1406
       },
       {
         "youtubeVideoId": "RjJO-fCWR54",
@@ -4312,7 +4248,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYAm24PkejQR2xMgJgn7xwg",
         "sourceChannelTitle": "Stewart Hicks",
         "thumbnailUrl": "https://i.ytimg.com/vi/RjJO-fCWR54/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 664
       },
       {
         "youtubeVideoId": "fCKaDR1rNgk",
@@ -4328,7 +4264,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSb-xYOELhIqVr2n9s-b_4w",
         "sourceChannelTitle": "Linus Boman",
         "thumbnailUrl": "https://i.ytimg.com/vi/altfwRMXG4A/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1286
       },
       {
         "youtubeVideoId": "6QbQb-jKA-M",
@@ -4336,7 +4272,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoNTMWgGuXtGPLv9UeJZwBw",
         "sourceChannelTitle": "Living Big In A Tiny House",
         "thumbnailUrl": "https://i.ytimg.com/vi/6QbQb-jKA-M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1363
       },
       {
         "youtubeVideoId": "3Mn6YnuH_AI",
@@ -4344,7 +4280,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsWG9ANbrmgR0z-eFk_A3YQ",
         "sourceChannelTitle": "Dezeen",
         "thumbnailUrl": "https://i.ytimg.com/vi/3Mn6YnuH_AI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 114
       },
       {
         "youtubeVideoId": "_7S4pG9mMmM",
@@ -4352,7 +4288,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3r_kdJocuqtDYb2GgM42Ng",
         "sourceChannelTitle": "ArchDaily",
         "thumbnailUrl": "https://i.ytimg.com/vi/_7S4pG9mMmM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 696
       },
       {
         "youtubeVideoId": "liO-zVzN4Cs",
@@ -4360,7 +4296,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCv6JHGYnS74viHnZ-6zR2Jg",
         "sourceChannelTitle": "designboom",
         "thumbnailUrl": "https://i.ytimg.com/vi/liO-zVzN4Cs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2678
       },
       {
         "youtubeVideoId": "dlnH0uVAEHk",
@@ -4368,7 +4304,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
         "thumbnailUrl": "https://i.ytimg.com/vi/dlnH0uVAEHk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 670
       },
       {
         "youtubeVideoId": "Z3AlPMj6mIc",
@@ -4376,7 +4312,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgxg48_pay4R67s-7WOgWFA",
         "sourceChannelTitle": "The Local Project",
         "thumbnailUrl": "https://i.ytimg.com/vi/Z3AlPMj6mIc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 573
       },
       {
         "youtubeVideoId": "R4WxHWQ-i_g",
@@ -4384,7 +4320,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDsElQQt_gCZ9LgnW-7v-cQ",
         "sourceChannelTitle": "Kirsten Dirksen",
         "thumbnailUrl": "https://i.ytimg.com/vi/R4WxHWQ-i_g/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1058
       },
       {
         "youtubeVideoId": "LEVGLXBzghc",
@@ -4392,7 +4328,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-b3c7kxa5vU-bnmaROgvog",
         "sourceChannelTitle": "The Futur",
         "thumbnailUrl": "https://i.ytimg.com/vi/LEVGLXBzghc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 469
       },
       {
         "youtubeVideoId": "2JOmHYyQoO4",
@@ -4400,15 +4336,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYAm24PkejQR2xMgJgn7xwg",
         "sourceChannelTitle": "Stewart Hicks",
         "thumbnailUrl": "https://i.ytimg.com/vi/2JOmHYyQoO4/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "2_f7pJwCb9c",
-        "title": "DON'T DRINK & DRIVE |MY FIRST ANIMATION|",
-        "sourceChannelId": "UC_kjXjYwOlMZeLMkAanRn3g",
-        "sourceChannelTitle": "Design Theory",
-        "thumbnailUrl": "https://i.ytimg.com/vi/2_f7pJwCb9c/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 665
       },
       {
         "youtubeVideoId": "ogH1NEJ1GUw",
@@ -4416,7 +4344,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSb-xYOELhIqVr2n9s-b_4w",
         "sourceChannelTitle": "Linus Boman",
         "thumbnailUrl": "https://i.ytimg.com/vi/ogH1NEJ1GUw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 4485
       },
       {
         "youtubeVideoId": "TPIbyvSf3qY",
@@ -4424,7 +4352,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoNTMWgGuXtGPLv9UeJZwBw",
         "sourceChannelTitle": "Living Big In A Tiny House",
         "thumbnailUrl": "https://i.ytimg.com/vi/TPIbyvSf3qY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1304
       },
       {
         "youtubeVideoId": "44PTbbnCVuE",
@@ -4432,7 +4360,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsWG9ANbrmgR0z-eFk_A3YQ",
         "sourceChannelTitle": "Dezeen",
         "thumbnailUrl": "https://i.ytimg.com/vi/44PTbbnCVuE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 240
       },
       {
         "youtubeVideoId": "pDG_clTIfVc",
@@ -4440,7 +4368,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC3r_kdJocuqtDYb2GgM42Ng",
         "sourceChannelTitle": "ArchDaily",
         "thumbnailUrl": "https://i.ytimg.com/vi/pDG_clTIfVc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 562
       },
       {
         "youtubeVideoId": "jc_oBQdBgZ8",
@@ -4448,7 +4376,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCv6JHGYnS74viHnZ-6zR2Jg",
         "sourceChannelTitle": "designboom",
         "thumbnailUrl": "https://i.ytimg.com/vi/jc_oBQdBgZ8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2308
       },
       {
         "youtubeVideoId": "X8D6ZPz5eWc",
@@ -4456,7 +4384,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
         "thumbnailUrl": "https://i.ytimg.com/vi/X8D6ZPz5eWc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 746
       },
       {
         "youtubeVideoId": "g20cSkBc2XA",
@@ -4464,7 +4392,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgxg48_pay4R67s-7WOgWFA",
         "sourceChannelTitle": "The Local Project",
         "thumbnailUrl": "https://i.ytimg.com/vi/g20cSkBc2XA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 352
       },
       {
         "youtubeVideoId": "pcHEMy7uN2Q",
@@ -4472,7 +4400,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDsElQQt_gCZ9LgnW-7v-cQ",
         "sourceChannelTitle": "Kirsten Dirksen",
         "thumbnailUrl": "https://i.ytimg.com/vi/pcHEMy7uN2Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 938
       },
       {
         "youtubeVideoId": "EYXgfHNq6mo",
@@ -4480,7 +4408,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC-b3c7kxa5vU-bnmaROgvog",
         "sourceChannelTitle": "The Futur",
         "thumbnailUrl": "https://i.ytimg.com/vi/EYXgfHNq6mo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 639
       },
       {
         "youtubeVideoId": "7sfoLUumGnc",
@@ -4488,7 +4416,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYAm24PkejQR2xMgJgn7xwg",
         "sourceChannelTitle": "Stewart Hicks",
         "thumbnailUrl": "https://i.ytimg.com/vi/7sfoLUumGnc/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 706
       },
       {
         "youtubeVideoId": "ISDVLuErJ3k",
@@ -4496,7 +4424,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC_kjXjYwOlMZeLMkAanRn3g",
         "sourceChannelTitle": "Design Theory",
         "thumbnailUrl": "https://i.ytimg.com/vi/ISDVLuErJ3k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 728
       },
       {
         "youtubeVideoId": "JiJA5SHAwHs",
@@ -4504,7 +4432,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSb-xYOELhIqVr2n9s-b_4w",
         "sourceChannelTitle": "Linus Boman",
         "thumbnailUrl": "https://i.ytimg.com/vi/JiJA5SHAwHs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 533
       },
       {
         "youtubeVideoId": "kD9P2TjT0sk",
@@ -4512,7 +4440,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoNTMWgGuXtGPLv9UeJZwBw",
         "sourceChannelTitle": "Living Big In A Tiny House",
         "thumbnailUrl": "https://i.ytimg.com/vi/kD9P2TjT0sk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1243
       },
       {
         "youtubeVideoId": "s-kMNm8Ob3U",
@@ -4520,7 +4448,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsWG9ANbrmgR0z-eFk_A3YQ",
         "sourceChannelTitle": "Dezeen",
         "thumbnailUrl": "https://i.ytimg.com/vi/s-kMNm8Ob3U/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 89
       },
       {
         "youtubeVideoId": "wmjwvYJzmhs",
@@ -4528,7 +4456,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCv6JHGYnS74viHnZ-6zR2Jg",
         "sourceChannelTitle": "designboom",
         "thumbnailUrl": "https://i.ytimg.com/vi/wmjwvYJzmhs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2669
       },
       {
         "youtubeVideoId": "wPX8KOAGJ6A",
@@ -4536,7 +4464,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
         "thumbnailUrl": "https://i.ytimg.com/vi/wPX8KOAGJ6A/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1147
       },
       {
         "youtubeVideoId": "Vx40aviKhZE",
@@ -4544,7 +4472,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCgxg48_pay4R67s-7WOgWFA",
         "sourceChannelTitle": "The Local Project",
         "thumbnailUrl": "https://i.ytimg.com/vi/Vx40aviKhZE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 365
       },
       {
         "youtubeVideoId": "NP_ugJHuY6w",
@@ -4552,7 +4480,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCDsElQQt_gCZ9LgnW-7v-cQ",
         "sourceChannelTitle": "Kirsten Dirksen",
         "thumbnailUrl": "https://i.ytimg.com/vi/NP_ugJHuY6w/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1216
       },
       {
         "youtubeVideoId": "jHIkiGJ1PxM",
@@ -4560,7 +4488,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCYAm24PkejQR2xMgJgn7xwg",
         "sourceChannelTitle": "Stewart Hicks",
         "thumbnailUrl": "https://i.ytimg.com/vi/jHIkiGJ1PxM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 773
       }
     ]
   },
@@ -4576,7 +4504,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
         "sourceChannelTitle": "Vox",
         "thumbnailUrl": "https://i.ytimg.com/vi/l7-eiKWhRHo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2607
       },
       {
         "youtubeVideoId": "nBVuemyrMgE",
@@ -4584,7 +4512,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsooa4yRKGN_zEE8iknghZA",
         "sourceChannelTitle": "TED-Ed",
         "thumbnailUrl": "https://i.ytimg.com/vi/nBVuemyrMgE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 309
       },
       {
         "youtubeVideoId": "pTdvsfIMGes",
@@ -4592,7 +4520,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCAuUUnT6oDeKwE6v1NGQxug",
         "sourceChannelTitle": "TED",
         "thumbnailUrl": "https://i.ytimg.com/vi/pTdvsfIMGes/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 841
       },
       {
         "youtubeVideoId": "rUiulWItECQ",
@@ -4600,7 +4528,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1_uAIS3r8Vu6JjXWvastJg",
         "sourceChannelTitle": "Mathologer",
         "thumbnailUrl": "https://i.ytimg.com/vi/rUiulWItECQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2336
       },
       {
         "youtubeVideoId": "Z9qScNdX0Q4",
@@ -4608,7 +4536,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTWKe1zATFV6d0o6oLS9sgw",
         "sourceChannelTitle": "Extremities",
         "thumbnailUrl": "https://i.ytimg.com/vi/Z9qScNdX0Q4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1254
       },
       {
         "youtubeVideoId": "2KpNwcpAAd8",
@@ -4616,7 +4544,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC176GAQozKKjhz62H8u9vQQ",
         "sourceChannelTitle": "Real Science",
         "thumbnailUrl": "https://i.ytimg.com/vi/2KpNwcpAAd8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1030
       },
       {
         "youtubeVideoId": "EQr_eJOFy4Q",
@@ -4624,7 +4552,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCX6b17PVsYBQ0ip5gyeme-Q",
         "sourceChannelTitle": "CrashCourse",
         "thumbnailUrl": "https://i.ytimg.com/vi/EQr_eJOFy4Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 28099
       },
       {
         "youtubeVideoId": "n05Yu3UAI_o",
@@ -4632,7 +4560,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMOqf8ab-42UUQIdVoKwjlQ",
         "sourceChannelTitle": "Practical Engineering",
         "thumbnailUrl": "https://i.ytimg.com/vi/n05Yu3UAI_o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 469
       },
       {
         "youtubeVideoId": "FPg1UL0RNnA",
@@ -4640,7 +4568,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCuCkxoKLYO_EQ2GeFtbM_bw",
         "sourceChannelTitle": "Half as Interesting",
         "thumbnailUrl": "https://i.ytimg.com/vi/FPg1UL0RNnA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 535
       },
       {
         "youtubeVideoId": "p2AAz24AzU4",
@@ -4648,7 +4576,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoxcjq-8xIDTYp3uz647V5A",
         "sourceChannelTitle": "Numberphile",
         "thumbnailUrl": "https://i.ytimg.com/vi/p2AAz24AzU4/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 801
       },
       {
         "youtubeVideoId": "BmBw827GgFA",
@@ -4656,7 +4584,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9-y-6csu5WGm29I7JiwpnA",
         "sourceChannelTitle": "Computerphile",
         "thumbnailUrl": "https://i.ytimg.com/vi/BmBw827GgFA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 701
       },
       {
         "youtubeVideoId": "0V-4lQYNugA",
@@ -4664,7 +4592,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCBa659QWEk1AI4Tg--mrJ2A",
         "sourceChannelTitle": "Tom Scott",
         "thumbnailUrl": "https://i.ytimg.com/vi/0V-4lQYNugA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1585
       },
       {
         "youtubeVideoId": "zuaVFnj4SWY",
@@ -4672,7 +4600,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSju5G2aFaWMqn-_0YBtq5A",
         "sourceChannelTitle": "Stand-up Maths",
         "thumbnailUrl": "https://i.ytimg.com/vi/zuaVFnj4SWY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1212
       },
       {
         "youtubeVideoId": "1BVJzaXv3rk",
@@ -4680,7 +4608,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNIuvl7V8zACPpTmmNIqP2A",
         "sourceChannelTitle": "OverSimplified",
         "thumbnailUrl": "https://i.ytimg.com/vi/1BVJzaXv3rk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2946
       },
       {
         "youtubeVideoId": "r0750q5e-Us",
@@ -4688,7 +4616,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
         "sourceChannelTitle": "Vox",
         "thumbnailUrl": "https://i.ytimg.com/vi/r0750q5e-Us/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2491
       },
       {
         "youtubeVideoId": "bw5tzcoEG88",
@@ -4696,7 +4624,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsooa4yRKGN_zEE8iknghZA",
         "sourceChannelTitle": "TED-Ed",
         "thumbnailUrl": "https://i.ytimg.com/vi/bw5tzcoEG88/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 298
       },
       {
         "youtubeVideoId": "g3_TqjSLyLk",
@@ -4704,7 +4632,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCAuUUnT6oDeKwE6v1NGQxug",
         "sourceChannelTitle": "TED",
         "thumbnailUrl": "https://i.ytimg.com/vi/g3_TqjSLyLk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 543
       },
       {
         "youtubeVideoId": "8q95eiq-y-Q",
@@ -4712,7 +4640,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1_uAIS3r8Vu6JjXWvastJg",
         "sourceChannelTitle": "Mathologer",
         "thumbnailUrl": "https://i.ytimg.com/vi/8q95eiq-y-Q/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 878
       },
       {
         "youtubeVideoId": "TQ96CN6G6bQ",
@@ -4720,7 +4648,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTWKe1zATFV6d0o6oLS9sgw",
         "sourceChannelTitle": "Extremities",
         "thumbnailUrl": "https://i.ytimg.com/vi/TQ96CN6G6bQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1300
       },
       {
         "youtubeVideoId": "IH_uv4h2xYM",
@@ -4728,7 +4656,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC176GAQozKKjhz62H8u9vQQ",
         "sourceChannelTitle": "Real Science",
         "thumbnailUrl": "https://i.ytimg.com/vi/IH_uv4h2xYM/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 984
       },
       {
         "youtubeVideoId": "FcY4QW_lyYo",
@@ -4736,7 +4664,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCX6b17PVsYBQ0ip5gyeme-Q",
         "sourceChannelTitle": "CrashCourse",
         "thumbnailUrl": "https://i.ytimg.com/vi/FcY4QW_lyYo/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2009
       },
       {
         "youtubeVideoId": "JsRiC6vGb1E",
@@ -4744,7 +4672,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMOqf8ab-42UUQIdVoKwjlQ",
         "sourceChannelTitle": "Practical Engineering",
         "thumbnailUrl": "https://i.ytimg.com/vi/JsRiC6vGb1E/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1469
       },
       {
         "youtubeVideoId": "ju1OZStv2eI",
@@ -4752,7 +4680,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCuCkxoKLYO_EQ2GeFtbM_bw",
         "sourceChannelTitle": "Half as Interesting",
         "thumbnailUrl": "https://i.ytimg.com/vi/ju1OZStv2eI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 438
       },
       {
         "youtubeVideoId": "vCAD3W43lIk",
@@ -4760,7 +4688,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoxcjq-8xIDTYp3uz647V5A",
         "sourceChannelTitle": "Numberphile",
         "thumbnailUrl": "https://i.ytimg.com/vi/vCAD3W43lIk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1178
       },
       {
         "youtubeVideoId": "NDgS__J1U-M",
@@ -4768,7 +4696,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9-y-6csu5WGm29I7JiwpnA",
         "sourceChannelTitle": "Computerphile",
         "thumbnailUrl": "https://i.ytimg.com/vi/NDgS__J1U-M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1476
       },
       {
         "youtubeVideoId": "NBXu6Z9Fw_M",
@@ -4776,7 +4704,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCBa659QWEk1AI4Tg--mrJ2A",
         "sourceChannelTitle": "Tom Scott",
         "thumbnailUrl": "https://i.ytimg.com/vi/NBXu6Z9Fw_M/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 980
       },
       {
         "youtubeVideoId": "KxHKrbfnmTU",
@@ -4784,7 +4712,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSju5G2aFaWMqn-_0YBtq5A",
         "sourceChannelTitle": "Stand-up Maths",
         "thumbnailUrl": "https://i.ytimg.com/vi/KxHKrbfnmTU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1673
       },
       {
         "youtubeVideoId": "Q-nWA0WeF98",
@@ -4792,7 +4720,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNIuvl7V8zACPpTmmNIqP2A",
         "sourceChannelTitle": "OverSimplified",
         "thumbnailUrl": "https://i.ytimg.com/vi/Q-nWA0WeF98/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2257
       },
       {
         "youtubeVideoId": "olEs7cm1LWw",
@@ -4800,7 +4728,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
         "sourceChannelTitle": "Vox",
         "thumbnailUrl": "https://i.ytimg.com/vi/olEs7cm1LWw/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1903
       },
       {
         "youtubeVideoId": "8EtdC9Bjubk",
@@ -4808,7 +4736,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsooa4yRKGN_zEE8iknghZA",
         "sourceChannelTitle": "TED-Ed",
         "thumbnailUrl": "https://i.ytimg.com/vi/8EtdC9Bjubk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 373
       },
       {
         "youtubeVideoId": "on1L_jblaw8",
@@ -4816,7 +4744,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCAuUUnT6oDeKwE6v1NGQxug",
         "sourceChannelTitle": "TED",
         "thumbnailUrl": "https://i.ytimg.com/vi/on1L_jblaw8/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 988
       },
       {
         "youtubeVideoId": "d-Yy-ILjM3k",
@@ -4824,7 +4752,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1_uAIS3r8Vu6JjXWvastJg",
         "sourceChannelTitle": "Mathologer",
         "thumbnailUrl": "https://i.ytimg.com/vi/d-Yy-ILjM3k/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2252
       },
       {
         "youtubeVideoId": "X0gnZtjW-eE",
@@ -4832,7 +4760,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTWKe1zATFV6d0o6oLS9sgw",
         "sourceChannelTitle": "Extremities",
         "thumbnailUrl": "https://i.ytimg.com/vi/X0gnZtjW-eE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1390
       },
       {
         "youtubeVideoId": "uGCaL_Ge6tg",
@@ -4840,7 +4768,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC176GAQozKKjhz62H8u9vQQ",
         "sourceChannelTitle": "Real Science",
         "thumbnailUrl": "https://i.ytimg.com/vi/uGCaL_Ge6tg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1120
       },
       {
         "youtubeVideoId": "oJXxCfwkb-o",
@@ -4848,7 +4776,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCX6b17PVsYBQ0ip5gyeme-Q",
         "sourceChannelTitle": "CrashCourse",
         "thumbnailUrl": "https://i.ytimg.com/vi/oJXxCfwkb-o/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 869
       },
       {
         "youtubeVideoId": "awV7FP9sAHE",
@@ -4856,7 +4784,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMOqf8ab-42UUQIdVoKwjlQ",
         "sourceChannelTitle": "Practical Engineering",
         "thumbnailUrl": "https://i.ytimg.com/vi/awV7FP9sAHE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1087
       },
       {
         "youtubeVideoId": "auScRXZwHhk",
@@ -4864,7 +4792,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCuCkxoKLYO_EQ2GeFtbM_bw",
         "sourceChannelTitle": "Half as Interesting",
         "thumbnailUrl": "https://i.ytimg.com/vi/auScRXZwHhk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 530
       },
       {
         "youtubeVideoId": "EgnAN0ZUl08",
@@ -4872,7 +4800,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCoxcjq-8xIDTYp3uz647V5A",
         "sourceChannelTitle": "Numberphile",
         "thumbnailUrl": "https://i.ytimg.com/vi/EgnAN0ZUl08/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 819
       },
       {
         "youtubeVideoId": "cI8IquVEyVY",
@@ -4880,7 +4808,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9-y-6csu5WGm29I7JiwpnA",
         "sourceChannelTitle": "Computerphile",
         "thumbnailUrl": "https://i.ytimg.com/vi/cI8IquVEyVY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1158
       },
       {
         "youtubeVideoId": "-E47v4Oy7fE",
@@ -4888,7 +4816,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCBa659QWEk1AI4Tg--mrJ2A",
         "sourceChannelTitle": "Tom Scott",
         "thumbnailUrl": "https://i.ytimg.com/vi/-E47v4Oy7fE/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1397
       },
       {
         "youtubeVideoId": "9xwU-ochogk",
@@ -4896,7 +4824,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCSju5G2aFaWMqn-_0YBtq5A",
         "sourceChannelTitle": "Stand-up Maths",
         "thumbnailUrl": "https://i.ytimg.com/vi/9xwU-ochogk/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1110
       },
       {
         "youtubeVideoId": "lsbcN9-jU1Y",
@@ -4904,7 +4832,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNIuvl7V8zACPpTmmNIqP2A",
         "sourceChannelTitle": "OverSimplified",
         "thumbnailUrl": "https://i.ytimg.com/vi/lsbcN9-jU1Y/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1695
       },
       {
         "youtubeVideoId": "MQqi6wZYRGs",
@@ -4912,7 +4840,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
         "sourceChannelTitle": "Vox",
         "thumbnailUrl": "https://i.ytimg.com/vi/MQqi6wZYRGs/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 703
       },
       {
         "youtubeVideoId": "8RPK5KwYhgA",
@@ -4920,7 +4848,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCsooa4yRKGN_zEE8iknghZA",
         "sourceChannelTitle": "TED-Ed",
         "thumbnailUrl": "https://i.ytimg.com/vi/8RPK5KwYhgA/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 330
       },
       {
         "youtubeVideoId": "84wVmiEl7Dg",
@@ -4928,7 +4856,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCAuUUnT6oDeKwE6v1NGQxug",
         "sourceChannelTitle": "TED",
         "thumbnailUrl": "https://i.ytimg.com/vi/84wVmiEl7Dg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 382
       },
       {
         "youtubeVideoId": "8CksuEk2jJQ",
@@ -4936,7 +4864,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC1_uAIS3r8Vu6JjXWvastJg",
         "sourceChannelTitle": "Mathologer",
         "thumbnailUrl": "https://i.ytimg.com/vi/8CksuEk2jJQ/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 2113
       },
       {
         "youtubeVideoId": "W9e5Un7VLUg",
@@ -4944,7 +4872,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCTWKe1zATFV6d0o6oLS9sgw",
         "sourceChannelTitle": "Extremities",
         "thumbnailUrl": "https://i.ytimg.com/vi/W9e5Un7VLUg/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1439
       },
       {
         "youtubeVideoId": "nq_tGiprNlU",
@@ -4952,7 +4880,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC176GAQozKKjhz62H8u9vQQ",
         "sourceChannelTitle": "Real Science",
         "thumbnailUrl": "https://i.ytimg.com/vi/nq_tGiprNlU/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 1376
       },
       {
         "youtubeVideoId": "y5RqfQvCaBY",
@@ -4960,7 +4888,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCX6b17PVsYBQ0ip5gyeme-Q",
         "sourceChannelTitle": "CrashCourse",
         "thumbnailUrl": "https://i.ytimg.com/vi/y5RqfQvCaBY/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 694
       },
       {
         "youtubeVideoId": "5_B1Mq02wcI",
@@ -4968,7 +4896,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMOqf8ab-42UUQIdVoKwjlQ",
         "sourceChannelTitle": "Practical Engineering",
         "thumbnailUrl": "https://i.ytimg.com/vi/5_B1Mq02wcI/hqdefault.jpg",
-        "durationSec": 600
+        "durationSec": 994
       }
     ]
   }

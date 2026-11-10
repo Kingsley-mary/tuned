@@ -24,7 +24,7 @@ export function getVideoDuration(video: Video): number {
     return KNOWN_DURATIONS.get(id)!;
   }
 
-  if (video.durationSec && video.durationSec >= 60 && video.durationSec !== 600) {
+  if (video.durationSec && video.durationSec > 60 && video.durationSec !== 600) {
     return video.durationSec;
   }
 
@@ -60,6 +60,17 @@ export interface BroadcastState {
   durationSec: number;
   remainingSec: number;
   currentVideo: Video | null;
+}
+
+export interface ScheduledProgram {
+  videoIndex: number;
+  video: Video;
+  durationSec: number;
+  startTimeMs: number;
+  endTimeMs: number;
+  startsInSec: number;
+  isLive: boolean;
+  progressPercent: number;
 }
 
 /**
@@ -185,4 +196,68 @@ export function advanceChannelPlayback(
   }
 
   return { videoIndex: idx, seekSeconds: 0 };
+}
+
+/**
+ * Builds a linear TV schedule starting from a channel's current broadcast state,
+ * calculating exact wall-clock start/end times for the current show and upcoming programs.
+ */
+export function buildChannelSchedule(
+  videos: Video[],
+  activeVideoIndex: number,
+  activeSeekSeconds: number,
+  count: number = 12,
+  nowMs: number = Date.now()
+): ScheduledProgram[] {
+  if (!videos || videos.length === 0) return [];
+
+  const schedule: ScheduledProgram[] = [];
+  const safeStartIdx = ((activeVideoIndex % videos.length) + videos.length) % videos.length;
+  const activeVideo = videos[safeStartIdx];
+  const activeDur = getVideoDuration(activeVideo);
+  const clampedSeek = Math.min(Math.max(0, activeSeekSeconds), Math.max(0, activeDur - 1));
+  const remainingActiveSec = Math.max(1, activeDur - clampedSeek);
+
+  // Current live show
+  const currentStartMs = nowMs - clampedSeek * 1000;
+  const currentEndMs = nowMs + remainingActiveSec * 1000;
+
+  schedule.push({
+    videoIndex: safeStartIdx,
+    video: activeVideo,
+    durationSec: activeDur,
+    startTimeMs: currentStartMs,
+    endTimeMs: currentEndMs,
+    startsInSec: 0,
+    isLive: true,
+    progressPercent: activeDur > 0 ? Math.min(100, (clampedSeek / activeDur) * 100) : 0,
+  });
+
+  let cursorMs = currentEndMs;
+  let accumulatedWaitSec = remainingActiveSec;
+
+  const limit = Math.min(count, videos.length);
+  for (let offset = 1; offset < limit; offset++) {
+    const idx = (safeStartIdx + offset) % videos.length;
+    const vid = videos[idx];
+    const dur = getVideoDuration(vid);
+    const startMs = cursorMs;
+    const endMs = startMs + dur * 1000;
+
+    schedule.push({
+      videoIndex: idx,
+      video: vid,
+      durationSec: dur,
+      startTimeMs: startMs,
+      endTimeMs: endMs,
+      startsInSec: accumulatedWaitSec,
+      isLive: false,
+      progressPercent: 0,
+    });
+
+    cursorMs = endMs;
+    accumulatedWaitSec += dur;
+  }
+
+  return schedule;
 }

@@ -12,7 +12,9 @@ declare global {
 interface YouTubePlayerProps {
   videoId: string;
   startSeconds?: number;
+  tuneKey?: number;
   isPlaying: boolean;
+  isMuted?: boolean;
   onEnded: () => void;
   onError: (errorCode: number) => void;
   onTimeUpdate: (currentTime: number, duration: number) => void;
@@ -24,7 +26,9 @@ interface YouTubePlayerProps {
 export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   videoId,
   startSeconds = 0,
+  tuneKey = 0,
   isPlaying,
+  isMuted = false,
   onEnded,
   onError,
   onTimeUpdate,
@@ -38,6 +42,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const isReadyRef = useRef<boolean>(false);
   const hasStartedRef = useRef<boolean>(false);
   const shortCheckDoneRef = useRef<string | null>(null);
+  const loadedVideoIdRef = useRef<string>('');
 
   // Initialize YT Player once API is loaded
   useEffect(() => {
@@ -48,6 +53,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       if (playerRef.current) return;
 
       try {
+        loadedVideoIdRef.current = videoId || '';
         playerRef.current = new window.YT.Player(containerRef.current, {
           height: '100%',
           width: '100%',
@@ -67,13 +73,24 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             onReady: (event: any) => {
               if (isCancelled) return;
               isReadyRef.current = true;
-              
+
               // Ensure iframe has proper fullscreen attributes
               try {
                 const iframe = event.target?.getIframe?.();
                 if (iframe) {
                   iframe.setAttribute('allowfullscreen', 'true');
-                  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen');
+                  iframe.setAttribute(
+                    'allow',
+                    'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
+                  );
+                }
+              } catch {}
+
+              try {
+                if (isMuted) {
+                  playerRef.current?.mute?.();
+                } else {
+                  playerRef.current?.unMute?.();
                 }
               } catch {}
 
@@ -140,22 +157,33 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     if (!playerRef.current || !isReadyRef.current || !videoId) return;
 
     hasStartedRef.current = false;
+    const targetStart = Math.floor(startSeconds || 0);
+
     try {
-      if (isPlaying) {
-        playerRef.current.loadVideoById({
-          videoId,
-          startSeconds: Math.floor(startSeconds || 0),
-        });
+      if (loadedVideoIdRef.current === videoId) {
+        // Same video (e.g. Jump to Live): seek directly without full iframe reload
+        playerRef.current.seekTo?.(targetStart, true);
+        if (isPlaying) {
+          playerRef.current.playVideo?.();
+        }
       } else {
-        playerRef.current.cueVideoById({
-          videoId,
-          startSeconds: Math.floor(startSeconds || 0),
-        });
+        loadedVideoIdRef.current = videoId;
+        if (isPlaying) {
+          playerRef.current.loadVideoById({
+            videoId,
+            startSeconds: targetStart,
+          });
+        } else {
+          playerRef.current.cueVideoById({
+            videoId,
+            startSeconds: targetStart,
+          });
+        }
       }
     } catch (e) {
       console.warn('Error cueing/loading video:', e);
     }
-  }, [videoId, startSeconds]);
+  }, [videoId, startSeconds, tuneKey]);
 
   // Watchdog: If video is supposed to play but fails to start or gets stuck in unstarted state
   useEffect(() => {
@@ -193,7 +221,21 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     }
   }, [isPlaying]);
 
-  // Periodic time updates & short detection
+  // Handle mute / unmute changes
+  useEffect(() => {
+    if (!playerRef.current || !isReadyRef.current) return;
+    try {
+      if (isMuted) {
+        playerRef.current.mute?.();
+      } else {
+        playerRef.current.unMute?.();
+      }
+    } catch (e) {
+      console.warn('Error toggling mute:', e);
+    }
+  }, [isMuted]);
+
+  // Periodic time updates, short detection & seek-past-end guard
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       if (!playerRef.current || !isReadyRef.current) return;
@@ -207,6 +249,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           shortCheckDoneRef.current = videoId;
           console.warn(`[Tuned] Video ${videoId} is <=60s (${dur}s). Excluded as YouTube Short.`);
           onShortDetected?.(videoId);
+          return;
+        }
+
+        // Guard against initial seek landing past the actual end of the video
+        if (dur > 60 && startSeconds >= dur - 2 && shortCheckDoneRef.current !== `seek_${videoId}`) {
+          shortCheckDoneRef.current = `seek_${videoId}`;
+          onEnded();
         }
       } catch {}
     }, 250);
@@ -214,7 +263,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [onTimeUpdate, onShortDetected, videoId]);
+  }, [onTimeUpdate, onShortDetected, onEnded, videoId, startSeconds]);
 
   return (
     <div

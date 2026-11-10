@@ -1,52 +1,117 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ScreenMode, Category, ChannelLineup, UserState } from '../lib/types';
+import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
 import { getLiveBroadcastState, advanceChannelPlayback } from '../lib/broadcast-clock';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
 import { TuningScreen } from '../components/TuningScreen';
-import { WatchScreen } from '../components/WatchScreen';
-import { GuideScreen } from '../components/GuideScreen';
+import { WatchScreen, SleepTimerMode } from '../components/WatchScreen';
+import { GuideScreen, ChannelSavedState } from '../components/GuideScreen';
 import { ManageScreen } from '../components/ManageScreen';
 import { OffAirScreen } from '../components/OffAirScreen';
 
 const STORAGE_KEY = 'tuned_user_state_v1';
+const PLAYBACK_STORAGE_KEY = 'tuned_playback_session_v1';
 const DEFAULT_CATEGORIES = ['tech', 'music', 'science', 'food'];
 
 export default function TunedApp() {
   const [screenMode, setScreenMode] = useState<ScreenMode>('power');
+  const [hasEnteredWatch, setHasEnteredWatch] = useState<boolean>(false);
   const [isReturningUser, setIsReturningUser] = useState<boolean>(false);
   const [pickedCategoryIds, setPickedCategoryIds] = useState<string[]>(DEFAULT_CATEGORIES);
+  const [customSources, setCustomSources] = useState<CustomSource[]>([]);
   const [channels, setChannels] = useState<ChannelLineup[]>([]);
   const [currentChannelIndex, setCurrentChannelIndex] = useState<number>(0);
+  const [previousChannelIndex, setPreviousChannelIndex] = useState<number | null>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(0);
   const [startSeconds, setStartSeconds] = useState<number>(0);
+  const [tuneKey, setTuneKey] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [theme, setTheme] = useState<'dark' | 'light' | 'system'>('system');
+  const [theme, setTheme] = useState<'dark' | 'light' | 'system'>('dark');
   const [offAirReason, setOffAirReason] = useState<string>('Nothing playable on this channel right now.');
 
-  const isInitialLoadRef = useRef(true);
+  // Sleep Timer state
+  const [sleepTimerMode, setSleepTimerMode] = useState<SleepTimerMode>('off');
+  const [sleepRemainingSec, setSleepRemainingSec] = useState<number | null>(null);
+
   const isDirtyRef = useRef(false);
-  const channelPlaybackStatesRef = useRef<Map<string, { videoIndex: number; seekSeconds: number; leftAt: number }>>(new Map());
+  const currentPlaybackTimeRef = useRef<number>(0);
+  const channelPlaybackStatesRef = useRef<Map<string, ChannelSavedState>>(new Map());
   const completedVideoIdsRef = useRef<Set<string>>(new Set());
 
-  // Load user state from LocalStorage on mount (PRD Section 8 & 10)
+  // Helper to persist playback session state (completed shows + channel clocks) to localStorage
+  const persistPlaybackSession = useCallback(() => {
+    try {
+      const statesObj: Record<string, ChannelSavedState> = {};
+      channelPlaybackStatesRef.current.forEach((val, key) => {
+        statesObj[key] = val;
+      });
+      localStorage.setItem(
+        PLAYBACK_STORAGE_KEY,
+        JSON.stringify({
+          completedIds: Array.from(completedVideoIdsRef.current),
+          channelStates: statesObj,
+        })
+      );
+    } catch {}
+  }, []);
+
+  // Load user state and playback session from LocalStorage on mount (PRD Section 8 & 10)
   useEffect(() => {
     try {
+      const savedSession = localStorage.getItem(PLAYBACK_STORAGE_KEY);
+      if (savedSession) {
+        const parsedSession = JSON.parse(savedSession);
+        if (Array.isArray(parsedSession.completedIds)) {
+          completedVideoIdsRef.current = new Set(parsedSession.completedIds);
+        }
+        if (parsedSession.channelStates && typeof parsedSession.channelStates === 'object') {
+          Object.entries(parsedSession.channelStates).forEach(([k, v]) => {
+            channelPlaybackStatesRef.current.set(k, v as ChannelSavedState);
+          });
+        }
+      }
+    } catch {}
+
+    try {
       const saved = localStorage.getItem(STORAGE_KEY);
+      let loadedCategories = DEFAULT_CATEGORIES;
+      let loadedChannelIdx = 0;
+
       if (saved) {
         const parsed: UserState = JSON.parse(saved);
         if (parsed.pickedCategoryIds && parsed.pickedCategoryIds.length >= 3) {
+          loadedCategories = parsed.pickedCategoryIds;
           setPickedCategoryIds(parsed.pickedCategoryIds);
           setIsReturningUser(true);
         }
+        if (Array.isArray(parsed.customSources)) {
+          setCustomSources(parsed.customSources);
+        }
         if (typeof parsed.lastChannelIndex === 'number') {
+          loadedChannelIdx = parsed.lastChannelIndex;
           setCurrentChannelIndex(parsed.lastChannelIndex);
         }
         if (parsed.theme) {
           setTheme(parsed.theme);
+        }
+      }
+
+      // Support shared ?ch=<categoryId> URL parameter
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const sharedCh = params.get('ch');
+        if (sharedCh) {
+          const existingIdx = loadedCategories.indexOf(sharedCh);
+          if (existingIdx !== -1) {
+            setCurrentChannelIndex(existingIdx);
+          } else if (CATEGORIES.some((c) => c.id === sharedCh)) {
+            const nextCats = [sharedCh, ...loadedCategories.filter((id) => id !== sharedCh)].slice(0, 8);
+            setPickedCategoryIds(nextCats);
+            setCurrentChannelIndex(0);
+          }
         }
       }
     } catch (e) {
@@ -69,7 +134,7 @@ export default function TunedApp() {
       try {
         const stateToSave: UserState = {
           pickedCategoryIds,
-          customSources: [],
+          customSources,
           lastChannelIndex: currentChannelIndex,
           autoplay: true,
           isReturningUser: true,
@@ -81,58 +146,154 @@ export default function TunedApp() {
         console.warn('Could not save user state:', e);
       }
     },
-    [pickedCategoryIds, currentChannelIndex, theme]
+    [pickedCategoryIds, customSources, currentChannelIndex, theme]
+  );
+
+  // Resolve target channel's current continuous broadcast state (never pauses while away!)
+  const resolveChannelContinuousState = useCallback(
+    (target: ChannelLineup): { videoIndex: number; seekSeconds: number } => {
+      if (!target || !target.videos?.length) {
+        return { videoIndex: 0, seekSeconds: 0 };
+      }
+
+      const saved = channelPlaybackStatesRef.current.get(target.categoryId);
+      if (saved) {
+        const elapsedSec = Math.max(0, (Date.now() - saved.leftAt) / 1000);
+        const adv = advanceChannelPlayback(
+          target.videos,
+          saved.videoIndex,
+          saved.seekSeconds,
+          elapsedSec,
+          completedVideoIdsRef.current
+        );
+        return adv;
+      }
+
+      const live = getLiveBroadcastState(
+        target.videos,
+        target.categoryId,
+        Math.floor(Date.now() / 1000),
+        completedVideoIdsRef.current
+      );
+      return { videoIndex: live.videoIndex, seekSeconds: live.seekSeconds };
+    },
+    []
+  );
+
+  // Snapshot the active channel's exact current playback position right before leaving it
+  const snapshotActiveChannel = useCallback(
+    (chIdx: number, vidIdx: number, exactSeekSec: number) => {
+      const currentCh = channels[chIdx];
+      if (!currentCh) return;
+      channelPlaybackStatesRef.current.set(currentCh.categoryId, {
+        videoIndex: vidIdx,
+        seekSeconds: Math.max(0, Math.floor(exactSeekSec)),
+        leftAt: Date.now(),
+      });
+      persistPlaybackSession();
+    },
+    [channels, persistPlaybackSession]
   );
 
   // Fetch or construct lineups for current picked categories
-  const loadLineups = useCallback(async (categoryIds: string[]): Promise<ChannelLineup[]> => {
-    try {
-      const res = await fetch(`/api/lineup?ids=${categoryIds.join(',')}`);
-      if (!res.ok) throw new Error('API lineup fetch failed');
-      const data = await res.json();
-      if (data.lineups && Array.isArray(data.lineups) && data.lineups.length > 0) {
-        return data.lineups;
+  const loadLineups = useCallback(
+    async (categoryIds: string[], knownCustomSources: CustomSource[] = customSources): Promise<ChannelLineup[]> => {
+      try {
+        const res = await fetch(`/api/lineup?ids=${categoryIds.join(',')}`);
+        if (!res.ok) throw new Error('API lineup fetch failed');
+        const data = await res.json();
+        if (data.lineups && Array.isArray(data.lineups) && data.lineups.length > 0) {
+          return data.lineups.map((lineup: ChannelLineup) => {
+            const customMeta = knownCustomSources.find((cs) => cs.channelId === lineup.categoryId);
+            if (customMeta && customMeta.title) {
+              return {
+                ...lineup,
+                categoryName: customMeta.title,
+              };
+            }
+            return lineup;
+          });
+        }
+      } catch (err) {
+        console.warn('API error, falling back to seed catalog:', err);
       }
-    } catch (err) {
-      console.warn('API error, falling back to seed catalog:', err);
-    }
 
-    // Fallback directly to seed catalog (works offline or without network)
-    return categoryIds.map((id) => {
-      const meta = CATEGORIES.find((c) => c.id === id);
-      const seed = SEED_LINEUPS[id] || {
-        categoryId: id,
-        categoryName: meta?.name || id,
-        hue: meta?.hue || 355,
-        builtAt: Date.now(),
-        videos: SEED_LINEUPS.tech.videos,
-      };
-      return seed;
-    });
-  }, []);
+      // Fallback directly to seed catalog (works offline or without network)
+      return categoryIds.map((id) => {
+        const meta = CATEGORIES.find((c) => c.id === id);
+        const customMeta = knownCustomSources.find((cs) => cs.channelId === id);
+        const seed = SEED_LINEUPS[id] || {
+          categoryId: id,
+          categoryName: customMeta?.title || meta?.name || id,
+          hue: meta?.hue || 355,
+          builtAt: Date.now(),
+          videos: SEED_LINEUPS.tech.videos,
+        };
+        return seed;
+      });
+    },
+    [customSources]
+  );
 
-  // Preload lineups immediately and sync to live broadcast schedule
+  // Preload lineups immediately and sync to continuous broadcast schedule
   useEffect(() => {
     loadLineups(pickedCategoryIds).then((loaded) => {
       setChannels(loaded);
-      const active = loaded[currentChannelIndex] || loaded[0];
+      const safeChIdx = currentChannelIndex < loaded.length ? currentChannelIndex : 0;
+      const active = loaded[safeChIdx] || loaded[0];
       if (active && active.videos?.length > 0) {
-        const live = getLiveBroadcastState(active.videos, active.categoryId);
-        setCurrentVideoIndex(live.videoIndex);
-        setStartSeconds(live.seekSeconds);
+        const pos = resolveChannelContinuousState(active);
+        setCurrentVideoIndex(pos.videoIndex);
+        setStartSeconds(pos.seekSeconds);
+        currentPlaybackTimeRef.current = pos.seekSeconds;
       }
     });
-  }, [pickedCategoryIds, loadLineups]);
+  }, [pickedCategoryIds, loadLineups, resolveChannelContinuousState]);
+
+  // Sleep Timer countdown effect
+  useEffect(() => {
+    if (sleepRemainingSec === null || sleepRemainingSec <= 0) return;
+
+    const timer = setInterval(() => {
+      setSleepRemainingSec((prev) => {
+        if (prev === null) return null;
+        if (prev <= 1) {
+          // Time's up: power off TV
+          setIsPlaying(false);
+          setScreenMode('power');
+          setSleepTimerMode('off');
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [sleepRemainingSec]);
+
+  const handleCycleSleepTimer = useCallback(() => {
+    const order: SleepTimerMode[] = ['off', '15m', '30m', '60m', 'end'];
+    const nextMode = order[(order.indexOf(sleepTimerMode) + 1) % order.length];
+    setSleepTimerMode(nextMode);
+    if (nextMode === '15m') setSleepRemainingSec(15 * 60);
+    else if (nextMode === '30m') setSleepRemainingSec(30 * 60);
+    else if (nextMode === '60m') setSleepRemainingSec(60 * 60);
+    else setSleepRemainingSec(null);
+  }, [sleepTimerMode]);
 
   // Handlers for Power Screen
   const handleTurnOn = () => {
     if (isReturningUser) {
-      const active = channels[currentChannelIndex] || channels[0];
+      const safeIdx = currentChannelIndex < channels.length ? currentChannelIndex : 0;
+      const active = channels[safeIdx] || channels[0];
       if (active && active.videos?.length > 0) {
-        const live = getLiveBroadcastState(active.videos, active.categoryId);
-        setCurrentVideoIndex(live.videoIndex);
-        setStartSeconds(live.seekSeconds);
+        const pos = resolveChannelContinuousState(active);
+        setCurrentVideoIndex(pos.videoIndex);
+        setStartSeconds(pos.seekSeconds);
+        currentPlaybackTimeRef.current = pos.seekSeconds;
+        setTuneKey((k) => k + 1);
       }
+      setHasEnteredWatch(true);
       setScreenMode('watch');
       setIsPlaying(true);
     } else {
@@ -179,72 +340,77 @@ export default function TunedApp() {
       return;
     }
 
-    const firstCh = loaded[0];
-    const live = getLiveBroadcastState(firstCh.videos, firstCh.categoryId);
-    setCurrentChannelIndex(0);
-    setCurrentVideoIndex(live.videoIndex);
-    setStartSeconds(live.seekSeconds);
+    const safeIdx = currentChannelIndex < loaded.length ? currentChannelIndex : 0;
+    const firstCh = loaded[safeIdx] || loaded[0];
+    const pos = resolveChannelContinuousState(firstCh);
+    setCurrentChannelIndex(safeIdx);
+    setCurrentVideoIndex(pos.videoIndex);
+    setStartSeconds(pos.seekSeconds);
+    currentPlaybackTimeRef.current = pos.seekSeconds;
+    setTuneKey((k) => k + 1);
     setIsPlaying(true);
     setIsReturningUser(true);
-    persistState({ isReturningUser: true, lastChannelIndex: 0 });
+    setHasEnteredWatch(true);
+    persistState({ isReturningUser: true, lastChannelIndex: safeIdx });
     setScreenMode('watch');
   };
 
   // Handlers for Watch Screen
-  const handleSelectChannel = (channelIndex: number) => {
-    // 1. Save state of current channel before switching
-    const currentCh = channels[currentChannelIndex];
-    if (currentCh) {
-      channelPlaybackStatesRef.current.set(currentCh.categoryId, {
-        videoIndex: currentVideoIndex,
-        seekSeconds: startSeconds,
-        leftAt: Date.now(),
-      });
-    }
+  const handleSelectChannel = useCallback(
+    (channelIndex: number) => {
+      if (channelIndex < 0 || channelIndex >= channels.length) return;
 
-    setCurrentChannelIndex(channelIndex);
-    const target = channels[channelIndex];
-    if (target && target.videos?.length > 0) {
-      const saved = channelPlaybackStatesRef.current.get(target.categoryId);
-      if (saved) {
-        // Resume target channel advancing forward by elapsed real time (never rewind!)
-        const elapsedSec = (Date.now() - saved.leftAt) / 1000;
-        const adv = advanceChannelPlayback(
-          target.videos,
-          saved.videoIndex,
-          saved.seekSeconds,
-          elapsedSec,
-          completedVideoIdsRef.current
-        );
-        setCurrentVideoIndex(adv.videoIndex);
-        setStartSeconds(adv.seekSeconds);
-      } else {
-        // First visit to this channel in this session: sync to live clock, skipping completed videos
-        const live = getLiveBroadcastState(
-          target.videos,
-          target.categoryId,
-          Math.floor(Date.now() / 1000),
-          completedVideoIdsRef.current
-        );
-        setCurrentVideoIndex(live.videoIndex);
-        setStartSeconds(live.seekSeconds);
+      // 1. Save exact live playback second of the current channel before switching
+      // so it continues advancing in the background while we watch other channels
+      snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
+
+      if (channelIndex !== currentChannelIndex) {
+        setPreviousChannelIndex(currentChannelIndex);
       }
-    } else {
-      setCurrentVideoIndex(0);
-      setStartSeconds(0);
-    }
-    setIsPlaying(true);
-    persistState({ lastChannelIndex: channelIndex });
-  };
 
-  const handleSelectVideo = (videoIndex: number) => {
-    setCurrentVideoIndex(videoIndex);
-    setStartSeconds(0);
-    setIsPlaying(true);
-  };
+      setCurrentChannelIndex(channelIndex);
+      const target = channels[channelIndex];
+      if (target && target.videos?.length > 0) {
+        const pos = resolveChannelContinuousState(target);
+        setCurrentVideoIndex(pos.videoIndex);
+        setStartSeconds(pos.seekSeconds);
+        currentPlaybackTimeRef.current = pos.seekSeconds;
+        // Update target channel's snapshot anchor to now
+        channelPlaybackStatesRef.current.set(target.categoryId, {
+          videoIndex: pos.videoIndex,
+          seekSeconds: pos.seekSeconds,
+          leftAt: Date.now(),
+        });
+        persistPlaybackSession();
+      } else {
+        setCurrentVideoIndex(0);
+        setStartSeconds(0);
+        currentPlaybackTimeRef.current = 0;
+      }
+
+      setTuneKey((k) => k + 1);
+      setIsPlaying(true);
+      persistState({ lastChannelIndex: channelIndex });
+    },
+    [
+      channels,
+      currentChannelIndex,
+      currentVideoIndex,
+      snapshotActiveChannel,
+      resolveChannelContinuousState,
+      persistPlaybackSession,
+      persistState,
+    ]
+  );
+
+  const handleRecallLastChannel = useCallback(() => {
+    if (previousChannelIndex !== null && previousChannelIndex < channels.length) {
+      handleSelectChannel(previousChannelIndex);
+    }
+  }, [previousChannelIndex, channels.length, handleSelectChannel]);
 
   // Called when video ends naturally
-  const handleNextVideo = () => {
+  const handleNextVideo = useCallback(() => {
     const active = channels[currentChannelIndex];
     if (!active || !active.videos?.length) return;
 
@@ -267,6 +433,8 @@ export default function TunedApp() {
 
     setCurrentVideoIndex(nextIdx);
     setStartSeconds(0);
+    currentPlaybackTimeRef.current = 0;
+    setTuneKey((k) => k + 1);
     setIsPlaying(true);
 
     channelPlaybackStatesRef.current.set(active.categoryId, {
@@ -274,9 +442,10 @@ export default function TunedApp() {
       seekSeconds: 0,
       leftAt: Date.now(),
     });
-  };
+    persistPlaybackSession();
+  }, [channels, currentChannelIndex, currentVideoIndex, persistPlaybackSession]);
 
-  const handleJumpToLive = () => {
+  const handleJumpToLive = useCallback(() => {
     const active = channels[currentChannelIndex];
     if (!active || !active.videos?.length) return;
 
@@ -288,6 +457,8 @@ export default function TunedApp() {
     );
     setCurrentVideoIndex(live.videoIndex);
     setStartSeconds(live.seekSeconds);
+    currentPlaybackTimeRef.current = live.seekSeconds;
+    setTuneKey((k) => k + 1);
     setIsPlaying(true);
 
     channelPlaybackStatesRef.current.set(active.categoryId, {
@@ -295,24 +466,40 @@ export default function TunedApp() {
       seekSeconds: live.seekSeconds,
       leftAt: Date.now(),
     });
-  };
+    persistPlaybackSession();
+  }, [channels, currentChannelIndex, persistPlaybackSession]);
 
-  const handleShortDetected = (videoId: string) => {
-    completedVideoIdsRef.current.add(videoId);
-    handleNextVideo();
-  };
+  const handleShortDetected = useCallback(
+    (videoId: string) => {
+      completedVideoIdsRef.current.add(videoId);
+      handleNextVideo();
+    },
+    [handleNextVideo]
+  );
 
-  const handleTogglePlay = () => {
+  const handleProgressUpdate = useCallback((cur: number) => {
+    if (cur > 0) {
+      currentPlaybackTimeRef.current = cur;
+    }
+  }, []);
+
+  const handleTogglePlay = useCallback(() => {
     setIsPlaying((prev) => !prev);
-  };
+  }, []);
 
   const handleToggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    const isCurrentlyDark =
+      theme === 'dark' ||
+      (theme === 'system' &&
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const nextTheme = isCurrentlyDark ? 'light' : 'dark';
     setTheme(nextTheme);
     persistState({ theme: nextTheme });
   };
 
   const handlePowerOff = () => {
+    snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
     setIsPlaying(false);
     persistState();
     setScreenMode('power');
@@ -351,8 +538,12 @@ export default function TunedApp() {
 
   const handleRemoveChannel = (index: number) => {
     if (channels.length <= 3) return; // PRD M-2: min 3
+    const removed = channels[index];
     setChannels((prev) => prev.filter((_, idx) => idx !== index));
     setPickedCategoryIds((prev) => prev.filter((_, idx) => idx !== index));
+    if (removed) {
+      setCustomSources((prev) => prev.filter((cs) => cs.channelId !== removed.categoryId));
+    }
     if (currentChannelIndex >= channels.length - 1) {
       setCurrentChannelIndex(0);
     }
@@ -383,23 +574,34 @@ export default function TunedApp() {
         return data.error || 'Could not resolve channel.';
       }
 
-      // Generate a custom channel lineup with a unique hue
+      if (pickedCategoryIds.includes(data.channelId)) {
+        return 'That channel is already in your lineup.';
+      }
+
       const name = data.title || 'Custom';
       const hue = [...name].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360;
 
       const customLineup: ChannelLineup = {
-        categoryId: data.channelId || `custom_${Date.now()}`,
+        categoryId: data.channelId,
         categoryName: name,
         hue,
         builtAt: Date.now(),
-        videos: SEED_LINEUPS.tech.videos.map((v, i) => ({
-          ...v,
-          sourceChannelTitle: name,
-        })),
+        videos: Array.isArray(data.videos) && data.videos.length > 0 ? data.videos : [],
       };
 
+      const nextCustomSources: CustomSource[] = [
+        ...customSources.filter((cs) => cs.channelId !== data.channelId),
+        { channelId: data.channelId, handle: query, title: name },
+      ];
+      const nextPickedIds = [...pickedCategoryIds, customLineup.categoryId];
+
+      setCustomSources(nextCustomSources);
       setChannels((prev) => [...prev, customLineup]);
-      setPickedCategoryIds((prev) => [...prev, customLineup.categoryId]);
+      setPickedCategoryIds(nextPickedIds);
+      persistState({
+        pickedCategoryIds: nextPickedIds,
+        customSources: nextCustomSources,
+      });
       isDirtyRef.current = true;
       return null;
     } catch {
@@ -413,6 +615,7 @@ export default function TunedApp() {
       isDirtyRef.current = false;
       setScreenMode('tuning');
     } else {
+      setHasEnteredWatch(true);
       setScreenMode('watch');
     }
   };
@@ -430,7 +633,9 @@ export default function TunedApp() {
     }
   };
 
-  // Render current screen
+  const keepPlayerMounted =
+    hasEnteredWatch && (screenMode === 'watch' || screenMode === 'guide' || screenMode === 'manage');
+
   return (
     <>
       {screenMode === 'power' && (
@@ -456,12 +661,16 @@ export default function TunedApp() {
 
       {screenMode === 'tuning' && (
         <TuningScreen
-          channels={pickedCategoryIds.map((id, idx) => {
+          channels={pickedCategoryIds.map((id) => {
             const cat = CATEGORIES.find((c) => c.id === id);
+            const customMeta = customSources.find((cs) => cs.channelId === id);
+            const name = customMeta?.title || cat?.name || id;
+            const hue =
+              cat?.hue ?? ([...name].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360);
             return {
               id,
-              name: cat?.name || id,
-              hue: cat?.hue || 355,
+              name,
+              hue,
             };
           })}
           lineups={channels}
@@ -469,23 +678,37 @@ export default function TunedApp() {
         />
       )}
 
-      {screenMode === 'watch' && (
+      {/* Keep WatchScreen mounted during Guide and Manage so live broadcast audio/video never cuts out */}
+      {keepPlayerMounted && (
         <WatchScreen
           channels={channels}
           currentChannelIndex={currentChannelIndex}
+          previousChannelIndex={previousChannelIndex}
           currentVideoIndex={currentVideoIndex}
           startSeconds={startSeconds}
+          tuneKey={tuneKey}
           isPlaying={isPlaying}
+          isHidden={screenMode !== 'watch'}
           theme={theme}
+          sleepTimerMode={sleepTimerMode}
+          sleepRemainingSec={sleepRemainingSec}
+          onCycleSleepTimer={handleCycleSleepTimer}
           onToggleTheme={handleToggleTheme}
           onSelectChannel={handleSelectChannel}
-          onSelectVideo={handleSelectVideo}
+          onRecallLastChannel={handleRecallLastChannel}
           onTogglePlay={handleTogglePlay}
           onNextVideo={handleNextVideo}
           onJumpToLive={handleJumpToLive}
           onShortDetected={handleShortDetected}
-          onOpenGuide={() => setScreenMode('guide')}
-          onOpenManage={() => setScreenMode('manage')}
+          onProgressUpdate={handleProgressUpdate}
+          onOpenGuide={() => {
+            snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
+            setScreenMode('guide');
+          }}
+          onOpenManage={() => {
+            snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
+            setScreenMode('manage');
+          }}
           onPowerOff={handlePowerOff}
         />
       )}
@@ -495,22 +718,14 @@ export default function TunedApp() {
           channels={channels}
           currentChannelIndex={currentChannelIndex}
           currentVideoIndex={currentVideoIndex}
+          currentPlaybackSeconds={currentPlaybackTimeRef.current}
+          savedChannelStates={channelPlaybackStatesRef.current}
+          completedVideoIds={completedVideoIdsRef.current}
           onBackToWatch={() => setScreenMode('watch')}
-          onSelectProgram={(chIdx, vidIdx) => {
-            setCurrentChannelIndex(chIdx);
-            setCurrentVideoIndex(vidIdx);
-            const target = channels[chIdx];
-            if (target) {
-              const live = getLiveBroadcastState(target.videos, target.categoryId);
-              if (live.videoIndex === vidIdx) {
-                setStartSeconds(live.seekSeconds);
-              } else {
-                setStartSeconds(0);
-              }
-            } else {
-              setStartSeconds(0);
+          onTuneChannel={(chIdx) => {
+            if (chIdx !== currentChannelIndex) {
+              handleSelectChannel(chIdx);
             }
-            setIsPlaying(true);
             setScreenMode('watch');
           }}
         />

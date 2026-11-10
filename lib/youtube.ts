@@ -1,7 +1,8 @@
 import { ChannelLineup, Video } from './types';
-import { CATEGORIES } from './seed-catalog';
+import { CATEGORIES, SEED_LINEUPS } from './seed-catalog';
+import { getVideoDuration } from './broadcast-clock';
 
-// Comprehensive roster of verified top creators per television channel (11-14 creators per channel)
+// Comprehensive roster of verified top creators per television channel (11-16 creators per channel)
 export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }[]> = {
   "tech": [
     {
@@ -689,6 +690,16 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
   ]
 };
 
+// Build fast lookup map of verified video durations from SEED_LINEUPS
+const SEED_DURATION_MAP = new Map<string, number>();
+for (const lineup of Object.values(SEED_LINEUPS)) {
+  for (const v of lineup.videos) {
+    if (v.durationSec && v.durationSec > 60 && v.durationSec !== 600) {
+      SEED_DURATION_MAP.set(v.youtubeVideoId, v.durationSec);
+    }
+  }
+}
+
 // In-memory cache with 15-minute revalidation
 interface CachedPool {
   lineup: ChannelLineup;
@@ -698,7 +709,7 @@ const MEMORY_CACHE = new Map<string, CachedPool>();
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
 
 // Fetch recent uploads from an official YouTube channel feed
-async function fetchChannelUploads(channelId: string, channelName: string): Promise<Video[]> {
+export async function fetchChannelUploads(channelId: string, channelName: string): Promise<Video[]> {
   try {
     const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
       next: { revalidate: 900 },
@@ -707,6 +718,7 @@ async function fetchChannelUploads(channelId: string, channelName: string): Prom
     if (!res.ok) return [];
     const xml = await res.text();
 
+    const feedTitle = xml.match(/<feed[\s\S]*?<title>(.*?)<\/title>/)?.[1]?.trim() || channelName;
     const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
     const videos: Video[] = [];
 
@@ -714,7 +726,7 @@ async function fetchChannelUploads(channelId: string, channelName: string): Prom
       const entryText = entry[1];
       const vid = entryText.match(/<yt:videoId>(.*?)<\/yt:videoId>/)?.[1]?.trim();
       const rawTitle = entryText.match(/<title>(.*?)<\/title>/)?.[1]?.trim();
-      const author = entryText.match(/<author>\s*<name>(.*?)<\/name>/)?.[1]?.trim() || channelName;
+      const author = entryText.match(/<author>\s*<name>(.*?)<\/name>/)?.[1]?.trim() || feedTitle || channelName;
 
       if (!vid || !rawTitle) continue;
 
@@ -742,14 +754,18 @@ async function fetchChannelUploads(channelId: string, channelName: string): Prom
         .replace(/&lt;/g, '<')
         .replace(/&gt;/g, '>');
 
-      videos.push({
+      const knownDur = SEED_DURATION_MAP.get(vid);
+      const tempVideo: Video = {
         youtubeVideoId: vid,
         title: cleanTitle,
         sourceChannelId: channelId,
         sourceChannelTitle: author,
         thumbnailUrl: `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`,
-        durationSec: 600
-      });
+        durationSec: knownDur || 0
+      };
+      tempVideo.durationSec = knownDur || getVideoDuration(tempVideo);
+
+      videos.push(tempVideo);
     }
 
     return videos;
@@ -784,12 +800,30 @@ function roundRobinInterleave(lists: Video[][]): Video[] {
   return result;
 }
 
-// Master function: live-scours the creator universe for a given category
+// Master function: live-scours the creator universe for a given category or custom UC channel ID
 export async function getLineupForCategory(categoryId: string): Promise<ChannelLineup> {
   // Check cache first for instant sub-second response
   const cached = MEMORY_CACHE.get(categoryId);
   if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
     return cached.lineup;
+  }
+
+  // Support custom YouTube channels directly (e.g. UC...)
+  if (categoryId.startsWith('UC') && categoryId.length >= 20) {
+    const uploads = await fetchChannelUploads(categoryId, 'Custom Channel');
+    const channelTitle = uploads[0]?.sourceChannelTitle || 'Custom Channel';
+    const hue = [...channelTitle].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360;
+    const customLineup: ChannelLineup = {
+      categoryId,
+      categoryName: channelTitle,
+      hue,
+      builtAt: Date.now(),
+      videos: uploads,
+    };
+    if (uploads.length > 0) {
+      MEMORY_CACHE.set(categoryId, { lineup: customLineup, timestamp: Date.now() });
+    }
+    return customLineup;
   }
 
   const categoryMeta = CATEGORIES.find(c => c.id === categoryId);
@@ -828,6 +862,11 @@ export async function getLineupForCategory(categoryId: string): Promise<ChannelL
   // Stale cache fallback if available
   if (cached) return cached.lineup;
 
+  // Fallback to verified seed catalog if available
+  if (SEED_LINEUPS[categoryId]) {
+    return SEED_LINEUPS[categoryId];
+  }
+
   // Empty fallback
   return {
     categoryId,
@@ -838,19 +877,26 @@ export async function getLineupForCategory(categoryId: string): Promise<ChannelL
   };
 }
 
-// Resolve YouTube channel handle
-export async function resolveHandleToChannelId(handle: string): Promise<string | null> {
+// Resolve YouTube channel handle or URL to { channelId, title }
+export async function resolveHandleToChannelId(handle: string): Promise<{ channelId: string; title?: string } | null> {
   const clean = handle.replace(/^@/, '').trim();
+  if (/^UC[\w-]{22}$/.test(clean)) {
+    return { channelId: clean };
+  }
   try {
     const res = await fetch(`https://www.youtube.com/@${clean}`, {
-      headers: { 'User-Agent': 'Mozilla/5.0' }
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Cookie': 'SOCS=CAESEwgDEgk2MTQ1NzU1NDQaAmVuIAEaBgiA_LyaBg'
+      }
     });
     const html = await res.text();
     const m = html.match(/<meta itemprop="identifier" content="(UC[\w-]{22})">/) ||
               html.match(/<meta itemprop="channelId" content="(UC[\w-]{22})">/) ||
               html.match(/"channelId":"(UC[\w-]{22})"/) ||
               html.match(/"externalId":"(UC[\w-]{22})"/);
-    return m ? m[1] : null;
+    const titleMatch = html.match(/<meta property="og:title" content="([^"]+)">/);
+    return m ? { channelId: m[1], title: titleMatch?.[1] } : null;
   } catch {
     return null;
   }
@@ -859,17 +905,44 @@ export async function resolveHandleToChannelId(handle: string): Promise<string |
 // Higher-level resolver for custom channel input
 export async function resolveYouTubeChannel(
   query: string
-): Promise<{ channelId: string; title: string } | { error: string }> {
+): Promise<{ channelId: string; title: string; videos: Video[] } | { error: string }> {
   const clean = query.trim();
   if (!clean) return { error: 'Please enter a channel link or @handle.' };
 
-  const handle = clean.replace(/^.*youtube\.com\/@?/, '').replace(/^@/, '');
-  const channelId = await resolveHandleToChannelId(handle);
-  if (!channelId) {
+  // Support direct UC channel URLs or @handles
+  const ucMatch = clean.match(/(UC[\w-]{22})/);
+  const handle = ucMatch
+    ? ucMatch[1]
+    : clean.replace(/^.*youtube\.com\/(?:c\/|user\/|@)?/, '').replace(/^@/, '').split(/[/?#]/)[0];
+
+  const resolved = await resolveHandleToChannelId(handle);
+  if (!resolved?.channelId) {
     return { error: 'Could not find a YouTube channel matching that input.' };
   }
+
+  const uploads = await fetchChannelUploads(resolved.channelId, resolved.title || handle);
+  if (uploads.length === 0) {
+    return { error: 'Found channel, but it has no long-form broadcast videos available.' };
+  }
+
+  const realTitle = uploads[0]?.sourceChannelTitle || resolved.title || handle;
+  const hue = [...realTitle].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360;
+
+  // Cache immediately so subsequent /api/lineup calls are instant
+  MEMORY_CACHE.set(resolved.channelId, {
+    lineup: {
+      categoryId: resolved.channelId,
+      categoryName: realTitle,
+      hue,
+      builtAt: Date.now(),
+      videos: uploads,
+    },
+    timestamp: Date.now(),
+  });
+
   return {
-    channelId,
-    title: handle,
+    channelId: resolved.channelId,
+    title: realTitle,
+    videos: uploads,
   };
 }
