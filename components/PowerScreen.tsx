@@ -41,36 +41,8 @@ export const PowerScreen: React.FC<PowerScreenProps> = ({
   return (
     <div className={`power-curtain ${isPoweringUp ? 'turning-on' : ''}`}>
       <div style={{ textAlign: 'center', padding: '24px' }}>
-        <button
-          onClick={handleActivate}
-          aria-label="Turn on Tuned"
-          style={{
-            width: 96,
-            height: 96,
-            borderRadius: '50%',
-            border: '2px solid rgba(255, 255, 255, 0.4)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            marginBottom: 24,
-            transition: 'all 0.25s ease',
-            boxShadow: '0 0 30px rgba(255, 75, 62, 0.2)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.08)';
-            e.currentTarget.style.background = '#fff';
-            e.currentTarget.style.color = '#000';
-            e.currentTarget.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.4)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.background = 'transparent';
-            e.currentTarget.style.color = '#fff';
-            e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 75, 62, 0.2)';
-          }}
-        >
-          <Power size={36} strokeWidth={2} />
+        <button onClick={handleActivate} aria-label="Turn on Tuned" className="power-btn">
+          <Power size={40} strokeWidth={1.8} />
         </button>
 
         <h1

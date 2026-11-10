@@ -25,7 +25,7 @@ export const OffAirScreen: React.FC<OffAirScreenProps> = ({
       }}
     >
       {/* SMPTE Color Bars Graphic (PRD O-2) */}
-      <div className="smpte-bars" style={{ width: '100%' }}>
+      <div className="offair-wrap"><span className="offair-badge">NO SIGNAL</span><div className="smpte-bars">
         <div className="smpte-bar" style={{ background: '#dcdcdc' }} />
         <div className="smpte-bar" style={{ background: '#e6d94a' }} />
         <div className="smpte-bar" style={{ background: '#3ec7d6' }} />
@@ -33,6 +33,7 @@ export const OffAirScreen: React.FC<OffAirScreenProps> = ({
         <div className="smpte-bar" style={{ background: '#c24fc9' }} />
         <div className="smpte-bar" style={{ background: '#e5484d' }} />
         <div className="smpte-bar" style={{ background: '#3b5bdb' }} />
+      </div>
       </div>
 
       <h1

@@ -113,22 +113,10 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
       >
         {/* Left Column: Active Channels List */}
         <div
-          style={{
-            background: 'var(--panel)',
-            border: '1px solid var(--border)',
-            borderRadius: 'var(--radius-lg)',
-            padding: 20,
-          }}
+          className="glass-card"
         >
           <div
-            style={{
-              fontSize: 12,
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'var(--ink-secondary)',
-              marginBottom: 16,
-            }}
+            className="section-label" style={{ marginBottom: 16 }}
           >
             Current Lineup ({channelCount} of 8)
           </div>
@@ -138,38 +126,21 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
               return (
                 <div
                   key={ch.categoryId + idx}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 12,
-                    height: 52,
-                    padding: '0 14px',
-                    borderRadius: 'var(--radius-md)',
-                    background: 'var(--subtle-bg)',
-                    border: '1px solid var(--border)',
-                  }}
+                  className="manage-row"
                 >
+                  <span className="manage-row-bar" style={{ background: `hsl(${ch.hue}, 85%, 55%)` }} />
                   <span
                     style={{
                       fontSize: 13,
                       fontFamily: 'var(--font-display)',
                       fontWeight: 700,
                       color: 'var(--ink-secondary)',
-                      width: 24,
-                    }}
+                      width: 24, marginLeft: 4 }}
                   >
                     {String(idx + 1).padStart(2, '0')}
                   </span>
 
-                  <span
-                    style={{
-                      width: 8,
-                      height: 8,
-                      borderRadius: '50%',
-                      background: `hsl(${ch.hue}, 85%, 55%)`,
-                      flexShrink: 0,
-                    }}
-                  />
+                  
 
                   <span style={{ flex: 1, fontWeight: 600, fontSize: 15, textTransform: 'capitalize' }}>
                     {ch.categoryName}
@@ -234,22 +205,10 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {/* Add a Channel from Categories (PRD M-3) */}
           <div
-            style={{
-              background: 'var(--panel)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 20,
-            }}
+            className="glass-card"
           >
             <div
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-secondary)',
-                marginBottom: 12,
-              }}
+              className="section-label" style={{ marginBottom: 12 }}
             >
               Add a Channel
             </div>
@@ -268,9 +227,7 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
                   <button
                     key={cat.id}
                     onClick={() => onAddCategory(cat)}
-                    className="btn-pill"
-                    style={{ fontSize: 13 }}
-                  >
+                    className="chip-add">
                     <Plus size={14} />
                     <span>{cat.name}</span>
                   </button>
@@ -281,22 +238,10 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
 
           {/* Add Your Own (PRD M-4) */}
           <div
-            style={{
-              background: 'var(--panel)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 20,
-            }}
+            className="glass-card"
           >
             <div
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-secondary)',
-                marginBottom: 6,
-              }}
+              className="section-label" style={{ marginBottom: 6 }}
             >
               Add Your Own
             </div>
@@ -314,15 +259,7 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
                 }}
                 disabled={!canAdd || isResolving}
                 placeholder="youtube.com/@yourchannel"
-                style={{
-                  flex: 1,
-                  height: 44,
-                  borderRadius: 'var(--radius-pill)',
-                  border: '1px solid var(--border)',
-                  background: 'var(--subtle-bg)',
-                  padding: '0 16px',
-                  fontSize: 14,
-                }}
+                className="input-pill"
               />
               <button
                 type="submit"
@@ -353,22 +290,10 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
 
           {/* Demo tools (PRD M-6 / Demo) */}
           <div
-            style={{
-              background: 'var(--panel)',
-              border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 20,
-            }}
+            className="glass-card"
           >
             <div
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-secondary)',
-                marginBottom: 10,
-              }}
+              className="section-label" style={{ marginBottom: 10 }}
             >
               Demo Tools
             </div>
