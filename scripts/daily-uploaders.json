@@ -1,0 +1,77 @@
+[
+  {
+    "cat": "tech",
+    "id": "UC-6OW5aJYBFM33zXQlBKPNA",
+    "name": "Engadget"
+  },
+  {
+    "cat": "tech",
+    "id": "UCOmcA3f_RrH6b9NmcNa4tdg",
+    "name": "CNET"
+  },
+  {
+    "cat": "tech",
+    "id": "UCgyqtNWZmIxTx3b6OxTSALw",
+    "name": "Android Authority"
+  },
+  {
+    "cat": "tech",
+    "id": "UC8jkbVLPvztz8TuE98OYo8Q",
+    "name": "Front Page Tech"
+  },
+  {
+    "cat": "tech",
+    "id": "UCdBK94H6oZT2Q7l0-b0xmMg",
+    "name": "ShortCircuit"
+  },
+  {
+    "cat": "tech",
+    "id": "UCUUNkL6Wke6i0P6funa7wdQ",
+    "name": "AppleInsider"
+  },
+  {
+    "cat": "games",
+    "id": "UCT6QFE3peNry9PdO5uGj96g",
+    "name": "Kinda Funny Games"
+  },
+  {
+    "cat": "games",
+    "id": "UCeHXmuEx_a2N1vuQqSAnTyQ",
+    "name": "TripleJump"
+  },
+  {
+    "cat": "games",
+    "id": "UC4w_tMnHl6sw5VD93tVymGw",
+    "name": "Inside Gaming"
+  },
+  {
+    "cat": "food",
+    "id": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
+    "name": "Tasty"
+  },
+  {
+    "cat": "food",
+    "id": "UCfFI8jIjvIApUACJ3qjax2w",
+    "name": "Food52"
+  },
+  {
+    "cat": "science",
+    "id": "UCrMePiHCWG4Vwqv3t7W9EFg",
+    "name": "SciShow Space"
+  },
+  {
+    "cat": "science",
+    "id": "UCeiYXex_fwgYDonaTcSIk6w",
+    "name": "MinuteEarth"
+  },
+  {
+    "cat": "learning",
+    "id": "UCLXo7UDZvByw2ixzpQCufnA",
+    "name": "Vox"
+  },
+  {
+    "cat": "learning",
+    "id": "UCUdettijNYvLAm4AixZv4RA",
+    "name": "SciShow Psych"
+  }
+]

@@ -163,6 +163,24 @@ export async function resolveHandleToChannelId(handle: string): Promise<string |
     return null;
   }
 }
+
+// Higher-level resolver for custom channel input
+export async function resolveYouTubeChannel(
+  query: string
+): Promise<{ channelId: string; title: string } | { error: string }> {
+  const clean = query.trim();
+  if (!clean) return { error: 'Please enter a channel link or @handle.' };
+
+  const handle = clean.replace(/^.*youtube\\.com\\/@?/, '').replace(/^@/, '');
+  const channelId = await resolveHandleToChannelId(handle);
+  if (!channelId) {
+    return { error: 'Could not find a YouTube channel matching that input.' };
+  }
+  return {
+    channelId,
+    title: handle,
+  };
+}
 `;
 
 fs.writeFileSync('lib/youtube.ts', fileContent);

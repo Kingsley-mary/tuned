@@ -80,8 +80,40 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "tech",
     "categoryName": "Tech",
     "hue": 355,
-    "builtAt": 1794334888300,
+    "builtAt": 1794336509233,
     "videos": [
+      {
+        "youtubeVideoId": "3t0dUbh14Lc",
+        "title": "iPhone 18 Pro After 1 Month — Why I Keep Coming Back",
+        "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
+        "sourceChannelTitle": "AppleInsider",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3t0dUbh14Lc/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "mGvHmBs8OfA",
+        "title": "iPhone Duo Livestream: How Many Folds Can Apple’s Phone Take? Day 12",
+        "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
+        "sourceChannelTitle": "CNET",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mGvHmBs8OfA/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "v1zMt0-aJKw",
+        "title": "Track ANYTHING with the Google Pixel Tag! 💼 #google #googlepixel #tracker",
+        "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
+        "sourceChannelTitle": "Android Authority",
+        "thumbnailUrl": "https://i.ytimg.com/vi/v1zMt0-aJKw/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "rbWqk3x8lGI",
+        "title": "How do Starlink speeds compare to 5G?",
+        "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
+        "sourceChannelTitle": "Engadget",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rbWqk3x8lGI/hqdefault.jpg",
+        "durationSec": 600
+      },
       {
         "youtubeVideoId": "_x58r9TBois",
         "title": "Meta VR Glasses: What Vision Pro 2 COULD Have Been!",
@@ -168,6 +200,38 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UC9fSZHEh6XsRpX-xJc6lT3A",
         "sourceChannelTitle": "UrAvgConsumer",
         "thumbnailUrl": "https://i.ytimg.com/vi/kNY9zrl5DYY/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "TFG4sL_yEOU",
+        "title": "Apple just released iOS 27.2.1! Here’s what’s new and why you should update! ￼",
+        "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
+        "sourceChannelTitle": "AppleInsider",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TFG4sL_yEOU/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "KGobpJdH9IQ",
+        "title": "Fold-A-Phone Week 3, Stream Day 12: iPhone Duo made it to 385K folds!",
+        "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
+        "sourceChannelTitle": "CNET",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KGobpJdH9IQ/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "GCUHLVD9uZo",
+        "title": "This Phone Proves Samsung and Google Need Help",
+        "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
+        "sourceChannelTitle": "Android Authority",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GCUHLVD9uZo/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "Zx3Cw5tFLO0",
+        "title": "Do you want a Ring Drone Cam to fly around in your house?",
+        "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
+        "sourceChannelTitle": "Engadget",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zx3Cw5tFLO0/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -259,6 +323,38 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
+        "youtubeVideoId": "qor9EDdmNa0",
+        "title": "Apple's incredible Q3, iOS 27.3 features, & more iPhone Duo on the AppleInsider Podcast",
+        "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
+        "sourceChannelTitle": "AppleInsider",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qor9EDdmNa0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "PMqGhyLERCc",
+        "title": "Amazon Ring Wants to Put a Drone in Your Home For Security...Again",
+        "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
+        "sourceChannelTitle": "CNET",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PMqGhyLERCc/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "UmbqCS8VdxE",
+        "title": "Stay connected no matter what! #garmin #wildernesssurvival #emergencysurvival",
+        "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
+        "sourceChannelTitle": "Android Authority",
+        "thumbnailUrl": "https://i.ytimg.com/vi/UmbqCS8VdxE/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "xkUiXkGsnPI",
+        "title": "Why You Should Never Point A Laser Pointer At A Security Camera",
+        "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
+        "sourceChannelTitle": "Engadget",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xkUiXkGsnPI/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
         "youtubeVideoId": "2reQut8WNGc",
         "title": "Macbook PROLED XDR Impressions: They Said They Wouldn't!",
         "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
@@ -347,139 +443,43 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
+        "youtubeVideoId": "SEeWJMxPIBk",
+        "title": "OhSnap vs. Low-Pro PopSocket — The Ultimate iPhone Comparison!",
+        "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
+        "sourceChannelTitle": "AppleInsider",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SEeWJMxPIBk/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "AdvbtL7I-N0",
+        "title": "M6 MacBook Pro vs MacBook Pro PROLED",
+        "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
+        "sourceChannelTitle": "CNET",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AdvbtL7I-N0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "Ig497BH7d0E",
+        "title": "Tested in the Wild: Best Survival Tech!",
+        "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
+        "sourceChannelTitle": "Android Authority",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ig497BH7d0E/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "5LUiY0obYOs",
+        "title": "Confessing our tech sins: \"I use the same password everywhere\"",
+        "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
+        "sourceChannelTitle": "Engadget",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5LUiY0obYOs/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
         "youtubeVideoId": "ai1gIWacf0I",
         "title": "This can SEE Sound!",
         "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
         "sourceChannelTitle": "Marques Brownlee",
         "thumbnailUrl": "https://i.ytimg.com/vi/ai1gIWacf0I/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "8IHhvkaVqVE",
-        "title": "Does Deno 2 really uncomplicate JavaScript?",
-        "sourceChannelId": "UC2Xd-TjJByJyK2w1zNwY0zQ",
-        "sourceChannelTitle": "Beyond Fireship",
-        "thumbnailUrl": "https://i.ytimg.com/vi/8IHhvkaVqVE/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "k2ruCf_z75I",
-        "title": "The worst week in cybersecurity history... so far",
-        "sourceChannelId": "UCsBjURrPoezykLs9EqgamOA",
-        "sourceChannelTitle": "Fireship",
-        "thumbnailUrl": "https://i.ytimg.com/vi/k2ruCf_z75I/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "KZR6XdQ0xk8",
-        "title": "Copy/Paste in Real Life -  Creality Sermoon P1",
-        "sourceChannelId": "UCdBK94H6oZT2Q7l0-b0xmMg",
-        "sourceChannelTitle": "ShortCircuit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/KZR6XdQ0xk8/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "Q5HihA3g0uU",
-        "title": "Is a 5.3 inch display enough for a phone? #Vergecast",
-        "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
-        "sourceChannelTitle": "The Verge",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Q5HihA3g0uU/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "i3ZlSlnGWng",
-        "title": "6 ways iPhone Duo beats Samsung",
-        "sourceChannelId": "UCMiJRAwDNSNzuYeN2uWa0pA",
-        "sourceChannelTitle": "Mrwhosetheboss",
-        "thumbnailUrl": "https://i.ytimg.com/vi/i3ZlSlnGWng/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "5O-vCJW1b8g",
-        "title": "Trump Phone Durability Test - Its worse than we thought...",
-        "sourceChannelId": "UCWFKCr40YwOZQx8FHU_ZqqQ",
-        "sourceChannelTitle": "JerryRigEverything",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5O-vCJW1b8g/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "jUj_wMtm8w0",
-        "title": "Whoops, we got forgot about this",
-        "sourceChannelId": "UC1IQIspOkCeV3WnYm32SBFQ",
-        "sourceChannelTitle": "This Is",
-        "thumbnailUrl": "https://i.ytimg.com/vi/jUj_wMtm8w0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "Q7MpFTrT9Gk",
-        "title": "Weird Tech We WOULD Try",
-        "sourceChannelId": "UCG7J20LhUeLl6y_Emi7OJrA",
-        "sourceChannelTitle": "The Studio",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Q7MpFTrT9Gk/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "sEW_R9sbnNM",
-        "title": "Apple Loses Ground...",
-        "sourceChannelId": "UCXv-co3EYHF7aOH4A93qAHQ",
-        "sourceChannelTitle": "Lew Later",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sEW_R9sbnNM/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "rSMgft_byEA",
-        "title": "iPhone Duo: My Favorite Accessories So Far!",
-        "sourceChannelId": "UC9fSZHEh6XsRpX-xJc6lT3A",
-        "sourceChannelTitle": "UrAvgConsumer",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rSMgft_byEA/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "_4ELeWAgMwo",
-        "title": "ASMR iPhone Duo Unboxing",
-        "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
-        "sourceChannelTitle": "Marques Brownlee",
-        "thumbnailUrl": "https://i.ytimg.com/vi/_4ELeWAgMwo/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "7WFXl4-aCxs",
-        "title": "Build better payment forms using new “embedded” Stripe Checkout",
-        "sourceChannelId": "UC2Xd-TjJByJyK2w1zNwY0zQ",
-        "sourceChannelTitle": "Beyond Fireship",
-        "thumbnailUrl": "https://i.ytimg.com/vi/7WFXl4-aCxs/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "nEaJMdM1djM",
-        "title": "Did the AI bubble just pop?",
-        "sourceChannelId": "UCsBjURrPoezykLs9EqgamOA",
-        "sourceChannelTitle": "Fireship",
-        "thumbnailUrl": "https://i.ytimg.com/vi/nEaJMdM1djM/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "ewwShy3UFWo",
-        "title": "LMG Staff React to iPhone Duo",
-        "sourceChannelId": "UCdBK94H6oZT2Q7l0-b0xmMg",
-        "sourceChannelTitle": "ShortCircuit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ewwShy3UFWo/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "afoJu8f9GMA",
-        "title": "Torrenters are building epic media collections | The Vergecast",
-        "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
-        "sourceChannelTitle": "The Verge",
-        "thumbnailUrl": "https://i.ytimg.com/vi/afoJu8f9GMA/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "Xrxy_W78SKk",
-        "title": "iPhone Duo is Messier Than You Think",
-        "sourceChannelId": "UCMiJRAwDNSNzuYeN2uWa0pA",
-        "sourceChannelTitle": "Mrwhosetheboss",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Xrxy_W78SKk/hqdefault.jpg",
         "durationSec": 600
       }
     ]
@@ -488,7 +488,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "games",
     "categoryName": "Games",
     "hue": 268,
-    "builtAt": 1794334889319,
+    "builtAt": 1794336510091,
     "videos": [
       {
         "youtubeVideoId": "8LMau1qXPYE",
@@ -896,7 +896,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "music",
     "categoryName": "Music",
     "hue": 205,
-    "builtAt": 1794334889559,
+    "builtAt": 1794336510365,
     "videos": [
       {
         "youtubeVideoId": "LtUDeizHqKk",
@@ -1003,11 +1003,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "D7l-2yGnrEc",
-        "title": "Thaiboy Digital's Perfect 10",
+        "youtubeVideoId": "7RxfMBv1_6I",
+        "title": "RealYungPhil Q&A At Pitchfork Music Festival London",
         "sourceChannelId": "UC7kI8WjpCfFoMSNDuRh_4lA",
         "sourceChannelTitle": "Pitchfork",
-        "thumbnailUrl": "https://i.ytimg.com/vi/D7l-2yGnrEc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7RxfMBv1_6I/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1115,11 +1115,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "WIHGdXVji7w",
-        "title": "Backstage at Carnegie Hall with Worldpeace DMT",
+        "youtubeVideoId": "D7l-2yGnrEc",
+        "title": "Thaiboy Digital's Perfect 10",
         "sourceChannelId": "UC7kI8WjpCfFoMSNDuRh_4lA",
         "sourceChannelTitle": "Pitchfork",
-        "thumbnailUrl": "https://i.ytimg.com/vi/WIHGdXVji7w/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/D7l-2yGnrEc/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1227,11 +1227,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "D6rlsp7mCxU",
-        "title": "Shygirl on collaborating with SOPHIE, Arca, Tinashe, and more",
+        "youtubeVideoId": "WIHGdXVji7w",
+        "title": "Backstage at Carnegie Hall with Worldpeace DMT",
         "sourceChannelId": "UC7kI8WjpCfFoMSNDuRh_4lA",
         "sourceChannelTitle": "Pitchfork",
-        "thumbnailUrl": "https://i.ytimg.com/vi/D6rlsp7mCxU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WIHGdXVji7w/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1304,8 +1304,24 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "food",
     "categoryName": "Food",
     "hue": 22,
-    "builtAt": 1794334890150,
+    "builtAt": 1794336510867,
     "videos": [
+      {
+        "youtubeVideoId": "psQGER4zxVs",
+        "title": "These Fudgy Chocolate-Walnut Cookies Have No Flour or Butter",
+        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
+        "sourceChannelTitle": "Food52",
+        "thumbnailUrl": "https://i.ytimg.com/vi/psQGER4zxVs/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "r4PF02OO60k",
+        "title": "Leftover Shredded Beef Meatballs",
+        "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
+        "sourceChannelTitle": "Tasty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/r4PF02OO60k/hqdefault.jpg",
+        "durationSec": 600
+      },
       {
         "youtubeVideoId": "dUtnimSrLSQ",
         "title": "10 Levels of Potatoes (ft @FallowChefs) | With Babish",
@@ -1400,6 +1416,22 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
         "sourceChannelTitle": "Mythical Kitchen",
         "thumbnailUrl": "https://i.ytimg.com/vi/jlyuqWBo_W0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "IV68RBWL-6E",
+        "title": "30-Clove Garlic & Roasted Tomato Dip | The Perfect Holiday Appetizer",
+        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
+        "sourceChannelTitle": "Food52",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IV68RBWL-6E/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "rEX0r5Ou7VE",
+        "title": "Cheesecloth Juicy Turkey Hack",
+        "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
+        "sourceChannelTitle": "Tasty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rEX0r5Ou7VE/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1499,6 +1531,22 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
+        "youtubeVideoId": "cTm1v7U9-kA",
+        "title": "Recreating a 1935 Union Pacific Train Menu",
+        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
+        "sourceChannelTitle": "Food52",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cTm1v7U9-kA/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "Q0EHmhHgKq8",
+        "title": "Zelda-Inspired Blue Potion Smoothie",
+        "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
+        "sourceChannelTitle": "Tasty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Q0EHmhHgKq8/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
         "youtubeVideoId": "HGWICoR6n2s",
         "title": "I Tried the Best (and WORST) Instant Pot Recipes",
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
@@ -1595,6 +1643,22 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
+        "youtubeVideoId": "6e-IrO6_b6U",
+        "title": "Taiwanese Sticky Rice Stuffing",
+        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
+        "sourceChannelTitle": "Food52",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6e-IrO6_b6U/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "_EbSeO--EpI",
+        "title": "Creamy Shrimp Udon",
+        "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
+        "sourceChannelTitle": "Tasty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_EbSeO--EpI/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
         "youtubeVideoId": "oWhnytD3QoA",
         "title": "10 Levels of Nachos | With Babish",
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
@@ -1641,70 +1705,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Sorted Food",
         "thumbnailUrl": "https://i.ytimg.com/vi/hN_jM5_eooc/hqdefault.jpg",
         "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "IarUQl3EOdA",
-        "title": "The Lemon Party                   #lemons #party #nature",
-        "sourceChannelId": "UCekQr9znsk2vWxBo3YiLq2w",
-        "sourceChannelTitle": "You Suck At Cooking",
-        "thumbnailUrl": "https://i.ytimg.com/vi/IarUQl3EOdA/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "RE-eipdL68k",
-        "title": "Trust Me on This…",
-        "sourceChannelId": "UCbRj3Tcy1Zoz3rcf83nW5kw",
-        "sourceChannelTitle": "SAM THE COOKING GUY",
-        "thumbnailUrl": "https://i.ytimg.com/vi/RE-eipdL68k/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "BrLTf27eUL0",
-        "title": "Butcher Explains Which Steak to Buy | Ultimate Buying Guide | Epicurious",
-        "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
-        "sourceChannelTitle": "Epicurious",
-        "thumbnailUrl": "https://i.ytimg.com/vi/BrLTf27eUL0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "fQdHTDKlWM0",
-        "title": "7 Sunday Dinner Ideas To Cook This Weekend",
-        "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
-        "sourceChannelTitle": "Jamie Oliver",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fQdHTDKlWM0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "3EeQR3D5Ks0",
-        "title": "Easy spicy tuna stew with canned tuna (Chamchi-jjigae: 참치찌개)",
-        "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
-        "sourceChannelTitle": "Maangchi",
-        "thumbnailUrl": "https://i.ytimg.com/vi/3EeQR3D5Ks0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "HCm32djYLkg",
-        "title": "Dan & Phil Don't Say \"I Love You\"",
-        "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
-        "sourceChannelTitle": "Mythical Kitchen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/HCm32djYLkg/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "iZi0yEY60zE",
-        "title": "I Tried Celebrities' Favorite Pastas | With Babish",
-        "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
-        "sourceChannelTitle": "Binging with Babish",
-        "thumbnailUrl": "https://i.ytimg.com/vi/iZi0yEY60zE/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "ILArlisjE3k",
-        "title": "The McDonald's Egg McMuffin But Better",
-        "sourceChannelId": "UCUAg71CJEvFdOnujmep1Svw",
-        "sourceChannelTitle": "Joshua Weissman Recipes",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ILArlisjE3k/hqdefault.jpg",
-        "durationSec": 600
       }
     ]
   },
@@ -1712,7 +1712,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "science",
     "categoryName": "Science",
     "hue": 170,
-    "builtAt": 1794334890440,
+    "builtAt": 1794336511208,
     "videos": [
       {
         "youtubeVideoId": "rL0qEmTRI-I",
@@ -2120,7 +2120,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "sports",
     "categoryName": "Sports",
     "hue": 140,
-    "builtAt": 1794334890867,
+    "builtAt": 1794336511612,
     "videos": [
       {
         "youtubeVideoId": "URBkhN6-Pkc",
@@ -2147,11 +2147,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "jRnRoHv23KU",
-        "title": "‘Blowing Me Away’ 👀 Daniel Jeremiah reacts to Arvell Reese’s recent stretch | Move the Sticks",
+        "youtubeVideoId": "f1wMc-TTyks",
+        "title": "🚨 The Vikings have identified QB Kirk Cousins as a prime trade candidate - Schefty",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/jRnRoHv23KU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/f1wMc-TTyks/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2179,11 +2179,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Vofo3L74RpY",
-        "title": "기술로 압도하겠다는 호킷 #UFC334",
+        "youtubeVideoId": "6L2H9pVPZcg",
+        "title": "Josh Hokit has bars son! #ufc334",
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Vofo3L74RpY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6L2H9pVPZcg/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2203,11 +2203,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ZRJm2ZOB7Lo",
-        "title": "Dog got his own racetrack😭🔥",
+        "youtubeVideoId": "k6cbQoR1jnM",
+        "title": "POV: Bron falls on you mid game😅",
         "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
         "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZRJm2ZOB7Lo/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/k6cbQoR1jnM/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2243,11 +2243,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Fiz7podqPUA",
-        "title": "Do the Bills need to MAKE A TRADE?! 👀 Stephen A. weighs in | First Take",
+        "youtubeVideoId": "jRnRoHv23KU",
+        "title": "‘Blowing Me Away’ 👀 Daniel Jeremiah reacts to Arvell Reese’s recent stretch | Move the Sticks",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Fiz7podqPUA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jRnRoHv23KU/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2275,11 +2275,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "I7K8HTklrG4",
-        "title": "Josh Hokit reacting to Ciryl Gane's KO over Alex Pereira #ufc334",
+        "youtubeVideoId": "4rpblH3dEio",
+        "title": "JOE ROGAN WAS GOING CRAZY #ufc334",
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/I7K8HTklrG4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4rpblH3dEio/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2299,11 +2299,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "49ZUQsKGV64",
-        "title": "Bro was just AURA farming😭🔥",
+        "youtubeVideoId": "ZRJm2ZOB7Lo",
+        "title": "Dog got his own racetrack😭🔥",
         "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
         "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/49ZUQsKGV64/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZRJm2ZOB7Lo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2339,11 +2339,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "yJ-kgIKZNm4",
-        "title": "Is the 2027 NFL Draft class looking like a DISAPPOINTMENT? 🤔",
+        "youtubeVideoId": "Fiz7podqPUA",
+        "title": "Do the Bills need to MAKE A TRADE?! 👀 Stephen A. weighs in | First Take",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/yJ-kgIKZNm4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Fiz7podqPUA/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2371,11 +2371,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "7EyJnj-rpcQ",
-        "title": "UFC 334 Embedded: Vlog Series - Episode 2",
+        "youtubeVideoId": "Vofo3L74RpY",
+        "title": "기술로 압도하겠다는 호킷 #UFC334",
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/7EyJnj-rpcQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Vofo3L74RpY/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2395,11 +2395,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "MojzyGnga5o",
-        "title": "Mom just happy to be there🔥😅",
+        "youtubeVideoId": "49ZUQsKGV64",
+        "title": "Bro was just AURA farming😭🔥",
         "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
         "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/MojzyGnga5o/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/49ZUQsKGV64/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2435,11 +2435,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "yS_b9ngAq4E",
-        "title": "BOLD Prediction For Arvell Reese",
+        "youtubeVideoId": "yJ-kgIKZNm4",
+        "title": "Is the 2027 NFL Draft class looking like a DISAPPOINTMENT? 🤔",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/yS_b9ngAq4E/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yJ-kgIKZNm4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2467,11 +2467,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "duQzkyrxmgs",
-        "title": "GREATEST FIGHTS FROM UFC 334 Fighters 🚨",
+        "youtubeVideoId": "I7K8HTklrG4",
+        "title": "Josh Hokit reacting to Ciryl Gane's KO over Alex Pereira #ufc334",
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/duQzkyrxmgs/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/I7K8HTklrG4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2491,11 +2491,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "omu_DluQhsg",
-        "title": "WARRIORS ARE RED HOT😤🔥",
+        "youtubeVideoId": "MojzyGnga5o",
+        "title": "Mom just happy to be there🔥😅",
         "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
         "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/omu_DluQhsg/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MojzyGnga5o/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2528,7 +2528,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "travel",
     "categoryName": "Travel",
     "hue": 190,
-    "builtAt": 1794334891152,
+    "builtAt": 1794336511941,
     "videos": [
       {
         "youtubeVideoId": "42M_CnizJxc",
@@ -2563,11 +2563,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "sWBMwr3y9c4",
-        "title": "Montenegro Food: What to Eat & Drink When You Visit",
+        "youtubeVideoId": "iK5oNZtdXxQ",
+        "title": "What to Eat in Liverpool The Ultimate Food Guide!",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sWBMwr3y9c4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iK5oNZtdXxQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2667,11 +2667,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "pG4ru332TYc",
-        "title": "What to Eat in Florence, Italy - Traditional Florentine Food You MUST Try",
+        "youtubeVideoId": "sWBMwr3y9c4",
+        "title": "Montenegro Food: What to Eat & Drink When You Visit",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/pG4ru332TYc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sWBMwr3y9c4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2771,11 +2771,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "bjnLknm-lns",
-        "title": "Eat Seasonal When you Travel Europe for the best Treats!",
+        "youtubeVideoId": "pG4ru332TYc",
+        "title": "What to Eat in Florence, Italy - Traditional Florentine Food You MUST Try",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bjnLknm-lns/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/pG4ru332TYc/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2875,11 +2875,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "7XxKCSS_iZ4",
-        "title": "The Best Food in Turin, Italy - What to Eat in Torino",
+        "youtubeVideoId": "bjnLknm-lns",
+        "title": "Eat Seasonal When you Travel Europe for the best Treats!",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/7XxKCSS_iZ4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bjnLknm-lns/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2936,7 +2936,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "film",
     "categoryName": "Film",
     "hue": 300,
-    "builtAt": 1794334891651,
+    "builtAt": 1794336512345,
     "videos": [
       {
         "youtubeVideoId": "ZzaAa6yDvVk",
@@ -2955,11 +2955,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "5REIludod7c",
-        "title": "Holiday Gift Guide: Best Accessories!",
+        "youtubeVideoId": "W-ssgONXWX8",
+        "title": "This mouse makes a great gift for a PC gamer. Sponsored Ad by @BestBuy",
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5REIludod7c/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/W-ssgONXWX8/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3067,11 +3067,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "g1Jbb45TDrk",
-        "title": "Which Darunia had the better Lost Woods dance in Ocarina of Time? #zelda #ocarinaoftime #og #ign",
+        "youtubeVideoId": "5REIludod7c",
+        "title": "Holiday Gift Guide: Best Accessories!",
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/g1Jbb45TDrk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5REIludod7c/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3179,11 +3179,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "zjIXBESV0ew",
-        "title": "Marvel Rivals - Official Nightcrawler Character Reveal Trailer",
+        "youtubeVideoId": "g1Jbb45TDrk",
+        "title": "Which Darunia had the better Lost Woods dance in Ocarina of Time? #zelda #ocarinaoftime #og #ign",
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zjIXBESV0ew/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/g1Jbb45TDrk/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3291,11 +3291,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "PbvwXckJKrw",
-        "title": "Minerva Rising - Official Launch Trailer",
+        "youtubeVideoId": "zjIXBESV0ew",
+        "title": "Marvel Rivals - Official Nightcrawler Character Reveal Trailer",
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/PbvwXckJKrw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zjIXBESV0ew/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3344,7 +3344,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "fitness",
     "categoryName": "Fitness",
     "hue": 100,
-    "builtAt": 1794334891888,
+    "builtAt": 1794336512843,
     "videos": [
       {
         "youtubeVideoId": "xVuvVmZdIpQ",
@@ -3752,7 +3752,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "art",
     "categoryName": "Art",
     "hue": 330,
-    "builtAt": 1794334892502,
+    "builtAt": 1794336513239,
     "videos": [
       {
         "youtubeVideoId": "qLzw6r2ORk0",
@@ -4160,7 +4160,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "design",
     "categoryName": "Design",
     "hue": 45,
-    "builtAt": 1794334892907,
+    "builtAt": 1794336513921,
     "videos": [
       {
         "youtubeVideoId": "vQ_40b0Un-I",
@@ -4568,8 +4568,16 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "learning",
     "categoryName": "Learning",
     "hue": 235,
-    "builtAt": 1794334893343,
+    "builtAt": 1794336514214,
     "videos": [
+      {
+        "youtubeVideoId": "l7-eiKWhRHo",
+        "title": "Why your cold emails aren't paying off | Best of Luck",
+        "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
+        "sourceChannelTitle": "Vox",
+        "thumbnailUrl": "https://i.ytimg.com/vi/l7-eiKWhRHo/hqdefault.jpg",
+        "durationSec": 600
+      },
       {
         "youtubeVideoId": "nBVuemyrMgE",
         "title": "When did humans start using salt? - Carolyn Beans",
@@ -4672,6 +4680,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCNIuvl7V8zACPpTmmNIqP2A",
         "sourceChannelTitle": "OverSimplified",
         "thumbnailUrl": "https://i.ytimg.com/vi/1BVJzaXv3rk/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "3DD2mW7uU_I",
+        "title": "If you live long enough, you may become a time traveler",
+        "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
+        "sourceChannelTitle": "Vox",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3DD2mW7uU_I/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4779,6 +4795,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
+        "youtubeVideoId": "EOy0rXDRqPM",
+        "title": "Animals shouldn't have to prove they deserve our care and compassion",
+        "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
+        "sourceChannelTitle": "Vox",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EOy0rXDRqPM/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
         "youtubeVideoId": "8EtdC9Bjubk",
         "title": "Can you solve the Billy Bonka riddle? - Edwin F. Meyer",
         "sourceChannelId": "UCsooa4yRKGN_zEE8iknghZA",
@@ -4883,6 +4907,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
+        "youtubeVideoId": "ENR-RY0wa2A",
+        "title": "Is Pete Hegseth headed for impeachment?",
+        "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
+        "sourceChannelTitle": "Vox",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ENR-RY0wa2A/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
         "youtubeVideoId": "8RPK5KwYhgA",
         "title": "What if you didn’t brush your teeth for a year? - Justin Merritt",
         "sourceChannelId": "UCsooa4yRKGN_zEE8iknghZA",
@@ -4936,38 +4968,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UCMOqf8ab-42UUQIdVoKwjlQ",
         "sourceChannelTitle": "Practical Engineering",
         "thumbnailUrl": "https://i.ytimg.com/vi/5_B1Mq02wcI/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "HjeesNAbWqM",
-        "title": "The Logistics of NYC Waste Management",
-        "sourceChannelId": "UCuCkxoKLYO_EQ2GeFtbM_bw",
-        "sourceChannelTitle": "Half as Interesting",
-        "thumbnailUrl": "https://i.ytimg.com/vi/HjeesNAbWqM/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "iJU6csQs_no",
-        "title": "Blind Ranking Numbers (Daniel Litt)",
-        "sourceChannelId": "UCoxcjq-8xIDTYp3uz647V5A",
-        "sourceChannelTitle": "Numberphile",
-        "thumbnailUrl": "https://i.ytimg.com/vi/iJU6csQs_no/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "h6j_ixGnpiY",
-        "title": "How Image Watermarking Works - Computerphile",
-        "sourceChannelId": "UC9-y-6csu5WGm29I7JiwpnA",
-        "sourceChannelTitle": "Computerphile",
-        "thumbnailUrl": "https://i.ytimg.com/vi/h6j_ixGnpiY/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "BxXfeotgVVA",
-        "title": "Clocks are so much more interesting than I thought.",
-        "sourceChannelId": "UCBa659QWEk1AI4Tg--mrJ2A",
-        "sourceChannelTitle": "Tom Scott",
-        "thumbnailUrl": "https://i.ytimg.com/vi/BxXfeotgVVA/hqdefault.jpg",
         "durationSec": 600
       }
     ]

@@ -5,6 +5,22 @@ import { CATEGORIES } from './seed-catalog';
 export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }[]> = {
   "tech": [
     {
+      "id": "UCUUNkL6Wke6i0P6funa7wdQ",
+      "name": "AppleInsider"
+    },
+    {
+      "id": "UCOmcA3f_RrH6b9NmcNa4tdg",
+      "name": "CNET"
+    },
+    {
+      "id": "UCgyqtNWZmIxTx3b6OxTSALw",
+      "name": "Android Authority"
+    },
+    {
+      "id": "UC-6OW5aJYBFM33zXQlBKPNA",
+      "name": "Engadget"
+    },
+    {
       "id": "UCBJycsmduvYEL83R_U4JriQ",
       "name": "Marques Brownlee"
     },
@@ -166,6 +182,14 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     }
   ],
   "food": [
+    {
+      "id": "UCfFI8jIjvIApUACJ3qjax2w",
+      "name": "Food52"
+    },
+    {
+      "id": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
+      "name": "Tasty"
+    },
     {
       "id": "UCJHA_jMfCvEnv-3kRjTCQXw",
       "name": "Binging with Babish"
@@ -590,6 +614,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     }
   ],
   "learning": [
+    {
+      "id": "UCLXo7UDZvByw2ixzpQCufnA",
+      "name": "Vox"
+    },
     {
       "id": "UCsooa4yRKGN_zEE8iknghZA",
       "name": "TED-Ed"
