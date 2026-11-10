@@ -80,7 +80,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "tech",
     "categoryName": "Tech",
     "hue": 355,
-    "builtAt": 1794336509233,
+    "builtAt": 1794338232065,
     "videos": [
       {
         "youtubeVideoId": "3t0dUbh14Lc",
@@ -99,11 +99,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "v1zMt0-aJKw",
-        "title": "Track ANYTHING with the Google Pixel Tag! 💼 #google #googlepixel #tracker",
+        "youtubeVideoId": "GCUHLVD9uZo",
+        "title": "This Phone Proves Samsung and Google Need Help",
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
-        "thumbnailUrl": "https://i.ytimg.com/vi/v1zMt0-aJKw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GCUHLVD9uZo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -147,11 +147,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "zWq76MXOS_g",
-        "title": "Ring's autonomous security robot",
+        "youtubeVideoId": "afoJu8f9GMA",
+        "title": "Torrenters are building epic media collections | The Vergecast",
         "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
         "sourceChannelTitle": "The Verge",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zWq76MXOS_g/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/afoJu8f9GMA/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -179,11 +179,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "v92XR6RwB9Q",
-        "title": "Marques Blind Ranks Halloween Candy",
+        "youtubeVideoId": "7soMd19QQo0",
+        "title": "48 Hours at the Folding iPhone Event with MKBHD",
         "sourceChannelId": "UCG7J20LhUeLl6y_Emi7OJrA",
         "sourceChannelTitle": "The Studio",
-        "thumbnailUrl": "https://i.ytimg.com/vi/v92XR6RwB9Q/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7soMd19QQo0/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -203,35 +203,35 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "TFG4sL_yEOU",
-        "title": "Apple just released iOS 27.2.1! Here’s what’s new and why you should update! ￼",
+        "youtubeVideoId": "qor9EDdmNa0",
+        "title": "Apple's incredible Q3, iOS 27.3 features, & more iPhone Duo on the AppleInsider Podcast",
         "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
         "sourceChannelTitle": "AppleInsider",
-        "thumbnailUrl": "https://i.ytimg.com/vi/TFG4sL_yEOU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qor9EDdmNa0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "KGobpJdH9IQ",
-        "title": "Fold-A-Phone Week 3, Stream Day 12: iPhone Duo made it to 385K folds!",
+        "youtubeVideoId": "RavEFW5vb54",
+        "title": "iPhone Duo Livestream: How Many Folds Can Apple’s Phone Take? Day 11",
         "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
         "sourceChannelTitle": "CNET",
-        "thumbnailUrl": "https://i.ytimg.com/vi/KGobpJdH9IQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RavEFW5vb54/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "GCUHLVD9uZo",
-        "title": "This Phone Proves Samsung and Google Need Help",
+        "youtubeVideoId": "Ig497BH7d0E",
+        "title": "Tested in the Wild: Best Survival Tech!",
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GCUHLVD9uZo/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ig497BH7d0E/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Zx3Cw5tFLO0",
-        "title": "Do you want a Ring Drone Cam to fly around in your house?",
+        "youtubeVideoId": "xkUiXkGsnPI",
+        "title": "Why You Should Never Point A Laser Pointer At A Security Camera",
         "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
         "sourceChannelTitle": "Engadget",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Zx3Cw5tFLO0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xkUiXkGsnPI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -267,11 +267,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "b62BIUCVuRY",
-        "title": "Ring Drone Cam hands-on",
+        "youtubeVideoId": "-U4thshDTL8",
+        "title": "Big Tech lost big in the 2026 election | The Vergecast",
         "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
         "sourceChannelTitle": "The Verge",
-        "thumbnailUrl": "https://i.ytimg.com/vi/b62BIUCVuRY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-U4thshDTL8/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -283,11 +283,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "-Z0hsfUP-I4",
-        "title": "LOOK MOM NO HANDS",
+        "youtubeVideoId": "5O-vCJW1b8g",
+        "title": "Trump Phone Durability Test - Its worse than we thought...",
         "sourceChannelId": "UCWFKCr40YwOZQx8FHU_ZqqQ",
         "sourceChannelTitle": "JerryRigEverything",
-        "thumbnailUrl": "https://i.ytimg.com/vi/-Z0hsfUP-I4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5O-vCJW1b8g/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -299,11 +299,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "0-bQziLITuk",
-        "title": "Do You Know These Foldables?",
+        "youtubeVideoId": "G3z8mL2_oJo",
+        "title": "Is This Movie Tech ACTUALLY Possible?",
         "sourceChannelId": "UCG7J20LhUeLl6y_Emi7OJrA",
         "sourceChannelTitle": "The Studio",
-        "thumbnailUrl": "https://i.ytimg.com/vi/0-bQziLITuk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/G3z8mL2_oJo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -315,43 +315,43 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "1oggyK7dnXY",
-        "title": "A fun day w/ Austin playing Minecraft with the new @XBOX Nano Controller. Like father like son 💪🏾",
+        "youtubeVideoId": "rSMgft_byEA",
+        "title": "iPhone Duo: My Favorite Accessories So Far!",
         "sourceChannelId": "UC9fSZHEh6XsRpX-xJc6lT3A",
         "sourceChannelTitle": "UrAvgConsumer",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1oggyK7dnXY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rSMgft_byEA/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "qor9EDdmNa0",
-        "title": "Apple's incredible Q3, iOS 27.3 features, & more iPhone Duo on the AppleInsider Podcast",
+        "youtubeVideoId": "SEeWJMxPIBk",
+        "title": "OhSnap vs. Low-Pro PopSocket — The Ultimate iPhone Comparison!",
         "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
         "sourceChannelTitle": "AppleInsider",
-        "thumbnailUrl": "https://i.ytimg.com/vi/qor9EDdmNa0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SEeWJMxPIBk/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "PMqGhyLERCc",
-        "title": "Amazon Ring Wants to Put a Drone in Your Home For Security...Again",
+        "youtubeVideoId": "QIxUyt2up7o",
+        "title": "iPhone Camera Night Test: Duo vs. iPhone 18 Pro Max",
         "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
         "sourceChannelTitle": "CNET",
-        "thumbnailUrl": "https://i.ytimg.com/vi/PMqGhyLERCc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QIxUyt2up7o/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "UmbqCS8VdxE",
-        "title": "Stay connected no matter what! #garmin #wildernesssurvival #emergencysurvival",
+        "youtubeVideoId": "34wPouxB9sY",
+        "title": "I Was Wrong About the Galaxy Z Fold 8",
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
-        "thumbnailUrl": "https://i.ytimg.com/vi/UmbqCS8VdxE/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/34wPouxB9sY/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "xkUiXkGsnPI",
-        "title": "Why You Should Never Point A Laser Pointer At A Security Camera",
+        "youtubeVideoId": "5LUiY0obYOs",
+        "title": "Confessing our tech sins: \"I use the same password everywhere\"",
         "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
         "sourceChannelTitle": "Engadget",
-        "thumbnailUrl": "https://i.ytimg.com/vi/xkUiXkGsnPI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5LUiY0obYOs/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -387,43 +387,43 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "F4SWHjK9mcI",
-        "title": "Torrenters vs. J.D. Salinger",
+        "youtubeVideoId": "CAYWoVi0rkw",
+        "title": "BookTok is the antidote to doomscrolling | The Vergecast",
         "sourceChannelId": "UCddiUEpeqJcYeBxX1IVBKvQ",
         "sourceChannelTitle": "The Verge",
-        "thumbnailUrl": "https://i.ytimg.com/vi/F4SWHjK9mcI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CAYWoVi0rkw/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "1yB56IT0kDw",
-        "title": "6 ways Samsung Fold beats iPhone Duo",
+        "youtubeVideoId": "Xrxy_W78SKk",
+        "title": "iPhone Duo is Messier Than You Think",
         "sourceChannelId": "UCMiJRAwDNSNzuYeN2uWa0pA",
         "sourceChannelTitle": "Mrwhosetheboss",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1yB56IT0kDw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Xrxy_W78SKk/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "8xUEEu5vom8",
-        "title": "Hey Look Mom, Ive made it!",
+        "youtubeVideoId": "_Xe2JAoMwIA",
+        "title": "iPhone Duo Teardown – APPLE SHOULD APOLOGIZE",
         "sourceChannelId": "UCWFKCr40YwOZQx8FHU_ZqqQ",
         "sourceChannelTitle": "JerryRigEverything",
-        "thumbnailUrl": "https://i.ytimg.com/vi/8xUEEu5vom8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_Xe2JAoMwIA/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Uqns_bpMUfQ",
-        "title": "This Laptop is NEXT Level #MSI #NVIDIA #RTXSpark #ad",
+        "youtubeVideoId": "jUj_wMtm8w0",
+        "title": "Whoops, we got forgot about this",
         "sourceChannelId": "UC1IQIspOkCeV3WnYm32SBFQ",
         "sourceChannelTitle": "This Is",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Uqns_bpMUfQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jUj_wMtm8w0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "fBdy_ggh8Xc",
-        "title": "Bet you didn't know what we shot the intro on",
+        "youtubeVideoId": "ZrAkCJS9H1s",
+        "title": "We Flew to Spain for the Solar Eclipse",
         "sourceChannelId": "UCG7J20LhUeLl6y_Emi7OJrA",
         "sourceChannelTitle": "The Studio",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fBdy_ggh8Xc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZrAkCJS9H1s/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -435,51 +435,51 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "KjAscT1SfvA",
-        "title": "Unboxing the MacBook Pro with PROLED was LIT! 🔥 what do you guys want to know about this one? 👀",
+        "youtubeVideoId": "XWyAA48n_TU",
+        "title": "Don't Choose the Wrong Gaming Headset for GTA 6.",
         "sourceChannelId": "UC9fSZHEh6XsRpX-xJc6lT3A",
         "sourceChannelTitle": "UrAvgConsumer",
-        "thumbnailUrl": "https://i.ytimg.com/vi/KjAscT1SfvA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/XWyAA48n_TU/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "SEeWJMxPIBk",
-        "title": "OhSnap vs. Low-Pro PopSocket — The Ultimate iPhone Comparison!",
+        "youtubeVideoId": "B84L0wWr93U",
+        "title": "Testing Live Rewind & Siri Recap on Apple Watch -- Useful, Scary, or Both?",
         "sourceChannelId": "UCUUNkL6Wke6i0P6funa7wdQ",
         "sourceChannelTitle": "AppleInsider",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SEeWJMxPIBk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/B84L0wWr93U/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "AdvbtL7I-N0",
-        "title": "M6 MacBook Pro vs MacBook Pro PROLED",
+        "youtubeVideoId": "V5CYMpUAzl0",
+        "title": "iPhone Duo Livestream: How Many Folds Can Apple’s Phone Take? Day 15",
         "sourceChannelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
         "sourceChannelTitle": "CNET",
-        "thumbnailUrl": "https://i.ytimg.com/vi/AdvbtL7I-N0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/V5CYMpUAzl0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Ig497BH7d0E",
-        "title": "Tested in the Wild: Best Survival Tech!",
+        "youtubeVideoId": "WTNFAWm3QWI",
+        "title": "The iPhone Duo has failed",
         "sourceChannelId": "UCgyqtNWZmIxTx3b6OxTSALw",
         "sourceChannelTitle": "Android Authority",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Ig497BH7d0E/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WTNFAWm3QWI/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "5LUiY0obYOs",
-        "title": "Confessing our tech sins: \"I use the same password everywhere\"",
+        "youtubeVideoId": "2rfk0aa60e0",
+        "title": "The worst gadgets I got: A mini disc player and a Sega Saturn",
         "sourceChannelId": "UC-6OW5aJYBFM33zXQlBKPNA",
         "sourceChannelTitle": "Engadget",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5LUiY0obYOs/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2rfk0aa60e0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ai1gIWacf0I",
-        "title": "This can SEE Sound!",
+        "youtubeVideoId": "ESABTN4VtrA",
+        "title": "iPhone Duo Review: First Generation Fun!",
         "sourceChannelId": "UCBJycsmduvYEL83R_U4JriQ",
         "sourceChannelTitle": "Marques Brownlee",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ai1gIWacf0I/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ESABTN4VtrA/hqdefault.jpg",
         "durationSec": 600
       }
     ]
@@ -488,7 +488,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "games",
     "categoryName": "Games",
     "hue": 268,
-    "builtAt": 1794336510091,
+    "builtAt": 1794338232374,
     "videos": [
       {
         "youtubeVideoId": "8LMau1qXPYE",
@@ -531,19 +531,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "8j-ecLCywxU",
-        "title": "Should Developers Target Games For Potato-Level PCs?",
+        "youtubeVideoId": "PkaZzWmQQ3M",
+        "title": "The Legend Of Zelda: Ocarina Of Time - Essential on Switch 2",
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
-        "thumbnailUrl": "https://i.ytimg.com/vi/8j-ecLCywxU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PkaZzWmQQ3M/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "o6BzlI71DSA",
-        "title": "FANATICS FEST ANNOUNCEMENT!!!",
+        "youtubeVideoId": "ECHvbbpEP_M",
+        "title": "Gametime w/Fendler - Winter PGA Custom Courses/Football Yap",
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/o6BzlI71DSA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ECHvbbpEP_M/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -643,19 +643,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "v7j8BvbNpIY",
-        "title": "God of Laufey Delayed By Three Months - And That's A Good Thing",
+        "youtubeVideoId": "8j-ecLCywxU",
+        "title": "Should Developers Target Games For Potato-Level PCs?",
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
-        "thumbnailUrl": "https://i.ytimg.com/vi/v7j8BvbNpIY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8j-ecLCywxU/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ECHvbbpEP_M",
-        "title": "Gametime w/Fendler - Winter PGA Custom Courses/Football Yap",
+        "youtubeVideoId": "mfBeP8318YA",
+        "title": "Gametime w/Fendler - Winter PGA Custom Courses/Football Yap (Portrait)",
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ECHvbbpEP_M/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mfBeP8318YA/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -667,11 +667,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "CFB5WLEMgBM",
-        "title": "What is the Magic of Chris Huelsbeck's Iconic Video Game Music?",
+        "youtubeVideoId": "_g6WN2yR0kg",
+        "title": "Epic Chris Huelsbeck Interview - The Legendary Commodore 64, Amiga, & Video Game Composer",
         "sourceChannelId": "UCYt9E2d_GCrPzquW-5MZwmQ",
         "sourceChannelTitle": "The Guru Meditation",
-        "thumbnailUrl": "https://i.ytimg.com/vi/CFB5WLEMgBM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_g6WN2yR0kg/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -707,11 +707,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Ow_I3R8GfSA",
-        "title": "⭐Wholesome Snack returns on December 5th at 9 am PT / 12 pm ET⭐",
+        "youtubeVideoId": "dFsQxTpsEas",
+        "title": "Milki Delivery Gameplay Trailer",
         "sourceChannelId": "UCKMkV9T20tUOBqwsi5xh7HA",
         "sourceChannelTitle": "Wholesome Games",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Ow_I3R8GfSA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dFsQxTpsEas/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -755,19 +755,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "bLY4y-3J7Dc",
-        "title": "Is Testing Using RTX 5090 Unacceptable At This Point?",
+        "youtubeVideoId": "v7j8BvbNpIY",
+        "title": "God of Laufey Delayed By Three Months - And That's A Good Thing",
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bLY4y-3J7Dc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/v7j8BvbNpIY/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "mfBeP8318YA",
+        "youtubeVideoId": "WXTWK_MuuPo",
         "title": "Gametime w/Fendler - Winter PGA Custom Courses/Football Yap (Portrait)",
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mfBeP8318YA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WXTWK_MuuPo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -779,11 +779,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "vNi24u3hapc",
-        "title": "The Hilarious Story About How The Great Giana Sisters Got Its Title - Chris Huelsbeck",
+        "youtubeVideoId": "MvZRGvouhdQ",
+        "title": "FIRST LOOK: New Wireless Commodore Amiga Tank Mouse",
         "sourceChannelId": "UCYt9E2d_GCrPzquW-5MZwmQ",
         "sourceChannelTitle": "The Guru Meditation",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vNi24u3hapc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MvZRGvouhdQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -819,11 +819,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "bySXbrw029k",
-        "title": "Help Neha find a friend for her pet cow in Milki Delivery, launching November 17th",
+        "youtubeVideoId": "5venGClMwdo",
+        "title": "Loftia Early Access Launch Trailer",
         "sourceChannelId": "UCKMkV9T20tUOBqwsi5xh7HA",
         "sourceChannelTitle": "Wholesome Games",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bySXbrw029k/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5venGClMwdo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -867,19 +867,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "NnqPuwRZAhw",
-        "title": "Claude Blocked From Creating AI Recompilations... But Will It Work?",
+        "youtubeVideoId": "bLY4y-3J7Dc",
+        "title": "Is Testing Using RTX 5090 Unacceptable At This Point?",
         "sourceChannelId": "UCLdBr5f6RcP6l_TAP4GkhDQ",
         "sourceChannelTitle": "DF Clips",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NnqPuwRZAhw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bLY4y-3J7Dc/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "YvoVlEvzLGw",
-        "title": "GOLF IS HARD!! (even virtually).  There's always the next hole...",
+        "youtubeVideoId": "EsuIE09kie4",
+        "title": "Gametime w/Fendler - Winter PGA Custom Courses/Football Yap",
         "sourceChannelId": "UC5CE6nbu1tjSGha-a_cHAFA",
         "sourceChannelTitle": "GameSpot Sports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/YvoVlEvzLGw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EsuIE09kie4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -896,7 +896,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "music",
     "categoryName": "Music",
     "hue": 205,
-    "builtAt": 1794336510365,
+    "builtAt": 1794338232822,
     "videos": [
       {
         "youtubeVideoId": "LtUDeizHqKk",
@@ -907,19 +907,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "QTLM3cu6-Dg",
-        "title": "Jesse Malin shares his memoir with World Cafe",
+        "youtubeVideoId": "fIeVKrWIoSM",
+        "title": "Jesse Malin - \"Almost Grown\" (Live for World Cafe)",
         "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
         "sourceChannelTitle": "World Cafe",
-        "thumbnailUrl": "https://i.ytimg.com/vi/QTLM3cu6-Dg/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fIeVKrWIoSM/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "LCV4BlH1_Is",
-        "title": "Slowwves performs \"Anywhere Else\" & more Live on KEXP at AXEAN Festival",
+        "youtubeVideoId": "qbYI8cixutY",
+        "title": "Slowwves - Full Performance (Live on KEXP)",
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
-        "thumbnailUrl": "https://i.ytimg.com/vi/LCV4BlH1_Is/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qbYI8cixutY/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -931,11 +931,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "t6lYfvGxYpM",
-        "title": "“Back From There”, a soaring and high-energy collaboration by Massane and Teho. Out now.",
+        "youtubeVideoId": "oIgHjxeQn3k",
+        "title": "Massane, Teho - Back From There",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
-        "thumbnailUrl": "https://i.ytimg.com/vi/t6lYfvGxYpM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/oIgHjxeQn3k/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -963,139 +963,27 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "18RaQ6ZkJrc",
-        "title": "Hannah Laing at Boiler Room LA: Teletech",
+        "youtubeVideoId": "z28UbGAPteA",
+        "title": "Vieze Asbak | Boiler Room LA: Teletech",
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
-        "thumbnailUrl": "https://i.ytimg.com/vi/18RaQ6ZkJrc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/z28UbGAPteA/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "El4mqvRWuDY",
-        "title": "@Flyteband describes how they would write a song about success",
+        "youtubeVideoId": "b7jc67izCKU",
+        "title": "Denitia covers Stone Temple Pilots' \"Interstate Love Song.\"",
         "sourceChannelId": "UCRLZb8PpI9N7COmYqHiDH7A",
         "sourceChannelTitle": "Sofar Sounds",
-        "thumbnailUrl": "https://i.ytimg.com/vi/El4mqvRWuDY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/b7jc67izCKU/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "FwD_FIWHVFw",
-        "title": "Amythyst Kiah on Dolly Parton's passing #AmythystKiah",
+        "youtubeVideoId": "h1QTWtUx81w",
+        "title": "Charlie Parr — (what's so funny about) Universal Healthcare? (live in The Current studio)",
         "sourceChannelId": "UCAKcSON6PSG_JkTbXh2WdIg",
         "sourceChannelTitle": "The Current",
-        "thumbnailUrl": "https://i.ytimg.com/vi/FwD_FIWHVFw/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "zPqkBwImvMk",
-        "title": "Katie Pruitt performing “Little Boxes” in our latest Paste Session",
-        "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
-        "sourceChannelTitle": "Paste Magazine",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zPqkBwImvMk/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "mk-UTm2zvNk",
-        "title": "LIVE: Special Guest Robby Hoffman! | Morning Becomes Eclectic",
-        "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
-        "sourceChannelTitle": "KCRW",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mk-UTm2zvNk/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "7RxfMBv1_6I",
-        "title": "RealYungPhil Q&A At Pitchfork Music Festival London",
-        "sourceChannelId": "UC7kI8WjpCfFoMSNDuRh_4lA",
-        "sourceChannelTitle": "Pitchfork",
-        "thumbnailUrl": "https://i.ytimg.com/vi/7RxfMBv1_6I/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "73wCQRQb7v0",
-        "title": "Jungle: Tiny Desk Concert",
-        "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
-        "sourceChannelTitle": "NPR Music",
-        "thumbnailUrl": "https://i.ytimg.com/vi/73wCQRQb7v0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "fIeVKrWIoSM",
-        "title": "Jesse Malin - \"Almost Grown\" (Live for World Cafe)",
-        "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
-        "sourceChannelTitle": "World Cafe",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fIeVKrWIoSM/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "qbYI8cixutY",
-        "title": "Slowwves - Full Performance (Live on KEXP)",
-        "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
-        "sourceChannelTitle": "KEXP",
-        "thumbnailUrl": "https://i.ytimg.com/vi/qbYI8cixutY/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "_sf68tCJtXY",
-        "title": "Sparklmami performs running for Mahogany Sessions",
-        "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
-        "sourceChannelTitle": "Mahogany",
-        "thumbnailUrl": "https://i.ytimg.com/vi/_sf68tCJtXY/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "oIgHjxeQn3k",
-        "title": "Massane, Teho - Back From There",
-        "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
-        "sourceChannelTitle": "Cercle Records",
-        "thumbnailUrl": "https://i.ytimg.com/vi/oIgHjxeQn3k/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "BNiyijgDRp0",
-        "title": "THIS IS NOT A JOKE FACEBOOK EVENT!",
-        "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
-        "sourceChannelTitle": "triple j talks",
-        "thumbnailUrl": "https://i.ytimg.com/vi/BNiyijgDRp0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "19oaAYqgiU0",
-        "title": "Ella Red - Aphrodite | Audiotree Live",
-        "sourceChannelId": "UCWjmAUHmajb1-eo5WKk_22A",
-        "sourceChannelTitle": "Audiotree",
-        "thumbnailUrl": "https://i.ytimg.com/vi/19oaAYqgiU0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "JhHnfevpeDs",
-        "title": "the most British Unpopular Opinion you’ll hear this week 🇬🇧🚗",
-        "sourceChannelId": "UC-FQUIVQ-bZiefzBiQAa8Fw",
-        "sourceChannelTitle": "BBC Radio 1",
-        "thumbnailUrl": "https://i.ytimg.com/vi/JhHnfevpeDs/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "rYyooU5oQGo",
-        "title": "Natte Visstick at Boiler Room LA: Teletech",
-        "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
-        "sourceChannelTitle": "Boiler Room",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rYyooU5oQGo/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "Mt6-b6UayEc",
-        "title": "For @mayadelilahh, she had an actual ‘Have I Made It’ moment.",
-        "sourceChannelId": "UCRLZb8PpI9N7COmYqHiDH7A",
-        "sourceChannelTitle": "Sofar Sounds",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Mt6-b6UayEc/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "ZOGTz79r3w8",
-        "title": "Ryan Bingham on writing the song \"Cocaine Charlie\"",
-        "sourceChannelId": "UCAKcSON6PSG_JkTbXh2WdIg",
-        "sourceChannelTitle": "The Current",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZOGTz79r3w8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/h1QTWtUx81w/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1107,27 +995,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "KZ2OEZArv5g",
-        "title": "Jakob Nowell's (of Sublime) Must-Listen Albums",
+        "youtubeVideoId": "mk-UTm2zvNk",
+        "title": "LIVE: Special Guest Robby Hoffman! | Morning Becomes Eclectic",
         "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
         "sourceChannelTitle": "KCRW",
-        "thumbnailUrl": "https://i.ytimg.com/vi/KZ2OEZArv5g/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mk-UTm2zvNk/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "D7l-2yGnrEc",
-        "title": "Thaiboy Digital's Perfect 10",
-        "sourceChannelId": "UC7kI8WjpCfFoMSNDuRh_4lA",
-        "sourceChannelTitle": "Pitchfork",
-        "thumbnailUrl": "https://i.ytimg.com/vi/D7l-2yGnrEc/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "XoH44mH5laY",
-        "title": "Richard O'Brien's 'The Rocky Horror Show': Tiny Desk Concert",
+        "youtubeVideoId": "73wCQRQb7v0",
+        "title": "Jungle: Tiny Desk Concert",
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XoH44mH5laY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/73wCQRQb7v0/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1147,19 +1027,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "vD5_ys2KurU",
-        "title": "Sparklmami performs quisiera for Mahogany Sessions",
+        "youtubeVideoId": "_sf68tCJtXY",
+        "title": "Sparklmami performs running for Mahogany Sessions",
         "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
         "sourceChannelTitle": "Mahogany",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vD5_ys2KurU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_sf68tCJtXY/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "wdfjTwqvpbM",
-        "title": "“What To Do” an energetic track by Denis Horvat and Lulliby. Out now on all platforms.",
+        "youtubeVideoId": "gwLLvuVitx0",
+        "title": "Denis Horvat, Lulliby - What To Do",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
-        "thumbnailUrl": "https://i.ytimg.com/vi/wdfjTwqvpbM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gwLLvuVitx0/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1171,75 +1051,59 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "S2maODnQWGk",
-        "title": "#AltPop Ella Red on Audiotree Live - OUT NOW",
+        "youtubeVideoId": "19oaAYqgiU0",
+        "title": "Ella Red - Aphrodite | Audiotree Live",
         "sourceChannelId": "UCWjmAUHmajb1-eo5WKk_22A",
         "sourceChannelTitle": "Audiotree",
-        "thumbnailUrl": "https://i.ytimg.com/vi/S2maODnQWGk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/19oaAYqgiU0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "bpLRhji2YYM",
-        "title": "The Essential Mix in 60 seconds 👽👾",
+        "youtubeVideoId": "j04AQUOx9yY",
+        "title": "Armin van Buuren & Benwal at ADE (Gashouder) - Radio 1’s Essential Mix Live",
         "sourceChannelId": "UC-FQUIVQ-bZiefzBiQAa8Fw",
         "sourceChannelTitle": "BBC Radio 1",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bpLRhji2YYM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/j04AQUOx9yY/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "xH_zllbN8BE",
-        "title": "Vieze Asbak at Boiler Room LA: Teletech",
+        "youtubeVideoId": "rGjgyjKBhDs",
+        "title": "JAZZY | Boiler Room LA: Teletech",
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
-        "thumbnailUrl": "https://i.ytimg.com/vi/xH_zllbN8BE/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rGjgyjKBhDs/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "jUE4PXqEyR4",
-        "title": "@denitia covers Stone Temple Pilots' \"Interstate Love Song.\"",
-        "sourceChannelId": "UCRLZb8PpI9N7COmYqHiDH7A",
-        "sourceChannelTitle": "Sofar Sounds",
-        "thumbnailUrl": "https://i.ytimg.com/vi/jUE4PXqEyR4/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "s3UyXjqpRcs",
-        "title": "How fatherhood inspired Shakey Graves' latest album #ShakeyGraves",
+        "youtubeVideoId": "FHuAfvoQB-c",
+        "title": "Kiwi Jr. — Photos of the Reenactment (live in The Current studio)",
         "sourceChannelId": "UCAKcSON6PSG_JkTbXh2WdIg",
         "sourceChannelTitle": "The Current",
-        "thumbnailUrl": "https://i.ytimg.com/vi/s3UyXjqpRcs/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FHuAfvoQB-c/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ZReZuy9lFaw",
-        "title": "Della Mae performs “Magic Accident” for our latest Paste Session",
+        "youtubeVideoId": "KDvG_hN_8o8",
+        "title": "Della Mae - Full Session | Paste",
         "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
         "sourceChannelTitle": "Paste Magazine",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZReZuy9lFaw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KDvG_hN_8o8/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "cfNiSsYBki0",
-        "title": "LIVE: Monday Morning Soundtrack | Morning Becomes Eclectic",
+        "youtubeVideoId": "KZ2OEZArv5g",
+        "title": "Jakob Nowell's (of Sublime) Must-Listen Albums",
         "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
         "sourceChannelTitle": "KCRW",
-        "thumbnailUrl": "https://i.ytimg.com/vi/cfNiSsYBki0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KZ2OEZArv5g/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "WIHGdXVji7w",
-        "title": "Backstage at Carnegie Hall with Worldpeace DMT",
-        "sourceChannelId": "UC7kI8WjpCfFoMSNDuRh_4lA",
-        "sourceChannelTitle": "Pitchfork",
-        "thumbnailUrl": "https://i.ytimg.com/vi/WIHGdXVji7w/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "xPIMk4d4ulI",
-        "title": "CMAT: Tiny Desk Concert",
+        "youtubeVideoId": "XoH44mH5laY",
+        "title": "Richard O'Brien's 'The Rocky Horror Show': Tiny Desk Concert",
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
-        "thumbnailUrl": "https://i.ytimg.com/vi/xPIMk4d4ulI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/XoH44mH5laY/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1259,27 +1123,27 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "N4OIOudIROo",
-        "title": "olorunns performs Iris for Mahogany Sessions",
+        "youtubeVideoId": "vD5_ys2KurU",
+        "title": "Sparklmami performs quisiera for Mahogany Sessions",
         "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
         "sourceChannelTitle": "Mahogany",
-        "thumbnailUrl": "https://i.ytimg.com/vi/N4OIOudIROo/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vD5_ys2KurU/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "gwLLvuVitx0",
-        "title": "Denis Horvat, Lulliby - What To Do",
+        "youtubeVideoId": "F6IiTdG83Y4",
+        "title": "19:26,1LINE - On The Other Side",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
-        "thumbnailUrl": "https://i.ytimg.com/vi/gwLLvuVitx0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/F6IiTdG83Y4/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "b2aZbtDuObM",
-        "title": "This button could ruin lives",
+        "youtubeVideoId": "IEoIAMl87RA",
+        "title": "The kind of episode where you have to wipe your ass after | The Grill Podcast",
         "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
         "sourceChannelTitle": "triple j talks",
-        "thumbnailUrl": "https://i.ytimg.com/vi/b2aZbtDuObM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IEoIAMl87RA/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1291,11 +1155,147 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "4KUkG76N3AM",
-        "title": "Denis Villeneuve's favourite Bond moments",
-        "sourceChannelId": "UC-FQUIVQ-bZiefzBiQAa8Fw",
-        "sourceChannelTitle": "BBC Radio 1",
-        "thumbnailUrl": "https://i.ytimg.com/vi/4KUkG76N3AM/hqdefault.jpg",
+        "youtubeVideoId": "AL75DHREheM",
+        "title": "Jowi | Boiler Room LA: Teletech",
+        "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
+        "sourceChannelTitle": "Boiler Room",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AL75DHREheM/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "j58aOarW_YA",
+        "title": "Ramsey Thornton - Full Session | Paste",
+        "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
+        "sourceChannelTitle": "Paste Magazine",
+        "thumbnailUrl": "https://i.ytimg.com/vi/j58aOarW_YA/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "cfNiSsYBki0",
+        "title": "LIVE: Monday Morning Soundtrack | Morning Becomes Eclectic",
+        "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
+        "sourceChannelTitle": "KCRW",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cfNiSsYBki0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "xPIMk4d4ulI",
+        "title": "CMAT: Tiny Desk Concert",
+        "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
+        "sourceChannelTitle": "NPR Music",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xPIMk4d4ulI/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "bRjijIUxLOQ",
+        "title": "Jesse Malin on World Cafe I Studio Session & Interview",
+        "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
+        "sourceChannelTitle": "World Cafe",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bRjijIUxLOQ/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "OGBXbNoFWEw",
+        "title": "Slowwves - Evangeline (Live on KEXP)",
+        "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
+        "sourceChannelTitle": "KEXP",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OGBXbNoFWEw/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "N4OIOudIROo",
+        "title": "olorunns performs Iris for Mahogany Sessions",
+        "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
+        "sourceChannelTitle": "Mahogany",
+        "thumbnailUrl": "https://i.ytimg.com/vi/N4OIOudIROo/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "KlGEta2Pp-o",
+        "title": "Helsloot - I Keep Going (feat. Chris Howard)",
+        "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
+        "sourceChannelTitle": "Cercle Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KlGEta2Pp-o/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "duAln9SSHgU",
+        "title": "70 Shows Into Breaky Radio And We Have Thoughts! | Abby and Tyrone Podcast",
+        "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
+        "sourceChannelTitle": "triple j talks",
+        "thumbnailUrl": "https://i.ytimg.com/vi/duAln9SSHgU/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "AjoHm2q6jos",
+        "title": "Ella Red - I Like You Best | Audiotree Live",
+        "sourceChannelId": "UCWjmAUHmajb1-eo5WKk_22A",
+        "sourceChannelTitle": "Audiotree",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AjoHm2q6jos/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "svo1fX_il9k",
+        "title": "Natte Visstick | Boiler Room LA: Teletech",
+        "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
+        "sourceChannelTitle": "Boiler Room",
+        "thumbnailUrl": "https://i.ytimg.com/vi/svo1fX_il9k/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "8GmD549VT2o",
+        "title": "Lindsay Lou - Full Session | Paste",
+        "sourceChannelId": "UC_PscE_7n8SiMspieMGMK_A",
+        "sourceChannelTitle": "Paste Magazine",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8GmD549VT2o/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "MQi0WJcps9w",
+        "title": "Music in Nature | 8 Hour Ambient Mix",
+        "sourceChannelId": "UC54U5gpKkaa_BpXRVNip2Dw",
+        "sourceChannelTitle": "KCRW",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MQi0WJcps9w/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "_Mp_bpIZKlI",
+        "title": "Brìghde Chaimbeul: Tiny Desk Concert",
+        "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
+        "sourceChannelTitle": "NPR Music",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_Mp_bpIZKlI/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "i0w641Yo0ys",
+        "title": "Margaret Glaspy - \"Reminder\" (Live for World Cafe)",
+        "sourceChannelId": "UC7nrQB0dRxdQpH8-y8glEDw",
+        "sourceChannelTitle": "World Cafe",
+        "thumbnailUrl": "https://i.ytimg.com/vi/i0w641Yo0ys/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "EeI8OkqYbbQ",
+        "title": "Slowwves - Anywhere Else (Live on KEXP)",
+        "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
+        "sourceChannelTitle": "KEXP",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EeI8OkqYbbQ/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "CgXxYPAJU-s",
+        "title": "Matthew Ifield performs Thinking for Mahogany Sessions",
+        "sourceChannelId": "UCG36u-k09zdIPQh5EEdVgTA",
+        "sourceChannelTitle": "Mahogany",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CgXxYPAJU-s/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "_n49Uzm9DCM",
+        "title": "Marino Canal - Luxor",
+        "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
+        "sourceChannelTitle": "Cercle Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_n49Uzm9DCM/hqdefault.jpg",
         "durationSec": 600
       }
     ]
@@ -1304,22 +1304,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "food",
     "categoryName": "Food",
     "hue": 22,
-    "builtAt": 1794336510867,
+    "builtAt": 1794338233231,
     "videos": [
       {
-        "youtubeVideoId": "psQGER4zxVs",
-        "title": "These Fudgy Chocolate-Walnut Cookies Have No Flour or Butter",
-        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
-        "sourceChannelTitle": "Food52",
-        "thumbnailUrl": "https://i.ytimg.com/vi/psQGER4zxVs/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "r4PF02OO60k",
-        "title": "Leftover Shredded Beef Meatballs",
+        "youtubeVideoId": "3r5aoFrXNRY",
+        "title": "How To Make Award Winning Chili",
         "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
         "sourceChannelTitle": "Tasty",
-        "thumbnailUrl": "https://i.ytimg.com/vi/r4PF02OO60k/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3r5aoFrXNRY/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1371,11 +1363,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "jHyxSnOSQgE",
-        "title": "Preparing for Fall  #apple #fall #leaves",
+        "youtubeVideoId": "mXUG-m6QgKs",
+        "title": "Alpha Male Cupcakes - You Suck at Cooking (episode 182)",
         "sourceChannelId": "UCekQr9znsk2vWxBo3YiLq2w",
         "sourceChannelTitle": "You Suck At Cooking",
-        "thumbnailUrl": "https://i.ytimg.com/vi/jHyxSnOSQgE/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mXUG-m6QgKs/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1387,11 +1379,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "eZY8Js-eE6k",
-        "title": "The Secret to Perfect Tiramisu Is in the Ladyfingers",
+        "youtubeVideoId": "N6JDgJmiMFM",
+        "title": "The Best Tiramisu You’ll Ever Make (Restaurant-Quality) | Epicurious 101",
         "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
         "sourceChannelTitle": "Epicurious",
-        "thumbnailUrl": "https://i.ytimg.com/vi/eZY8Js-eE6k/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/N6JDgJmiMFM/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1419,22 +1411,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "IV68RBWL-6E",
-        "title": "30-Clove Garlic & Roasted Tomato Dip | The Perfect Holiday Appetizer",
-        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
-        "sourceChannelTitle": "Food52",
-        "thumbnailUrl": "https://i.ytimg.com/vi/IV68RBWL-6E/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "rEX0r5Ou7VE",
-        "title": "Cheesecloth Juicy Turkey Hack",
-        "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
-        "sourceChannelTitle": "Tasty",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rEX0r5Ou7VE/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
         "youtubeVideoId": "COvngm7VbZs",
         "title": "I Tested Viral TikTok Recipes",
         "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
@@ -1459,11 +1435,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "FNOnylMO7wU",
-        "title": "The Right Way to Make Fried Rice",
+        "youtubeVideoId": "Nx2V2yC-ei4",
+        "title": "The Test Kitchen Makes Their Perfect Thanksgiving Recipes | Bon Appétit",
         "sourceChannelId": "UCbpMy0Fg74eXXkvxJrtEn3w",
         "sourceChannelTitle": "Bon Appétit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/FNOnylMO7wU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Nx2V2yC-ei4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1483,11 +1459,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "mjf8i_qZ3u4",
-        "title": "Jack it Up         #halloween #pumpkin #jackolantern",
+        "youtubeVideoId": "TRF14lFwB7I",
+        "title": "Chili Oil Onion Pasta - You Suck at Cooking (episode 181)",
         "sourceChannelId": "UCekQr9znsk2vWxBo3YiLq2w",
         "sourceChannelTitle": "You Suck At Cooking",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mjf8i_qZ3u4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TRF14lFwB7I/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1499,51 +1475,35 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "RZTj_vDAFqM",
-        "title": "How to Make Perfect Mascarpone Cream for Tiramisu",
+        "youtubeVideoId": "BrLTf27eUL0",
+        "title": "Butcher Explains Which Steak to Buy | Ultimate Buying Guide | Epicurious",
         "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
         "sourceChannelTitle": "Epicurious",
-        "thumbnailUrl": "https://i.ytimg.com/vi/RZTj_vDAFqM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BrLTf27eUL0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "GlAx-afCrfg",
-        "title": "20 Minutes on the Clock: Can Jamie beat the Roo? 🍕 #challenge #sabotage",
+        "youtubeVideoId": "1NldsAtQlOc",
+        "title": "How To Make Bread At Home | Jamie Oliver",
         "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
         "sourceChannelTitle": "Jamie Oliver",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GlAx-afCrfg/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1NldsAtQlOc/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "E5oO1rKZSVQ",
-        "title": "Beef & Mushroom Rice Bowl  (소고기버섯덮밥)",
+        "youtubeVideoId": "xrTMJbjUJCA",
+        "title": "Korean highway reststop potatoes",
         "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
         "sourceChannelTitle": "Maangchi",
-        "thumbnailUrl": "https://i.ytimg.com/vi/E5oO1rKZSVQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xrTMJbjUJCA/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "iU9Ql5QDmkg",
-        "title": "Matthew McConaughey is blown away by fried bologna",
+        "youtubeVideoId": "AQbpUILs8So",
+        "title": "We Meal Prep With YOUR Groceries",
         "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
         "sourceChannelTitle": "Mythical Kitchen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/iU9Ql5QDmkg/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "cTm1v7U9-kA",
-        "title": "Recreating a 1935 Union Pacific Train Menu",
-        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
-        "sourceChannelTitle": "Food52",
-        "thumbnailUrl": "https://i.ytimg.com/vi/cTm1v7U9-kA/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "Q0EHmhHgKq8",
-        "title": "Zelda-Inspired Blue Potion Smoothie",
-        "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
-        "sourceChannelTitle": "Tasty",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Q0EHmhHgKq8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AQbpUILs8So/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1571,11 +1531,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Nx2V2yC-ei4",
-        "title": "The Test Kitchen Makes Their Perfect Thanksgiving Recipes | Bon Appétit",
+        "youtubeVideoId": "-YP3OCTy3lg",
+        "title": "This Steakhouse is Miami’s Hardest Reservation | On The Line | Bon Appétit",
         "sourceChannelId": "UCbpMy0Fg74eXXkvxJrtEn3w",
         "sourceChannelTitle": "Bon Appétit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Nx2V2yC-ei4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-YP3OCTy3lg/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1595,14 +1555,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "7zvheC0F_Yk",
-        "title": "History of Jack-O-Lanterns.  #pumpkin #halloween #jackolantern",
-        "sourceChannelId": "UCekQr9znsk2vWxBo3YiLq2w",
-        "sourceChannelTitle": "You Suck At Cooking",
-        "thumbnailUrl": "https://i.ytimg.com/vi/7zvheC0F_Yk/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
         "youtubeVideoId": "Bp2r-gleRws",
         "title": "I Made the HELLFIRE BURGER… and Immediately Regretted It",
         "sourceChannelId": "UCbRj3Tcy1Zoz3rcf83nW5kw",
@@ -1611,51 +1563,35 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "N6JDgJmiMFM",
-        "title": "The Best Tiramisu You’ll Ever Make (Restaurant-Quality) | Epicurious 101",
+        "youtubeVideoId": "OxuHuukJq3c",
+        "title": "Can 8 People Agree on Chocolate Chip Cookies? | Everybody Eats | Epicurious",
         "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
         "sourceChannelTitle": "Epicurious",
-        "thumbnailUrl": "https://i.ytimg.com/vi/N6JDgJmiMFM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OxuHuukJq3c/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "1NldsAtQlOc",
-        "title": "How To Make Bread At Home | Jamie Oliver",
+        "youtubeVideoId": "fQdHTDKlWM0",
+        "title": "7 Sunday Dinner Ideas To Cook This Weekend",
         "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
         "sourceChannelTitle": "Jamie Oliver",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1NldsAtQlOc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fQdHTDKlWM0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "xrTMJbjUJCA",
-        "title": "Korean highway reststop potatoes",
+        "youtubeVideoId": "3EeQR3D5Ks0",
+        "title": "Easy spicy tuna stew with canned tuna (Chamchi-jjigae: 참치찌개)",
         "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
         "sourceChannelTitle": "Maangchi",
-        "thumbnailUrl": "https://i.ytimg.com/vi/xrTMJbjUJCA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3EeQR3D5Ks0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "YtF1mj9j1m4",
-        "title": "Surprising Josh Johnson with Nunchucks",
+        "youtubeVideoId": "zQ_4it9GRWE",
+        "title": "Cheap vs Expensive Fried Rice (ft. Uncle Roger)",
         "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
         "sourceChannelTitle": "Mythical Kitchen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/YtF1mj9j1m4/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "6e-IrO6_b6U",
-        "title": "Taiwanese Sticky Rice Stuffing",
-        "sourceChannelId": "UCfFI8jIjvIApUACJ3qjax2w",
-        "sourceChannelTitle": "Food52",
-        "thumbnailUrl": "https://i.ytimg.com/vi/6e-IrO6_b6U/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "_EbSeO--EpI",
-        "title": "Creamy Shrimp Udon",
-        "sourceChannelId": "UCJFp8uSYCjXOMnkUyb3CQ3Q",
-        "sourceChannelTitle": "Tasty",
-        "thumbnailUrl": "https://i.ytimg.com/vi/_EbSeO--EpI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zQ_4it9GRWE/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1683,11 +1619,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Fb_fZxOm-0Y",
-        "title": "This Viral Restaurant Only Opens 3 Days a Week",
+        "youtubeVideoId": "4D4pAvxy9lo",
+        "title": "How a French Chef Makes France’s Most Famous Chicken Dish | French Fundamentals | Bon Appétit",
         "sourceChannelId": "UCbpMy0Fg74eXXkvxJrtEn3w",
         "sourceChannelTitle": "Bon Appétit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Fb_fZxOm-0Y/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4D4pAvxy9lo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1705,6 +1641,70 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Sorted Food",
         "thumbnailUrl": "https://i.ytimg.com/vi/hN_jM5_eooc/hqdefault.jpg",
         "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "RE-eipdL68k",
+        "title": "Trust Me on This…",
+        "sourceChannelId": "UCbRj3Tcy1Zoz3rcf83nW5kw",
+        "sourceChannelTitle": "SAM THE COOKING GUY",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RE-eipdL68k/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "r9eTNJHskSU",
+        "title": "Pro Chefs Blind Taste Test Every Frozen Mac & Cheese | The Taste Panel | Epicurious",
+        "sourceChannelId": "UCcjhYlL1WRBjKaJsMH_h7Lg",
+        "sourceChannelTitle": "Epicurious",
+        "thumbnailUrl": "https://i.ytimg.com/vi/r9eTNJHskSU/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "3zdNUrZaqvA",
+        "title": "Can Crystelle Cook Thai Soup in 20 Minutes? ⏱️ | The Tuesday 20",
+        "sourceChannelId": "UCpSgg_ECBj25s9moCDfSTsA",
+        "sourceChannelTitle": "Jamie Oliver",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3zdNUrZaqvA/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "U-oN4yYCVgA",
+        "title": "Pan-Fried Eggplant That Tastes Like Grilled Meat",
+        "sourceChannelId": "UC8gFadPgK2r1ndqLI04Xvvw",
+        "sourceChannelTitle": "Maangchi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/U-oN4yYCVgA/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "SMe38JQJbAs",
+        "title": "We Spent $1,240 To Make a Wendy's Baconator",
+        "sourceChannelId": "UCXGR70CkW_pXb8n52LzCCRw",
+        "sourceChannelTitle": "Mythical Kitchen",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SMe38JQJbAs/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "iZi0yEY60zE",
+        "title": "I Tried Celebrities' Favorite Pastas | With Babish",
+        "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
+        "sourceChannelTitle": "Binging with Babish",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iZi0yEY60zE/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "ILArlisjE3k",
+        "title": "The McDonald's Egg McMuffin But Better",
+        "sourceChannelId": "UCUAg71CJEvFdOnujmep1Svw",
+        "sourceChannelTitle": "Joshua Weissman Recipes",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ILArlisjE3k/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "0Nxldbd3oQ0",
+        "title": "Gordon Ramsay's Best UNDERCOVER Disguises (Season 2) | COMPILATION | 24 Hours To Hell & Back",
+        "sourceChannelId": "UCIEv3lZ_tNXHzL3ox-_uUGQ",
+        "sourceChannelTitle": "Gordon Ramsay",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0Nxldbd3oQ0/hqdefault.jpg",
+        "durationSec": 600
       }
     ]
   },
@@ -1712,14 +1712,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "science",
     "categoryName": "Science",
     "hue": 170,
-    "builtAt": 1794336511208,
+    "builtAt": 1794338233582,
     "videos": [
       {
-        "youtubeVideoId": "rL0qEmTRI-I",
-        "title": "Why do deserts get cold at night?",
+        "youtubeVideoId": "KfODG5REyss",
+        "title": "I finally saw quantum mechanics with my own eyes... (It's spookier than I expected)",
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rL0qEmTRI-I/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KfODG5REyss/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1739,19 +1739,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "G99ycZV6g1g",
-        "title": "Messiest Competition vs. Kid Wash",
+        "youtubeVideoId": "4fvkgAJiBQI",
+        "title": "I Engineered the First-Ever Human Car Wash",
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
-        "thumbnailUrl": "https://i.ytimg.com/vi/G99ycZV6g1g/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "sQjWFvpTg7Y",
-        "title": "What I Found In My Safe",
-        "sourceChannelId": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
-        "sourceChannelTitle": "Vsauce",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sQjWFvpTg7Y/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4fvkgAJiBQI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1771,35 +1763,35 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "teQi1dVC_X4",
-        "title": "How two letters have made this island $100 million",
+        "youtubeVideoId": "fwW3XVFrm9c",
+        "title": "The Most Important Silicon Valley Company You've Never Heard Of",
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/teQi1dVC_X4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fwW3XVFrm9c/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "e1zyr9K03c0",
-        "title": "How Black Holes EAT Entire Galaxies",
+        "youtubeVideoId": "RG5WhPmwGgk",
+        "title": "So You Want To Understand Black Holes...",
         "sourceChannelId": "UC7_gcs09iThXybpVgjHZ_7g",
         "sourceChannelTitle": "PBS Space Time",
-        "thumbnailUrl": "https://i.ytimg.com/vi/e1zyr9K03c0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RG5WhPmwGgk/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "fcjR9ORNtXc",
-        "title": "Your mom's cells are still inside you",
+        "youtubeVideoId": "YgoiujmwLKI",
+        "title": "The Real Cost of AI Will Shock You",
         "sourceChannelId": "UCH4BNI0-FOK2dMXoFtViWHw",
         "sourceChannelTitle": "Be Smart",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fcjR9ORNtXc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YgoiujmwLKI/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "TVpMka43TFk",
-        "title": "This magnet machine is scary",
+        "youtubeVideoId": "ID-K64Jk6JM",
+        "title": "Turning air into alcohol",
         "sourceChannelId": "UCFhXFikryT4aFcLkLw2LBLA",
         "sourceChannelTitle": "NileRed",
-        "thumbnailUrl": "https://i.ytimg.com/vi/TVpMka43TFk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ID-K64Jk6JM/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1819,11 +1811,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "KfODG5REyss",
-        "title": "I finally saw quantum mechanics with my own eyes... (It's spookier than I expected)",
+        "youtubeVideoId": "eyZEqSPeMwg",
+        "title": "No device could prove Einstein wrong... until now",
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/KfODG5REyss/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eyZEqSPeMwg/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1843,19 +1835,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "P1eps8HN2T8",
-        "title": "Over-Engineered Pumpkin Carving",
+        "youtubeVideoId": "vr_ADr-XrR4",
+        "title": "Can Anything Survive My Crunchinator?",
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
-        "thumbnailUrl": "https://i.ytimg.com/vi/P1eps8HN2T8/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "sU3DYEJ1br0",
-        "title": "Ghost Tape Number 10",
-        "sourceChannelId": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
-        "sourceChannelTitle": "Vsauce",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sU3DYEJ1br0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vr_ADr-XrR4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1867,43 +1851,43 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "EVGE1Mu9PTQ",
-        "title": "What makes some sunsets so spectacular?",
+        "youtubeVideoId": "9PJvV5PYDm0",
+        "title": "Why Are Some Sunsets SO MUCH Better Than Others?",
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
-        "thumbnailUrl": "https://i.ytimg.com/vi/EVGE1Mu9PTQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9PJvV5PYDm0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "fwW3XVFrm9c",
-        "title": "The Most Important Silicon Valley Company You've Never Heard Of",
+        "youtubeVideoId": "CTUqmUHvd2Y",
+        "title": "We analysed 3 years worth of Polymarket trades. Here's what we found.",
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fwW3XVFrm9c/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CTUqmUHvd2Y/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "RG5WhPmwGgk",
-        "title": "So You Want To Understand Black Holes...",
+        "youtubeVideoId": "eb8x2tz_pgc",
+        "title": "Ghost Particles Are Exposing Hidden Black Holes. They Just Won a Nobel Prize.",
         "sourceChannelId": "UC7_gcs09iThXybpVgjHZ_7g",
         "sourceChannelTitle": "PBS Space Time",
-        "thumbnailUrl": "https://i.ytimg.com/vi/RG5WhPmwGgk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eb8x2tz_pgc/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "4NEdVmPFP7g",
-        "title": "Why are there no green mammals?",
+        "youtubeVideoId": "w6hK2PML6Uc",
+        "title": "This Weird Pattern Will Let Us Reshape Matter",
         "sourceChannelId": "UCH4BNI0-FOK2dMXoFtViWHw",
         "sourceChannelTitle": "Be Smart",
-        "thumbnailUrl": "https://i.ytimg.com/vi/4NEdVmPFP7g/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/w6hK2PML6Uc/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "5OcnO7U0VeA",
-        "title": "Making nasty soap",
+        "youtubeVideoId": "GmwaJnj6pfY",
+        "title": "Making liquid nitrogen from scratch (an absurd amount)",
         "sourceChannelId": "UCFhXFikryT4aFcLkLw2LBLA",
         "sourceChannelTitle": "NileRed",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5OcnO7U0VeA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GmwaJnj6pfY/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1923,11 +1907,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "xlNKNnXdtN4",
-        "title": "These ponds help support half the people on Earth",
+        "youtubeVideoId": "NiCgcUTL9_Q",
+        "title": "Fiber Optics are so much cooler than I thought",
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/xlNKNnXdtN4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NiCgcUTL9_Q/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1947,19 +1931,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ayr091ImrwU",
-        "title": "Levitate A Ball With Water!",
+        "youtubeVideoId": "iSbLf1iOcZQ",
+        "title": "Water Experiments That Look Like Magic",
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ayr091ImrwU/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "YYu76d3leR8",
-        "title": "Thunder Tubes",
-        "sourceChannelId": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
-        "sourceChannelTitle": "Vsauce",
-        "thumbnailUrl": "https://i.ytimg.com/vi/YYu76d3leR8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iSbLf1iOcZQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -1971,43 +1947,35 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "1bjkZYmQefA",
-        "title": "How to Tame Your Pet AI Dragon",
+        "youtubeVideoId": "kIXkIBWo6vE",
+        "title": "Four Places We Might Find Aliens",
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1bjkZYmQefA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kIXkIBWo6vE/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "CTUqmUHvd2Y",
-        "title": "We analysed 3 years worth of Polymarket trades. Here's what we found.",
+        "youtubeVideoId": "eczB0uUx_k8",
+        "title": "This $40 Hunk of Metal Made China a Superpower",
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/CTUqmUHvd2Y/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eczB0uUx_k8/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "hq65Tpdx3-Q",
-        "title": "The Hidden Structure of The Universe",
+        "youtubeVideoId": "w6229Ivy_Lo",
+        "title": "Why Does -1/12 Keep Appearing Everywhere In Physics?",
         "sourceChannelId": "UC7_gcs09iThXybpVgjHZ_7g",
         "sourceChannelTitle": "PBS Space Time",
-        "thumbnailUrl": "https://i.ytimg.com/vi/hq65Tpdx3-Q/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/w6229Ivy_Lo/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "YgoiujmwLKI",
-        "title": "The Real Cost of AI Will Shock You",
+        "youtubeVideoId": "KLmtn_xwgS4",
+        "title": "The Very Weird Reason Hot Water Freezes Faster",
         "sourceChannelId": "UCH4BNI0-FOK2dMXoFtViWHw",
         "sourceChannelTitle": "Be Smart",
-        "thumbnailUrl": "https://i.ytimg.com/vi/YgoiujmwLKI/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "K56LuXCQ0ik",
-        "title": "Making color changing mercury",
-        "sourceChannelId": "UCFhXFikryT4aFcLkLw2LBLA",
-        "sourceChannelTitle": "NileRed",
-        "thumbnailUrl": "https://i.ytimg.com/vi/K56LuXCQ0ik/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KLmtn_xwgS4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2027,11 +1995,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "zEmabFZvdqA",
-        "title": "What happens if I lower this weight into the water?",
+        "youtubeVideoId": "ONAuUyml0yI",
+        "title": "We're trying something new...",
         "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
         "sourceChannelTitle": "Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zEmabFZvdqA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ONAuUyml0yI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2051,19 +2019,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "4fvkgAJiBQI",
-        "title": "I Engineered the First-Ever Human Car Wash",
+        "youtubeVideoId": "9QldsLTaQHo",
+        "title": "Animals vs Engineers",
         "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
         "sourceChannelTitle": "CrunchLabs",
-        "thumbnailUrl": "https://i.ytimg.com/vi/4fvkgAJiBQI/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "gNVj-FIxoe4",
-        "title": "We Used To Think The Sun Was Cold",
-        "sourceChannelId": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
-        "sourceChannelTitle": "Vsauce",
-        "thumbnailUrl": "https://i.ytimg.com/vi/gNVj-FIxoe4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9QldsLTaQHo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2075,43 +2035,83 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Tl-5u1AHQjo",
-        "title": "Kate's National Geographic Journeys safari experience!",
+        "youtubeVideoId": "jsAFbi4HgFg",
+        "title": "The Sea Turtle Cheat Code",
         "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
         "sourceChannelTitle": "MinuteEarth",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Tl-5u1AHQjo/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jsAFbi4HgFg/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "eczB0uUx_k8",
-        "title": "This $40 Hunk of Metal Made China a Superpower",
+        "youtubeVideoId": "SsYKLXIU7no",
+        "title": "An Element Of Innovation  | Channel Trailer",
         "sourceChannelId": "UC1UmujXTizWokDHojdEOdow",
         "sourceChannelTitle": "InGenius by Veritasium",
-        "thumbnailUrl": "https://i.ytimg.com/vi/eczB0uUx_k8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SsYKLXIU7no/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "FSwND7rvjpo",
-        "title": "Can We Turn The Solar System Into A Spaceship?",
-        "sourceChannelId": "UC7_gcs09iThXybpVgjHZ_7g",
-        "sourceChannelTitle": "PBS Space Time",
-        "thumbnailUrl": "https://i.ytimg.com/vi/FSwND7rvjpo/hqdefault.jpg",
+        "youtubeVideoId": "jXzARHsTBQY",
+        "title": "This Ring of Plasma Could Change the World",
+        "sourceChannelId": "UC1VLQPn9cYSqx8plbk9RxxQ",
+        "sourceChannelTitle": "The Action Lab",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jXzARHsTBQY/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "pBLPsvOdPSE",
-        "title": "Where have humans never been?",
-        "sourceChannelId": "UCH4BNI0-FOK2dMXoFtViWHw",
-        "sourceChannelTitle": "Be Smart",
-        "thumbnailUrl": "https://i.ytimg.com/vi/pBLPsvOdPSE/hqdefault.jpg",
+        "youtubeVideoId": "t3CvQRH-mFg",
+        "title": "Quantum Computing Finally Got Its Numbers, and They’re Bad",
+        "sourceChannelId": "UC1yNl2E66ZzKApQdRuTQ4tw",
+        "sourceChannelTitle": "Sabine Hossenfelder",
+        "thumbnailUrl": "https://i.ytimg.com/vi/t3CvQRH-mFg/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ID-K64Jk6JM",
-        "title": "Turning air into alcohol",
-        "sourceChannelId": "UCFhXFikryT4aFcLkLw2LBLA",
-        "sourceChannelTitle": "NileRed",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ID-K64Jk6JM/hqdefault.jpg",
+        "youtubeVideoId": "JsBZOcqZerk",
+        "title": "The Insane Real Engineering of the Nazi Enigma Machine",
+        "sourceChannelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+        "sourceChannelTitle": "Veritasium",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JsBZOcqZerk/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "205swuI0JlY",
+        "title": "When Death Was a Relief",
+        "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
+        "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
+        "thumbnailUrl": "https://i.ytimg.com/vi/205swuI0JlY/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "jVDPOPWarDU",
+        "title": "Smarter Scrubber Update",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jVDPOPWarDU/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "QMFrtyT5a2k",
+        "title": "Making Impossible Items Float",
+        "sourceChannelId": "UC513PdAP2-jWkJunTh5kXRw",
+        "sourceChannelTitle": "CrunchLabs",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QMFrtyT5a2k/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "LNBXhocsQyY",
+        "title": "Tune Into Psychology | Compilation",
+        "sourceChannelId": "UCUdettijNYvLAm4AixZv4RA",
+        "sourceChannelTitle": "SciShow Psych",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LNBXhocsQyY/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "x-vpfrs7RIs",
+        "title": "Why Don't Birds Cause MORE Crashes?",
+        "sourceChannelId": "UCeiYXex_fwgYDonaTcSIk6w",
+        "sourceChannelTitle": "MinuteEarth",
+        "thumbnailUrl": "https://i.ytimg.com/vi/x-vpfrs7RIs/hqdefault.jpg",
         "durationSec": 600
       }
     ]
@@ -2120,38 +2120,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "sports",
     "categoryName": "Sports",
     "hue": 140,
-    "builtAt": 1794336511612,
+    "builtAt": 1794338234020,
     "videos": [
       {
-        "youtubeVideoId": "URBkhN6-Pkc",
-        "title": "BOUNCE IN A ROW",
+        "youtubeVideoId": "4MZHXB6UX-c",
+        "title": "Overtime 52: PIRATE EDITION",
         "sourceChannelId": "UCRijo3ddMTht_IHyNSNXpNQ",
         "sourceChannelTitle": "Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/URBkhN6-Pkc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4MZHXB6UX-c/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "obcHTkREpvI",
-        "title": "Tenz + Ace = Good Times #twitch #valorant",
+        "youtubeVideoId": "0VCpPloplNY",
+        "title": "Guess The Rank in FORTNITE ft. SypherPK, Amar, Mongraal & MrSavage",
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
         "sourceChannelTitle": "Red Bull Esports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/obcHTkREpvI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0VCpPloplNY/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "NMa_9_WMggY",
-        "title": "Mission: Hurricane Marathon and Finale Tonight",
-        "sourceChannelId": "UCcSrNe5CbXOmsF645RYDe5w",
-        "sourceChannelTitle": "WeatherSpyTV",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NMa_9_WMggY/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "f1wMc-TTyks",
-        "title": "🚨 The Vikings have identified QB Kirk Cousins as a prime trade candidate - Schefty",
+        "youtubeVideoId": "jRnRoHv23KU",
+        "title": "‘Blowing Me Away’ 👀 Daniel Jeremiah reacts to Arvell Reese’s recent stretch | Move the Sticks",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/f1wMc-TTyks/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jRnRoHv23KU/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2171,27 +2163,27 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "6ec1PbkVq7M",
-        "title": "Someone's ready for winter 😅",
+        "youtubeVideoId": "krXg6yqZU5A",
+        "title": "Jason Borosky returns to Double the Baldy Pipe",
         "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
         "sourceChannelTitle": "Nitro Circus",
-        "thumbnailUrl": "https://i.ytimg.com/vi/6ec1PbkVq7M/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/krXg6yqZU5A/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "6L2H9pVPZcg",
-        "title": "Josh Hokit has bars son! #ufc334",
+        "youtubeVideoId": "7EyJnj-rpcQ",
+        "title": "UFC 334 Embedded: Vlog Series - Episode 2",
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/6L2H9pVPZcg/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7EyJnj-rpcQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "VyRXzWb4eB8",
-        "title": "Yaxel had only good things to say about Jordan Poole ‼️🙌",
+        "youtubeVideoId": "9rZmV1XAGm4",
+        "title": "NBA on Fire - 2026/27 - Episode 3",
         "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
         "sourceChannelTitle": "NBA",
-        "thumbnailUrl": "https://i.ytimg.com/vi/VyRXzWb4eB8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9rZmV1XAGm4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2203,139 +2195,59 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "k6cbQoR1jnM",
-        "title": "POV: Bron falls on you mid game😅",
+        "youtubeVideoId": "rz4vPnJW9GQ",
+        "title": "Steph Curry Drops a NO-LOOK DIME & Gets HYPED After the Warriors’ Amazing Sequence 🔥",
         "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
         "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/k6cbQoR1jnM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rz4vPnJW9GQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "LSlNkIJbd8w",
-        "title": "Insane S&S Wallride 🎬 Wyatt Gentry + Parkin Costain #GoPro",
+        "youtubeVideoId": "N4Rvj7VF800",
+        "title": "Fighting a House Fire | GoPro POV",
         "sourceChannelId": "UCqhnX4jA0A5paNd1v-zEysw",
         "sourceChannelTitle": "GoPro",
-        "thumbnailUrl": "https://i.ytimg.com/vi/LSlNkIJbd8w/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/N4Rvj7VF800/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "xwtCdHd7H7w",
-        "title": "Ball Touched The CLOUDS ☁️ (feat. iShowSpeed)",
-        "sourceChannelId": "UCRijo3ddMTht_IHyNSNXpNQ",
-        "sourceChannelTitle": "Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/xwtCdHd7H7w/hqdefault.jpg",
+        "youtubeVideoId": "NBN-p0ZZkXc",
+        "title": "Battletoads? We tried...!",
+        "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
+        "sourceChannelTitle": "Secret Base",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NBN-p0ZZkXc/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "rcWvrg2Dx9w",
-        "title": "How far can Team Spirit make it?🤔 #gaming #redbull #counterstrike #cs2 #esport",
+        "youtubeVideoId": "zTBCMBS0UEo",
+        "title": "Daniel Ricciardo Reacts To Best Career Moments | Salesforce: Inside F1",
+        "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
+        "sourceChannelTitle": "FORMULA 1",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zTBCMBS0UEo/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "Q4xRXBVvHU4",
+        "title": "Barca come from behind to win! 🔥 | Atletico Madrid 1-2 Barcelona | La Liga Highlights",
+        "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
+        "sourceChannelTitle": "Sky Sports Football",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Q4xRXBVvHU4/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "UgUuZelE4gs",
+        "title": "🔴 𝙇𝙄𝙑𝙀 Summer Youth Olympics! Women's Artistic Gymnastics All Around Final | #Dakar2026",
+        "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
+        "sourceChannelTitle": "Olympic Games",
+        "thumbnailUrl": "https://i.ytimg.com/vi/UgUuZelE4gs/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "qoAj4fBA5AI",
+        "title": "A Clash Between Modern Legends | Leshar vs Kawano",
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
         "sourceChannelTitle": "Red Bull Esports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rcWvrg2Dx9w/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "eRHXwx0v8bE",
-        "title": "Mission: Hurricane Returns Sunday, August 13th!",
-        "sourceChannelId": "UCcSrNe5CbXOmsF645RYDe5w",
-        "sourceChannelTitle": "WeatherSpyTV",
-        "thumbnailUrl": "https://i.ytimg.com/vi/eRHXwx0v8bE/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "jRnRoHv23KU",
-        "title": "‘Blowing Me Away’ 👀 Daniel Jeremiah reacts to Arvell Reese’s recent stretch | Move the Sticks",
-        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
-        "sourceChannelTitle": "NFL on ESPN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/jRnRoHv23KU/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "qjxdqn7fOjY",
-        "title": "Zhong Qi on the Beam! 🇨🇳🤸‍♀️ Artistic Gymnastics at Dakar 2026 | Youth Olympics",
-        "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
-        "sourceChannelTitle": "Olympics Gymnastics",
-        "thumbnailUrl": "https://i.ytimg.com/vi/qjxdqn7fOjY/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "kKqddaxOB_o",
-        "title": "Sparky Has a SERIOUS Problem With Thanksgiving",
-        "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
-        "sourceChannelTitle": "Almost Athletes with Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kKqddaxOB_o/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "krXg6yqZU5A",
-        "title": "Jason Borosky returns to Double the Baldy Pipe",
-        "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
-        "sourceChannelTitle": "Nitro Circus",
-        "thumbnailUrl": "https://i.ytimg.com/vi/krXg6yqZU5A/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "4rpblH3dEio",
-        "title": "JOE ROGAN WAS GOING CRAZY #ufc334",
-        "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
-        "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/4rpblH3dEio/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "jGMchLz9oxM",
-        "title": "Coach Steve Kerr with a funny comment on Coach Jimmy 😭",
-        "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
-        "sourceChannelTitle": "NBA",
-        "thumbnailUrl": "https://i.ytimg.com/vi/jGMchLz9oxM/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "l0gQUTnvpy0",
-        "title": "@buffalobills Greg Rousseau schools the rookie 😅",
-        "sourceChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
-        "sourceChannelTitle": "NFL",
-        "thumbnailUrl": "https://i.ytimg.com/vi/l0gQUTnvpy0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "ZRJm2ZOB7Lo",
-        "title": "Dog got his own racetrack😭🔥",
-        "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
-        "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZRJm2ZOB7Lo/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "tAIjGmGVa1g",
-        "title": "POV: 55ft MTB Freefall 🎬 Antoni Villoni #GoPro",
-        "sourceChannelId": "UCqhnX4jA0A5paNd1v-zEysw",
-        "sourceChannelTitle": "GoPro",
-        "thumbnailUrl": "https://i.ytimg.com/vi/tAIjGmGVa1g/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "vGZy0zCJ8MQ",
-        "title": "Can We Make 6 In A Row? 🏀",
-        "sourceChannelId": "UCRijo3ddMTht_IHyNSNXpNQ",
-        "sourceChannelTitle": "Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vGZy0zCJ8MQ/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "WnYp6-oJ-Us",
-        "title": "Did you guess it? 🥹🤌 #fortnite #rank #challenge @S@SypherPKmon@mongraalsav@mrsavageOff@AmarOfficial",
-        "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
-        "sourceChannelTitle": "Red Bull Esports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/WnYp6-oJ-Us/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "N4HRSTvF9NA",
-        "title": "Mission: Hurricane BTS Compilation",
-        "sourceChannelId": "UCcSrNe5CbXOmsF645RYDe5w",
-        "sourceChannelTitle": "WeatherSpyTV",
-        "thumbnailUrl": "https://i.ytimg.com/vi/N4HRSTvF9NA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qoAj4fBA5AI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2347,139 +2259,43 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ShpQZ-RLibQ",
-        "title": "Li Lezheng on the Horizontal Bar at Dakar 2026! 🇨🇳 | Youth Olympics",
+        "youtubeVideoId": "qjxdqn7fOjY",
+        "title": "Zhong Qi on the Beam! 🇨🇳🤸‍♀️ Artistic Gymnastics at Dakar 2026 | Youth Olympics",
         "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
         "sourceChannelTitle": "Olympics Gymnastics",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ShpQZ-RLibQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qjxdqn7fOjY/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "1AJlJhXqo5k",
-        "title": "Does Cornhole Count as a REAL Sport?",
+        "youtubeVideoId": "mq-uDRYTi6g",
+        "title": "Dude Perfect Reacts to The World's Weirdest Sports",
         "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
         "sourceChannelTitle": "Almost Athletes with Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1AJlJhXqo5k/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mq-uDRYTi6g/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "REM3E5d4YV4",
-        "title": "Not our smartest idea...",
+        "youtubeVideoId": "nXiFBPABGsQ",
+        "title": "This Moto Quarterpipe Contest Only Got CRAZIER in Round 2",
         "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
         "sourceChannelTitle": "Nitro Circus",
-        "thumbnailUrl": "https://i.ytimg.com/vi/REM3E5d4YV4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nXiFBPABGsQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Vofo3L74RpY",
-        "title": "기술로 압도하겠다는 호킷 #UFC334",
+        "youtubeVideoId": "duQzkyrxmgs",
+        "title": "GREATEST FIGHTS FROM UFC 334 Fighters 🚨",
         "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
         "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Vofo3L74RpY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/duQzkyrxmgs/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "z-pnATbVRw8",
-        "title": "Had to throw Jordan Poole's sunglasses on... 😎 (📹: 957thegame/X)",
+        "youtubeVideoId": "ETVUBCD7-Bk",
+        "title": "NBA's Nightly Recap | November 9, 2026",
         "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
         "sourceChannelTitle": "NBA",
-        "thumbnailUrl": "https://i.ytimg.com/vi/z-pnATbVRw8/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "F9Ulo10MgPg",
-        "title": "“You know I caught that, right?” | Every Angle of Broncos Safety Devon Key’s bizarre interception",
-        "sourceChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
-        "sourceChannelTitle": "NFL",
-        "thumbnailUrl": "https://i.ytimg.com/vi/F9Ulo10MgPg/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "49ZUQsKGV64",
-        "title": "Bro was just AURA farming😭🔥",
-        "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
-        "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/49ZUQsKGV64/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "ZXldnr-bwsE",
-        "title": "The Future of Helmets | GoPro x AGV",
-        "sourceChannelId": "UCqhnX4jA0A5paNd1v-zEysw",
-        "sourceChannelTitle": "GoPro",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZXldnr-bwsE/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "PknrQZXny-8",
-        "title": "This Trick Shot Took 10 HOURS 🤯",
-        "sourceChannelId": "UCRijo3ddMTht_IHyNSNXpNQ",
-        "sourceChannelTitle": "Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/PknrQZXny-8/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "0VCpPloplNY",
-        "title": "Guess The Rank in FORTNITE ft. SypherPK, Amar, Mongraal & MrSavage",
-        "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
-        "sourceChannelTitle": "Red Bull Esports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/0VCpPloplNY/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "dcGHp_BqcCM",
-        "title": "Mission: Hurricane EP7",
-        "sourceChannelId": "UCcSrNe5CbXOmsF645RYDe5w",
-        "sourceChannelTitle": "WeatherSpyTV",
-        "thumbnailUrl": "https://i.ytimg.com/vi/dcGHp_BqcCM/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "yJ-kgIKZNm4",
-        "title": "Is the 2027 NFL Draft class looking like a DISAPPOINTMENT? 🤔",
-        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
-        "sourceChannelTitle": "NFL on ESPN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/yJ-kgIKZNm4/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "HRMCWVyr5ss",
-        "title": "Minamino Yume's Vault! 🇯🇵 | Dakar Youth Olympics",
-        "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
-        "sourceChannelTitle": "Olympics Gymnastics",
-        "thumbnailUrl": "https://i.ytimg.com/vi/HRMCWVyr5ss/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "NoLZHGW2Nl0",
-        "title": "Tyler Toney Has a HUGE Problem With Duck Hunting Season",
-        "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
-        "sourceChannelTitle": "Almost Athletes with Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NoLZHGW2Nl0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "H2hTkbWvmO8",
-        "title": "'He got merked' 😆",
-        "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
-        "sourceChannelTitle": "Nitro Circus",
-        "thumbnailUrl": "https://i.ytimg.com/vi/H2hTkbWvmO8/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "I7K8HTklrG4",
-        "title": "Josh Hokit reacting to Ciryl Gane's KO over Alex Pereira #ufc334",
-        "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
-        "sourceChannelTitle": "UFC",
-        "thumbnailUrl": "https://i.ytimg.com/vi/I7K8HTklrG4/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "NffLBR4im28",
-        "title": "How Wemby?! 😱",
-        "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
-        "sourceChannelTitle": "NBA",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NffLBR4im28/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ETVUBCD7-Bk/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2491,35 +2307,219 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "MojzyGnga5o",
-        "title": "Mom just happy to be there🔥😅",
+        "youtubeVideoId": "13YuMKeCtuE",
+        "title": "“PASS TO STEPH” Coach Jimmy Butler’s Game Plan for the Warriors 🤣",
         "sourceChannelId": "UCqQo7ewe87aYAe7ub5UqXMw",
         "sourceChannelTitle": "House of Highlights",
-        "thumbnailUrl": "https://i.ytimg.com/vi/MojzyGnga5o/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/13YuMKeCtuE/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "csoJZlpT9AE",
-        "title": "POV: Fighting a House Fire 🎬 Bryce Medina #GoPro",
-        "sourceChannelId": "UCqhnX4jA0A5paNd1v-zEysw",
-        "sourceChannelTitle": "GoPro",
-        "thumbnailUrl": "https://i.ytimg.com/vi/csoJZlpT9AE/hqdefault.jpg",
+        "youtubeVideoId": "OVRba175OpU",
+        "title": "Double Dragon Gaiden: Rise Of The Dragons - LAUNCH TRAILER",
+        "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
+        "sourceChannelTitle": "Secret Base",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OVRba175OpU/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "dfzhNKPPqjM",
-        "title": "WHO HIT THE TARGET?! 🎯",
-        "sourceChannelId": "UCRijo3ddMTht_IHyNSNXpNQ",
-        "sourceChannelTitle": "Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/dfzhNKPPqjM/hqdefault.jpg",
+        "youtubeVideoId": "y23pvZMQCPI",
+        "title": "Wild Race Start & Mercedes' Wet Weather Struggles In Interlagos | Jolyon Palmer's F1 TV Analysis",
+        "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
+        "sourceChannelTitle": "FORMULA 1",
+        "thumbnailUrl": "https://i.ytimg.com/vi/y23pvZMQCPI/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ILi9y-1bDj0",
-        "title": "Trent 4k like 🤯 #g2 #vct #redbull",
+        "youtubeVideoId": "XR21JDFQv-E",
+        "title": "Five-star Falkirk THUMP sorry Hearts! 💢 | Hearts 2-5 Falkirk | SPFL highlights",
+        "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
+        "sourceChannelTitle": "Sky Sports Football",
+        "thumbnailUrl": "https://i.ytimg.com/vi/XR21JDFQv-E/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "074I4964nGw",
+        "title": "Mzondois is GOLDEN for Zimbabwe! 🇿🇼 | Men's 200m #Dakar2026",
+        "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
+        "sourceChannelTitle": "Olympic Games",
+        "thumbnailUrl": "https://i.ytimg.com/vi/074I4964nGw/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "jWVzGoSXHPU",
+        "title": "The future of Street Fighter is HERE | Sahara vs Blaz",
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
         "sourceChannelTitle": "Red Bull Esports",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ILi9y-1bDj0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jWVzGoSXHPU/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "JWKUr2rFmxk",
+        "title": "Stephen A. tells Trevor Lawrence to ANSWER THE CALL as the Jaguars make big moves 📞 | First Take",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JWKUr2rFmxk/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "ShpQZ-RLibQ",
+        "title": "Li Lezheng on the Horizontal Bar at Dakar 2026! 🇨🇳 | Youth Olympics",
+        "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
+        "sourceChannelTitle": "Olympics Gymnastics",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ShpQZ-RLibQ/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "mqeTIFCNwiE",
+        "title": "Dude Perfect Picks Season 1 Fan Fail WINNER!",
+        "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
+        "sourceChannelTitle": "Almost Athletes with Dude Perfect",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqeTIFCNwiE/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "CuhVdH5QGbg",
+        "title": "Only ONE Man in History Had Ever Landed This Stunt...",
+        "sourceChannelId": "UC9UGYdMSKasjY0mhU1lG4lQ",
+        "sourceChannelTitle": "Nitro Circus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CuhVdH5QGbg/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "JnX9xgJu3q4",
+        "title": "UFC FIGHTS THAT ARE AMAZING",
+        "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
+        "sourceChannelTitle": "UFC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JnX9xgJu3q4/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "y-jR93AytPc",
+        "title": "EXTENDED: PACERS at MAVERICKS | FULL GAME HIGHLIGHTS | November 9, 2026",
+        "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
+        "sourceChannelTitle": "NBA",
+        "thumbnailUrl": "https://i.ytimg.com/vi/y-jR93AytPc/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "QxO8kEPVmC0",
+        "title": "Every Team's Longest Play at Midseason | 2026 NFL Season",
+        "sourceChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
+        "sourceChannelTitle": "NFL",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QxO8kEPVmC0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "x13U7HIJGHg",
+        "title": "Double Dragon Gaiden : Rise of the Dragons - Announcement Trailer",
+        "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
+        "sourceChannelTitle": "Secret Base",
+        "thumbnailUrl": "https://i.ytimg.com/vi/x13U7HIJGHg/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "_09gPxeE_gc",
+        "title": "Top 10 Onboards | 2026 Sao Paulo Grand Prix | Qatar Airways",
+        "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
+        "sourceChannelTitle": "FORMULA 1",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_09gPxeE_gc/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "DSicuQmGksI",
+        "title": "Hoops restore four-point lead at top! | Celtic 1-0 Kilmarnock | SPFL highlights",
+        "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
+        "sourceChannelTitle": "Sky Sports Football",
+        "thumbnailUrl": "https://i.ytimg.com/vi/DSicuQmGksI/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "B_IwF-sh0LI",
+        "title": "🔴 𝙇𝙄𝙑𝙀 Summer Youth Olympics! Taekwondo Finals - Women's -55kg, -63kg & Men's -63kg | #Dakar2026",
+        "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
+        "sourceChannelTitle": "Olympic Games",
+        "thumbnailUrl": "https://i.ytimg.com/vi/B_IwF-sh0LI/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "1_91kDYtHbo",
+        "title": "Street Fighter's Most Competitive Rivalry | Tokido vs MenaRD",
+        "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
+        "sourceChannelTitle": "Red Bull Esports",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1_91kDYtHbo/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "QmLsn_JrPbo",
+        "title": "‘NOT FAIR’ 😤 How the Bengals offense KEEPS dominating | Move the Sticks",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QmLsn_JrPbo/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "HRMCWVyr5ss",
+        "title": "Minamino Yume's Vault! 🇯🇵 | Dakar Youth Olympics",
+        "sourceChannelId": "UC_kdjhHnkUbSImMrezjRyDQ",
+        "sourceChannelTitle": "Olympics Gymnastics",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HRMCWVyr5ss/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "YvYBloAS3_Y",
+        "title": "Polymarket UFC 334: Ceremonial Weigh-In",
+        "sourceChannelId": "UCvgfXK4nTYKudb0rFR6noLA",
+        "sourceChannelTitle": "UFC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YvYBloAS3_Y/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "B5VNBCvu4E0",
+        "title": "NBA's Top 10 Plays of the Night | November 9, 2026",
+        "sourceChannelId": "UCWJ2lWNubArHWmf3FIHbfcQ",
+        "sourceChannelTitle": "NBA",
+        "thumbnailUrl": "https://i.ytimg.com/vi/B5VNBCvu4E0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "BN_-u78ur0I",
+        "title": "Top 15 Plays of Week 9! | 2026 NFL Season",
+        "sourceChannelId": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
+        "sourceChannelTitle": "NFL",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BN_-u78ur0I/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "8TvF1hxB7c0",
+        "title": "Original Devil Dare review on GameTrailers",
+        "sourceChannelId": "UCw_LnTX4iYwMic7q20I4uRQ",
+        "sourceChannelTitle": "Secret Base",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8TvF1hxB7c0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "q16mDWoytf0",
+        "title": "Nine Minutes Of Max Verstappen Tearing Through The Field At Interlagos | 2026 Sao Paulo Grand Prix",
+        "sourceChannelId": "UCB_qr75-ydFVKSF9Dmo6izg",
+        "sourceChannelTitle": "FORMULA 1",
+        "thumbnailUrl": "https://i.ytimg.com/vi/q16mDWoytf0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "LVhbeQDt5RM",
+        "title": "Spence assists Esposito as Como beaten! | Inter Milan 2-0 Como | Serie A Highlights",
+        "sourceChannelId": "UCZ7wY7MRDSygp63HIEfdQZA",
+        "sourceChannelTitle": "Sky Sports Football",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LVhbeQDt5RM/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "ta-sP-EY8aM",
+        "title": "🔴 𝙇𝙄𝙑𝙀 Summer Youth Olympics! Athletics Finals - Men's & Women's 200m and more! | #Dakar2026",
+        "sourceChannelId": "UCTl3QQTvqHFjurroKxexy2Q",
+        "sourceChannelTitle": "Olympic Games",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ta-sP-EY8aM/hqdefault.jpg",
         "durationSec": 600
       }
     ]
@@ -2528,7 +2528,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "travel",
     "categoryName": "Travel",
     "hue": 190,
-    "builtAt": 1794336511941,
+    "builtAt": 1794338234296,
     "videos": [
       {
         "youtubeVideoId": "42M_CnizJxc",
@@ -2563,11 +2563,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "iK5oNZtdXxQ",
-        "title": "What to Eat in Liverpool The Ultimate Food Guide!",
+        "youtubeVideoId": "sWBMwr3y9c4",
+        "title": "Montenegro Food: What to Eat & Drink When You Visit",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/iK5oNZtdXxQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sWBMwr3y9c4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2587,11 +2587,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Rw2KYD6WuqI",
-        "title": "Proud to be a barefoot human with @vivobarefootTV ❤️ Use code 25EVAZUBECK for 25% off at checkout!",
+        "youtubeVideoId": "kYyxSvOcr4k",
+        "title": "Everyday life living in my tent alone (with horses & dogs)",
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Rw2KYD6WuqI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kYyxSvOcr4k/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2603,11 +2603,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "cabm6L_rgC8",
-        "title": "Viper on a Remote Trail",
+        "youtubeVideoId": "q7thhitQoww",
+        "title": "The Zombie Fungus Worth More than Gold",
         "sourceChannelId": "UC_DmOS_FBvO4H27U7X0OtRg",
         "sourceChannelTitle": "Fearless &amp; Far",
-        "thumbnailUrl": "https://i.ytimg.com/vi/cabm6L_rgC8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/q7thhitQoww/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2667,11 +2667,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "sWBMwr3y9c4",
-        "title": "Montenegro Food: What to Eat & Drink When You Visit",
+        "youtubeVideoId": "pG4ru332TYc",
+        "title": "What to Eat in Florence, Italy - Traditional Florentine Food You MUST Try",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sWBMwr3y9c4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/pG4ru332TYc/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2691,27 +2691,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "kYyxSvOcr4k",
-        "title": "Everyday life living in my tent alone (with horses & dogs)",
+        "youtubeVideoId": "vofF8V-40dU",
+        "title": "I'm moving into a tent... (and I rescued a dog)",
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kYyxSvOcr4k/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vofF8V-40dU/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "OMHTpynpU7g",
-        "title": "How London’s Famous Salt Beef Beigel Is Made 🇬🇧",
+        "youtubeVideoId": "8tEXcv-8pIw",
+        "title": "I Tried the World’s Most UNUSUAL Buffet!! (in Greenland 🇬🇱)",
         "sourceChannelId": "UCyEd6QBSgat5kkC6svyjudA",
         "sourceChannelTitle": "Mark Wiens",
-        "thumbnailUrl": "https://i.ytimg.com/vi/OMHTpynpU7g/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "hj-3KmH8a30",
-        "title": "River Catch Wrapped in Leaves",
-        "sourceChannelId": "UC_DmOS_FBvO4H27U7X0OtRg",
-        "sourceChannelTitle": "Fearless &amp; Far",
-        "thumbnailUrl": "https://i.ytimg.com/vi/hj-3KmH8a30/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8tEXcv-8pIw/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2731,11 +2723,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ntg3B80YRNo",
-        "title": "Trying the viral Iranian “looti pulao” in Dubai at Iranish Restaurant!",
+        "youtubeVideoId": "VBcwjyBzAdo",
+        "title": "I Tried China's Most Insane Breakfasts!",
         "sourceChannelId": "UCiAq_SU0ED1C6vWFMnw8Ekg",
         "sourceChannelTitle": "The Food Ranger",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ntg3B80YRNo/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VBcwjyBzAdo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2771,11 +2763,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "pG4ru332TYc",
-        "title": "What to Eat in Florence, Italy - Traditional Florentine Food You MUST Try",
+        "youtubeVideoId": "7XxKCSS_iZ4",
+        "title": "The Best Food in Turin, Italy - What to Eat in Torino",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/pG4ru332TYc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7XxKCSS_iZ4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2795,27 +2787,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "HJ98D9wLmNY",
-        "title": "My book, THE WILDER WAY, is now available in GERMAN! Buy it anywhere you buy your books!",
+        "youtubeVideoId": "uuJpJ6sAULE",
+        "title": "Life has taken a crazy turn (am I a farmer now?)",
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
-        "thumbnailUrl": "https://i.ytimg.com/vi/HJ98D9wLmNY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uuJpJ6sAULE/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "8tEXcv-8pIw",
-        "title": "I Tried the World’s Most UNUSUAL Buffet!! (in Greenland 🇬🇱)",
+        "youtubeVideoId": "gM5hAO3bW7s",
+        "title": "Surviving GREENLAND!! Arctic Food for 4,500 Years!!",
         "sourceChannelId": "UCyEd6QBSgat5kkC6svyjudA",
         "sourceChannelTitle": "Mark Wiens",
-        "thumbnailUrl": "https://i.ytimg.com/vi/8tEXcv-8pIw/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "tEgNK8FxcYs",
-        "title": "Dinner Comes with Spikes",
-        "sourceChannelId": "UC_DmOS_FBvO4H27U7X0OtRg",
-        "sourceChannelTitle": "Fearless &amp; Far",
-        "thumbnailUrl": "https://i.ytimg.com/vi/tEgNK8FxcYs/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gM5hAO3bW7s/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2827,19 +2811,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "NPbYmiWvBHY",
-        "title": "I've NEVER SEEN this Filipino sweet before 🇵🇭 So Unique!!",
-        "sourceChannelId": "UCD5v3wL-6NMG0SMMeR6TxsA",
-        "sourceChannelTitle": "Extra Chopsticks",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NPbYmiWvBHY/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "PVJAvf947aI",
-        "title": "Trying the most viral seafood restaurant in Greece",
+        "youtubeVideoId": "_SoZEcucEXg",
+        "title": "I Ranked 13 Chinese Street Foods on a $100 Budget!",
         "sourceChannelId": "UCiAq_SU0ED1C6vWFMnw8Ekg",
         "sourceChannelTitle": "The Food Ranger",
-        "thumbnailUrl": "https://i.ytimg.com/vi/PVJAvf947aI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_SoZEcucEXg/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2875,11 +2851,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "bjnLknm-lns",
-        "title": "Eat Seasonal When you Travel Europe for the best Treats!",
+        "youtubeVideoId": "xWT89PEpAXU",
+        "title": "Best Drinks Tourists Should Try in France",
         "sourceChannelId": "UCkFli83zdGzt7s-IsiRijXA",
         "sourceChannelTitle": "Wolters World Eats",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bjnLknm-lns/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xWT89PEpAXU/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2899,27 +2875,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "vofF8V-40dU",
-        "title": "I'm moving into a tent... (and I rescued a dog)",
+        "youtubeVideoId": "D8dAqVe6m0E",
+        "title": "They're making my life here VERY difficult",
         "sourceChannelId": "UCDTINI9skkeZNY2ZXnBqIkQ",
         "sourceChannelTitle": "Eva zu Beck",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vofF8V-40dU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/D8dAqVe6m0E/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "y0RKbdmLOcQ",
-        "title": "Everything I Ate for 24 hours as a MasterChef Asia Judge in Macao!",
+        "youtubeVideoId": "Tk_0L_vS5Y4",
+        "title": "Food is WILD on the World’s Biggest Island!!",
         "sourceChannelId": "UCyEd6QBSgat5kkC6svyjudA",
         "sourceChannelTitle": "Mark Wiens",
-        "thumbnailUrl": "https://i.ytimg.com/vi/y0RKbdmLOcQ/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "ifYSO8p_ik4",
-        "title": "Amazon Sweat Bees: Honey Hunt Gone Wrong",
-        "sourceChannelId": "UC_DmOS_FBvO4H27U7X0OtRg",
-        "sourceChannelTitle": "Fearless &amp; Far",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ifYSO8p_ik4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Tk_0L_vS5Y4/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -2929,6 +2897,38 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Indigo Traveller",
         "thumbnailUrl": "https://i.ytimg.com/vi/xNXA8CRnZXY/hqdefault.jpg",
         "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "-7BUwQH6bAY",
+        "title": "I Tried the World's Spiciest Chinese Food!! (Almost Died)",
+        "sourceChannelId": "UCiAq_SU0ED1C6vWFMnw8Ekg",
+        "sourceChannelTitle": "The Food Ranger",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-7BUwQH6bAY/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "jZb8qTrR5lk",
+        "title": "Credit Card Stacking Explained: Save More, Earn More",
+        "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
+        "sourceChannelTitle": "Daily Drop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jZb8qTrR5lk/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "CKDGkhQDLjQ",
+        "title": "We Launched the First Ever \"Seek Discomfort\" Shoe!",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CKDGkhQDLjQ/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "EFczZrLwS_I",
+        "title": "Building a Product in China (the idea got REAL)",
+        "sourceChannelId": "UCi7KXaqqW_h6ifNVnudH0kQ",
+        "sourceChannelTitle": "Christian LeBlanc",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EFczZrLwS_I/hqdefault.jpg",
+        "durationSec": 600
       }
     ]
   },
@@ -2936,7 +2936,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "film",
     "categoryName": "Film",
     "hue": 300,
-    "builtAt": 1794336512345,
+    "builtAt": 1794338234810,
     "videos": [
       {
         "youtubeVideoId": "ZzaAa6yDvVk",
@@ -2955,11 +2955,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "W-ssgONXWX8",
-        "title": "This mouse makes a great gift for a PC gamer. Sponsored Ad by @BestBuy",
+        "youtubeVideoId": "AgLOYGvPJoQ",
+        "title": "DreamWorks Shrek 2 Remastered - Official Launch Trailer",
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/W-ssgONXWX8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AgLOYGvPJoQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3027,11 +3027,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Nl7q_96GWV0",
-        "title": "A trip to Granville Island @VIFFest Industry 2026",
+        "youtubeVideoId": "ZXUBoI9eHfQ",
+        "title": "Every Frame x Lackadaisy - Interview with Tracy J. Butler & Fable Siegel",
         "sourceChannelId": "UCjFqcJQXGZ6T6sxyFB-5i6A",
         "sourceChannelTitle": "Every Frame a Painting",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Nl7q_96GWV0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZXUBoI9eHfQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3059,11 +3059,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "0VZSru3ol98",
-        "title": "How Film Crews Prevent Ruined Shots",
+        "youtubeVideoId": "Wq8_S3drQg8",
+        "title": "The Art of Faking It in Movies",
         "sourceChannelId": "UCDylnpLJWDj2gKWujjwap9w",
         "sourceChannelTitle": "StudioBinder Academy",
-        "thumbnailUrl": "https://i.ytimg.com/vi/0VZSru3ol98/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Wq8_S3drQg8/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3123,11 +3123,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "tPOmWB1ui3o",
-        "title": "A New Challenger approaches...",
+        "youtubeVideoId": "FBV-leryHu8",
+        "title": "VFX Artists React to Bad & Great CGi 250",
         "sourceChannelId": "UCSpFnDQr88xCZ80N-X7t0nQ",
         "sourceChannelTitle": "Corridor Crew",
-        "thumbnailUrl": "https://i.ytimg.com/vi/tPOmWB1ui3o/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FBV-leryHu8/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3139,11 +3139,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "GRgb8oDtxOc",
-        "title": "Things you learn in South Korea @VIFFest 2026 Industry",
+        "youtubeVideoId": "CahiJhFxrTE",
+        "title": "THE SECOND | Animatic vs. Final (Bonus Video)",
         "sourceChannelId": "UCjFqcJQXGZ6T6sxyFB-5i6A",
         "sourceChannelTitle": "Every Frame a Painting",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GRgb8oDtxOc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CahiJhFxrTE/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3171,19 +3171,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Wq8_S3drQg8",
-        "title": "The Art of Faking It in Movies",
+        "youtubeVideoId": "NK5wsSLY5-o",
+        "title": "How Movies Replace Actors Without You Noticing",
         "sourceChannelId": "UCDylnpLJWDj2gKWujjwap9w",
         "sourceChannelTitle": "StudioBinder Academy",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Wq8_S3drQg8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NK5wsSLY5-o/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "g1Jbb45TDrk",
-        "title": "Which Darunia had the better Lost Woods dance in Ocarina of Time? #zelda #ocarinaoftime #og #ign",
+        "youtubeVideoId": "zjIXBESV0ew",
+        "title": "Marvel Rivals - Official Nightcrawler Character Reveal Trailer",
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/g1Jbb45TDrk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zjIXBESV0ew/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3235,11 +3235,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "FBV-leryHu8",
-        "title": "VFX Artists React to Bad & Great CGi 250",
+        "youtubeVideoId": "TOfKSbaM4wM",
+        "title": "A PEEK at our BIGGEST Project YET!",
         "sourceChannelId": "UCSpFnDQr88xCZ80N-X7t0nQ",
         "sourceChannelTitle": "Corridor Crew",
-        "thumbnailUrl": "https://i.ytimg.com/vi/FBV-leryHu8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TOfKSbaM4wM/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3251,11 +3251,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "yJiZGtm_Xpc",
-        "title": "A new live event @VIFFest Industry 2026",
+        "youtubeVideoId": "Mfz6tj_Ep1E",
+        "title": "THE SECOND | Short Film",
         "sourceChannelId": "UCjFqcJQXGZ6T6sxyFB-5i6A",
         "sourceChannelTitle": "Every Frame a Painting",
-        "thumbnailUrl": "https://i.ytimg.com/vi/yJiZGtm_Xpc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Mfz6tj_Ep1E/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3275,27 +3275,27 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "FX49j9ImvlU",
-        "title": "My Favorite Pacino Performance #thomasflight #acting",
+        "youtubeVideoId": "hygub3ScCbQ",
+        "title": "Furiosa - Thomas Flight Review",
         "sourceChannelId": "UC-hehDTvO4X8d9M7MVtpElg",
         "sourceChannelTitle": "Seeing Through Our Screens - Thomas Flight",
-        "thumbnailUrl": "https://i.ytimg.com/vi/FX49j9ImvlU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hygub3ScCbQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "NK5wsSLY5-o",
-        "title": "How Movies Replace Actors Without You Noticing",
+        "youtubeVideoId": "3ew1FTNK4K0",
+        "title": "The Film Job Nobody Talks About",
         "sourceChannelId": "UCDylnpLJWDj2gKWujjwap9w",
         "sourceChannelTitle": "StudioBinder Academy",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NK5wsSLY5-o/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3ew1FTNK4K0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "zjIXBESV0ew",
-        "title": "Marvel Rivals - Official Nightcrawler Character Reveal Trailer",
+        "youtubeVideoId": "PbvwXckJKrw",
+        "title": "Minerva Rising - Official Launch Trailer",
         "sourceChannelId": "UCKy1dAqELo0zrOtPkf0eTMw",
         "sourceChannelTitle": "IGN",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zjIXBESV0ew/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PbvwXckJKrw/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3344,7 +3344,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "fitness",
     "categoryName": "Fitness",
     "hue": 100,
-    "builtAt": 1794336512843,
+    "builtAt": 1794338235193,
     "videos": [
       {
         "youtubeVideoId": "xVuvVmZdIpQ",
@@ -3363,19 +3363,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "CmreFQoVans",
-        "title": "I Trained With Rice for 30 Days!",
+        "youtubeVideoId": "dP5SxmMNjAE",
+        "title": "Can You Really Get Fit With Just 1 Hour a Week?",
         "sourceChannelId": "UCZIIRX8rkNjVpP-oLMHpeDw",
         "sourceChannelTitle": "Calisthenicmovement",
-        "thumbnailUrl": "https://i.ytimg.com/vi/CmreFQoVans/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dP5SxmMNjAE/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "w7lWAtaQlkQ",
-        "title": "Work-to-Rest Ratios & Strength: What You Need to Know",
+        "youtubeVideoId": "Dg26eIEgH50",
+        "title": "[FREE Day 4]- Bored Easily Core & HIIT Cardio: Blended Exercises with No Equipment",
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
-        "thumbnailUrl": "https://i.ytimg.com/vi/w7lWAtaQlkQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Dg26eIEgH50/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3395,19 +3395,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "tfY99dJ-A88",
-        "title": "Casual 1950's style",
+        "youtubeVideoId": "aCH0eUXFMk0",
+        "title": "I Dressed Like a 1950s Man for a Week, Here's What Happened",
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
-        "thumbnailUrl": "https://i.ytimg.com/vi/tfY99dJ-A88/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/aCH0eUXFMk0/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "txsjs8Mvits",
-        "title": "What I would about society #stayflexy #ad @wearpeluva",
+        "youtubeVideoId": "NDX4pSQZVYA",
+        "title": "The ONLY Deep Squat Video You Need",
         "sourceChannelId": "UCM2ra7Od2jliHB9TLPKt76w",
         "sourceChannelTitle": "MovementbyDavid",
-        "thumbnailUrl": "https://i.ytimg.com/vi/txsjs8Mvits/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NDX4pSQZVYA/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3419,11 +3419,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "fFEOLAGTkjM",
-        "title": "pov: you’re in your 3rd trimester",
+        "youtubeVideoId": "H90XDZVHKHI",
+        "title": "25 MIN BIRTH BALL EXERCISES (MadFit App Prenatal Program)",
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fFEOLAGTkjM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/H90XDZVHKHI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3459,19 +3459,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "nIHuncyH_zc",
-        "title": "Are You Lying About Your Pull Ups?",
-        "sourceChannelId": "UCZIIRX8rkNjVpP-oLMHpeDw",
-        "sourceChannelTitle": "Calisthenicmovement",
-        "thumbnailUrl": "https://i.ytimg.com/vi/nIHuncyH_zc/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "T_azyub3mPQ",
-        "title": "Reps & Weight Ratios: What Really Builds Strength?",
+        "youtubeVideoId": "xGSLQ1ynZjQ",
+        "title": "Community Discussion: You Questions Answered Video Response (Brian & Tasha)",
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
-        "thumbnailUrl": "https://i.ytimg.com/vi/T_azyub3mPQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xGSLQ1ynZjQ/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3491,19 +3483,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "aCH0eUXFMk0",
-        "title": "I Dressed Like a 1950s Man for a Week, Here's What Happened",
+        "youtubeVideoId": "uldb_2pKxvA",
+        "title": "Full Day of Eating with the ONLY 20 Foods You Need to Get Shredded",
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
-        "thumbnailUrl": "https://i.ytimg.com/vi/aCH0eUXFMk0/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "1GvHr5KBWMg",
-        "title": "These abs tests... HARD #stayflexy",
-        "sourceChannelId": "UCM2ra7Od2jliHB9TLPKt76w",
-        "sourceChannelTitle": "MovementbyDavid",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1GvHr5KBWMg/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uldb_2pKxvA/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3515,11 +3499,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "UZRYKxY6mdw",
-        "title": "Focusing on stability during pregnancy is one of the best things I’ve done!",
+        "youtubeVideoId": "rbUl0AyD1Dk",
+        "title": "30 DAY HOME WORKOUT CHALLENGE | FREE Full Body Workout Plan",
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/UZRYKxY6mdw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rbUl0AyD1Dk/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3531,11 +3515,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "tgk77qH9UmQ",
-        "title": "Top 3 Core Exercises for Calisthenics",
+        "youtubeVideoId": "hR6R0oVl6_U",
+        "title": "10 Calisthenics Exercises Every Gym Lifter MUST Do",
         "sourceChannelId": "UCgFItI58gEggW1-39DxjVbA",
         "sourceChannelTitle": "CALISTHENICS FAMILY",
-        "thumbnailUrl": "https://i.ytimg.com/vi/tgk77qH9UmQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hR6R0oVl6_U/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3555,19 +3539,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "zvcsrmzomH4",
-        "title": "Don't Feel Like Working Out - Try This!",
-        "sourceChannelId": "UCZIIRX8rkNjVpP-oLMHpeDw",
-        "sourceChannelTitle": "Calisthenicmovement",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zvcsrmzomH4/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "Dg26eIEgH50",
-        "title": "[FREE Day 4]- Bored Easily Core & HIIT Cardio: Blended Exercises with No Equipment",
+        "youtubeVideoId": "6QBodF49E1s",
+        "title": "Energizing Cardio and Core: Low-Impact Exercises with Light Weights",
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Dg26eIEgH50/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6QBodF49E1s/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3587,19 +3563,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "UPLD5E8ERtc",
-        "title": "when you run into the other evil homie 🎃",
+        "youtubeVideoId": "r4NRilxu4WA",
+        "title": "The ONLY 20 Foods You Need to Get Shredded (Budget Grocery Haul)",
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
-        "thumbnailUrl": "https://i.ytimg.com/vi/UPLD5E8ERtc/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "yvax7DfQs1I",
-        "title": "Ankle Mobility!",
-        "sourceChannelId": "UCM2ra7Od2jliHB9TLPKt76w",
-        "sourceChannelTitle": "MovementbyDavid",
-        "thumbnailUrl": "https://i.ytimg.com/vi/yvax7DfQs1I/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/r4NRilxu4WA/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3611,11 +3579,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "GkkJ5e0v1KQ",
-        "title": "things I stopped caring about during pregnancy!",
+        "youtubeVideoId": "OIpQ9jnUH1c",
+        "title": "45 MIN FULL BODY STRENGTH + BALANCE WORKOUT (MadFit App Prenatal Program)",
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GkkJ5e0v1KQ/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OIpQ9jnUH1c/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3627,11 +3595,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "hR6R0oVl6_U",
-        "title": "10 Calisthenics Exercises Every Gym Lifter MUST Do",
+        "youtubeVideoId": "M3MnGJ-RCDk",
+        "title": "Can’t Do a Muscle-Up? Try This 7 Minute Workout",
         "sourceChannelId": "UCgFItI58gEggW1-39DxjVbA",
         "sourceChannelTitle": "CALISTHENICS FAMILY",
-        "thumbnailUrl": "https://i.ytimg.com/vi/hR6R0oVl6_U/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/M3MnGJ-RCDk/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3651,19 +3619,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "dP5SxmMNjAE",
-        "title": "Can You Really Get Fit With Just 1 Hour a Week?",
-        "sourceChannelId": "UCZIIRX8rkNjVpP-oLMHpeDw",
-        "sourceChannelTitle": "Calisthenicmovement",
-        "thumbnailUrl": "https://i.ytimg.com/vi/dP5SxmMNjAE/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "g1Jq_ghFULY",
-        "title": "Stop Comparing Your Fitness Journey",
+        "youtubeVideoId": "WRIOtDa2tG0",
+        "title": "Express Upper Body Active Recovery: Low-Intensity Cardio, Mobility & Stretching",
         "sourceChannelId": "UCiP6wD_tYlYLYh3agzbByWQ",
         "sourceChannelTitle": "FitnessBlender",
-        "thumbnailUrl": "https://i.ytimg.com/vi/g1Jq_ghFULY/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WRIOtDa2tG0/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3683,19 +3643,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "uldb_2pKxvA",
-        "title": "Full Day of Eating with the ONLY 20 Foods You Need to Get Shredded",
+        "youtubeVideoId": "PKxOEoZGDZI",
+        "title": "Im Broken...",
         "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
         "sourceChannelTitle": "Buff Dudes",
-        "thumbnailUrl": "https://i.ytimg.com/vi/uldb_2pKxvA/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "-KuWRD_T_d0",
-        "title": "Medieval Workout #stayflexy",
-        "sourceChannelId": "UCM2ra7Od2jliHB9TLPKt76w",
-        "sourceChannelTitle": "MovementbyDavid",
-        "thumbnailUrl": "https://i.ytimg.com/vi/-KuWRD_T_d0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PKxOEoZGDZI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3707,11 +3659,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "JS3sTtD_Eec",
-        "title": "“no equipment” does NOT mean you’re in the clear😅",
+        "youtubeVideoId": "uMJ_HdFusWs",
+        "title": "20 MIN CORE + BREATHING WORKOUT (MadFit App Prenatal Program)",
         "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
         "sourceChannelTitle": "MadFit",
-        "thumbnailUrl": "https://i.ytimg.com/vi/JS3sTtD_Eec/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uMJ_HdFusWs/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3720,14 +3672,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelId": "UChVRfsT_ASBZk10o0An7Ucg",
         "sourceChannelTitle": "Pamela Reif",
         "thumbnailUrl": "https://i.ytimg.com/vi/var0HjTAFhA/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "llO11-faOBs",
-        "title": "The 7-Minute Calisthenics Workout",
-        "sourceChannelId": "UCgFItI58gEggW1-39DxjVbA",
-        "sourceChannelTitle": "CALISTHENICS FAMILY",
-        "thumbnailUrl": "https://i.ytimg.com/vi/llO11-faOBs/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3745,6 +3689,62 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "ATHLEAN-X™",
         "thumbnailUrl": "https://i.ytimg.com/vi/X6LXOWzmUmY/hqdefault.jpg",
         "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "eQeNhnAHXP4",
+        "title": "Yoga for Better Posture | Chest, Shoulders & Upper Back",
+        "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
+        "sourceChannelTitle": "Yoga With Adriene",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eQeNhnAHXP4/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "Hf_NBDid0d0",
+        "title": "Stop Cutting and Bulking. Do This Instead.",
+        "sourceChannelId": "UCadiU6WTKl65HUwEih1XLYg",
+        "sourceChannelTitle": "PictureFit",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Hf_NBDid0d0/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "W--SWugwi_M",
+        "title": "How to Train Like The Witcher | Bodyweight Workout",
+        "sourceChannelId": "UCKf0UqBiCQI4Ol0To9V0pKQ",
+        "sourceChannelTitle": "Buff Dudes",
+        "thumbnailUrl": "https://i.ytimg.com/vi/W--SWugwi_M/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "2_VXktb_2ag",
+        "title": "20 Min Killer Full Body HIIT Workout - 2 Week Glow Up | Home Workout",
+        "sourceChannelId": "UCCgLoMYIyP0U56dEhEL1wXQ",
+        "sourceChannelTitle": "Chloe Ting",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2_VXktb_2ag/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "o9l63Vr0HRs",
+        "title": "THE COMPLETE PREGNANCY WORKOUT PROGRAM | Workouts for Every Trimester",
+        "sourceChannelId": "UCpQ34afVgk8cRQBjSJ1xuJQ",
+        "sourceChannelTitle": "MadFit",
+        "thumbnailUrl": "https://i.ytimg.com/vi/o9l63Vr0HRs/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "4Mn8O9szfKo",
+        "title": "12 MIN PAM’S BDAY DANCE - Dua Lipa, Bruno Mars, Lizzo, Anne Marie",
+        "sourceChannelId": "UChVRfsT_ASBZk10o0An7Ucg",
+        "sourceChannelTitle": "Pamela Reif",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4Mn8O9szfKo/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "RtLUWw0IViI",
+        "title": "Patience can help you achieve your goals faster (if you understand it)",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RtLUWw0IViI/hqdefault.jpg",
+        "durationSec": 600
       }
     ]
   },
@@ -3752,7 +3752,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "art",
     "categoryName": "Art",
     "hue": 330,
-    "builtAt": 1794336513239,
+    "builtAt": 1794338235757,
     "videos": [
       {
         "youtubeVideoId": "qLzw6r2ORk0",
@@ -3779,11 +3779,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "DmjAVwGii2c",
-        "title": "He Was An Artist Before Directing 🤯",
+        "youtubeVideoId": "-CfS7iOJmr8",
+        "title": "The Intermediate Plateau - Draftsmen S4E08",
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/DmjAVwGii2c/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-CfS7iOJmr8/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3875,11 +3875,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "-CfS7iOJmr8",
-        "title": "The Intermediate Plateau - Draftsmen S4E08",
+        "youtubeVideoId": "YO5axY8wHGk",
+        "title": "How to Learn Color - Draftsmen S4E07",
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/-CfS7iOJmr8/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YO5axY8wHGk/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -3971,11 +3971,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "YO5axY8wHGk",
-        "title": "How to Learn Color - Draftsmen S4E07",
+        "youtubeVideoId": "xjXqmNqukEY",
+        "title": "Draftsmen LIVE Q&A",
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/YO5axY8wHGk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xjXqmNqukEY/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4067,11 +4067,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "eDvvh8tJPGI",
-        "title": "How to Encourage Creativity #art",
+        "youtubeVideoId": "Dgf66X_dRVI",
+        "title": "State of the Art Industry - Draftsmen S04E06",
         "sourceChannelId": "UCfvIqreCk628yB9mp3e_ABQ",
         "sourceChannelTitle": "Draftsmen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/eDvvh8tJPGI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Dgf66X_dRVI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4160,22 +4160,22 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "design",
     "categoryName": "Design",
     "hue": 45,
-    "builtAt": 1794336513921,
+    "builtAt": 1794338236111,
     "videos": [
       {
-        "youtubeVideoId": "vQ_40b0Un-I",
-        "title": "These Bricks Move To Make Shelves And Hooks!",
+        "youtubeVideoId": "yUzgb0RYpfc",
+        "title": "Small Apartment Transformed With Clever Storage and Colour, Poland 58sqm/624sqft",
         "sourceChannelId": "UC_zQ777U6YTyatP3P1wi3xw",
         "sourceChannelTitle": "NEVER TOO SMALL",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vQ_40b0Un-I/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yUzgb0RYpfc/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "0OZdY64GOZk",
-        "title": "Jaylen Brown Has a Hyperbaric Chamber in His Bedroom",
+        "youtubeVideoId": "MYM0Q_6sbEc",
+        "title": "Inside the Coziest Celebrity Homes | Architectural Digest",
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
-        "thumbnailUrl": "https://i.ytimg.com/vi/0OZdY64GOZk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MYM0Q_6sbEc/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4251,11 +4251,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "4jOMmgdXNLA",
-        "title": "What does it mean to make the city?",
+        "youtubeVideoId": "WtpkjcbdvF8",
+        "title": "In Conversation with Fadaa at Amman Design Week 2026",
         "sourceChannelId": "UC3r_kdJocuqtDYb2GgM42Ng",
         "sourceChannelTitle": "ArchDaily",
-        "thumbnailUrl": "https://i.ytimg.com/vi/4jOMmgdXNLA/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WtpkjcbdvF8/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4267,19 +4267,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "5StC8a8Hyjo",
-        "title": "Your Hallway Could Be Working Harder #nevertoosmall #mycitymybackyard",
-        "sourceChannelId": "UC_zQ777U6YTyatP3P1wi3xw",
-        "sourceChannelTitle": "NEVER TOO SMALL",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5StC8a8Hyjo/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "MYM0Q_6sbEc",
-        "title": "Inside the Coziest Celebrity Homes | Architectural Digest",
+        "youtubeVideoId": "bKmUQcFlDPI",
+        "title": "How One Man DIY'd His Entire NYC Apartment | Small Spaces | Architectural Digest",
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
-        "thumbnailUrl": "https://i.ytimg.com/vi/MYM0Q_6sbEc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bKmUQcFlDPI/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4299,19 +4291,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "sUEwAXpQl3E",
-        "title": "Why Expertise Makes Influencers Truly Powerful",
+        "youtubeVideoId": "WrehiIId62U",
+        "title": "The Painful Truth About Being a “Jack of All Trades”",
         "sourceChannelId": "UC-b3c7kxa5vU-bnmaROgvog",
         "sourceChannelTitle": "The Futur",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sUEwAXpQl3E/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WrehiIId62U/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "3-YzceiIP3o",
-        "title": "Hong Kong’s Rainbow Estate is Coming Down",
+        "youtubeVideoId": "TPTtcV3qJ4U",
+        "title": "Is Chongqing REALLY a Cyberpunk City?",
         "sourceChannelId": "UCJ_2hNMxOzNjviJBiLWHMqg",
         "sourceChannelTitle": "DamiLee",
-        "thumbnailUrl": "https://i.ytimg.com/vi/3-YzceiIP3o/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TPTtcV3qJ4U/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4355,11 +4347,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "hjZulm02-Yc",
-        "title": "Las Vegas Architecture City Guide",
+        "youtubeVideoId": "_7S4pG9mMmM",
+        "title": "Why Light is The Most Important Material in Architecture",
         "sourceChannelId": "UC3r_kdJocuqtDYb2GgM42Ng",
         "sourceChannelTitle": "ArchDaily",
-        "thumbnailUrl": "https://i.ytimg.com/vi/hjZulm02-Yc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_7S4pG9mMmM/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4371,19 +4363,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "rAWKSMrQaVg",
-        "title": "This Artwork Seats Four… Yep, You Read That Right!",
-        "sourceChannelId": "UC_zQ777U6YTyatP3P1wi3xw",
-        "sourceChannelTitle": "NEVER TOO SMALL",
-        "thumbnailUrl": "https://i.ytimg.com/vi/rAWKSMrQaVg/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "kCuU3GDuEuw",
-        "title": "Why Dodger Stadium Looks So Different From Other Ballparks",
+        "youtubeVideoId": "dlnH0uVAEHk",
+        "title": "Inside NBA Star Jaylen Brown's Sleek Boston Penthouse | Open Door | Architectural Digest",
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kCuU3GDuEuw/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dlnH0uVAEHk/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4403,19 +4387,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "NBP_aFUiuZ4",
-        "title": "Don’t Explain Your Prices",
+        "youtubeVideoId": "LEVGLXBzghc",
+        "title": "Better Work Won’t Get You More Clients. This Will.",
         "sourceChannelId": "UC-b3c7kxa5vU-bnmaROgvog",
         "sourceChannelTitle": "The Futur",
-        "thumbnailUrl": "https://i.ytimg.com/vi/NBP_aFUiuZ4/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "XFncrDhMDic",
-        "title": "Happy halloween everyone ☠️👻☠️",
-        "sourceChannelId": "UCJ_2hNMxOzNjviJBiLWHMqg",
-        "sourceChannelTitle": "DamiLee",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XFncrDhMDic/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LEVGLXBzghc/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4451,19 +4427,19 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "nmfJdtjp3Wc",
-        "title": "Take a look at the key features of Dezeen's new website!",
+        "youtubeVideoId": "44PTbbnCVuE",
+        "title": "\"Things start in really simple gestures\" says Es Devlin of her Design Museum retrospective",
         "sourceChannelId": "UCsWG9ANbrmgR0z-eFk_A3YQ",
         "sourceChannelTitle": "Dezeen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/nmfJdtjp3Wc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/44PTbbnCVuE/hqdefault.jpg",
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "zExTY2eint0",
-        "title": "The Student Project Awards are back!",
+        "youtubeVideoId": "pDG_clTIfVc",
+        "title": "Jane Jacobs | The Woman Who Changed City Design Forever",
         "sourceChannelId": "UC3r_kdJocuqtDYb2GgM42Ng",
         "sourceChannelTitle": "ArchDaily",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zExTY2eint0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/pDG_clTIfVc/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4475,19 +4451,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "BWXeyNxczSU",
-        "title": "How Do You Fit A Home, Yoga Studio, Piano Room And Hair Salon Into One Garage?",
-        "sourceChannelId": "UC_zQ777U6YTyatP3P1wi3xw",
-        "sourceChannelTitle": "NEVER TOO SMALL",
-        "thumbnailUrl": "https://i.ytimg.com/vi/BWXeyNxczSU/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "bKmUQcFlDPI",
-        "title": "How One Man DIY'd His Entire NYC Apartment | Small Spaces | Architectural Digest",
+        "youtubeVideoId": "X8D6ZPz5eWc",
+        "title": "How an Architect Turned a Basic White Box Into a Dream NYC Home | Architectural Digest",
         "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
         "sourceChannelTitle": "Architectural Digest",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bKmUQcFlDPI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/X8D6ZPz5eWc/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4507,19 +4475,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "Vb6KM4g8huo",
-        "title": "Simple Phrase That Softnens Difficult Questions",
+        "youtubeVideoId": "EYXgfHNq6mo",
+        "title": "How to Stand Out When Everyone Sells the Same Thing",
         "sourceChannelId": "UC-b3c7kxa5vU-bnmaROgvog",
         "sourceChannelTitle": "The Futur",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Vb6KM4g8huo/hqdefault.jpg",
-        "durationSec": 600
-      },
-      {
-        "youtubeVideoId": "Dn5dCPg_yTc",
-        "title": "The Hidden Pattern in Khafre’s Pyramid",
-        "sourceChannelId": "UCJ_2hNMxOzNjviJBiLWHMqg",
-        "sourceChannelTitle": "DamiLee",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Dn5dCPg_yTc/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EYXgfHNq6mo/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4539,11 +4499,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "i7PxPJe6iEI",
-        "title": "i thought they said designers were obsolete?",
+        "youtubeVideoId": "JiJA5SHAwHs",
+        "title": "Walmart's new $1 million logo",
         "sourceChannelId": "UCSb-xYOELhIqVr2n9s-b_4w",
         "sourceChannelTitle": "Linus Boman",
-        "thumbnailUrl": "https://i.ytimg.com/vi/i7PxPJe6iEI/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JiJA5SHAwHs/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4555,11 +4515,51 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "8lmJtfWCJOU",
-        "title": "Peter Zumthor unveils trio of “wonderfully expressive” buildings for Swiss museum",
+        "youtubeVideoId": "s-kMNm8Ob3U",
+        "title": "Tuesday Labs debuts “droid butler” Voxel",
         "sourceChannelId": "UCsWG9ANbrmgR0z-eFk_A3YQ",
         "sourceChannelTitle": "Dezeen",
-        "thumbnailUrl": "https://i.ytimg.com/vi/8lmJtfWCJOU/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/s-kMNm8Ob3U/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "wmjwvYJzmhs",
+        "title": "the architecture of togetherness – room for utopias podcast (episode 03)",
+        "sourceChannelId": "UCv6JHGYnS74viHnZ-6zR2Jg",
+        "sourceChannelTitle": "designboom",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wmjwvYJzmhs/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "wPX8KOAGJ6A",
+        "title": "Inside a Legendary Stadium Carved Into an L.A. Hillside | Inside History | Architectural Digest",
+        "sourceChannelId": "UC0k238zFx-Z8xFH0sxCrPJg",
+        "sourceChannelTitle": "Architectural Digest",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wPX8KOAGJ6A/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "Vx40aviKhZE",
+        "title": "Inside a Penthouse Where Architecture, Interior and River Become One (Penthouse Tour)",
+        "sourceChannelId": "UCgxg48_pay4R67s-7WOgWFA",
+        "sourceChannelTitle": "The Local Project",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Vx40aviKhZE/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "NP_ugJHuY6w",
+        "title": "He turned fixer-upper hidden in French village maze into foot-only oasis",
+        "sourceChannelId": "UCDsElQQt_gCZ9LgnW-7v-cQ",
+        "sourceChannelTitle": "Kirsten Dirksen",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NP_ugJHuY6w/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "jHIkiGJ1PxM",
+        "title": "The Gross Reason Suburban Yards Had to Be This Big",
+        "sourceChannelId": "UCYAm24PkejQR2xMgJgn7xwg",
+        "sourceChannelTitle": "Stewart Hicks",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jHIkiGJ1PxM/hqdefault.jpg",
         "durationSec": 600
       }
     ]
@@ -4568,7 +4568,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "learning",
     "categoryName": "Learning",
     "hue": 235,
-    "builtAt": 1794336514214,
+    "builtAt": 1794338236477,
     "videos": [
       {
         "youtubeVideoId": "l7-eiKWhRHo",
@@ -4683,11 +4683,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "3DD2mW7uU_I",
-        "title": "If you live long enough, you may become a time traveler",
+        "youtubeVideoId": "r0750q5e-Us",
+        "title": "Chocolate is getting worse. So is everything else. | The Gray Area",
         "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
         "sourceChannelTitle": "Vox",
-        "thumbnailUrl": "https://i.ytimg.com/vi/3DD2mW7uU_I/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/r0750q5e-Us/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4755,11 +4755,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "v9sfKhXDOn0",
-        "title": "Blind Ranking Numbers (Tom Crawford)",
+        "youtubeVideoId": "vCAD3W43lIk",
+        "title": "Who's Richer, Mario or Sonic? - Numberphile",
         "sourceChannelId": "UCoxcjq-8xIDTYp3uz647V5A",
         "sourceChannelTitle": "Numberphile",
-        "thumbnailUrl": "https://i.ytimg.com/vi/v9sfKhXDOn0/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vCAD3W43lIk/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4795,11 +4795,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "EOy0rXDRqPM",
-        "title": "Animals shouldn't have to prove they deserve our care and compassion",
+        "youtubeVideoId": "olEs7cm1LWw",
+        "title": "Wes Moore to Dems: Move fast on affordability | America, Actually",
         "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
         "sourceChannelTitle": "Vox",
-        "thumbnailUrl": "https://i.ytimg.com/vi/EOy0rXDRqPM/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/olEs7cm1LWw/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4867,11 +4867,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "vCAD3W43lIk",
-        "title": "Who's Richer, Mario or Sonic? - Numberphile",
+        "youtubeVideoId": "EgnAN0ZUl08",
+        "title": "Squaring the Triangle - Numberphile",
         "sourceChannelId": "UCoxcjq-8xIDTYp3uz647V5A",
         "sourceChannelTitle": "Numberphile",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vCAD3W43lIk/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EgnAN0ZUl08/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4907,11 +4907,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "ENR-RY0wa2A",
-        "title": "Is Pete Hegseth headed for impeachment?",
+        "youtubeVideoId": "MQqi6wZYRGs",
+        "title": "Is this the end of MAGA?",
         "sourceChannelId": "UCLXo7UDZvByw2ixzpQCufnA",
         "sourceChannelTitle": "Vox",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ENR-RY0wa2A/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MQqi6wZYRGs/hqdefault.jpg",
         "durationSec": 600
       },
       {
@@ -4923,11 +4923,11 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
-        "youtubeVideoId": "XZZ9gGpeSq4",
-        "title": "In a world of endless health advice, clarity and context might be the best prescription #TEDTalks",
+        "youtubeVideoId": "84wVmiEl7Dg",
+        "title": "I Can’t Speak. Here’s How I Get People to Listen | Jessica Irwin | TED",
         "sourceChannelId": "UCAuUUnT6oDeKwE6v1NGQxug",
         "sourceChannelTitle": "TED",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XZZ9gGpeSq4/hqdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/84wVmiEl7Dg/hqdefault.jpg",
         "durationSec": 600
       },
       {

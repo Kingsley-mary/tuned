@@ -18,6 +18,7 @@ interface YouTubePlayerProps {
   onTimeUpdate: (currentTime: number, duration: number) => void;
   onBuffering: (isBuffering: boolean) => void;
   onReady?: () => void;
+  onShortDetected?: (videoId: string) => void;
 }
 
 export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -29,12 +30,14 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   onTimeUpdate,
   onBuffering,
   onReady,
+  onShortDetected,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isReadyRef = useRef<boolean>(false);
   const hasStartedRef = useRef<boolean>(false);
+  const shortCheckDoneRef = useRef<string | null>(null);
 
   // Initialize YT Player once API is loaded
   useEffect(() => {
@@ -190,7 +193,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     }
   }, [isPlaying]);
 
-  // Periodic time updates
+  // Periodic time updates & short detection
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       if (!playerRef.current || !isReadyRef.current) return;
@@ -198,13 +201,20 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
         const cur = playerRef.current.getCurrentTime?.() || 0;
         const dur = playerRef.current.getDuration?.() || 0;
         onTimeUpdate(cur, dur);
+
+        // YouTube Shorts auto-exclude guard: All Shorts are <= 60s
+        if (dur > 0 && dur <= 60 && shortCheckDoneRef.current !== videoId) {
+          shortCheckDoneRef.current = videoId;
+          console.warn(`[Tuned] Video ${videoId} is <=60s (${dur}s). Excluded as YouTube Short.`);
+          onShortDetected?.(videoId);
+        }
       } catch {}
     }, 250);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [onTimeUpdate]);
+  }, [onTimeUpdate, onShortDetected, videoId]);
 
   return (
     <div

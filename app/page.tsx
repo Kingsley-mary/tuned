@@ -297,6 +297,11 @@ export default function TunedApp() {
     });
   };
 
+  const handleShortDetected = (videoId: string) => {
+    completedVideoIdsRef.current.add(videoId);
+    handleNextVideo();
+  };
+
   const handleTogglePlay = () => {
     setIsPlaying((prev) => !prev);
   };
@@ -478,6 +483,7 @@ export default function TunedApp() {
           onTogglePlay={handleTogglePlay}
           onNextVideo={handleNextVideo}
           onJumpToLive={handleJumpToLive}
+          onShortDetected={handleShortDetected}
           onOpenGuide={() => setScreenMode('guide')}
           onOpenManage={() => setScreenMode('manage')}
           onPowerOff={handlePowerOff}

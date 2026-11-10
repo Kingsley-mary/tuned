@@ -38,7 +38,18 @@ async function fetchChannelUploads(channelId: string, channelName: string): Prom
       if (!vid || !rawTitle) continue;
 
       // Filter out YouTube Shorts
-      if (rawTitle.toLowerCase().includes('#shorts') || rawTitle.toLowerCase().includes('#short')) {
+      const link = entryText.match(/<link[^>]*href="([^"]+)"/)?.[1] || '';
+      const desc = entryText.match(/<media:description>([\\s\\S]*?)<\\/media:description>/)?.[1] || '';
+
+      if (link.includes('/shorts/') || entryText.includes('/shorts/')) {
+        continue;
+      }
+      if (/#shorts?\\b|[\\(\\[]shorts?[\\)\\]]|(\\bshorts\\b.*#)/i.test(rawTitle) ||
+          rawTitle.toLowerCase().includes('#shorts') ||
+          rawTitle.toLowerCase().includes('#short')) {
+        continue;
+      }
+      if (/#shorts?\\b|youtube\\.com\\/shorts/i.test(desc)) {
         continue;
       }
 

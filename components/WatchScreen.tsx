@@ -33,6 +33,7 @@ interface WatchScreenProps {
   onTogglePlay: () => void;
   onNextVideo: () => void;
   onJumpToLive?: () => void;
+  onShortDetected?: (videoId: string) => void;
   onOpenGuide: () => void;
   onOpenManage: () => void;
   onPowerOff: () => void;
@@ -51,6 +52,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   onTogglePlay,
   onNextVideo,
   onJumpToLive,
+  onShortDetected,
   onOpenGuide,
   onOpenManage,
   onPowerOff,
@@ -235,6 +237,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   }
                 }}
                 onBuffering={setIsBuffering}
+                onShortDetected={onShortDetected}
               />
             ) : (
               <div

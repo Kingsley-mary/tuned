@@ -107,16 +107,17 @@ export function getLiveBroadcastState(
       const seek = Math.floor(cycleTime - accumulated);
       const targetVid = videos[i];
 
-      // If the user already completed this exact video in this session, skip forward!
-      if (completedIds && completedIds.has(targetVid.youtubeVideoId)) {
+      // If the user already completed this exact video in this session (or it's a short), skip forward!
+      if ((completedIds && completedIds.has(targetVid.youtubeVideoId)) || dur <= 60) {
         for (let j = 1; j < videos.length; j++) {
           const nextIdx = (i + j) % videos.length;
-          if (!completedIds.has(videos[nextIdx].youtubeVideoId)) {
+          const nextDur = durations[nextIdx];
+          if (!completedIds?.has(videos[nextIdx].youtubeVideoId) && nextDur > 60) {
             return {
               videoIndex: nextIdx,
               seekSeconds: 0,
-              durationSec: durations[nextIdx],
-              remainingSec: durations[nextIdx],
+              durationSec: nextDur,
+              remainingSec: nextDur,
               currentVideo: videos[nextIdx],
             };
           }
@@ -164,8 +165,8 @@ export function advanceChannelPlayback(
     const vid = videos[idx];
     const dur = getVideoDuration(vid);
 
-    // If already marked as completed, skip forward immediately
-    if (completedIds.has(vid.youtubeVideoId)) {
+    // If already marked as completed or detected as a short, skip forward immediately
+    if (completedIds.has(vid.youtubeVideoId) || dur <= 60) {
       seek = 0;
       idx = (idx + 1) % videos.length;
       steps++;

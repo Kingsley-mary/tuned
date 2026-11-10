@@ -345,6 +345,22 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCqhnX4jA0A5paNd1v-zEysw",
       "name": "GoPro"
+    },
+    {
+      "id": "UCw_LnTX4iYwMic7q20I4uRQ",
+      "name": "Secret Base"
+    },
+    {
+      "id": "UCB_qr75-ydFVKSF9Dmo6izg",
+      "name": "Formula 1"
+    },
+    {
+      "id": "UCZ7wY7MRDSygp63HIEfdQZA",
+      "name": "Sky Sports Football"
+    },
+    {
+      "id": "UCTl3QQTvqHFjurroKxexy2Q",
+      "name": "Olympics"
     }
   ],
   "travel": [
@@ -703,7 +719,18 @@ async function fetchChannelUploads(channelId: string, channelName: string): Prom
       if (!vid || !rawTitle) continue;
 
       // Filter out YouTube Shorts
-      if (rawTitle.toLowerCase().includes('#shorts') || rawTitle.toLowerCase().includes('#short')) {
+      const link = entryText.match(/<link[^>]*href="([^"]+)"/)?.[1] || '';
+      const desc = entryText.match(/<media:description>([\s\S]*?)<\/media:description>/)?.[1] || '';
+
+      if (link.includes('/shorts/') || entryText.includes('/shorts/')) {
+        continue;
+      }
+      if (/#shorts?\b|[\(\[]shorts?[\)\]]|(\bshorts\b.*#)/i.test(rawTitle) ||
+          rawTitle.toLowerCase().includes('#shorts') ||
+          rawTitle.toLowerCase().includes('#short')) {
+        continue;
+      }
+      if (/#shorts?\b|youtube\.com\/shorts/i.test(desc)) {
         continue;
       }
 
