@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
-import { getLiveBroadcastState } from '../lib/broadcast-clock';
+import { getLiveBroadcastState, advanceChannelPlayback } from '../lib/broadcast-clock';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
 import { TuningScreen } from '../components/TuningScreen';
@@ -29,6 +29,8 @@ export default function TunedApp() {
 
   const isInitialLoadRef = useRef(true);
   const isDirtyRef = useRef(false);
+  const channelPlaybackStatesRef = useRef<Map<string, { videoIndex: number; seekSeconds: number; leftAt: number }>>(new Map());
+  const completedVideoIdsRef = useRef<Set<string>>(new Set());
 
   // Load user state from LocalStorage on mount (PRD Section 8 & 10)
   useEffect(() => {
@@ -190,12 +192,43 @@ export default function TunedApp() {
 
   // Handlers for Watch Screen
   const handleSelectChannel = (channelIndex: number) => {
+    // 1. Save state of current channel before switching
+    const currentCh = channels[currentChannelIndex];
+    if (currentCh) {
+      channelPlaybackStatesRef.current.set(currentCh.categoryId, {
+        videoIndex: currentVideoIndex,
+        seekSeconds: startSeconds,
+        leftAt: Date.now(),
+      });
+    }
+
     setCurrentChannelIndex(channelIndex);
     const target = channels[channelIndex];
     if (target && target.videos?.length > 0) {
-      const live = getLiveBroadcastState(target.videos, target.categoryId);
-      setCurrentVideoIndex(live.videoIndex);
-      setStartSeconds(live.seekSeconds);
+      const saved = channelPlaybackStatesRef.current.get(target.categoryId);
+      if (saved) {
+        // Resume target channel advancing forward by elapsed real time (never rewind!)
+        const elapsedSec = (Date.now() - saved.leftAt) / 1000;
+        const adv = advanceChannelPlayback(
+          target.videos,
+          saved.videoIndex,
+          saved.seekSeconds,
+          elapsedSec,
+          completedVideoIdsRef.current
+        );
+        setCurrentVideoIndex(adv.videoIndex);
+        setStartSeconds(adv.seekSeconds);
+      } else {
+        // First visit to this channel in this session: sync to live clock, skipping completed videos
+        const live = getLiveBroadcastState(
+          target.videos,
+          target.categoryId,
+          Math.floor(Date.now() / 1000),
+          completedVideoIdsRef.current
+        );
+        setCurrentVideoIndex(live.videoIndex);
+        setStartSeconds(live.seekSeconds);
+      }
     } else {
       setCurrentVideoIndex(0);
       setStartSeconds(0);
@@ -210,13 +243,58 @@ export default function TunedApp() {
     setIsPlaying(true);
   };
 
+  // Called when video ends naturally
   const handleNextVideo = () => {
     const active = channels[currentChannelIndex];
-    if (!active || !active.videos.length) return;
-    const nextIdx = (currentVideoIndex + 1) % active.videos.length;
+    if (!active || !active.videos?.length) return;
+
+    // Mark completed so it is never replayed when returning
+    const finishedVideo = active.videos[currentVideoIndex];
+    if (finishedVideo?.youtubeVideoId) {
+      completedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
+    }
+
+    let nextIdx = (currentVideoIndex + 1) % active.videos.length;
+    // Skip any video in completedVideoIds
+    let safety = 0;
+    while (
+      safety < active.videos.length &&
+      completedVideoIdsRef.current.has(active.videos[nextIdx].youtubeVideoId)
+    ) {
+      nextIdx = (nextIdx + 1) % active.videos.length;
+      safety++;
+    }
+
     setCurrentVideoIndex(nextIdx);
     setStartSeconds(0);
     setIsPlaying(true);
+
+    channelPlaybackStatesRef.current.set(active.categoryId, {
+      videoIndex: nextIdx,
+      seekSeconds: 0,
+      leftAt: Date.now(),
+    });
+  };
+
+  const handleJumpToLive = () => {
+    const active = channels[currentChannelIndex];
+    if (!active || !active.videos?.length) return;
+
+    const live = getLiveBroadcastState(
+      active.videos,
+      active.categoryId,
+      Math.floor(Date.now() / 1000),
+      completedVideoIdsRef.current
+    );
+    setCurrentVideoIndex(live.videoIndex);
+    setStartSeconds(live.seekSeconds);
+    setIsPlaying(true);
+
+    channelPlaybackStatesRef.current.set(active.categoryId, {
+      videoIndex: live.videoIndex,
+      seekSeconds: live.seekSeconds,
+      leftAt: Date.now(),
+    });
   };
 
   const handleTogglePlay = () => {
@@ -399,6 +477,7 @@ export default function TunedApp() {
           onSelectVideo={handleSelectVideo}
           onTogglePlay={handleTogglePlay}
           onNextVideo={handleNextVideo}
+          onJumpToLive={handleJumpToLive}
           onOpenGuide={() => setScreenMode('guide')}
           onOpenManage={() => setScreenMode('manage')}
           onPowerOff={handlePowerOff}

@@ -3,10 +3,10 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer } from './YouTubePlayer';
+import { recordVideoDuration } from '../lib/broadcast-clock';
 import {
   Play,
   Pause,
-  SkipForward,
   ChevronUp,
   ChevronDown,
   Tv,
@@ -17,6 +17,7 @@ import {
   Loader2,
   Maximize,
   Minimize,
+  Radio,
 } from 'lucide-react';
 
 interface WatchScreenProps {
@@ -31,6 +32,7 @@ interface WatchScreenProps {
   onSelectVideo: (videoIndex: number) => void;
   onTogglePlay: () => void;
   onNextVideo: () => void;
+  onJumpToLive?: () => void;
   onOpenGuide: () => void;
   onOpenManage: () => void;
   onPowerOff: () => void;
@@ -48,6 +50,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   onSelectVideo,
   onTogglePlay,
   onNextVideo,
+  onJumpToLive,
   onOpenGuide,
   onOpenManage,
   onPowerOff,
@@ -141,9 +144,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       if (e.key === ' ') {
         e.preventDefault();
         onTogglePlay();
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        onNextVideo();
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         const nextIdx = (currentChannelIndex - 1 + channels.length) % channels.length;
@@ -160,7 +160,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentChannelIndex, channels.length, onTogglePlay, onNextVideo, onSelectChannel, toggleFullscreen]);
+  }, [currentChannelIndex, channels.length, onTogglePlay, onSelectChannel, toggleFullscreen]);
 
   // Compute up next list (3 videos)
   const upNextList = [1, 2, 3]
@@ -229,7 +229,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 }}
                 onTimeUpdate={(cur, dur) => {
                   setCurrentTime(cur);
-                  if (dur > 0) setDuration(dur);
+                  if (dur > 0) {
+                    setDuration(dur);
+                    recordVideoDuration(activeVideo.youtubeVideoId, dur);
+                  }
                 }}
                 onBuffering={setIsBuffering}
               />
@@ -382,17 +385,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 {isPlaying ? <Pause size={20} /> : <Play size={20} style={{ marginLeft: 2 }} />}
               </button>
 
-              <button
-                onClick={onNextVideo}
-                className="icon-btn"
-                aria-label="Skip to next video"
-                title="Next video (Arrow Right)"
-              >
-                <SkipForward size={18} />
-              </button>
-
-              {/* Channel stepper buttons */}
-              <div style={{ display: 'flex', gap: 4 }}>
+              {/* Channel stepper buttons (The primary TV remote buttons) */}
+              <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 <button
                   onClick={() => {
                     const nextIdx = (currentChannelIndex - 1 + channels.length) % channels.length;
@@ -401,7 +395,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   className="icon-btn"
                   title="Previous Channel (Up Arrow)"
                   aria-label="Previous channel"
-                  style={{ width: 36, height: 36 }}
+                  style={{ width: 38, height: 38 }}
                 >
                   <ChevronUp size={18} />
                 </button>
@@ -413,11 +407,48 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   className="icon-btn"
                   title="Next Channel (Down Arrow)"
                   aria-label="Next channel"
-                  style={{ width: 36, height: 36 }}
+                  style={{ width: 38, height: 38 }}
                 >
                   <ChevronDown size={18} />
                 </button>
               </div>
+
+              {/* Jump to Live broadcast button */}
+              {onJumpToLive && (
+                <button
+                  onClick={onJumpToLive}
+                  className="btn-pill"
+                  title="Sync to real-time live broadcast"
+                  style={{
+                    padding: '6px 14px',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: '0.06em',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    color: '#22c55e',
+                    border: '1px solid rgba(34, 197, 94, 0.35)',
+                    background: 'rgba(34, 197, 94, 0.08)',
+                    borderRadius: '9999px',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: '50%',
+                      background: '#22c55e',
+                      boxShadow: '0 0 6px #22c55e',
+                      display: 'inline-block',
+                      animation: 'pulse 2s infinite',
+                    }}
+                  />
+                  <span>LIVE</span>
+                </button>
+              )}
 
               {/* Progress bar */}
               <div
