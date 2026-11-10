@@ -14,7 +14,8 @@ import { OffAirScreen } from '../components/OffAirScreen';
 
 const STORAGE_KEY = 'tuned_user_state_v1';
 const PLAYBACK_STORAGE_KEY = 'tuned_playback_session_v1';
-const DEFAULT_CATEGORIES = ['tech', 'music', 'science', 'food'];
+const ENTERTAINMENT_MIGRATION_KEY = 'tuned_movies_cartoons_v1';
+const DEFAULT_CATEGORIES = ['tech', 'movies', 'cartoons', 'music', 'science', 'food'];
 
 export default function TunedApp() {
   const [screenMode, setScreenMode] = useState<ScreenMode>('power');
@@ -83,8 +84,21 @@ export default function TunedApp() {
       if (saved) {
         const parsed: UserState = JSON.parse(saved);
         if (parsed.pickedCategoryIds && parsed.pickedCategoryIds.length >= 3) {
-          loadedCategories = parsed.pickedCategoryIds;
-          setPickedCategoryIds(parsed.pickedCategoryIds);
+          let nextCats = [...parsed.pickedCategoryIds];
+          if (!localStorage.getItem(ENTERTAINMENT_MIGRATION_KEY)) {
+            for (const newCh of ['movies', 'cartoons']) {
+              if (!nextCats.includes(newCh) && nextCats.length < 8) {
+                nextCats.push(newCh);
+              }
+            }
+            localStorage.setItem(ENTERTAINMENT_MIGRATION_KEY, '1');
+            localStorage.setItem(
+              STORAGE_KEY,
+              JSON.stringify({ ...parsed, pickedCategoryIds: nextCats })
+            );
+          }
+          loadedCategories = nextCats;
+          setPickedCategoryIds(nextCats);
           setIsReturningUser(true);
         }
         if (Array.isArray(parsed.customSources)) {

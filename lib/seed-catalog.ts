@@ -72,6 +72,18 @@ export const CATEGORIES: Category[] = [
     "name": "Learning",
     "hue": 235,
     "description": "Cognition, mathematics, history & big ideas"
+  },
+  {
+    "id": "movies",
+    "name": "Movies",
+    "hue": 12,
+    "description": "Full-length feature films, sci-fi showcases, indie cinema & cult classics"
+  },
+  {
+    "id": "cartoons",
+    "name": "Cartoons",
+    "hue": 48,
+    "description": "Saturday morning cartoons, indie animation series & classic toons"
   }
 ];
 
@@ -4897,6 +4909,822 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Practical Engineering",
         "thumbnailUrl": "https://i.ytimg.com/vi/5_B1Mq02wcI/hqdefault.jpg",
         "durationSec": 994
+      }
+    ]
+  },
+  "movies": {
+    "categoryId": "movies",
+    "categoryName": "Movies",
+    "hue": 12,
+    "builtAt": 1794346171198,
+    "videos": [
+      {
+        "youtubeVideoId": "3Eh7dVNKWNU",
+        "title": "Marvelous and The Black Hole | Full Movie",
+        "sourceChannelId": "UC8IHAQMuiJdY6ALuhG7iU8Q",
+        "sourceChannelTitle": "FilmRise Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3Eh7dVNKWNU/hqdefault.jpg",
+        "durationSec": 4901
+      },
+      {
+        "youtubeVideoId": "bopJV_Xk_Ls",
+        "title": "A Birder's Guide To Everything | FULL MOVIE | Comedy | Kodi Smit-McPhee, Alex Wolff, Ben Kingsley",
+        "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
+        "sourceChannelTitle": "Popcornflix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bopJV_Xk_Ls/hqdefault.jpg",
+        "durationSec": 5183
+      },
+      {
+        "youtubeVideoId": "pNcI-uY00fk",
+        "title": "A Crime On The Bayou | FULL MOVIE | True Crime Racism Documentary",
+        "sourceChannelId": "UCpHaAKu74UHvcYCi2g_PvBQ",
+        "sourceChannelTitle": "Shout! Studios",
+        "thumbnailUrl": "https://i.ytimg.com/vi/pNcI-uY00fk/hqdefault.jpg",
+        "durationSec": 5462
+      },
+      {
+        "youtubeVideoId": "YllC-K1l2yg",
+        "title": "Stuck on Christmas | Full Movie | Office Rivals Trapped Together on Christmas Eve",
+        "sourceChannelId": "UC2u3R3pjOiPZu4LtTlKkxdw",
+        "sourceChannelTitle": "Maverick Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YllC-K1l2yg/hqdefault.jpg",
+        "durationSec": 4612
+      },
+      {
+        "youtubeVideoId": "k_INCq511-g",
+        "title": "LAND OF FORGOTTEN ECHOES | Omeleto",
+        "sourceChannelId": "UCTMt7iMWa7jy0fNXIktwyLA",
+        "sourceChannelTitle": "Omeleto",
+        "thumbnailUrl": "https://i.ytimg.com/vi/k_INCq511-g/hqdefault.jpg",
+        "durationSec": 826
+      },
+      {
+        "youtubeVideoId": "6YVLLkWE_9w",
+        "title": "Downsized | Sci-Fi Short Film | DUST",
+        "sourceChannelId": "UC7sDT8jZ76VLV1u__krUutA",
+        "sourceChannelTitle": "DUST",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6YVLLkWE_9w/hqdefault.jpg",
+        "durationSec": 516
+      },
+      {
+        "youtubeVideoId": "LBemh5juvyo",
+        "title": "Four Itchy Boys | Horror Short Film | ALTER",
+        "sourceChannelId": "UCMOB6uDg7e-h8OuCw8dK2_Q",
+        "sourceChannelTitle": "ALTER",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LBemh5juvyo/hqdefault.jpg",
+        "durationSec": 731
+      },
+      {
+        "youtubeVideoId": "0t6KgGBA4I4",
+        "title": "🍕Sweet Kitty Bellairs (1930) Full HD Movie | Claudia Dell, PRE-CODE MUSICAL ROMP🍕",
+        "sourceChannelId": "UCE34fwgW7kWr7tc7YiOWtRw",
+        "sourceChannelTitle": "PizzaFlix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0t6KgGBA4I4/hqdefault.jpg",
+        "durationSec": 3845
+      },
+      {
+        "youtubeVideoId": "6mfiaNtG7bY",
+        "title": "Красная палатка (1969) - Михаил Калатозов | драма | Мосфильм 4K",
+        "sourceChannelId": "UCEK3tT7DcfWGWJpNEDBdWog",
+        "sourceChannelTitle": "Киноконцерн &quot;Мосфильм&quot;",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6mfiaNtG7bY/hqdefault.jpg",
+        "durationSec": 9417
+      },
+      {
+        "youtubeVideoId": "RF64lC6m4rI",
+        "title": "A Great Divide | Official Trailer | Gravitas Ventures | Starring Ken Jeong",
+        "sourceChannelId": "UCoulHkEKWQ1t36oBheqEE_g",
+        "sourceChannelTitle": "Gravitas Ventures",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RF64lC6m4rI/hqdefault.jpg",
+        "durationSec": 135
+      },
+      {
+        "youtubeVideoId": "1NKq2wL_CcY",
+        "title": "Drug Kingpin Sends A Hitman To Kill Him | Shadows | Full 2026 Crime Drama Thriller Movie",
+        "sourceChannelId": "UCGBzBkV-MinlBvHBzZawfLQ",
+        "sourceChannelTitle": "Movie Central",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1NKq2wL_CcY/hqdefault.jpg",
+        "durationSec": 6049
+      },
+      {
+        "youtubeVideoId": "-6MDFSsIyfU",
+        "title": "work in progress",
+        "sourceChannelId": "UC2iymls3S-p5rsTdCfRYaNw",
+        "sourceChannelTitle": "SamuelGoldwynFilms",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-6MDFSsIyfU/hqdefault.jpg",
+        "durationSec": 128
+      },
+      {
+        "youtubeVideoId": "Ekfn-RVo8XI",
+        "title": "Mortuary | Full Movie",
+        "sourceChannelId": "UC8IHAQMuiJdY6ALuhG7iU8Q",
+        "sourceChannelTitle": "FilmRise Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ekfn-RVo8XI/hqdefault.jpg",
+        "durationSec": 5576
+      },
+      {
+        "youtubeVideoId": "NG4UEfI2qes",
+        "title": "Fever | FULL MOVIE | Mystery, Dark Thriller | Teri Hatcher, Henry Thomas",
+        "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
+        "sourceChannelTitle": "Popcornflix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NG4UEfI2qes/hqdefault.jpg",
+        "durationSec": 5317
+      },
+      {
+        "youtubeVideoId": "oKRznAcakfQ",
+        "title": "Old Enough | FULL MOVIE | Danny Aiello, Alyssa Milano | Coming of Age NYC Drama",
+        "sourceChannelId": "UCpHaAKu74UHvcYCi2g_PvBQ",
+        "sourceChannelTitle": "Shout! Studios",
+        "thumbnailUrl": "https://i.ytimg.com/vi/oKRznAcakfQ/hqdefault.jpg",
+        "durationSec": 5492
+      },
+      {
+        "youtubeVideoId": "a5V50qc5lxA",
+        "title": "Merry Little Baby | Full Movie | A Baby by Christmas? Love Has Other Plans",
+        "sourceChannelId": "UC2u3R3pjOiPZu4LtTlKkxdw",
+        "sourceChannelTitle": "Maverick Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/a5V50qc5lxA/hqdefault.jpg",
+        "durationSec": 5758
+      },
+      {
+        "youtubeVideoId": "bp_olTAJOac",
+        "title": "SILICON VALLEY GIRL | Omeleto",
+        "sourceChannelId": "UCTMt7iMWa7jy0fNXIktwyLA",
+        "sourceChannelTitle": "Omeleto",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bp_olTAJOac/hqdefault.jpg",
+        "durationSec": 796
+      },
+      {
+        "youtubeVideoId": "JiGrx-9RDYw",
+        "title": "HYPERBURN | Sci-Fi Short Film | DUST",
+        "sourceChannelId": "UC7sDT8jZ76VLV1u__krUutA",
+        "sourceChannelTitle": "DUST",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JiGrx-9RDYw/hqdefault.jpg",
+        "durationSec": 667
+      },
+      {
+        "youtubeVideoId": "ZWTJrhVDvDY",
+        "title": "AMYGDALA | Horror Short Film | ALTER",
+        "sourceChannelId": "UCMOB6uDg7e-h8OuCw8dK2_Q",
+        "sourceChannelTitle": "ALTER",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZWTJrhVDvDY/hqdefault.jpg",
+        "durationSec": 535
+      },
+      {
+        "youtubeVideoId": "EA6W6C0GeyE",
+        "title": "NEW HD RESTORATION🍕The Giant Spider Invasion (1975) UNBLURRED, UNCENSORED, ORIGINAL DIRECTOR'S CUT!",
+        "sourceChannelId": "UCE34fwgW7kWr7tc7YiOWtRw",
+        "sourceChannelTitle": "PizzaFlix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EA6W6C0GeyE/hqdefault.jpg",
+        "durationSec": 4800
+      },
+      {
+        "youtubeVideoId": "hm1gjlHUgBE",
+        "title": "Причалы (1987) — драма | Мосфильм",
+        "sourceChannelId": "UCEK3tT7DcfWGWJpNEDBdWog",
+        "sourceChannelTitle": "Киноконцерн &quot;Мосфильм&quot;",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hm1gjlHUgBE/hqdefault.jpg",
+        "durationSec": 4790
+      },
+      {
+        "youtubeVideoId": "CpwrJIkWxRw",
+        "title": "On Our Way - Official Trailer (2023) Micheál Richardson, Sophie Lane Curtis",
+        "sourceChannelId": "UCoulHkEKWQ1t36oBheqEE_g",
+        "sourceChannelTitle": "Gravitas Ventures",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CpwrJIkWxRw/hqdefault.jpg",
+        "durationSec": 95
+      },
+      {
+        "youtubeVideoId": "tYaiRT_sN24",
+        "title": "Paul Walker & Tyrese Gibson Street Race For Pink Slips | 2 Fast 2 Furious | Movie Clip",
+        "sourceChannelId": "UCGBzBkV-MinlBvHBzZawfLQ",
+        "sourceChannelTitle": "Movie Central",
+        "thumbnailUrl": "https://i.ytimg.com/vi/tYaiRT_sN24/hqdefault.jpg",
+        "durationSec": 593
+      },
+      {
+        "youtubeVideoId": "wgBnLO4Pnb0",
+        "title": "FARRAH BATTLES ROBOT! Saturn 3 | FULL MOVIE | Sci Fi Cult Classic | Farrah Fawcett, Kirk Douglas",
+        "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
+        "sourceChannelTitle": "Popcornflix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wgBnLO4Pnb0/hqdefault.jpg",
+        "durationSec": 5231
+      },
+      {
+        "youtubeVideoId": "k4zqaGyaojU",
+        "title": "Fade To Black | FULL MOVIE | Mickey Rourke | WTF Cult Horror Comedy Thriller",
+        "sourceChannelId": "UCpHaAKu74UHvcYCi2g_PvBQ",
+        "sourceChannelTitle": "Shout! Studios",
+        "thumbnailUrl": "https://i.ytimg.com/vi/k4zqaGyaojU/hqdefault.jpg",
+        "durationSec": 6142
+      },
+      {
+        "youtubeVideoId": "__LLF0vik24",
+        "title": "Bad Shuffle | Official Trailer",
+        "sourceChannelId": "UC2u3R3pjOiPZu4LtTlKkxdw",
+        "sourceChannelTitle": "Maverick Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/__LLF0vik24/hqdefault.jpg",
+        "durationSec": 97
+      },
+      {
+        "youtubeVideoId": "hAjf3hD_C-I",
+        "title": "NOT YET | Omeleto",
+        "sourceChannelId": "UCTMt7iMWa7jy0fNXIktwyLA",
+        "sourceChannelTitle": "Omeleto",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hAjf3hD_C-I/hqdefault.jpg",
+        "durationSec": 833
+      },
+      {
+        "youtubeVideoId": "g5WsM0G-_Ks",
+        "title": "The Reclaimers | Sci-Fi Short Film | DUST",
+        "sourceChannelId": "UC7sDT8jZ76VLV1u__krUutA",
+        "sourceChannelTitle": "DUST",
+        "thumbnailUrl": "https://i.ytimg.com/vi/g5WsM0G-_Ks/hqdefault.jpg",
+        "durationSec": 1147
+      },
+      {
+        "youtubeVideoId": "KOzxf1LryD0",
+        "title": "GNOMES | Horror Short Film | ALTER",
+        "sourceChannelId": "UCMOB6uDg7e-h8OuCw8dK2_Q",
+        "sourceChannelTitle": "ALTER",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KOzxf1LryD0/hqdefault.jpg",
+        "durationSec": 351
+      },
+      {
+        "youtubeVideoId": "ob2oz-p5byg",
+        "title": "NEW HD RESTORATION🍕 Door-to-Door Maniac (1960) Five Minutes to Live | JOHNNY CASH goes DARK🍕",
+        "sourceChannelId": "UCE34fwgW7kWr7tc7YiOWtRw",
+        "sourceChannelTitle": "PizzaFlix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ob2oz-p5byg/hqdefault.jpg",
+        "durationSec": 4536
+      },
+      {
+        "youtubeVideoId": "mPEpMflSsoM",
+        "title": "Деловые люди (1962) — Леонид Гайдай | комедия | Мосфильм 4K",
+        "sourceChannelId": "UCEK3tT7DcfWGWJpNEDBdWog",
+        "sourceChannelTitle": "Киноконцерн &quot;Мосфильм&quot;",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mPEpMflSsoM/hqdefault.jpg",
+        "durationSec": 5027
+      },
+      {
+        "youtubeVideoId": "btr33ucPaB4",
+        "title": "Gringa - Official Trailer (2023) Steve Zahn, Jess Gabor",
+        "sourceChannelId": "UCoulHkEKWQ1t36oBheqEE_g",
+        "sourceChannelTitle": "Gravitas Ventures",
+        "thumbnailUrl": "https://i.ytimg.com/vi/btr33ucPaB4/hqdefault.jpg",
+        "durationSec": 156
+      },
+      {
+        "youtubeVideoId": "_D-jweYqi4Q",
+        "title": "She Vowed To Rescue Trafficked Women | Death On The Border | 2026 Crime Action Movie",
+        "sourceChannelId": "UCGBzBkV-MinlBvHBzZawfLQ",
+        "sourceChannelTitle": "Movie Central",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_D-jweYqi4Q/hqdefault.jpg",
+        "durationSec": 5646
+      },
+      {
+        "youtubeVideoId": "ra0vF8YSvps",
+        "title": "Rendel: Dark Vengeance | FULL MOVIE | Action, Crime | Superhero",
+        "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
+        "sourceChannelTitle": "Popcornflix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ra0vF8YSvps/hqdefault.jpg",
+        "durationSec": 6324
+      },
+      {
+        "youtubeVideoId": "osuPhvRRNA4",
+        "title": "Christmas in The Hood | Official Trailer",
+        "sourceChannelId": "UC2u3R3pjOiPZu4LtTlKkxdw",
+        "sourceChannelTitle": "Maverick Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/osuPhvRRNA4/hqdefault.jpg",
+        "durationSec": 121
+      },
+      {
+        "youtubeVideoId": "Y1NIUL6T7_k",
+        "title": "AN ARTIST'S SOUL | Omeleto",
+        "sourceChannelId": "UCTMt7iMWa7jy0fNXIktwyLA",
+        "sourceChannelTitle": "Omeleto",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Y1NIUL6T7_k/hqdefault.jpg",
+        "durationSec": 848
+      },
+      {
+        "youtubeVideoId": "Lh-kx8B2bV8",
+        "title": "Hivemind Deluxe | Sci-Fi Short Film | DUST",
+        "sourceChannelId": "UC7sDT8jZ76VLV1u__krUutA",
+        "sourceChannelTitle": "DUST",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Lh-kx8B2bV8/hqdefault.jpg",
+        "durationSec": 605
+      },
+      {
+        "youtubeVideoId": "g5-8WlCU9_M",
+        "title": "Shift | Horror Short Film | ALTER",
+        "sourceChannelId": "UCMOB6uDg7e-h8OuCw8dK2_Q",
+        "sourceChannelTitle": "ALTER",
+        "thumbnailUrl": "https://i.ytimg.com/vi/g5-8WlCU9_M/hqdefault.jpg",
+        "durationSec": 944
+      },
+      {
+        "youtubeVideoId": "t8IqgV3b75s",
+        "title": "🍕Way Out West (MGM, 1930) Full HD Movie | William Haines, Leila Hyams, Screwball Western Sass🍕",
+        "sourceChannelId": "UCE34fwgW7kWr7tc7YiOWtRw",
+        "sourceChannelTitle": "PizzaFlix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/t8IqgV3b75s/hqdefault.jpg",
+        "durationSec": 4293
+      },
+      {
+        "youtubeVideoId": "JwooOqHBlWw",
+        "title": "Гранатовый браслет (1964) — Абрам Роом | драма | Мосфильм 4K",
+        "sourceChannelId": "UCEK3tT7DcfWGWJpNEDBdWog",
+        "sourceChannelTitle": "Киноконцерн &quot;Мосфильм&quot;",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JwooOqHBlWw/hqdefault.jpg",
+        "durationSec": 5408
+      },
+      {
+        "youtubeVideoId": "oOzODYq1i1A",
+        "title": "Hijack (1998) | FULL MOVIE | Action, Ernie Hudson, Jeff Fahey | Train Thriller",
+        "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
+        "sourceChannelTitle": "Popcornflix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/oOzODYq1i1A/hqdefault.jpg",
+        "durationSec": 5430
+      },
+      {
+        "youtubeVideoId": "BKnKv5hs08Y",
+        "title": "Hard Holiday | Full Movie | A Single Mother’s Fight for a Second Chance",
+        "sourceChannelId": "UC2u3R3pjOiPZu4LtTlKkxdw",
+        "sourceChannelTitle": "Maverick Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BKnKv5hs08Y/hqdefault.jpg",
+        "durationSec": 7072
+      },
+      {
+        "youtubeVideoId": "txAx7ChjbE0",
+        "title": "STEVE | Omeleto",
+        "sourceChannelId": "UCTMt7iMWa7jy0fNXIktwyLA",
+        "sourceChannelTitle": "Omeleto",
+        "thumbnailUrl": "https://i.ytimg.com/vi/txAx7ChjbE0/hqdefault.jpg",
+        "durationSec": 921
+      },
+      {
+        "youtubeVideoId": "4ykjtJRfong",
+        "title": "Sci-Fi Short Film \"The Traveler\" | DUST",
+        "sourceChannelId": "UC7sDT8jZ76VLV1u__krUutA",
+        "sourceChannelTitle": "DUST",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4ykjtJRfong/hqdefault.jpg",
+        "durationSec": 1078
+      },
+      {
+        "youtubeVideoId": "HVyxDU56l3c",
+        "title": "Tapestry | Horror Short Film | ALTER",
+        "sourceChannelId": "UCMOB6uDg7e-h8OuCw8dK2_Q",
+        "sourceChannelTitle": "ALTER",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HVyxDU56l3c/hqdefault.jpg",
+        "durationSec": 371
+      },
+      {
+        "youtubeVideoId": "1YYxEYEvKwM",
+        "title": "🍕Old English (1930) Full HD Movie | George Arliss, Leon Janney, PRE-CODE CLASSIC🍕",
+        "sourceChannelId": "UCE34fwgW7kWr7tc7YiOWtRw",
+        "sourceChannelTitle": "PizzaFlix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1YYxEYEvKwM/hqdefault.jpg",
+        "durationSec": 5261
+      },
+      {
+        "youtubeVideoId": "GkXUeJLhg_Q",
+        "title": "«Есть только миг» (музыкальный фрагмент из к/ф \"Земля Санникова\")",
+        "sourceChannelId": "UCEK3tT7DcfWGWJpNEDBdWog",
+        "sourceChannelTitle": "Киноконцерн &quot;Мосфильм&quot;",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GkXUeJLhg_Q/hqdefault.jpg",
+        "durationSec": 199
+      },
+      {
+        "youtubeVideoId": "B7RsU9_DTfU",
+        "title": "Knightriders | FULL MOVIE | 1981 | Ed Harris | Directed by George A. Romero, cosplay, motorcycles",
+        "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
+        "sourceChannelTitle": "Popcornflix",
+        "thumbnailUrl": "https://i.ytimg.com/vi/B7RsU9_DTfU/hqdefault.jpg",
+        "durationSec": 8792
+      },
+      {
+        "youtubeVideoId": "H5Dx36Ci2fc",
+        "title": "Mama Mae's Christmas | Official Trailer | Special Premiere on Pluto TV",
+        "sourceChannelId": "UC2u3R3pjOiPZu4LtTlKkxdw",
+        "sourceChannelTitle": "Maverick Movies",
+        "thumbnailUrl": "https://i.ytimg.com/vi/H5Dx36Ci2fc/hqdefault.jpg",
+        "durationSec": 136
+      },
+      {
+        "youtubeVideoId": "J4hBVdnLRiY",
+        "title": "ENDZGIVING | Omeleto",
+        "sourceChannelId": "UCTMt7iMWa7jy0fNXIktwyLA",
+        "sourceChannelTitle": "Omeleto",
+        "thumbnailUrl": "https://i.ytimg.com/vi/J4hBVdnLRiY/hqdefault.jpg",
+        "durationSec": 654
+      }
+    ]
+  },
+  "cartoons": {
+    "categoryId": "cartoons",
+    "categoryName": "Cartoons",
+    "hue": 48,
+    "builtAt": 1794346171198,
+    "videos": [
+      {
+        "youtubeVideoId": "dIWuRGEMpeg",
+        "title": "Tune Squad Slam Dunk! 🏀 💪| Space Jam | @wbkids",
+        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
+        "sourceChannelTitle": "WB Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dIWuRGEMpeg/hqdefault.jpg",
+        "durationSec": 308
+      },
+      {
+        "youtubeVideoId": "-jknl-GNjDw",
+        "title": "Now Loading... GAMEOVERSE",
+        "sourceChannelId": "UCn_FAXem2-e3HQvmK-mOH4g",
+        "sourceChannelTitle": "GLITCH",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-jknl-GNjDw/hqdefault.jpg",
+        "durationSec": 70
+      },
+      {
+        "youtubeVideoId": "OQXz9dX0lbA",
+        "title": "NO TOWEL! 😳 🙈 🤣 - Mr Bean",
+        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
+        "sourceChannelTitle": "WildBrain Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OQXz9dX0lbA/hqdefault.jpg",
+        "durationSec": 3599
+      },
+      {
+        "youtubeVideoId": "dk_z_jUzck4",
+        "title": "Sinsmas Sweaters, Advent Calendar & More",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dk_z_jUzck4/hqdefault.jpg",
+        "durationSec": 76
+      },
+      {
+        "youtubeVideoId": "9omW7kXZKAE",
+        "title": "Mr Bean's Most Embarrassing Swimming Pool Moment! 😂 | Mr Bean Live Action | Full Episodes | Mr Bean",
+        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
+        "sourceChannelTitle": "Mr Bean",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9omW7kXZKAE/hqdefault.jpg",
+        "durationSec": 4519
+      },
+      {
+        "youtubeVideoId": "nC_SzLRfaS4",
+        "title": "Prints of Darkness - 4K",
+        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
+        "sourceChannelTitle": "Simon's Cat",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nC_SzLRfaS4/hqdefault.jpg",
+        "durationSec": 86
+      },
+      {
+        "youtubeVideoId": "QCZjNqtnGmM",
+        "title": "The Dark Age - Animator vs. Animation 14",
+        "sourceChannelId": "UCbKWv2x9t6u8yZoB3KcPtnw",
+        "sourceChannelTitle": "Alan Becker",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QCZjNqtnGmM/hqdefault.jpg",
+        "durationSec": 1129
+      },
+      {
+        "youtubeVideoId": "RCZaxYrKb30",
+        "title": "BIGTOP BURGER: HEAVISIDE",
+        "sourceChannelId": "UCxXu9tCU63mF1ntk89XPkzA",
+        "sourceChannelTitle": "Worthikids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RCZaxYrKb30/hqdefault.jpg",
+        "durationSec": 265
+      },
+      {
+        "youtubeVideoId": "JyTKDk-rNr0",
+        "title": "Something About Resident Evil Requiem ANIMATED 🧟🧟",
+        "sourceChannelId": "UCLFXk9J3O-hhOk0msOjKYdQ",
+        "sourceChannelTitle": "TerminalMontage",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JyTKDk-rNr0/hqdefault.jpg",
+        "durationSec": 822
+      },
+      {
+        "youtubeVideoId": "5HX2nymWtrM",
+        "title": "Zee's Rescue Mission To Space 💥 | Oddbods Full Episode | Funny Cartoons for Kids",
+        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
+        "sourceChannelTitle": "Oddbods - Official Channel",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5HX2nymWtrM/hqdefault.jpg",
+        "durationSec": 1279
+      },
+      {
+        "youtubeVideoId": "ZuRE2-Gz-PM",
+        "title": "The Chicken 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation [1 hour]",
+        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
+        "sourceChannelTitle": "Shaun the Sheep Official",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZuRE2-Gz-PM/hqdefault.jpg",
+        "durationSec": 3600
+      },
+      {
+        "youtubeVideoId": "l6tnLyo1q34",
+        "title": "Choose Goose Has What You Need! 🛍️🪿 Adventure Time | Cartoon Network",
+        "sourceChannelId": "UCMsgXPD3wzzt8RxHJmXH7hQ",
+        "sourceChannelTitle": "Cartoon Network",
+        "thumbnailUrl": "https://i.ytimg.com/vi/l6tnLyo1q34/hqdefault.jpg",
+        "durationSec": 507
+      },
+      {
+        "youtubeVideoId": "v7MPgNivwYo",
+        "title": "ＳＣＡＲＹ",
+        "sourceChannelId": "UCWXCrItCF6ZgXrdozUS-Idw",
+        "sourceChannelTitle": "ExplosmEntertainment",
+        "thumbnailUrl": "https://i.ytimg.com/vi/v7MPgNivwYo/hqdefault.jpg",
+        "durationSec": 2216
+      },
+      {
+        "youtubeVideoId": "JlgsuGa8y2o",
+        "title": "Peachrooms",
+        "sourceChannelId": "UCCn62cYVpl0e_GN-yo1H9yQ",
+        "sourceChannelTitle": "mashed",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JlgsuGa8y2o/hqdefault.jpg",
+        "durationSec": 508
+      },
+      {
+        "youtubeVideoId": "p-YYSefZ51I",
+        "title": "Tom Cat in the Hat! 🐱🎩 | Tom & Jerry | #KidsCartoons @wbkids",
+        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
+        "sourceChannelTitle": "WB Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/p-YYSefZ51I/hqdefault.jpg",
+        "durationSec": 1186
+      },
+      {
+        "youtubeVideoId": "4-sO_dp1fkE",
+        "title": "KNIGHTS OF GUINEVERE - EPISODE 2 (TRAILER)",
+        "sourceChannelId": "UCn_FAXem2-e3HQvmK-mOH4g",
+        "sourceChannelTitle": "GLITCH",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4-sO_dp1fkE/hqdefault.jpg",
+        "durationSec": 63
+      },
+      {
+        "youtubeVideoId": "RqYEB3vzGgY",
+        "title": "RESTING Bean! 🥱 💤 😱 - Mr Bean",
+        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
+        "sourceChannelTitle": "WildBrain Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RqYEB3vzGgY/hqdefault.jpg",
+        "durationSec": 3599
+      },
+      {
+        "youtubeVideoId": "enjfF0TDFy8",
+        "title": "Merry Sinsmas From Helluva Boss!",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/enjfF0TDFy8/hqdefault.jpg",
+        "durationSec": 160
+      },
+      {
+        "youtubeVideoId": "mYS-ze88unM",
+        "title": "Mr Bean Will Do ANYTHING for a Cupcake! 🧁😂 | Mr Bean Animated Season 2 | Funny Clips | Mr Bean",
+        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
+        "sourceChannelTitle": "Mr Bean",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mYS-ze88unM/hqdefault.jpg",
+        "durationSec": 1378
+      },
+      {
+        "youtubeVideoId": "DsoiemFrYgY",
+        "title": "NATURE CALLS - A complete litter tray disaster!",
+        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
+        "sourceChannelTitle": "Simon's Cat",
+        "thumbnailUrl": "https://i.ytimg.com/vi/DsoiemFrYgY/hqdefault.jpg",
+        "durationSec": 77
+      },
+      {
+        "youtubeVideoId": "FcQlQAs5EDM",
+        "title": "Creeper Clan - Animation vs. Minecraft Shorts Ep 40",
+        "sourceChannelId": "UCbKWv2x9t6u8yZoB3KcPtnw",
+        "sourceChannelTitle": "Alan Becker",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FcQlQAs5EDM/hqdefault.jpg",
+        "durationSec": 734
+      },
+      {
+        "youtubeVideoId": "iTTumugS9ys",
+        "title": "BIGTOP BURGER: FACELESS",
+        "sourceChannelId": "UCxXu9tCU63mF1ntk89XPkzA",
+        "sourceChannelTitle": "Worthikids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iTTumugS9ys/hqdefault.jpg",
+        "durationSec": 290
+      },
+      {
+        "youtubeVideoId": "nY3KX4nYujU",
+        "title": "Something About Pokemon Champions ANIMATED - MASTER RANK BATTLE",
+        "sourceChannelId": "UCLFXk9J3O-hhOk0msOjKYdQ",
+        "sourceChannelTitle": "TerminalMontage",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nY3KX4nYujU/hqdefault.jpg",
+        "durationSec": 314
+      },
+      {
+        "youtubeVideoId": "P2CcC-kfJps",
+        "title": "Battle of the Bots, Loss of the Plots 🤖🤪 | Oddbods Full Episode | Funny Cartoons for Kids",
+        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
+        "sourceChannelTitle": "Oddbods - Official Channel",
+        "thumbnailUrl": "https://i.ytimg.com/vi/P2CcC-kfJps/hqdefault.jpg",
+        "durationSec": 442
+      },
+      {
+        "youtubeVideoId": "aXqQli6-sfI",
+        "title": "Piano Heist 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation",
+        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
+        "sourceChannelTitle": "Shaun the Sheep Official",
+        "thumbnailUrl": "https://i.ytimg.com/vi/aXqQli6-sfI/hqdefault.jpg",
+        "durationSec": 1800
+      },
+      {
+        "youtubeVideoId": "ChNXR50ru8A",
+        "title": "Artist's Block 🎨 | Regular Show: The Lost Tapes | Cartoon Network",
+        "sourceChannelId": "UCMsgXPD3wzzt8RxHJmXH7hQ",
+        "sourceChannelTitle": "Cartoon Network",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ChNXR50ru8A/hqdefault.jpg",
+        "durationSec": 247
+      },
+      {
+        "youtubeVideoId": "cE-wDybo1sw",
+        "title": "America's Next Top Cryptid - PILOT",
+        "sourceChannelId": "UCWXCrItCF6ZgXrdozUS-Idw",
+        "sourceChannelTitle": "ExplosmEntertainment",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cE-wDybo1sw/hqdefault.jpg",
+        "durationSec": 656
+      },
+      {
+        "youtubeVideoId": "GlAVbWir1BI",
+        "title": "Fun, Friends, LIGHTS! 🎆🎉 | Tom and Jerry Gokko + Looney Tunes Gokko FULL EPISODES | @wbkids",
+        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
+        "sourceChannelTitle": "WB Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GlAVbWir1BI/hqdefault.jpg",
+        "durationSec": 1332
+      },
+      {
+        "youtubeVideoId": "hfT8prJy7ZQ",
+        "title": "The Art of The Amazing Digital Circus",
+        "sourceChannelId": "UCn_FAXem2-e3HQvmK-mOH4g",
+        "sourceChannelTitle": "GLITCH",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hfT8prJy7ZQ/hqdefault.jpg",
+        "durationSec": 179
+      },
+      {
+        "youtubeVideoId": "9wANSZlOZTk",
+        "title": "An EXTREMELY COLD Christmas! 🎅 🎄 ❄️ - Mr Bean",
+        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
+        "sourceChannelTitle": "WildBrain Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9wANSZlOZTk/hqdefault.jpg",
+        "durationSec": 6585
+      },
+      {
+        "youtubeVideoId": "trxotfGUCEA",
+        "title": "Stolas Reads Horror Fiction Starring YOU",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/trxotfGUCEA/hqdefault.jpg",
+        "durationSec": 140
+      },
+      {
+        "youtubeVideoId": "9LbDcWHsKPQ",
+        "title": "Mr Bean Accidentally Gets Shipped to Moscow! 📦😂| Mr Bean Live Action | Funny Clips | Mr Bean",
+        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
+        "sourceChannelTitle": "Mr Bean",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9LbDcWHsKPQ/hqdefault.jpg",
+        "durationSec": 2034
+      },
+      {
+        "youtubeVideoId": "zen_StMPyBM",
+        "title": "Creepy Cat - Halloween Caturday Film Club",
+        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
+        "sourceChannelTitle": "Simon's Cat",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zen_StMPyBM/hqdefault.jpg",
+        "durationSec": 527
+      },
+      {
+        "youtubeVideoId": "l6WeJ9JqDfU",
+        "title": "The Machine - Animator vs. Animation 13",
+        "sourceChannelId": "UCbKWv2x9t6u8yZoB3KcPtnw",
+        "sourceChannelTitle": "Alan Becker",
+        "thumbnailUrl": "https://i.ytimg.com/vi/l6WeJ9JqDfU/hqdefault.jpg",
+        "durationSec": 1097
+      },
+      {
+        "youtubeVideoId": "iuv_15Z67PE",
+        "title": "BIGTOP BURGER: VENEZIA",
+        "sourceChannelId": "UCxXu9tCU63mF1ntk89XPkzA",
+        "sourceChannelTitle": "Worthikids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iuv_15Z67PE/hqdefault.jpg",
+        "durationSec": 337
+      },
+      {
+        "youtubeVideoId": "4K6KgNQkFlE",
+        "title": "Something About Bomberman 64 💣💥ANIMATED!",
+        "sourceChannelId": "UCLFXk9J3O-hhOk0msOjKYdQ",
+        "sourceChannelTitle": "TerminalMontage",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4K6KgNQkFlE/hqdefault.jpg",
+        "durationSec": 373
+      },
+      {
+        "youtubeVideoId": "uD_o0IQjp7c",
+        "title": "Newt's Stowaway 👜 A Monster Out to Play! 🤪 | Oddbods Full Episode | Funny Cartoons for Kids",
+        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
+        "sourceChannelTitle": "Oddbods - Official Channel",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uD_o0IQjp7c/hqdefault.jpg",
+        "durationSec": 2727
+      },
+      {
+        "youtubeVideoId": "D5nvZDT5pNM",
+        "title": "Movie Time 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation [1 hour]",
+        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
+        "sourceChannelTitle": "Shaun the Sheep Official",
+        "thumbnailUrl": "https://i.ytimg.com/vi/D5nvZDT5pNM/hqdefault.jpg",
+        "durationSec": 3600
+      },
+      {
+        "youtubeVideoId": "HWeriY9kB3g",
+        "title": "The Creepiest Terror Tales of the Park 👻🎃 The Regular Show | Cartoon Network",
+        "sourceChannelId": "UCMsgXPD3wzzt8RxHJmXH7hQ",
+        "sourceChannelTitle": "Cartoon Network",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HWeriY9kB3g/hqdefault.jpg",
+        "durationSec": 1121
+      },
+      {
+        "youtubeVideoId": "j5LktsJx84k",
+        "title": "That's one BIG Turkey 🦃 👀 | Scooby-Doo and the Witch's Ghost | @wbkids",
+        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
+        "sourceChannelTitle": "WB Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/j5LktsJx84k/hqdefault.jpg",
+        "durationSec": 230
+      },
+      {
+        "youtubeVideoId": "mrEpfVcgez0",
+        "title": "Mr Bean HOMELESS! 😱 🥱 💤 - Mr Bean",
+        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
+        "sourceChannelTitle": "WildBrain Kids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mrEpfVcgez0/hqdefault.jpg",
+        "durationSec": 3782
+      },
+      {
+        "youtubeVideoId": "q0FhdX_uu-E",
+        "title": "Stolas vs Blitz: Who Is Right?",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/q0FhdX_uu-E/hqdefault.jpg",
+        "durationSec": 154
+      },
+      {
+        "youtubeVideoId": "iBOxla8szFs",
+        "title": "Mr Bean Goes Digging for Buried Treasure! 🪙 | Mr Bean Animated Season 3 | Funny Clips | Mr Bean",
+        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
+        "sourceChannelTitle": "Mr Bean",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iBOxla8szFs/hqdefault.jpg",
+        "durationSec": 1394
+      },
+      {
+        "youtubeVideoId": "fC8pkhklvr4",
+        "title": "Bat Cat - 4K",
+        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
+        "sourceChannelTitle": "Simon's Cat",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fC8pkhklvr4/hqdefault.jpg",
+        "durationSec": 140
+      },
+      {
+        "youtubeVideoId": "-MV7Hg31usU",
+        "title": "The Aether - Animation vs. Minecraft Shorts Ep 39",
+        "sourceChannelId": "UCbKWv2x9t6u8yZoB3KcPtnw",
+        "sourceChannelTitle": "Alan Becker",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-MV7Hg31usU/hqdefault.jpg",
+        "durationSec": 764
+      },
+      {
+        "youtubeVideoId": "E7Ejus_AoIY",
+        "title": "BIGTOP BURGER: OVEN",
+        "sourceChannelId": "UCxXu9tCU63mF1ntk89XPkzA",
+        "sourceChannelTitle": "Worthikids",
+        "thumbnailUrl": "https://i.ytimg.com/vi/E7Ejus_AoIY/hqdefault.jpg",
+        "durationSec": 310
+      },
+      {
+        "youtubeVideoId": "0WY7Y_Hierc",
+        "title": "Something About Sonic Racing: CrossWorlds x Mega Man ANIMATED! 🏎️",
+        "sourceChannelId": "UCLFXk9J3O-hhOk0msOjKYdQ",
+        "sourceChannelTitle": "TerminalMontage",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0WY7Y_Hierc/hqdefault.jpg",
+        "durationSec": 246
+      },
+      {
+        "youtubeVideoId": "77zEGtH9_LM",
+        "title": "It's Jeff's Party, He Can Cry If He Wants To 🥲 | Oddbods Full Episode | Funny Cartoons for Kids",
+        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
+        "sourceChannelTitle": "Oddbods - Official Channel",
+        "thumbnailUrl": "https://i.ytimg.com/vi/77zEGtH9_LM/hqdefault.jpg",
+        "durationSec": 1279
+      },
+      {
+        "youtubeVideoId": "VWTopJvSLzs",
+        "title": "Classic Movie Time 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation [1 hour]",
+        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
+        "sourceChannelTitle": "Shaun the Sheep Official",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VWTopJvSLzs/hqdefault.jpg",
+        "durationSec": 3600
+      },
+      {
+        "youtubeVideoId": "brWNC87c3Ac",
+        "title": "The Lich Is Too Evil for Ooo 🦹‍♂️☠️ Adventure Time | Cartoon Network",
+        "sourceChannelId": "UCMsgXPD3wzzt8RxHJmXH7hQ",
+        "sourceChannelTitle": "Cartoon Network",
+        "thumbnailUrl": "https://i.ytimg.com/vi/brWNC87c3Ac/hqdefault.jpg",
+        "durationSec": 1097
       }
     ]
   }

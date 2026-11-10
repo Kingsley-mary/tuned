@@ -687,6 +687,114 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "id": "UCNIuvl7V8zACPpTmmNIqP2A",
       "name": "OverSimplified"
     }
+  ],
+  "movies": [
+    {
+      "id": "UC8IHAQMuiJdY6ALuhG7iU8Q",
+      "name": "FilmRise Movies"
+    },
+    {
+      "id": "UCVFYikepF-avelvuIaQ_lHA",
+      "name": "Popcornflix"
+    },
+    {
+      "id": "UCpHaAKu74UHvcYCi2g_PvBQ",
+      "name": "Shout! Studios"
+    },
+    {
+      "id": "UC2u3R3pjOiPZu4LtTlKkxdw",
+      "name": "Maverick Movies"
+    },
+    {
+      "id": "UCTMt7iMWa7jy0fNXIktwyLA",
+      "name": "Omeleto"
+    },
+    {
+      "id": "UC7sDT8jZ76VLV1u__krUutA",
+      "name": "DUST"
+    },
+    {
+      "id": "UCMOB6uDg7e-h8OuCw8dK2_Q",
+      "name": "ALTER"
+    },
+    {
+      "id": "UCE34fwgW7kWr7tc7YiOWtRw",
+      "name": "PizzaFlix"
+    },
+    {
+      "id": "UCEK3tT7DcfWGWJpNEDBdWog",
+      "name": "Mosfilm"
+    },
+    {
+      "id": "UCoulHkEKWQ1t36oBheqEE_g",
+      "name": "Gravitas Ventures"
+    },
+    {
+      "id": "UCGBzBkV-MinlBvHBzZawfLQ",
+      "name": "Movie Central"
+    },
+    {
+      "id": "UC2iymls3S-p5rsTdCfRYaNw",
+      "name": "SamuelGoldwynFilms"
+    }
+  ],
+  "cartoons": [
+    {
+      "id": "UC9trsD1jCTXXtN3xIOIU8gg",
+      "name": "WB Kids"
+    },
+    {
+      "id": "UCn_FAXem2-e3HQvmK-mOH4g",
+      "name": "GLITCH"
+    },
+    {
+      "id": "UCbmWOFTbZoDLWqG1rvFnJ0g",
+      "name": "WildBrain Cartoons"
+    },
+    {
+      "id": "UCzfyYtgvkx5mLy8nlLlayYg",
+      "name": "SpindleHorse"
+    },
+    {
+      "id": "UCkAGrHCLFmlK3H2kd6isipg",
+      "name": "Mr Bean"
+    },
+    {
+      "id": "UCH6vXjt-BA7QHl0KnfL-7RQ",
+      "name": "Simon's Cat"
+    },
+    {
+      "id": "UCbKWv2x9t6u8yZoB3KcPtnw",
+      "name": "Alan Becker"
+    },
+    {
+      "id": "UCxXu9tCU63mF1ntk89XPkzA",
+      "name": "Worthikids"
+    },
+    {
+      "id": "UCLFXk9J3O-hhOk0msOjKYdQ",
+      "name": "TerminalMontage"
+    },
+    {
+      "id": "UCtlth0w7_mYqpHPViMhQ99Q",
+      "name": "Oddbods"
+    },
+    {
+      "id": "UCS7H8U-n5mINVJjJsaRtGHg",
+      "name": "Shaun the Sheep"
+    },
+    {
+      "id": "UCMsgXPD3wzzt8RxHJmXH7hQ",
+      "name": "CartoonNetwork"
+    },
+    {
+      "id": "UCWXCrItCF6ZgXrdozUS-Idw",
+      "name": "ExplosmEntertainment"
+    },
+    {
+      "id": "UCCn62cYVpl0e_GN-yo1H9yQ",
+      "name": "mashed"
+    }
   ]
 };
 
