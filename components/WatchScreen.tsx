@@ -284,852 +284,236 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       ? `Sleep ${Math.ceil(sleepRemainingSec / 60)}m`
       : `Sleep ${sleepTimerMode}`;
 
+  // ---- DStv-style on-screen display (OSD) ----
+  const [osdOpen, setOsdOpen] = useState<boolean>(true);
+  const osdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const osdHoverRef = useRef<boolean>(false);
+
+  const pokeOsd = useCallback(() => {
+    setOsdOpen(true);
+    if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
+    osdTimerRef.current = setTimeout(() => {
+      if (!osdHoverRef.current) setOsdOpen(false);
+    }, 6000);
+  }, []);
+
+  useEffect(() => {
+    pokeOsd();
+    return () => {
+      if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
+    };
+  }, [currentChannelIndex, currentVideoIndex, tuneKey, pokeOsd]);
+
+  useEffect(() => {
+    if (isHidden) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
+      pokeOsd();
+      if (e.key === 'g' || e.key === 'G') {
+        e.preventDefault();
+        onOpenGuide();
+      } else if (e.key === 'i' || e.key === 'I' || e.key === 'Enter') {
+        e.preventDefault();
+        setOsdOpen((o) => !o);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isHidden, onOpenGuide, pokeOsd]);
+
+  const stepChannel = (dir: 1 | -1) =>
+    onSelectChannel((currentChannelIndex + dir + channels.length) % channels.length);
+
+  const now = new Date();
+  const hh = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+  const dateLabel = now.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' });
+  const hue = activeChannel?.hue ?? 355;
+  const rows = schedule.slice(0, 4);
+
   return (
     <div
-      className="app-container"
-      style={{
-        display: isHidden ? 'none' : undefined,
-      }}
+      ref={tvStageRef}
+      className={`tv-stage${osdOpen ? ' osd-on' : ''}`}
+      style={{ display: isHidden ? 'none' : undefined, ['--h' as string]: hue } as React.CSSProperties}
+      onMouseMove={pokeOsd}
     >
-      {/* Top Bar (PRD W-1) */}
-      <header className="top-nav">
-        <div className="brand-logo">
+      {/* Video layer */}
+      <div className={`tv-video ${isChannelPulsing ? 'pulse-glow' : ''}`}>
+        {isBumperActive ? (
+          <div
+            className="tv-bumper"
+            style={{
+              background: `radial-gradient(circle at 50% 30%, hsla(${hue}, 80%, 24%, 0.7), #07070a 75%)`,
+            }}
+          >
+            <div className="osd-chip">
+              <span className="dot" style={{ background: `hsl(${hue}, 85%, 55%)` }} />
+              CH {String(currentChannelIndex + 1).padStart(2, '0')} · {activeChannel?.categoryName}
+            </div>
+            <div className="osd-eyebrow">Up next on Tuned</div>
+            <h3>{nextVideo?.title || 'Continuing broadcast…'}</h3>
+            <p>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</p>
+          </div>
+        ) : activeVideo?.youtubeVideoId ? (
+          <div className="tv-yt">
+            <YouTubePlayer
+              videoId={activeVideo.youtubeVideoId}
+              startSeconds={startSeconds}
+              tuneKey={tuneKey}
+              isPlaying={isPlaying}
+              isMuted={isMuted}
+              onEnded={handleVideoEndedNaturally}
+              onError={(errCode) => {
+                console.warn(`Video ${activeVideo.youtubeVideoId} error (${errCode}), skipping...`);
+                onNextVideo();
+              }}
+              onTimeUpdate={(cur, dur) => {
+                setCurrentTime(cur);
+                if (dur > 0) {
+                  setDuration(dur);
+                  recordVideoDuration(activeVideo.youtubeVideoId, dur);
+                }
+                onProgressUpdate?.(cur, dur);
+              }}
+              onBuffering={setIsBuffering}
+              onShortDetected={onShortDetected}
+            />
+          </div>
+        ) : (
+          <div className="tv-bumper">
+            <p>No video available on this channel</p>
+          </div>
+        )}
+      </div>
+
+      {/* Click/hover capture layer so the OSD can be summoned over the iframe */}
+      <div
+        className="tv-capture"
+        onClick={() => (osdOpen ? setOsdOpen(false) : pokeOsd())}
+        onDoubleClick={toggleFullscreen}
+        aria-hidden
+      />
+
+      {/* Top bar */}
+      <div className="osd-top" onMouseEnter={() => (osdHoverRef.current = true)} onMouseLeave={() => { osdHoverRef.current = false; pokeOsd(); }}>
+        <div className="brand-logo" style={{ color: '#fff' }}>
           <span className="brand-dot" />
           <span>tuned</span>
         </div>
 
-        <div className="nav-actions">
-          <button onClick={onOpenGuide} className="btn-pill" aria-label="Open TV Guide">
-            <Tv size={16} />
-            <span>Guide</span>
+        <div className="osd-top-right">
+          {isBuffering && (
+            <span className="osd-chip">
+              <Loader2 size={13} className="animate-spin" /> Buffering…
+            </span>
+          )}
+          {!isPlaying && <span className="osd-chip">Paused</span>}
+          <button onClick={onOpenGuide} className="osd-btn" aria-label="Open TV Guide">
+            <Tv size={16} /> <span>Guide</span>
           </button>
-          <button onClick={onOpenManage} className="btn-pill" aria-label="Manage Channels">
-            <Settings size={16} />
-            <span>Manage</span>
+          <button onClick={onOpenManage} className="osd-btn" aria-label="Manage Channels">
+            <Settings size={16} /> <span>Manage</span>
           </button>
           <button
             onClick={onCycleSleepTimer}
-            className="btn-pill"
+            className={`osd-btn${sleepTimerMode !== 'off' ? ' active' : ''}`}
             title="Cycle Sleep Timer (Off / 15m / 30m / 60m / End of Show)"
             aria-label="Sleep Timer"
-            style={{
-              borderColor: sleepTimerMode !== 'off' ? 'var(--accent)' : undefined,
-              color: sleepTimerMode !== 'off' ? 'var(--accent)' : undefined,
-            }}
           >
-            <Timer size={15} />
-            <span>{sleepLabel}</span>
+            <Timer size={16} /> <span>{sleepLabel}</span>
           </button>
-          <button onClick={onToggleTheme} className="icon-btn" aria-label="Toggle theme" title="Toggle light/dark theme">
-            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+          <button onClick={onToggleTheme} className="osd-btn icon" aria-label="Toggle theme">
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <button
-            onClick={onPowerOff}
-            className="icon-btn"
-            title="Power off"
-            aria-label="Power off"
-            style={{ color: 'var(--accent)' }}
-          >
-            <Power size={18} />
+          <button onClick={onPowerOff} className="osd-btn icon danger" aria-label="Power off" title="Power off">
+            <Power size={16} />
           </button>
         </div>
-      </header>
+      </div>
 
-      {/* Main Grid Layout (PRD W-1 desktop, W-2 mobile) */}
-      <div className="watch-grid">
-        {/* Main Column: Player + Info & Controls */}
-        <main>
-          {/* TV Stage Wrapper (Fullscreens 16:9 frame + bottom bezel bar without overlapping video) */}
-          <div
-            ref={tvStageRef}
-            style={
-              isFullscreen
-                ? {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    width: '100vw',
-                    height: '100vh',
-                    background: '#050507',
-                  }
-                : undefined
-            }
-          >
-            {/* YouTube Player Frame (PRD D-1: Never overlap anything on top of active video) */}
-            <div
-              className={`player-tv-frame ${isChannelPulsing ? 'pulse-glow' : ''}`}
-              style={
-                isFullscreen
-                  ? {
-                      flex: 1,
-                      minHeight: 0,
-                      width: '100%',
-                      borderRadius: 0,
-                      border: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: '#000',
-                    }
-                  : undefined
-              }
-            >
-              {isBumperActive ? (
-                /* 2.4-Second Network Station ID Bumper between shows */
-                <div
-                  style={{
-                    aspectRatio: '16/9',
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: `radial-gradient(circle at 50% 30%, hsla(${activeChannel?.hue || 355}, 80%, 22%, 0.55), #07070a 75%)`,
-                    color: '#f5f4f0',
-                    padding: 32,
-                    textAlign: 'center',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 10,
-                      padding: '6px 16px',
-                      borderRadius: 999,
-                      background: 'rgba(255,255,255,0.08)',
-                      border: '1px solid rgba(255,255,255,0.16)',
-                      fontSize: 13,
-                      fontWeight: 700,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      marginBottom: 18,
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: '50%',
-                        background: `hsl(${activeChannel?.hue || 355}, 85%, 55%)`,
-                        boxShadow: `0 0 10px hsl(${activeChannel?.hue || 355}, 85%, 55%)`,
-                      }}
-                    />
-                    <span>
-                      CH {String(currentChannelIndex + 1).padStart(2, '0')} • {activeChannel?.categoryName}
-                    </span>
-                  </div>
+      {/* Bottom OSD */}
+      <div
+        className="osd-bottom"
+        onMouseEnter={() => (osdHoverRef.current = true)}
+        onMouseLeave={() => {
+          osdHoverRef.current = false;
+          pokeOsd();
+        }}
+      >
+        <div className="osd-legend">
+          <button onClick={onTogglePlay}>
+            {isPlaying ? 'Pause' : 'Play'} <span className="kbd-osd">SPACE</span>
+          </button>
+          <button onClick={() => setIsMuted((m) => !m)}>
+            {isMuted ? 'Unmute' : 'Mute'} <span className="kbd-osd">M</span>
+          </button>
+          <button onClick={toggleFullscreen}>
+            {isFullscreen ? 'Exit full' : 'Fullscreen'} <span className="kbd-osd">F</span>
+          </button>
+          <button onClick={onOpenGuide}>
+            Guide <span className="kbd-osd">G</span>
+          </button>
+          {previousChannelIndex !== null && previousChannelIndex !== currentChannelIndex && (
+            <button onClick={onRecallLastChannel}>
+              Last <span className="kbd-osd">L</span>
+            </button>
+          )}
+          <button onClick={handleShareChannel}>
+            {copiedShare ? 'Link copied' : 'Share'} <span className="kbd-osd">{copiedShare ? '✓' : 'LINK'}</span>
+          </button>
+        </div>
 
-                  <div
-                    style={{
-                      fontSize: 12,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.14em',
-                      color: 'rgba(245,244,240,0.55)',
-                      fontWeight: 600,
-                      marginBottom: 8,
-                    }}
-                  >
-                    Up Next on Tuned
-                  </div>
-
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: 'clamp(20px, 3vw, 32px)',
-                      fontWeight: 700,
-                      maxWidth: 640,
-                      lineHeight: 1.25,
-                      marginBottom: 8,
-                    }}
-                  >
-                    {nextVideo?.title || 'Continuing Broadcast…'}
-                  </h3>
-
-                  <p style={{ fontSize: 15, color: 'rgba(245,244,240,0.7)', fontWeight: 500 }}>
-                    {nextVideo?.sourceChannelTitle || activeChannel?.categoryName}
-                  </p>
-                </div>
-              ) : activeVideo?.youtubeVideoId ? (
-                <div style={{ width: '100%', maxHeight: isFullscreen ? 'calc(100vh - 76px)' : undefined, aspectRatio: '16/9' }}>
-                  <YouTubePlayer
-                    videoId={activeVideo.youtubeVideoId}
-                    startSeconds={startSeconds}
-                    tuneKey={tuneKey}
-                    isPlaying={isPlaying}
-                    isMuted={isMuted}
-                    onEnded={handleVideoEndedNaturally}
-                    onError={(errCode) => {
-                      console.warn(`Video ${activeVideo.youtubeVideoId} error (${errCode}), skipping...`);
-                      onNextVideo();
-                    }}
-                    onTimeUpdate={(cur, dur) => {
-                      setCurrentTime(cur);
-                      if (dur > 0) {
-                        setDuration(dur);
-                        recordVideoDuration(activeVideo.youtubeVideoId, dur);
-                      }
-                      onProgressUpdate?.(cur, dur);
-                    }}
-                    onBuffering={setIsBuffering}
-                    onShortDetected={onShortDetected}
-                  />
-                </div>
-              ) : (
-                <div
-                  style={{
-                    aspectRatio: '16/9',
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: '#09090c',
-                    color: 'rgba(255,255,255,0.4)',
-                    fontSize: 14,
-                  }}
-                >
-                  No video available on this channel
-                </div>
-              )}
+        <div className="osd-panel">
+          <div className="osd-head">
+            <div className="osd-head-left">
+              <span className="osd-time">{hh}</span>
+              <span className="osd-date">{dateLabel}</span>
             </div>
 
-            {/* Dedicated Fullscreen Broadcast Bezel Bar BELOW the 16:9 video (Zero video overlap) */}
-            {isFullscreen && (
-              <div
-                style={{
-                  height: 76,
-                  width: '100%',
-                  background: '#0b0b0f',
-                  borderTop: '1px solid rgba(255,255,255,0.12)',
-                  padding: '0 24px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: 20,
-                  color: '#f5f4f0',
-                  flexShrink: 0,
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14, minWidth: 0, flex: 1 }}>
-                  <span
-                    style={{
-                      padding: '4px 10px',
-                      borderRadius: 6,
-                      background: `hsl(${activeChannel?.hue || 355}, 85%, 50%)`,
-                      color: '#fff',
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 700,
-                      fontSize: 13,
-                      flexShrink: 0,
-                    }}
-                  >
-                    CH {String(currentChannelIndex + 1).padStart(2, '0')}
-                  </span>
-                  <span
-                    style={{
-                      fontWeight: 700,
-                      fontSize: 13,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.06em',
-                      color: 'rgba(255,255,255,0.7)',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {activeChannel?.categoryName}
-                  </span>
-                  <span style={{ color: 'rgba(255,255,255,0.25)' }}>|</span>
-                  <div
-                    style={{
-                      fontWeight: 600,
-                      fontSize: 15,
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                    }}
-                  >
-                    {activeVideo?.title}
-                  </div>
-                  <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', flexShrink: 0 }}>
-                    • {activeVideo?.sourceChannelTitle}
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-                  <button
-                    onClick={() => {
-                      const prevIdx = (currentChannelIndex - 1 + channels.length) % channels.length;
-                      onSelectChannel(prevIdx);
-                    }}
-                    className="icon-btn"
-                    style={{ width: 36, height: 36, color: '#fff', borderColor: 'rgba(255,255,255,0.2)' }}
-                    title="Previous Channel (Up Arrow)"
-                  >
-                    <ChevronUp size={18} />
-                  </button>
-                  <button
-                    onClick={() => {
-                      const nextIdx = (currentChannelIndex + 1) % channels.length;
-                      onSelectChannel(nextIdx);
-                    }}
-                    className="icon-btn"
-                    style={{ width: 36, height: 36, color: '#fff', borderColor: 'rgba(255,255,255,0.2)' }}
-                    title="Next Channel (Down Arrow)"
-                  >
-                    <ChevronDown size={18} />
-                  </button>
-                  <button
-                    onClick={() => setIsMuted((m) => !m)}
-                    className="icon-btn"
-                    style={{ width: 36, height: 36, color: '#fff', borderColor: 'rgba(255,255,255,0.2)' }}
-                    title="Mute / Unmute (M)"
-                  >
-                    {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
-                  </button>
-                  {onJumpToLive && (
-                    <button
-                      onClick={onJumpToLive}
-                      style={{
-                        padding: '6px 12px',
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: '0.06em',
-                        color: '#22c55e',
-                        border: '1px solid rgba(34, 197, 94, 0.4)',
-                        background: 'rgba(34, 197, 94, 0.12)',
-                        borderRadius: 999,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      ● LIVE
-                    </button>
-                  )}
-                  <button
-                    onClick={toggleFullscreen}
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.12)',
-                      color: '#ffffff',
-                      border: '1px solid rgba(255, 255, 255, 0.25)',
-                      borderRadius: '9999px',
-                      padding: '8px 14px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 6,
-                      fontSize: 12,
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <Minimize size={14} />
-                    <span>Exit (F)</span>
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Info Block (PRD W-3: 24px spacing from player) */}
-          <div style={{ marginTop: 24 }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                flexWrap: 'wrap',
-                fontSize: 13,
-                color: 'var(--ink-secondary)',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                fontWeight: 600,
-              }}
-            >
-              <span className={`channel-badge ${isBadgeFlipping ? 'flip' : ''}`}>
-                CH {String(currentChannelIndex + 1).padStart(2, '0')}
+            <div className="osd-channel">
+              <button onClick={() => stepChannel(-1)} aria-label="Previous channel" title="Previous channel (↑)">
+                <ChevronUp size={18} style={{ transform: 'rotate(-90deg)' }} />
+              </button>
+              <span className={`osd-channel-name ${isBadgeFlipping ? 'flip' : ''}`}>
+                <b>{String(currentChannelIndex + 1).padStart(2, '0')}</b>
+                <span style={{ textTransform: 'capitalize' }}>{activeChannel?.categoryName || 'Channel'}</span>
               </span>
-              <span>{activeChannel?.categoryName || 'Channel'}</span>
-              <span>•</span>
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  color: '#22c55e',
-                  fontWeight: 700,
-                  fontSize: 12,
-                  letterSpacing: '0.08em',
-                }}
-              >
-                <span
-                  style={{
-                    width: 7,
-                    height: 7,
-                    borderRadius: '50%',
-                    background: '#22c55e',
-                    boxShadow: '0 0 8px #22c55e',
-                    display: 'inline-block',
-                    animation: 'pulse 2s infinite',
-                  }}
-                />
-                ON AIR
-              </span>
-              {isBuffering && (
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    color: 'var(--accent)',
-                    fontWeight: 500,
-                    textTransform: 'none',
-                    fontSize: 12,
-                  }}
-                >
-                  <Loader2 size={13} className="animate-spin" />
-                  Buffering…
+              <button onClick={() => stepChannel(1)} aria-label="Next channel" title="Next channel (↓)">
+                <ChevronDown size={18} style={{ transform: 'rotate(-90deg)' }} />
+              </button>
+            </div>
+
+            <div className="osd-head-right">
+              {onJumpToLive && behindLiveSeconds > 0 ? (
+                <button className="osd-live behind" onClick={onJumpToLive}>
+                  Jump to live +{formatTime(behindLiveSeconds)}
+                </button>
+              ) : (
+                <span className="osd-live">
+                  <span className="dot" /> Watching live
                 </span>
               )}
-              <button
-                onClick={handleShareChannel}
-                className="btn-pill"
-                title="Copy synchronized link to this channel"
-                style={{
-                  marginLeft: 'auto',
-                  height: 28,
-                  padding: '0 10px',
-                  fontSize: 11,
-                  textTransform: 'none',
-                  letterSpacing: 0,
-                }}
-              >
-                {copiedShare ? <Check size={13} /> : <Share2 size={13} />}
-                <span>{copiedShare ? 'Channel Link Copied' : 'Share Channel'}</span>
-              </button>
             </div>
+          </div>
 
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(20px, 2.5vw, 28px)',
-                fontWeight: 700,
-                letterSpacing: '-0.03em',
-                lineHeight: 1.2,
-                marginTop: 10,
-                marginBottom: 4,
-              }}
-            >
-              {activeVideo?.title || 'Loading video…'}
-            </h2>
-
-            <p style={{ color: 'var(--ink-secondary)', fontSize: 15, fontWeight: 500 }}>
-              {activeVideo?.sourceChannelTitle || 'YouTube'}
-            </p>
-
-            {/* Custom Controls (PRD W-4: 16px below title) */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                marginTop: 20,
-                padding: '12px 18px',
-                background: 'var(--glass)',
-                backdropFilter: 'blur(20px) saturate(1.3)',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--border)',
-                flexWrap: 'wrap',
-              }}
-            >
-              <button
-                onClick={onTogglePlay}
-                className="icon-btn primary"
-                aria-label={isPlaying ? 'Pause' : 'Play'}
-                title={isPlaying ? 'Pause (Space)' : 'Play (Space)'}
-                style={{ width: 48, height: 48 }}
-              >
-                {isPlaying ? <Pause size={20} /> : <Play size={20} style={{ marginLeft: 2 }} />}
-              </button>
-
-              {/* Channel stepper buttons (The primary TV remote buttons) */}
-              <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-                <button
-                  onClick={() => {
-                    const nextIdx = (currentChannelIndex - 1 + channels.length) % channels.length;
-                    onSelectChannel(nextIdx);
-                  }}
-                  className="icon-btn"
-                  title="Previous Channel (Up Arrow)"
-                  aria-label="Previous channel"
-                  style={{ width: 38, height: 38 }}
-                >
-                  <ChevronUp size={18} />
-                </button>
-                <button
-                  onClick={() => {
-                    const nextIdx = (currentChannelIndex + 1) % channels.length;
-                    onSelectChannel(nextIdx);
-                  }}
-                  className="icon-btn"
-                  title="Next Channel (Down Arrow)"
-                  aria-label="Next channel"
-                  style={{ width: 38, height: 38 }}
-                >
-                  <ChevronDown size={18} />
-                </button>
-              </div>
-
-              {/* Last Channel Recall Button */}
-              {previousChannelIndex !== null && previousChannelIndex !== currentChannelIndex && (
-                <button
-                  onClick={onRecallLastChannel}
-                  className="btn-pill"
-                  title={`Flip back to CH ${String(previousChannelIndex + 1).padStart(2, '0')} (Press L or Backspace)`}
-                  style={{
-                    height: 36,
-                    padding: '0 12px',
-                    fontSize: 12,
-                    fontWeight: 600,
-                  }}
-                >
-                  <RotateCcw size={13} />
-                  <span>LAST</span>
-                </button>
-              )}
-
-              {/* Mute / Unmute Button */}
-              <button
-                onClick={() => setIsMuted((prev) => !prev)}
-                className="icon-btn"
-                title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
-                aria-label={isMuted ? 'Unmute' : 'Mute'}
-                style={{
-                  width: 38,
-                  height: 38,
-                  color: isMuted ? 'var(--accent)' : undefined,
-                }}
-              >
-                {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-              </button>
-
-              {/* Jump to Live broadcast button */}
-              {onJumpToLive && (
-                <button
-                  onClick={onJumpToLive}
-                  className="btn-pill"
-                  title={
-                    behindLiveSeconds > 0
-                      ? `You are ${behindLiveSeconds}s behind live broadcast — click to catch up`
-                      : 'Synced to live broadcast'
-                  }
-                  style={{
-                    padding: '6px 14px',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    letterSpacing: '0.06em',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    color: behindLiveSeconds > 0 ? '#f59e0b' : '#22c55e',
-                    border:
-                      behindLiveSeconds > 0
-                        ? '1px solid rgba(245, 158, 11, 0.45)'
-                        : '1px solid rgba(34, 197, 94, 0.35)',
-                    background:
-                      behindLiveSeconds > 0
-                        ? 'rgba(245, 158, 11, 0.12)'
-                        : 'rgba(34, 197, 94, 0.08)',
-                    borderRadius: '9999px',
-                    cursor: behindLiveSeconds > 0 ? 'pointer' : 'default',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  <span
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: '50%',
-                      background: behindLiveSeconds > 0 ? '#f59e0b' : '#22c55e',
-                      boxShadow:
-                        behindLiveSeconds > 0 ? '0 0 6px #f59e0b' : '0 0 6px #22c55e',
-                      display: 'inline-block',
-                      animation: 'pulse 2s infinite',
-                    }}
-                  />
-                  <span>
-                    {behindLiveSeconds > 0
-                      ? `JUMP TO LIVE (+${formatTime(behindLiveSeconds)})`
-                      : 'LIVE'}
+          {rows.map((slot, i) => {
+            const isNow = i === 0;
+            return (
+              <div key={slot.video.youtubeVideoId + i} className={`osd-row${isNow ? ' now' : ''}`}>
+                <span className="osd-row-time">{formatClockTime(isNow ? slot.startTimeMs : slot.startTimeMs)}</span>
+                <span className="osd-row-tag">{isNow ? 'LIVE' : i === 1 ? 'NEXT' : ''}</span>
+                <span className="osd-row-title">{isNow ? activeVideo?.title || slot.video.title : slot.video.title}</span>
+                <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>
+                <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
+                {isNow && (
+                  <span className="osd-row-progress">
+                    <span style={{ width: `${progressPercent}%` }} />
                   </span>
-                </button>
-              )}
-
-              {/* Progress bar */}
-              <div
-                style={{
-                  flex: 1,
-                  minWidth: 80,
-                  height: 6,
-                  borderRadius: 99,
-                  background: 'var(--subtle-bg)',
-                  overflow: 'hidden',
-                  margin: '0 6px',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    height: '100%',
-                    width: `${progressPercent}%`,
-                    background: 'var(--accent)',
-                    borderRadius: 99,
-                    transition: 'width 0.25s linear',
-                  }}
-                />
+                )}
               </div>
-
-              {/* Time display */}
-              <span
-                style={{
-                  fontSize: 13,
-                  color: 'var(--ink-secondary)',
-                  fontVariantNumeric: 'tabular-nums',
-                  whiteSpace: 'nowrap',
-                  fontWeight: 500,
-                }}
-              >
-                {formatTime(currentTime)} / {formatTime(effectiveDuration)}
-              </span>
-
-              {/* Fullscreen Button */}
-              <button
-                onClick={toggleFullscreen}
-                className="icon-btn"
-                title={isFullscreen ? 'Exit Fullscreen (F)' : 'Enter Fullscreen (F)'}
-                aria-label={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
-                style={{ width: 38, height: 38, flexShrink: 0 }}
-              >
-                {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
-              </button>
-            </div>
-
-            <div
-              style={{
-                marginTop: 10,
-                fontSize: 12,
-                color: 'var(--ink-secondary)',
-                opacity: 0.75,
-                display: 'flex',
-                gap: 14,
-                flexWrap: 'wrap',
-              }}
-            >
-              <span>Keys: 1–{channels.length} Tune Channel</span>
-              <span>•</span>
-              <span>↑/↓ Flip Channel</span>
-              <span>•</span>
-              <span>L Last Channel</span>
-              <span>•</span>
-              <span>M Mute</span>
-              <span>•</span>
-              <span>F Fullscreen</span>
-            </div>
-          </div>
-        </main>
-
-        {/* Side Column: Channels + Up Next Broadcast Schedule (PRD W-1, W-2) */}
-        <aside style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {/* Channel list */}
-          <div>
-            <h3
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-secondary)',
-                marginBottom: 10,
-              }}
-            >
-              Channels
-            </h3>
-
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 6,
-              }}
-            >
-              {channels.map((ch, idx) => {
-                const isActive = idx === currentChannelIndex;
-                return (
-                  <button
-                    key={ch.categoryId + idx}
-                    onClick={() => onSelectChannel(idx)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 12,
-                      height: 44,
-                      padding: '0 14px',
-                      borderRadius: 'var(--radius-md)',
-                      width: '100%',
-                      textAlign: 'left',
-                      fontSize: 14,
-                      fontWeight: isActive ? 600 : 500,
-                      background: isActive ? `linear-gradient(90deg, hsla(${ch.hue}, 80%, 50%, 0.28), hsla(${ch.hue}, 80%, 50%, 0.08))` : 'var(--glass)',
-                      color: 'var(--ink)',
-                      border: '1px solid',
-                      borderColor: isActive ? `hsla(${ch.hue}, 80%, 60%, 0.55)` : 'var(--border)',
-                      transition: 'all 0.15s ease',
-                      boxShadow: isActive ? `0 6px 20px -6px hsla(${ch.hue}, 80%, 50%, 0.5)` : 'none',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: 12,
-                        opacity: isActive ? 0.8 : 0.6,
-                        fontFamily: 'var(--font-display)',
-                        fontWeight: 700,
-                        width: 24,
-                      }}
-                    >
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    <span style={{ flex: 1, textTransform: 'capitalize' }}>{ch.categoryName}</span>
-                    <span
-                      style={{
-                        width: 9,
-                        height: 9,
-                        borderRadius: '50%',
-                        background: `hsl(${ch.hue}, 85%, 55%)`,
-                        boxShadow: isActive ? `0 0 8px hsl(${ch.hue}, 85%, 55%)` : 'none',
-                      }}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Up Next Schedule Preview (Non-clickable linear TV schedule) */}
-          <div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: 10,
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--ink-secondary)',
-                }}
-              >
-                Up Next on CH {String(currentChannelIndex + 1).padStart(2, '0')}
-              </h3>
-              <span style={{ fontSize: 11, color: 'var(--ink-secondary)', opacity: 0.75 }}>
-                Linear Schedule
-              </span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {upNextList.map((slot, slotIdx) => {
-                const { video, durationSec, startsInSec, startTimeMs } = slot;
-                const minsAway = Math.max(1, Math.round(startsInSec / 60));
-                return (
-                  <div
-                    key={video.youtubeVideoId + slot.videoIndex}
-                    style={{
-                      display: 'flex',
-                      gap: 12,
-                      alignItems: 'center',
-                      textAlign: 'left',
-                      padding: 10,
-                      borderRadius: 'var(--radius-md)',
-                      background: 'var(--panel)',
-                      border: '1px solid var(--border)',
-                      width: '100%',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: 88,
-                        height: 52,
-                        borderRadius: 8,
-                        overflow: 'hidden',
-                        flexShrink: 0,
-                        background: '#111',
-                        position: 'relative',
-                      }}
-                    >
-                      <img
-                        src={video.thumbnailUrl}
-                        alt={video.title}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        loading="lazy"
-                      />
-                      <span
-                        style={{
-                          position: 'absolute',
-                          bottom: 4,
-                          right: 4,
-                          background: 'rgba(0,0,0,0.82)',
-                          color: '#fff',
-                          fontSize: 10,
-                          fontWeight: 600,
-                          padding: '1px 5px',
-                          borderRadius: 4,
-                          fontVariantNumeric: 'tabular-nums',
-                        }}
-                      >
-                        {formatTime(durationSec)}
-                      </span>
-                    </div>
-
-                    <div style={{ minWidth: 0, flex: 1 }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 6,
-                          fontSize: 11,
-                          fontWeight: 700,
-                          color: slotIdx === 0 ? 'var(--accent)' : 'var(--ink-secondary)',
-                          marginBottom: 3,
-                        }}
-                      >
-                        <Clock size={11} />
-                        <span>
-                          {slotIdx === 0 ? `Next • in ${minsAway}m` : formatClockTime(startTimeMs)}
-                        </span>
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 13,
-                          fontWeight: 600,
-                          lineHeight: 1.3,
-                          overflow: 'hidden',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical',
-                        }}
-                      >
-                        {video.title}
-                      </div>
-                      <div style={{ color: 'var(--ink-secondary)', fontSize: 12, marginTop: 3 }}>
-                        {video.sourceChannelTitle}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </aside>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

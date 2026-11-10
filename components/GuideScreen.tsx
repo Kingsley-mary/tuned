@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ChannelLineup } from '../lib/types';
-import { ArrowLeft, Play, Radio, Clock } from 'lucide-react';
+import { Play, Radio, Tv } from 'lucide-react';
 import {
   ScheduledProgram,
   getLiveBroadcastState,
@@ -169,94 +169,27 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
   const nowX = msToX(nowMs);
 
   return (
-    <div className="app-container">
-      <header className="top-nav">
-        <button onClick={onBackToWatch} className="btn-pill primary" aria-label="Back to watching">
-          <ArrowLeft size={16} />
-          <span>Back to watching</span>
-        </button>
-
-        <div className="brand-logo">
-          <span className="brand-dot" />
-          <span>tuned</span>
+    <div className="gd-screen" style={{ ['--h' as string]: focusedChannel?.hue ?? 355 } as React.CSSProperties}>
+      <header className="gd-header">
+        <div>
+          <div className="brand-logo" style={{ color: '#fff' }}>
+            <span className="brand-dot" />
+            <span>tuned</span>
+          </div>
+          <div className="gd-title">
+            <Tv size={14} /> TV Guide
+          </div>
+        </div>
+        <div className="gd-clock">
+          <div className="gd-date">{new Date(nowMs).toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' })}</div>
+          <div className="gd-time">{formatClockTime(nowMs)}</div>
         </div>
       </header>
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'space-between',
-          gap: 16,
-          flexWrap: 'wrap',
-          marginBottom: 20,
-        }}
-      >
-        <div>
-          <h1
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(28px, 4vw, 40px)',
-              fontWeight: 700,
-              letterSpacing: '-0.03em',
-            }}
-          >
-            TV Guide
-          </h1>
-          <p style={{ color: 'var(--ink-secondary)', fontSize: 15, marginTop: 6 }}>
-            Everything is live right now. Pick a show to tune in.
-          </p>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          {activeChannel && activeVideo && (
-            <button
-              onClick={onBackToWatch}
-              className="btn-pill"
-              style={{ maxWidth: 360, overflow: 'hidden' }}
-              title="Audio keeps playing while you browse. Click to return."
-            >
-              <Radio size={14} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-              <span style={{ fontWeight: 700, fontSize: 12, flexShrink: 0 }}>
-                CH {String(currentChannelIndex + 1).padStart(2, '0')}
-              </span>
-              <span
-                style={{
-                  fontSize: 12,
-                  color: 'var(--ink-secondary)',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {activeVideo.title}
-              </span>
-            </button>
-          )}
-          <div style={{ textAlign: 'right' }}>
-            <div
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 32,
-                fontWeight: 700,
-                letterSpacing: '-0.03em',
-                fontVariantNumeric: 'tabular-nums',
-                lineHeight: 1,
-              }}
-            >
-              {formatClockTime(nowMs)}
-            </div>
-            <div style={{ fontSize: 12, color: 'var(--ink-muted)', marginTop: 4 }}>
-              {new Date(nowMs).toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' })}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="guide-shell" ref={shellRef}>
-        <div className="guide-scroll">
-          <div className="guide-ruler">
-            <div className="guide-corner">Channel</div>
+      <div className="gd-grid" ref={shellRef}>
+        <div className="guide-scroll gd-scroll">
+          <div className="guide-ruler gd-ruler">
+            <div className="guide-corner gd-corner">Today</div>
             <div className="guide-ticks" style={{ width: trackWidth }}>
               {ticks.map((t) => (
                 <div key={t} className="guide-tick" style={{ left: msToX(t) }}>
@@ -271,26 +204,25 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
 
           <div style={{ position: 'relative', minWidth: 'max-content' }}>
             {rows.map(({ ch, chIdx, isCurrentChannel, schedule }, r) => {
-              const hue = ch.hue;
+              const rowFocused = focus?.r === r;
               return (
-                <div key={ch.categoryId + chIdx} className="guide-row">
+                <div key={ch.categoryId + chIdx} className={`guide-row gd-row${rowFocused ? ' row-focused' : ''}`}>
                   <button
                     onClick={() => onTuneChannel(chIdx)}
-                    className="guide-channel-header"
+                    className={`guide-channel-header gd-channel${isCurrentChannel ? ' current' : ''}`}
+                    style={{ ['--h' as string]: ch.hue } as React.CSSProperties}
                     title={`Tune to CH ${String(chIdx + 1).padStart(2, '0')} ${ch.categoryName}`}
                   >
-                    <span className="guide-ch-bar" style={{ background: `hsl(${hue}, 85%, 55%)`, opacity: isCurrentChannel ? 1 : 0.5 }} />
-                    <span className="guide-ch-num">{String(chIdx + 1).padStart(2, '0')}</span>
-                    <span className="guide-ch-name" style={{ color: isCurrentChannel ? 'var(--ink)' : undefined }}>
-                      {ch.categoryName}
-                    </span>
+                    <span className="gd-ch-num">{String(chIdx + 1).padStart(2, '0')}</span>
+                    <span className="gd-ch-name">{ch.categoryName}</span>
+                    {isCurrentChannel && <Radio size={13} className="gd-ch-live" />}
                   </button>
 
                   <div className="guide-track" style={{ width: trackWidth }}>
                     {schedule.map((slot, c) => {
                       const left = Math.max(0, msToX(slot.startTimeMs));
                       const right = Math.min(trackWidth, msToX(slot.endTimeMs));
-                      const width = Math.max(48, right - left - 4);
+                      const width = Math.max(48, right - left - 6);
                       const isWatchingNow = isCurrentChannel && slot.isLive;
                       const cutLeft = slot.startTimeMs < winStart;
                       const isFocused = focus?.r === r && focus?.c === c;
@@ -303,22 +235,15 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                           onFocus={() => setFocus({ r, c })}
                           onMouseEnter={() => setFocus({ r, c })}
                           title={`${slot.video.title} (${formatClockTime(slot.startTimeMs)})`}
-                          className={`guide-slot${slot.isLive ? ' live' : ''}${isWatchingNow ? ' watching' : ''}${isFocused ? ' focused' : ''}`}
-                          style={{ left: left + 2, width, ['--slot-hue' as string]: hue } as React.CSSProperties}
+                          className={`gd-slot${slot.isLive ? ' live' : ''}${isWatchingNow ? ' watching' : ''}${isFocused ? ' focused' : ''}`}
+                          style={{ left: left + 3, width }}
                         >
-                          <span className="guide-slot-title">
+                          <span className="gd-slot-title">
                             {isWatchingNow && <Play size={11} fill="currentColor" style={{ flexShrink: 0 }} />}
                             {cutLeft && <span style={{ opacity: 0.5 }}>‹</span>}
                             <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{slot.video.title}</span>
                           </span>
-                          <span className="guide-slot-meta">
-                            {slot.isLive
-                              ? `On air · ${Math.max(1, Math.round((slot.durationSec * (1 - slot.progressPercent / 100)) / 60))}m left`
-                              : `${formatClockTime(slot.startTimeMs)} · ${formatDuration(slot.durationSec)}`}
-                          </span>
-                          {slot.isLive && (
-                            <span className="guide-slot-progress" style={{ width: `${slot.progressPercent}%` }} />
-                          )}
+                          {slot.isLive && <span className="gd-slot-progress" style={{ width: `${slot.progressPercent}%` }} />}
                         </button>
                       );
                     })}
@@ -329,44 +254,33 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
             <div className="guide-now-line" style={{ left: `calc(var(--guide-ch-w, 168px) + ${nowX - 1}px)` }} />
           </div>
         </div>
+      </div>
 
+      <footer className="gd-footer">
         {focusedSlot && focusedChannel && (
-          <div className="guide-detail">
-            <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: 12, color: 'var(--ink-muted)', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                CH {String(focusedChannelIdx + 1).padStart(2, '0')} · {focusedChannel.categoryName} ·{' '}
-                {formatClockTime(focusedSlot.startTimeMs)} – {formatClockTime(focusedSlot.endTimeMs)}
-              </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 20,
-                  fontWeight: 600,
-                  marginTop: 4,
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {focusedSlot.video.title}
-              </div>
-              <div style={{ fontSize: 13, color: 'var(--ink-secondary)', marginTop: 2 }}>
-                {focusedSlot.video.sourceChannelTitle} · {formatDuration(focusedSlot.durationSec)}
-              </div>
-            </div>
-            <button onClick={() => onTuneChannel(focusedChannelIdx)} className="btn-pill primary" style={{ flexShrink: 0 }}>
-              <Play size={14} fill="currentColor" />
-              <span>{focusedSlot.isLive ? 'Watch now' : 'Tune to channel'}</span>
-            </button>
+          <div className="gd-selected">
+            <span className="gd-sel-time">
+              {formatClockTime(focusedSlot.startTimeMs)} – {formatClockTime(focusedSlot.endTimeMs)}
+            </span>
+            <span className="gd-sel-title">{focusedSlot.video.title}</span>
+            <span className="gd-sel-src">
+              CH {String(focusedChannelIdx + 1).padStart(2, '0')} · {focusedChannel.categoryName} · {focusedSlot.video.sourceChannelTitle}
+            </span>
+            <span className="gd-sel-badge">{formatDuration(focusedSlot.durationSec)}</span>
           </div>
         )}
-      </div>
-
-      <div className="guide-hints">
-        <span><span className="kbd">←↑↓→</span>Browse</span>
-        <span><span className="kbd">Enter</span>Tune in</span>
-        <span><span className="kbd">Esc</span>Back to watching</span>
-      </div>
+        <div className="gd-legend">
+          <button onClick={() => focusedSlot && onTuneChannel(focusedChannelIdx)}>
+            Watch <span className="kbd-osd">ENTER</span>
+          </button>
+          <span>
+            Browse <span className="kbd-osd">←↑↓→</span>
+          </span>
+          <button onClick={onBackToWatch}>
+            Return <span className="kbd-osd">ESC</span>
+          </button>
+        </div>
+      </footer>
     </div>
   );
 };

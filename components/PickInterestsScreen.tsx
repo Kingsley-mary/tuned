@@ -32,7 +32,7 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
   };
 
   return (
-    <div className="app-container" style={{ paddingBottom: 100 }}>
+    <div className="gd-screen pk-screen">
       <header className="top-nav">
         <button onClick={onBack} className="btn-pill" aria-label="Go back to power screen">
           <ArrowLeft size={16} />

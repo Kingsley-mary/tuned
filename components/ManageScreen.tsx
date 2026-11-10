@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Category, ChannelLineup } from '../lib/types';
-import { ArrowUp, ArrowDown, X, Plus, AlertCircle, RefreshCw } from 'lucide-react';
+import { ArrowUp, ArrowDown, X, Plus, AlertCircle, RefreshCw, Tv } from 'lucide-react';
 
 interface ManageScreenProps {
   channels: ChannelLineup[];
@@ -74,235 +74,163 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
     }
   };
 
-  return (
-    <div className="app-container">
-      <header className="top-nav">
-        <div className="brand-logo">
-          <span className="brand-dot" />
-          <span>tuned</span>
-        </div>
+  const [sel, setSel] = useState(0);
+  const safeSel = Math.min(sel, Math.max(0, channelCount - 1));
 
-        <button onClick={onDone} className="btn-pill primary" style={{ minWidth: 90 }}>
-          Done
-        </button>
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onDone();
+      } else if (e.key === 'ArrowUp' && e.shiftKey) {
+        e.preventDefault();
+        if (safeSel > 0) {
+          onMoveUp(safeSel);
+          setSel(safeSel - 1);
+        }
+      } else if (e.key === 'ArrowDown' && e.shiftKey) {
+        e.preventDefault();
+        if (safeSel < channelCount - 1) {
+          onMoveDown(safeSel);
+          setSel(safeSel + 1);
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSel(Math.max(0, safeSel - 1));
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSel(Math.min(channelCount - 1, safeSel + 1));
+      } else if ((e.key === 'Delete' || e.key === 'Backspace') && canRemove) {
+        e.preventDefault();
+        onRemoveChannel(safeSel);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [safeSel, channelCount, canRemove, onDone, onMoveUp, onMoveDown, onRemoveChannel]);
+
+  const selected = channels[safeSel];
+
+  return (
+    <div className="gd-screen mg-screen" style={{ ['--h' as string]: selected?.hue ?? 355 } as React.CSSProperties}>
+      <header className="gd-header">
+        <div>
+          <div className="brand-logo" style={{ color: '#fff' }}>
+            <span className="brand-dot" />
+            <span>tuned</span>
+          </div>
+          <div className="gd-title">
+            <Tv size={14} /> Channel lineup
+          </div>
+        </div>
+        <div className="gd-clock">
+          <div className="gd-date">{channelCount} of 8 channels</div>
+          <div className="mg-sub">Keep between 3 and 8</div>
+        </div>
       </header>
 
-      <div style={{ marginBottom: 24 }}>
-        <h1
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(28px, 4vw, 40px)',
-            fontWeight: 700,
-            letterSpacing: '-0.03em',
-          }}
-        >
-          Your channels
-        </h1>
-        <p style={{ color: 'var(--ink-secondary)', fontSize: 15, marginTop: 6 }}>
-          Keep between 3 and 8. The top one plays first.
-        </p>
-      </div>
-
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: 24,
-          alignItems: 'start',
-        }}
-      >
-        {/* Left Column: Active Channels List */}
-        <div
-          className="glass-card"
-        >
-          <div
-            className="section-label" style={{ marginBottom: 16 }}
-          >
-            Current Lineup ({channelCount} of 8)
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {channels.map((ch, idx) => {
-              return (
-                <div
-                  key={ch.categoryId + idx}
-                  className="manage-row"
-                >
-                  <span className="manage-row-bar" style={{ background: `hsl(${ch.hue}, 85%, 55%)` }} />
-                  <span
-                    style={{
-                      fontSize: 13,
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 700,
-                      color: 'var(--ink-secondary)',
-                      width: 24, marginLeft: 4 }}
-                  >
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-
-                  
-
-                  <span style={{ flex: 1, fontWeight: 600, fontSize: 15, textTransform: 'capitalize' }}>
-                    {ch.categoryName}
-                  </span>
-
-                  {ch.error && (
-                    <button
-                      onClick={() => onRetryChannel?.(idx)}
-                      className="btn-pill"
-                      style={{ height: 32, padding: '0 8px', fontSize: 12, color: 'var(--accent)' }}
-                      title="Retry loading this channel"
-                    >
-                      <RefreshCw size={12} />
-                      <span>Retry</span>
-                    </button>
-                  )}
-
-                  {/* Actions: Move Up, Move Down, Remove */}
-                  <div style={{ display: 'flex', gap: 4 }}>
-                    <button
-                      onClick={() => onMoveUp(idx)}
-                      disabled={idx === 0}
-                      className="icon-btn"
-                      style={{ width: 32, height: 32 }}
-                      aria-label="Move channel up"
-                    >
-                      <ArrowUp size={14} />
-                    </button>
-                    <button
-                      onClick={() => onMoveDown(idx)}
-                      disabled={idx === channelCount - 1}
-                      className="icon-btn"
-                      style={{ width: 32, height: 32 }}
-                      aria-label="Move channel down"
-                    >
-                      <ArrowDown size={14} />
-                    </button>
-                    <button
-                      onClick={() => onRemoveChannel(idx)}
-                      disabled={!canRemove}
-                      className="icon-btn"
-                      style={{ width: 32, height: 32, color: canRemove ? 'var(--accent)' : undefined }}
-                      aria-label="Remove channel"
-                      title={!canRemove ? 'Minimum 3 channels required' : 'Remove channel'}
-                    >
-                      <X size={14} />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {!canRemove && (
-            <p style={{ color: 'var(--ink-secondary)', fontSize: 13, marginTop: 14 }}>
-              Minimum 3 channels required.
-            </p>
-          )}
-        </div>
-
-        {/* Right Column: Add Category & Add Custom */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {/* Add a Channel from Categories (PRD M-3) */}
-          <div
-            className="glass-card"
-          >
-            <div
-              className="section-label" style={{ marginBottom: 12 }}
+      <div className="mg-body">
+        {/* Left: lineup as a remote-style list */}
+        <section className="mg-list">
+          {channels.map((ch, idx) => (
+            <button
+              key={ch.categoryId + idx}
+              onClick={() => setSel(idx)}
+              onDoubleClick={onDone}
+              className={`mg-item${idx === safeSel ? ' selected' : ''}`}
+              style={{ ['--h' as string]: ch.hue } as React.CSSProperties}
             >
-              Add a Channel
-            </div>
-
-            {!canAdd ? (
-              <p style={{ color: 'var(--ink-secondary)', fontSize: 14 }}>
-                You’re at the 8 channel max. Remove one to add another.
-              </p>
-            ) : unpickedCategories.length === 0 ? (
-              <p style={{ color: 'var(--ink-secondary)', fontSize: 14 }}>
-                All default categories added!
-              </p>
-            ) : (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {unpickedCategories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => onAddCategory(cat)}
-                    className="chip-add">
-                    <Plus size={14} />
-                    <span>{cat.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Add Your Own (PRD M-4) */}
-          <div
-            className="glass-card"
-          >
-            <div
-              className="section-label" style={{ marginBottom: 6 }}
-            >
-              Add Your Own
-            </div>
-            <p style={{ color: 'var(--ink-secondary)', fontSize: 13, marginBottom: 14 }}>
-              Paste a YouTube channel link or @handle.
-            </p>
-
-            <form onSubmit={handleAddCustom} style={{ display: 'flex', gap: 8 }}>
-              <input
-                type="text"
-                value={customInput}
-                onChange={(e) => {
-                  setCustomInput(e.target.value);
-                  setErrorMessage('');
-                }}
-                disabled={!canAdd || isResolving}
-                placeholder="youtube.com/@yourchannel"
-                className="input-pill"
-              />
-              <button
-                type="submit"
-                disabled={!canAdd || isResolving || !customInput.trim()}
-                className="btn-pill primary"
-                style={{ minWidth: 80 }}
-              >
-                {isResolving ? 'Adding…' : 'Add'}
-              </button>
-            </form>
-
-            {errorMessage && (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  color: 'var(--accent)',
-                  fontSize: 13,
-                  marginTop: 10,
-                }}
-              >
-                <AlertCircle size={15} />
-                <span>{errorMessage}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Demo tools (PRD M-6 / Demo) */}
-          <div
-            className="glass-card"
-          >
-            <div
-              className="section-label" style={{ marginBottom: 10 }}
-            >
-              Demo Tools
-            </div>
-            <button onClick={onPreviewOffAir} className="btn-pill" style={{ fontSize: 13 }}>
-              Preview off-air test pattern
+              <span className="mg-num">{String(idx + 1).padStart(2, '0')}</span>
+              <span className="mg-name">{ch.categoryName}</span>
+              {ch.error && <span className="mg-err">Failed to load</span>}
+              {idx === 0 && <span className="mg-tag">Plays first</span>}
             </button>
+          ))}
+        </section>
+
+        {/* Right: contextual actions for the focused channel + add */}
+        <section className="mg-side">
+          {selected && (
+            <div className="mg-card">
+              <div className="mg-card-eyebrow">Selected · CH {String(safeSel + 1).padStart(2, '0')}</div>
+              <div className="mg-card-title">{selected.categoryName}</div>
+              <div className="mg-actions">
+                <button className="osd-btn" disabled={safeSel === 0} onClick={() => { onMoveUp(safeSel); setSel(safeSel - 1); }}>
+                  <ArrowUp size={15} /> Move up
+                </button>
+                <button className="osd-btn" disabled={safeSel === channelCount - 1} onClick={() => { onMoveDown(safeSel); setSel(safeSel + 1); }}>
+                  <ArrowDown size={15} /> Move down
+                </button>
+                <button className="osd-btn danger" disabled={!canRemove} title={!canRemove ? 'Minimum 3 channels required' : 'Remove channel'} onClick={() => onRemoveChannel(safeSel)}>
+                  <X size={15} /> Remove
+                </button>
+                {selected.error && (
+                  <button className="osd-btn" onClick={() => onRetryChannel?.(safeSel)}>
+                    <RefreshCw size={14} /> Retry
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="mg-card">
+            <div className="mg-card-eyebrow">Add a channel</div>
+            {!canAdd ? (
+              <p className="mg-muted">You’re at the 8 channel max. Remove one to add another.</p>
+            ) : (
+              <>
+                {unpickedCategories.length > 0 && (
+                  <div className="mg-chips">
+                    {unpickedCategories.map((cat) => (
+                      <button
+                        key={cat.id}
+                        onClick={() => onAddCategory(cat)}
+                        className="mg-chip"
+                        style={{ ['--h' as string]: cat.hue } as React.CSSProperties}
+                      >
+                        <Plus size={13} /> {cat.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <form onSubmit={handleAddCustom} className="mg-form">
+                  <input
+                    type="text"
+                    value={customInput}
+                    onChange={(e) => {
+                      setCustomInput(e.target.value);
+                      setErrorMessage('');
+                    }}
+                    disabled={isResolving}
+                    placeholder="Paste a YouTube link or @handle"
+                    className="input-pill mg-input"
+                  />
+                  <button type="submit" disabled={isResolving || !customInput.trim()} className="osd-btn active-solid">
+                    {isResolving ? 'Adding…' : 'Add'}
+                  </button>
+                </form>
+                {errorMessage && (
+                  <div className="mg-error">
+                    <AlertCircle size={15} /> <span>{errorMessage}</span>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-        </div>
+
+          <button onClick={onPreviewOffAir} className="mg-link">Preview off-air test pattern</button>
+        </section>
       </div>
+
+      <footer className="gd-footer">
+        <div className="gd-legend">
+          <span>Select <span className="kbd-osd">↑↓</span></span>
+          <span>Reorder <span className="kbd-osd">SHIFT + ↑↓</span></span>
+          <span>Remove <span className="kbd-osd">DEL</span></span>
+          <button onClick={onDone}>Done <span className="kbd-osd">ESC</span></button>
+        </div>
+      </footer>
     </div>
   );
 };
