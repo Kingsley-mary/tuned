@@ -34,10 +34,17 @@ export async function GET(request: NextRequest) {
     try {
       const lineups = await Promise.all(ids.map((id) => getLineupForCategory(id)));
       const quota = getQuotaStatus();
-      return NextResponse.json({
-        lineups,
-        quota,
-      });
+      return NextResponse.json(
+        {
+          lineups,
+          quota,
+        },
+        {
+          headers: {
+            'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=3600',
+          },
+        }
+      );
     } catch (err: any) {
       return NextResponse.json({ error: err?.message || 'Failed to load lineups' }, { status: 500 });
     }

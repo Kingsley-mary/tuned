@@ -297,8 +297,29 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               </span>
               <span>{activeChannel?.categoryName || 'Channel'}</span>
               <span>•</span>
-              <span>
-                Video {currentVideoIndex + 1} of {videos.length}
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  color: '#22c55e',
+                  fontWeight: 700,
+                  fontSize: 12,
+                  letterSpacing: '0.08em',
+                }}
+              >
+                <span
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: '50%',
+                    background: '#22c55e',
+                    boxShadow: '0 0 8px #22c55e',
+                    display: 'inline-block',
+                    animation: 'pulse 2s infinite',
+                  }}
+                />
+                ON AIR
               </span>
               {isBuffering && (
                 <span

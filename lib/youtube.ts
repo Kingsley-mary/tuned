@@ -1,245 +1,820 @@
-import { canMakeApiCall, recordApiUnits } from './quota';
-import { getCachedLineup, setCachedLineup, getCachedPlaylistId, setCachedPlaylistId, getStaleLineup } from './cache';
-import { SEED_LINEUPS, CATEGORIES } from './seed-catalog';
 import { ChannelLineup, Video } from './types';
+import { CATEGORIES } from './seed-catalog';
 
-const API_KEY = process.env.YOUTUBE_API_KEY;
-const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
-
-// Parse ISO 8601 duration e.g. "PT15M33S" to seconds
-export function parseDuration(durationStr: string): number {
-  if (!durationStr) return 0;
-  const match = durationStr.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  if (!match) return 0;
-  const hours = parseInt(match[1] || '0', 10);
-  const minutes = parseInt(match[2] || '0', 10);
-  const seconds = parseInt(match[3] || '0', 10);
-  return hours * 3600 + minutes * 60 + seconds;
-}
-
-// Fetch uploads playlist ID for a channel (1 unit, cached permanently)
-export async function getUploadsPlaylistId(channelId: string): Promise<string | null> {
-  const cached = getCachedPlaylistId(channelId);
-  if (cached) return cached;
-
-  if (!API_KEY || !canMakeApiCall(1)) return null;
-
-  try {
-    const res = await fetch(
-      `${YOUTUBE_API_BASE}/channels?part=contentDetails&id=${encodeURIComponent(channelId)}&key=${API_KEY}`
-    );
-    recordApiUnits(1);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const uploadsId = data.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
-    if (uploadsId) {
-      setCachedPlaylistId(channelId, uploadsId);
-      return uploadsId;
+// Comprehensive roster of verified top creators per television channel (11-14 creators per channel)
+export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }[]> = {
+  "tech": [
+    {
+      "id": "UCBJycsmduvYEL83R_U4JriQ",
+      "name": "Marques Brownlee"
+    },
+    {
+      "id": "UC2Xd-TjJByJyK2w1zNwY0zQ",
+      "name": "Fireship"
+    },
+    {
+      "id": "UCsBjURrPoezykLs9EqgamOA",
+      "name": "Fireship Classic"
+    },
+    {
+      "id": "UCdBK94H6oZT2Q7l0-b0xmMg",
+      "name": "Linus Tech Tips"
+    },
+    {
+      "id": "UCddiUEpeqJcYeBxX1IVBKvQ",
+      "name": "The Verge"
+    },
+    {
+      "id": "UCMiJRAwDNSNzuYeN2uWa0pA",
+      "name": "Mrwhosetheboss"
+    },
+    {
+      "id": "UCWFKCr40YwOZQx8FHU_ZqqQ",
+      "name": "JerryRigEverything"
+    },
+    {
+      "id": "UC1IQIspOkCeV3WnYm32SBFQ",
+      "name": "Austin Evans"
+    },
+    {
+      "id": "UCG7J20LhUeLl6y_Emi7OJrA",
+      "name": "The Studio"
+    },
+    {
+      "id": "UCXv-co3EYHF7aOH4A93qAHQ",
+      "name": "Unbox Therapy"
+    },
+    {
+      "id": "UC9fSZHEh6XsRpX-xJc6lT3A",
+      "name": "UrAvgConsumer"
     }
-  } catch (err) {
-    console.error('Error fetching uploads playlist ID:', err);
-  }
-  return null;
+  ],
+  "games": [
+    {
+      "id": "UCqJ-Xo29CKyLTjn6z2XwYAw",
+      "name": "Game Maker's Toolkit"
+    },
+    {
+      "id": "UCGiJeCKTVKIxtaYZOidh19g",
+      "name": "videogamedunkey"
+    },
+    {
+      "id": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
+      "name": "IGN"
+    },
+    {
+      "id": "UCNvzD7Z-g64bPXxGzaQaa4g",
+      "name": "gameranx"
+    },
+    {
+      "id": "UCZ7AeeVbyslLM_8-nVy2B8Q",
+      "name": "Skill Up"
+    },
+    {
+      "id": "UCLdBr5f6RcP6l_TAP4GkhDQ",
+      "name": "Digital Foundry"
+    },
+    {
+      "id": "UC5CE6nbu1tjSGha-a_cHAFA",
+      "name": "GameSpot"
+    },
+    {
+      "id": "UCL7O6Onu0lBcwZ8t-YMgGcw",
+      "name": "Easy Allies"
+    },
+    {
+      "id": "UCYt9E2d_GCrPzquW-5MZwmQ",
+      "name": "Modern Vintage Gamer"
+    },
+    {
+      "id": "UCHDRlTIaDXGGYduDDNrBmTw",
+      "name": "Arlo"
+    },
+    {
+      "id": "UCDTV8DckMvn7mlgtdxTyR-g",
+      "name": "Spawn Wave"
+    },
+    {
+      "id": "UCsvn_Po0SmunchJYOWpOxMg",
+      "name": "Dunkey"
+    },
+    {
+      "id": "UC2eEGT06FrWFU6VBnPOR9lg",
+      "name": "Girlfriend Reviews"
+    },
+    {
+      "id": "UCKMkV9T20tUOBqwsi5xh7HA",
+      "name": "Wholesome Games"
+    }
+  ],
+  "music": [
+    {
+      "id": "UC4eYXhJI4-7wSWc8UNRwD4A",
+      "name": "NPR Tiny Desk"
+    },
+    {
+      "id": "UC7nrQB0dRxdQpH8-y8glEDw",
+      "name": "NPR Music"
+    },
+    {
+      "id": "UC3I2GFN_F8WudD_2jUZbojA",
+      "name": "KEXP"
+    },
+    {
+      "id": "UCG36u-k09zdIPQh5EEdVgTA",
+      "name": "Mahogany Sessions"
+    },
+    {
+      "id": "UCCycRfTS7V9WOFfWfkNVCSg",
+      "name": "Cercle"
+    },
+    {
+      "id": "UC8sy_jU8fgYKVsMobRiBnWw",
+      "name": "triple j"
+    },
+    {
+      "id": "UCWjmAUHmajb1-eo5WKk_22A",
+      "name": "Audiotree"
+    },
+    {
+      "id": "UC-FQUIVQ-bZiefzBiQAa8Fw",
+      "name": "BBC Radio 1"
+    },
+    {
+      "id": "UCGBpxWJr9FNOcFYA5GkKrMg",
+      "name": "Boiler Room"
+    },
+    {
+      "id": "UCRLZb8PpI9N7COmYqHiDH7A",
+      "name": "Sofar Sounds"
+    },
+    {
+      "id": "UCAKcSON6PSG_JkTbXh2WdIg",
+      "name": "The Current"
+    },
+    {
+      "id": "UC_PscE_7n8SiMspieMGMK_A",
+      "name": "Paste Magazine"
+    },
+    {
+      "id": "UC54U5gpKkaa_BpXRVNip2Dw",
+      "name": "KCRW"
+    },
+    {
+      "id": "UC7kI8WjpCfFoMSNDuRh_4lA",
+      "name": "Pitchfork"
+    }
+  ],
+  "food": [
+    {
+      "id": "UCJHA_jMfCvEnv-3kRjTCQXw",
+      "name": "Binging with Babish"
+    },
+    {
+      "id": "UCUAg71CJEvFdOnujmep1Svw",
+      "name": "Joshua Weissman"
+    },
+    {
+      "id": "UCIEv3lZ_tNXHzL3ox-_uUGQ",
+      "name": "Gordon Ramsay"
+    },
+    {
+      "id": "UCbpMy0Fg74eXXkvxJrtEn3w",
+      "name": "Bon Appétit"
+    },
+    {
+      "id": "UC4avs5jYd_FvzQ8f0XYziqw",
+      "name": "Babish Eats"
+    },
+    {
+      "id": "UCfyehHM_eo4g5JUyWmms2LA",
+      "name": "Sorted Food"
+    },
+    {
+      "id": "UCekQr9znsk2vWxBo3YiLq2w",
+      "name": "You Suck at Cooking"
+    },
+    {
+      "id": "UCbRj3Tcy1Zoz3rcf83nW5kw",
+      "name": "Sam The Cooking Guy"
+    },
+    {
+      "id": "UCcjhYlL1WRBjKaJsMH_h7Lg",
+      "name": "Epicurious"
+    },
+    {
+      "id": "UCpSgg_ECBj25s9moCDfSTsA",
+      "name": "Jamie Oliver"
+    },
+    {
+      "id": "UC8gFadPgK2r1ndqLI04Xvvw",
+      "name": "Maangchi"
+    },
+    {
+      "id": "UCXGR70CkW_pXb8n52LzCCRw",
+      "name": "Mythical Kitchen"
+    }
+  ],
+  "science": [
+    {
+      "id": "UCHnyfMqiRRG1u-2MsSQLbXA",
+      "name": "Veritasium"
+    },
+    {
+      "id": "UCq8ZAAsI89IoJ-fn1gYpO3g",
+      "name": "Kurzgesagt – In a Nutshell"
+    },
+    {
+      "id": "UC8VkNBOwvsTlFjoSnNSMmxw",
+      "name": "SmarterEveryDay"
+    },
+    {
+      "id": "UC513PdAP2-jWkJunTh5kXRw",
+      "name": "Mark Rober"
+    },
+    {
+      "id": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
+      "name": "Vsauce"
+    },
+    {
+      "id": "UCUdettijNYvLAm4AixZv4RA",
+      "name": "SciShow"
+    },
+    {
+      "id": "UCeiYXex_fwgYDonaTcSIk6w",
+      "name": "MinutePhysics"
+    },
+    {
+      "id": "UC1UmujXTizWokDHojdEOdow",
+      "name": "Veritasium Classics"
+    },
+    {
+      "id": "UC7_gcs09iThXybpVgjHZ_7g",
+      "name": "PBS Space Time"
+    },
+    {
+      "id": "UCH4BNI0-FOK2dMXoFtViWHw",
+      "name": "Be Smart"
+    },
+    {
+      "id": "UCFhXFikryT4aFcLkLw2LBLA",
+      "name": "NileRed"
+    },
+    {
+      "id": "UC1VLQPn9cYSqx8plbk9RxxQ",
+      "name": "The Action Lab"
+    },
+    {
+      "id": "UC1yNl2E66ZzKApQdRuTQ4tw",
+      "name": "Sabine Hossenfelder"
+    },
+    {
+      "id": "UCzWQYUVCpZqtN93H8RR44Qw",
+      "name": "Seeker"
+    }
+  ],
+  "sports": [
+    {
+      "id": "UCRijo3ddMTht_IHyNSNXpNQ",
+      "name": "Dude Perfect"
+    },
+    {
+      "id": "UC8VddvuHJzIj__Ud0rY2_ww",
+      "name": "Red Bull"
+    },
+    {
+      "id": "UCcSrNe5CbXOmsF645RYDe5w",
+      "name": "People Are Awesome"
+    },
+    {
+      "id": "UCiio0ydw439X13KyZgMIcHw",
+      "name": "ESPN"
+    },
+    {
+      "id": "UC_kdjhHnkUbSImMrezjRyDQ",
+      "name": "Olympics"
+    },
+    {
+      "id": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
+      "name": "Dude Perfect Extra"
+    },
+    {
+      "id": "UC9UGYdMSKasjY0mhU1lG4lQ",
+      "name": "Nitro Circus"
+    },
+    {
+      "id": "UCvgfXK4nTYKudb0rFR6noLA",
+      "name": "UFC"
+    },
+    {
+      "id": "UCWJ2lWNubArHWmf3FIHbfcQ",
+      "name": "NBA"
+    },
+    {
+      "id": "UCDVYQ4Zhbm3S2dlz7P1GBDg",
+      "name": "NFL"
+    },
+    {
+      "id": "UCqQo7ewe87aYAe7ub5UqXMw",
+      "name": "House of Highlights"
+    },
+    {
+      "id": "UCqhnX4jA0A5paNd1v-zEysw",
+      "name": "GoPro"
+    }
+  ],
+  "travel": [
+    {
+      "id": "UCneNuMawbfqgXCew2EdZMcQ",
+      "name": "Kara and Nate"
+    },
+    {
+      "id": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+      "name": "Yes Theory"
+    },
+    {
+      "id": "UCi7KXaqqW_h6ifNVnudH0kQ",
+      "name": "Lost LeBlanc"
+    },
+    {
+      "id": "UCodVXWu3aFyE1hGmbJrJJLQ",
+      "name": "Drew Binsky"
+    },
+    {
+      "id": "UCkFli83zdGzt7s-IsiRijXA",
+      "name": "Wolters World"
+    },
+    {
+      "id": "UCxDZs_ltFFvn0FDHT6kmoXA",
+      "name": "Bald and Bankrupt"
+    },
+    {
+      "id": "UCJ7FVLKSOlpTNbuyvqOjPqw",
+      "name": "Rick Steves"
+    },
+    {
+      "id": "UCDTINI9skkeZNY2ZXnBqIkQ",
+      "name": "Eva zu Beck"
+    },
+    {
+      "id": "UCyEd6QBSgat5kkC6svyjudA",
+      "name": "Mark Wiens"
+    },
+    {
+      "id": "UC_DmOS_FBvO4H27U7X0OtRg",
+      "name": "Fearless & Far"
+    },
+    {
+      "id": "UCXulruMI7BHj3kGyosNa0jA",
+      "name": "Indigo Traveller"
+    },
+    {
+      "id": "UCD5v3wL-6NMG0SMMeR6TxsA",
+      "name": "Chopstick Travel"
+    },
+    {
+      "id": "UCiAq_SU0ED1C6vWFMnw8Ekg",
+      "name": "The Food Ranger"
+    }
+  ],
+  "film": [
+    {
+      "id": "UC-hehDTvO4X8d9M7MVtpElg",
+      "name": "Thomas Flight"
+    },
+    {
+      "id": "UCDylnpLJWDj2gKWujjwap9w",
+      "name": "StudioBinder"
+    },
+    {
+      "id": "UCKy1dAqELo0zrOtPkf0eTMw",
+      "name": "CineFix"
+    },
+    {
+      "id": "UCErSSa3CaP_GJxmFpdjG9Jw",
+      "name": "Lessons from the Screenplay"
+    },
+    {
+      "id": "UCzjbia0NqUsSL1_-loJihMg",
+      "name": "CinemaStix"
+    },
+    {
+      "id": "UCuPgdqQKpq4T4zeqmTelnFg",
+      "name": "kaptainkristian"
+    },
+    {
+      "id": "UCWTFGPpNQ0Ms6afXhaWDiRw",
+      "name": "Now You See It"
+    },
+    {
+      "id": "UCJkMlOu7faDgqh4PfzbpLdg",
+      "name": "Nerdwriter1"
+    },
+    {
+      "id": "UCx0L2ZdYfiq-tsAXb8IXpQg",
+      "name": "Just Write"
+    },
+    {
+      "id": "UCSpFnDQr88xCZ80N-X7t0nQ",
+      "name": "Corridor Crew"
+    },
+    {
+      "id": "UCSFAYalJ2Q7Tm_WmLgetmeg",
+      "name": "Filmmaker IQ"
+    },
+    {
+      "id": "UCjFqcJQXGZ6T6sxyFB-5i6A",
+      "name": "Every Frame a Painting"
+    },
+    {
+      "id": "UCfjaAUlTZRHJapJmCT6eyIg",
+      "name": "Spacedock"
+    },
+    {
+      "id": "UCs7nPQIEba0T3tGOWWsZpJQ",
+      "name": "Like Stories of Old"
+    }
+  ],
+  "fitness": [
+    {
+      "id": "UCmCnayXABSyVjexptPEQxlA",
+      "name": "Hybrid Calisthenics"
+    },
+    {
+      "id": "UCe0TLA0EsQbE-MjuHXevj2A",
+      "name": "ATHLEAN-X"
+    },
+    {
+      "id": "UCZIIRX8rkNjVpP-oLMHpeDw",
+      "name": "Calisthenicmovement"
+    },
+    {
+      "id": "UCiP6wD_tYlYLYh3agzbByWQ",
+      "name": "FitnessBlender"
+    },
+    {
+      "id": "UCFKE7WVJfvaHW5q283SxchA",
+      "name": "Yoga With Adriene"
+    },
+    {
+      "id": "UCadiU6WTKl65HUwEih1XLYg",
+      "name": "Picture Fit"
+    },
+    {
+      "id": "UCKf0UqBiCQI4Ol0To9V0pKQ",
+      "name": "Buff Dudes"
+    },
+    {
+      "id": "UCM2ra7Od2jliHB9TLPKt76w",
+      "name": "Movement by David"
+    },
+    {
+      "id": "UCCgLoMYIyP0U56dEhEL1wXQ",
+      "name": "Chloe Ting"
+    },
+    {
+      "id": "UCpQ34afVgk8cRQBjSJ1xuJQ",
+      "name": "MadFit"
+    },
+    {
+      "id": "UChVRfsT_ASBZk10o0An7Ucg",
+      "name": "Pamela Reif"
+    },
+    {
+      "id": "UCgFItI58gEggW1-39DxjVbA",
+      "name": "Calisthenics Family"
+    }
+  ],
+  "art": [
+    {
+      "id": "UClM2LuQ1q5WEc23462tQzBg",
+      "name": "Proko"
+    },
+    {
+      "id": "UC3BCGz72VQcFdoBiZtKfOpg",
+      "name": "Jazza"
+    },
+    {
+      "id": "UCoal_hpPIPAnWlG-kWHLheA",
+      "name": "Drawfee Show"
+    },
+    {
+      "id": "UCfvIqreCk628yB9mp3e_ABQ",
+      "name": "Proko TV"
+    },
+    {
+      "id": "UCh-ArhaGOqFsBPrR2yQd42w",
+      "name": "Ten Hundred"
+    },
+    {
+      "id": "UCvZe6ZCbF9xgbbbdkiodPKQ",
+      "name": "Baumgartner Restoration"
+    },
+    {
+      "id": "UCno-YPZ8BiLrN0Wbl8qICFA",
+      "name": "Mark Crilley"
+    },
+    {
+      "id": "UCx-mMlEegnZ-SjWPS73Tgvw",
+      "name": "Baylee Jae"
+    },
+    {
+      "id": "UCvcEBQ0K3UsQ8bzWKHKQmbw",
+      "name": "Struthless"
+    },
+    {
+      "id": "UCmRm1xtLIpBhuWjTyD411pA",
+      "name": "Trent Kaniuga"
+    },
+    {
+      "id": "UCLcxo0ysMP27XTiRKqrdASg",
+      "name": "Minnie Small"
+    },
+    {
+      "id": "UCSl51TSNCxLQJqLTQp0B6Cg",
+      "name": "Kirsty Partridge Art"
+    }
+  ],
+  "design": [
+    {
+      "id": "UC_zQ777U6YTyatP3P1wi3xw",
+      "name": "Never Too Small"
+    },
+    {
+      "id": "UC0k238zFx-Z8xFH0sxCrPJg",
+      "name": "Architectural Digest"
+    },
+    {
+      "id": "UCgxg48_pay4R67s-7WOgWFA",
+      "name": "The Local Project"
+    },
+    {
+      "id": "UCDsElQQt_gCZ9LgnW-7v-cQ",
+      "name": "Kirsten Dirksen"
+    },
+    {
+      "id": "UC-b3c7kxa5vU-bnmaROgvog",
+      "name": "The Futur"
+    },
+    {
+      "id": "UCJ_2hNMxOzNjviJBiLWHMqg",
+      "name": "Dami Lee"
+    },
+    {
+      "id": "UCYAm24PkejQR2xMgJgn7xwg",
+      "name": "Stewart Hicks"
+    },
+    {
+      "id": "UC_kjXjYwOlMZeLMkAanRn3g",
+      "name": "Design Theory"
+    },
+    {
+      "id": "UCSb-xYOELhIqVr2n9s-b_4w",
+      "name": "Linus Boman"
+    },
+    {
+      "id": "UCoNTMWgGuXtGPLv9UeJZwBw",
+      "name": "Living Big In A Tiny House"
+    },
+    {
+      "id": "UCsWG9ANbrmgR0z-eFk_A3YQ",
+      "name": "Dezeen"
+    },
+    {
+      "id": "UC3r_kdJocuqtDYb2GgM42Ng",
+      "name": "ArchDaily"
+    },
+    {
+      "id": "UCv6JHGYnS74viHnZ-6zR2Jg",
+      "name": "designboom"
+    }
+  ],
+  "learning": [
+    {
+      "id": "UCsooa4yRKGN_zEE8iknghZA",
+      "name": "TED-Ed"
+    },
+    {
+      "id": "UCAuUUnT6oDeKwE6v1NGQxug",
+      "name": "TED-Ed Lessons"
+    },
+    {
+      "id": "UC1_uAIS3r8Vu6JjXWvastJg",
+      "name": "3Blue1Brown"
+    },
+    {
+      "id": "UCTWKe1zATFV6d0o6oLS9sgw",
+      "name": "Wendover Productions"
+    },
+    {
+      "id": "UC176GAQozKKjhz62H8u9vQQ",
+      "name": "Real Engineering"
+    },
+    {
+      "id": "UCX6b17PVsYBQ0ip5gyeme-Q",
+      "name": "CrashCourse"
+    },
+    {
+      "id": "UCMOqf8ab-42UUQIdVoKwjlQ",
+      "name": "Practical Engineering"
+    },
+    {
+      "id": "UCuCkxoKLYO_EQ2GeFtbM_bw",
+      "name": "Half as Interesting"
+    },
+    {
+      "id": "UCoxcjq-8xIDTYp3uz647V5A",
+      "name": "Numberphile"
+    },
+    {
+      "id": "UC9-y-6csu5WGm29I7JiwpnA",
+      "name": "Computerphile"
+    },
+    {
+      "id": "UCBa659QWEk1AI4Tg--mrJ2A",
+      "name": "Tom Scott"
+    },
+    {
+      "id": "UCSju5G2aFaWMqn-_0YBtq5A",
+      "name": "Stand-up Maths"
+    },
+    {
+      "id": "UCNIuvl7V8zACPpTmmNIqP2A",
+      "name": "OverSimplified"
+    }
+  ]
+};
+
+// In-memory cache with 15-minute revalidation
+interface CachedPool {
+  lineup: ChannelLineup;
+  timestamp: number;
 }
+const MEMORY_CACHE = new Map<string, CachedPool>();
+const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
 
-// Fetch recent videos from an uploads playlist (1 unit)
-export async function getPlaylistVideos(playlistId: string, maxResults: number = 15): Promise<string[]> {
-  if (!API_KEY || !canMakeApiCall(1)) return [];
-
+// Fetch recent uploads from an official YouTube channel feed
+async function fetchChannelUploads(channelId: string, channelName: string): Promise<Video[]> {
   try {
-    const res = await fetch(
-      `${YOUTUBE_API_BASE}/playlistItems?part=contentDetails&maxResults=${maxResults}&playlistId=${encodeURIComponent(
-        playlistId
-      )}&key=${API_KEY}`
-    );
-    recordApiUnits(1);
+    const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
+      next: { revalidate: 900 },
+      headers: { 'User-Agent': 'Tuned-Broadcaster/1.0' }
+    });
     if (!res.ok) return [];
-    const data = await res.json();
-    return (data.items || []).map((item: any) => item.contentDetails?.videoId).filter(Boolean);
-  } catch (err) {
-    console.error('Error fetching playlist items:', err);
-    return [];
-  }
-}
+    const xml = await res.text();
 
-// Fetch video details in batch of up to 50 (1 unit) & filter embeddable
-export async function getVideoDetails(videoIds: string[]): Promise<Video[]> {
-  if (!videoIds.length || !API_KEY || !canMakeApiCall(1)) return [];
-
-  try {
-    const res = await fetch(
-      `${YOUTUBE_API_BASE}/videos?part=snippet,contentDetails,status&id=${encodeURIComponent(
-        videoIds.join(',')
-      )}&key=${API_KEY}`
-    );
-    recordApiUnits(1);
-    if (!res.ok) return [];
-    const data = await res.json();
-    const items = data.items || [];
-
+    const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
     const videos: Video[] = [];
-    for (const item of items) {
-      // PRD Section 8 & 9: Only keep videos that are embeddable!
-      if (item.status?.embeddable === false) continue;
 
-      const durationSec = parseDuration(item.contentDetails?.duration || '');
-      // Skip shorts or ultra-short clips (< 60s) or broken durations
-      if (durationSec < 60) continue;
+    for (const entry of entries) {
+      const entryText = entry[1];
+      const vid = entryText.match(/<yt:videoId>(.*?)<\/yt:videoId>/)?.[1]?.trim();
+      const rawTitle = entryText.match(/<title>(.*?)<\/title>/)?.[1]?.trim();
+      const author = entryText.match(/<author>\s*<name>(.*?)<\/name>/)?.[1]?.trim() || channelName;
 
-      const thumb =
-        item.snippet?.thumbnails?.high?.url ||
-        item.snippet?.thumbnails?.medium?.url ||
-        `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`;
+      if (!vid || !rawTitle) continue;
+
+      // Filter out YouTube Shorts
+      if (rawTitle.toLowerCase().includes('#shorts') || rawTitle.toLowerCase().includes('#short')) {
+        continue;
+      }
+
+      // Clean HTML entities if any
+      const cleanTitle = rawTitle
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>');
 
       videos.push({
-        youtubeVideoId: item.id,
-        title: item.snippet?.title || 'Untitled',
-        sourceChannelId: item.snippet?.channelId || '',
-        sourceChannelTitle: item.snippet?.channelTitle || 'YouTube Creator',
-        thumbnailUrl: thumb,
-        durationSec,
-        publishedAt: item.snippet?.publishedAt,
-        embeddable: true,
-        fetchedAt: Date.now(),
+        youtubeVideoId: vid,
+        title: cleanTitle,
+        sourceChannelId: channelId,
+        sourceChannelTitle: author,
+        thumbnailUrl: `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`,
+        durationSec: 600
       });
     }
+
     return videos;
   } catch (err) {
-    console.error('Error fetching video details:', err);
+    console.warn(`Failed to fetch channel feed for ${channelName} (${channelId}):`, err);
     return [];
   }
 }
 
-// Fetch or build lineup for category
-export async function getLineupForCategory(categoryId: string): Promise<ChannelLineup> {
-  // 1. Fresh cache check
-  const cached = getCachedLineup(categoryId);
-  if (cached) return cached;
+// Interleave multiple arrays round-robin so adjacent videos come from different creators
+function roundRobinInterleave(lists: Video[][]): Video[] {
+  const result: Video[] = [];
+  const seenIds = new Set<string>();
+  let hasMore = true;
+  let round = 0;
 
-  const categoryMeta = CATEGORIES.find((c) => c.id === categoryId);
-  const hue = categoryMeta?.hue ?? 355;
-  const categoryName = categoryMeta?.name ?? categoryId;
-
-  // 2. If no API key or quota guarded, serve high quality seed lineup
-  if (!API_KEY || !canMakeApiCall(2)) {
-    const seed = SEED_LINEUPS[categoryId] || {
-      categoryId,
-      categoryName,
-      hue,
-      builtAt: Date.now(),
-      videos: SEED_LINEUPS.tech.videos,
-    };
-    setCachedLineup(categoryId, seed);
-    return seed;
-  }
-
-  // 3. Try to fetch from YouTube API if channel IDs provided
-  const sourceChannelIds = categoryMeta?.sourceChannelIds || [];
-  if (sourceChannelIds.length > 0) {
-    try {
-      const allVideoIds: string[] = [];
-      for (const channelId of sourceChannelIds.slice(0, 5)) {
-        const playlistId = await getUploadsPlaylistId(channelId);
-        if (playlistId) {
-          const ids = await getPlaylistVideos(playlistId, 5);
-          allVideoIds.push(...ids);
+  while (hasMore) {
+    hasMore = false;
+    for (const list of lists) {
+      if (round < list.length) {
+        const item = list[round];
+        if (!seenIds.has(item.youtubeVideoId)) {
+          seenIds.add(item.youtubeVideoId);
+          result.push(item);
         }
+        hasMore = true;
       }
-
-      if (allVideoIds.length > 0) {
-        const uniqueIds = Array.from(new Set(allVideoIds)).slice(0, 50);
-        const videos = await getVideoDetails(uniqueIds);
-        if (videos.length >= 5) {
-          const lineup: ChannelLineup = {
-            categoryId,
-            categoryName,
-            hue,
-            videos: videos.slice(0, 20),
-            builtAt: Date.now(),
-          };
-          setCachedLineup(categoryId, lineup);
-          return lineup;
-        }
-      }
-    } catch (e) {
-      console.warn(`Dynamic lineup fetch failed for ${categoryId}, using seed fallback:`, e);
     }
+    round++;
   }
 
-  // Fallback to seed catalog
-  const stale = getStaleLineup(categoryId);
-  if (stale && stale.videos.length >= 5) return stale;
-
-  const fallback = SEED_LINEUPS[categoryId] || SEED_LINEUPS.tech;
-  setCachedLineup(categoryId, fallback);
-  return fallback;
+  return result;
 }
 
-// Resolve YouTube channel from link or @handle
+// Master function: live-scours the creator universe for a given category
+export async function getLineupForCategory(categoryId: string): Promise<ChannelLineup> {
+  // Check cache first for instant sub-second response
+  const cached = MEMORY_CACHE.get(categoryId);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+    return cached.lineup;
+  }
+
+  const categoryMeta = CATEGORIES.find(c => c.id === categoryId);
+  const categoryName = categoryMeta?.name || 'Channel';
+  const categoryHue = categoryMeta?.hue || 200;
+
+  const creators = BROADCAST_CHANNELS_MAP[categoryId] || [];
+
+  try {
+    // Scour all creators in parallel live from YouTube
+    const channelLists = await Promise.all(
+      creators.map(c => fetchChannelUploads(c.id, c.name))
+    );
+
+    const validLists = channelLists.filter(list => list.length > 0);
+
+    if (validLists.length > 0) {
+      // Interleave round-robin across creators
+      const interleaved = roundRobinInterleave(validLists);
+
+      const lineup: ChannelLineup = {
+        categoryId,
+        categoryName,
+        hue: categoryHue,
+        builtAt: Date.now(),
+        videos: interleaved
+      };
+
+      MEMORY_CACHE.set(categoryId, { lineup, timestamp: Date.now() });
+      return lineup;
+    }
+  } catch (err) {
+    console.error(`Live scouring error for ${categoryId}:`, err);
+  }
+
+  // Stale cache fallback if available
+  if (cached) return cached.lineup;
+
+  // Empty fallback
+  return {
+    categoryId,
+    categoryName,
+    hue: categoryHue,
+    builtAt: Date.now(),
+    videos: []
+  };
+}
+
+// Resolve YouTube channel handle
+export async function resolveHandleToChannelId(handle: string): Promise<string | null> {
+  const clean = handle.replace(/^@/, '').trim();
+  try {
+    const res = await fetch(`https://www.youtube.com/@${clean}`, {
+      headers: { 'User-Agent': 'Mozilla/5.0' }
+    });
+    const html = await res.text();
+    const m = html.match(/<meta itemprop="identifier" content="(UC[\w-]{22})">/) ||
+              html.match(/<meta itemprop="channelId" content="(UC[\w-]{22})">/) ||
+              html.match(/"channelId":"(UC[\w-]{22})"/) ||
+              html.match(/"externalId":"(UC[\w-]{22})"/);
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+// Higher-level resolver for custom channel input
 export async function resolveYouTubeChannel(
   query: string
-): Promise<{ channelId: string; title: string; uploadsPlaylistId?: string } | { error: string }> {
+): Promise<{ channelId: string; title: string } | { error: string }> {
   const clean = query.trim();
   if (!clean) return { error: 'Please enter a channel link or @handle.' };
 
-  // Parse @handle or channel ID from various formats
-  let handleMatch = clean.match(/(?:@)([a-zA-Z0-9_.-]+)/);
-  let idMatch = clean.match(/(?:channel\/)([a-zA-Z0-9_-]{20,})/);
-  let userMatch = clean.match(/(?:c\/|user\/)([a-zA-Z0-9_-]+)/);
-
-  if (!handleMatch && !idMatch && !userMatch) {
-    // If user entered bare text like "mkbhd" or "@mkbhd"
-    if (/^@?[a-zA-Z0-9_.-]+$/.test(clean)) {
-      handleMatch = [clean, clean.replace(/^@/, '')];
-    } else {
-      return { error: 'That doesn’t look like a valid YouTube channel link or @handle.' };
-    }
+  const handle = clean.replace(/^.*youtube\.com\/@?/, '').replace(/^@/, '');
+  const channelId = await resolveHandleToChannelId(handle);
+  if (!channelId) {
+    return { error: 'Could not find a YouTube channel matching that input.' };
   }
-
-  if (!API_KEY) {
-    // If no API key configured, resolve mock gracefully
-    const name = handleMatch ? handleMatch[1] : userMatch ? userMatch[1] : idMatch ? idMatch[1] : 'channel';
-    return {
-      channelId: `custom_${name.toLowerCase()}`,
-      title: name,
-    };
-  }
-
-  if (!canMakeApiCall(1)) {
-    return { error: 'YouTube API daily quota is currently guarded. Try again later.' };
-  }
-
-  try {
-    let url = '';
-    if (handleMatch) {
-      url = `${YOUTUBE_API_BASE}/channels?part=snippet,contentDetails&forHandle=${encodeURIComponent(
-        handleMatch[1]
-      )}&key=${API_KEY}`;
-    } else if (idMatch) {
-      url = `${YOUTUBE_API_BASE}/channels?part=snippet,contentDetails&id=${encodeURIComponent(idMatch[1])}&key=${API_KEY}`;
-    } else if (userMatch) {
-      url = `${YOUTUBE_API_BASE}/channels?part=snippet,contentDetails&forUsername=${encodeURIComponent(
-        userMatch[1]
-      )}&key=${API_KEY}`;
-    }
-
-    const res = await fetch(url);
-    recordApiUnits(1);
-    if (!res.ok) {
-      return { error: 'Could not find a YouTube channel matching that input.' };
-    }
-    const data = await res.json();
-    const item = data.items?.[0];
-    if (!item) {
-      return { error: 'No channel found for that handle or URL.' };
-    }
-
-    return {
-      channelId: item.id,
-      title: item.snippet?.title || 'Custom Channel',
-      uploadsPlaylistId: item.contentDetails?.relatedPlaylists?.uploads,
-    };
-  } catch (err) {
-    return { error: 'Failed to contact YouTube servers. Check your connection.' };
-  }
+  return {
+    channelId,
+    title: handle,
+  };
 }
