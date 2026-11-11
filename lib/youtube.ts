@@ -430,6 +430,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCeJrRK_Pt1m23l5zgSytVUA",
       "name": "duplee"
+    },
+    {
+      "id": "UC3JhfsgFPLSLNEROQCdj-GQ",
+      "name": "Headspace"
     }
   ],
   "food": [
@@ -1284,10 +1288,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC-dmJ79518WlKMbsu50eMTQ",
       "name": "Clark Kegley"
-    },
-    {
-      "id": "UC3JhfsgFPLSLNEROQCdj-GQ",
-      "name": "Headspace"
     }
   ],
   "movies": [

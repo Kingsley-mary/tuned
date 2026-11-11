@@ -1919,6 +1919,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "builtAt": 1794338232822,
     "videos": [
       {
+        "youtubeVideoId": "A8lEleHtqQc",
+        "title": "2 Hours of Cozy, Ambient Sounds for Your Pet’s Afternoon Nap",
+        "sourceChannelId": "UC3JhfsgFPLSLNEROQCdj-GQ",
+        "sourceChannelTitle": "Headspace",
+        "thumbnailUrl": "https://i.ytimg.com/vi/A8lEleHtqQc/hqdefault.jpg",
+        "durationSec": 7227
+      },
+      {
+        "youtubeVideoId": "ynbIe1LGx7g",
+        "title": "4-Minute Pep Talk to Boost Your Confidence",
+        "sourceChannelId": "UC3JhfsgFPLSLNEROQCdj-GQ",
+        "sourceChannelTitle": "Headspace",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ynbIe1LGx7g/hqdefault.jpg",
+        "durationSec": 240
+      },
+      {
+        "youtubeVideoId": "OlV94YvOUlA",
+        "title": "12-Minute Meditation to Improve Focus and Productivity | Headspace Courses",
+        "sourceChannelId": "UC3JhfsgFPLSLNEROQCdj-GQ",
+        "sourceChannelTitle": "Headspace",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OlV94YvOUlA/hqdefault.jpg",
+        "durationSec": 711
+      },
+      {
         "youtubeVideoId": "o8EmAJGYJgE",
         "title": "Little Simz - Game On ft. JT (Official Visualiser)",
         "sourceChannelId": "UC89IYKXyf15qNezA7IuFG1A",
@@ -7791,14 +7815,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 801
       },
       {
-        "youtubeVideoId": "A8lEleHtqQc",
-        "title": "2 Hours of Cozy, Ambient Sounds for Your Pet’s Afternoon Nap",
-        "sourceChannelId": "UC3JhfsgFPLSLNEROQCdj-GQ",
-        "sourceChannelTitle": "Headspace",
-        "thumbnailUrl": "https://i.ytimg.com/vi/A8lEleHtqQc/hqdefault.jpg",
-        "durationSec": 7227
-      },
-      {
         "youtubeVideoId": "BmBw827GgFA",
         "title": "Mutex Explained - Computerphile",
         "sourceChannelId": "UC9-y-6csu5WGm29I7JiwpnA",
@@ -7999,14 +8015,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1178
       },
       {
-        "youtubeVideoId": "ynbIe1LGx7g",
-        "title": "4-Minute Pep Talk to Boost Your Confidence",
-        "sourceChannelId": "UC3JhfsgFPLSLNEROQCdj-GQ",
-        "sourceChannelTitle": "Headspace",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ynbIe1LGx7g/hqdefault.jpg",
-        "durationSec": 240
-      },
-      {
         "youtubeVideoId": "NDgS__J1U-M",
         "title": "The Private Key Mistake! (TLS Key set to \"4\") - Computerphile",
         "sourceChannelId": "UC9-y-6csu5WGm29I7JiwpnA",
@@ -8205,14 +8213,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Numberphile",
         "thumbnailUrl": "https://i.ytimg.com/vi/EgnAN0ZUl08/hqdefault.jpg",
         "durationSec": 819
-      },
-      {
-        "youtubeVideoId": "OlV94YvOUlA",
-        "title": "12-Minute Meditation to Improve Focus and Productivity | Headspace Courses",
-        "sourceChannelId": "UC3JhfsgFPLSLNEROQCdj-GQ",
-        "sourceChannelTitle": "Headspace",
-        "thumbnailUrl": "https://i.ytimg.com/vi/OlV94YvOUlA/hqdefault.jpg",
-        "durationSec": 711
       },
       {
         "youtubeVideoId": "cI8IquVEyVY",
