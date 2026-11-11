@@ -128,6 +128,7 @@ export default function TunedApp() {
           ...overrides,
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
+        localStorage.setItem(ENTERTAINMENT_MIGRATION_KEY, '1');
       } catch (e) {
         console.warn('Could not save user state:', e);
       }
@@ -306,12 +307,26 @@ export default function TunedApp() {
   };
 
   const handleContinuePick = () => {
+    setIsReturningUser(true);
+    setCurrentChannelIndex(0);
+    persistState({
+      pickedCategoryIds,
+      isReturningUser: true,
+      lastChannelIndex: 0,
+    });
     setScreenMode('tuning');
   };
 
   const handleSkipPick = () => {
     setPickedCategoryIds(DEFAULT_CATEGORIES);
+    setIsReturningUser(true);
+    setCurrentChannelIndex(0);
     isDirtyRef.current = true;
+    persistState({
+      pickedCategoryIds: DEFAULT_CATEGORIES,
+      isReturningUser: true,
+      lastChannelIndex: 0,
+    });
     setScreenMode('tuning');
   };
 
