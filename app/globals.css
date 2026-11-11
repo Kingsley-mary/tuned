@@ -92,10 +92,12 @@ button:focus-visible, input:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-family: var(--font-logo);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1;
   color: var(--ink);
   text-decoration: none;
   background: none;
@@ -1166,8 +1168,8 @@ button:focus-visible, input:focus-visible {
   -webkit-backdrop-filter: blur(36px) saturate(1.4);
   padding: 28px 48px 22px;
 }
-.gd-screen .brand-logo { font-family: var(--font-logo); font-size: 30px; font-weight: 800; letter-spacing: -0.04em; text-shadow: 0 2px 16px rgba(0,0,0,0.35); }
-.gd-screen .brand-dot { width: 12px; height: 12px; }
+.gd-screen .brand-logo { font-family: var(--font-logo); font-size: 30px; font-weight: 400; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1; text-shadow: 0 2px 16px rgba(0,0,0,0.35); }
+.gd-screen .brand-dot { width: 10px; height: 10px; }
 .gd-title { font-size: 15px; margin-top: 10px; color: rgba(255,255,255,0.85); letter-spacing: 0.02em; }
 .gd-date { font-size: 20px; }
 .gd-time { font-size: 52px; }
@@ -1236,7 +1238,7 @@ button:focus-visible, input:focus-visible {
 
 /* ================= Guide v3: broadcast-style layout ================= */
 .gd-screen { padding: 28px 56px 22px; }
-.gd-screen .brand-logo { font-family: var(--font-logo); font-weight: 400; font-size: 44px; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1; }
+.gd-screen .brand-logo { font-family: var(--font-logo); font-weight: 400; font-size: 30px; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1; }
 .gd-title { margin-top: 8px; }
 .gd-time { font-size: 54px; }
 
@@ -1357,17 +1359,21 @@ button:focus-visible, input:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 600;
-  font-size: clamp(24px, 3.2vh, 32px);
-  letter-spacing: -.03em;
+  font-family: "Mouse Memoirs", "MM Local", var(--font-logo), sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   line-height: 1;
+  color: #fff;
 }
 .tvg-guide-screen .lg i {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: #ff4b3e;
-  box-shadow: 0 0 16px #ff4b3e;
+  background: var(--accent, #ff5544);
+  box-shadow: 0 0 10px var(--accent, #ff5544);
+  animation: pulse-dot 2s infinite ease-in-out;
 }
 .tvg-guide-screen .tg {
   display: flex;

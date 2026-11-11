@@ -46,16 +46,15 @@ export const PowerScreen: React.FC<PowerScreenProps> = ({
         </button>
 
         <h1
+          className="brand-logo"
           style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(32px, 5vw, 54px)',
-            fontWeight: 700,
-            letterSpacing: '-0.04em',
-            lineHeight: 1.1,
+            justifyContent: 'center',
+            fontSize: 'clamp(36px, 5vw, 52px)',
             color: '#f5f4f0',
           }}
         >
-          tuned
+          <span className="brand-dot" />
+          <span>tuned</span>
         </h1>
 
         <p

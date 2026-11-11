@@ -55,9 +55,9 @@ export const TuningScreen: React.FC<TuningScreenProps> = ({
         textAlign: 'center',
       }}
     >
-      <div className="brand-logo" style={{ marginBottom: 32 }}>
+      <div className="brand-logo" style={{ marginBottom: 32, color: '#fff' }}>
         <span className="brand-dot" />
-        <span style={{ fontSize: 26 }}>tuned</span>
+        <span>tuned</span>
       </div>
 
       <div
