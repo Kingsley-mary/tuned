@@ -5,6 +5,7 @@ const channels = JSON.parse(fs.readFileSync('scripts/verified-channels-full.json
 const fileContent = `import { ChannelLineup, Video } from './types';
 import { CATEGORIES, SEED_LINEUPS } from './seed-catalog';
 import { getVideoDuration } from './broadcast-clock';
+import { readCatalogSnapshot } from './catalog-storage';
 
 // Comprehensive roster of verified top creators per television channel (11-16 creators per channel)
 export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }[]> = ${JSON.stringify(channels, null, 2)};
@@ -146,8 +147,13 @@ export async function getLineupForCategory(categoryId: string): Promise<ChannelL
     return customLineup;
   }
 
-  // For built-in channels, return the verified, curated broadcast lineup (SEED_LINEUPS)
-  // so every browser and instance shares the exact same verified videos and real durations in lockstep.
+  // For built-in channels, read from the shared Vercel Blob catalog snapshot first (updated by daily cron),
+  // falling back cleanly to SEED_LINEUPS so every browser worldwide stays 100% synchronized.
+  const blobSnapshot = await readCatalogSnapshot();
+  if (blobSnapshot?.[categoryId] && blobSnapshot[categoryId].videos.length > 0) {
+    return blobSnapshot[categoryId];
+  }
+
   if (SEED_LINEUPS[categoryId] && SEED_LINEUPS[categoryId].videos.length > 0) {
     return SEED_LINEUPS[categoryId];
   }

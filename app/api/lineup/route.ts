@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       const lineup = await getLineupForCategory(categoryId);
       return NextResponse.json(lineup, {
         headers: {
-          'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+          'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=3600',
         },
       });
     } catch (error) {
@@ -46,6 +46,7 @@ export async function GET(request: NextRequest) {
         }
       );
     } catch (err: any) {
+      console.error('Lineups batch error:', err);
       return NextResponse.json({ error: err?.message || 'Failed to load lineups' }, { status: 500 });
     }
   }
