@@ -101,7 +101,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isBumperActive, setIsBumperActive] = useState<boolean>(false);
   const [copiedShare, setCopiedShare] = useState<boolean>(false);
-  const [isDockMinimized, setIsDockMinimized] = useState<boolean>(false);
+  const [isDockMinimized, setIsDockMinimized] = useState<boolean>(true);
+  const [dockAnim, setDockAnim] = useState<'minimizing' | 'maximizing' | null>(null);
   const shareTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isOnline, setIsOnline] = useState<boolean>(() =>
     typeof navigator !== 'undefined' ? navigator.onLine : true
@@ -430,7 +431,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
     osdTimerRef.current = setTimeout(() => {
       if (!osdHoverRef.current && !captionsMenuOpenRef.current) setOsdOpen(false);
-    }, 6000);
+    }, 5000);
   }, []);
 
   useEffect(() => {
@@ -782,7 +783,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           </button>
         </div>
 
-        <div className={`osd-panel${isDockMinimized ? ' minimized' : ''}`}>
+        <div
+          className={`osd-panel${isDockMinimized ? ' minimized' : ''}${dockAnim ? ` anim-${dockAnim}` : ''}`}
+          onAnimationEnd={(e) => {
+            if (e.target === e.currentTarget) {
+              setDockAnim(null);
+            }
+          }}
+        >
           <div className="osd-head">
             <div className="osd-head-left">
               <span className="osd-time">{hh}</span>
@@ -816,7 +824,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 type="button"
                 className="osd-dock-toggle"
                 onClick={() => {
-                  setIsDockMinimized((prev) => !prev);
+                  setIsDockMinimized((prev) => {
+                    const next = !prev;
+                    setDockAnim(next ? 'minimizing' : 'maximizing');
+                    return next;
+                  });
                   pokeOsd();
                 }}
                 aria-label={isDockMinimized ? 'Expand dock' : 'Minimize dock'}
@@ -827,23 +839,34 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             </div>
           </div>
 
-          {(isDockMinimized ? rows.slice(0, 1) : rows).map((slot, i) => {
-            const isNow = i === 0;
-            return (
-              <div key={slot.video.youtubeVideoId + i} className={`osd-row${isNow ? ' now' : ''}`}>
-                <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
-                <span className="osd-row-tag">{isNow ? 'LIVE' : i === 1 ? 'NEXT' : ''}</span>
-                <span className="osd-row-title">{isNow ? activeVideo?.title || slot.video.title : slot.video.title}</span>
-                <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>
-                <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
-                {isNow && (
-                  <span className="osd-row-progress">
-                    <span style={{ width: `${progressPercent}%` }} />
-                  </span>
-                )}
+          {rows.slice(0, 1).map((slot) => (
+            <div key={slot.video.youtubeVideoId + 'now'} className="osd-row now">
+              <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
+              <span className="osd-row-tag">LIVE</span>
+              <span className="osd-row-title">{activeVideo?.title || slot.video.title}</span>
+              <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>
+              <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
+              <span className="osd-row-progress">
+                <span style={{ width: `${progressPercent}%` }} />
+              </span>
+            </div>
+          ))}
+
+          {rows.length > 1 && (
+            <div className="osd-upcoming" aria-hidden={isDockMinimized}>
+              <div className="osd-upcoming-inner">
+                {rows.slice(1).map((slot, i) => (
+                  <div key={slot.video.youtubeVideoId + (i + 1)} className="osd-row">
+                    <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
+                    <span className="osd-row-tag">{i === 0 ? 'NEXT' : ''}</span>
+                    <span className="osd-row-title">{slot.video.title}</span>
+                    <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>
+                    <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
+                  </div>
+                ))}
               </div>
-            );
-          })}
+            </div>
+          )}
         </div>
       </div>
     </div>
