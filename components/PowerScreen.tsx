@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Power } from 'lucide-react';
 
 interface PowerScreenProps {
@@ -20,12 +20,12 @@ export const PowerScreen: React.FC<PowerScreenProps> = ({
 }) => {
   const [isPoweringUp, setIsPoweringUp] = useState(false);
 
-  const handleActivate = () => {
+  const handleActivate = useCallback(() => {
     if (isPoweringUp) return;
     setIsPoweringUp(true);
     // iOS Safari requires audio/video context unlock immediately inside click handler
     onTurnOn();
-  };
+  }, [isPoweringUp, onTurnOn]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -36,58 +36,36 @@ export const PowerScreen: React.FC<PowerScreenProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [handleActivate]);
 
   return (
     <div className={`power-curtain ${isPoweringUp ? 'turning-on' : ''}`}>
-      <div style={{ textAlign: 'center', padding: '24px' }}>
+      <div className="pw-inner">
         <button onClick={handleActivate} aria-label="Turn on Tuned" className="power-btn">
-          <Power size={40} strokeWidth={1.8} />
+          <Power size={44} strokeWidth={1.7} />
         </button>
 
-        <h1
-          className="brand-logo"
-          style={{
-            justifyContent: 'center',
-            fontSize: 'clamp(36px, 5vw, 52px)',
-            color: '#f5f4f0',
-          }}
-        >
+        <h1 className="brand-logo pw-logo">
           <span className="brand-dot" />
           <span>tuned</span>
         </h1>
 
-        <p
-          style={{
-            color: 'rgba(245, 244, 240, 0.65)',
-            fontSize: 16,
-            marginTop: 10,
-            fontFamily: 'var(--font-body)',
-          }}
-        >
+        <p className="pw-sub">
           {isReturningUser
-            ? `Resume · CH ${String(lastChannelNumber).padStart(2, '0')} ${lastCategoryName}`
+            ? `Resume · CH ${String(lastChannelNumber).padStart(2, '0')} ${lastCategoryName.toUpperCase()}`
             : 'Tap to turn on'}
         </p>
 
         {isReturningUser && (
-          <div style={{ marginTop: 24 }}>
-            <button
-              onClick={onChangeChannels}
-              style={{
-                fontSize: 14,
-                color: 'rgba(245, 244, 240, 0.8)',
-                textDecoration: 'underline',
-                cursor: 'pointer',
-              }}
-            >
-              Change channels
-            </button>
-          </div>
+          <button type="button" onClick={onChangeChannels} className="pw-chg">
+            Change channels
+          </button>
         )}
+      </div>
 
-        <div style={{ marginTop: 32, fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
-          Press Space or Enter to power on
+      <div className="pw-keys" aria-hidden>
+        <div>
+          Power on <span className="pk-k">Space</span> <span className="pk-k">Enter</span>
         </div>
       </div>
     </div>

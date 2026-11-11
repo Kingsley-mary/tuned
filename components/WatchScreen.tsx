@@ -524,22 +524,24 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       {/* Video layer: keep YouTubePlayer mounted at full dimensions so its GPU video surface is never evicted */}
       <div className="tv-video">
         {isBumperActive && (
-          <div
-            className="tv-bumper"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 2,
-              background: `radial-gradient(circle at 50% 30%, hsla(${hue}, 80%, 24%, 0.7), #07070a 75%)`,
-            }}
-          >
-            <div className="osd-chip">
-              <span className="dot" style={{ background: `hsl(${hue}, 85%, 55%)` }} />
-              CH {String(currentChannelIndex + 1).padStart(2, '0')} · {activeChannel?.categoryName}
+          <div className="tv-bumper">
+            <div className="tv-bumper-card">
+              <div className="tv-bumper-head">
+                <div className="brand-logo tv-bumper-brand">
+                  <span className="brand-dot" />
+                  <span>tuned</span>
+                </div>
+                <div className="tv-bumper-pills">
+                  <span className="osd-chip">
+                    <span className="dot" />
+                    CH {String(currentChannelIndex + 1).padStart(2, '0')} · {activeChannel?.categoryName}
+                  </span>
+                  <span className="tv-bumper-next">UP NEXT</span>
+                </div>
+              </div>
+              <h3>{nextVideo?.title || 'Continuing broadcast…'}</h3>
+              <p>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</p>
             </div>
-            <div className="osd-eyebrow">Up next on Tuned</div>
-            <h3>{nextVideo?.title || 'Continuing broadcast…'}</h3>
-            <p>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</p>
           </div>
         )}
         {activeVideo?.youtubeVideoId ? (
