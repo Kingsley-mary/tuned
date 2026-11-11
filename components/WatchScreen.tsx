@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
-import { YouTubePlayer } from './YouTubePlayer';
+import { YouTubePlayer, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule } from '../lib/broadcast-clock';
 import {
   Play,
@@ -22,7 +22,18 @@ import {
   Share2,
   Check,
   Clock,
+  Captions,
+  CaptionsOff,
 } from 'lucide-react';
+
+const CAPTION_PREFS_KEY = 'tuned_caption_prefs_v1';
+const CAPTION_SIZES: { value: CaptionFontSize; label: string; title: string }[] = [
+  { value: -1, label: 'S', title: 'Small (75%)' },
+  { value: 0, label: 'M', title: 'Medium (100%)' },
+  { value: 1, label: 'L', title: 'Large (150%)' },
+  { value: 2, label: 'XL', title: 'Extra Large (200%)' },
+  { value: 3, label: 'XXL', title: 'Huge (300%)' },
+];
 
 export type SleepTimerMode = 'off' | '15m' | '30m' | '60m' | 'end';
 
@@ -79,12 +90,39 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [duration, setDuration] = useState<number>(0);
   const [isBuffering, setIsBuffering] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const [autoMutedBanner, setAutoMutedBanner] = useState<boolean>(false);
   const [isChannelPulsing, setIsChannelPulsing] = useState<boolean>(false);
   const [isBadgeFlipping, setIsBadgeFlipping] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isBumperActive, setIsBumperActive] = useState<boolean>(false);
   const [copiedShare, setCopiedShare] = useState<boolean>(false);
+
+  // Caption settings (persisted across channels & refreshes)
+  const [captionsEnabled, setCaptionsEnabled] = useState<boolean>(false);
+  const [captionFontSize, setCaptionFontSize] = useState<CaptionFontSize>(0);
+  const [captionLanguage, setCaptionLanguage] = useState<string>('auto');
+  const [captionTracks, setCaptionTracks] = useState<CaptionTrack[]>([]);
+  const [captionsMenuOpen, setCaptionsMenuOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(CAPTION_PREFS_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (typeof parsed.enabled === 'boolean') setCaptionsEnabled(parsed.enabled);
+        if ([-1, 0, 1, 2, 3].includes(parsed.fontSize)) setCaptionFontSize(parsed.fontSize);
+        if (typeof parsed.language === 'string') setCaptionLanguage(parsed.language);
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        CAPTION_PREFS_KEY,
+        JSON.stringify({ enabled: captionsEnabled, fontSize: captionFontSize, language: captionLanguage })
+      );
+    } catch {}
+  }, [captionsEnabled, captionFontSize, captionLanguage]);
 
   const tvStageRef = useRef<HTMLDivElement>(null);
   const bumperTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -246,11 +284,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         toggleFullscreen();
       } else if (e.key === 'm' || e.key === 'M') {
         e.preventDefault();
-        setIsMuted((prev) => {
-          const next = !prev;
-          if (!next) setAutoMutedBanner(false);
-          return next;
-        });
+        setIsMuted((prev) => !prev);
       } else if (e.key === 'l' || e.key === 'L' || e.key === 'Backspace') {
         if (previousChannelIndex !== null && previousChannelIndex !== currentChannelIndex) {
           e.preventDefault();
@@ -298,12 +332,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [osdOpen, setOsdOpen] = useState<boolean>(true);
   const osdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const osdHoverRef = useRef<boolean>(false);
+  const captionsMenuOpenRef = useRef<boolean>(false);
+  captionsMenuOpenRef.current = captionsMenuOpen;
 
   const pokeOsd = useCallback(() => {
     setOsdOpen(true);
     if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
     osdTimerRef.current = setTimeout(() => {
-      if (!osdHoverRef.current) setOsdOpen(false);
+      if (!osdHoverRef.current && !captionsMenuOpenRef.current) setOsdOpen(false);
     }, 6000);
   }, []);
 
@@ -321,9 +357,17 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       pokeOsd();
       if (e.key === 'g' || e.key === 'G') {
         e.preventDefault();
+        setCaptionsMenuOpen(false);
         onOpenGuide();
+      } else if (e.key === 'c' || e.key === 'C') {
+        e.preventDefault();
+        setCaptionsEnabled((prev) => !prev);
+      } else if (e.key === 'Escape' && captionsMenuOpenRef.current) {
+        e.preventDefault();
+        setCaptionsMenuOpen(false);
       } else if (e.key === 'i' || e.key === 'I' || e.key === 'Enter') {
         e.preventDefault();
+        setCaptionsMenuOpen(false);
         setOsdOpen((o) => !o);
       }
     };
@@ -368,12 +412,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         stepChannel(dx < 0 ? 1 : -1);
       }
     }
-  };
-
-  const handleUnmuteTap = () => {
-    setIsMuted(false);
-    setAutoMutedBanner(false);
-    pokeOsd();
   };
 
   const now = new Date();
@@ -430,6 +468,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               tuneKey={tuneKey}
               isPlaying={isPlaying && !isBumperActive}
               isMuted={isMuted}
+              captionsEnabled={captionsEnabled}
+              captionFontSize={captionFontSize}
+              captionLanguage={captionLanguage}
+              onCaptionTracksChange={setCaptionTracks}
               onEnded={handleVideoEndedNaturally}
               onError={(errCode) => {
                 console.warn(`Video ${activeVideo.youtubeVideoId} error (${errCode}), skipping...`);
@@ -447,7 +489,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               onShortDetected={onShortDetected}
               onAutoMuted={() => {
                 setIsMuted(true);
-                setAutoMutedBanner(true);
               }}
             />
           </div>
@@ -463,25 +504,20 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       {/* Click/touch/swipe capture layer so the OSD can be summoned and channels swiped on mobile */}
       <div
         className="tv-capture"
-        onClick={() => (osdOpen ? setOsdOpen(false) : pokeOsd())}
+        onClick={() => {
+          if (captionsMenuOpen) {
+            setCaptionsMenuOpen(false);
+            pokeOsd();
+            return;
+          }
+          if (osdOpen) setOsdOpen(false);
+          else pokeOsd();
+        }}
         onDoubleClick={toggleFullscreen}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         aria-hidden
       />
-
-      {/* Mobile Auto-Mute Unmute Prompt (iOS / Android autoplay unlock) */}
-      {(autoMutedBanner || isMuted) && (
-        <button
-          type="button"
-          className="tv-unmute-pill"
-          onClick={handleUnmuteTap}
-          aria-label="Tap to unmute audio"
-        >
-          <VolumeX size={16} />
-          <span>Tap for Sound</span>
-        </button>
-      )}
 
       {/* Top bar */}
       <div
@@ -505,6 +541,19 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             </span>
           )}
           {!isPlaying && <span className="osd-chip">Paused</span>}
+          <button
+            onClick={() => {
+              setCaptionsMenuOpen((prev) => !prev);
+              pokeOsd();
+            }}
+            className={`osd-btn${captionsEnabled ? ' active' : ''}`}
+            aria-label="Caption settings"
+            aria-expanded={captionsMenuOpen}
+            title="Captions & Subtitles (C)"
+          >
+            {captionsEnabled ? <Captions size={16} /> : <CaptionsOff size={16} />}
+            <span>CC</span>
+          </button>
           <button onClick={onOpenGuide} className="osd-btn" aria-label="Open TV Guide">
             <Tv size={16} /> <span>Guide</span>
           </button>
@@ -523,6 +572,72 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             <Power size={16} />
           </button>
         </div>
+
+        {captionsMenuOpen && (
+          <div
+            className="cc-popover"
+            onClick={(e) => e.stopPropagation()}
+            onMouseEnter={() => (osdHoverRef.current = true)}
+          >
+            <div className="cc-row">
+              <div>
+                <div className="cc-title">Captions</div>
+                <div className="cc-sub">{captionsEnabled ? 'Subtitles enabled' : 'Subtitles off'}</div>
+              </div>
+              <button
+                type="button"
+                className={`cc-toggle${captionsEnabled ? ' on' : ''}`}
+                onClick={() => setCaptionsEnabled((prev) => !prev)}
+                aria-pressed={captionsEnabled}
+              >
+                {captionsEnabled ? 'On' : 'Off'}
+              </button>
+            </div>
+
+            <div className={`cc-section${!captionsEnabled ? ' disabled' : ''}`}>
+              <div className="cc-label">Text size</div>
+              <div className="cc-sizes">
+                {CAPTION_SIZES.map((sz) => (
+                  <button
+                    key={sz.value}
+                    type="button"
+                    disabled={!captionsEnabled}
+                    title={sz.title}
+                    className={`cc-size-btn${captionFontSize === sz.value ? ' on' : ''}`}
+                    onClick={() => setCaptionFontSize(sz.value)}
+                  >
+                    {sz.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={`cc-section${!captionsEnabled ? ' disabled' : ''}`}>
+              <div className="cc-label">Language</div>
+              <div className="cc-langs">
+                <button
+                  type="button"
+                  disabled={!captionsEnabled}
+                  className={`cc-lang-btn${captionLanguage === 'auto' ? ' on' : ''}`}
+                  onClick={() => setCaptionLanguage('auto')}
+                >
+                  Auto (EN)
+                </button>
+                {captionTracks.map((tr) => (
+                  <button
+                    key={tr.languageCode}
+                    type="button"
+                    disabled={!captionsEnabled}
+                    className={`cc-lang-btn${captionLanguage === tr.languageCode ? ' on' : ''}`}
+                    onClick={() => setCaptionLanguage(tr.languageCode)}
+                  >
+                    {tr.displayName}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bottom OSD */}
@@ -539,16 +654,16 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           <button onClick={onTogglePlay}>
             {isPlaying ? 'Pause' : 'Play'} <span className="kbd-osd">SPACE</span>
           </button>
+          <button onClick={() => setIsMuted((m) => !m)}>
+            {isMuted ? 'Unmute' : 'Mute'} <span className="kbd-osd">M</span>
+          </button>
           <button
             onClick={() => {
-              setIsMuted((m) => {
-                const next = !m;
-                if (!next) setAutoMutedBanner(false);
-                return next;
-              });
+              setCaptionsMenuOpen((prev) => !prev);
+              pokeOsd();
             }}
           >
-            {isMuted ? 'Unmute' : 'Mute'} <span className="kbd-osd">M</span>
+            {captionsEnabled ? 'Captions On' : 'Captions'} <span className="kbd-osd">C</span>
           </button>
           <button onClick={toggleFullscreen}>
             {isFullscreen ? 'Exit full' : 'Fullscreen'} <span className="kbd-osd">F</span>

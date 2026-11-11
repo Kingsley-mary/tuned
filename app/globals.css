@@ -1590,28 +1590,116 @@ button:focus-visible, input:focus-visible {
   }
 }
 
-/* ================= Mobile & Touch Optimizations across Watch, Manage, and Pick ================= */
-.tv-unmute-pill {
+/* ================= Captions Popover ================= */
+.cc-popover {
   position: absolute;
-  top: calc(74px + env(safe-area-inset-top, 0px));
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 6;
-  display: inline-flex;
+  top: calc(100% + 4px);
+  right: clamp(14px, 2.5vw, 28px);
+  width: min(320px, calc(100vw - 28px));
+  max-height: calc(100dvh - 88px);
+  overflow-y: auto;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(24, 18, 15, 0.92);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65);
+  color: #fff;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cc-row {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  background: rgba(244, 235, 224, 0.96);
-  color: #1f140d;
-  font-size: 14px;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cc-title {
+  font-size: 15px;
   font-weight: 700;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
-  border: 1px solid #fff;
-  cursor: pointer;
-  animation: pulse-live 2s infinite;
+}
+.cc-sub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 2px;
+}
+.cc-toggle {
+  min-width: 56px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.15s ease;
+}
+.cc-toggle.on {
+  background: rgba(244, 235, 224, 0.95);
+  color: #26180f;
+  border-color: #fff;
+}
+.cc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cc-section.disabled {
+  opacity: 0.42;
+}
+.cc-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.65);
+}
+.cc-sizes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+.cc-size-btn,
+.cc-lang-btn {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.12s ease;
+}
+.cc-size-btn:hover:not(:disabled),
+.cc-lang-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.22);
+}
+.cc-size-btn.on,
+.cc-lang-btn.on {
+  background: rgba(244, 235, 224, 0.95);
+  color: #26180f;
+  border-color: #fff;
+}
+.cc-langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cc-lang-btn {
+  height: 28px;
+  font-size: 11px;
 }
 
+/* ================= Mobile & Touch Optimizations across Watch, Guide, Manage, and Pick ================= */
 @media (max-width: 768px) {
   .tv-stage {
     height: 100dvh;
@@ -1720,5 +1808,221 @@ button:focus-visible, input:focus-visible {
   .tv-stage.osd-on .tv-video {
     align-items: flex-start;
     padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  }
+}
+
+/* Mobile Landscape Optimizations (e.g. phones rotated horizontally 667x375 - 932x430) */
+@media (max-height: 540px) and (orientation: landscape) {
+  .tv-stage {
+    height: 100dvh;
+  }
+  .tv-stage .tv-video {
+    align-items: center;
+    padding-top: 0;
+  }
+  .osd-top {
+    padding: max(8px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) 8px max(14px, env(safe-area-inset-left, 0px));
+  }
+  .osd-top .osd-btn {
+    height: 32px;
+    padding: 0 11px;
+    font-size: 12px;
+  }
+  .osd-top .osd-btn.icon {
+    width: 32px;
+    padding: 0;
+  }
+  .osd-top .osd-btn span {
+    display: inline;
+  }
+  .osd-bottom {
+    padding: 12px max(14px, env(safe-area-inset-right, 0px)) max(8px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.92) 45%, transparent);
+  }
+  .osd-legend {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    padding: 0 4px 6px;
+    gap: 6px;
+  }
+  .osd-legend::-webkit-scrollbar {
+    display: none;
+  }
+  .osd-legend button {
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+  }
+  .kbd-osd {
+    display: none;
+  }
+  .osd-panel {
+    border-radius: 14px;
+  }
+  .osd-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 14px;
+  }
+  .osd-head-left {
+    display: none;
+  }
+  .osd-channel {
+    gap: 8px;
+  }
+  .osd-channel > button {
+    width: 28px;
+    height: 28px;
+  }
+  .osd-channel-name {
+    min-width: 0;
+    font-size: 16px;
+  }
+  .osd-channel-name span {
+    font-size: 19px;
+  }
+  .osd-row {
+    height: 32px;
+    padding: 0 12px;
+    grid-template-columns: 56px 46px minmax(0, 1fr) 48px;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .osd-row.now {
+    height: 38px;
+    margin: 3px 6px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+  .osd-row-src,
+  .osd-row:nth-of-type(n+4) {
+    display: none;
+  }
+
+  /* TV Guide in Mobile Landscape */
+  .tvg-guide-screen {
+    height: 100dvh;
+    --lw: clamp(110px, 18vw, 160px);
+    --gut: 12px;
+    --gap: 5px;
+  }
+  .tvg-guide-screen .app {
+    height: 100dvh;
+    padding: max(8px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) max(6px, env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px));
+  }
+  .tvg-guide-screen .top {
+    align-items: center;
+  }
+  .tvg-guide-screen .top > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .tvg-guide-screen .lg {
+    font-size: 20px;
+  }
+  .tvg-guide-screen .tg {
+    margin-top: 0;
+    font-size: 13px;
+  }
+  .tvg-guide-screen .clock {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .tvg-guide-screen .clock small {
+    font-size: 12px;
+  }
+  .tvg-guide-screen .clock b {
+    font-size: 24px;
+  }
+  .tvg-guide-screen .axis {
+    margin-top: 4px;
+  }
+  .tvg-guide-screen .today,
+  .tvg-guide-screen .times {
+    height: 24px;
+    font-size: 13px;
+  }
+  .tvg-guide-screen .times span {
+    font-size: 13px;
+  }
+  .tvg-guide-screen .rows {
+    margin-top: 10px;
+    gap: 3px;
+  }
+  .tvg-guide-screen .ch span {
+    font-size: clamp(16px, 5vh, 24px);
+    letter-spacing: 0.04em;
+  }
+  .tvg-guide-screen .pr {
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 7px;
+  }
+  .tvg-guide-screen .now {
+    top: -12px;
+  }
+  .tvg-guide-screen .now b {
+    font-size: 9px;
+    padding: 1px 7px;
+  }
+  .tvg-guide-screen .info {
+    margin-top: 6px;
+    height: 36px;
+    padding: 0 12px;
+  }
+  .tvg-guide-screen .info .tm,
+  .tvg-guide-screen .info .tt {
+    font-size: 12px;
+  }
+  .tvg-guide-screen .info .rt {
+    font-size: 11px;
+  }
+  .tvg-guide-screen .bdg {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  .tvg-guide-screen .keys {
+    padding-top: 6px;
+    gap: 10px;
+    font-size: 12px;
+  }
+  .tvg-guide-screen .keys div {
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+  .tvg-guide-screen .k {
+    display: none;
+  }
+
+  /* Manage & Pick in Mobile Landscape */
+  .gd-screen.mg-screen,
+  .gd-screen.pk-screen {
+    height: 100dvh;
+    overflow-y: auto;
+    padding: max(10px, env(safe-area-inset-top, 0px)) max(18px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px));
+  }
+  .mg-body {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 14px;
+    overflow: visible;
+  }
+  .mg-item {
+    height: 46px;
+  }
+  .pk-screen .category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pk-screen .category-grid button {
+    height: 96px !important;
   }
 }

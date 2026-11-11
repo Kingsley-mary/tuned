@@ -9,12 +9,24 @@ declare global {
   }
 }
 
+export type CaptionFontSize = -1 | 0 | 1 | 2 | 3;
+
+export interface CaptionTrack {
+  languageCode: string;
+  displayName: string;
+  isDefault?: boolean;
+}
+
 interface YouTubePlayerProps {
   videoId: string;
   startSeconds?: number;
   tuneKey?: number;
   isPlaying: boolean;
   isMuted?: boolean;
+  captionsEnabled?: boolean;
+  captionFontSize?: CaptionFontSize;
+  captionLanguage?: string;
+  onCaptionTracksChange?: (tracks: CaptionTrack[]) => void;
   onEnded: () => void;
   onError: (errorCode: number) => void;
   onTimeUpdate: (currentTime: number, duration: number) => void;
@@ -30,6 +42,10 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   tuneKey = 0,
   isPlaying,
   isMuted = false,
+  captionsEnabled = false,
+  captionFontSize = 0,
+  captionLanguage = 'auto',
+  onCaptionTracksChange,
   onEnded,
   onError,
   onTimeUpdate,
@@ -55,6 +71,10 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     tuneKey,
     isPlaying,
     isMuted,
+    captionsEnabled,
+    captionFontSize,
+    captionLanguage,
+    onCaptionTracksChange,
     onEnded,
     onError,
     onTimeUpdate,
@@ -71,6 +91,10 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       tuneKey,
       isPlaying,
       isMuted,
+      captionsEnabled,
+      captionFontSize,
+      captionLanguage,
+      onCaptionTracksChange,
       onEnded,
       onError,
       onTimeUpdate,
@@ -80,6 +104,67 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       onAutoMuted,
     };
   });
+
+  // Read available caption tracks and apply enable/disable, language, and fontSize
+  const applyCaptionSettings = (
+    player: any,
+    enabled: boolean,
+    fontSize: CaptionFontSize,
+    preferredLang: string = 'auto'
+  ) => {
+    if (!player) return;
+    try {
+      let collectedTracks: CaptionTrack[] = [];
+      for (const mod of ['captions', 'cc']) {
+        try {
+          const rawTracks = player.getOption?.(mod, 'tracklist');
+          if (Array.isArray(rawTracks) && rawTracks.length > 0) {
+            collectedTracks = rawTracks
+              .filter((t: any) => t && (t.languageCode || t.displayName || t.languageName))
+              .map((t: any) => ({
+                languageCode: String(t.languageCode || 'en'),
+                displayName: String(t.displayName || t.languageName || t.languageCode || 'Captions'),
+                isDefault: Boolean(t.is_default || t.isDefault),
+              }));
+            break;
+          }
+        } catch {}
+      }
+
+      if (collectedTracks.length > 0) {
+        latestPropsRef.current.onCaptionTracksChange?.(collectedTracks);
+      }
+
+      if (!enabled) {
+        player.setOption?.('captions', 'track', {});
+        player.setOption?.('cc', 'track', {});
+        player.unloadModule?.('captions');
+        player.unloadModule?.('cc');
+      } else {
+        player.loadModule?.('captions');
+        player.loadModule?.('cc');
+        for (const mod of ['captions', 'cc']) {
+          try {
+            const rawTracks = player.getOption?.(mod, 'tracklist');
+            if (Array.isArray(rawTracks) && rawTracks.length > 0) {
+              const targetTrack =
+                (preferredLang && preferredLang !== 'auto'
+                  ? rawTracks.find((t: any) => t.languageCode === preferredLang)
+                  : null) ||
+                rawTracks.find((t: any) => /^en/i.test(t.languageCode || '')) ||
+                rawTracks[0];
+              player.setOption?.(mod, 'track', targetTrack);
+            } else {
+              const fallbackCode = preferredLang && preferredLang !== 'auto' ? preferredLang : 'en';
+              player.setOption?.(mod, 'track', { languageCode: fallbackCode });
+            }
+            player.setOption?.(mod, 'fontSize', fontSize);
+            player.setOption?.(mod, 'reload', true);
+          } catch {}
+        }
+      }
+    } catch {}
+  };
 
   // Helper to fire onEnded at most once per (videoId, tuneKey)
   const triggerEndedOnce = () => {
@@ -122,6 +207,8 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             rel: 0,
             playsinline: 1,
             fs: 1,
+            cc_load_policy: initial.captionsEnabled ? 1 : 0,
+            hl: 'en',
             start: Math.floor(initial.startSeconds || 0),
             iv_load_policy: 3,
             origin: typeof window !== 'undefined' ? window.location.origin : undefined,
@@ -158,6 +245,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                 }
               } catch {}
 
+              applyCaptionSettings(
+                playerRef.current,
+                !!cur.captionsEnabled,
+                cur.captionFontSize ?? 0,
+                cur.captionLanguage ?? 'auto'
+              );
+
               cur.onReady?.();
 
               // If videoId changed while player was initializing, load the latest videoId
@@ -177,6 +271,16 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                 playerRef.current?.playVideo?.();
               }
             },
+            onApiChange: () => {
+              if (isCancelled) return;
+              const cur = latestPropsRef.current;
+              applyCaptionSettings(
+                playerRef.current,
+                !!cur.captionsEnabled,
+                cur.captionFontSize ?? 0,
+                cur.captionLanguage ?? 'auto'
+              );
+            },
             onStateChange: (event: any) => {
               if (isCancelled) return;
               const cur = latestPropsRef.current;
@@ -184,6 +288,24 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               if (event.data === 1) {
                 hasStartedRef.current = true;
                 cur.onBuffering(false);
+                // Re-apply caption state once playback starts so forced creator captions respect user setting
+                applyCaptionSettings(
+                  playerRef.current,
+                  !!cur.captionsEnabled,
+                  cur.captionFontSize ?? 0,
+                  cur.captionLanguage ?? 'auto'
+                );
+                setTimeout(() => {
+                  if (!isCancelled) {
+                    const latest = latestPropsRef.current;
+                    applyCaptionSettings(
+                      playerRef.current,
+                      !!latest.captionsEnabled,
+                      latest.captionFontSize ?? 0,
+                      latest.captionLanguage ?? 'auto'
+                    );
+                  }
+                }, 600);
               } else if (event.data === 0) {
                 cur.onBuffering(false);
                 triggerEndedOnce();
@@ -233,6 +355,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
   // Update videoId or start position when changed
   useEffect(() => {
+    latestPropsRef.current.onCaptionTracksChange?.([]);
     if (!playerRef.current || !isReadyRef.current || !videoId) return;
 
     hasStartedRef.current = false;
@@ -271,10 +394,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     }
   }, [videoId, startSeconds, tuneKey, isPlaying]);
 
+  // Update caption state (on/off, font size, language) immediately when user changes it
+  useEffect(() => {
+    if (!playerRef.current || !isReadyRef.current) return;
+    applyCaptionSettings(playerRef.current, !!captionsEnabled, captionFontSize, captionLanguage);
+  }, [captionsEnabled, captionFontSize, captionLanguage]);
+
   // Mobile Autoplay Recovery + Unplayable Watchdog:
-  // On iOS Safari & Android Chrome, unmuted autoplay inside a cross-origin YouTube iframe is blocked
-  // unless muted first. If playback hasn't started within 1.4s, auto-mute and retry playVideo()
-  // so mobile playback always starts instead of getting stuck or skipping in an infinite loop.
   useEffect(() => {
     if (!videoId || !isPlaying) return;
 
