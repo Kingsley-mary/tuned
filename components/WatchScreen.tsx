@@ -330,15 +330,24 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     <div
       ref={tvStageRef}
       className={`tv-stage${osdOpen ? ' osd-on' : ''}`}
-      style={{ display: isHidden ? 'none' : undefined, ['--h' as string]: hue } as React.CSSProperties}
+      style={
+        {
+          visibility: isHidden ? 'hidden' : 'visible',
+          pointerEvents: isHidden ? 'none' : undefined,
+          ['--h' as string]: hue,
+        } as React.CSSProperties
+      }
       onMouseMove={pokeOsd}
     >
-      {/* Video layer: keep YouTubePlayer mounted during bumpers so it transitions seamlessly */}
+      {/* Video layer: keep YouTubePlayer mounted at full dimensions so its GPU video surface is never evicted */}
       <div className="tv-video">
         {isBumperActive && (
           <div
             className="tv-bumper"
             style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 2,
               background: `radial-gradient(circle at 50% 30%, hsla(${hue}, 80%, 24%, 0.7), #07070a 75%)`,
             }}
           >
@@ -352,7 +361,13 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           </div>
         )}
         {activeVideo?.youtubeVideoId ? (
-          <div className="tv-yt" style={{ display: isBumperActive ? 'none' : undefined }}>
+          <div
+            className="tv-yt"
+            style={{
+              opacity: isBumperActive ? 0 : 1,
+              pointerEvents: isBumperActive ? 'none' : undefined,
+            }}
+          >
             <YouTubePlayer
               videoId={activeVideo.youtubeVideoId}
               startSeconds={startSeconds}

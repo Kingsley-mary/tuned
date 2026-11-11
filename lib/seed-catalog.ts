@@ -909,12 +909,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "builtAt": 1794338232822,
     "videos": [
       {
+        "youtubeVideoId": "vEhlyN9TU6c",
+        "title": "thuy makes some tough decisions in IYKYK",
+        "sourceChannelId": "UC2pmfLm7iq6Ov1UwYrWYkZA",
+        "sourceChannelTitle": "Vevo",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vEhlyN9TU6c/hqdefault.jpg",
+        "durationSec": 73
+      },
+      {
         "youtubeVideoId": "LtUDeizHqKk",
         "title": "Fat Joe: Tiny Desk Concert",
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/LtUDeizHqKk/hqdefault.jpg",
         "durationSec": 1547
+      },
+      {
+        "youtubeVideoId": "XiCdhLJE93Q",
+        "title": "Sienna Senate | A COLORS INTERVIEW",
+        "sourceChannelId": "UC2Qw1dzXDBAZPwS7zm37g8g",
+        "sourceChannelTitle": "COLORS",
+        "thumbnailUrl": "https://i.ytimg.com/vi/XiCdhLJE93Q/hqdefault.jpg",
+        "durationSec": 198
       },
       {
         "youtubeVideoId": "fIeVKrWIoSM",
@@ -925,12 +941,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 229
       },
       {
+        "youtubeVideoId": "xJ6IRuipyro",
+        "title": "comehelpglo “onsra” Lyrics & Meaning | Genius Verified",
+        "sourceChannelId": "UCyFZMEnm1il5Wv3a6tPscbA",
+        "sourceChannelTitle": "Genius",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xJ6IRuipyro/hqdefault.jpg",
+        "durationSec": 171
+      },
+      {
         "youtubeVideoId": "qbYI8cixutY",
         "title": "Slowwves - Full Performance (Live on KEXP)",
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/qbYI8cixutY/hqdefault.jpg",
         "durationSec": 1429
+      },
+      {
+        "youtubeVideoId": "nERl4gyy-XM",
+        "title": "Outstanding Pop Tour of the Year: Hilary Duff | Billboard Live Music Summit 2026",
+        "sourceChannelId": "UCsVcseUYbYjldc-XgcsiEbg",
+        "sourceChannelTitle": "Billboard",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nERl4gyy-XM/hqdefault.jpg",
+        "durationSec": 1858
       },
       {
         "youtubeVideoId": "4Z2a2Iaj48M",
@@ -941,6 +973,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 236
       },
       {
+        "youtubeVideoId": "C4XtDNlB11k",
+        "title": "Jordan Firstman on Club Kid, New Lingo & Knowing When To Leave the Party | The Rolling Stone Studio",
+        "sourceChannelId": "UC-JblcinswY50lrUdSaRNEg",
+        "sourceChannelTitle": "Rolling Stone",
+        "thumbnailUrl": "https://i.ytimg.com/vi/C4XtDNlB11k/hqdefault.jpg",
+        "durationSec": 1782
+      },
+      {
         "youtubeVideoId": "oIgHjxeQn3k",
         "title": "Massane, Teho - Back From There",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
@@ -949,12 +989,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 315
       },
       {
-        "youtubeVideoId": "F8E0y5xiyso",
-        "title": "Are You In A Sexless Relationship? | The Hook Up Podcast",
-        "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
-        "sourceChannelTitle": "triple j talks",
-        "thumbnailUrl": "https://i.ytimg.com/vi/F8E0y5xiyso/hqdefault.jpg",
-        "durationSec": 2508
+        "youtubeVideoId": "SoeQGZzQps0",
+        "title": "’The Hunger Games: Sunrise on the Reaping’ Cast Creates a Custom Playlist | MTV Music To Blank To",
+        "sourceChannelId": "UCxAICW_LdkfFYwTqTHHE0vg",
+        "sourceChannelTitle": "MTV",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SoeQGZzQps0/hqdefault.jpg",
+        "durationSec": 292
       },
       {
         "youtubeVideoId": "u1GtMLZMlDA",
@@ -965,12 +1005,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 182
       },
       {
+        "youtubeVideoId": "d3QQHqRmvH4",
+        "title": "The Christmas gift that started it all (animated clip)",
+        "sourceChannelId": "UCSJ4gkVC6NrvII8umztf0Ow",
+        "sourceChannelTitle": "Lofi Girl",
+        "thumbnailUrl": "https://i.ytimg.com/vi/d3QQHqRmvH4/hqdefault.jpg",
+        "durationSec": 72
+      },
+      {
         "youtubeVideoId": "VibtPvPxohQ",
         "title": "2hollis Joins Sian Eleri + 'Daisy' Is Radio 1's Hottest Record 🔥",
         "sourceChannelId": "UC-FQUIVQ-bZiefzBiQAa8Fw",
         "sourceChannelTitle": "BBC Radio 1",
         "thumbnailUrl": "https://i.ytimg.com/vi/VibtPvPxohQ/hqdefault.jpg",
         "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "IGaRF6dwRkQ",
+        "title": "Avicii | Tomorrowland 2011",
+        "sourceChannelId": "UCsN8M73DMWa8SPp5o_0IAQQ",
+        "sourceChannelTitle": "Tomorrowland",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IGaRF6dwRkQ/hqdefault.jpg",
+        "durationSec": 5175
       },
       {
         "youtubeVideoId": "z28UbGAPteA",
@@ -981,6 +1037,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 3561
       },
       {
+        "youtubeVideoId": "BLtZYoxFsaI",
+        "title": "Spinnin’ Sessions Radio – Episode #704 | Modeā",
+        "sourceChannelId": "UCpDJl2EmP7Oh90Vylx0dZtA",
+        "sourceChannelTitle": "Spinnin' Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BLtZYoxFsaI/hqdefault.jpg",
+        "durationSec": 3453
+      },
+      {
         "youtubeVideoId": "b7jc67izCKU",
         "title": "Denitia covers Stone Temple Pilots' \"Interstate Love Song.\"",
         "sourceChannelId": "UCRLZb8PpI9N7COmYqHiDH7A",
@@ -989,12 +1053,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 252
       },
       {
+        "youtubeVideoId": "dS6Lhl4JS8A",
+        "title": "Punctual & Jem Cooke - Ten Thousand Times [Deep Progressive House | Monstercat]",
+        "sourceChannelId": "UCp8OOssjSjGZRVYK6zWbNLg",
+        "sourceChannelTitle": "Monstercat Instinct",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dS6Lhl4JS8A/hqdefault.jpg",
+        "durationSec": 194
+      },
+      {
         "youtubeVideoId": "h1QTWtUx81w",
         "title": "Charlie Parr — (what's so funny about) Universal Healthcare? (live in The Current studio)",
         "sourceChannelId": "UCAKcSON6PSG_JkTbXh2WdIg",
         "sourceChannelTitle": "The Current",
         "thumbnailUrl": "https://i.ytimg.com/vi/h1QTWtUx81w/hqdefault.jpg",
         "durationSec": 190
+      },
+      {
+        "youtubeVideoId": "b3MEtRUTYc0",
+        "title": "Sanjoy - Doux (Official Lyric Video) [Ultra Records]",
+        "sourceChannelId": "UC4rasfm9J-X4jNl9SvXp8xA",
+        "sourceChannelTitle": "Ultra Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/b3MEtRUTYc0/hqdefault.jpg",
+        "durationSec": 198
       },
       {
         "youtubeVideoId": "qwEvePgqS3E",
@@ -1013,12 +1093,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 3419
       },
       {
+        "youtubeVideoId": "yObCB1oCh3g",
+        "title": "Bradley Simpson's Play, Skip, Repeat",
+        "sourceChannelId": "UC2pmfLm7iq6Ov1UwYrWYkZA",
+        "sourceChannelTitle": "Vevo",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yObCB1oCh3g/hqdefault.jpg",
+        "durationSec": 87
+      },
+      {
         "youtubeVideoId": "73wCQRQb7v0",
         "title": "Jungle: Tiny Desk Concert",
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/73wCQRQb7v0/hqdefault.jpg",
         "durationSec": 1093
+      },
+      {
+        "youtubeVideoId": "TOBmHM6_hGc",
+        "title": "Sienna Senate - Do Your Thing | A COLORS SHOW",
+        "sourceChannelId": "UC2Qw1dzXDBAZPwS7zm37g8g",
+        "sourceChannelTitle": "COLORS",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TOBmHM6_hGc/hqdefault.jpg",
+        "durationSec": 180
       },
       {
         "youtubeVideoId": "KAAOVrm6Q4Q",
@@ -1029,12 +1125,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 211
       },
       {
+        "youtubeVideoId": "kXJqbgwzqzs",
+        "title": "That Mexican OT “Apple Bottom” (Live Performance) | Open Mic",
+        "sourceChannelId": "UCyFZMEnm1il5Wv3a6tPscbA",
+        "sourceChannelTitle": "Genius",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kXJqbgwzqzs/hqdefault.jpg",
+        "durationSec": 230
+      },
+      {
         "youtubeVideoId": "GRunLx0PZKk",
         "title": "Slowwves - Killed By Egoistic Disease (Live on KEXP)",
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/GRunLx0PZKk/hqdefault.jpg",
         "durationSec": 316
+      },
+      {
+        "youtubeVideoId": "b94GGzJepQ4",
+        "title": "Bella Kay’s Breakout Year: Taking “iloveitiloveiloveit” From TikTok to the Hot 100 | Up & Coming",
+        "sourceChannelId": "UCsVcseUYbYjldc-XgcsiEbg",
+        "sourceChannelTitle": "Billboard",
+        "thumbnailUrl": "https://i.ytimg.com/vi/b94GGzJepQ4/hqdefault.jpg",
+        "durationSec": 2617
       },
       {
         "youtubeVideoId": "_sf68tCJtXY",
@@ -1045,6 +1157,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 203
       },
       {
+        "youtubeVideoId": "xxHF843gTUA",
+        "title": "Greta Van Fleet’s Unlikely Evolution | Rolling Stone Nashville Now",
+        "sourceChannelId": "UC-JblcinswY50lrUdSaRNEg",
+        "sourceChannelTitle": "Rolling Stone",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xxHF843gTUA/hqdefault.jpg",
+        "durationSec": 4268
+      },
+      {
         "youtubeVideoId": "gwLLvuVitx0",
         "title": "Denis Horvat, Lulliby - What To Do",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
@@ -1053,12 +1173,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 162
       },
       {
-        "youtubeVideoId": "UiR_wdpxNIk",
-        "title": "STOP USING PARTIFUL | The Slop podcast",
-        "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
-        "sourceChannelTitle": "triple j talks",
-        "thumbnailUrl": "https://i.ytimg.com/vi/UiR_wdpxNIk/hqdefault.jpg",
-        "durationSec": 1876
+        "youtubeVideoId": "x_iZ9dYYpC4",
+        "title": "I Cried a River Through Palm Springs (Baby Nova) | MTV Underground",
+        "sourceChannelId": "UCxAICW_LdkfFYwTqTHHE0vg",
+        "sourceChannelTitle": "MTV",
+        "thumbnailUrl": "https://i.ytimg.com/vi/x_iZ9dYYpC4/hqdefault.jpg",
+        "durationSec": 196
       },
       {
         "youtubeVideoId": "19oaAYqgiU0",
@@ -1069,12 +1189,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 236
       },
       {
+        "youtubeVideoId": "_jH2oTNRe7g",
+        "title": "cozy autumn music 🍂 lofi beats to study / relax to",
+        "sourceChannelId": "UCSJ4gkVC6NrvII8umztf0Ow",
+        "sourceChannelTitle": "Lofi Girl",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_jH2oTNRe7g/hqdefault.jpg",
+        "durationSec": 3881
+      },
+      {
         "youtubeVideoId": "j04AQUOx9yY",
         "title": "Armin van Buuren & Benwal at ADE (Gashouder) - Radio 1’s Essential Mix Live",
         "sourceChannelId": "UC-FQUIVQ-bZiefzBiQAa8Fw",
         "sourceChannelTitle": "BBC Radio 1",
         "thumbnailUrl": "https://i.ytimg.com/vi/j04AQUOx9yY/hqdefault.jpg",
         "durationSec": 8079
+      },
+      {
+        "youtubeVideoId": "fO64LaGqx3s",
+        "title": "We Are Tomorrow 2026 l Documentary",
+        "sourceChannelId": "UCsN8M73DMWa8SPp5o_0IAQQ",
+        "sourceChannelTitle": "Tomorrowland",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fO64LaGqx3s/hqdefault.jpg",
+        "durationSec": 1433
       },
       {
         "youtubeVideoId": "rGjgyjKBhDs",
@@ -1085,12 +1221,36 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 3649
       },
       {
+        "youtubeVideoId": "5lOloH_NrK8",
+        "title": "KAAZE - Psychological (feat. CERES) [Official Audio]",
+        "sourceChannelId": "UCpDJl2EmP7Oh90Vylx0dZtA",
+        "sourceChannelTitle": "Spinnin' Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5lOloH_NrK8/hqdefault.jpg",
+        "durationSec": 153
+      },
+      {
+        "youtubeVideoId": "kntCvO1Xopo",
+        "title": "Macon & Paige Bea - Back Where It Started [Techno | Monstercat]",
+        "sourceChannelId": "UCp8OOssjSjGZRVYK6zWbNLg",
+        "sourceChannelTitle": "Monstercat Instinct",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kntCvO1Xopo/hqdefault.jpg",
+        "durationSec": 202
+      },
+      {
         "youtubeVideoId": "FHuAfvoQB-c",
         "title": "Kiwi Jr. — Photos of the Reenactment (live in The Current studio)",
         "sourceChannelId": "UCAKcSON6PSG_JkTbXh2WdIg",
         "sourceChannelTitle": "The Current",
         "thumbnailUrl": "https://i.ytimg.com/vi/FHuAfvoQB-c/hqdefault.jpg",
         "durationSec": 187
+      },
+      {
+        "youtubeVideoId": "xZbcSF9itt8",
+        "title": "EASY FREAK - Summer Interlude (Official Video) [Ultra Records]",
+        "sourceChannelId": "UC4rasfm9J-X4jNl9SvXp8xA",
+        "sourceChannelTitle": "Ultra Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xZbcSF9itt8/hqdefault.jpg",
+        "durationSec": 118
       },
       {
         "youtubeVideoId": "KDvG_hN_8o8",
@@ -1109,12 +1269,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 534
       },
       {
+        "youtubeVideoId": "IhfgQ0zCA70",
+        "title": "Vevo - Pop Video Weekly | This Week’s Biggest Hits Ep. 22",
+        "sourceChannelId": "UC2pmfLm7iq6Ov1UwYrWYkZA",
+        "sourceChannelTitle": "Vevo",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IhfgQ0zCA70/hqdefault.jpg",
+        "durationSec": 117
+      },
+      {
         "youtubeVideoId": "XoH44mH5laY",
         "title": "Richard O'Brien's 'The Rocky Horror Show': Tiny Desk Concert",
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/XoH44mH5laY/hqdefault.jpg",
         "durationSec": 966
+      },
+      {
+        "youtubeVideoId": "1czUusLWcZg",
+        "title": "Rex Orange County - Iron Man | A COLORS SHOW",
+        "sourceChannelId": "UC2Qw1dzXDBAZPwS7zm37g8g",
+        "sourceChannelTitle": "COLORS",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1czUusLWcZg/hqdefault.jpg",
+        "durationSec": 217
       },
       {
         "youtubeVideoId": "UdJNUNiXKQs",
@@ -1125,12 +1301,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 188
       },
       {
+        "youtubeVideoId": "IwRUkl5QJNo",
+        "title": "JoJo “Too Little Too Late” Lyrics & Meaning | Genius Verified",
+        "sourceChannelId": "UCyFZMEnm1il5Wv3a6tPscbA",
+        "sourceChannelTitle": "Genius",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IwRUkl5QJNo/hqdefault.jpg",
+        "durationSec": 323
+      },
+      {
         "youtubeVideoId": "UNE8a-AGo3Q",
         "title": "Slowwves - Vortex (Live on KEXP)",
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/UNE8a-AGo3Q/hqdefault.jpg",
         "durationSec": 221
+      },
+      {
+        "youtubeVideoId": "8TKmep6Tl4U",
+        "title": "Fans At Billboard Latin Music Week 2026 Share What Songs Help Get Them In Motion | Billboard",
+        "sourceChannelId": "UCsVcseUYbYjldc-XgcsiEbg",
+        "sourceChannelTitle": "Billboard",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8TKmep6Tl4U/hqdefault.jpg",
+        "durationSec": 106
       },
       {
         "youtubeVideoId": "vD5_ys2KurU",
@@ -1141,6 +1333,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 268
       },
       {
+        "youtubeVideoId": "3164WXoiZjY",
+        "title": "Kurt Vile Shuffles His Music Library: John Prine, The Roots, and more | Song Shuffle",
+        "sourceChannelId": "UC-JblcinswY50lrUdSaRNEg",
+        "sourceChannelTitle": "Rolling Stone",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3164WXoiZjY/hqdefault.jpg",
+        "durationSec": 610
+      },
+      {
         "youtubeVideoId": "F6IiTdG83Y4",
         "title": "19:26,1LINE - On The Other Side",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
@@ -1149,12 +1349,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 171
       },
       {
-        "youtubeVideoId": "IEoIAMl87RA",
-        "title": "The kind of episode where you have to wipe your ass after | The Grill Podcast",
-        "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
-        "sourceChannelTitle": "triple j talks",
-        "thumbnailUrl": "https://i.ytimg.com/vi/IEoIAMl87RA/hqdefault.jpg",
-        "durationSec": 1754
+        "youtubeVideoId": "JTFwsLsaeIk",
+        "title": "Baby Nova Shows Off Her Vocals on “Sad Porn” 🌟 MTV Underground",
+        "sourceChannelId": "UCxAICW_LdkfFYwTqTHHE0vg",
+        "sourceChannelTitle": "MTV",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JTFwsLsaeIk/hqdefault.jpg",
+        "durationSec": 185
       },
       {
         "youtubeVideoId": "fPnkAfXeArM",
@@ -1165,12 +1365,52 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1557
       },
       {
+        "youtubeVideoId": "O_97HkFMhFk",
+        "title": "lofi house vol.1 🌆 chill music to vibe to",
+        "sourceChannelId": "UCSJ4gkVC6NrvII8umztf0Ow",
+        "sourceChannelTitle": "Lofi Girl",
+        "thumbnailUrl": "https://i.ytimg.com/vi/O_97HkFMhFk/hqdefault.jpg",
+        "durationSec": 5455
+      },
+      {
+        "youtubeVideoId": "SiYRxCfrPTw",
+        "title": "Memories live forever | Sunweb x Tomorrowland",
+        "sourceChannelId": "UCsN8M73DMWa8SPp5o_0IAQQ",
+        "sourceChannelTitle": "Tomorrowland",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SiYRxCfrPTw/hqdefault.jpg",
+        "durationSec": 185
+      },
+      {
         "youtubeVideoId": "AL75DHREheM",
         "title": "Jowi | Boiler Room LA: Teletech",
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
         "thumbnailUrl": "https://i.ytimg.com/vi/AL75DHREheM/hqdefault.jpg",
         "durationSec": 3512
+      },
+      {
+        "youtubeVideoId": "fobCK-B51iM",
+        "title": "SMVGGLERS - Babalù (feat. KEL) [Official Audio]",
+        "sourceChannelId": "UCpDJl2EmP7Oh90Vylx0dZtA",
+        "sourceChannelTitle": "Spinnin' Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fobCK-B51iM/hqdefault.jpg",
+        "durationSec": 169
+      },
+      {
+        "youtubeVideoId": "gdqOmI7dygY",
+        "title": "Eyezic - LONELY [Dance / Pop | Monstercat]",
+        "sourceChannelId": "UCp8OOssjSjGZRVYK6zWbNLg",
+        "sourceChannelTitle": "Monstercat Instinct",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gdqOmI7dygY/hqdefault.jpg",
+        "durationSec": 167
+      },
+      {
+        "youtubeVideoId": "_dgWYxPCEc0",
+        "title": "Halogen - Dope [Ultra Records]",
+        "sourceChannelId": "UC4rasfm9J-X4jNl9SvXp8xA",
+        "sourceChannelTitle": "Ultra Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_dgWYxPCEc0/hqdefault.jpg",
+        "durationSec": 274
       },
       {
         "youtubeVideoId": "j58aOarW_YA",
@@ -1189,12 +1429,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 600
       },
       {
+        "youtubeVideoId": "eNBySS8jaOo",
+        "title": "Sam Smith, Demi Lovato - The Making Of I’m Ready | Vevo Footnotes",
+        "sourceChannelId": "UC2pmfLm7iq6Ov1UwYrWYkZA",
+        "sourceChannelTitle": "Vevo",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eNBySS8jaOo/hqdefault.jpg",
+        "durationSec": 209
+      },
+      {
         "youtubeVideoId": "xPIMk4d4ulI",
         "title": "CMAT: Tiny Desk Concert",
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/xPIMk4d4ulI/hqdefault.jpg",
         "durationSec": 1452
+      },
+      {
+        "youtubeVideoId": "DuwDrPcC5fs",
+        "title": "The Womack Sisters - I Am Your Season | A COLORS SHOW",
+        "sourceChannelId": "UC2Qw1dzXDBAZPwS7zm37g8g",
+        "sourceChannelTitle": "COLORS",
+        "thumbnailUrl": "https://i.ytimg.com/vi/DuwDrPcC5fs/hqdefault.jpg",
+        "durationSec": 243
       },
       {
         "youtubeVideoId": "bRjijIUxLOQ",
@@ -1205,12 +1461,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1924
       },
       {
+        "youtubeVideoId": "oHyGHWcaooU",
+        "title": "Milo J \"Niño\" Letra Oficial Y Significado | Genius Verified",
+        "sourceChannelId": "UCyFZMEnm1il5Wv3a6tPscbA",
+        "sourceChannelTitle": "Genius",
+        "thumbnailUrl": "https://i.ytimg.com/vi/oHyGHWcaooU/hqdefault.jpg",
+        "durationSec": 418
+      },
+      {
         "youtubeVideoId": "OGBXbNoFWEw",
         "title": "Slowwves - Evangeline (Live on KEXP)",
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/OGBXbNoFWEw/hqdefault.jpg",
         "durationSec": 392
+      },
+      {
+        "youtubeVideoId": "7TKX9O9xhFs",
+        "title": "Maluma Gets Real About Mental Health, Vulnerability & Personal Growth | Latin Music Week 2026",
+        "sourceChannelId": "UCsVcseUYbYjldc-XgcsiEbg",
+        "sourceChannelTitle": "Billboard",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7TKX9O9xhFs/hqdefault.jpg",
+        "durationSec": 1820
       },
       {
         "youtubeVideoId": "N4OIOudIROo",
@@ -1221,6 +1493,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 178
       },
       {
+        "youtubeVideoId": "jbdnXHx_O3c",
+        "title": "Jessica Lange on ‘AHS’ S13, Ryan Murphy, and Why She May Be Done Acting | The Rolling Stone Studio",
+        "sourceChannelId": "UC-JblcinswY50lrUdSaRNEg",
+        "sourceChannelTitle": "Rolling Stone",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jbdnXHx_O3c/hqdefault.jpg",
+        "durationSec": 1716
+      },
+      {
         "youtubeVideoId": "KlGEta2Pp-o",
         "title": "Helsloot - I Keep Going (feat. Chris Howard)",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
@@ -1229,12 +1509,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 254
       },
       {
-        "youtubeVideoId": "duAln9SSHgU",
-        "title": "70 Shows Into Breaky Radio And We Have Thoughts! | Abby and Tyrone Podcast",
-        "sourceChannelId": "UC8sy_jU8fgYKVsMobRiBnWw",
-        "sourceChannelTitle": "triple j talks",
-        "thumbnailUrl": "https://i.ytimg.com/vi/duAln9SSHgU/hqdefault.jpg",
-        "durationSec": 1031
+        "youtubeVideoId": "TWzJ2gSNuos",
+        "title": "Madonna Wins Artist of the Year | 2026 VMAs",
+        "sourceChannelId": "UCxAICW_LdkfFYwTqTHHE0vg",
+        "sourceChannelTitle": "MTV",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TWzJ2gSNuos/hqdefault.jpg",
+        "durationSec": 166
       },
       {
         "youtubeVideoId": "AjoHm2q6jos",
@@ -1245,12 +1525,52 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 172
       },
       {
+        "youtubeVideoId": "P12XxVMbYXg",
+        "title": "Lofi Girl x Secret Lair - beats to cast to 💫",
+        "sourceChannelId": "UCSJ4gkVC6NrvII8umztf0Ow",
+        "sourceChannelTitle": "Lofi Girl",
+        "thumbnailUrl": "https://i.ytimg.com/vi/P12XxVMbYXg/hqdefault.jpg",
+        "durationSec": 3874
+      },
+      {
+        "youtubeVideoId": "M66W6tETI0E",
+        "title": "Holy Priest WE1 | Tomorrowland 2026",
+        "sourceChannelId": "UCsN8M73DMWa8SPp5o_0IAQQ",
+        "sourceChannelTitle": "Tomorrowland",
+        "thumbnailUrl": "https://i.ytimg.com/vi/M66W6tETI0E/hqdefault.jpg",
+        "durationSec": 3610
+      },
+      {
         "youtubeVideoId": "svo1fX_il9k",
         "title": "Natte Visstick | Boiler Room LA: Teletech",
         "sourceChannelId": "UCGBpxWJr9FNOcFYA5GkKrMg",
         "sourceChannelTitle": "Boiler Room",
         "thumbnailUrl": "https://i.ytimg.com/vi/svo1fX_il9k/hqdefault.jpg",
         "durationSec": 3493
+      },
+      {
+        "youtubeVideoId": "A64nnJE8j7s",
+        "title": "Behind the Song | Timmy Trumpet x Olivia Sebastianelli - Dance Till I Die",
+        "sourceChannelId": "UCpDJl2EmP7Oh90Vylx0dZtA",
+        "sourceChannelTitle": "Spinnin' Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/A64nnJE8j7s/hqdefault.jpg",
+        "durationSec": 138
+      },
+      {
+        "youtubeVideoId": "7tmI8gcGL34",
+        "title": "Bag Raiders & Abby Bella May - Ur Type [Indie Dance | Monstercat]",
+        "sourceChannelId": "UCp8OOssjSjGZRVYK6zWbNLg",
+        "sourceChannelTitle": "Monstercat Instinct",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7tmI8gcGL34/hqdefault.jpg",
+        "durationSec": 188
+      },
+      {
+        "youtubeVideoId": "uiUSM6sSlic",
+        "title": "EASY FREAK - Don't It Feel Right (Official Video) [Ultra Records]",
+        "sourceChannelId": "UC4rasfm9J-X4jNl9SvXp8xA",
+        "sourceChannelTitle": "Ultra Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uiUSM6sSlic/hqdefault.jpg",
+        "durationSec": 158
       },
       {
         "youtubeVideoId": "8GmD549VT2o",
@@ -1269,12 +1589,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 28909
       },
       {
+        "youtubeVideoId": "S1ajVx9hL48",
+        "title": "Demi Lovato - Reactions to Demi Lovato’s “I Love Me” | Watch This (Vevo)",
+        "sourceChannelId": "UC2pmfLm7iq6Ov1UwYrWYkZA",
+        "sourceChannelTitle": "Vevo",
+        "thumbnailUrl": "https://i.ytimg.com/vi/S1ajVx9hL48/hqdefault.jpg",
+        "durationSec": 203
+      },
+      {
         "youtubeVideoId": "_Mp_bpIZKlI",
         "title": "Brìghde Chaimbeul: Tiny Desk Concert",
         "sourceChannelId": "UC4eYXhJI4-7wSWc8UNRwD4A",
         "sourceChannelTitle": "NPR Music",
         "thumbnailUrl": "https://i.ytimg.com/vi/_Mp_bpIZKlI/hqdefault.jpg",
         "durationSec": 1195
+      },
+      {
+        "youtubeVideoId": "TW3Hy5-Z2Pc",
+        "title": "Anderson .Paak & Cordae - 58th Floor | A COLORS SHOW",
+        "sourceChannelId": "UC2Qw1dzXDBAZPwS7zm37g8g",
+        "sourceChannelTitle": "COLORS",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TW3Hy5-Z2Pc/hqdefault.jpg",
+        "durationSec": 181
       },
       {
         "youtubeVideoId": "i0w641Yo0ys",
@@ -1285,12 +1621,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 307
       },
       {
+        "youtubeVideoId": "GBZpkNWjy0U",
+        "title": "BE:FIRST “WATCH ME” (Live Performance) | Open Mic",
+        "sourceChannelId": "UCyFZMEnm1il5Wv3a6tPscbA",
+        "sourceChannelTitle": "Genius",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GBZpkNWjy0U/hqdefault.jpg",
+        "durationSec": 170
+      },
+      {
         "youtubeVideoId": "EeI8OkqYbbQ",
         "title": "Slowwves - Anywhere Else (Live on KEXP)",
         "sourceChannelId": "UC3I2GFN_F8WudD_2jUZbojA",
         "sourceChannelTitle": "KEXP",
         "thumbnailUrl": "https://i.ytimg.com/vi/EeI8OkqYbbQ/hqdefault.jpg",
         "durationSec": 247
+      },
+      {
+        "youtubeVideoId": "yb7G9mMNkbY",
+        "title": "Luke Bryan on “Country Girl (Shake It For Me)” “Play It Again” & His Biggest Hits | Chart History",
+        "sourceChannelId": "UCsVcseUYbYjldc-XgcsiEbg",
+        "sourceChannelTitle": "Billboard",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yb7G9mMNkbY/hqdefault.jpg",
+        "durationSec": 1892
       },
       {
         "youtubeVideoId": "CgXxYPAJU-s",
@@ -1301,12 +1653,68 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 212
       },
       {
+        "youtubeVideoId": "-HOmlgll1sI",
+        "title": "Vince Staples Joins The Rolling Stone Interview: ‘Hip-Hop Doesn’t Really Have Any Rules’",
+        "sourceChannelId": "UC-JblcinswY50lrUdSaRNEg",
+        "sourceChannelTitle": "Rolling Stone",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-HOmlgll1sI/hqdefault.jpg",
+        "durationSec": 2112
+      },
+      {
         "youtubeVideoId": "_n49Uzm9DCM",
         "title": "Marino Canal - Luxor",
         "sourceChannelId": "UCCycRfTS7V9WOFfWfkNVCSg",
         "sourceChannelTitle": "Cercle Records",
         "thumbnailUrl": "https://i.ytimg.com/vi/_n49Uzm9DCM/hqdefault.jpg",
         "durationSec": 291
+      },
+      {
+        "youtubeVideoId": "iOpesuAYbcw",
+        "title": "Raye Performs \"I Will Overcome.\" / \"WHERE IS MY HUSBAND!\" | 2026 VMAs",
+        "sourceChannelId": "UCxAICW_LdkfFYwTqTHHE0vg",
+        "sourceChannelTitle": "MTV",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iOpesuAYbcw/hqdefault.jpg",
+        "durationSec": 216
+      },
+      {
+        "youtubeVideoId": "XVFUtEh9zrY",
+        "title": "summer lofi ☀️ chill beats to relax to",
+        "sourceChannelId": "UCSJ4gkVC6NrvII8umztf0Ow",
+        "sourceChannelTitle": "Lofi Girl",
+        "thumbnailUrl": "https://i.ytimg.com/vi/XVFUtEh9zrY/hqdefault.jpg",
+        "durationSec": 3661
+      },
+      {
+        "youtubeVideoId": "Mwfd0youI1Q",
+        "title": "Philou WE2 | Tomorrowland 2026",
+        "sourceChannelId": "UCsN8M73DMWa8SPp5o_0IAQQ",
+        "sourceChannelTitle": "Tomorrowland",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Mwfd0youI1Q/hqdefault.jpg",
+        "durationSec": 2792
+      },
+      {
+        "youtubeVideoId": "8-4WnV7r-EE",
+        "title": "KAAZE - Hot As Ice (feat. CERES) [Official Audio]",
+        "sourceChannelId": "UCpDJl2EmP7Oh90Vylx0dZtA",
+        "sourceChannelTitle": "Spinnin' Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8-4WnV7r-EE/hqdefault.jpg",
+        "durationSec": 182
+      },
+      {
+        "youtubeVideoId": "KeSwS7m_0vc",
+        "title": "Dillon Francis - Fall [Future Bass | Monstercat]",
+        "sourceChannelId": "UCp8OOssjSjGZRVYK6zWbNLg",
+        "sourceChannelTitle": "Monstercat Instinct",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KeSwS7m_0vc/hqdefault.jpg",
+        "durationSec": 200
+      },
+      {
+        "youtubeVideoId": "p9VGmfmw8sg",
+        "title": "Franky Wah, Tripolism - Tripowah [Ultra Records]",
+        "sourceChannelId": "UC4rasfm9J-X4jNl9SvXp8xA",
+        "sourceChannelTitle": "Ultra Records",
+        "thumbnailUrl": "https://i.ytimg.com/vi/p9VGmfmw8sg/hqdefault.jpg",
+        "durationSec": 219
       }
     ]
   },

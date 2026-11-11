@@ -36,7 +36,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   onReady,
   onShortDetected,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isReadyRef = useRef<boolean>(false);
@@ -91,25 +91,33 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     let isCancelled = false;
 
     const initPlayer = () => {
-      if (!window.YT || !window.YT.Player || !containerRef.current) return;
+      if (!window.YT || !window.YT.Player || !wrapperRef.current) return;
       if (playerRef.current) return;
 
       const initial = latestPropsRef.current;
 
       try {
+        // Create an inner mount element so YT.Player replacing the node with <iframe>
+        // never mutates React's own wrapperRef DOM node and always retains 100%x100% layout.
+        wrapperRef.current.innerHTML = '';
+        const mountNode = document.createElement('div');
+        mountNode.style.width = '100%';
+        mountNode.style.height = '100%';
+        wrapperRef.current.appendChild(mountNode);
+
         loadedVideoIdRef.current = initial.videoId || '';
         loadedTuneKeyRef.current = initial.tuneKey;
-        playerRef.current = new window.YT.Player(containerRef.current, {
+        playerRef.current = new window.YT.Player(mountNode, {
           height: '100%',
           width: '100%',
           videoId: initial.videoId || '',
           playerVars: {
             autoplay: initial.isPlaying ? 1 : 0,
-            controls: 0, // PRD W-4: Turn off native controls, custom controls below
+            controls: 0,
             modestbranding: 1,
             rel: 0,
-            playsinline: 1, // PRD P-5: required for iOS Safari
-            fs: 1, // Enable fullscreen
+            playsinline: 1,
+            fs: 1,
             start: Math.floor(initial.startSeconds || 0),
             iv_load_policy: 3,
             origin: typeof window !== 'undefined' ? window.location.origin : undefined,
@@ -120,10 +128,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               isReadyRef.current = true;
               const cur = latestPropsRef.current;
 
-              // Ensure iframe has proper fullscreen attributes
+              // Ensure iframe has proper fullscreen and sizing attributes
               try {
                 const iframe = event.target?.getIframe?.();
                 if (iframe) {
+                  iframe.style.width = '100%';
+                  iframe.style.height = '100%';
+                  iframe.style.display = 'block';
                   iframe.setAttribute('allowfullscreen', 'true');
                   iframe.setAttribute(
                     'allow',
@@ -172,7 +183,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               } else if (event.data === 3) {
                 cur.onBuffering(true);
               } else if (event.data === 5 && cur.isPlaying) {
-                // If video entered cued state while isPlaying is true, start playback immediately
                 try {
                   playerRef.current?.playVideo?.();
                 } catch {}
@@ -183,7 +193,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             onError: (event: any) => {
               const cur = latestPropsRef.current;
               console.warn('YouTube Player reported error:', event.data, 'for video:', cur.videoId);
-              // Auto-advance immediately on error (100: not found/deleted, 101/150: embedding disabled)
               cur.onError(event.data);
             },
           },
@@ -263,7 +272,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       if (!hasStartedRef.current && playerRef.current) {
         try {
           const state = playerRef.current.getPlayerState?.();
-          // If still unstarted (-1) or cued (5) after 6 seconds while expecting play
           if (state === -1 || state === 5) {
             console.warn(`Video ${videoId} failed to start playing within 6s (state ${state}), auto-skipping.`);
             latestPropsRef.current.onError(100);
@@ -325,8 +333,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
           return;
         }
 
-        // Guard against initial seek landing past the actual end of the video,
-        // or YouTube reaching the final 0.4s / ended state (0)
         if (state === 0 || (dur > 60 && cur >= dur - 0.4 && hasStartedRef.current)) {
           triggerEndedOnce();
           return;
@@ -350,12 +356,21 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       style={{
         position: 'relative',
         width: '100%',
+        height: '100%',
         aspectRatio: '16/9',
         background: '#000',
         overflow: 'hidden',
       }}
     >
-      <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+      <div
+        ref={wrapperRef}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+        }}
+      />
     </div>
   );
 };

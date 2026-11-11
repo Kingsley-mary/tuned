@@ -121,48 +121,88 @@
   ],
   "music": [
     {
+      "id": "UC2pmfLm7iq6Ov1UwYrWYkZA",
+      "name": "Vevo"
+    },
+    {
       "id": "UC4eYXhJI4-7wSWc8UNRwD4A",
       "name": "NPR Tiny Desk"
+    },
+    {
+      "id": "UC2Qw1dzXDBAZPwS7zm37g8g",
+      "name": "COLORS"
     },
     {
       "id": "UC7nrQB0dRxdQpH8-y8glEDw",
       "name": "NPR Music"
     },
     {
+      "id": "UCyFZMEnm1il5Wv3a6tPscbA",
+      "name": "Genius"
+    },
+    {
       "id": "UC3I2GFN_F8WudD_2jUZbojA",
       "name": "KEXP"
+    },
+    {
+      "id": "UCsVcseUYbYjldc-XgcsiEbg",
+      "name": "Billboard"
     },
     {
       "id": "UCG36u-k09zdIPQh5EEdVgTA",
       "name": "Mahogany Sessions"
     },
     {
+      "id": "UC-JblcinswY50lrUdSaRNEg",
+      "name": "Rolling Stone"
+    },
+    {
       "id": "UCCycRfTS7V9WOFfWfkNVCSg",
       "name": "Cercle"
     },
     {
-      "id": "UC8sy_jU8fgYKVsMobRiBnWw",
-      "name": "triple j"
+      "id": "UCxAICW_LdkfFYwTqTHHE0vg",
+      "name": "MTV"
     },
     {
       "id": "UCWjmAUHmajb1-eo5WKk_22A",
       "name": "Audiotree"
     },
     {
+      "id": "UCSJ4gkVC6NrvII8umztf0Ow",
+      "name": "Lofi Girl"
+    },
+    {
       "id": "UC-FQUIVQ-bZiefzBiQAa8Fw",
       "name": "BBC Radio 1"
+    },
+    {
+      "id": "UCsN8M73DMWa8SPp5o_0IAQQ",
+      "name": "Tomorrowland"
     },
     {
       "id": "UCGBpxWJr9FNOcFYA5GkKrMg",
       "name": "Boiler Room"
     },
     {
+      "id": "UCpDJl2EmP7Oh90Vylx0dZtA",
+      "name": "Spinnin' Records"
+    },
+    {
       "id": "UCRLZb8PpI9N7COmYqHiDH7A",
       "name": "Sofar Sounds"
     },
     {
+      "id": "UCp8OOssjSjGZRVYK6zWbNLg",
+      "name": "Monstercat"
+    },
+    {
       "id": "UCAKcSON6PSG_JkTbXh2WdIg",
       "name": "The Current"
+    },
+    {
+      "id": "UC4rasfm9J-X4jNl9SvXp8xA",
+      "name": "Ultra Music"
     },
     {
       "id": "UC_PscE_7n8SiMspieMGMK_A",
