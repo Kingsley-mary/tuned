@@ -4623,12 +4623,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "builtAt": 1794338234810,
     "videos": [
       {
+        "youtubeVideoId": "Y9S0x-KL1nk",
+        "title": "12 Cheating Allegations That Went Viral Overnight",
+        "sourceChannelId": "UCaWd5_7JhbQBe4dknZhsHJg",
+        "sourceChannelTitle": "WatchMojo.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Y9S0x-KL1nk/hqdefault.jpg",
+        "durationSec": 944
+      },
+      {
         "youtubeVideoId": "Rma1KLKyZWs",
         "title": "RESIDENT EVIL Creator Deep Dive With Filmmakers - Teaser",
         "sourceChannelId": "UCz97F7dMxBNOfGYu3rx8aCw",
         "sourceChannelTitle": "Sony Pictures Entertainment",
         "thumbnailUrl": "https://i.ytimg.com/vi/Rma1KLKyZWs/hqdefault.jpg",
         "durationSec": 80
+      },
+      {
+        "youtubeVideoId": "6DazexC3PR4",
+        "title": "The Batman 2's Villain Leak Could Break Bruce Wayne’s Hope",
+        "sourceChannelId": "UC2iUwfYi_1FCGGqhOUNx-iA",
+        "sourceChannelTitle": "ScreenRant",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6DazexC3PR4/hqdefault.jpg",
+        "durationSec": 531
       },
       {
         "youtubeVideoId": "ZzaAa6yDvVk",
@@ -5031,12 +5047,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 246
       },
       {
+        "youtubeVideoId": "l3n4x-NmCdc",
+        "title": "10 Disturbing Russell Brand Moments With What We Know Now",
+        "sourceChannelId": "UCaWd5_7JhbQBe4dknZhsHJg",
+        "sourceChannelTitle": "WatchMojo.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/l3n4x-NmCdc/hqdefault.jpg",
+        "durationSec": 707
+      },
+      {
         "youtubeVideoId": "nIw1O3zvOfE",
         "title": "JUMANJI: OPEN WORLD - New Trailer (4K)",
         "sourceChannelId": "UCz97F7dMxBNOfGYu3rx8aCw",
         "sourceChannelTitle": "Sony Pictures Entertainment",
         "thumbnailUrl": "https://i.ytimg.com/vi/nIw1O3zvOfE/hqdefault.jpg",
         "durationSec": 171
+      },
+      {
+        "youtubeVideoId": "WWXstkvMFzQ",
+        "title": "NCIS: Origins: Gibbs’ Silence About Lala Has a Painful New Meaning",
+        "sourceChannelId": "UC2iUwfYi_1FCGGqhOUNx-iA",
+        "sourceChannelTitle": "ScreenRant",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WWXstkvMFzQ/hqdefault.jpg",
+        "durationSec": 517
       },
       {
         "youtubeVideoId": "LdbmF1bzaUI",
@@ -5423,12 +5455,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 591
       },
       {
+        "youtubeVideoId": "Oqs4HKdv6FA",
+        "title": "3 Predictions For Godzilla After Minus Zero",
+        "sourceChannelId": "UCaWd5_7JhbQBe4dknZhsHJg",
+        "sourceChannelTitle": "WatchMojo.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Oqs4HKdv6FA/hqdefault.jpg",
+        "durationSec": 722
+      },
+      {
         "youtubeVideoId": "NLVLsyE4uUA",
         "title": "The Holiday 20th Anniversary Trailer",
         "sourceChannelId": "UCz97F7dMxBNOfGYu3rx8aCw",
         "sourceChannelTitle": "Sony Pictures Entertainment",
         "thumbnailUrl": "https://i.ytimg.com/vi/NLVLsyE4uUA/hqdefault.jpg",
         "durationSec": 92
+      },
+      {
+        "youtubeVideoId": "65pR6snQ9Qg",
+        "title": "Austin Powers 4: Dr. Evil Could Steal Austin’s Movie",
+        "sourceChannelId": "UC2iUwfYi_1FCGGqhOUNx-iA",
+        "sourceChannelTitle": "ScreenRant",
+        "thumbnailUrl": "https://i.ytimg.com/vi/65pR6snQ9Qg/hqdefault.jpg",
+        "durationSec": 503
       },
       {
         "youtubeVideoId": "zfem5233D_8",
@@ -5741,6 +5789,38 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Ryder the Omniscient",
         "thumbnailUrl": "https://i.ytimg.com/vi/CEVUJEWUP9I/hqdefault.jpg",
         "durationSec": 1168
+      },
+      {
+        "youtubeVideoId": "dV1uD6xpGWI",
+        "title": "10 Ways Marvel Had To Change Its Plans After Dropping Kang",
+        "sourceChannelId": "UCaWd5_7JhbQBe4dknZhsHJg",
+        "sourceChannelTitle": "WatchMojo.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dV1uD6xpGWI/hqdefault.jpg",
+        "durationSec": 729
+      },
+      {
+        "youtubeVideoId": "u1qAFoWqgl0",
+        "title": "Carrie Season 2 Expands Stephen King's Psychic World",
+        "sourceChannelId": "UC2iUwfYi_1FCGGqhOUNx-iA",
+        "sourceChannelTitle": "ScreenRant",
+        "thumbnailUrl": "https://i.ytimg.com/vi/u1qAFoWqgl0/hqdefault.jpg",
+        "durationSec": 530
+      },
+      {
+        "youtubeVideoId": "OT_go3Yozls",
+        "title": "Top 10 Most Iconic Music Moments of 2002",
+        "sourceChannelId": "UCaWd5_7JhbQBe4dknZhsHJg",
+        "sourceChannelTitle": "WatchMojo.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OT_go3Yozls/hqdefault.jpg",
+        "durationSec": 797
+      },
+      {
+        "youtubeVideoId": "5Qp8X9BFnaA",
+        "title": "You Can See Everything: Oscars' First Best Picture Doc?",
+        "sourceChannelId": "UC2iUwfYi_1FCGGqhOUNx-iA",
+        "sourceChannelTitle": "ScreenRant",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5Qp8X9BFnaA/hqdefault.jpg",
+        "durationSec": 560
       }
     ]
   },
@@ -8247,6 +8327,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "builtAt": 1794346171198,
     "videos": [
       {
+        "youtubeVideoId": "nfz6SaMOEd8",
+        "title": "\"Chilling Encounters: Scary Stories to Keep You Up at Night\"",
+        "sourceChannelId": "UCPHA7A4XYhyQR4ewsuFkKnw",
+        "sourceChannelTitle": "HorrorCentral",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nfz6SaMOEd8/hqdefault.jpg",
+        "durationSec": 162
+      },
+      {
         "youtubeVideoId": "3Eh7dVNKWNU",
         "title": "Marvelous and The Black Hole | Full Movie",
         "sourceChannelId": "UC8IHAQMuiJdY6ALuhG7iU8Q",
@@ -8255,12 +8343,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 4901
       },
       {
+        "youtubeVideoId": "OqktXY_oRDQ",
+        "title": "THE LEPRECHAUN'S CURSE 🎬 Full Horror Movie 🎬 English HD",
+        "sourceChannelId": "UC4ZqZ6V67OWNUxBHLLv7yAA",
+        "sourceChannelTitle": "Watch Movies Now!",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OqktXY_oRDQ/hqdefault.jpg",
+        "durationSec": 4819
+      },
+      {
         "youtubeVideoId": "bopJV_Xk_Ls",
         "title": "A Birder's Guide To Everything | FULL MOVIE | Comedy | Kodi Smit-McPhee, Alex Wolff, Ben Kingsley",
         "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
         "sourceChannelTitle": "Popcornflix",
         "thumbnailUrl": "https://i.ytimg.com/vi/bopJV_Xk_Ls/hqdefault.jpg",
         "durationSec": 5183
+      },
+      {
+        "youtubeVideoId": "2j1ulDeUPzk",
+        "title": "Alice Fades Away (FULL MOVIE) WWII Drama, Ashley Shelton, William Sadler, Blanche Baker",
+        "sourceChannelId": "UCX1nchEcBshItKBeJvH-YMw",
+        "sourceChannelTitle": "FREE MOVIES",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2j1ulDeUPzk/hqdefault.jpg",
+        "durationSec": 4574
       },
       {
         "youtubeVideoId": "pNcI-uY00fk",
@@ -8343,6 +8447,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 128
       },
       {
+        "youtubeVideoId": "2IwRTjgBT38",
+        "title": "\"Chilling True Scary Story: 'The Neighbor'",
+        "sourceChannelId": "UCPHA7A4XYhyQR4ewsuFkKnw",
+        "sourceChannelTitle": "HorrorCentral",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2IwRTjgBT38/hqdefault.jpg",
+        "durationSec": 154
+      },
+      {
         "youtubeVideoId": "Ekfn-RVo8XI",
         "title": "Mortuary | Full Movie",
         "sourceChannelId": "UC8IHAQMuiJdY6ALuhG7iU8Q",
@@ -8351,12 +8463,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 5576
       },
       {
+        "youtubeVideoId": "dHhMxFm_upM",
+        "title": "THE DEAD RISE (SPECIAL EDITION) 🎬 Full Sci-Fi Horror Movie 🎬 English HD",
+        "sourceChannelId": "UC4ZqZ6V67OWNUxBHLLv7yAA",
+        "sourceChannelTitle": "Watch Movies Now!",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dHhMxFm_upM/hqdefault.jpg",
+        "durationSec": 4710
+      },
+      {
         "youtubeVideoId": "NG4UEfI2qes",
         "title": "Fever | FULL MOVIE | Mystery, Dark Thriller | Teri Hatcher, Henry Thomas",
         "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
         "sourceChannelTitle": "Popcornflix",
         "thumbnailUrl": "https://i.ytimg.com/vi/NG4UEfI2qes/hqdefault.jpg",
         "durationSec": 5317
+      },
+      {
+        "youtubeVideoId": "bI80wVThavY",
+        "title": "This Is Where We Live | Heartfelt Award-Winning Indie Family Drama",
+        "sourceChannelId": "UCX1nchEcBshItKBeJvH-YMw",
+        "sourceChannelTitle": "FREE MOVIES",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bI80wVThavY/hqdefault.jpg",
+        "durationSec": 5574
       },
       {
         "youtubeVideoId": "oKRznAcakfQ",
@@ -8431,12 +8559,36 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 593
       },
       {
+        "youtubeVideoId": "kozeQ7UR_-8",
+        "title": "\"Real Scary Stories That Will Haunt Your Dreams\"",
+        "sourceChannelId": "UCPHA7A4XYhyQR4ewsuFkKnw",
+        "sourceChannelTitle": "HorrorCentral",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kozeQ7UR_-8/hqdefault.jpg",
+        "durationSec": 82
+      },
+      {
+        "youtubeVideoId": "xN6n3cSfOqw",
+        "title": "BUTCHERS (SPECIAL EDITION) 🎬 Full Horror Movie 🎬 English HD",
+        "sourceChannelId": "UC4ZqZ6V67OWNUxBHLLv7yAA",
+        "sourceChannelTitle": "Watch Movies Now!",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xN6n3cSfOqw/hqdefault.jpg",
+        "durationSec": 3823
+      },
+      {
         "youtubeVideoId": "wgBnLO4Pnb0",
         "title": "FARRAH BATTLES ROBOT! Saturn 3 | FULL MOVIE | Sci Fi Cult Classic | Farrah Fawcett, Kirk Douglas",
         "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
         "sourceChannelTitle": "Popcornflix",
         "thumbnailUrl": "https://i.ytimg.com/vi/wgBnLO4Pnb0/hqdefault.jpg",
         "durationSec": 5231
+      },
+      {
+        "youtubeVideoId": "yRYvLFLdgk0",
+        "title": "Keedar Whittle: Hear Me Out (FULL COMEDY SPECIAL) Stand Up Comedy, Movie,",
+        "sourceChannelId": "UCX1nchEcBshItKBeJvH-YMw",
+        "sourceChannelTitle": "FREE MOVIES",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yRYvLFLdgk0/hqdefault.jpg",
+        "durationSec": 3894
       },
       {
         "youtubeVideoId": "k4zqaGyaojU",
@@ -8511,12 +8663,36 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 5646
       },
       {
+        "youtubeVideoId": "B0wH5sJeNgk",
+        "title": "\"Creepy Tales: True Horror Stories You Won't Believe\"",
+        "sourceChannelId": "UCPHA7A4XYhyQR4ewsuFkKnw",
+        "sourceChannelTitle": "HorrorCentral",
+        "thumbnailUrl": "https://i.ytimg.com/vi/B0wH5sJeNgk/hqdefault.jpg",
+        "durationSec": 105
+      },
+      {
+        "youtubeVideoId": "EuRQx5jURxA",
+        "title": "BLEED: EAT OR BE EATEN (SPECIAL EDITION) 🎬 Full Horror Movie 🎬 English HD",
+        "sourceChannelId": "UC4ZqZ6V67OWNUxBHLLv7yAA",
+        "sourceChannelTitle": "Watch Movies Now!",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EuRQx5jURxA/hqdefault.jpg",
+        "durationSec": 4007
+      },
+      {
         "youtubeVideoId": "ra0vF8YSvps",
         "title": "Rendel: Dark Vengeance | FULL MOVIE | Action, Crime | Superhero",
         "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
         "sourceChannelTitle": "Popcornflix",
         "thumbnailUrl": "https://i.ytimg.com/vi/ra0vF8YSvps/hqdefault.jpg",
         "durationSec": 6324
+      },
+      {
+        "youtubeVideoId": "sqCYHOTNBNc",
+        "title": "Ashes (FULL MOVIE) Based on a true story | Horror, Supernatural, Ghosts, Comedy, Ouija Board",
+        "sourceChannelId": "UCX1nchEcBshItKBeJvH-YMw",
+        "sourceChannelTitle": "FREE MOVIES",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sqCYHOTNBNc/hqdefault.jpg",
+        "durationSec": 5200
       },
       {
         "youtubeVideoId": "osuPhvRRNA4",
@@ -8567,12 +8743,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 5408
       },
       {
+        "youtubeVideoId": "WVihRhmc264",
+        "title": "ALIENS RETURN 🎬 Full Horror Movie 🎬 English HD",
+        "sourceChannelId": "UC4ZqZ6V67OWNUxBHLLv7yAA",
+        "sourceChannelTitle": "Watch Movies Now!",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WVihRhmc264/hqdefault.jpg",
+        "durationSec": 4813
+      },
+      {
         "youtubeVideoId": "oOzODYq1i1A",
         "title": "Hijack (1998) | FULL MOVIE | Action, Ernie Hudson, Jeff Fahey | Train Thriller",
         "sourceChannelId": "UCVFYikepF-avelvuIaQ_lHA",
         "sourceChannelTitle": "Popcornflix",
         "thumbnailUrl": "https://i.ytimg.com/vi/oOzODYq1i1A/hqdefault.jpg",
         "durationSec": 5430
+      },
+      {
+        "youtubeVideoId": "k5u0m5tnMeY",
+        "title": "Go Chase Yourself (FULL MOVIE) CRIME DRAMA, SUPERNATURAL, ROMANCE, Amanda Rodriguez, Jason Gervacio",
+        "sourceChannelId": "UCX1nchEcBshItKBeJvH-YMw",
+        "sourceChannelTitle": "FREE MOVIES",
+        "thumbnailUrl": "https://i.ytimg.com/vi/k5u0m5tnMeY/hqdefault.jpg",
+        "durationSec": 5013
       },
       {
         "youtubeVideoId": "BKnKv5hs08Y",
