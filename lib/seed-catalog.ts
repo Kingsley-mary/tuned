@@ -1733,12 +1733,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 3955
       },
       {
-        "youtubeVideoId": "QQXCC6o_LHU",
-        "title": "The Cult That Drove a Whole City Insane",
-        "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
-        "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
-        "thumbnailUrl": "https://i.ytimg.com/vi/QQXCC6o_LHU/hqdefault.jpg",
-        "durationSec": 1152
+        "youtubeVideoId": "fEjvSbI_PT4",
+        "title": "What Actually Happens When You Die?",
+        "sourceChannelId": "UCsXVk37bltHxD1rDPwtNM8Q",
+        "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fEjvSbI_PT4/hqdefault.jpg",
+        "durationSec": 864
       },
       {
         "youtubeVideoId": "TTipD_G73iQ",
@@ -1829,12 +1829,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 2067
       },
       {
-        "youtubeVideoId": "HfaO94_KZ3c",
-        "title": "The Fall of the Last Zulu King",
-        "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
-        "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
-        "thumbnailUrl": "https://i.ytimg.com/vi/HfaO94_KZ3c/hqdefault.jpg",
-        "durationSec": 1073
+        "youtubeVideoId": "5_Fayfx2NUM",
+        "title": "How I Survived Late-Stage Cancer (A Fun Story)",
+        "sourceChannelId": "UCsXVk37bltHxD1rDPwtNM8Q",
+        "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5_Fayfx2NUM/hqdefault.jpg",
+        "durationSec": 682
       },
       {
         "youtubeVideoId": "3L-_HyXdGP4",
@@ -1925,12 +1925,20 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 2072
       },
       {
-        "youtubeVideoId": "kGvF7ATAqoo",
-        "title": "The Real Story of the Mongolian Singing Dunes",
-        "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
-        "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kGvF7ATAqoo/hqdefault.jpg",
-        "durationSec": 410
+        "youtubeVideoId": "QW_jlUn4gA8",
+        "title": "This Is What a Godlike Civilization Would Look Like",
+        "sourceChannelId": "UCsXVk37bltHxD1rDPwtNM8Q",
+        "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QW_jlUn4gA8/hqdefault.jpg",
+        "durationSec": 862
+      },
+      {
+        "youtubeVideoId": "PXbVn-f_wuM",
+        "title": "You Will Only Like Half of This Video",
+        "sourceChannelId": "UCsXVk37bltHxD1rDPwtNM8Q",
+        "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PXbVn-f_wuM/hqdefault.jpg",
+        "durationSec": 627
       },
       {
         "youtubeVideoId": "Q9JcpSJwEK0",
@@ -2013,12 +2021,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 307
       },
       {
-        "youtubeVideoId": "AcjDyzYcIkc",
-        "title": "Why These Nuns Cut off Their Noses and Lips",
-        "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
-        "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
-        "thumbnailUrl": "https://i.ytimg.com/vi/AcjDyzYcIkc/hqdefault.jpg",
-        "durationSec": 470
+        "youtubeVideoId": "_y9JuojAIg0",
+        "title": "We Finally Know More About Humanity’s First Civilization",
+        "sourceChannelId": "UCsXVk37bltHxD1rDPwtNM8Q",
+        "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_y9JuojAIg0/hqdefault.jpg",
+        "durationSec": 634
       },
       {
         "youtubeVideoId": "i7_hi00ktgY",
@@ -2085,12 +2093,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 2861
       },
       {
-        "youtubeVideoId": "205swuI0JlY",
-        "title": "When Death Was a Relief",
-        "sourceChannelId": "UCq8ZAAsI89IoJ-fn1gYpO3g",
-        "sourceChannelTitle": "Nightshift – Kurzgesagt After Dark",
-        "thumbnailUrl": "https://i.ytimg.com/vi/205swuI0JlY/hqdefault.jpg",
-        "durationSec": 946
+        "youtubeVideoId": "ujkD4SxPKOI",
+        "title": "AI Just Crossed the Terrifying Line - Now What?",
+        "sourceChannelId": "UCsXVk37bltHxD1rDPwtNM8Q",
+        "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ujkD4SxPKOI/hqdefault.jpg",
+        "durationSec": 808
       },
       {
         "youtubeVideoId": "jVDPOPWarDU",
@@ -5797,38 +5805,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1489
       },
       {
-        "youtubeVideoId": "uZhpH5LOK_M",
-        "title": "Steak That's STILL Alive?! | Strange Evidence | Science Channel",
-        "sourceChannelId": "UCvJiYiBUbw4tmpRSZT2r1Hw",
-        "sourceChannelTitle": "Science Channel",
-        "thumbnailUrl": "https://i.ytimg.com/vi/uZhpH5LOK_M/hqdefault.jpg",
-        "durationSec": 612
-      },
-      {
-        "youtubeVideoId": "gi1ivBzadTs",
-        "title": "Inside the World’s Biggest Stage | Friedrichstadt-Palast Secrets! | WELT Documentary",
-        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
-        "sourceChannelTitle": "WELT Documentary",
-        "thumbnailUrl": "https://i.ytimg.com/vi/gi1ivBzadTs/hqdefault.jpg",
-        "durationSec": 1086
-      },
-      {
-        "youtubeVideoId": "347FNmhBVLM",
-        "title": "3,300 Women, Just 20 Guards | Inside the Philippines' Largest Women's Prison | Free Documentary",
-        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
-        "sourceChannelTitle": "Free Documentary",
-        "thumbnailUrl": "https://i.ytimg.com/vi/347FNmhBVLM/hqdefault.jpg",
-        "durationSec": 654
-      },
-      {
-        "youtubeVideoId": "ZZTC_dXcC2o",
-        "title": "Do you think Hard Disk Drives are Slow? Think again.",
-        "sourceChannelId": "UCdp4_l1vPmpN-gDbUwhaRUQ",
-        "sourceChannelTitle": "Branch Education",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZZTC_dXcC2o/hqdefault.jpg",
-        "durationSec": 1073
-      },
-      {
         "youtubeVideoId": "BuRyQYf03xA",
         "title": "My dog won't stay out of mud so I made this...",
         "sourceChannelId": "UCj1VqrHhDte54oLgPG4xpuQ",
@@ -5925,38 +5901,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1355
       },
       {
-        "youtubeVideoId": "Uadcj9NHUr8",
-        "title": "Parthenon, Machu Picchu and Stonehenge | If We Built It Today | Science Channel",
-        "sourceChannelId": "UCvJiYiBUbw4tmpRSZT2r1Hw",
-        "sourceChannelTitle": "Science Channel",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Uadcj9NHUr8/hqdefault.jpg",
-        "durationSec": 1143
-      },
-      {
-        "youtubeVideoId": "mZkpSpvOeNE",
-        "title": "SPACETIME TO SLEEP: Sail through the infinite Sea of Stars | Season 7 I WELT HD Documentary",
-        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
-        "sourceChannelTitle": "WELT Documentary",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mZkpSpvOeNE/hqdefault.jpg",
-        "durationSec": 1276
-      },
-      {
-        "youtubeVideoId": "H4jRIXwVDKs",
-        "title": "The Ayoreo People | Paraguay: Fighting to Remain Uncontacted | Free Documentary",
-        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
-        "sourceChannelTitle": "Free Documentary",
-        "thumbnailUrl": "https://i.ytimg.com/vi/H4jRIXwVDKs/hqdefault.jpg",
-        "durationSec": 714
-      },
-      {
-        "youtubeVideoId": "N_6k_jd5pnA",
-        "title": "How does Tap to Pay Work?",
-        "sourceChannelId": "UCdp4_l1vPmpN-gDbUwhaRUQ",
-        "sourceChannelTitle": "Branch Education",
-        "thumbnailUrl": "https://i.ytimg.com/vi/N_6k_jd5pnA/hqdefault.jpg",
-        "durationSec": 1013
-      },
-      {
         "youtubeVideoId": "RpslsMqPFWA",
         "title": "I made an apple peel itself",
         "sourceChannelId": "UCj1VqrHhDte54oLgPG4xpuQ",
@@ -6051,38 +5995,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "TITANS of CNC MACHINING",
         "thumbnailUrl": "https://i.ytimg.com/vi/95ovLUV9LRY/hqdefault.jpg",
         "durationSec": 824
-      },
-      {
-        "youtubeVideoId": "WbxjeySougg",
-        "title": "Why Was this Victorian Hat Made with 80 Human Teeth?! | Strangest Things | Science Channel",
-        "sourceChannelId": "UCvJiYiBUbw4tmpRSZT2r1Hw",
-        "sourceChannelTitle": "Science Channel",
-        "thumbnailUrl": "https://i.ytimg.com/vi/WbxjeySougg/hqdefault.jpg",
-        "durationSec": 748
-      },
-      {
-        "youtubeVideoId": "8DkmlhGKlqQ",
-        "title": "NATO TIGER MEET: How European Tornado Crews Train for Combat | Full Documentary",
-        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
-        "sourceChannelTitle": "WELT Documentary",
-        "thumbnailUrl": "https://i.ytimg.com/vi/8DkmlhGKlqQ/hqdefault.jpg",
-        "durationSec": 946
-      },
-      {
-        "youtubeVideoId": "04uEBj0ftj8",
-        "title": "World's Toughest Cruise Ships | Extreme Voyages: Sailing to the Ends of the Earth | Free Documentary",
-        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
-        "sourceChannelTitle": "Free Documentary",
-        "thumbnailUrl": "https://i.ytimg.com/vi/04uEBj0ftj8/hqdefault.jpg",
-        "durationSec": 1104
-      },
-      {
-        "youtubeVideoId": "9kM3mnxrMMM",
-        "title": "How do microSD Cards Store 2 TB in such a TINY space?",
-        "sourceChannelId": "UCdp4_l1vPmpN-gDbUwhaRUQ",
-        "sourceChannelTitle": "Branch Education",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9kM3mnxrMMM/hqdefault.jpg",
-        "durationSec": 638
       },
       {
         "youtubeVideoId": "2OfjZ3ORJfc",

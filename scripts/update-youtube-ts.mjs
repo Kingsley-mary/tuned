@@ -119,7 +119,8 @@ function roundRobinInterleave(lists: Video[][]): Video[] {
   return result;
 }
 
-// Master function: live-scours the creator universe for a given category or custom UC channel ID
+// Master function: returns the deterministic verified broadcast lineup for built-in categories,
+// or live-scours the creator feed for custom UC channel IDs
 export async function getLineupForCategory(categoryId: string): Promise<ChannelLineup> {
   // Check cache first for instant sub-second response
   const cached = MEMORY_CACHE.get(categoryId);
@@ -143,6 +144,12 @@ export async function getLineupForCategory(categoryId: string): Promise<ChannelL
       MEMORY_CACHE.set(categoryId, { lineup: customLineup, timestamp: Date.now() });
     }
     return customLineup;
+  }
+
+  // For built-in channels, return the verified, curated broadcast lineup (SEED_LINEUPS)
+  // so every browser and instance shares the exact same verified videos and real durations in lockstep.
+  if (SEED_LINEUPS[categoryId] && SEED_LINEUPS[categoryId].videos.length > 0) {
+    return SEED_LINEUPS[categoryId];
   }
 
   const categoryMeta = CATEGORIES.find(c => c.id === categoryId);
@@ -180,11 +187,6 @@ export async function getLineupForCategory(categoryId: string): Promise<ChannelL
 
   // Stale cache fallback if available
   if (cached) return cached.lineup;
-
-  // Fallback to verified seed catalog if available
-  if (SEED_LINEUPS[categoryId]) {
-    return SEED_LINEUPS[categoryId];
-  }
 
   // Empty fallback
   return {

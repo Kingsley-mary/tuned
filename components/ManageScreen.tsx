@@ -34,8 +34,7 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
   const [isResolving, setIsResolving] = useState(false);
 
   const channelCount = channels.length;
-  const canRemove = channelCount > 3; // PRD M-2: Must keep between 3 and 8 channels
-  const canAdd = channelCount < 8;
+  const canRemove = channelCount > 3; // Minimum 3 channels
 
   // Unpicked categories for "Add a channel" chips
   const unpickedCategories = allCategories.filter(
@@ -48,11 +47,6 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
 
     if (!query) {
       setErrorMessage('Paste a YouTube link or @handle first.');
-      return;
-    }
-
-    if (!canAdd) {
-      setErrorMessage('You’re at the 8 channel max.');
       return;
     }
 
@@ -125,8 +119,8 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
           </div>
         </div>
         <div className="gd-clock">
-          <div className="gd-date">{channelCount} of 8 channels</div>
-          <div className="mg-sub">Keep between 3 and 8</div>
+          <div className="gd-date">{channelCount} channels</div>
+          <div className="mg-sub">Minimum 3 channels</div>
         </div>
       </header>
 
@@ -176,46 +170,40 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
 
           <div className="mg-card">
             <div className="mg-card-eyebrow">Add a channel</div>
-            {!canAdd ? (
-              <p className="mg-muted">You’re at the 8 channel max. Remove one to add another.</p>
-            ) : (
-              <>
-                {unpickedCategories.length > 0 && (
-                  <div className="mg-chips">
-                    {unpickedCategories.map((cat) => (
-                      <button
-                        key={cat.id}
-                        onClick={() => onAddCategory(cat)}
-                        className="mg-chip"
-                        style={{ ['--h' as string]: cat.hue } as React.CSSProperties}
-                      >
-                        <Plus size={13} /> {cat.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-                <form onSubmit={handleAddCustom} className="mg-form">
-                  <input
-                    type="text"
-                    value={customInput}
-                    onChange={(e) => {
-                      setCustomInput(e.target.value);
-                      setErrorMessage('');
-                    }}
-                    disabled={isResolving}
-                    placeholder="Paste a YouTube link or @handle"
-                    className="input-pill mg-input"
-                  />
-                  <button type="submit" disabled={isResolving || !customInput.trim()} className="osd-btn active-solid">
-                    {isResolving ? 'Adding…' : 'Add'}
+            {unpickedCategories.length > 0 && (
+              <div className="mg-chips">
+                {unpickedCategories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => onAddCategory(cat)}
+                    className="mg-chip"
+                    style={{ ['--h' as string]: cat.hue } as React.CSSProperties}
+                  >
+                    <Plus size={13} /> {cat.name}
                   </button>
-                </form>
-                {errorMessage && (
-                  <div className="mg-error">
-                    <AlertCircle size={15} /> <span>{errorMessage}</span>
-                  </div>
-                )}
-              </>
+                ))}
+              </div>
+            )}
+            <form onSubmit={handleAddCustom} className="mg-form">
+              <input
+                type="text"
+                value={customInput}
+                onChange={(e) => {
+                  setCustomInput(e.target.value);
+                  setErrorMessage('');
+                }}
+                disabled={isResolving}
+                placeholder="Paste a YouTube link or @handle"
+                className="input-pill mg-input"
+              />
+              <button type="submit" disabled={isResolving || !customInput.trim()} className="osd-btn active-solid">
+                {isResolving ? 'Adding…' : 'Add'}
+              </button>
+            </form>
+            {errorMessage && (
+              <div className="mg-error">
+                <AlertCircle size={15} /> <span>{errorMessage}</span>
+              </div>
             )}
           </div>
 

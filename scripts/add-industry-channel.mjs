@@ -1,24 +1,61 @@
 import fs from 'fs';
 
-const PURE_INDUSTRY_CREATORS = [
+const EXTRA_FACTORY_HANDLES = [
+  'SuigenerisProcess',
+  'WonderProcess',
+  'NYCCNC',
+  'Blondihacks',
+  'InheritanceMachining',
+  'FireballTool',
+];
+
+async function resolveHandle(handle) {
+  try {
+    const res = await fetch(`https://www.youtube.com/@${handle}`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Cookie': 'SOCS=CAESEwgDEgk2MTQ1NzU1NDQaAmVuIAEaBgiA_LyaBg'
+      }
+    });
+    const html = await res.text();
+    const m = html.match(/"externalId":"(UC[\w-]{22})"/) || html.match(/"channelId":"(UC[\w-]{22})"/);
+    const t = html.match(/<meta property="og:title" content="([^"]+)">/);
+    return m ? { id: m[1], name: t?.[1] || handle } : null;
+  } catch {
+    return null;
+  }
+}
+
+const BASE_INDUSTRY_CREATORS = [
   { id: 'UChZgikssAJkmiQOv_sO-ngQ', name: 'ProcessX' },
   { id: 'UC-b5z1biw_Qra-eOfC4kuqQ', name: 'Miracle Process' },
   { id: 'UCNP1mwtQKwZ2At6QRkJk4tw', name: 'FACTORYmonster' },
   { id: 'UCSNIT8Z40XgB4RKk9Vhf1eA', name: 'All process of world' },
   { id: 'UCB9PwFQwTg9ig42xwKsfSEg', name: 'Awesome Process' },
-  { id: 'UCKtCP-jRstPOWJWoYbIfsQQ', name: 'Modern Process' },
   { id: 'UCbW5tOCMJcgGGK6YtVqCLuA', name: 'King Process' },
   { id: 'UCc2lUKVOTXKlQR7Fm7h1JfQ', name: 'TITANS of CNC MACHINING' },
-  { id: 'UCvJiYiBUbw4tmpRSZT2r1Hw', name: 'Science Channel' },
-  { id: 'UCBAeFXaLV1ZqKqc-Uf3pKaA', name: 'WELT Documentary' },
-  { id: 'UCijcd0GR0fkxCAZwkiuWqtQ', name: 'Free Documentary' },
-  { id: 'UCdp4_l1vPmpN-gDbUwhaRUQ', name: 'Branch Education' },
   { id: 'UCj1VqrHhDte54oLgPG4xpuQ', name: 'Stuff Made Here' },
   { id: 'UC5NO8MgTQKHAWXp6z8Xl7yQ', name: 'This Old Tony' },
   { id: 'UCMrMVIBtqFW6O0-MWq26gqw', name: 'my mechanics' },
   { id: 'UCworsKCR-Sx6R6-BnIjS2MA', name: 'Clickspring' },
   { id: 'UCw3UZn1tcVe7pH3R6C3Gcng', name: 'Abom79' },
   { id: 'UC2wdo5vU7bPBNzyC2nnwmNQ', name: 'Cutting Edge Engineering' },
+];
+
+const SCIENCE_CREATORS = [
+  { id: 'UCHnyfMqiRRG1u-2MsSQLbXA', name: 'Veritasium' },
+  { id: 'UCsXVk37bltHxD1rDPwtNM8Q', name: 'Kurzgesagt – In a Nutshell' },
+  { id: 'UC6107grRI4m0o2-emgoDnAA', name: 'SmarterEveryDay' },
+  { id: 'UCY1kMZp36IQSyNx_9h4mpCg', name: 'Mark Rober' },
+  { id: 'UC6nSFpj9HTCZ5t-N3Rm3-HA', name: 'Vsauce' },
+  { id: 'UCZYTClx2T1of7BRZ86-8fow', name: 'SciShow' },
+  { id: 'UCeiYXex_fwgYDonaTcSIk6w', name: 'MinuteEarth' },
+  { id: 'UC7_gcs09iThXybpVgjHZ_7g', name: 'PBS Space Time' },
+  { id: 'UCH4BNI0-FOK2dMXoFtViWHw', name: 'Be Smart' },
+  { id: 'UCFhXFikryT4aFcLkLw2LBLA', name: 'NileRed' },
+  { id: 'UC1VLQPn9cYSqx8plbk9RxxQ', name: 'The Action Lab' },
+  { id: 'UC1yNl2E66ZzKApQdRuTQ4tw', name: 'Sabine Hossenfelder' },
+  { id: 'UCzWQYUVCpZqtN93H8RR44Qw', name: 'Seeker' },
 ];
 
 async function fetchVideoDurationAndEmbeddable(id) {
@@ -46,10 +83,7 @@ async function fetchVideoDurationAndEmbeddable(id) {
       const sec = Math.round(parseInt(msMatch[1], 10) / 1000);
       return sec > 60 ? sec : null;
     }
-    // If YouTube rate-limits HTML scrape but oEmbed succeeded and RSS link was /watch?v=, use deterministic length
-    let hash = 0;
-    for (let i = 0; i < id.length; i++) hash = ((hash << 5) - hash + id.charCodeAt(i)) | 0;
-    return 600 + (Math.abs(hash) % 900);
+    return null;
   } catch {
     return null;
   }
@@ -125,17 +159,15 @@ function roundRobin(lists) {
   return result;
 }
 
-async function main() {
-  console.log(`Fetching RSS feeds for ${PURE_INDUSTRY_CREATORS.length} pure Manufacturing & Factory creators...`);
-  const rawLists = await Promise.all(PURE_INDUSTRY_CREATORS.map(c => fetchChannelRawUploads(c.id, c.name)));
-  const activeCreators = PURE_INDUSTRY_CREATORS.filter((_, idx) => rawLists[idx].length > 0);
-  const candidates = roundRobin(rawLists.filter(l => l.length > 0)).slice(0, 75);
+async function buildVerifiedLineup(creators, label) {
+  const rawLists = await Promise.all(creators.map(c => fetchChannelRawUploads(c.id, c.name)));
+  const activeCreators = creators.filter((_, idx) => rawLists[idx].length > 0);
+  const candidates = roundRobin(rawLists.filter(l => l.length > 0)).slice(0, 85);
 
-  console.log(`Found ${candidates.length} candidate videos across ${activeCreators.length} creators. Verifying embeddability & real durations in controlled batches...`);
-
-  const industryVideos = [];
-  const batchSize = 15;
-  for (let i = 0; i < candidates.length && industryVideos.length < 50; i += batchSize) {
+  console.log(`[${label}] Found ${candidates.length} candidates across ${activeCreators.length} creators. Verifying...`);
+  const verifiedVideos = [];
+  const batchSize = 12;
+  for (let i = 0; i < candidates.length && verifiedVideos.length < 50; i += batchSize) {
     const batch = candidates.slice(i, i + batchSize);
     const verifiedBatch = await Promise.all(
       batch.map(async (v) => {
@@ -145,18 +177,33 @@ async function main() {
       })
     );
     for (const v of verifiedBatch) {
-      if (v && industryVideos.length < 50) {
-        industryVideos.push(v);
+      if (v && verifiedVideos.length < 50) {
+        verifiedVideos.push(v);
       }
     }
   }
+  console.log(`[${label}] Verified ${verifiedVideos.length} videos! Sources:`, [...new Set(verifiedVideos.map(v => v.sourceChannelTitle))]);
+  return { activeCreators, verifiedVideos };
+}
 
-  console.log(`Verified ${industryVideos.length} embeddable Industry & Manufacturing videos from ${activeCreators.length} creators!`);
-  console.log('Active Industry Creators:', activeCreators.map(c => c.name).join(', '));
+async function main() {
+  const resolvedExtras = (await Promise.all(EXTRA_FACTORY_HANDLES.map(resolveHandle))).filter(Boolean);
+  const seenCreatorIds = new Set(BASE_INDUSTRY_CREATORS.map(c => c.id));
+  const allIndustryCreators = [...BASE_INDUSTRY_CREATORS];
+  for (const ex of resolvedExtras) {
+    if (!seenCreatorIds.has(ex.id)) {
+      seenCreatorIds.add(ex.id);
+      allIndustryCreators.push(ex);
+    }
+  }
+
+  const industryResult = await buildVerifiedLineup(allIndustryCreators, 'Industry');
+  const scienceResult = await buildVerifiedLineup(SCIENCE_CREATORS, 'Science');
 
   // Update verified-channels-full.json
   const verifiedMap = JSON.parse(fs.readFileSync('scripts/verified-channels-full.json', 'utf8'));
-  verifiedMap.industry = activeCreators;
+  verifiedMap.industry = industryResult.activeCreators;
+  verifiedMap.science = scienceResult.activeCreators;
   fs.writeFileSync('scripts/verified-channels-full.json', JSON.stringify(verifiedMap, null, 2));
 
   // Update lib/seed-catalog.ts
@@ -167,26 +214,18 @@ async function main() {
   const categories = JSON.parse(catMatch[1]);
   const lineups = JSON.parse(lineupMatch[1]);
 
-  const industryCategory = {
-    id: 'industry',
-    name: 'Industry',
-    hue: 32,
-    description: 'How things are made, factory production lines, CNC machining & mass manufacturing'
-  };
-
-  const existingIdx = categories.findIndex(c => c.id === 'industry');
-  if (existingIdx !== -1) {
-    categories[existingIdx] = industryCategory;
-  } else {
-    categories.push(industryCategory);
-  }
-
   lineups.industry = {
     categoryId: 'industry',
     categoryName: 'Industry',
     hue: 32,
     builtAt: Date.now(),
-    videos: industryVideos
+    videos: industryResult.verifiedVideos
+  };
+
+  lineups.science = {
+    ...lineups.science,
+    builtAt: Date.now(),
+    videos: scienceResult.verifiedVideos
   };
 
   const updatedTs = `import { Category, ChannelLineup } from './types';
@@ -196,7 +235,7 @@ export const CATEGORIES: Category[] = ${JSON.stringify(categories, null, 2)};
 export const SEED_LINEUPS: Record<string, ChannelLineup> = ${JSON.stringify(lineups, null, 2)};
 `;
   fs.writeFileSync('lib/seed-catalog.ts', updatedTs);
-  console.log('Successfully updated Industry channel with pure manufacturing creators!');
+  console.log('Successfully updated both Industry and Science lineups in lib/seed-catalog.ts!');
 }
 
 main();

@@ -41,63 +41,36 @@ export default function TunedApp() {
   const isDirtyRef = useRef(false);
   const currentPlaybackTimeRef = useRef<number>(0);
   const channelPlaybackStatesRef = useRef<Map<string, ChannelSavedState>>(new Map());
-  const completedVideoIdsRef = useRef<Set<string>>(new Set());
+  const failedVideoIdsRef = useRef<Set<string>>(new Set());
 
-  // Helper to persist playback session state (completed shows + channel clocks) to localStorage
-  const persistPlaybackSession = useCallback(() => {
-    try {
-      const statesObj: Record<string, ChannelSavedState> = {};
-      channelPlaybackStatesRef.current.forEach((val, key) => {
-        statesObj[key] = val;
-      });
-      localStorage.setItem(
-        PLAYBACK_STORAGE_KEY,
-        JSON.stringify({
-          completedIds: Array.from(completedVideoIdsRef.current),
-          channelStates: statesObj,
-        })
-      );
-    } catch {}
-  }, []);
-
-  // Load user state and playback session from LocalStorage on mount (PRD Section 8 & 10)
+  // Load user state from LocalStorage on mount (PRD Section 8 & 10)
   useEffect(() => {
     try {
-      const savedSession = localStorage.getItem(PLAYBACK_STORAGE_KEY);
-      if (savedSession) {
-        const parsedSession = JSON.parse(savedSession);
-        if (Array.isArray(parsedSession.completedIds)) {
-          completedVideoIdsRef.current = new Set(parsedSession.completedIds);
-        }
-        if (parsedSession.channelStates && typeof parsedSession.channelStates === 'object') {
-          Object.entries(parsedSession.channelStates).forEach(([k, v]) => {
-            channelPlaybackStatesRef.current.set(k, v as ChannelSavedState);
-          });
-        }
-      }
+      // Clear legacy per-browser playback drift so all browsers lock to the global broadcast clock
+      localStorage.removeItem(PLAYBACK_STORAGE_KEY);
     } catch {}
 
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      let loadedCategories = DEFAULT_CATEGORIES;
-      let loadedChannelIdx = 0;
+      let loadedCategories = Array.from(new Set(DEFAULT_CATEGORIES));
 
       if (saved) {
         const parsed: UserState = JSON.parse(saved);
         if (parsed.pickedCategoryIds && parsed.pickedCategoryIds.length >= 3) {
-          let nextCats = [...parsed.pickedCategoryIds];
+          // Always deduplicate category IDs so no channel (like Games) can ever appear twice
+          let nextCats = Array.from(new Set(parsed.pickedCategoryIds));
           if (!localStorage.getItem(ENTERTAINMENT_MIGRATION_KEY)) {
             for (const newCh of ['movies', 'cartoons', 'industry']) {
-              if (!nextCats.includes(newCh) && nextCats.length < 8) {
+              if (!nextCats.includes(newCh)) {
                 nextCats.push(newCh);
               }
             }
             localStorage.setItem(ENTERTAINMENT_MIGRATION_KEY, '1');
-            localStorage.setItem(
-              STORAGE_KEY,
-              JSON.stringify({ ...parsed, pickedCategoryIds: nextCats })
-            );
           }
+          localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify({ ...parsed, pickedCategoryIds: nextCats })
+          );
           loadedCategories = nextCats;
           setPickedCategoryIds(nextCats);
           setIsReturningUser(true);
@@ -106,7 +79,6 @@ export default function TunedApp() {
           setCustomSources(parsed.customSources);
         }
         if (typeof parsed.lastChannelIndex === 'number') {
-          loadedChannelIdx = parsed.lastChannelIndex;
           setCurrentChannelIndex(parsed.lastChannelIndex);
         }
         if (parsed.theme) {
@@ -123,7 +95,7 @@ export default function TunedApp() {
           if (existingIdx !== -1) {
             setCurrentChannelIndex(existingIdx);
           } else if (CATEGORIES.some((c) => c.id === sharedCh)) {
-            const nextCats = [sharedCh, ...loadedCategories.filter((id) => id !== sharedCh)].slice(0, 8);
+            const nextCats = [sharedCh, ...loadedCategories.filter((id) => id !== sharedCh)];
             setPickedCategoryIds(nextCats);
             setCurrentChannelIndex(0);
           }
@@ -164,77 +136,59 @@ export default function TunedApp() {
     [pickedCategoryIds, customSources, currentChannelIndex, theme]
   );
 
-  // Resolve target channel's current continuous broadcast state (never pauses while away!)
+  // Resolve target channel's live broadcast state from the global deterministic wall-clock
+  // Guarantees every browser, tab, and device sees the exact same video & timestamp,
+  // while channels continue advancing in real time while you watch other channels!
   const resolveChannelContinuousState = useCallback(
     (target: ChannelLineup): { videoIndex: number; seekSeconds: number } => {
       if (!target || !target.videos?.length) {
         return { videoIndex: 0, seekSeconds: 0 };
       }
 
-      const saved = channelPlaybackStatesRef.current.get(target.categoryId);
-      if (saved) {
-        const elapsedSec = Math.max(0, (Date.now() - saved.leftAt) / 1000);
-        const adv = advanceChannelPlayback(
-          target.videos,
-          saved.videoIndex,
-          saved.seekSeconds,
-          elapsedSec,
-          completedVideoIdsRef.current
-        );
-        return adv;
-      }
-
       const live = getLiveBroadcastState(
         target.videos,
         target.categoryId,
         Math.floor(Date.now() / 1000),
-        completedVideoIdsRef.current
+        failedVideoIdsRef.current
       );
       return { videoIndex: live.videoIndex, seekSeconds: live.seekSeconds };
     },
     []
   );
 
-  // Snapshot the active channel's exact current playback position right before leaving it
-  const snapshotActiveChannel = useCallback(
-    (chIdx: number, vidIdx: number, exactSeekSec: number) => {
-      const currentCh = channels[chIdx];
-      if (!currentCh) return;
-      channelPlaybackStatesRef.current.set(currentCh.categoryId, {
-        videoIndex: vidIdx,
-        seekSeconds: Math.max(0, Math.floor(exactSeekSec)),
-        leftAt: Date.now(),
-      });
-      persistPlaybackSession();
-    },
-    [channels, persistPlaybackSession]
-  );
-
-  // Fetch or construct lineups for current picked categories
+  // Fetch or construct lineups for current picked categories (deduplicated)
   const loadLineups = useCallback(
     async (categoryIds: string[], knownCustomSources: CustomSource[] = customSources): Promise<ChannelLineup[]> => {
+      const uniqueIds = Array.from(new Set(categoryIds));
       try {
-        const res = await fetch(`/api/lineup?ids=${categoryIds.join(',')}`);
+        const res = await fetch(`/api/lineup?ids=${uniqueIds.join(',')}`);
         if (!res.ok) throw new Error('API lineup fetch failed');
         const data = await res.json();
         if (data.lineups && Array.isArray(data.lineups) && data.lineups.length > 0) {
-          return data.lineups.map((lineup: ChannelLineup) => {
-            const customMeta = knownCustomSources.find((cs) => cs.channelId === lineup.categoryId);
-            if (customMeta && customMeta.title) {
-              return {
-                ...lineup,
-                categoryName: customMeta.title,
-              };
-            }
-            return lineup;
-          });
+          const seen = new Set<string>();
+          return data.lineups
+            .filter((lineup: ChannelLineup) => {
+              if (seen.has(lineup.categoryId)) return false;
+              seen.add(lineup.categoryId);
+              return true;
+            })
+            .map((lineup: ChannelLineup) => {
+              const customMeta = knownCustomSources.find((cs) => cs.channelId === lineup.categoryId);
+              if (customMeta && customMeta.title) {
+                return {
+                  ...lineup,
+                  categoryName: customMeta.title,
+                };
+              }
+              return lineup;
+            });
         }
       } catch (err) {
         console.warn('API error, falling back to seed catalog:', err);
       }
 
       // Fallback directly to seed catalog (works offline or without network)
-      return categoryIds.map((id) => {
+      return uniqueIds.map((id) => {
         const meta = CATEGORIES.find((c) => c.id === id);
         const customMeta = knownCustomSources.find((cs) => cs.channelId === id);
         const seed = SEED_LINEUPS[id] || {
@@ -339,7 +293,6 @@ export default function TunedApp() {
       if (exists) {
         return prev.filter((item) => item !== id);
       } else {
-        if (prev.length >= 8) return prev; // max 8 categories
         return [...prev, id];
       }
     });
@@ -387,10 +340,6 @@ export default function TunedApp() {
     (channelIndex: number) => {
       if (channelIndex < 0 || channelIndex >= channels.length) return;
 
-      // 1. Save exact live playback second of the current channel before switching
-      // so it continues advancing in the background while we watch other channels
-      snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
-
       if (channelIndex !== currentChannelIndex) {
         setPreviousChannelIndex(currentChannelIndex);
       }
@@ -402,13 +351,6 @@ export default function TunedApp() {
         setCurrentVideoIndex(pos.videoIndex);
         setStartSeconds(pos.seekSeconds);
         currentPlaybackTimeRef.current = pos.seekSeconds;
-        // Update target channel's snapshot anchor to now
-        channelPlaybackStatesRef.current.set(target.categoryId, {
-          videoIndex: pos.videoIndex,
-          seekSeconds: pos.seekSeconds,
-          leftAt: Date.now(),
-        });
-        persistPlaybackSession();
       } else {
         setCurrentVideoIndex(0);
         setStartSeconds(0);
@@ -423,10 +365,7 @@ export default function TunedApp() {
     [
       channels,
       currentChannelIndex,
-      currentVideoIndex,
-      snapshotActiveChannel,
       resolveChannelContinuousState,
-      persistPlaybackSession,
       persistState,
     ]
   );
@@ -437,23 +376,33 @@ export default function TunedApp() {
     }
   }, [previousChannelIndex, channels.length, handleSelectChannel]);
 
-  // Called when video ends naturally
+  // Called when video ends naturally or is skipped on error
   const handleNextVideo = useCallback(() => {
     const active = channels[currentChannelIndex];
     if (!active || !active.videos?.length) return;
 
-    // Mark completed so it is never replayed when returning
-    const finishedVideo = active.videos[currentVideoIndex];
-    if (finishedVideo?.youtubeVideoId) {
-      completedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
+    // Check global broadcast clock first so all browsers stay in lockstep across transitions
+    const live = getLiveBroadcastState(
+      active.videos,
+      active.categoryId,
+      Math.floor((Date.now() - behindLiveSeconds * 1000) / 1000),
+      failedVideoIdsRef.current
+    );
+
+    if (live.videoIndex !== currentVideoIndex) {
+      setCurrentVideoIndex(live.videoIndex);
+      setStartSeconds(live.seekSeconds);
+      currentPlaybackTimeRef.current = live.seekSeconds;
+      setTuneKey((k) => k + 1);
+      setIsPlaying(true);
+      return;
     }
 
     let nextIdx = (currentVideoIndex + 1) % active.videos.length;
-    // Skip any video in completedVideoIds
     let safety = 0;
     while (
       safety < active.videos.length &&
-      completedVideoIdsRef.current.has(active.videos[nextIdx].youtubeVideoId)
+      failedVideoIdsRef.current.has(active.videos[nextIdx].youtubeVideoId)
     ) {
       nextIdx = (nextIdx + 1) % active.videos.length;
       safety++;
@@ -465,14 +414,7 @@ export default function TunedApp() {
     setBehindLiveSeconds(0);
     setTuneKey((k) => k + 1);
     setIsPlaying(true);
-
-    channelPlaybackStatesRef.current.set(active.categoryId, {
-      videoIndex: nextIdx,
-      seekSeconds: 0,
-      leftAt: Date.now(),
-    });
-    persistPlaybackSession();
-  }, [channels, currentChannelIndex, currentVideoIndex, persistPlaybackSession]);
+  }, [channels, currentChannelIndex, currentVideoIndex, behindLiveSeconds]);
 
   const handleJumpToLive = useCallback(() => {
     // If already at live edge (haven't paused), do not switch or reload video!
@@ -484,39 +426,29 @@ export default function TunedApp() {
     const active = channels[currentChannelIndex];
     if (!active || !active.videos?.length) return;
 
-    // Fast-forward current channel by the exact seconds accumulated while paused
-    const adv = advanceChannelPlayback(
+    // Sync directly to the global wall-clock live broadcast state
+    const live = getLiveBroadcastState(
       active.videos,
-      currentVideoIndex,
-      currentPlaybackTimeRef.current,
-      behindLiveSeconds,
-      completedVideoIdsRef.current
+      active.categoryId,
+      Math.floor(Date.now() / 1000),
+      failedVideoIdsRef.current
     );
-    setCurrentVideoIndex(adv.videoIndex);
-    setStartSeconds(adv.seekSeconds);
-    currentPlaybackTimeRef.current = adv.seekSeconds;
+    setCurrentVideoIndex(live.videoIndex);
+    setStartSeconds(live.seekSeconds);
+    currentPlaybackTimeRef.current = live.seekSeconds;
     setBehindLiveSeconds(0);
     setTuneKey((k) => k + 1);
     setIsPlaying(true);
-
-    channelPlaybackStatesRef.current.set(active.categoryId, {
-      videoIndex: adv.videoIndex,
-      seekSeconds: adv.seekSeconds,
-      leftAt: Date.now(),
-    });
-    persistPlaybackSession();
   }, [
     behindLiveSeconds,
     isPlaying,
     channels,
     currentChannelIndex,
-    currentVideoIndex,
-    persistPlaybackSession,
   ]);
 
   const handleShortDetected = useCallback(
     (videoId: string) => {
-      completedVideoIdsRef.current.add(videoId);
+      failedVideoIdsRef.current.add(videoId);
       handleNextVideo();
     },
     [handleNextVideo]
@@ -544,7 +476,6 @@ export default function TunedApp() {
   };
 
   const handlePowerOff = () => {
-    snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
     setIsPlaying(false);
     persistState();
     setScreenMode('power');
@@ -582,7 +513,7 @@ export default function TunedApp() {
   };
 
   const handleRemoveChannel = (index: number) => {
-    if (channels.length <= 3) return; // PRD M-2: min 3
+    if (channels.length <= 3) return; // Minimum 3 channels
     const removed = channels[index];
     setChannels((prev) => prev.filter((_, idx) => idx !== index));
     setPickedCategoryIds((prev) => prev.filter((_, idx) => idx !== index));
@@ -596,8 +527,8 @@ export default function TunedApp() {
   };
 
   const handleAddCategory = async (cat: Category) => {
-    if (channels.length >= 8) return; // PRD M-2: max 8
-    setPickedCategoryIds((prev) => [...prev, cat.id]);
+    // Prevent duplicate channels in lineup
+    setPickedCategoryIds((prev) => (prev.includes(cat.id) ? prev : [...prev, cat.id]));
 
     const newSeed = SEED_LINEUPS[cat.id] || {
       categoryId: cat.id,
@@ -607,7 +538,7 @@ export default function TunedApp() {
       videos: SEED_LINEUPS.tech.videos,
     };
 
-    setChannels((prev) => [...prev, newSeed]);
+    setChannels((prev) => (prev.some((ch) => ch.categoryId === cat.id) ? prev : [...prev, newSeed]));
     isDirtyRef.current = true;
   };
 
@@ -748,11 +679,9 @@ export default function TunedApp() {
           onShortDetected={handleShortDetected}
           onProgressUpdate={handleProgressUpdate}
           onOpenGuide={() => {
-            snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
             setScreenMode('guide');
           }}
           onOpenManage={() => {
-            snapshotActiveChannel(currentChannelIndex, currentVideoIndex, currentPlaybackTimeRef.current);
             setScreenMode('manage');
           }}
           onPowerOff={handlePowerOff}
@@ -766,7 +695,7 @@ export default function TunedApp() {
           currentVideoIndex={currentVideoIndex}
           currentPlaybackSeconds={currentPlaybackTimeRef.current}
           savedChannelStates={channelPlaybackStatesRef.current}
-          completedVideoIds={completedVideoIdsRef.current}
+          completedVideoIds={failedVideoIdsRef.current}
           onBackToWatch={() => setScreenMode('watch')}
           onTuneChannel={(chIdx) => {
             if (chIdx !== currentChannelIndex) {

@@ -23,11 +23,9 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
 }) => {
   const count = selectedIds.length;
   const isMinReached = count >= 3;
-  const isMaxReached = count >= 8;
 
   const getCounterText = () => {
-    if (count < 3) return `${count} of 3 picked`;
-    if (count >= 8) return '8 picked · that’s the max for now';
+    if (count < 3) return `${count} of 3 minimum picked`;
     return `${count} picked`;
   };
 
@@ -58,7 +56,7 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
           What do you want to watch?
         </h1>
         <p style={{ color: 'var(--ink-secondary)', fontSize: 16, marginTop: 8, marginBottom: 28 }}>
-          Pick at least 3, up to 8. You can change these anytime.
+          Pick at least 3 channels. You can change or add more anytime.
         </p>
 
         <div className="category-grid">
@@ -89,8 +87,8 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
                     : '0 4px 12px rgba(0,0,0,0.06)',
                   transform: isSelected ? 'scale(1.02)' : 'scale(1)',
                   transition: 'all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1)',
-                  cursor: !isSelected && isMaxReached ? 'not-allowed' : 'pointer',
-                  opacity: !isSelected && isMaxReached ? 0.45 : 1,
+                  cursor: 'pointer',
+                  opacity: 1,
                 }}
               >
                 {/* Selection Badge */}
@@ -179,7 +177,7 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
           style={{
             fontSize: 14,
             fontWeight: 600,
-            color: count < 3 ? 'var(--ink-secondary)' : count >= 8 ? 'var(--accent)' : 'var(--ink)',
+            color: count < 3 ? 'var(--ink-secondary)' : 'var(--ink)',
             fontVariantNumeric: 'tabular-nums',
           }}
         >

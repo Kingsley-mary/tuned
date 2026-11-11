@@ -19,13 +19,13 @@ export function recordVideoDuration(videoId: string, durationSec: number): void 
 export function getVideoDuration(video: Video): number {
   if (!video) return 600;
 
+  if (video.durationSec && video.durationSec > 60 && video.durationSec !== 600) {
+    return video.durationSec;
+  }
+
   const id = video.youtubeVideoId || '';
   if (KNOWN_DURATIONS.has(id)) {
     return KNOWN_DURATIONS.get(id)!;
-  }
-
-  if (video.durationSec && video.durationSec > 60 && video.durationSec !== 600) {
-    return video.durationSec;
   }
 
   // Deterministic hash based on YouTube video ID
