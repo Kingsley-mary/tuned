@@ -6383,12 +6383,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1141
       },
       {
-        "youtubeVideoId": "FMlcn-_jpWY",
-        "title": "Selena Gomez - Hands To Myself",
-        "sourceChannelId": "UCOroCmP8_xZa3X5WJERYHKg",
-        "sourceChannelTitle": "SelenaGomezVEVO",
-        "thumbnailUrl": "https://i.ytimg.com/vi/FMlcn-_jpWY/hqdefault.jpg",
-        "durationSec": 228
+        "youtubeVideoId": "QMtsvyJmUAk",
+        "title": "How I Paint Realistic Clouds that *GLOW*",
+        "sourceChannelId": "UCcwoY8oOA0DOW2H7OqmqNzw",
+        "sourceChannelTitle": "Brooke Cormier",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QMtsvyJmUAk/hqdefault.jpg",
+        "durationSec": 1298
       },
       {
         "youtubeVideoId": "alI9_07IFqg",
@@ -6591,12 +6591,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 3069
       },
       {
-        "youtubeVideoId": "dYFALyP2e7U",
-        "title": "Incredible footage of hermit crab changing shells with anemones!",
-        "sourceChannelId": "UCOroCmP8_xZa3X5WJERYHKg",
-        "sourceChannelTitle": "BlueWorldTV",
-        "thumbnailUrl": "https://i.ytimg.com/vi/dYFALyP2e7U/hqdefault.jpg",
-        "durationSec": 159
+        "youtubeVideoId": "3zUREp_tlbs",
+        "title": "I Made a $15k Oil Painting",
+        "sourceChannelId": "UCcwoY8oOA0DOW2H7OqmqNzw",
+        "sourceChannelTitle": "Brooke Cormier",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3zUREp_tlbs/hqdefault.jpg",
+        "durationSec": 1069
       },
       {
         "youtubeVideoId": "OioegWLBlS0",
@@ -6799,12 +6799,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1196
       },
       {
-        "youtubeVideoId": "j24_xH5uvdA",
-        "title": "Listen And Move",
-        "sourceChannelId": "UCOroCmP8_xZa3X5WJERYHKg",
-        "sourceChannelTitle": "TheKidsCartoons",
-        "thumbnailUrl": "https://i.ytimg.com/vi/j24_xH5uvdA/hqdefault.jpg",
-        "durationSec": 295
+        "youtubeVideoId": "H5Y01Kj538I",
+        "title": "How to Stop Overthinking and Just Start Painting",
+        "sourceChannelId": "UCcwoY8oOA0DOW2H7OqmqNzw",
+        "sourceChannelTitle": "Brooke Cormier",
+        "thumbnailUrl": "https://i.ytimg.com/vi/H5Y01Kj538I/hqdefault.jpg",
+        "durationSec": 702
       },
       {
         "youtubeVideoId": "HfHW53KY2po",
@@ -8855,14 +8855,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 72
       },
       {
-        "youtubeVideoId": "dIWuRGEMpeg",
-        "title": "Tune Squad Slam Dunk! 🏀 💪| Space Jam | @wbkids",
-        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
-        "sourceChannelTitle": "WB Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/dIWuRGEMpeg/hqdefault.jpg",
-        "durationSec": 308
-      },
-      {
         "youtubeVideoId": "H-AFoTjDdb8",
         "title": "GEMMA - Animation Short Film 2026 - GOBELINS",
         "sourceChannelId": "UC-vrN89jIox3XqAKbEMeFgQ",
@@ -8885,14 +8877,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "SkyeWei",
         "thumbnailUrl": "https://i.ytimg.com/vi/d8Fd2wk9toM/hqdefault.jpg",
         "durationSec": 96
-      },
-      {
-        "youtubeVideoId": "OQXz9dX0lbA",
-        "title": "NO TOWEL! 😳 🙈 🤣 - Mr Bean",
-        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
-        "sourceChannelTitle": "WildBrain Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/OQXz9dX0lbA/hqdefault.jpg",
-        "durationSec": 3599
       },
       {
         "youtubeVideoId": "5VZRiyT9s8g",
@@ -8919,28 +8903,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1373
       },
       {
-        "youtubeVideoId": "9omW7kXZKAE",
-        "title": "Mr Bean's Most Embarrassing Swimming Pool Moment! 😂 | Mr Bean Live Action | Full Episodes | Mr Bean",
-        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
-        "sourceChannelTitle": "Mr Bean",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9omW7kXZKAE/hqdefault.jpg",
-        "durationSec": 4519
-      },
-      {
         "youtubeVideoId": "VzEyH3XF9u0",
         "title": "Music Saved My Life",
         "sourceChannelId": "UCAjgxh6TBT_mKBjKGDC6g_Q",
         "sourceChannelTitle": "Jaicemations",
         "thumbnailUrl": "https://i.ytimg.com/vi/VzEyH3XF9u0/hqdefault.jpg",
         "durationSec": 678
-      },
-      {
-        "youtubeVideoId": "nC_SzLRfaS4",
-        "title": "Prints of Darkness - 4K",
-        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
-        "sourceChannelTitle": "Simon's Cat",
-        "thumbnailUrl": "https://i.ytimg.com/vi/nC_SzLRfaS4/hqdefault.jpg",
-        "durationSec": 86
       },
       {
         "youtubeVideoId": "oD93kl_aoJ4",
@@ -8991,22 +8959,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 822
       },
       {
-        "youtubeVideoId": "5HX2nymWtrM",
-        "title": "Zee's Rescue Mission To Space 💥 | Oddbods Full Episode | Funny Cartoons for Kids",
-        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
-        "sourceChannelTitle": "Oddbods - Official Channel",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5HX2nymWtrM/hqdefault.jpg",
-        "durationSec": 1279
-      },
-      {
-        "youtubeVideoId": "ZuRE2-Gz-PM",
-        "title": "The Chicken 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation [1 hour]",
-        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
-        "sourceChannelTitle": "Shaun the Sheep Official",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZuRE2-Gz-PM/hqdefault.jpg",
-        "durationSec": 3600
-      },
-      {
         "youtubeVideoId": "l6tnLyo1q34",
         "title": "Choose Goose Has What You Need! 🛍️🪿 Adventure Time | Cartoon Network",
         "sourceChannelId": "UCMsgXPD3wzzt8RxHJmXH7hQ",
@@ -9039,14 +8991,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 104
       },
       {
-        "youtubeVideoId": "p-YYSefZ51I",
-        "title": "Tom Cat in the Hat! 🐱🎩 | Tom & Jerry | #KidsCartoons @wbkids",
-        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
-        "sourceChannelTitle": "WB Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/p-YYSefZ51I/hqdefault.jpg",
-        "durationSec": 1186
-      },
-      {
         "youtubeVideoId": "urOLyaWVDvk",
         "title": "FORTUNE TELLERS INC - Animation Short Film 2026 - GOBELINS",
         "sourceChannelId": "UC-vrN89jIox3XqAKbEMeFgQ",
@@ -9069,14 +9013,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "SkyeWei",
         "thumbnailUrl": "https://i.ytimg.com/vi/F8zqVO8UqTM/hqdefault.jpg",
         "durationSec": 265
-      },
-      {
-        "youtubeVideoId": "RqYEB3vzGgY",
-        "title": "RESTING Bean! 🥱 💤 😱 - Mr Bean",
-        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
-        "sourceChannelTitle": "WildBrain Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/RqYEB3vzGgY/hqdefault.jpg",
-        "durationSec": 3599
       },
       {
         "youtubeVideoId": "tycyv2eoOaU",
@@ -9103,28 +9039,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 862
       },
       {
-        "youtubeVideoId": "mYS-ze88unM",
-        "title": "Mr Bean Will Do ANYTHING for a Cupcake! 🧁😂 | Mr Bean Animated Season 2 | Funny Clips | Mr Bean",
-        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
-        "sourceChannelTitle": "Mr Bean",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mYS-ze88unM/hqdefault.jpg",
-        "durationSec": 1378
-      },
-      {
         "youtubeVideoId": "NJPY_nUvdl8",
         "title": "The Time A Math Game Took Over My School",
         "sourceChannelId": "UCAjgxh6TBT_mKBjKGDC6g_Q",
         "sourceChannelTitle": "Jaicemations",
         "thumbnailUrl": "https://i.ytimg.com/vi/NJPY_nUvdl8/hqdefault.jpg",
         "durationSec": 485
-      },
-      {
-        "youtubeVideoId": "DsoiemFrYgY",
-        "title": "NATURE CALLS - A complete litter tray disaster!",
-        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
-        "sourceChannelTitle": "Simon's Cat",
-        "thumbnailUrl": "https://i.ytimg.com/vi/DsoiemFrYgY/hqdefault.jpg",
-        "durationSec": 77
       },
       {
         "youtubeVideoId": "3nYUhiZquMY",
@@ -9175,22 +9095,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 314
       },
       {
-        "youtubeVideoId": "P2CcC-kfJps",
-        "title": "Battle of the Bots, Loss of the Plots 🤖🤪 | Oddbods Full Episode | Funny Cartoons for Kids",
-        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
-        "sourceChannelTitle": "Oddbods - Official Channel",
-        "thumbnailUrl": "https://i.ytimg.com/vi/P2CcC-kfJps/hqdefault.jpg",
-        "durationSec": 442
-      },
-      {
-        "youtubeVideoId": "aXqQli6-sfI",
-        "title": "Piano Heist 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation",
-        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
-        "sourceChannelTitle": "Shaun the Sheep Official",
-        "thumbnailUrl": "https://i.ytimg.com/vi/aXqQli6-sfI/hqdefault.jpg",
-        "durationSec": 1800
-      },
-      {
         "youtubeVideoId": "ChNXR50ru8A",
         "title": "Artist's Block 🎨 | Regular Show: The Lost Tapes | Cartoon Network",
         "sourceChannelId": "UCMsgXPD3wzzt8RxHJmXH7hQ",
@@ -9213,14 +9117,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Walt Disney Animation Studios",
         "thumbnailUrl": "https://i.ytimg.com/vi/KXO21xZdUaM/hqdefault.jpg",
         "durationSec": 145
-      },
-      {
-        "youtubeVideoId": "GlAVbWir1BI",
-        "title": "Fun, Friends, LIGHTS! 🎆🎉 | Tom and Jerry Gokko + Looney Tunes Gokko FULL EPISODES | @wbkids",
-        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
-        "sourceChannelTitle": "WB Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GlAVbWir1BI/hqdefault.jpg",
-        "durationSec": 1332
       },
       {
         "youtubeVideoId": "041lqaXwOs0",
@@ -9247,14 +9143,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 232
       },
       {
-        "youtubeVideoId": "9wANSZlOZTk",
-        "title": "An EXTREMELY COLD Christmas! 🎅 🎄 ❄️ - Mr Bean",
-        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
-        "sourceChannelTitle": "WildBrain Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9wANSZlOZTk/hqdefault.jpg",
-        "durationSec": 6585
-      },
-      {
         "youtubeVideoId": "3IVslEdL6aQ",
         "title": "I Spent $7,000,000 On My Animated Series",
         "sourceChannelId": "UCZzvDDvaYti8Dd8bLEiSoyQ",
@@ -9279,28 +9167,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 952
       },
       {
-        "youtubeVideoId": "9LbDcWHsKPQ",
-        "title": "Mr Bean Accidentally Gets Shipped to Moscow! 📦😂| Mr Bean Live Action | Funny Clips | Mr Bean",
-        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
-        "sourceChannelTitle": "Mr Bean",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9LbDcWHsKPQ/hqdefault.jpg",
-        "durationSec": 2034
-      },
-      {
         "youtubeVideoId": "CIDJlmWpPSg",
         "title": "How I Got My Girl Back 2",
         "sourceChannelId": "UCAjgxh6TBT_mKBjKGDC6g_Q",
         "sourceChannelTitle": "Jaicemations",
         "thumbnailUrl": "https://i.ytimg.com/vi/CIDJlmWpPSg/hqdefault.jpg",
         "durationSec": 589
-      },
-      {
-        "youtubeVideoId": "zen_StMPyBM",
-        "title": "Creepy Cat - Halloween Caturday Film Club",
-        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
-        "sourceChannelTitle": "Simon's Cat",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zen_StMPyBM/hqdefault.jpg",
-        "durationSec": 527
       },
       {
         "youtubeVideoId": "w1IZFcVLWlw",
@@ -9351,22 +9223,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 373
       },
       {
-        "youtubeVideoId": "uD_o0IQjp7c",
-        "title": "Newt's Stowaway 👜 A Monster Out to Play! 🤪 | Oddbods Full Episode | Funny Cartoons for Kids",
-        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
-        "sourceChannelTitle": "Oddbods - Official Channel",
-        "thumbnailUrl": "https://i.ytimg.com/vi/uD_o0IQjp7c/hqdefault.jpg",
-        "durationSec": 2727
-      },
-      {
-        "youtubeVideoId": "D5nvZDT5pNM",
-        "title": "Movie Time 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation [1 hour]",
-        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
-        "sourceChannelTitle": "Shaun the Sheep Official",
-        "thumbnailUrl": "https://i.ytimg.com/vi/D5nvZDT5pNM/hqdefault.jpg",
-        "durationSec": 3600
-      },
-      {
         "youtubeVideoId": "HWeriY9kB3g",
         "title": "The Creepiest Terror Tales of the Park 👻🎃 The Regular Show | Cartoon Network",
         "sourceChannelId": "UCMsgXPD3wzzt8RxHJmXH7hQ",
@@ -9375,44 +9231,12 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1121
       },
       {
-        "youtubeVideoId": "j5LktsJx84k",
-        "title": "That's one BIG Turkey 🦃 👀 | Scooby-Doo and the Witch's Ghost | @wbkids",
-        "sourceChannelId": "UC9trsD1jCTXXtN3xIOIU8gg",
-        "sourceChannelTitle": "WB Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/j5LktsJx84k/hqdefault.jpg",
-        "durationSec": 230
-      },
-      {
-        "youtubeVideoId": "mrEpfVcgez0",
-        "title": "Mr Bean HOMELESS! 😱 🥱 💤 - Mr Bean",
-        "sourceChannelId": "UCbmWOFTbZoDLWqG1rvFnJ0g",
-        "sourceChannelTitle": "WildBrain Kids",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mrEpfVcgez0/hqdefault.jpg",
-        "durationSec": 3782
-      },
-      {
         "youtubeVideoId": "q0FhdX_uu-E",
         "title": "Stolas vs Blitz: Who Is Right?",
         "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
         "sourceChannelTitle": "Vivziepop",
         "thumbnailUrl": "https://i.ytimg.com/vi/q0FhdX_uu-E/hqdefault.jpg",
         "durationSec": 154
-      },
-      {
-        "youtubeVideoId": "iBOxla8szFs",
-        "title": "Mr Bean Goes Digging for Buried Treasure! 🪙 | Mr Bean Animated Season 3 | Funny Clips | Mr Bean",
-        "sourceChannelId": "UCkAGrHCLFmlK3H2kd6isipg",
-        "sourceChannelTitle": "Mr Bean",
-        "thumbnailUrl": "https://i.ytimg.com/vi/iBOxla8szFs/hqdefault.jpg",
-        "durationSec": 1394
-      },
-      {
-        "youtubeVideoId": "fC8pkhklvr4",
-        "title": "Bat Cat - 4K",
-        "sourceChannelId": "UCH6vXjt-BA7QHl0KnfL-7RQ",
-        "sourceChannelTitle": "Simon's Cat",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fC8pkhklvr4/hqdefault.jpg",
-        "durationSec": 140
       },
       {
         "youtubeVideoId": "-MV7Hg31usU",
@@ -9437,22 +9261,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "TerminalMontage",
         "thumbnailUrl": "https://i.ytimg.com/vi/0WY7Y_Hierc/hqdefault.jpg",
         "durationSec": 246
-      },
-      {
-        "youtubeVideoId": "77zEGtH9_LM",
-        "title": "It's Jeff's Party, He Can Cry If He Wants To 🥲 | Oddbods Full Episode | Funny Cartoons for Kids",
-        "sourceChannelId": "UCtlth0w7_mYqpHPViMhQ99Q",
-        "sourceChannelTitle": "Oddbods - Official Channel",
-        "thumbnailUrl": "https://i.ytimg.com/vi/77zEGtH9_LM/hqdefault.jpg",
-        "durationSec": 1279
-      },
-      {
-        "youtubeVideoId": "VWTopJvSLzs",
-        "title": "Classic Movie Time 🐑 Shaun the Sheep 🐑  - Cartoons for Kids 🐑 Full Episodes Compilation [1 hour]",
-        "sourceChannelId": "UCS7H8U-n5mINVJjJsaRtGHg",
-        "sourceChannelTitle": "Shaun the Sheep Official",
-        "thumbnailUrl": "https://i.ytimg.com/vi/VWTopJvSLzs/hqdefault.jpg",
-        "durationSec": 3600
       },
       {
         "youtubeVideoId": "brWNC87c3Ac",

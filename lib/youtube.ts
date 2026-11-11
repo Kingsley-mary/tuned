@@ -1045,7 +1045,7 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "Konariin"
     },
     {
-      "id": "UCOroCmP8_xZa3X5WJERYHKg",
+      "id": "UCcwoY8oOA0DOW2H7OqmqNzw",
       "name": "Brooke Cormier"
     },
     {
@@ -1353,28 +1353,12 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
   ],
   "cartoons": [
     {
-      "id": "UC9trsD1jCTXXtN3xIOIU8gg",
-      "name": "WB Kids"
-    },
-    {
       "id": "UCn_FAXem2-e3HQvmK-mOH4g",
       "name": "GLITCH"
     },
     {
-      "id": "UCbmWOFTbZoDLWqG1rvFnJ0g",
-      "name": "WildBrain Cartoons"
-    },
-    {
       "id": "UCzfyYtgvkx5mLy8nlLlayYg",
       "name": "SpindleHorse"
-    },
-    {
-      "id": "UCkAGrHCLFmlK3H2kd6isipg",
-      "name": "Mr Bean"
-    },
-    {
-      "id": "UCH6vXjt-BA7QHl0KnfL-7RQ",
-      "name": "Simon's Cat"
     },
     {
       "id": "UCbKWv2x9t6u8yZoB3KcPtnw",
@@ -1387,14 +1371,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCLFXk9J3O-hhOk0msOjKYdQ",
       "name": "TerminalMontage"
-    },
-    {
-      "id": "UCtlth0w7_mYqpHPViMhQ99Q",
-      "name": "Oddbods"
-    },
-    {
-      "id": "UCS7H8U-n5mINVJjJsaRtGHg",
-      "name": "Shaun the Sheep"
     },
     {
       "id": "UCMsgXPD3wzzt8RxHJmXH7hQ",
