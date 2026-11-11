@@ -32,7 +32,7 @@ interface GuideSlot {
 }
 
 const VIS = 7;
-const WIN = 120; // 120-minute window
+const WIN = 90; // 90-minute window for wider, more readable program blocks
 
 const pad = (n: number) => String(n).padStart(2, '0');
 

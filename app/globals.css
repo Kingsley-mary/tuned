@@ -1125,7 +1125,7 @@ button:focus-visible, input:focus-visible {
 .mg-name { font-size: 28px; }
 .brand-logo { font-weight: 400; font-size: 30px; text-transform: uppercase; }
 
-/* ================= TV Guide (Exact CSS from Tuned — TV Guide.html) ================= */
+/* ================= TV Guide (Exact CSS from Tuned — TV Guide.html, Responsive 100vw x 100vh) ================= */
 .tvg-guide-screen {
   --ink: #fff;
   --cream: rgba(244, 235, 224, .95);
@@ -1134,24 +1134,22 @@ button:focus-visible, input:focus-visible {
   --gl2: rgba(255, 255, 255, .15);
   --dk: rgba(0, 0, 0, .4);
   --ln: rgba(255, 255, 255, .1);
-  --lw: 250px;
-  --gap: 8px;
-  --gut: 30px;
-  --rh: clamp(52px, 8.3vh, 88px);
+  --lw: clamp(180px, 14vw, 250px);
+  --gap: clamp(6px, 0.55vw, 8px);
+  --gut: clamp(18px, 1.8vw, 30px);
   color-scheme: dark;
   box-sizing: border-box;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
   position: fixed;
   inset: 0;
   z-index: 50;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   background: #0b0807;
   color: var(--ink);
   font-family: "Poppins", "Poppins Local", var(--font-body), system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
+  user-select: none;
 }
 .tvg-guide-screen * {
   box-sizing: border-box;
@@ -1178,24 +1176,27 @@ button:focus-visible, input:focus-visible {
 .tvg-guide-screen .app {
   position: relative;
   z-index: 1;
-  max-width: 1400px;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
   margin: 0 auto;
-  padding: 28px 48px 20px;
-  min-height: 100vh;
+  padding: clamp(16px, 2.4vh, 28px) clamp(24px, 3.2vw, 48px) clamp(12px, 1.8vh, 20px);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .tvg-guide-screen .top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 .tvg-guide-screen .lg {
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 600;
-  font-size: 32px;
+  font-size: clamp(24px, 3.2vh, 32px);
   letter-spacing: -.03em;
   line-height: 1;
 }
@@ -1210,12 +1211,12 @@ button:focus-visible, input:focus-visible {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 15px;
-  margin-top: 10px;
+  font-size: clamp(13px, 1.6vh, 15px);
+  margin-top: clamp(4px, 0.8vh, 10px);
 }
 .tvg-guide-screen .tg svg {
-  width: 22px;
-  height: 22px;
+  width: clamp(18px, 2.2vh, 22px);
+  height: clamp(18px, 2.2vh, 22px);
   fill: none;
   stroke: #fff;
   stroke-width: 1.6;
@@ -1227,38 +1228,53 @@ button:focus-visible, input:focus-visible {
 }
 .tvg-guide-screen .clock small {
   display: block;
-  font-size: 18px;
+  font-size: clamp(14px, 1.8vh, 18px);
   font-weight: 500;
 }
 .tvg-guide-screen .clock b {
   display: block;
-  font-size: 54px;
+  font-size: clamp(36px, 5.2vh, 54px);
   font-weight: 600;
   letter-spacing: -.03em;
   line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.tvg-guide-screen .scroll {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.tvg-guide-screen .scroll > div {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 .tvg-guide-screen .axis {
   display: grid;
   grid-template-columns: var(--lw) 1fr;
   gap: var(--gap);
-  margin-top: 22px;
+  margin-top: clamp(8px, 1.6vh, 20px);
   align-items: center;
   padding-right: var(--gut);
+  flex-shrink: 0;
 }
 .tvg-guide-screen .today {
   display: flex;
   align-items: center;
   gap: 14px;
-  font-size: 21px;
+  font-size: clamp(16px, 2.1vh, 21px);
   font-weight: 500;
 }
 .tvg-guide-screen .pgb {
-  height: 36px;
+  height: clamp(28px, 3.6vh, 36px);
   min-width: 46px;
   padding: 0 10px;
   border-radius: 9px;
   background: var(--gl2);
-  font-size: 15px;
+  font-size: clamp(13px, 1.5vh, 15px);
   font-weight: 600;
   color: #fff;
 }
@@ -1268,27 +1284,32 @@ button:focus-visible, input:focus-visible {
 }
 .tvg-guide-screen .times {
   position: relative;
-  height: 36px;
+  height: clamp(28px, 3.6vh, 36px);
 }
 .tvg-guide-screen .times span {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  font-size: 21px;
+  transform: translate(-50%, -50%);
+  font-size: clamp(15px, 2.1vh, 21px);
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .tvg-guide-screen .rows {
   position: relative;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex: 1;
+  min-height: 0;
+  margin-top: clamp(14px, 2.2vh, 26px);
+  display: grid;
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+  gap: clamp(4px, 0.5vh, 6px);
 }
 .tvg-guide-screen .row {
   display: grid;
   grid-template-columns: var(--lw) 1fr;
   gap: var(--gap);
-  height: var(--rh);
+  height: 100%;
+  min-height: 0;
   margin-right: var(--gut);
 }
 .tvg-guide-screen .ch {
@@ -1305,10 +1326,10 @@ button:focus-visible, input:focus-visible {
   font-family: "Mouse Memoirs", "MM Local", var(--font-logo), Impact, "Arial Narrow", sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  font-size: clamp(36px, 5vh, 48px);
+  font-size: clamp(26px, 4.2vh, 46px);
   letter-spacing: .07em;
   line-height: 1;
-  padding-top: 3px;
+  padding-top: 2px;
   white-space: nowrap;
 }
 .tvg-guide-screen .ch:hover {
@@ -1325,16 +1346,18 @@ button:focus-visible, input:focus-visible {
 }
 .tvg-guide-screen .trk {
   position: relative;
+  height: 100%;
+  min-height: 0;
 }
 .tvg-guide-screen .pr {
   position: absolute;
   top: 0;
   bottom: 0;
   border-radius: 9px;
-  padding: 0 22px;
+  padding: 0 clamp(12px, 1.2vw, 22px);
   display: flex;
   align-items: center;
-  font-size: clamp(15px, 1.45vw, 21px);
+  font-size: clamp(13px, 1.85vh, 19px);
   font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
@@ -1365,20 +1388,20 @@ button:focus-visible, input:focus-visible {
 }
 .tvg-guide-screen .pr.cl::before {
   content: "‹";
-  margin-right: 10px;
-  font-size: 22px;
+  margin-right: 8px;
+  font-size: clamp(16px, 2.2vh, 22px);
   flex: none;
 }
 .tvg-guide-screen .pr.cr::after {
   content: "›";
   margin-left: auto;
-  padding-left: 10px;
-  font-size: 22px;
+  padding-left: 8px;
+  font-size: clamp(16px, 2.2vh, 22px);
   flex: none;
 }
 .tvg-guide-screen .now {
   position: absolute;
-  top: -24px;
+  top: -18px;
   bottom: 0;
   width: 1px;
   background: rgba(255, 255, 255, .9);
@@ -1391,14 +1414,14 @@ button:focus-visible, input:focus-visible {
   top: -6px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: .1em;
   background: rgba(255, 255, 255, .28);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  padding: 3px 12px;
-  border-radius: 7px;
+  padding: 2px 10px;
+  border-radius: 6px;
 }
 .tvg-guide-screen .sbar {
   position: absolute;
@@ -1417,8 +1440,9 @@ button:focus-visible, input:focus-visible {
   background: #fff;
 }
 .tvg-guide-screen .info {
-  margin-top: 24px;
-  height: clamp(54px, 7.2vh, 72px);
+  flex-shrink: 0;
+  margin-top: clamp(10px, 1.8vh, 20px);
+  height: clamp(46px, 6.4vh, 66px);
   border-radius: 10px;
   background: var(--cream);
   color: var(--cd);
@@ -1431,11 +1455,12 @@ button:focus-visible, input:focus-visible {
 }
 .tvg-guide-screen .info .tm {
   text-align: center;
-  font-size: 20px;
+  font-size: clamp(14px, 2vh, 20px);
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
 }
 .tvg-guide-screen .info .tt {
-  font-size: 20px;
+  font-size: clamp(14px, 2vh, 20px);
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -1444,42 +1469,43 @@ button:focus-visible, input:focus-visible {
 .tvg-guide-screen .info .rt {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 14px;
+  gap: 14px;
+  font-size: clamp(12px, 1.5vh, 14px);
   color: rgba(38, 24, 15, .72);
   white-space: nowrap;
 }
 .tvg-guide-screen .bdg {
   background: var(--cd);
   color: #fff;
-  font-size: 14px;
+  font-size: clamp(12px, 1.5vh, 14px);
   font-weight: 600;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 8px;
 }
 .tvg-guide-screen .keys {
-  margin-top: auto;
-  padding-top: 22px;
+  flex-shrink: 0;
+  margin-top: 0;
+  padding-top: clamp(10px, 1.6vh, 18px);
   display: flex;
   justify-content: space-around;
   max-width: 1040px;
   width: 100%;
   align-self: center;
-  font-size: 16px;
+  font-size: clamp(13px, 1.7vh, 16px);
   font-weight: 500;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 16px;
 }
 .tvg-guide-screen .keys div {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 .tvg-guide-screen .k {
   background: var(--gl2);
-  padding: 7px 16px;
+  padding: clamp(4px, 0.7vh, 7px) clamp(10px, 1.2vw, 16px);
   border-radius: 9px;
-  font-size: 14px;
+  font-size: clamp(11px, 1.4vh, 14px);
   letter-spacing: .04em;
   text-transform: uppercase;
 }
@@ -1505,28 +1531,13 @@ button:focus-visible, input:focus-visible {
 .tvg-guide-screen .toast.on {
   transform: translate(-50%, 0);
 }
-.tvg-guide-screen .scroll {
-  overflow-x: auto;
-}
 @media (max-width: 980px) {
   .tvg-guide-screen {
-    --lw: 140px;
+    --lw: 130px;
     --gut: 14px;
   }
   .tvg-guide-screen .app {
-    padding: 20px 16px;
-  }
-  .tvg-guide-screen .scroll > div {
-    min-width: 780px;
-  }
-  .tvg-guide-screen .ch span {
-    font-size: 30px;
-  }
-  .tvg-guide-screen .clock b {
-    font-size: 38px;
-  }
-  .tvg-guide-screen .lg {
-    font-size: 26px;
+    padding: 14px 14px 10px;
   }
   .tvg-guide-screen .info {
     grid-template-columns: var(--lw) 1fr;
