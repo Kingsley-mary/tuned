@@ -1053,7 +1053,7 @@ button:focus-visible, input:focus-visible {
 }
 .osd-eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,244,240,0.55); font-weight: 600; margin-top: 18px; }
 .osd-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.16); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; backdrop-filter: blur(12px); }
-.osd-chip .dot, .osd-live .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; display: inline-block; }
+.osd-chip .dot, .osd-live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); display: inline-block; }
 
 .osd-top, .osd-bottom { position: absolute; left: 0; right: 0; z-index: 3; transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .osd-top { top: 0; display: flex; justify-content: space-between; align-items: center; padding: 20px 28px; background: linear-gradient(180deg, rgba(0,0,0,0.65), transparent); opacity: 0; transform: translateY(-12px); pointer-events: none; }
@@ -1091,7 +1091,7 @@ button:focus-visible, input:focus-visible {
 .osd-row.now { height: 64px; margin: 8px 12px; padding: 0 16px; border-radius: 14px; background: rgba(255,244,232,0.2); color: #fff; font-size: 17px; font-weight: 600; border: none; }
 .osd-row-time { font-variant-numeric: tabular-nums; font-size: 13px; opacity: 0.85; }
 .osd-row-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-align: center; padding: 4px 0; border-radius: 6px; background: rgba(255,255,255,0.16); visibility: hidden; }
-.osd-row.now .osd-row-tag { visibility: visible; background: #22c55e; color: #052e12; }
+.osd-row.now .osd-row-tag { visibility: visible; background: var(--accent); color: #fff; }
 .osd-row:nth-of-type(3) .osd-row-tag { visibility: visible; }
 .osd-row-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .osd-row-src { font-size: 12px; opacity: 0.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
