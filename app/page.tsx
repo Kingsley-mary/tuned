@@ -45,6 +45,13 @@ export default function TunedApp() {
 
   const isDirtyRef = useRef(false);
   const hasSharedChannelRef = useRef(false);
+  const [hasHydratedStorage, setHasHydratedStorage] = useState<boolean>(false);
+  const pickedCategoryIdsRef = useRef<string[]>(pickedCategoryIds);
+  pickedCategoryIdsRef.current = pickedCategoryIds;
+  const customSourcesRef = useRef<CustomSource[]>(customSources);
+  customSourcesRef.current = customSources;
+  const currentChannelIndexRef = useRef<number>(currentChannelIndex);
+  currentChannelIndexRef.current = currentChannelIndex;
   const currentPlaybackTimeRef = useRef<number>(0);
   const channelPlaybackStatesRef = useRef<Map<string, ChannelSavedState>>(new Map());
   const failedVideoIdsRef = useRef<Set<string>>(new Set());
@@ -108,6 +115,8 @@ export default function TunedApp() {
       }
     } catch (e) {
       console.warn('Could not read user state from local storage:', e);
+    } finally {
+      setHasHydratedStorage(true);
     }
   }, []);
   // Tuned is dark-only: lock the theme attribute
@@ -116,25 +125,22 @@ export default function TunedApp() {
   }, []);
 
   // Persist user state to LocalStorage
-  const persistState = useCallback(
-    (overrides?: Partial<UserState>) => {
-      try {
-        const stateToSave: UserState = {
-          pickedCategoryIds,
-          customSources,
-          lastChannelIndex: currentChannelIndex,
-          autoplay: true,
-          isReturningUser: true,
-          ...overrides,
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
-        localStorage.setItem(ENTERTAINMENT_MIGRATION_KEY, '1');
-      } catch (e) {
-        console.warn('Could not save user state:', e);
-      }
-    },
-    [pickedCategoryIds, customSources, currentChannelIndex]
-  );
+  const persistState = useCallback((overrides?: Partial<UserState>) => {
+    try {
+      const stateToSave: UserState = {
+        pickedCategoryIds: pickedCategoryIdsRef.current,
+        customSources: customSourcesRef.current,
+        lastChannelIndex: currentChannelIndexRef.current,
+        autoplay: true,
+        isReturningUser: true,
+        ...overrides,
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
+      localStorage.setItem(ENTERTAINMENT_MIGRATION_KEY, '1');
+    } catch (e) {
+      console.warn('Could not save user state:', e);
+    }
+  }, []);
 
   // Resolve target channel's live broadcast state from the global deterministic wall-clock
   // Guarantees every browser, tab, and device sees the exact same video & timestamp,
@@ -204,11 +210,14 @@ export default function TunedApp() {
     [customSources]
   );
 
-  // Preload lineups immediately and sync to continuous broadcast schedule
+  // Preload lineups immediately after storage hydration and sync to continuous broadcast schedule
   useEffect(() => {
+    if (!hasHydratedStorage) return;
+    let cancelled = false;
     loadLineups(pickedCategoryIds).then((loaded) => {
+      if (cancelled) return;
       setChannels(loaded);
-      const safeChIdx = currentChannelIndex < loaded.length ? currentChannelIndex : 0;
+      const safeChIdx = currentChannelIndexRef.current < loaded.length ? currentChannelIndexRef.current : 0;
       const active = loaded[safeChIdx] || loaded[0];
       if (active && active.videos?.length > 0) {
         const pos = resolveChannelContinuousState(active);
@@ -217,7 +226,10 @@ export default function TunedApp() {
         currentPlaybackTimeRef.current = pos.seekSeconds;
       }
     });
-  }, [pickedCategoryIds, loadLineups, resolveChannelContinuousState]);
+    return () => {
+      cancelled = true;
+    };
+  }, [hasHydratedStorage, pickedCategoryIds, loadLineups, resolveChannelContinuousState]);
 
   // Sleep Timer countdown effect
   useEffect(() => {
@@ -295,22 +307,21 @@ export default function TunedApp() {
 
   // Handlers for Pick Interests Screen
   const handleToggleCategory = (id: string) => {
-    setPickedCategoryIds((prev) => {
-      const exists = prev.includes(id);
-      if (exists) {
-        return prev.filter((item) => item !== id);
-      } else {
-        return [...prev, id];
-      }
-    });
+    const current = pickedCategoryIdsRef.current;
+    const next = current.includes(id)
+      ? current.filter((item) => item !== id)
+      : [...current, id];
+    pickedCategoryIdsRef.current = next;
+    setPickedCategoryIds(next);
     isDirtyRef.current = true;
   };
 
   const handleContinuePick = () => {
     setIsReturningUser(true);
+    currentChannelIndexRef.current = 0;
     setCurrentChannelIndex(0);
     persistState({
-      pickedCategoryIds,
+      pickedCategoryIds: pickedCategoryIdsRef.current,
       isReturningUser: true,
       lastChannelIndex: 0,
     });
@@ -318,6 +329,8 @@ export default function TunedApp() {
   };
 
   const handleSkipPick = () => {
+    pickedCategoryIdsRef.current = DEFAULT_CATEGORIES;
+    currentChannelIndexRef.current = 0;
     setPickedCategoryIds(DEFAULT_CATEGORIES);
     setIsReturningUser(true);
     setCurrentChannelIndex(0);
@@ -332,7 +345,7 @@ export default function TunedApp() {
 
   // Handlers for Tuning Screen
   const handleTuningComplete = async () => {
-    const loaded = await loadLineups(pickedCategoryIds);
+    const loaded = await loadLineups(pickedCategoryIdsRef.current);
     setChannels(loaded);
 
     if (loaded.length === 0 || !loaded.some((c) => c.videos.length > 0)) {
@@ -536,11 +549,13 @@ export default function TunedApp() {
       [next[index - 1], next[index]] = [next[index], next[index - 1]];
       return next;
     });
-    setPickedCategoryIds((prev) => {
-      const next = [...prev];
-      [next[index - 1], next[index]] = [next[index], next[index - 1]];
-      return next;
-    });
+    const nextIds = [...pickedCategoryIdsRef.current];
+    if (index < nextIds.length) {
+      [nextIds[index - 1], nextIds[index]] = [nextIds[index], nextIds[index - 1]];
+      pickedCategoryIdsRef.current = nextIds;
+      setPickedCategoryIds(nextIds);
+      persistState({ pickedCategoryIds: nextIds });
+    }
     isDirtyRef.current = true;
   };
 
@@ -551,11 +566,13 @@ export default function TunedApp() {
       [next[index], next[index + 1]] = [next[index + 1], next[index]];
       return next;
     });
-    setPickedCategoryIds((prev) => {
-      const next = [...prev];
-      [next[index], next[index + 1]] = [next[index + 1], next[index]];
-      return next;
-    });
+    const nextIds = [...pickedCategoryIdsRef.current];
+    if (index + 1 < nextIds.length) {
+      [nextIds[index], nextIds[index + 1]] = [nextIds[index + 1], nextIds[index]];
+      pickedCategoryIdsRef.current = nextIds;
+      setPickedCategoryIds(nextIds);
+      persistState({ pickedCategoryIds: nextIds });
+    }
     isDirtyRef.current = true;
   };
 
@@ -563,19 +580,35 @@ export default function TunedApp() {
     if (channels.length <= 3) return; // Minimum 3 channels
     const removed = channels[index];
     setChannels((prev) => prev.filter((_, idx) => idx !== index));
-    setPickedCategoryIds((prev) => prev.filter((_, idx) => idx !== index));
-    if (removed) {
-      setCustomSources((prev) => prev.filter((cs) => cs.channelId !== removed.categoryId));
+    const nextIds = pickedCategoryIdsRef.current.filter((_, idx) => idx !== index);
+    pickedCategoryIdsRef.current = nextIds;
+    setPickedCategoryIds(nextIds);
+    const nextCustomSources = removed
+      ? customSourcesRef.current.filter((cs) => cs.channelId !== removed.categoryId)
+      : customSourcesRef.current;
+    customSourcesRef.current = nextCustomSources;
+    setCustomSources(nextCustomSources);
+    const nextChIdx = currentChannelIndex >= channels.length - 1 ? 0 : currentChannelIndex;
+    if (nextChIdx !== currentChannelIndex) {
+      setCurrentChannelIndex(nextChIdx);
     }
-    if (currentChannelIndex >= channels.length - 1) {
-      setCurrentChannelIndex(0);
-    }
+    persistState({
+      pickedCategoryIds: nextIds,
+      customSources: nextCustomSources,
+      lastChannelIndex: nextChIdx,
+    });
     isDirtyRef.current = true;
   };
 
   const handleAddCategory = async (cat: Category) => {
     // Prevent duplicate channels in lineup
-    setPickedCategoryIds((prev) => (prev.includes(cat.id) ? prev : [...prev, cat.id]));
+    const currentIds = pickedCategoryIdsRef.current;
+    const nextIds = currentIds.includes(cat.id) ? currentIds : [...currentIds, cat.id];
+    if (nextIds !== currentIds) {
+      pickedCategoryIdsRef.current = nextIds;
+      setPickedCategoryIds(nextIds);
+      persistState({ pickedCategoryIds: nextIds });
+    }
 
     const newSeed = SEED_LINEUPS[cat.id] || {
       categoryId: cat.id,
@@ -597,7 +630,7 @@ export default function TunedApp() {
         return data.error || 'Could not resolve channel.';
       }
 
-      if (pickedCategoryIds.includes(data.channelId)) {
+      if (pickedCategoryIdsRef.current.includes(data.channelId)) {
         return 'That channel is already in your lineup.';
       }
 
@@ -613,11 +646,13 @@ export default function TunedApp() {
       };
 
       const nextCustomSources: CustomSource[] = [
-        ...customSources.filter((cs) => cs.channelId !== data.channelId),
+        ...customSourcesRef.current.filter((cs) => cs.channelId !== data.channelId),
         { channelId: data.channelId, handle: query, title: name },
       ];
-      const nextPickedIds = [...pickedCategoryIds, customLineup.categoryId];
+      const nextPickedIds = [...pickedCategoryIdsRef.current, customLineup.categoryId];
 
+      customSourcesRef.current = nextCustomSources;
+      pickedCategoryIdsRef.current = nextPickedIds;
       setCustomSources(nextCustomSources);
       setChannels((prev) => [...prev, customLineup]);
       setPickedCategoryIds(nextPickedIds);

@@ -106,7 +106,7 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
           e.preventDefault();
           setSel(safeSel + colSplit);
         }
-      } else if ((e.key === 'Delete' || e.key === 'Backspace') && canRemove) {
+      } else if (e.key === 'Delete' && canRemove) {
         e.preventDefault();
         onRemoveChannel(safeSel);
       }
