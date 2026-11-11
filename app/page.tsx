@@ -44,6 +44,7 @@ export default function TunedApp() {
   const crtTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isDirtyRef = useRef(false);
+  const hasSharedChannelRef = useRef(false);
   const currentPlaybackTimeRef = useRef<number>(0);
   const channelPlaybackStatesRef = useRef<Map<string, ChannelSavedState>>(new Map());
   const failedVideoIdsRef = useRef<Set<string>>(new Set());
@@ -95,8 +96,10 @@ export default function TunedApp() {
         if (sharedCh) {
           const existingIdx = loadedCategories.indexOf(sharedCh);
           if (existingIdx !== -1) {
+            hasSharedChannelRef.current = true;
             setCurrentChannelIndex(existingIdx);
           } else if (CATEGORIES.some((c) => c.id === sharedCh)) {
+            hasSharedChannelRef.current = true;
             const nextCats = [sharedCh, ...loadedCategories.filter((id) => id !== sharedCh)];
             setPickedCategoryIds(nextCats);
             setCurrentChannelIndex(0);
@@ -266,7 +269,7 @@ export default function TunedApp() {
       setCrtTransition(null);
     }, 650);
 
-    if (isReturningUser) {
+    if (isReturningUser || hasSharedChannelRef.current) {
       const safeIdx = currentChannelIndex < channels.length ? currentChannelIndex : 0;
       const active = channels[safeIdx] || channels[0];
       if (active && active.videos?.length > 0) {

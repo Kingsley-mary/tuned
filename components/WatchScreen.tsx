@@ -99,6 +99,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isBumperActive, setIsBumperActive] = useState<boolean>(false);
   const [copiedShare, setCopiedShare] = useState<boolean>(false);
+  const shareTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isOnline, setIsOnline] = useState<boolean>(() =>
     typeof navigator !== 'undefined' ? navigator.onLine : true
   );
@@ -277,18 +278,53 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     }, 2400);
   }, [onPowerOff, sleepTimerMode]);
 
-  // Share synchronized channel link
-  const handleShareChannel = useCallback(() => {
+  // Share synchronized channel link (always copy clean URL to clipboard; native share sheet only on touch devices)
+  const handleShareChannel = useCallback(async () => {
     if (!activeChannel || typeof window === 'undefined') return;
-    const url = new URL(window.location.href);
+    const url = new URL(window.location.origin + window.location.pathname);
     url.searchParams.set('ch', activeChannel.categoryId);
-    if (navigator.share) {
-      navigator.share({ title: `Tuned · ${activeChannel.categoryName}`, url: url.toString() }).catch(() => {});
-    } else {
-      navigator.clipboard?.writeText(url.toString()).catch(() => {});
+    const shareUrl = url.toString();
+
+    let copied = false;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        copied = true;
+      }
+    } catch {
+      copied = false;
     }
-    setCopiedShare(true);
-    setTimeout(() => setCopiedShare(false), 2000);
+
+    if (!copied) {
+      try {
+        const host = document.fullscreenElement || document.body;
+        const ta = document.createElement('textarea');
+        ta.value = shareUrl;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        ta.style.opacity = '0';
+        host.appendChild(ta);
+        ta.focus();
+        ta.select();
+        copied = document.execCommand('copy');
+        host.removeChild(ta);
+      } catch {
+        copied = false;
+      }
+    }
+
+    const isTouchDevice =
+      typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchDevice && typeof navigator.share === 'function') {
+      navigator.share({ title: `Tuned · ${activeChannel.categoryName}`, url: shareUrl }).catch(() => {});
+    }
+
+    if (copied) {
+      setCopiedShare(true);
+      if (shareTimerRef.current) clearTimeout(shareTimerRef.current);
+      shareTimerRef.current = setTimeout(() => setCopiedShare(false), 2000);
+    }
   }, [activeChannel]);
 
   // Format seconds to mm:ss or hh:mm:ss
@@ -730,7 +766,13 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               Last <span className="kbd-osd">L</span>
             </button>
           )}
-          <button onClick={handleShareChannel}>
+          <button
+            type="button"
+            onClick={() => {
+              handleShareChannel();
+              pokeOsd();
+            }}
+          >
             {copiedShare ? 'Link copied' : 'Share'} <span className="kbd-osd">{copiedShare ? '✓' : 'LINK'}</span>
           </button>
         </div>
