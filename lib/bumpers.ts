@@ -19,50 +19,39 @@ export type BreakPlan =
       clip: YouTubeBumperClip;
     };
 
-// Verified horizontal, embeddable short TV station idents, bootups, visualizers & intermissions
+// Curated, verified iconic broadcast idents, console startups & theater promos (zero Shorts/slop loops)
 const CLIPS = {
-  // Cartoons / Animation
+  // Animations
   cnCity1: { youtubeVideoId: 'h9IPZC6giFM', label: 'Cartoon Network Ident', durationSec: 10 },
   cnCity2: { youtubeVideoId: 'boaUvdivics', label: 'Cartoon Network Bumper', durationSec: 10 },
   cnPowerhouse: { youtubeVideoId: 'MzFF_5Tf98s', label: 'Powerhouse Ident', durationSec: 10 },
   asCheckered1: { youtubeVideoId: 'ubcceuUYwtg', label: '[adult swim] Bump', durationSec: 10 },
   asCheckered2: { youtubeVideoId: 'M6svpGyleCQ', label: '[adult swim] Bumper', durationSec: 15 },
   nick2001: { youtubeVideoId: 'p0DOSv1sA2w', label: 'Nickelodeon Ident', durationSec: 10 },
-  pixarFriends: { youtubeVideoId: 'JUoxyPvdgk8', label: 'Animation Promo', durationSec: 26 },
+  pixarFriends: { youtubeVideoId: 'JUoxyPvdgk8', label: 'Studio Ident', durationSec: 26 },
   // Games
   ps1Boot: { youtubeVideoId: 'oAhvQoLpvsM', label: 'PlayStation Ident', durationSec: 16 },
   gcBoot: { youtubeVideoId: 'HKfKk40dPr8', label: 'GameCube Ident', durationSec: 6 },
-  // Tech / Industry / Design
-  mac1984: { youtubeVideoId: 'EKrxM65enjs', label: 'Hello Macintosh', durationSec: 21 },
-  crtGlitch: { youtubeVideoId: 'Q71ZVa83PgY', label: 'CRT Signal Break', durationSec: 5 },
-  synthGrid: { youtubeVideoId: 'cHC_ykHbW8A', label: 'Synthwave Grid', durationSec: 10 },
+  // Tech
+  mac1984: { youtubeVideoId: 'EKrxM65enjs', label: 'Macintosh 1984', durationSec: 21 },
   // Music
   mtvChainsaw: { youtubeVideoId: 'he3SszCkNOc', label: 'MTV Station ID', durationSec: 11 },
-  mtvKaiju: { youtubeVideoId: 'Y41t0L-pfVc', label: 'MTV Kaiju Ident', durationSec: 21 },
-  lofiLoop: { youtubeVideoId: 'Vfw352_la8k', label: 'Lofi Intermission', durationSec: 7 },
-  audioViz: { youtubeVideoId: 'qjmpoyEpT3U', label: 'Spectrum Visualizer', durationSec: 5 },
+  mtvKaiju: { youtubeVideoId: 'Y41t0L-pfVc', label: 'MTV Kaiju ID', durationSec: 21 },
   // Movies / Film
   featurePres: { youtubeVideoId: '8HEL4YHdj68', label: 'Feature Presentation', durationSec: 17 },
-  thxDeepNote: { youtubeVideoId: 'i43WNXnlGMs', label: 'THX Soundcheck', durationSec: 32 },
-  filmCountdown4k: { youtubeVideoId: 'I8-YbI98ikk', label: 'Film Countdown', durationSec: 11 },
-  oldFilmCountdown: { youtubeVideoId: 'GVuiftq3KsI', label: '35mm Leader', durationSec: 13 },
-  // Food / Drive-in
+  thxDeepNote: { youtubeVideoId: 'i43WNXnlGMs', label: 'THX Deep Note', durationSec: 32 },
+  // Food / Sports / News
   driveInDog: { youtubeVideoId: 'H8WA6ceRfEQ', label: 'Drive-In Intermission', durationSec: 25 },
-  chillyDilly: { youtubeVideoId: 'rVRsawpf94Y', label: 'Intermission Promo', durationSec: 31 },
-  // Science / Sports / News / General
-  jwstZoom: { youtubeVideoId: 'oCm1q-tg88w', label: 'Deep Space Zoom', durationSec: 13 },
-  itvSport: { youtubeVideoId: 'W4jCRwJh87o', label: 'Sport Bumper', durationSec: 5 },
-  sportsBroadcast: { youtubeVideoId: 'tTLkY-beUJ0', label: 'Broadcast Bumper', durationSec: 13 },
+  itvSport: { youtubeVideoId: 'W4jCRwJh87o', label: 'ITV Sport Bumper', durationSec: 5 },
   kadnNews: { youtubeVideoId: 'mg5gUVCaRvA', label: 'News Desk ID', durationSec: 5 },
-  abcNews: { youtubeVideoId: 'WOmvzb9IBEA', label: 'Station News ID', durationSec: 5 },
-  sbsIdent: { youtubeVideoId: 'd198bKXlCWU', label: 'SBS Broadcast ID', durationSec: 14 },
-  tyneTees: { youtubeVideoId: '5dHV8-7hV2Q', label: 'Classic Network ID', durationSec: 11 },
-  metroNet: { youtubeVideoId: 'Ds-W4slQd4Y', label: 'Network Station ID', durationSec: 6 },
+  abcNews: { youtubeVideoId: 'WOmvzb9IBEA', label: 'WLS News ID', durationSec: 5 },
 } satisfies Record<string, YouTubeBumperClip>;
 
+// Only assign Option 3 clips to channels with truly iconic retro/broadcast promos
 const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
-  tech: [CLIPS.crtGlitch, CLIPS.synthGrid, CLIPS.mac1984],
-  movies: [CLIPS.featurePres, CLIPS.filmCountdown4k, CLIPS.thxDeepNote],
+  tech: [CLIPS.mac1984],
+  movies: [CLIPS.featurePres, CLIPS.thxDeepNote],
+  film: [CLIPS.featurePres, CLIPS.thxDeepNote],
   cartoons: [
     CLIPS.cnCity1,
     CLIPS.asCheckered1,
@@ -72,33 +61,12 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.cnPowerhouse,
     CLIPS.pixarFriends,
   ],
-  industry: [CLIPS.synthGrid, CLIPS.crtGlitch, CLIPS.metroNet],
-  music: [CLIPS.mtvKaiju, CLIPS.lofiLoop, CLIPS.mtvChainsaw, CLIPS.audioViz],
-  science: [CLIPS.jwstZoom, CLIPS.synthGrid],
-  food: [CLIPS.driveInDog, CLIPS.chillyDilly],
-  games: [CLIPS.ps1Boot, CLIPS.gcBoot, CLIPS.synthGrid],
-  sports: [CLIPS.itvSport, CLIPS.sportsBroadcast],
-  travel: [CLIPS.jwstZoom, CLIPS.sbsIdent],
-  film: [CLIPS.filmCountdown4k, CLIPS.featurePres, CLIPS.oldFilmCountdown],
-  fitness: [CLIPS.itvSport, CLIPS.audioViz],
-  art: [CLIPS.mtvChainsaw, CLIPS.sbsIdent, CLIPS.lofiLoop],
-  design: [CLIPS.synthGrid, CLIPS.sbsIdent, CLIPS.crtGlitch],
-  learning: [CLIPS.jwstZoom, CLIPS.mac1984],
-  documentaries: [CLIPS.oldFilmCountdown, CLIPS.jwstZoom],
-  architecture: [CLIPS.sbsIdent, CLIPS.metroNet],
-  religion: [CLIPS.lofiLoop, CLIPS.tyneTees],
-  cars: [CLIPS.synthGrid, CLIPS.itvSport],
-  business: [CLIPS.kadnNews, CLIPS.abcNews],
+  music: [CLIPS.mtvKaiju, CLIPS.mtvChainsaw],
+  games: [CLIPS.ps1Boot, CLIPS.gcBoot],
+  food: [CLIPS.driveInDog],
+  sports: [CLIPS.itvSport],
   news: [CLIPS.kadnNews, CLIPS.abcNews],
-  entertainment: [CLIPS.featurePres, CLIPS.mtvKaiju],
 };
-
-const GENERAL_YOUTUBE_BUMPERS: YouTubeBumperClip[] = [
-  CLIPS.cnCity1,
-  CLIPS.synthGrid,
-  CLIPS.metroNet,
-  CLIPS.lofiLoop,
-];
 
 interface DeadpanCard {
   lead: string;
@@ -111,7 +79,7 @@ const CHANNEL_CARDS: Record<string, DeadpanCard[]> = {
     { lead: 'You could be scrolling a feed.', punchline: 'Instead you are watching linear television.' },
   ],
   movies: [
-    { lead: 'Now changing 35mm reels.', punchline: 'Silence your phone in row G.' },
+    { lead: 'Changing 35mm reels.', punchline: 'Silence your phone in row G.' },
     { lead: 'No skip-intro button here.', punchline: 'Next feature presentation rolling shortly.' },
   ],
   cartoons: [
@@ -173,36 +141,38 @@ const DEFAULT_CARDS: DeadpanCard[] = [
 ];
 
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
-  { variant: 'ident', durationMs: 4400 },
-  { variant: 'visualizer', durationMs: 4600 },
-  { variant: 'lineup', durationMs: 4800 },
-  { variant: 'card', durationMs: 4300 },
+  { variant: 'ident', durationMs: 4200 },
+  { variant: 'lineup', durationMs: 4500 },
+  { variant: 'visualizer', durationMs: 4400 },
+  { variant: 'card', durationMs: 4100 },
 ];
 
 /**
- * Picks the next station break for a channel, alternating cleanly between
- * full-screen Option 1 motion/visualizer/Adult-Swim cards and Option 3 YouTube mini-bumpers.
+ * Picks the next station break for a channel:
+ * rotates smoothly across studio Three.js 3D idents (Option 1 + Web Audio chimes)
+ * and, where curated classics exist, weaves in verified Option 3 TV/bootup promos.
  */
 export function pickNextBreak(
   categoryId: string,
   breakCount: number,
   failedIds?: Set<string>
 ): BreakPlan {
-  const pool = (YOUTUBE_BUMPERS_BY_CHANNEL[categoryId] || GENERAL_YOUTUBE_BUMPERS).filter(
+  const pool = (YOUTUBE_BUMPERS_BY_CHANNEL[categoryId] || []).filter(
     (clip) => !failedIds?.has(clip.youtubeVideoId)
   );
 
-  // Alternate between full-screen Option 1 animated idents & Option 3 curated YouTube clips
-  if (pool.length > 0 && breakCount % 2 === 1) {
-    const clipIdx = Math.floor(breakCount / 2) % pool.length;
+  // Every 3rd break (breakCount % 3 === 1) plays a curated Option 3 bumper if that channel has one
+  if (pool.length > 0 && breakCount % 3 === 1) {
+    const clipIdx = Math.floor(breakCount / 3) % pool.length;
     return {
       kind: 'youtube',
       clip: pool[clipIdx],
     };
   }
 
-  const motionIdx = Math.floor(breakCount / (pool.length > 0 ? 2 : 1)) % MOTION_ROTATION.length;
-  const template = MOTION_ROTATION[motionIdx];
+  const youtubeOffset = pool.length > 0 ? Math.floor((breakCount + 1) / 3) : 0;
+  const motionIdx = (breakCount - youtubeOffset) % MOTION_ROTATION.length;
+  const template = MOTION_ROTATION[Math.max(0, motionIdx)];
 
   const hour = typeof window !== 'undefined' ? new Date().getHours() : 20;
   const isLateNight = hour >= 0 && hour < 5;
