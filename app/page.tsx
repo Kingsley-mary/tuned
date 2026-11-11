@@ -16,6 +16,8 @@ const STORAGE_KEY = 'tuned_user_state_v1';
 const PLAYBACK_STORAGE_KEY = 'tuned_playback_session_v1';
 const ENTERTAINMENT_MIGRATION_KEY = 'tuned_movies_cartoons_industry_v2';
 const DEFAULT_CATEGORIES = ['tech', 'movies', 'cartoons', 'industry', 'music', 'science', 'food'];
+// Menu overlays that float over the blurred live video stage
+const MENU_OVERLAY_MODES = new Set<ScreenMode>(['guide', 'manage']);
 
 export default function TunedApp() {
   const [screenMode, setScreenMode] = useState<ScreenMode>('power');
@@ -699,6 +701,7 @@ export default function TunedApp() {
             tuneKey={tuneKey}
             isPlaying={isPlaying}
             isHidden={screenMode !== 'watch'}
+            keepVideoVisible={MENU_OVERLAY_MODES.has(screenMode)}
             sleepTimerMode={sleepTimerMode}
             sleepRemainingSec={sleepRemainingSec}
             behindLiveSeconds={behindLiveSeconds}

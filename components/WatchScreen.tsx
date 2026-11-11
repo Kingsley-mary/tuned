@@ -46,6 +46,7 @@ interface WatchScreenProps {
   tuneKey?: number;
   isPlaying: boolean;
   isHidden?: boolean;
+  keepVideoVisible?: boolean;
   sleepTimerMode: SleepTimerMode;
   sleepRemainingSec: number | null;
   behindLiveSeconds?: number;
@@ -72,6 +73,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   tuneKey = 0,
   isPlaying,
   isHidden = false,
+  keepVideoVisible = false,
   sleepTimerMode,
   sleepRemainingSec,
   behindLiveSeconds = 0,
@@ -472,15 +474,16 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   return (
     <div
       ref={tvStageRef}
-      className={`tv-stage${osdOpen ? ' osd-on' : ''}`}
+      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}`}
       style={
         {
-          visibility: isHidden ? 'hidden' : 'visible',
+          visibility: isHidden && !keepVideoVisible ? 'hidden' : 'visible',
           pointerEvents: isHidden ? 'none' : undefined,
           ['--h' as string]: hue,
         } as React.CSSProperties
       }
-      onMouseMove={pokeOsd}
+      onMouseMove={isHidden ? undefined : pokeOsd}
+      aria-hidden={isHidden || undefined}
     >
       {/* Video layer: keep YouTubePlayer mounted at full dimensions so its GPU video surface is never evicted */}
       <div className="tv-video">

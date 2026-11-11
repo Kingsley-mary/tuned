@@ -70,6 +70,7 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
 
   const [sel, setSel] = useState(0);
   const safeSel = Math.min(sel, Math.max(0, channelCount - 1));
+  const colSplit = Math.ceil(channelCount / 2);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -95,6 +96,16 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
       } else if (e.key === 'ArrowDown') {
         e.preventDefault();
         setSel(Math.min(channelCount - 1, safeSel + 1));
+      } else if (e.key === 'ArrowLeft') {
+        if (safeSel >= colSplit) {
+          e.preventDefault();
+          setSel(safeSel - colSplit);
+        }
+      } else if (e.key === 'ArrowRight') {
+        if (safeSel < colSplit && safeSel + colSplit < channelCount) {
+          e.preventDefault();
+          setSel(safeSel + colSplit);
+        }
       } else if ((e.key === 'Delete' || e.key === 'Backspace') && canRemove) {
         e.preventDefault();
         onRemoveChannel(safeSel);
@@ -102,9 +113,13 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [safeSel, channelCount, canRemove, onDone, onMoveUp, onMoveDown, onRemoveChannel]);
+  }, [safeSel, channelCount, colSplit, canRemove, onDone, onMoveUp, onMoveDown, onRemoveChannel]);
 
   const selected = channels[safeSel];
+  const columns = [
+    { offset: 0, items: channels.slice(0, colSplit) },
+    { offset: colSplit, items: channels.slice(colSplit) },
+  ].filter((col) => col.items.length > 0);
 
   return (
     <div className="gd-screen mg-screen" style={{ ['--h' as string]: selected?.hue ?? 355 } as React.CSSProperties}>
@@ -130,21 +145,28 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
       </header>
 
       <div className="mg-body">
-        {/* Left: lineup as a remote-style list */}
+        {/* Left: lineup split into two columns so all channels stay visible without deep scrolling */}
         <section className="mg-list">
-          {channels.map((ch, idx) => (
-            <button
-              key={ch.categoryId + idx}
-              onClick={() => setSel(idx)}
-              onDoubleClick={onDone}
-              className={`mg-item${idx === safeSel ? ' selected' : ''}`}
-              style={{ ['--h' as string]: ch.hue } as React.CSSProperties}
-            >
-              <span className="mg-num">{String(idx + 1).padStart(2, '0')}</span>
-              <span className="mg-name">{ch.categoryName}</span>
-              {ch.error && <span className="mg-err">Failed to load</span>}
-              {idx === 0 && <span className="mg-tag">Plays first</span>}
-            </button>
+          {columns.map((col, colIndex) => (
+            <div key={colIndex} className="mg-col">
+              {col.items.map((ch, localIdx) => {
+                const idx = col.offset + localIdx;
+                return (
+                  <button
+                    key={ch.categoryId + idx}
+                    onClick={() => setSel(idx)}
+                    onDoubleClick={onDone}
+                    className={`mg-item${idx === safeSel ? ' selected' : ''}`}
+                    style={{ ['--h' as string]: ch.hue } as React.CSSProperties}
+                  >
+                    <span className="mg-num">{String(idx + 1).padStart(2, '0')}</span>
+                    <span className="mg-name">{ch.categoryName}</span>
+                    {ch.error && <span className="mg-err">Failed to load</span>}
+                    {idx === 0 && <span className="mg-tag">Plays first</span>}
+                  </button>
+                );
+              })}
+            </div>
           ))}
         </section>
 
@@ -218,7 +240,7 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
 
       <footer className="gd-footer">
         <div className="gd-legend">
-          <span>Select <span className="kbd-osd">↑↓</span></span>
+          <span>Select <span className="kbd-osd">↑↓ ←→</span></span>
           <span>Reorder <span className="kbd-osd">SHIFT + ↑↓</span></span>
           <span>Remove <span className="kbd-osd">DEL</span></span>
           <button onClick={onDone}>Done <span className="kbd-osd">ESC</span></button>
