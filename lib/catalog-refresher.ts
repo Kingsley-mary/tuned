@@ -1,7 +1,8 @@
 import { ChannelLineup, Video } from './types';
 import { CATEGORIES, SEED_LINEUPS } from './seed-catalog';
 
-const MAX_VIDEOS_PER_CHANNEL = 140;
+const MAX_VIDEOS_PER_CHANNEL = 200;
+const MAX_VIDEOS_PER_CREATOR = 10;
 const NEW_PER_CREATOR = 3;
 const CONCURRENCY = 20;
 
@@ -36,7 +37,7 @@ async function fetchLatestViaYouTubeApi(
 
     const plUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet&playlistId=${encodeURIComponent(
       uploadsPlaylistId
-    )}&maxResults=8&key=${encodeURIComponent(apiKey)}`;
+    )}&maxResults=${MAX_VIDEOS_PER_CREATOR}&key=${encodeURIComponent(apiKey)}`;
     const plRes = await fetch(plUrl, { signal: AbortSignal.timeout(7000) });
     if (!plRes.ok) return [];
     const plData = await plRes.json();
@@ -103,7 +104,7 @@ async function fetchLatestViaChannelPage(
     const html = await res.text();
     const candidateIds = Array.from(
       new Set([...html.matchAll(/"videoId":"([a-zA-Z0-9_-]{11})"/g)].map((m) => m[1]))
-    ).slice(0, 8);
+    ).slice(0, MAX_VIDEOS_PER_CREATOR);
 
     const valid: Video[] = [];
     for (const vid of candidateIds) {
@@ -246,15 +247,14 @@ export async function refreshAllLineups(
         const oldList = perCreatorMap.get(creatorId) || [];
         const brandNew = freshList.filter((v) => !existingIds.has(v.youtubeVideoId));
         newVideosFound += brandNew.length;
-        const mergedCreatorList = [...brandNew, ...oldList].slice(0, 8);
+        const mergedCreatorList = [...brandNew, ...oldList].slice(0, MAX_VIDEOS_PER_CREATOR);
         perCreatorMap.set(creatorId, mergedCreatorList);
       }
     }
 
     const creatorLists = [...perCreatorMap.values()];
-    const limit = cat.id === 'movies' ? 80 : MAX_VIDEOS_PER_CHANNEL;
     const finalVideos =
-      creatorLists.length > 0 ? roundRobinInterleave(creatorLists, limit) : existingVideos;
+      creatorLists.length > 0 ? roundRobinInterleave(creatorLists, MAX_VIDEOS_PER_CHANNEL) : existingVideos;
 
     nextSnapshot[cat.id] = {
       categoryId: cat.id,
