@@ -154,7 +154,7 @@ export function GuideScreen({
         activeSeek = live.seekSeconds;
       }
 
-      const forward = buildChannelSchedule(ch.videos, activeIdx, activeSeek, 36, scheduleAnchorMs);
+      const forward = buildChannelSchedule(ch.videos, activeIdx, activeSeek, Math.min(36, ch.videos.length), scheduleAnchorMs);
       const forwardSlots: GuideSlot[] = forward.map((slot, sIdx) => ({
         id: `${ch.categoryId}-f${sIdx}-${slot.video.youtubeVideoId}`,
         s: (slot.startTimeMs - dayStartMs) / 60000,
@@ -164,12 +164,34 @@ export function GuideScreen({
         videoId: slot.video.youtubeVideoId,
       }));
 
+      // Keep appending wrapped slots until the schedule covers the full scrollable horizon (+6h)
+      const maxTargetMin = liveW0 + 460;
+      let forwardCursorMin = forwardSlots[forwardSlots.length - 1]?.e ?? (scheduleAnchorMs - dayStartMs) / 60000;
+      let nextOffset = forwardSlots.length;
+      while (forwardCursorMin < maxTargetMin && nextOffset < 200) {
+        const nextIdx = (activeIdx + nextOffset) % ch.videos.length;
+        const vid = ch.videos[nextIdx];
+        const durMin = Math.max(1 / 60, getVideoDuration(vid) / 60);
+        const slotStart = forwardCursorMin;
+        const slotEnd = slotStart + durMin;
+        forwardSlots.push({
+          id: `${ch.categoryId}-f${nextOffset}-${vid.youtubeVideoId}`,
+          s: slotStart,
+          e: slotEnd,
+          t: vid.title,
+          src: vid.sourceChannelTitle,
+          videoId: vid.youtubeVideoId,
+        });
+        forwardCursorMin = slotEnd;
+        nextOffset++;
+      }
+
       // Prepend preceding videos before the currently airing show so the left side of the NOW line is filled
       const pastSlots: GuideSlot[] = [];
       let cursorStartMin = forwardSlots[0] ? forwardSlots[0].s : (scheduleAnchorMs - dayStartMs) / 60000;
       const minTargetMin = liveW0 - 60;
       let stepBack = 1;
-      while (cursorStartMin > minTargetMin && stepBack <= ch.videos.length) {
+      while (cursorStartMin > minTargetMin && stepBack <= 200) {
         const prevIdx =
           (((activeIdx - stepBack) % ch.videos.length) + ch.videos.length) % ch.videos.length;
         const prevVid = ch.videos[prevIdx];
@@ -463,11 +485,7 @@ export function GuideScreen({
                 const isCurrentPlayingChannel = r === safeCurrentCh;
                 const isFocusedRow = r === selRow;
                 const rowSlots = (schedules[r] || []).filter(
-                  (p) =>
-                    p.e > w0 &&
-                    p.s < w1 &&
-                    (Math.min(p.e, w1) - Math.max(p.s, w0) >= 3 ||
-                      (selectedSlot?.id === p.id && isFocusedRow))
+                  (p) => p.e > w0 && p.s < w1
                 );
 
                 return (
@@ -484,16 +502,15 @@ export function GuideScreen({
                     </button>
 
                     <div className="trk">
-                      {rowSlots.map((p, i) => {
-                        let a = Math.max(p.s, w0);
-                        if (i === 0 && a - w0 < 3) a = w0;
+                      {rowSlots.map((p) => {
+                        const a = Math.max(p.s, w0);
                         const b = Math.min(p.e, w1);
                         const air = p.s <= nowMin && nowMin < p.e;
                         const isOn = selectedSlot?.id === p.id && isFocusedRow;
                         const cl = p.s < w0 - 0.5;
                         const cr = p.e > w1 + 0.5;
                         const leftPct = ((a - w0) / WIN) * 100;
-                        const widthPct = Math.max(2, ((b - a) / WIN) * 100);
+                        const widthPct = ((b - a) / WIN) * 100;
 
                         return (
                           <button
@@ -502,7 +519,7 @@ export function GuideScreen({
                             className={`pr ${air ? 'air' : ''} ${isOn ? 'on' : ''} ${cl ? 'cl' : ''} ${cr ? 'cr' : ''}`}
                             style={{
                               left: `${leftPct}%`,
-                              width: `calc(${widthPct}% - 5px)`,
+                              width: widthPct > 0.8 ? `calc(${widthPct}% - 4px)` : `${widthPct}%`,
                             }}
                             onMouseEnter={() => {
                               setSelRow(r);
