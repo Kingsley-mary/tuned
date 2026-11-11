@@ -381,21 +381,9 @@ export default function TunedApp() {
     const active = channels[currentChannelIndex];
     if (!active || !active.videos?.length) return;
 
-    // Check global broadcast clock first so all browsers stay in lockstep across transitions
-    const live = getLiveBroadcastState(
-      active.videos,
-      active.categoryId,
-      Math.floor((Date.now() - behindLiveSeconds * 1000) / 1000),
-      failedVideoIdsRef.current
-    );
-
-    if (live.videoIndex !== currentVideoIndex) {
-      setCurrentVideoIndex(live.videoIndex);
-      setStartSeconds(live.seekSeconds);
-      currentPlaybackTimeRef.current = live.seekSeconds;
-      setTuneKey((k) => k + 1);
-      setIsPlaying(true);
-      return;
+    const finishedVideo = active.videos[currentVideoIndex];
+    if (finishedVideo?.youtubeVideoId) {
+      failedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
     }
 
     let nextIdx = (currentVideoIndex + 1) % active.videos.length;
@@ -414,7 +402,7 @@ export default function TunedApp() {
     setBehindLiveSeconds(0);
     setTuneKey((k) => k + 1);
     setIsPlaying(true);
-  }, [channels, currentChannelIndex, currentVideoIndex, behindLiveSeconds]);
+  }, [channels, currentChannelIndex, currentVideoIndex]);
 
   const handleJumpToLive = useCallback(() => {
     // If already at live edge (haven't paused), do not switch or reload video!

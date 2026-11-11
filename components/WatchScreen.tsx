@@ -93,6 +93,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   const tvStageRef = useRef<HTMLDivElement>(null);
   const bumperTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const onNextVideoRef = useRef(onNextVideo);
+  onNextVideoRef.current = onNextVideo;
 
   const activeChannel = channels[currentChannelIndex] || channels[0];
   const videos = activeChannel?.videos || [];
@@ -181,9 +183,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
     bumperTimeoutRef.current = setTimeout(() => {
       setIsBumperActive(false);
-      onNextVideo();
+      onNextVideoRef.current();
     }, 2400);
-  }, [onNextVideo, onPowerOff, sleepTimerMode]);
+  }, [onPowerOff, sleepTimerMode]);
 
   // Share synchronized channel link
   const handleShareChannel = useCallback(() => {
@@ -337,9 +339,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       style={{ display: isHidden ? 'none' : undefined, ['--h' as string]: hue } as React.CSSProperties}
       onMouseMove={pokeOsd}
     >
-      {/* Video layer */}
+      {/* Video layer: keep YouTubePlayer mounted during bumpers so it transitions seamlessly */}
       <div className="tv-video">
-        {isBumperActive ? (
+        {isBumperActive && (
           <div
             className="tv-bumper"
             style={{
@@ -354,18 +356,19 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             <h3>{nextVideo?.title || 'Continuing broadcast…'}</h3>
             <p>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</p>
           </div>
-        ) : activeVideo?.youtubeVideoId ? (
-          <div className="tv-yt">
+        )}
+        {activeVideo?.youtubeVideoId ? (
+          <div className="tv-yt" style={{ display: isBumperActive ? 'none' : undefined }}>
             <YouTubePlayer
               videoId={activeVideo.youtubeVideoId}
               startSeconds={startSeconds}
               tuneKey={tuneKey}
-              isPlaying={isPlaying}
+              isPlaying={isPlaying && !isBumperActive}
               isMuted={isMuted}
               onEnded={handleVideoEndedNaturally}
               onError={(errCode) => {
                 console.warn(`Video ${activeVideo.youtubeVideoId} error (${errCode}), skipping...`);
-                onNextVideo();
+                onNextVideoRef.current();
               }}
               onTimeUpdate={(cur, dur) => {
                 setCurrentTime(cur);
@@ -380,9 +383,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             />
           </div>
         ) : (
-          <div className="tv-bumper">
-            <p>No video available on this channel</p>
-          </div>
+          !isBumperActive && (
+            <div className="tv-bumper">
+              <p>No video available on this channel</p>
+            </div>
+          )
         )}
       </div>
 
