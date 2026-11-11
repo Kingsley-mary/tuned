@@ -8847,6 +8847,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "builtAt": 1794346171198,
     "videos": [
       {
+        "youtubeVideoId": "P0_5DU3A9Cg",
+        "title": "I Got CAUGHT Running Away",
+        "sourceChannelId": "UCpHWSOWGarUZIjTvTjbQkDA",
+        "sourceChannelTitle": "OnzLemur",
+        "thumbnailUrl": "https://i.ytimg.com/vi/P0_5DU3A9Cg/hqdefault.jpg",
+        "durationSec": 602
+      },
+      {
+        "youtubeVideoId": "zoCxWzuC-dA",
+        "title": "ONE Girl DESTROYED My Friend Group 3",
+        "sourceChannelId": "UCpHWSOWGarUZIjTvTjbQkDA",
+        "sourceChannelTitle": "OnzLemur",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zoCxWzuC-dA/hqdefault.jpg",
+        "durationSec": 663
+      },
+      {
+        "youtubeVideoId": "YJefoFt_DE0",
+        "title": "ONE girl DESTROYED my friend group 2",
+        "sourceChannelId": "UCpHWSOWGarUZIjTvTjbQkDA",
+        "sourceChannelTitle": "OnzLemur",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YJefoFt_DE0/hqdefault.jpg",
+        "durationSec": 925
+      },
+      {
         "youtubeVideoId": "lQ9Kx_tCbNY",
         "title": "Hexed | Wicked Fun",
         "sourceChannelId": "UC_976xMxPgzIa290Hqtk-9g",
@@ -10759,14 +10783,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 5526
       },
       {
-        "youtubeVideoId": "P0_5DU3A9Cg",
-        "title": "I Got CAUGHT Running Away",
-        "sourceChannelId": "UCpHWSOWGarUZIjTvTjbQkDA",
-        "sourceChannelTitle": "OnzLemur",
-        "thumbnailUrl": "https://i.ytimg.com/vi/P0_5DU3A9Cg/hqdefault.jpg",
-        "durationSec": 602
-      },
-      {
         "youtubeVideoId": "LKZQXPdVFTU",
         "title": "Why not China? Why not Japan? : K-pop Documentary",
         "sourceChannelId": "UCADEYQiszEI_cMARTSi5GdQ",
@@ -10855,14 +10871,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 2908
       },
       {
-        "youtubeVideoId": "zoCxWzuC-dA",
-        "title": "ONE Girl DESTROYED My Friend Group 3",
-        "sourceChannelId": "UCpHWSOWGarUZIjTvTjbQkDA",
-        "sourceChannelTitle": "OnzLemur",
-        "thumbnailUrl": "https://i.ytimg.com/vi/zoCxWzuC-dA/hqdefault.jpg",
-        "durationSec": 663
-      },
-      {
         "youtubeVideoId": "uY64Bm4nRqk",
         "title": "As a South Korean, I Hate North Korea. This Is Why:",
         "sourceChannelId": "UCADEYQiszEI_cMARTSi5GdQ",
@@ -10949,14 +10957,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Cruise",
         "thumbnailUrl": "https://i.ytimg.com/vi/Htm40v9uego/hqdefault.jpg",
         "durationSec": 1803
-      },
-      {
-        "youtubeVideoId": "YJefoFt_DE0",
-        "title": "ONE girl DESTROYED my friend group 2",
-        "sourceChannelId": "UCpHWSOWGarUZIjTvTjbQkDA",
-        "sourceChannelTitle": "OnzLemur",
-        "thumbnailUrl": "https://i.ytimg.com/vi/YJefoFt_DE0/hqdefault.jpg",
-        "durationSec": 925
       },
       {
         "youtubeVideoId": "eQgQFOyviY0",

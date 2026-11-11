@@ -1423,6 +1423,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCQF0f62JXnfFSxKDmN8SDUg",
       "name": "SolarBalls"
+    },
+    {
+      "id": "UCpHWSOWGarUZIjTvTjbQkDA",
+      "name": "OnzLemur"
     }
   ],
   "industry": [
@@ -1699,10 +1703,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCADEYQiszEI_cMARTSi5GdQ",
       "name": "Papiens"
-    },
-    {
-      "id": "UCpHWSOWGarUZIjTvTjbQkDA",
-      "name": "OnzLemur"
     },
     {
       "id": "UCxs87BsBSzw8FC7IlvfQ5kA",
