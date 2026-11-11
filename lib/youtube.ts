@@ -64,6 +64,82 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC9fSZHEh6XsRpX-xJc6lT3A",
       "name": "UrAvgConsumer"
+    },
+    {
+      "id": "UCC_NjLEb2Sley94py4vSYTA",
+      "name": "Andres Vidoza"
+    },
+    {
+      "id": "UCE_M8A5yxnLfW0KghEeajjw",
+      "name": "Apple"
+    },
+    {
+      "id": "UCBK_MzhanH8HamrFbABbe8Q",
+      "name": "ASUS"
+    },
+    {
+      "id": "UCHuiy8bXnmK5nisYHUd1J5g",
+      "name": "NVIDIA"
+    },
+    {
+      "id": "UCJSJ0xIWf4e3hNu7KgYqPxg",
+      "name": "Hall Of Tech LLC"
+    },
+    {
+      "id": "UC415bOPUcGSamy543abLmRA",
+      "name": "Cleo Abram"
+    },
+    {
+      "id": "UCuVQmkiETvqmLviDcBtQw4A",
+      "name": "Nothing"
+    },
+    {
+      "id": "UCWwgaK7x0_FR1goeSRazfsQ",
+      "name": "Samsung"
+    },
+    {
+      "id": "UCxDb8z2KsJTwDTRixbx-Ncg",
+      "name": "Kagan"
+    },
+    {
+      "id": "UCEeH57P89hPQ1Sp2TavfICA",
+      "name": "Parker Burton"
+    },
+    {
+      "id": "UCEli52HZqbog3LQr5sRzL1A",
+      "name": "Shevon Salmon"
+    },
+    {
+      "id": "UCQQBbC25U6zJtGhxUnaPOLg",
+      "name": "Devyn Johnston"
+    },
+    {
+      "id": "UCK8sQmJBp8GCxrOtXWBpyEA",
+      "name": "Google"
+    },
+    {
+      "id": "UCRsSVa7zu3l5e0CI3j14NrA",
+      "name": "soiboi soft"
+    },
+    {
+      "id": "UConJDkGk921yT9hISzFqpzw",
+      "name": "Freethink"
+    },
+    {
+      "id": "UCNl9pCCDFUWqWmvk4sI5WLA",
+      "name": "Life Of Gaurz"
+    },
+    {
+      "id": "UCnty0z0pNRDgnuoirYXnC5A",
+      "name": "CodeTV"
+    },
+    {
+      "id": "UCMOBdfLjLT-PzrGzld8GjRw",
+      "name": "Carbon"
+    },
+    {
+      "id": "UCOQ6GGRyyu8S3jahnUz2zHw",
+      "name": "Bad Decisions Studio "
     }
   ],
   "games": [
@@ -122,6 +198,110 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCKMkV9T20tUOBqwsi5xh7HA",
       "name": "Wholesome Games"
+    },
+    {
+      "id": "UCIPPMRA040LQr5QPyJEbmXA",
+      "name": "MrBeast Gaming"
+    },
+    {
+      "id": "UC7Y7aX_EMsRwue_G_Vb7YDA",
+      "name": "geminitay"
+    },
+    {
+      "id": "UChFur_NwVSbUozOcF_F2kMg",
+      "name": "Mumbo Jumbo"
+    },
+    {
+      "id": "UCR9Gcq0CMm6YgTzsDxAxjOQ",
+      "name": "Grian"
+    },
+    {
+      "id": "UC6VcWc1rAoWdBCM0JxrRQ3A",
+      "name": "Rockstar Games"
+    },
+    {
+      "id": "UCbVrK84jqRDbN3pPf25TDDw",
+      "name": "Flow State"
+    },
+    {
+      "id": "UCO9mCmS86IbJM4BHTBYpotQ",
+      "name": "Goated"
+    },
+    {
+      "id": "UCoVnZiFHqOuIbYp7MFPU3FQ",
+      "name": "Kindle Bubble Dump"
+    },
+    {
+      "id": "UCjBp_7RuDBUYbd1LegWEJ8g",
+      "name": "XBOX"
+    },
+    {
+      "id": "UC-2Y8dQb0S6DtpxNgAKoJKA",
+      "name": "PlayStation"
+    },
+    {
+      "id": "UC1sELGmy5jp5fQUugmuYlXQ",
+      "name": "Minecraft"
+    },
+    {
+      "id": "UC-M2qLCBDD1vOvws_YKN55Q",
+      "name": "redthreadgames"
+    },
+    {
+      "id": "UCEW0O9GyXRw420kj4dL8CkQ",
+      "name": "orkid pulse"
+    },
+    {
+      "id": "UCmb9CzRZCd71cdcesqyzenA",
+      "name": "Snarple"
+    },
+    {
+      "id": "UChRxI4p6X8u7vCaRmpHK-rw",
+      "name": "Riloe"
+    },
+    {
+      "id": "UCpmThB2TR0XQ8Y8Zv4zgYyA",
+      "name": "Hytale"
+    },
+    {
+      "id": "UCvRu5NjRmXy4UbKNHBhmKYA",
+      "name": "synn matthew"
+    },
+    {
+      "id": "UCSLAT2AVACxik7Ez8f9nsRQ",
+      "name": "shovel241"
+    },
+    {
+      "id": "UCGwITW9jq4h_9osOC-jFnJw",
+      "name": "ThaMango"
+    },
+    {
+      "id": "UC8CX0LD98EDXl4UYX1MDCXg",
+      "name": "VALORANT"
+    },
+    {
+      "id": "UCqDS7KWjAPKv-7ZSlro9OiQ",
+      "name": "thegameawards"
+    },
+    {
+      "id": "UC4UNqGYuB2q49GzGD_CBIVQ",
+      "name": "TrixyBlox"
+    },
+    {
+      "id": "UCVb8JXAznL2asigbDnrP6jA",
+      "name": "Sluda Builds"
+    },
+    {
+      "id": "UCP4kPIzNhpTGrn75XeLVVXg",
+      "name": "nounish"
+    },
+    {
+      "id": "UC-dqqfoSrz8sAYzpJ2zdIIw",
+      "name": "Laynce"
+    },
+    {
+      "id": "UC1MaLhSumVa9tx_qL2BR-ug",
+      "name": "ApolloTV"
     }
   ],
   "music": [
@@ -220,6 +400,34 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC7kI8WjpCfFoMSNDuRh_4lA",
       "name": "Pitchfork"
+    },
+    {
+      "id": "UC_m96wEUiEktKJ_0JoqqGfQ",
+      "name": "ROTI"
+    },
+    {
+      "id": "UC89IYKXyf15qNezA7IuFG1A",
+      "name": "Little Simz"
+    },
+    {
+      "id": "UCHzIX2frWnKAURPn3tK4wMA",
+      "name": "Surreal Cat"
+    },
+    {
+      "id": "UCn9Vf5gBcLMNGvAy37BPCaA",
+      "name": "Alesa Mileto"
+    },
+    {
+      "id": "UC_sOjEnngNB2y_AEaDd2cSA",
+      "name": "Epidemic Sound"
+    },
+    {
+      "id": "UC3lBXcrKFnFAFkfVk5WuKcQ",
+      "name": "Kendrick Lamar"
+    },
+    {
+      "id": "UCeJrRK_Pt1m23l5zgSytVUA",
+      "name": "duplee"
     }
   ],
   "food": [
@@ -278,6 +486,18 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCXGR70CkW_pXb8n52LzCCRw",
       "name": "Mythical Kitchen"
+    },
+    {
+      "id": "UC_pT_Iz6XjuM-eMTlXghdfw",
+      "name": "Max the Meat Guy"
+    },
+    {
+      "id": "UCfE5Cz44GlZVyoaYTHJbuZw",
+      "name": "Guga Foods"
+    },
+    {
+      "id": "UCMyOj6fhvKFMjxUCp3b_3gA",
+      "name": "Nick DiGiovanni"
     }
   ],
   "science": [
@@ -336,6 +556,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCzWQYUVCpZqtN93H8RR44Qw",
       "name": "Seeker"
+    },
+    {
+      "id": "UClYDoTmBdnafBCHhnUCqvtw",
+      "name": "Epic Spaceman"
     }
   ],
   "sports": [
@@ -402,6 +626,14 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCTl3QQTvqHFjurroKxexy2Q",
       "name": "Olympics"
+    },
+    {
+      "id": "UCNtiHO5dvgowvZScesaKUqA",
+      "name": "F1 Academy"
+    },
+    {
+      "id": "UCQctwMz9ErTyK6ZpguWNH5Q",
+      "name": "The Grid"
     }
   ],
   "travel": [
@@ -456,6 +688,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCiAq_SU0ED1C6vWFMnw8Ekg",
       "name": "The Food Ranger"
+    },
+    {
+      "id": "UC8p_y3iHPe-n3zRfXK2czWA",
+      "name": "Tayo Aina"
     }
   ],
   "film": [
@@ -514,6 +750,158 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCs7nPQIEba0T3tGOWWsZpJQ",
       "name": "Like Stories of Old"
+    },
+    {
+      "id": "UCz97F7dMxBNOfGYu3rx8aCw",
+      "name": "Sony Pictures Entertainment"
+    },
+    {
+      "id": "UCvC4D8onUfXzvjTOM-dBfEA",
+      "name": "Marvel Entertainment"
+    },
+    {
+      "id": "UCQJWtTnAHhEG5w4uN0udnUQ",
+      "name": "Prime Video"
+    },
+    {
+      "id": "UC1Myj674wRVXB9I4c6Hm5zA",
+      "name": "Apple TV"
+    },
+    {
+      "id": "UCx-KWLTKlB83hDI6UKECtJQ",
+      "name": "HBO Max"
+    },
+    {
+      "id": "UCrRttZIypNTA1Mrfwo745Sg",
+      "name": "Paramount Plus"
+    },
+    {
+      "id": "UCVjS9AuBloqJJjhsy3vIfug",
+      "name": "Sony"
+    },
+    {
+      "id": "UCWOA1ZGywLbqmigxE4Qlvuw",
+      "name": "Netflix"
+    },
+    {
+      "id": "UCeMYsj4kULpER9OQpKn9HhQ",
+      "name": "IMAX"
+    },
+    {
+      "id": "UCVTQuK2CaWaTgSsoNkn5AiQ",
+      "name": "HBO"
+    },
+    {
+      "id": "UChPRO1CB_Hvd0TvKRU62iSQ",
+      "name": "Harry Potter"
+    },
+    {
+      "id": "UCAVadSTSh382kte-fQHqMNw",
+      "name": "Legendary"
+    },
+    {
+      "id": "UC7yRILFFJ2QZCykymr8LPwA",
+      "name": "New Rockstars"
+    },
+    {
+      "id": "UC9to9MJHFod_HCb5QVRN3uQ",
+      "name": "Snarky Jay"
+    },
+    {
+      "id": "UCN_u5w69V9wUZYG8WeJWuNg",
+      "name": "Avatar Legends"
+    },
+    {
+      "id": "UC71x8bBOwIEscxAltguHXMQ",
+      "name": "Blake Ridder"
+    },
+    {
+      "id": "UCAYsy_6_VBLiXkTGYIO2pdg",
+      "name": "William H Baker"
+    },
+    {
+      "id": "UC3sznuotAs2ohg_U__Jzj_Q",
+      "name": "The Film Theorists"
+    },
+    {
+      "id": "UCVun3IyFIh6AsEMV11zlVHg",
+      "name": "Sticks"
+    },
+    {
+      "id": "UCCwh1iC5ZJ7niFzqqVwAPTA",
+      "name": "Moodymeria"
+    },
+    {
+      "id": "UCWfi3ehtvILxj5zjxiVKDXQ",
+      "name": "Ermia Ramez"
+    },
+    {
+      "id": "UCpntEHiWoGKaJEosqaPlQhQ",
+      "name": "sam boyette"
+    },
+    {
+      "id": "UCKo61AAaRD00ibCWJZ321MQ",
+      "name": "SoKrispyMedia"
+    },
+    {
+      "id": "UCSBPzXzIiNrrQFJOdG9TVkA",
+      "name": "Talkin&#39; Bout"
+    },
+    {
+      "id": "UCiELs1dxyTThkxGFFo7M6vA",
+      "name": "Luda"
+    },
+    {
+      "id": "UCEmc2aF81xiI9JNDGTMOTCQ",
+      "name": "Kemz Art"
+    },
+    {
+      "id": "UCxAJ8G44RgNhDwXTJM8gkYw",
+      "name": "taichibeni"
+    },
+    {
+      "id": "UCp-R630BEr1UHsvh6HUh8fQ",
+      "name": "Sleepy Charlie"
+    },
+    {
+      "id": "UCN-DGJpb0iyPVdK_qto0qsw",
+      "name": "Ryder the Omniscient"
+    },
+    {
+      "id": "UCCA75dU6oaqia36HHrVveaQ",
+      "name": "Scene It"
+    },
+    {
+      "id": "UCeJWq9aFeZJlRjtLO4ttDAA",
+      "name": "akthawicked"
+    },
+    {
+      "id": "UC20Y7fiRyz8aCctBJa937IA",
+      "name": "Teja Lisjak"
+    },
+    {
+      "id": "UCcFoxUZrPn3qT0WGLDjqaxA",
+      "name": "The Vandalist"
+    },
+    {
+      "id": "UCz11O3R1rNe7rrZjBRSdkQA",
+      "name": "Isaac Carlton"
+    },
+    {
+      "id": "UCRZ1OquIwGiUjJS7SXW4Fdg",
+      "name": "Life Of Riza"
+    },
+    {
+      "id": "UC8ItWN2sAQFqMvfylrqbwWw",
+      "name": "itsn3t"
+    },
+    {
+      "id": "UCiblCUJwnzn77r9_VeCW6Wg",
+      "name": "Megan Tan"
+    },
+    {
+      "id": "UCV8Ml5naZgJ2gfH1_6-c8-w",
+      "name": "ottilie wills"
     }
   ],
   "fitness": [
@@ -614,36 +1002,68 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCSl51TSNCxLQJqLTQp0B6Cg",
       "name": "Kirsty Partridge Art"
+    },
+    {
+      "id": "UChIHYCXYpUsHY6Wjk03C_uQ",
+      "name": "Love2DrawManga"
+    },
+    {
+      "id": "UCKtu_JtQCY0yryIy6zK4ZCg",
+      "name": "Marc Brunet"
+    },
+    {
+      "id": "UCM55RjebjSevVWPnj2LEymw",
+      "name": "viyaura"
+    },
+    {
+      "id": "UCHu2KNu6TtJ0p4hpSW7Yv7Q",
+      "name": "Jazza"
+    },
+    {
+      "id": "UCNNOvB507MRfny7Jcv8MmOw",
+      "name": "SamDoesArts"
+    },
+    {
+      "id": "UCpgi6wIZv7c6TlAY-d1PMuw",
+      "name": "Chroma Moma"
+    },
+    {
+      "id": "UC96DW3YAifjM7x3LYpPyI0A",
+      "name": "Airi Pan"
+    },
+    {
+      "id": "UCjGjl2fpyL5WQBCwy-M4lNw",
+      "name": "Konariin"
+    },
+    {
+      "id": "UCOroCmP8_xZa3X5WJERYHKg",
+      "name": "Brooke Cormier"
+    },
+    {
+      "id": "UCKrYd0tMaMSp16q4xCMiLDQ",
+      "name": "Dayungnico"
+    },
+    {
+      "id": "UCwcDy-AjZJ5T7DH9BWaOMZg",
+      "name": "Kiptoe"
+    },
+    {
+      "id": "UC1fctxjxOyjNyWYR1Q1j8-g",
+      "name": "MEANDI DRAWS"
+    },
+    {
+      "id": "UCFDxyA1H3VEN0VQwfMe2VMQ",
+      "name": "Gawx Art"
+    },
+    {
+      "id": "UCLMkh2PYXpQh52d3m2bzNNA",
+      "name": "KeshArt"
     }
   ],
   "design": [
     {
-      "id": "UC_zQ777U6YTyatP3P1wi3xw",
-      "name": "Never Too Small"
-    },
-    {
-      "id": "UC0k238zFx-Z8xFH0sxCrPJg",
-      "name": "Architectural Digest"
-    },
-    {
-      "id": "UCgxg48_pay4R67s-7WOgWFA",
-      "name": "The Local Project"
-    },
-    {
-      "id": "UCDsElQQt_gCZ9LgnW-7v-cQ",
-      "name": "Kirsten Dirksen"
-    },
-    {
       "id": "UC-b3c7kxa5vU-bnmaROgvog",
       "name": "The Futur"
-    },
-    {
-      "id": "UCJ_2hNMxOzNjviJBiLWHMqg",
-      "name": "Dami Lee"
-    },
-    {
-      "id": "UCYAm24PkejQR2xMgJgn7xwg",
-      "name": "Stewart Hicks"
     },
     {
       "id": "UC_kjXjYwOlMZeLMkAanRn3g",
@@ -654,20 +1074,104 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "Linus Boman"
     },
     {
-      "id": "UCoNTMWgGuXtGPLv9UeJZwBw",
-      "name": "Living Big In A Tiny House"
+      "id": "UCw5pljbSyZMq-wjm_notQLQ",
+      "name": "Two Times Elliott"
     },
     {
-      "id": "UCsWG9ANbrmgR0z-eFk_A3YQ",
-      "name": "Dezeen"
+      "id": "UCwOFqUE6Er2hfCvtLGMTW6Q",
+      "name": "RIGHT ALIGNED"
     },
     {
-      "id": "UC3r_kdJocuqtDYb2GgM42Ng",
-      "name": "ArchDaily"
+      "id": "UC98Glz-MWdnqeZDBxRPUUvQ",
+      "name": "Design Docs"
     },
     {
-      "id": "UCv6JHGYnS74viHnZ-6zR2Jg",
-      "name": "designboom"
+      "id": "UCSIkG6wtvxDduCumCRAAO4A",
+      "name": "Will Paterson"
+    },
+    {
+      "id": "UCwADKD62xOgWPxoe68rzMVA",
+      "name": "Shantanu Kumar"
+    },
+    {
+      "id": "UC9x81wlmaOq8wykycn9-QiA",
+      "name": "Brandon Shepherd"
+    },
+    {
+      "id": "UCqausxjCnGsTl0rQgM7HZWQ",
+      "name": "Designer In Japan"
+    },
+    {
+      "id": "UC8ME0E1icwddCikdomxrIVw",
+      "name": "Dena Nguyen"
+    },
+    {
+      "id": "UCUn5JuT0zriA1nOJWoumSZw",
+      "name": "Scene"
+    },
+    {
+      "id": "UCcBZIvKbIgXGRjn9j2P6lOw",
+      "name": "Arteri"
+    },
+    {
+      "id": "UCdgUN8rX3SEb9L7FDub3I6A",
+      "name": "Design Theory"
+    },
+    {
+      "id": "UCSLeoz5odIGS2GdlbHbCAUg",
+      "name": "Matthew Encina"
+    },
+    {
+      "id": "UCa_aLyHBN8zuisUpHDjmBbw",
+      "name": "elliotisacoolguy"
+    },
+    {
+      "id": "UCa8W2_uf81Ew6gYuw0VPSeA",
+      "name": "Juxtopposed"
+    },
+    {
+      "id": "UCIn5gFPi5hSB1Gqpur33_3w",
+      "name": "The Science of Products"
+    },
+    {
+      "id": "UCS1gMhu2KgHqW4OunIAaKrA",
+      "name": "P A N T E R"
+    },
+    {
+      "id": "UCFsUH7Zyy0UXAfv6KQGq9eg",
+      "name": "Noggi"
+    },
+    {
+      "id": "UCWIfzAYHyNSyHmT2AO-54yg",
+      "name": "pwnisher"
+    },
+    {
+      "id": "UCMosQZ8k4dPITlPZ0Q6kpog",
+      "name": "Kaizen"
+    },
+    {
+      "id": "UC0G7e3uCtTyKQy2vZbRaKxg",
+      "name": "Works By Design"
+    },
+    {
+      "id": "UC1V-DYqsaj764uBis9-UDug",
+      "name": "Foureyes Furniture"
+    },
+    {
+      "id": "UCQJQB-ij7HNYKCyNdi0Y--Q",
+      "name": "Make With Miles"
+    },
+    {
+      "id": "UCbtEd1MuY6gd2RpdWqkzXFw",
+      "name": "Morley Kert"
+    },
+    {
+      "id": "UC5mKrz-oinuz9stgxYdznrg",
+      "name": "makerunit"
+    },
+    {
+      "id": "UCkcBDNWKUSczL9TIx-7h6Qw",
+      "name": "David Fragomeni"
     }
   ],
   "learning": [
@@ -726,6 +1230,54 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCNIuvl7V8zACPpTmmNIqP2A",
       "name": "OverSimplified"
+    },
+    {
+      "id": "UCfdNM3NAhaBOXCafH7krzrA",
+      "name": "The Infographics Show"
+    },
+    {
+      "id": "UCdp4_l1vPmpN-gDbUwhaRUQ",
+      "name": "Branch Education"
+    },
+    {
+      "id": "UCZjMzdwVa4dRy_V5AQwEv8A",
+      "name": "Historically"
+    },
+    {
+      "id": "UCq8ZAAsI89IoJ-fn1gYpO3g",
+      "name": "Nightshift – Kurzgesagt After Dark"
+    },
+    {
+      "id": "UCFYOBrtrYKzdya20cFirkTA",
+      "name": "Kieren Westwood"
+    },
+    {
+      "id": "UC3g-w83Cb5pEAu5UmRrge-A",
+      "name": "Brandon Sanderson"
+    },
+    {
+      "id": "UCiflcKnh5cZiRWK7jlYKwxA",
+      "name": "Elliot Brooks"
+    },
+    {
+      "id": "UCoOae5nYA7VqaXzerajD0lg",
+      "name": "Ali Abdaal"
+    },
+    {
+      "id": "UCftSbpEaMtTWcaFnvjwCvXw",
+      "name": "Rian Doris"
+    },
+    {
+      "id": "UCtUId5WFnN82GdDy7DgaQ7w",
+      "name": "Better Ideas"
+    },
+    {
+      "id": "UC-dmJ79518WlKMbsu50eMTQ",
+      "name": "Clark Kegley"
+    },
+    {
+      "id": "UC3JhfsgFPLSLNEROQCdj-GQ",
+      "name": "Headspace"
     }
   ],
   "movies": [
@@ -834,6 +1386,46 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCCn62cYVpl0e_GN-yo1H9yQ",
       "name": "mashed"
+    },
+    {
+      "id": "UC-vrN89jIox3XqAKbEMeFgQ",
+      "name": "GOBELINS"
+    },
+    {
+      "id": "UC_976xMxPgzIa290Hqtk-9g",
+      "name": "Walt Disney Animation Studios"
+    },
+    {
+      "id": "UCZzvDDvaYti8Dd8bLEiSoyQ",
+      "name": "Beast Animations"
+    },
+    {
+      "id": "UCsOav-uzO3ENpoft3VnDIeQ",
+      "name": "SkyeWei"
+    },
+    {
+      "id": "UC8hmxmZq7HwS_-tSkNi_n9A",
+      "name": "WHAT HAD HAPPENED WAS "
+    },
+    {
+      "id": "UCi7x2X0VSmEKtHPPXVBX_3w",
+      "name": "Don&#39;t Walk Home Alone After Dark"
+    },
+    {
+      "id": "UCAjgxh6TBT_mKBjKGDC6g_Q",
+      "name": "Jaicemations"
+    },
+    {
+      "id": "UC_m-6n6uGAM0K_qPRzGqDaw",
+      "name": "NAITWAFREDDY "
+    },
+    {
+      "id": "UCWifGU19tH1hkUiiVnWRAOA",
+      "name": "AFarParadice"
+    },
+    {
+      "id": "UCQF0f62JXnfFSxKDmN8SDUg",
+      "name": "SolarBalls"
     }
   ],
   "industry": [
@@ -888,6 +1480,244 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC2wdo5vU7bPBNzyC2nnwmNQ",
       "name": "Cutting Edge Engineering"
+    }
+  ],
+  "architecture": [
+    {
+      "id": "UC_zQ777U6YTyatP3P1wi3xw",
+      "name": "Never Too Small"
+    },
+    {
+      "id": "UC0k238zFx-Z8xFH0sxCrPJg",
+      "name": "Architectural Digest"
+    },
+    {
+      "id": "UCgxg48_pay4R67s-7WOgWFA",
+      "name": "The Local Project"
+    },
+    {
+      "id": "UCDsElQQt_gCZ9LgnW-7v-cQ",
+      "name": "Kirsten Dirksen"
+    },
+    {
+      "id": "UCJ_2hNMxOzNjviJBiLWHMqg",
+      "name": "Dami Lee"
+    },
+    {
+      "id": "UCYAm24PkejQR2xMgJgn7xwg",
+      "name": "Stewart Hicks"
+    },
+    {
+      "id": "UCoNTMWgGuXtGPLv9UeJZwBw",
+      "name": "Living Big In A Tiny House"
+    },
+    {
+      "id": "UCsWG9ANbrmgR0z-eFk_A3YQ",
+      "name": "Dezeen"
+    },
+    {
+      "id": "UC3r_kdJocuqtDYb2GgM42Ng",
+      "name": "ArchDaily"
+    },
+    {
+      "id": "UCv6JHGYnS74viHnZ-6zR2Jg",
+      "name": "designboom"
+    },
+    {
+      "id": "UCLYrUmw0L_bjFeQCvWuiijg",
+      "name": "The Luxury Home Show"
+    },
+    {
+      "id": "UC6n8I1UDTKP1IWjQMg6_TwA",
+      "name": "The B1M"
+    },
+    {
+      "id": "UC4GYmnbkZranfQo2f3TJ3KA",
+      "name": "COMPOUND"
+    },
+    {
+      "id": "UCRSRvZQ0PgbINaDIF1QTTRQ",
+      "name": "Dami Lee"
+    },
+    {
+      "id": "UCOn4OkRtzsN4EP8pWM-IYVw",
+      "name": "Property London"
+    },
+    {
+      "id": "UCMayaatitp-arhjI7azj9IA",
+      "name": "Refined Living"
+    },
+    {
+      "id": "UC6TY36Ys_J6UPKd75TpRuUw",
+      "name": "MegaBuilds"
+    }
+  ],
+  "documentaries": [
+    {
+      "id": "UCHyzc2Pp_fC5hfTLebF1ZiQ",
+      "name": "@fern"
+    },
+    {
+      "id": "UCWBtLCE-BnzZx3DneqDiXWQ",
+      "name": "Astrum Earth"
+    },
+    {
+      "id": "UCR9sFzaG9Ia_kXJhfxtFMBA",
+      "name": "melodysheep"
+    },
+    {
+      "id": "UClZbmi9JzfnB2CEb0fG8iew",
+      "name": "Primal Space"
+    },
+    {
+      "id": "UCWAqXzY2MLxYUf8qVFuJedg",
+      "name": "Theniyifagbemi"
+    },
+    {
+      "id": "UC4lH-odQ5ll-85fkpWxDYmA",
+      "name": "Steven Ndukwu"
+    },
+    {
+      "id": "UCijcd0GR0fkxCAZwkiuWqtQ",
+      "name": "Free Documentary"
+    },
+    {
+      "id": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+      "name": "WELT Documentary"
+    }
+  ],
+  "religion": [
+    {
+      "id": "UC27F-5DfIOEitDEazCwdHWw",
+      "name": "The Catholic Crusade"
+    },
+    {
+      "id": "UCw_FuPznUUVSLtPnSMQnZQw",
+      "name": "Alexander Wilson"
+    },
+    {
+      "id": "UCVdGX3N-WIJ5nUvklBTNhAw",
+      "name": "Ascension Presents"
+    },
+    {
+      "id": "UCmJTXhjB9h83BjuLjehW_Bw",
+      "name": "FOCUS Catholic"
+    },
+    {
+      "id": "UCZpWMxP4e8sQLZjbYQmanIw",
+      "name": "Sundays with Ascension"
+    },
+    {
+      "id": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+      "name": "Redeeming Productivity"
+    }
+  ],
+  "cars": [
+    {
+      "id": "UC_BaxRhNREI_V0DVXjXDALA",
+      "name": "Porsche"
+    },
+    {
+      "id": "UCKSVUHI9rbbkXhvAXK-2uxA",
+      "name": "Supercar Blondie"
+    },
+    {
+      "id": "UC9ZqNBEjEU1NK475EvqmlLA",
+      "name": "Polestar"
+    },
+    {
+      "id": "UC2J-0g_nxlwcD9JBK1eTleQ",
+      "name": "Auto Focus"
+    }
+  ],
+  "business": [
+    {
+      "id": "UChFahjDeMBV67DSXiF5pwBA",
+      "name": "UpFlip"
+    },
+    {
+      "id": "UCGq-a57w-aPwyi3pW7XLiHw",
+      "name": "The Diary Of A CEO"
+    },
+    {
+      "id": "UCUEmaeh13ai1ivT5wzz5Lhg",
+      "name": "Maxinomics"
+    },
+    {
+      "id": "UCegCVWcBFpbndzPJaC-DsMQ",
+      "name": "theinvisiblehand"
+    },
+    {
+      "id": "UCisy6taOAeLfyaCqcMQDfig",
+      "name": "Max Klymenko"
+    },
+    {
+      "id": "UCNjPtOCvMrKY5eLwr_-7eUg",
+      "name": "Alux.com"
+    },
+    {
+      "id": "UCyRtUwLylsFqguBvV6Kwlfw",
+      "name": "The Numbers Game"
+    }
+  ],
+  "news": [
+    {
+      "id": "UCeY0bbntWzzVIaj2z3QigXg",
+      "name": "NBC News"
+    },
+    {
+      "id": "UCzPpbeK8ANcNKg5aoMB0miw",
+      "name": "Dylan Page"
+    }
+  ],
+  "entertainment": [
+    {
+      "id": "UCX6OQ3DkcsbYNE6H8uQQuVA",
+      "name": "MrBeast"
+    },
+    {
+      "id": "UCnmGIkw-KdI0W5siakKPKog",
+      "name": "Ryan Trahan"
+    },
+    {
+      "id": "UCGmnsW623G1r-Chmo5RB4Yw",
+      "name": "KSI"
+    },
+    {
+      "id": "UCzUjeR-Wgr0_iyL_brgx3Fw",
+      "name": "ShxtsnGigs Podcast"
+    },
+    {
+      "id": "UC4pFQ-V4RUtnWZ3ksRfRl-Q",
+      "name": "ShxtsnGigs Reacts"
+    },
+    {
+      "id": "UC1TyJa3QI9JzqCTcO_cfhmg",
+      "name": "Idy Archibong"
+    },
+    {
+      "id": "UCOvGHa9GYZyyatJqsKTCWSA",
+      "name": "Cruise"
+    },
+    {
+      "id": "UCADEYQiszEI_cMARTSi5GdQ",
+      "name": "Papiens"
+    },
+    {
+      "id": "UCpHWSOWGarUZIjTvTjbQkDA",
+      "name": "OnzLemur"
+    },
+    {
+      "id": "UCxs87BsBSzw8FC7IlvfQ5kA",
+      "name": "Asa Park"
+    },
+    {
+      "id": "UCY0LR5f4leMPO-O9VP4NB_A",
+      "name": "The Ash Files"
+    },
+    {
+      "id": "UCccjdJEay2hpb5scz61zY6Q",
+      "name": "NBC"
     }
   ]
 };
