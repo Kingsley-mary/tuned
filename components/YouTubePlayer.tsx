@@ -33,7 +33,6 @@ interface YouTubePlayerProps {
   onBuffering: (isBuffering: boolean) => void;
   onReady?: () => void;
   onShortDetected?: (videoId: string) => void;
-  onAutoMuted?: () => void;
 }
 
 export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -52,7 +51,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   onBuffering,
   onReady,
   onShortDetected,
-  onAutoMuted,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
@@ -81,7 +79,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     onBuffering,
     onReady,
     onShortDetected,
-    onAutoMuted,
   });
 
   useEffect(() => {
@@ -101,7 +98,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       onBuffering,
       onReady,
       onShortDetected,
-      onAutoMuted,
     };
   });
 
@@ -288,6 +284,14 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               if (event.data === 1) {
                 hasStartedRef.current = true;
                 cur.onBuffering(false);
+                try {
+                  if (cur.isMuted) {
+                    playerRef.current?.mute?.();
+                  } else {
+                    playerRef.current?.unMute?.();
+                    playerRef.current?.setVolume?.(100);
+                  }
+                } catch {}
                 // Re-apply caption state once playback starts so forced creator captions respect user setting
                 applyCaptionSettings(
                   playerRef.current,
@@ -400,22 +404,9 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     applyCaptionSettings(playerRef.current, !!captionsEnabled, captionFontSize, captionLanguage);
   }, [captionsEnabled, captionFontSize, captionLanguage]);
 
-  // Mobile Autoplay Recovery + Unplayable Watchdog:
+  // Watchdog: If video is supposed to play but fails to start within 8s, skip to next video
   useEffect(() => {
     if (!videoId || !isPlaying) return;
-
-    const muteFallbackTimer = setTimeout(() => {
-      if (!hasStartedRef.current && playerRef.current && isReadyRef.current) {
-        try {
-          const state = playerRef.current.getPlayerState?.();
-          if (state === -1 || state === 5 || state === 2) {
-            playerRef.current.mute?.();
-            playerRef.current.playVideo?.();
-            latestPropsRef.current.onAutoMuted?.();
-          }
-        } catch {}
-      }
-    }, 1400);
 
     const watchdog = setTimeout(() => {
       if (!hasStartedRef.current && playerRef.current && isReadyRef.current) {
@@ -430,7 +421,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     }, 8000);
 
     return () => {
-      clearTimeout(muteFallbackTimer);
       clearTimeout(watchdog);
     };
   }, [videoId, tuneKey, isPlaying]);

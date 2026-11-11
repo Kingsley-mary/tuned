@@ -487,9 +487,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               }}
               onBuffering={setIsBuffering}
               onShortDetected={onShortDetected}
-              onAutoMuted={() => {
-                setIsMuted(true);
-              }}
             />
           </div>
         ) : (
