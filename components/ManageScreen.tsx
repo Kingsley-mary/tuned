@@ -118,9 +118,14 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
             <Tv size={14} /> Channel lineup
           </div>
         </div>
-        <div className="gd-clock">
-          <div className="gd-date">{channelCount} channels</div>
-          <div className="mg-sub">Minimum 3 channels</div>
+        <div className="gd-clock" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div>
+            <div className="gd-date">{channelCount} channels</div>
+            <div className="mg-sub">Minimum 3 channels</div>
+          </div>
+          <button onClick={onDone} className="osd-btn active-solid" style={{ height: 38, padding: '0 18px' }}>
+            Done
+          </button>
         </div>
       </header>
 

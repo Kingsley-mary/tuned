@@ -79,6 +79,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [duration, setDuration] = useState<number>(0);
   const [isBuffering, setIsBuffering] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [autoMutedBanner, setAutoMutedBanner] = useState<boolean>(false);
   const [isChannelPulsing, setIsChannelPulsing] = useState<boolean>(false);
   const [isBadgeFlipping, setIsBadgeFlipping] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
@@ -87,6 +88,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   const tvStageRef = useRef<HTMLDivElement>(null);
   const bumperTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const onNextVideoRef = useRef(onNextVideo);
   onNextVideoRef.current = onNextVideo;
 
@@ -129,26 +131,31 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     return () => clearTimeout(timer);
   }, [currentChannelIndex, activeChannel?.hue]);
 
-  // Fullscreen toggle handler on tvStageRef (contains 16:9 video + non-overlapping bottom bezel bar)
+  // Fullscreen toggle handler on tvStageRef (with iOS Safari graceful fallback)
   const toggleFullscreen = useCallback(async () => {
     try {
-      if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) {
-        if (tvStageRef.current) {
-          if (tvStageRef.current.requestFullscreen) {
-            await tvStageRef.current.requestFullscreen();
-          } else if ((tvStageRef.current as any).webkitRequestFullscreen) {
-            await (tvStageRef.current as any).webkitRequestFullscreen();
-          }
+      const docAny = document as any;
+      const stageAny = tvStageRef.current as any;
+      if (!document.fullscreenElement && !docAny.webkitFullscreenElement) {
+        if (stageAny?.requestFullscreen) {
+          await stageAny.requestFullscreen();
+        } else if (stageAny?.webkitRequestFullscreen) {
+          await stageAny.webkitRequestFullscreen();
+        } else {
+          // iOS Safari does not support requestFullscreen on div elements; toggle immersive OSD-hidden state
+          setIsFullscreen((prev) => !prev);
+          setOsdOpen(false);
         }
       } else {
         if (document.exitFullscreen) {
           await document.exitFullscreen();
-        } else if ((document as any).webkitExitFullscreen) {
-          await (document as any).webkitExitFullscreen();
+        } else if (docAny.webkitExitFullscreen) {
+          await docAny.webkitExitFullscreen();
         }
       }
     } catch (err) {
-      console.warn('Fullscreen request failed:', err);
+      setIsFullscreen((prev) => !prev);
+      setOsdOpen(false);
     }
   }, []);
 
@@ -186,7 +193,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     if (!activeChannel || typeof window === 'undefined') return;
     const url = new URL(window.location.href);
     url.searchParams.set('ch', activeChannel.categoryId);
-    navigator.clipboard?.writeText(url.toString()).catch(() => {});
+    if (navigator.share) {
+      navigator.share({ title: `Tuned · ${activeChannel.categoryName}`, url: url.toString() }).catch(() => {});
+    } else {
+      navigator.clipboard?.writeText(url.toString()).catch(() => {});
+    }
     setCopiedShare(true);
     setTimeout(() => setCopiedShare(false), 2000);
   }, [activeChannel]);
@@ -235,7 +246,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         toggleFullscreen();
       } else if (e.key === 'm' || e.key === 'M') {
         e.preventDefault();
-        setIsMuted((prev) => !prev);
+        setIsMuted((prev) => {
+          const next = !prev;
+          if (!next) setAutoMutedBanner(false);
+          return next;
+        });
       } else if (e.key === 'l' || e.key === 'L' || e.key === 'Backspace') {
         if (previousChannelIndex !== null && previousChannelIndex !== currentChannelIndex) {
           e.preventDefault();
@@ -265,7 +280,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   // Compute true linear schedule for Up Next (3 upcoming shows)
   const schedule = buildChannelSchedule(videos, currentVideoIndex, currentTime, 4);
-  const upNextList = schedule.slice(1, 4);
 
   const effectiveDuration = duration > 0 ? duration : activeVideo ? getVideoDuration(activeVideo) : 600;
   const progressPercent =
@@ -275,7 +289,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     sleepTimerMode === 'off'
       ? 'Sleep'
       : sleepTimerMode === 'end'
-      ? 'Sleep: End of Show'
+      ? 'Sleep: End'
       : sleepRemainingSec !== null
       ? `Sleep ${Math.ceil(sleepRemainingSec / 60)}m`
       : `Sleep ${sleepTimerMode}`;
@@ -317,8 +331,50 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     return () => window.removeEventListener('keydown', onKey);
   }, [isHidden, onOpenGuide, pokeOsd]);
 
-  const stepChannel = (dir: 1 | -1) =>
-    onSelectChannel((currentChannelIndex + dir + channels.length) % channels.length);
+  const stepChannel = useCallback(
+    (dir: 1 | -1) => {
+      if (channels.length === 0) return;
+      onSelectChannel((currentChannelIndex + dir + channels.length) % channels.length);
+      pokeOsd();
+    },
+    [channels.length, currentChannelIndex, onSelectChannel, pokeOsd]
+  );
+
+  // Touch swipe gestures for mobile channel surfing (Swipe Up/Left = Next Ch, Swipe Down/Right = Prev Ch)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (!t) return;
+    touchStartRef.current = { x: t.clientX, y: t.clientY, time: Date.now() };
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStartRef.current;
+    touchStartRef.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    if (!t) return;
+
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    const dt = Date.now() - start.time;
+
+    // Swipe gesture threshold
+    if (dt < 700 && (Math.abs(dy) > 48 || Math.abs(dx) > 56)) {
+      if (Math.abs(dy) >= Math.abs(dx)) {
+        // Swipe up -> next channel, swipe down -> prev channel
+        stepChannel(dy < 0 ? 1 : -1);
+      } else {
+        // Swipe left -> next channel, swipe right -> prev channel
+        stepChannel(dx < 0 ? 1 : -1);
+      }
+    }
+  };
+
+  const handleUnmuteTap = () => {
+    setIsMuted(false);
+    setAutoMutedBanner(false);
+    pokeOsd();
+  };
 
   const now = new Date();
   const hh = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -389,6 +445,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               }}
               onBuffering={setIsBuffering}
               onShortDetected={onShortDetected}
+              onAutoMuted={() => {
+                setIsMuted(true);
+                setAutoMutedBanner(true);
+              }}
             />
           </div>
         ) : (
@@ -400,16 +460,39 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         )}
       </div>
 
-      {/* Click/hover capture layer so the OSD can be summoned over the iframe */}
+      {/* Click/touch/swipe capture layer so the OSD can be summoned and channels swiped on mobile */}
       <div
         className="tv-capture"
         onClick={() => (osdOpen ? setOsdOpen(false) : pokeOsd())}
         onDoubleClick={toggleFullscreen}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         aria-hidden
       />
 
+      {/* Mobile Auto-Mute Unmute Prompt (iOS / Android autoplay unlock) */}
+      {(autoMutedBanner || isMuted) && (
+        <button
+          type="button"
+          className="tv-unmute-pill"
+          onClick={handleUnmuteTap}
+          aria-label="Tap to unmute audio"
+        >
+          <VolumeX size={16} />
+          <span>Tap for Sound</span>
+        </button>
+      )}
+
       {/* Top bar */}
-      <div className="osd-top" onMouseEnter={() => (osdHoverRef.current = true)} onMouseLeave={() => { osdHoverRef.current = false; pokeOsd(); }}>
+      <div
+        className="osd-top"
+        onMouseEnter={() => (osdHoverRef.current = true)}
+        onMouseLeave={() => {
+          osdHoverRef.current = false;
+          pokeOsd();
+        }}
+        onTouchStart={() => pokeOsd()}
+      >
         <div className="brand-logo" style={{ color: '#fff' }}>
           <span className="brand-dot" />
           <span>tuned</span>
@@ -450,12 +533,21 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           osdHoverRef.current = false;
           pokeOsd();
         }}
+        onTouchStart={() => pokeOsd()}
       >
         <div className="osd-legend">
           <button onClick={onTogglePlay}>
             {isPlaying ? 'Pause' : 'Play'} <span className="kbd-osd">SPACE</span>
           </button>
-          <button onClick={() => setIsMuted((m) => !m)}>
+          <button
+            onClick={() => {
+              setIsMuted((m) => {
+                const next = !m;
+                if (!next) setAutoMutedBanner(false);
+                return next;
+              });
+            }}
+          >
             {isMuted ? 'Unmute' : 'Mute'} <span className="kbd-osd">M</span>
           </button>
           <button onClick={toggleFullscreen}>
@@ -511,7 +603,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             const isNow = i === 0;
             return (
               <div key={slot.video.youtubeVideoId + i} className={`osd-row${isNow ? ' now' : ''}`}>
-                <span className="osd-row-time">{formatClockTime(isNow ? slot.startTimeMs : slot.startTimeMs)}</span>
+                <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
                 <span className="osd-row-tag">{isNow ? 'LIVE' : i === 1 ? 'NEXT' : ''}</span>
                 <span className="osd-row-title">{isNow ? activeVideo?.title || slot.video.title : slot.video.title}</span>
                 <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>

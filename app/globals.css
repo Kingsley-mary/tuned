@@ -1533,19 +1533,192 @@ button:focus-visible, input:focus-visible {
 }
 @media (max-width: 980px) {
   .tvg-guide-screen {
-    --lw: 130px;
-    --gut: 14px;
+    --lw: clamp(92px, 26vw, 130px);
+    --gut: 12px;
+    --gap: 5px;
+    height: 100dvh;
   }
   .tvg-guide-screen .app {
-    padding: 14px 14px 10px;
+    height: 100dvh;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+  .tvg-guide-screen .ch span {
+    font-size: clamp(18px, 3.2vh, 26px);
+    letter-spacing: .04em;
+  }
+  .tvg-guide-screen .pr {
+    padding: 0 10px;
+    font-size: 13px;
   }
   .tvg-guide-screen .info {
-    grid-template-columns: var(--lw) 1fr;
+    grid-template-columns: auto 1fr auto;
+    padding: 0 12px;
+    gap: 10px;
+    height: clamp(44px, 6vh, 54px);
+  }
+  .tvg-guide-screen .info .tm {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .tvg-guide-screen .info .tt {
+    font-size: 13px;
   }
   .tvg-guide-screen .info .rt span {
     display: none;
   }
-  .tvg-guide-screen .info .rt {
-    grid-column: 2;
+  .tvg-guide-screen .bdg {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  .tvg-guide-screen .keys {
+    padding-top: 8px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .tvg-guide-screen .keys div {
+    flex: 1;
+    justify-content: center;
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 10px;
+    padding: 8px 6px;
+    gap: 6px;
+    font-size: 13px;
+  }
+  .tvg-guide-screen .k {
+    display: none;
+  }
+}
+
+/* ================= Mobile & Touch Optimizations across Watch, Manage, and Pick ================= */
+.tv-unmute-pill {
+  position: absolute;
+  top: calc(74px + env(safe-area-inset-top, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(244, 235, 224, 0.96);
+  color: #1f140d;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  border: 1px solid #fff;
+  cursor: pointer;
+  animation: pulse-live 2s infinite;
+}
+
+@media (max-width: 768px) {
+  .tv-stage {
+    height: 100dvh;
+  }
+  .osd-top {
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 14px 12px;
+  }
+  .osd-bottom {
+    padding: 24px 10px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.94) 55%, transparent);
+  }
+  .osd-legend {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    padding: 0 4px 10px;
+    gap: 8px;
+  }
+  .osd-legend::-webkit-scrollbar {
+    display: none;
+  }
+  .osd-legend button {
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+  }
+  .osd-panel {
+    border-radius: 16px;
+  }
+  .osd-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+  }
+  .osd-head-left {
+    display: none;
+  }
+  .osd-channel {
+    gap: 8px;
+  }
+  .osd-channel-name {
+    min-width: 0;
+    font-size: 18px;
+  }
+  .osd-channel-name span {
+    font-size: 22px;
+  }
+  .osd-row {
+    height: 40px;
+    grid-template-columns: 58px minmax(0, 1fr) 46px;
+    padding: 0 12px;
+    gap: 8px;
+  }
+  .osd-row.now {
+    height: 46px;
+    margin: 4px 6px;
+    padding: 0 10px;
+  }
+  .osd-row-title {
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block !important;
+    font-size: 13px;
+  }
+  .osd-screen,
+  .gd-screen.mg-screen,
+  .gd-screen.pk-screen {
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mg-screen {
+    padding: calc(16px + env(safe-area-inset-top, 0px)) 14px calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+  .mg-body {
+    overflow: visible;
+    gap: 16px;
+  }
+  .mg-card {
+    padding: 16px;
+  }
+  .mg-form {
+    flex-direction: column;
+  }
+  .mg-form .osd-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .pk-screen .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pk-screen .category-grid button {
+    height: 112px !important;
+    padding: 12px !important;
+  }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .tv-stage.osd-on .tv-video {
+    align-items: flex-start;
+    padding-top: calc(64px + env(safe-area-inset-top, 0px));
   }
 }

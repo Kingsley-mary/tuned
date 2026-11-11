@@ -32,7 +32,6 @@ interface GuideSlot {
 }
 
 const VIS = 7;
-const WIN = 90; // 90-minute window for wider, more readable program blocks
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -70,6 +69,20 @@ export function GuideScreen({
   onTuneChannel,
 }: GuideScreenProps) {
   const [nowMs, setNowMs] = useState<number>(() => Date.now());
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkViewport = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
+    return () => window.removeEventListener('resize', checkViewport);
+  }, []);
+
+  // Use 60-minute timeline window on mobile phones so program titles have plenty of room; 90 minutes on desktop
+  const WIN = isMobile ? 60 : 90;
+
   const dayStartMs = useMemo(() => getDayStartMs(nowMs), [nowMs]);
   const nowMin = (nowMs - dayStartMs) / 60000;
   const liveW0 = useMemo(() => getLiveWindowStart(nowMin), [Math.floor(nowMin)]);
@@ -91,6 +104,7 @@ export function GuideScreen({
   const [toastOn, setToastOn] = useState<boolean>(false);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const rowsRef = useRef<HTMLDivElement | null>(null);
+  const touchRef = useRef<{ x: number; y: number; startTop: number; startOffset: number } | null>(null);
 
   // Sync highlighted/selected row whenever currentChannelIndex changes
   useEffect(() => {
@@ -116,7 +130,6 @@ export function GuideScreen({
   }, []);
 
   // Build continuous linear schedule for each channel (including preceding slots back to w0 and upcoming slots)
-  // Re-anchored once per minute so slot IDs remain stable while seconds tick
   const scheduleAnchorMs = useMemo(() => Math.floor(nowMs / 10000) * 10000, [Math.floor(nowMs / 10000)]);
 
   const schedules: GuideSlot[][] = useMemo(() => {
@@ -223,13 +236,12 @@ export function GuideScreen({
   const w0 = liveW0 + winOffsetMin;
   const w1 = w0 + WIN;
 
-  // Move focus with keyboard arrows
+  // Move focus with keyboard arrows or buttons
   const move = useCallback(
     (dr: number, dt: number) => {
       if (dr) {
         const nextRow = Math.max(0, Math.min(channels.length - 1, selRow + dr));
         setSelRow(nextRow);
-        // Select the slot on the new row at the current window/time
         const targetList = schedules[nextRow] || [];
         const curMid = selectedSlot ? Math.max(selectedSlot.s + 1, nowMin) : nowMin;
         const match =
@@ -243,7 +255,6 @@ export function GuideScreen({
         const next = list[idx + dt];
         if (next && next.e > liveW0) {
           setSelSlotId(next.id);
-          // Shift window if selected slot is outside [w0, w1)
           const slotStart = Math.max(next.s, liveW0);
           if (slotStart >= w1 - 10) {
             setWinOffsetMin((off) => off + 30);
@@ -319,6 +330,45 @@ export function GuideScreen({
     return () => el.removeEventListener('wheel', onWheel);
   }, [channels.length, fittedTop]);
 
+  // Mobile Touch Drag/Swipe on Guide rows (vertical = scroll channels, horizontal = scroll timeline)
+  const handleRowsTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (!t) return;
+    touchRef.current = {
+      x: t.clientX,
+      y: t.clientY,
+      startTop: fittedTop,
+      startOffset: winOffsetMin,
+    };
+  };
+
+  const handleRowsTouchEnd = (e: React.TouchEvent) => {
+    const start = touchRef.current;
+    touchRef.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    if (!t) return;
+
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+
+    if (Math.abs(dy) > 36 && Math.abs(dy) >= Math.abs(dx)) {
+      const rowsDelta = dy < 0 ? 2 : -2;
+      const maxTop = Math.max(0, channels.length - VIS);
+      const nextTop = Math.max(0, Math.min(maxTop, start.startTop + rowsDelta));
+      setTopRow(nextTop);
+      setSelRow((r) => {
+        const nextR = Math.max(0, Math.min(channels.length - 1, r + (dy < 0 ? 1 : -1)));
+        if (nextR < nextTop) return nextTop;
+        if (nextR >= nextTop + VIS) return Math.min(channels.length - 1, nextTop + VIS - 1);
+        return nextR;
+      });
+    } else if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy)) {
+      const timeStep = dx < 0 ? 30 : -30;
+      setWinOffsetMin((off) => Math.max(0, Math.min(360, off + timeStep)));
+    }
+  };
+
   // Format header clock & date matching Tuned — TV Guide.html
   const clockDateObj = new Date(nowMs);
   const clockText = `${pad(clockDateObj.getHours())}:${pad(clockDateObj.getMinutes())}`;
@@ -328,15 +378,16 @@ export function GuideScreen({
     month: 'short',
   });
 
-  // 30-min time markers aligned to the timeline window [w0, w0 + 120]
+  // 30-min time markers aligned to the timeline window [w0, w0 + WIN]
   const timeTicks = useMemo(() => {
-    const firstTick = Math.ceil(w0 / 30) * 30;
+    const step = isMobile ? 30 : 30;
+    const firstTick = Math.ceil(w0 / step) * step;
     const ticks: number[] = [];
-    for (let m = firstTick; m < w0 + WIN - 8; m += 30) {
+    for (let m = firstTick; m < w0 + WIN - 6; m += step) {
       ticks.push(m);
     }
     return ticks;
-  }, [w0]);
+  }, [w0, WIN, isMobile]);
 
   const visibleRowIndices = useMemo(() => {
     const indices: number[] = [];
@@ -401,7 +452,12 @@ export function GuideScreen({
               </div>
             </div>
 
-            <div className="rows" ref={rowsRef}>
+            <div
+              className="rows"
+              ref={rowsRef}
+              onTouchStart={handleRowsTouchStart}
+              onTouchEnd={handleRowsTouchEnd}
+            >
               {visibleRowIndices.map((r) => {
                 const c = channels[r];
                 const isCurrentPlayingChannel = r === safeCurrentCh;
@@ -490,7 +546,12 @@ export function GuideScreen({
             </div>
 
             {selChannel && selectedSlot && (
-              <div className="info">
+              <div
+                className="info"
+                onClick={() => handleTune(selRow, selectedSlot)}
+                style={{ cursor: 'pointer' }}
+                title="Tap to watch this channel"
+              >
                 <div className="tm">
                   {hm(selectedSlot.s)} – {hm(selectedSlot.e)}
                 </div>
@@ -510,7 +571,11 @@ export function GuideScreen({
           <div onClick={() => handleTune(selRow, selectedSlot)} style={{ cursor: 'pointer' }}>
             Watch<span className="k">Enter</span>
           </div>
-          <div>
+          <div
+            onClick={() => move(1, 0)}
+            style={{ cursor: 'pointer' }}
+            title="Tap to step through channels"
+          >
             Browse<span className="k">↑ ↓</span>
           </div>
           <div onClick={onBackToWatch} style={{ cursor: 'pointer' }}>

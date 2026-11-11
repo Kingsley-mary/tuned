@@ -21,6 +21,7 @@ interface YouTubePlayerProps {
   onBuffering: (isBuffering: boolean) => void;
   onReady?: () => void;
   onShortDetected?: (videoId: string) => void;
+  onAutoMuted?: () => void;
 }
 
 export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
@@ -35,6 +36,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   onBuffering,
   onReady,
   onShortDetected,
+  onAutoMuted,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
@@ -59,6 +61,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     onBuffering,
     onReady,
     onShortDetected,
+    onAutoMuted,
   });
 
   useEffect(() => {
@@ -74,6 +77,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       onBuffering,
       onReady,
       onShortDetected,
+      onAutoMuted,
     };
   });
 
@@ -128,7 +132,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               isReadyRef.current = true;
               const cur = latestPropsRef.current;
 
-              // Ensure iframe has proper fullscreen and sizing attributes
+              // Ensure iframe has proper fullscreen and mobile playsinline attributes
               try {
                 const iframe = event.target?.getIframe?.();
                 if (iframe) {
@@ -136,6 +140,8 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                   iframe.style.height = '100%';
                   iframe.style.display = 'block';
                   iframe.setAttribute('allowfullscreen', 'true');
+                  iframe.setAttribute('playsinline', '1');
+                  iframe.setAttribute('webkit-playsinline', '1');
                   iframe.setAttribute(
                     'allow',
                     'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen'
@@ -148,6 +154,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                   playerRef.current?.mute?.();
                 } else {
                   playerRef.current?.unMute?.();
+                  playerRef.current?.setVolume?.(100);
                 }
               } catch {}
 
@@ -264,23 +271,42 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     }
   }, [videoId, startSeconds, tuneKey, isPlaying]);
 
-  // Watchdog: If video is supposed to play but fails to start or gets stuck in unstarted state
+  // Mobile Autoplay Recovery + Unplayable Watchdog:
+  // On iOS Safari & Android Chrome, unmuted autoplay inside a cross-origin YouTube iframe is blocked
+  // unless muted first. If playback hasn't started within 1.4s, auto-mute and retry playVideo()
+  // so mobile playback always starts instead of getting stuck or skipping in an infinite loop.
   useEffect(() => {
     if (!videoId || !isPlaying) return;
 
+    const muteFallbackTimer = setTimeout(() => {
+      if (!hasStartedRef.current && playerRef.current && isReadyRef.current) {
+        try {
+          const state = playerRef.current.getPlayerState?.();
+          if (state === -1 || state === 5 || state === 2) {
+            playerRef.current.mute?.();
+            playerRef.current.playVideo?.();
+            latestPropsRef.current.onAutoMuted?.();
+          }
+        } catch {}
+      }
+    }, 1400);
+
     const watchdog = setTimeout(() => {
-      if (!hasStartedRef.current && playerRef.current) {
+      if (!hasStartedRef.current && playerRef.current && isReadyRef.current) {
         try {
           const state = playerRef.current.getPlayerState?.();
           if (state === -1 || state === 5) {
-            console.warn(`Video ${videoId} failed to start playing within 6s (state ${state}), auto-skipping.`);
+            console.warn(`Video ${videoId} failed to start playing within 8s (state ${state}), auto-skipping.`);
             latestPropsRef.current.onError(100);
           }
         } catch {}
       }
-    }, 6000);
+    }, 8000);
 
-    return () => clearTimeout(watchdog);
+    return () => {
+      clearTimeout(muteFallbackTimer);
+      clearTimeout(watchdog);
+    };
   }, [videoId, tuneKey, isPlaying]);
 
   // Handle play / pause changes
@@ -307,6 +333,10 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
         playerRef.current.mute?.();
       } else {
         playerRef.current.unMute?.();
+        playerRef.current.setVolume?.(100);
+        if (latestPropsRef.current.isPlaying) {
+          playerRef.current.playVideo?.();
+        }
       }
     } catch (e) {
       console.warn('Error toggling mute:', e);

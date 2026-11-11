@@ -576,8 +576,7 @@ export default function TunedApp() {
     }
   };
 
-  const keepPlayerMounted =
-    hasEnteredWatch && (screenMode === 'watch' || screenMode === 'guide' || screenMode === 'manage');
+  const keepPlayerMounted = channels.length > 0 && screenMode !== 'off';
 
   return (
     <>
