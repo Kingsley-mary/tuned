@@ -1,406 +1,313 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { ChannelLineup } from '../lib/types';
-import {
-  ScheduledProgram,
-  getLiveBroadcastState,
-  advanceChannelPlayback,
-  buildChannelSchedule,
-} from '../lib/broadcast-clock';
+import { getLiveBroadcastState, buildChannelSchedule } from '../lib/broadcast-clock';
 
 export interface ChannelSavedState {
   videoIndex: number;
   seekSeconds: number;
-  leftAt: number;
+  savedAtMs: number;
+  completedVideoIds: Set<string>;
 }
 
-interface GuideScreenProps {
+export interface GuideScreenProps {
   channels: ChannelLineup[];
   currentChannelIndex: number;
   currentVideoIndex: number;
-  currentPlaybackSeconds: number;
-  savedChannelStates: Map<string, ChannelSavedState>;
-  completedVideoIds: Set<string>;
+  currentPlaybackSeconds?: number;
+  savedChannelStates?: Map<string, ChannelSavedState>;
+  completedVideoIds?: Set<string>;
   onBackToWatch: () => void;
   onTuneChannel: (channelIndex: number) => void;
 }
 
 interface GuideSlot {
-  startMs: number;
-  endMs: number;
-  startMin: number;
-  endMin: number;
-  title: string;
-  source: string;
+  id: string;
+  s: number; // minutes from start of today (00:00 local)
+  e: number; // minutes from start of today (00:00 local)
+  t: string;
+  src: string;
   videoId: string;
-  isLive: boolean;
-  progressPercent: number;
-  extraCount: number;
 }
 
-const VIS = 7; // 7 visible channel rows at a time
-const WIN = 120; // 120-minute (2-hour) horizontal broadcast window
-const MIN_SLOT_MS = 18 * 60 * 1000; // Group very short clips (<18m) so every TV guide block is wide & readable
+const VIS = 7;
+const WIN = 120; // 120 minutes
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-const formatHmFromEpoch = (epochMs: number) => {
-  const d = new Date(epochMs);
-  return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const hm = (m: number) => {
+  const norm = ((Math.floor(m) % 1440) + 1440) % 1440;
+  return `${pad(Math.floor(norm / 60))}:${pad(norm % 60)}`;
 };
 
-const formatDurationMin = (mins: number) => {
-  const safe = Math.max(1, Math.round(mins));
-  if (safe >= 60) {
-    const h = Math.floor(safe / 60);
-    const m = safe % 60;
-    return m > 0 ? `${h}h ${pad(m)}m` : `${h}h`;
-  }
-  return `${safe}m`;
+const dur = (d: number) => {
+  const mins = Math.max(1, Math.round(d));
+  return mins >= 60 ? `${Math.floor(mins / 60)}h ${pad(mins % 60)}m` : `${mins}m`;
 };
 
-function buildReadableSlots(schedule: ScheduledProgram[], nowMs: number, epochOriginMs: number): GuideSlot[] {
-  const slots: GuideSlot[] = [];
-  let i = 0;
-
-  while (i < schedule.length) {
-    const first = schedule[i];
-    let endMs = first.endTimeMs;
-    let extraCount = 0;
-    let j = i + 1;
-
-    while (endMs - first.startTimeMs < MIN_SLOT_MS && j < schedule.length) {
-      endMs = schedule[j].endTimeMs;
-      extraCount++;
-      j++;
-    }
-
-    const isLive = first.startTimeMs <= nowMs && nowMs < endMs;
-    const totalDurMs = Math.max(1, endMs - first.startTimeMs);
-    const progressPercent = isLive
-      ? Math.min(100, Math.max(0, ((nowMs - first.startTimeMs) / totalDurMs) * 100))
-      : 0;
-
-    slots.push({
-      startMs: first.startTimeMs,
-      endMs,
-      startMin: (first.startTimeMs - epochOriginMs) / 60000,
-      endMin: (endMs - epochOriginMs) / 60000,
-      title: first.video.title,
-      source: first.video.sourceChannelTitle,
-      videoId: first.video.youtubeVideoId,
-      isLive,
-      progressPercent,
-      extraCount,
-    });
-
-    i = j;
-  }
-
-  return slots;
+function getDayStartMs(nowMs: number): number {
+  const d = new Date(nowMs);
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
 }
 
-export const GuideScreen: React.FC<GuideScreenProps> = ({
+export function GuideScreen({
   channels,
   currentChannelIndex,
   currentVideoIndex,
-  currentPlaybackSeconds,
-  savedChannelStates,
+  currentPlaybackSeconds = 0,
   completedVideoIds,
   onBackToWatch,
   onTuneChannel,
-}) => {
+}: GuideScreenProps) {
   const [nowMs, setNowMs] = useState<number>(() => Date.now());
+  const dayStartMs = useMemo(() => getDayStartMs(nowMs), [nowMs]);
+  const nowMin = (nowMs - dayStartMs) / 60000;
+
+  // S.r (selected channel row), S.top (top visible row), S.t (time cursor), S.w0 (window start)
   const [selRow, setSelRow] = useState<number>(() =>
     Math.max(0, Math.min(channels.length - 1, currentChannelIndex))
   );
-  const [topRow, setTopRow] = useState<number>(() =>
-    Math.max(0, Math.min(Math.max(0, channels.length - VIS), currentChannelIndex - Math.floor(VIS / 2)))
-  );
-  // Selected time offset in minutes relative to nowMs (0 = live now)
-  const [selOffsetMin, setSelOffsetMin] = useState<number>(0);
-  // Window start offset in minutes relative to nowMs (0 = starts at current time)
-  const [winOffsetMin, setWinOffsetMin] = useState<number>(0);
-  const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [topRow, setTopRow] = useState<number>(() => {
+    const r = Math.max(0, Math.min(channels.length - 1, currentChannelIndex));
+    if (r >= VIS) return Math.min(Math.max(0, channels.length - VIS), r - VIS + 1);
+    return 0;
+  });
+  const [selTime, setSelTime] = useState<number>(() => (Date.now() - getDayStartMs(Date.now())) / 60000);
+  const [winStart, setWinStart] = useState<number>(() => (Date.now() - getDayStartMs(Date.now())) / 60000);
 
-  const toastTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const rowsContainerRef = useRef<HTMLDivElement>(null);
+  const [toastMsg, setToastMsg] = useState<string>('');
+  const [toastOn, setToastOn] = useState<boolean>(false);
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const rowsRef = useRef<HTMLDivElement | null>(null);
 
-  const flashToast = useCallback((msg: string) => {
+  const flash = useCallback((msg: string) => {
     setToastMsg(msg);
+    setToastOn(true);
     if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
-    toastTimerRef.current = setTimeout(() => {
-      setToastMsg(null);
-    }, 2200);
+    toastTimerRef.current = setTimeout(() => setToastOn(false), 2200);
   }, []);
 
+  // Update clock every 15s and keep w0/t advancing with live clock just like Tuned — TV Guide.html
   useEffect(() => {
-    return () => {
-      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
-    };
-  }, []);
-
-  // Update clock every 15 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setNowMs(Date.now());
+    const id = setInterval(() => {
+      const nextMs = Date.now();
+      const nextDayStart = getDayStartMs(nextMs);
+      const nextNowMin = (nextMs - nextDayStart) / 60000;
+      setNowMs((prevMs) => {
+        const prevNowMin = (prevMs - getDayStartMs(prevMs)) / 60000;
+        setWinStart((w0) => (Math.abs(w0 - prevNowMin) < 1 ? nextNowMin : Math.max(w0, nextNowMin)));
+        setSelTime((t) => Math.max(t, nextNowMin));
+        return nextMs;
+      });
     }, 15000);
-    return () => clearInterval(timer);
+    return () => clearInterval(id);
   }, []);
 
-  // Midnight of today as minute-0 reference so minute math matches Tuned — TV Guide.html
-  const dayOriginMs = useMemo(() => {
-    const d = new Date(nowMs);
-    d.setHours(0, 0, 0, 0);
-    return d.getTime();
-  }, [nowMs]);
+  // Build real linear TV schedule for each channel
+  const schedules: GuideSlot[][] = useMemo(() => {
+    const nowEpochSec = Math.floor(nowMs / 1000);
+    return channels.map((ch, idx) => {
+      let activeIdx = 0;
+      let activeSeek = 0;
 
-  const nowMin = (nowMs - dayOriginMs) / 60000;
-  const w0 = nowMin + winOffsetMin;
-  const w1 = w0 + WIN;
-  const targetTimeMin = nowMin + selOffsetMin;
-
-  // Build linear schedules for all channels
-  const allRows = useMemo(() => {
-    return channels.map((ch, chIdx) => {
-      const isCurrentChannel = chIdx === currentChannelIndex;
-      let vIdx = 0;
-      let seek = 0;
-
-      if (isCurrentChannel) {
-        vIdx = currentVideoIndex;
-        seek = currentPlaybackSeconds;
+      if (idx === currentChannelIndex && currentPlaybackSeconds > 0) {
+        activeIdx = currentVideoIndex;
+        activeSeek = currentPlaybackSeconds;
       } else {
-        const saved = savedChannelStates.get(ch.categoryId);
-        if (saved && ch.videos.length > 0) {
-          const adv = advanceChannelPlayback(
-            ch.videos,
-            saved.videoIndex,
-            saved.seekSeconds,
-            (nowMs - saved.leftAt) / 1000,
-            new Set(completedVideoIds)
-          );
-          vIdx = adv.videoIndex;
-          seek = adv.seekSeconds;
-        } else {
-          const live = getLiveBroadcastState(
-            ch.videos,
-            ch.categoryId,
-            Math.floor(nowMs / 1000),
-            completedVideoIds
-          );
-          vIdx = live.videoIndex;
-          seek = live.seekSeconds;
-        }
+        const live = getLiveBroadcastState(
+          ch.videos,
+          ch.categoryId,
+          nowEpochSec,
+          completedVideoIds
+        );
+        activeIdx = live.videoIndex;
+        activeSeek = live.seekSeconds;
       }
 
-      const rawSchedule = buildChannelSchedule(ch.videos, vIdx, seek, 75, nowMs);
-      const slots = buildReadableSlots(rawSchedule, nowMs, dayOriginMs);
-      return {
-        ch,
-        chIdx,
-        isCurrentChannel,
-        slots,
-      };
+      const raw = buildChannelSchedule(ch.videos, activeIdx, activeSeek, 36, nowMs);
+      return raw.map((slot, sIdx) => ({
+        id: `${ch.categoryId}-${sIdx}-${slot.video.youtubeVideoId}`,
+        s: (slot.startTimeMs - dayStartMs) / 60000,
+        e: (slot.endTimeMs - dayStartMs) / 60000,
+        t: slot.video.title,
+        src: slot.video.sourceChannelTitle,
+        videoId: slot.video.youtubeVideoId,
+      }));
     });
   }, [
     channels,
     currentChannelIndex,
     currentVideoIndex,
     currentPlaybackSeconds,
-    savedChannelStates,
     completedVideoIds,
-    nowMs,
-    dayOriginMs,
+    Math.floor(nowMs / 15000),
+    dayStartMs,
   ]);
 
-  const slotAt = useCallback(
-    (rowIdx: number, tMin: number): GuideSlot | undefined => {
-      const list = allRows[rowIdx]?.slots || [];
-      return list.find((p) => p.startMin <= tMin && tMin < p.endMin) || list.find((p) => p.endMin > nowMin) || list[0];
+  const at = useCallback(
+    (r: number, t: number): GuideSlot | undefined => {
+      const list = schedules[r] || [];
+      return list.find((p) => p.s <= t && t < p.e) || list.find((p) => p.e > nowMin) || list[0];
     },
-    [allRows, nowMin]
+    [schedules, nowMin]
   );
 
-  // Keep row viewport (topRow) and time window (winOffsetMin) fitted to selection
-  const fitViewport = useCallback(
-    (nextRow: number, nextSelOffsetMin: number) => {
-      setTopRow((prevTop) => {
-        let t = prevTop;
-        if (nextRow < t) t = nextRow;
-        if (nextRow >= t + VIS) t = nextRow - VIS + 1;
-        return Math.max(0, Math.min(Math.max(0, channels.length - VIS), t));
-      });
+  // fit() logic from Tuned — TV Guide.html
+  const fittedTop = useMemo(() => {
+    let top = topRow;
+    if (selRow < top) top = selRow;
+    if (selRow >= top + VIS) top = selRow - VIS + 1;
+    const maxTop = Math.max(0, channels.length - VIS);
+    return Math.max(0, Math.min(maxTop, top));
+  }, [selRow, topRow, channels.length]);
 
-      const slot = slotAt(nextRow, nowMin + nextSelOffsetMin);
-      if (slot) {
-        const psOffset = Math.max(0, slot.startMin - nowMin);
-        setWinOffsetMin((prevWin) => {
-          let nextW = prevWin;
-          if (psOffset < nextW || psOffset >= nextW + WIN) {
-            nextW = psOffset;
-          }
-          return Math.max(0, nextW);
-        });
-      }
-    },
-    [channels.length, nowMin, slotAt]
-  );
+  useEffect(() => {
+    if (fittedTop !== topRow) setTopRow(fittedTop);
+  }, [fittedTop, topRow]);
 
-  const moveSelection = useCallback(
+  const selectedSlot = useMemo(() => at(selRow, selTime), [at, selRow, selTime]);
+
+  const fittedW0 = useMemo(() => {
+    let w0 = winStart;
+    if (selectedSlot) {
+      const ps = Math.max(selectedSlot.s, nowMin);
+      if (ps < w0 || ps >= w0 + WIN) w0 = ps;
+    }
+    if (w0 < nowMin) w0 = nowMin;
+    return w0;
+  }, [winStart, selectedSlot, nowMin]);
+
+  useEffect(() => {
+    if (Math.abs(fittedW0 - winStart) > 0.01) setWinStart(fittedW0);
+  }, [fittedW0, winStart]);
+
+  const w0 = fittedW0;
+  const w1 = w0 + WIN;
+
+  const move = useCallback(
     (dr: number, dt: number) => {
-      let nextRow = selRow;
-      let nextSelOffset = selOffsetMin;
-
-      if (dr !== 0) {
-        nextRow = Math.max(0, Math.min(channels.length - 1, selRow + dr));
+      if (dr) {
+        setSelRow((prev) => Math.max(0, Math.min(channels.length - 1, prev + dr)));
       }
-
-      if (dt !== 0) {
-        const list = allRows[nextRow]?.slots || [];
-        const curSlot = slotAt(nextRow, nowMin + selOffsetMin);
-        const curIdx = curSlot ? list.indexOf(curSlot) : 0;
-        const targetSlot = list[curIdx + dt];
-        if (targetSlot && targetSlot.endMin > nowMin) {
-          nextSelOffset = Math.max(0, targetSlot.startMin - nowMin + 0.5);
+      if (dt) {
+        const list = schedules[selRow] || [];
+        const cur = at(selRow, selTime);
+        const idx = cur ? list.findIndex((p) => p.id === cur.id) : -1;
+        const next = list[idx + dt];
+        if (next && next.e > nowMin) {
+          setSelTime(Math.max(next.s, nowMin));
         }
       }
-
-      setSelRow(nextRow);
-      setSelOffsetMin(nextSelOffset);
-      fitViewport(nextRow, nextSelOffset);
     },
-    [selRow, selOffsetMin, channels.length, allRows, slotAt, nowMin, fitViewport]
+    [channels.length, schedules, selRow, selTime, at, nowMin]
   );
 
-  const pageChannels = useCallback(
-    (dir: 1 | -1) => {
-      const maxTop = Math.max(0, channels.length - VIS);
-      const nextTop = Math.max(0, Math.min(maxTop, topRow + dir * VIS));
-      setTopRow(nextTop);
-      if (selRow < nextTop) setSelRow(nextTop);
-      else if (selRow >= nextTop + VIS) setSelRow(Math.min(channels.length - 1, nextTop + VIS - 1));
+  const watchSelected = useCallback(
+    (targetRow = selRow, targetSlot = selectedSlot) => {
+      const ch = channels[targetRow];
+      if (!ch) return;
+      const isLiveSlot = !targetSlot || (targetSlot.s <= nowMin && nowMin < targetSlot.e);
+      if (isLiveSlot) {
+        onTuneChannel(targetRow);
+      } else {
+        flash(
+          `Tuning to CH ${pad(targetRow + 1)} ${ch.categoryName.toUpperCase()} — ${targetSlot.t}`
+        );
+        onTuneChannel(targetRow);
+      }
     },
-    [channels.length, topRow, selRow]
-  );
-
-  const handleWatchSelected = useCallback(
-    (rowIdx: number = selRow) => {
-      const targetRow = allRows[rowIdx];
-      if (!targetRow) return;
-      const slot = slotAt(rowIdx, targetTimeMin);
-      flashToast(
-        `Tuning to CH ${pad(rowIdx + 1)} ${targetRow.ch.categoryName.toUpperCase()} — ${slot?.title || 'Live'}`
-      );
-      onTuneChannel(rowIdx);
-    },
-    [selRow, allRows, slotAt, targetTimeMin, flashToast, onTuneChannel]
+    [selRow, selectedSlot, channels, nowMin, onTuneChannel, flash]
   );
 
   // Keyboard navigation matching Tuned — TV Guide.html
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowUp') {
+      const k = e.key;
+      if (k === 'ArrowUp') {
         e.preventDefault();
-        moveSelection(-1, 0);
-      } else if (e.key === 'ArrowDown') {
+        move(-1, 0);
+      } else if (k === 'ArrowDown') {
         e.preventDefault();
-        moveSelection(1, 0);
-      } else if (e.key === 'ArrowLeft') {
+        move(1, 0);
+      } else if (k === 'ArrowLeft') {
         e.preventDefault();
-        moveSelection(0, -1);
-      } else if (e.key === 'ArrowRight') {
+        move(0, -1);
+      } else if (k === 'ArrowRight') {
         e.preventDefault();
-        moveSelection(0, 1);
-      } else if (e.key === 'PageUp') {
+        move(0, 1);
+      } else if (k === 'Enter') {
         e.preventDefault();
-        pageChannels(-1);
-      } else if (e.key === 'PageDown') {
-        e.preventDefault();
-        pageChannels(1);
-      } else if (e.key === 'Enter') {
-        e.preventDefault();
-        handleWatchSelected(selRow);
-      } else if (e.key === 'Escape' || e.key === 'Backspace') {
+        watchSelected();
+      } else if (k === 'Escape' || k === 'g' || k === 'G') {
         e.preventDefault();
         onBackToWatch();
       }
     };
-
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [moveSelection, pageChannels, handleWatchSelected, selRow, onBackToWatch]);
+  }, [move, watchSelected, onBackToWatch]);
 
-  // Wheel scrolling over rows (matching Tuned — TV Guide.html)
+  // Wheel scrolling matching Tuned — TV Guide.html
   useEffect(() => {
-    const el = rowsContainerRef.current;
+    const el = rowsRef.current;
     if (!el) return;
-
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      if (channels.length <= VIS) {
-        const nextRow = Math.max(0, Math.min(channels.length - 1, selRow + (e.deltaY > 0 ? 1 : -1)));
-        setSelRow(nextRow);
-        return;
-      }
       const maxTop = Math.max(0, channels.length - VIS);
-      const nextTop = Math.max(0, Math.min(maxTop, topRow + (e.deltaY > 0 ? 1 : -1)));
+      const nextTop = Math.max(0, Math.min(maxTop, fittedTop + (e.deltaY > 0 ? 1 : -1)));
       setTopRow(nextTop);
-      if (selRow < nextTop) setSelRow(nextTop);
-      if (selRow >= nextTop + VIS) setSelRow(Math.min(channels.length - 1, nextTop + VIS - 1));
+      setSelRow((r) => {
+        if (r < nextTop) return nextTop;
+        if (r >= nextTop + VIS) return Math.min(channels.length - 1, nextTop + VIS - 1);
+        return r;
+      });
     };
-
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
-  }, [channels.length, topRow, selRow]);
+  }, [channels.length, fittedTop]);
 
-  // 30-minute time axis ticks inside [w0, w0 + WIN]
-  const timeTicks = useMemo(() => {
-    const firstTick = Math.ceil(w0 / 30) * 30;
-    return [0, 1, 2, 3, 4]
-      .map((k) => firstTick + k * 30)
-      .filter((m) => m < w0 + WIN - 12)
-      .map((m) => ({
-        min: m,
-        leftPct: ((m - w0) / WIN) * 100,
-        label: formatHmFromEpoch(dayOriginMs + m * 60000),
-      }));
-  }, [w0, dayOriginMs]);
-
-  const visibleRowSlice = allRows.slice(topRow, Math.min(topRow + VIS, allRows.length));
-  const selectedSlot = slotAt(selRow, targetTimeMin);
-  const selectedRowData = allRows[selRow];
-  const nowProgressP = (nowMin - w0) / WIN;
-
-  const nowDate = new Date(nowMs);
-  const clockTimeStr = `${pad(nowDate.getHours())}:${pad(nowDate.getMinutes())}`;
-  const clockDateStr = nowDate.toLocaleDateString(undefined, {
+  // Format header clock & date matching Tuned — TV Guide.html
+  const clockDateObj = new Date(nowMs);
+  const clockText = `${pad(clockDateObj.getHours())}:${pad(clockDateObj.getMinutes())}`;
+  const dateText = clockDateObj.toLocaleDateString(undefined, {
     weekday: 'short',
     day: 'numeric',
     month: 'short',
   });
 
-  const scrollThumbTopPct = channels.length > 0 ? (topRow / channels.length) * 100 : 0;
-  const scrollThumbHeightPct = channels.length > 0 ? Math.min(100, (VIS / channels.length) * 100) : 100;
+  // 30-min time markers matching Tuned — TV Guide.html
+  const timeTicks = useMemo(() => {
+    const base = Math.ceil(w0 / 30) * 30;
+    return [0, 1, 2, 3, 4]
+      .map((k) => base + k * 30)
+      .filter((m) => m < w0 + WIN - 12);
+  }, [w0]);
+
+  const visibleRowIndices = useMemo(() => {
+    const indices: number[] = [];
+    const end = Math.min(fittedTop + VIS, channels.length);
+    for (let r = fittedTop; r < end; r++) indices.push(r);
+    return indices;
+  }, [fittedTop, channels.length]);
+
+  const nowFraction = (nowMin - w0) / WIN;
+  const selChannel = channels[selRow];
 
   return (
-    <div
-      className="tvg-root"
-      style={{ ['--h' as string]: selectedRowData?.ch.hue ?? 355 } as React.CSSProperties}
-    >
-      <div className="tvg-bg" />
-      <div className={`tvg-toast${toastMsg ? ' on' : ''}`}>{toastMsg}</div>
+    <div className="tvg-guide-screen">
+      <div className="bg" />
+      <div className={`toast ${toastOn ? 'on' : ''}`}>{toastMsg}</div>
 
-      <div className="tvg-app">
-        {/* Top Header */}
-        <div className="tvg-top">
+      <div className="app">
+        <div className="top">
           <div>
-            <div className="tvg-lg">
+            <div className="lg">
               <i />
               tuned
             </div>
-            <div className="tvg-tg">
+            <div className="tg">
               <svg viewBox="0 0 24 24">
                 <rect x="3" y="7" width="18" height="13" rx="2" />
                 <path d="M8 3l4 4 4-4" />
@@ -408,137 +315,84 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
               TV Guide
             </div>
           </div>
-
-          <div className="tvg-clock">
-            <small>{clockDateStr}</small>
-            <b>{clockTimeStr}</b>
+          <div className="clock">
+            <small>{dateText}</small>
+            <b>{clockText}</b>
           </div>
         </div>
 
-        {/* Main Scrollable Timeline Area */}
-        <div className="tvg-scroll">
+        <div className="scroll">
           <div>
-            {/* Time Axis */}
-            <div className="tvg-axis">
-              <div className="tvg-today">
-                <span>{winOffsetMin > 5 ? `+${Math.round(winOffsetMin / 60)}h` : 'Today'}</span>
-                {channels.length > VIS && (
-                  <div style={{ display: 'flex', gap: 6, marginLeft: 'auto' }}>
-                    <button
-                      className="tvg-pgb"
-                      onClick={() => pageChannels(-1)}
-                      title="Previous channels (PageUp)"
-                    >
-                      P-
-                    </button>
-                    <button
-                      className="tvg-pgb"
-                      onClick={() => pageChannels(1)}
-                      title="More channels (PageDown)"
-                    >
-                      P+
-                    </button>
-                  </div>
-                )}
-                {winOffsetMin > 5 && (
-                  <button
-                    className="tvg-pgb"
-                    onClick={() => {
-                      setSelOffsetMin(0);
-                      setWinOffsetMin(0);
-                    }}
-                    title="Jump back to Live Now"
-                  >
-                    Now
-                  </button>
-                )}
-              </div>
-
-              <div className="tvg-times">
-                {timeTicks.map((tk) => (
-                  <span key={tk.min} style={{ left: `${tk.leftPct}%` }}>
-                    {tk.label}
+            <div className="axis">
+              <div className="today">Today</div>
+              <div className="times">
+                {timeTicks.map((m) => (
+                  <span key={m} style={{ left: `${((m - w0) / WIN) * 100}%` }}>
+                    {hm(m)}
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* Channel Rows */}
-            <div className="tvg-rows" ref={rowsContainerRef}>
-              {visibleRowSlice.map(({ ch, chIdx, isCurrentChannel, slots }) => {
-                const isRowSelected = chIdx === selRow;
-                const rowSelSlot = isRowSelected ? selectedSlot : undefined;
-
-                const visibleSlots = slots.filter(
+            <div className="rows" ref={rowsRef}>
+              {visibleRowIndices.map((r) => {
+                const c = channels[r];
+                const rowSlots = (schedules[r] || []).filter(
                   (p) =>
-                    p.endMin > w0 &&
-                    p.startMin < w1 &&
-                    (Math.min(p.endMin, w1) - Math.max(p.startMin, w0) >= 3 ||
-                      (p === rowSelSlot && isRowSelected))
+                    p.e > w0 &&
+                    p.s < w1 &&
+                    (Math.min(p.e, w1) - Math.max(p.s, w0) >= 3 ||
+                      (selectedSlot?.id === p.id && r === selRow))
                 );
 
                 return (
-                  <div key={ch.categoryId + '_' + chIdx} className={`tvg-row${isRowSelected ? ' sel' : ''}`}>
+                  <div key={c.categoryId} className={`row ${r === selRow ? 'sel' : ''}`}>
                     <button
-                      className="tvg-ch"
+                      type="button"
+                      className="ch"
                       onClick={() => {
-                        setSelRow(chIdx);
-                        handleWatchSelected(chIdx);
+                        if (selRow === r) {
+                          onTuneChannel(r);
+                        } else {
+                          setSelRow(r);
+                        }
                       }}
-                      onMouseEnter={() => setSelRow(chIdx)}
-                      title={`Tune to CH ${pad(chIdx + 1)} ${ch.categoryName}`}
                     >
-                      <small className="tvg-ch-num">{pad(chIdx + 1)}</small>
-                      <span>{ch.categoryName}</span>
-                      {isCurrentChannel && <i className="tvg-ch-playing" title="Currently watching" />}
+                      <span>{c.categoryName}</span>
                     </button>
 
-                    <div className="tvg-trk">
-                      {visibleSlots.map((p, idx) => {
-                        let a = Math.max(p.startMin, w0);
-                        if (idx === 0 && a - w0 < 3) a = w0;
-                        const b = Math.min(p.endMin, w1);
-                        const air = p.startMin <= nowMin && nowMin < p.endMin;
-                        const isSlotOn = isRowSelected && rowSelSlot?.startMs === p.startMs;
-                        const clippedLeft = p.startMin < w0 - 1;
-                        const clippedRight = p.endMin > w1;
-
+                    <div className="trk">
+                      {rowSlots.map((p, i) => {
+                        let a = Math.max(p.s, w0);
+                        if (i === 0 && a - w0 < 3) a = w0;
+                        const b = Math.min(p.e, w1);
+                        const air = p.s <= nowMin && nowMin < p.e;
+                        const isOn = selectedSlot?.id === p.id && r === selRow;
+                        const cl = p.s < w0 - 0.5;
+                        const cr = p.e > w1 + 0.5;
                         const leftPct = ((a - w0) / WIN) * 100;
-                        const widthPct = Math.max(2.5, ((b - a) / WIN) * 100);
+                        const widthPct = Math.max(2, ((b - a) / WIN) * 100);
 
                         return (
                           <button
-                            key={p.videoId + '_' + p.startMs}
-                            className={`tvg-pr${air ? ' air' : ''}${isSlotOn ? ' on' : ''}${
-                              clippedLeft ? ' cl' : ''
-                            }${clippedRight ? ' cr' : ''}`}
+                            key={p.id}
+                            type="button"
+                            className={`pr ${air ? 'air' : ''} ${isOn ? 'on' : ''} ${cl ? 'cl' : ''} ${cr ? 'cr' : ''}`}
                             style={{
                               left: `${leftPct}%`,
                               width: `calc(${widthPct}% - 5px)`,
                             }}
-                            onMouseEnter={() => {
-                              setSelRow(chIdx);
-                              setSelOffsetMin(Math.max(0, p.startMin - nowMin + 0.5));
-                            }}
                             onClick={() => {
-                              const alreadySelected = isRowSelected && rowSelSlot?.startMs === p.startMs;
-                              setSelRow(chIdx);
-                              setSelOffsetMin(Math.max(0, p.startMin - nowMin + 0.5));
-                              if (alreadySelected || air) {
-                                handleWatchSelected(chIdx);
+                              const same =
+                                selRow === r && selectedSlot?.id === p.id;
+                              setSelRow(r);
+                              setSelTime(Math.max(p.s, nowMin));
+                              if (same) {
+                                watchSelected(r, p);
                               }
                             }}
                           >
-                            <span>
-                              {p.title}
-                              {p.extraCount > 0 ? ` (+${p.extraCount})` : ''}
-                            </span>
-                            {air && (
-                              <i
-                                className="tvg-pr-prog"
-                                style={{ width: `${p.progressPercent}%` }}
-                              />
-                            )}
+                            <span>{p.t}</span>
                           </button>
                         );
                       })}
@@ -547,68 +401,56 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                 );
               })}
 
-              {/* Vertical NOW Indicator Line */}
-              {nowProgressP >= 0 && nowProgressP <= 1 && (
+              {nowFraction >= 0 && nowFraction <= 1 && (
                 <div
-                  className="tvg-now"
-                  style={{ ['--p' as string]: nowProgressP } as React.CSSProperties}
+                  className="now"
+                  style={{ '--p': nowFraction } as React.CSSProperties}
                 >
                   <b>NOW</b>
                 </div>
               )}
 
-              {/* Right Scrollbar Indicator */}
-              <div className="tvg-sbar">
+              <div className="sbar">
                 <i
                   style={{
-                    top: `${scrollThumbTopPct}%`,
-                    height: `${scrollThumbHeightPct}%`,
+                    top: `${(fittedTop / Math.max(1, channels.length)) * 100}%`,
+                    height: `${Math.min(1, VIS / Math.max(1, channels.length)) * 100}%`,
                   }}
                 />
               </div>
             </div>
 
-            {/* Cream Selected Program Info Banner */}
-            {selectedSlot && selectedRowData && (
-              <div className="tvg-info">
+            {selChannel && selectedSlot && (
+              <div className="info">
                 <div className="tm">
-                  {formatHmFromEpoch(selectedSlot.startMs)} – {formatHmFromEpoch(selectedSlot.endMs)}
+                  {hm(selectedSlot.s)} – {hm(selectedSlot.e)}
                 </div>
-                <div className="tt">
-                  {selectedSlot.title}
-                  {selectedSlot.extraCount > 0 ? ` (+${selectedSlot.extraCount} more)` : ''}
-                </div>
+                <div className="tt">{selectedSlot.t}</div>
                 <div className="rt">
                   <span>
-                    CH {pad(selRow + 1)} · {selectedRowData.ch.categoryName} · {selectedSlot.source}
+                    CH {pad(selRow + 1)} · {selChannel.categoryName} · {selectedSlot.src}
                   </span>
-                  <b className="tvg-bdg">
-                    {formatDurationMin(selectedSlot.endMin - selectedSlot.startMin)}
-                  </b>
+                  <b className="bdg">{dur(selectedSlot.e - selectedSlot.s)}</b>
                 </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* Bottom Remote Keys Legend */}
-        <div className="tvg-keys">
-          <button onClick={() => handleWatchSelected(selRow)}>
-            Watch <span className="tvg-k">Enter</span>
-          </button>
-          <div>
-            Browse <span className="tvg-k">← ↑ ↓ →</span>
+        <div className="keys">
+          <div onClick={() => watchSelected()} style={{ cursor: 'pointer' }}>
+            Watch<span className="k">Enter</span>
           </div>
-          {channels.length > VIS && (
-            <button onClick={() => pageChannels(1)}>
-              More Channels <span className="tvg-k">PgDn</span>
-            </button>
-          )}
-          <button onClick={onBackToWatch}>
-            Return <span className="tvg-k">Esc</span>
-          </button>
+          <div>
+            Browse<span className="k">↑ ↓</span>
+          </div>
+          <div onClick={onBackToWatch} style={{ cursor: 'pointer' }}>
+            Return<span className="k">Esc</span>
+          </div>
         </div>
       </div>
     </div>
   );
-};
+}
+
+export default GuideScreen;
