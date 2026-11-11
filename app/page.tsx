@@ -45,7 +45,6 @@ export default function TunedApp() {
   const currentPlaybackTimeRef = useRef<number>(0);
   const channelPlaybackStatesRef = useRef<Map<string, ChannelSavedState>>(new Map());
   const failedVideoIdsRef = useRef<Set<string>>(new Set());
-  const skippedVideoAtRef = useRef<Map<string, number>>(new Map());
 
   // Load user state from LocalStorage on mount (PRD Section 8 & 10)
   useEffect(() => {
@@ -144,8 +143,7 @@ export default function TunedApp() {
         target.videos,
         target.categoryId,
         Math.floor(Date.now() / 1000),
-        failedVideoIdsRef.current,
-        skippedVideoAtRef.current
+        failedVideoIdsRef.current
       );
       return { videoIndex: live.videoIndex, seekSeconds: live.seekSeconds };
     },
@@ -380,33 +378,37 @@ export default function TunedApp() {
   }, [previousChannelIndex, channels.length, handleSelectChannel]);
 
   // Called when video ends naturally or is skipped on error
-  const handleNextVideo = useCallback(() => {
-    const active = channels[currentChannelIndex];
-    if (!active || !active.videos?.length) return;
+  const handleNextVideo = useCallback(
+    (isErrorSkip: boolean = false) => {
+      const active = channels[currentChannelIndex];
+      if (!active || !active.videos?.length) return;
 
-    const finishedVideo = active.videos[currentVideoIndex];
-    if (finishedVideo?.youtubeVideoId) {
-      failedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
-      skippedVideoAtRef.current.set(finishedVideo.youtubeVideoId, Math.floor(Date.now() / 1000));
-    }
+      const finishedVideo = active.videos[currentVideoIndex];
+      // Only add genuinely unplayable/Short videos to failedVideoIdsRef so naturally ended videos
+      // never cause per-browser session drift away from the global broadcast clock.
+      if (isErrorSkip && finishedVideo?.youtubeVideoId) {
+        failedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
+      }
 
-    let nextIdx = (currentVideoIndex + 1) % active.videos.length;
-    let safety = 0;
-    while (
-      safety < active.videos.length &&
-      failedVideoIdsRef.current.has(active.videos[nextIdx].youtubeVideoId)
-    ) {
-      nextIdx = (nextIdx + 1) % active.videos.length;
-      safety++;
-    }
+      let nextIdx = (currentVideoIndex + 1) % active.videos.length;
+      let safety = 0;
+      while (
+        safety < active.videos.length &&
+        failedVideoIdsRef.current.has(active.videos[nextIdx].youtubeVideoId)
+      ) {
+        nextIdx = (nextIdx + 1) % active.videos.length;
+        safety++;
+      }
 
-    setCurrentVideoIndex(nextIdx);
-    setStartSeconds(0);
-    currentPlaybackTimeRef.current = 0;
-    setBehindLiveSeconds(0);
-    setTuneKey((k) => k + 1);
-    setIsPlaying(true);
-  }, [channels, currentChannelIndex, currentVideoIndex]);
+      setCurrentVideoIndex(nextIdx);
+      setStartSeconds(0);
+      currentPlaybackTimeRef.current = 0;
+      setBehindLiveSeconds(0);
+      setTuneKey((k) => k + 1);
+      setIsPlaying(true);
+    },
+    [channels, currentChannelIndex, currentVideoIndex]
+  );
 
   const handleJumpToLive = useCallback(() => {
     // If already at live edge (haven't paused), do not switch or reload video!
@@ -423,8 +425,7 @@ export default function TunedApp() {
       active.videos,
       active.categoryId,
       Math.floor(Date.now() / 1000),
-      failedVideoIdsRef.current,
-      skippedVideoAtRef.current
+      failedVideoIdsRef.current
     );
     setCurrentVideoIndex(live.videoIndex);
     setStartSeconds(live.seekSeconds);
@@ -442,8 +443,7 @@ export default function TunedApp() {
   const handleShortDetected = useCallback(
     (videoId: string) => {
       failedVideoIdsRef.current.add(videoId);
-      skippedVideoAtRef.current.set(videoId, Math.floor(Date.now() / 1000));
-      handleNextVideo();
+      handleNextVideo(true);
     },
     [handleNextVideo]
   );

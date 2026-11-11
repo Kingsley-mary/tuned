@@ -53,7 +53,7 @@ interface WatchScreenProps {
   onSelectChannel: (channelIndex: number) => void;
   onRecallLastChannel: () => void;
   onTogglePlay: () => void;
-  onNextVideo: () => void;
+  onNextVideo: (isErrorSkip?: boolean) => void;
   onJumpToLive?: () => void;
   onShortDetected?: (videoId: string) => void;
   onProgressUpdate?: (currentTime: number, duration: number) => void;
@@ -222,7 +222,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
     bumperTimeoutRef.current = setTimeout(() => {
       setIsBumperActive(false);
-      onNextVideoRef.current();
+      onNextVideoRef.current(false);
     }, 2400);
   }, [onPowerOff, sleepTimerMode]);
 
@@ -475,7 +475,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               onEnded={handleVideoEndedNaturally}
               onError={(errCode) => {
                 console.warn(`Video ${activeVideo.youtubeVideoId} error (${errCode}), skipping...`);
-                onNextVideoRef.current();
+                onNextVideoRef.current(true);
               }}
               onTimeUpdate={(cur, dur) => {
                 setCurrentTime(cur);
