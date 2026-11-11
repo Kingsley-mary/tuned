@@ -2,6 +2,7 @@ import { ChannelLineup, Video } from './types';
 import { CATEGORIES, SEED_LINEUPS } from './seed-catalog';
 import { getVideoDuration } from './broadcast-clock';
 import { readCatalogSnapshot } from './catalog-storage';
+import { isYouTubeShort, MAX_SHORT_DURATION_SEC } from './youtube-shorts';
 
 // Comprehensive roster of verified top creators per television channel (11-16 creators per channel)
 export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }[]> = {
@@ -1749,7 +1750,7 @@ export async function fetchChannelUploads(channelId: string, channelName: string
 
     const feedTitle = xml.match(/<feed[\s\S]*?<title>(.*?)<\/title>/)?.[1]?.trim() || channelName;
     const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
-    const videos: Video[] = [];
+    const candidateVideos: { video: Video; needsShortCheck: boolean }[] = [];
 
     for (const entry of entries) {
       const entryText = entry[1];
@@ -1794,10 +1795,16 @@ export async function fetchChannelUploads(channelId: string, channelName: string
       };
       tempVideo.durationSec = knownDur || getVideoDuration(tempVideo);
 
-      videos.push(tempVideo);
+      candidateVideos.push({
+        video: tempVideo,
+        needsShortCheck: !knownDur || knownDur <= MAX_SHORT_DURATION_SEC,
+      });
     }
 
-    return videos;
+    const shortFlags = await Promise.all(
+      candidateVideos.map((c) => (c.needsShortCheck ? isYouTubeShort(c.video.youtubeVideoId) : false))
+    );
+    return candidateVideos.filter((_, i) => !shortFlags[i]).map((c) => c.video);
   } catch (err) {
     console.warn(`Failed to fetch channel feed for ${channelName} (${channelId}):`, err);
     return [];

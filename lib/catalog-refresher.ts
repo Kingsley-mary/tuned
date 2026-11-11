@@ -1,5 +1,6 @@
 import { ChannelLineup, Video } from './types';
 import { CATEGORIES, SEED_LINEUPS } from './seed-catalog';
+import { isYouTubeShort, MAX_SHORT_DURATION_SEC } from './youtube-shorts';
 
 const MAX_VIDEOS_PER_CHANNEL = 200;
 const MAX_VIDEOS_PER_CREATOR = 10;
@@ -70,6 +71,7 @@ async function fetchLatestViaYouTubeApi(
       if (!embeddable || privacy !== 'public' || isLive) continue;
       if (durationSec < minDurationSec || durationSec > 18000) continue;
       if (/#shorts?\b/i.test(title)) continue;
+      if (durationSec <= MAX_SHORT_DURATION_SEC && (await isYouTubeShort(vid))) continue;
 
       valid.push({
         youtubeVideoId: vid,
@@ -126,6 +128,7 @@ async function fetchLatestViaChannelPage(
       const oembed = await oembedRes.json();
       const title = String(oembed.title || '').trim();
       if (!title || /#shorts?\b/i.test(title)) continue;
+      if (durationSec <= MAX_SHORT_DURATION_SEC && (await isYouTubeShort(vid))) continue;
 
       valid.push({
         youtubeVideoId: vid,
