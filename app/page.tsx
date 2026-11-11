@@ -37,10 +37,15 @@ export default function TunedApp() {
   const [sleepRemainingSec, setSleepRemainingSec] = useState<number | null>(null);
   const [behindLiveSeconds, setBehindLiveSeconds] = useState<number>(0);
 
+  // Early 90s CRT Power On/Off Transition state
+  const [crtTransition, setCrtTransition] = useState<'on' | 'off' | null>(null);
+  const crtTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const isDirtyRef = useRef(false);
   const currentPlaybackTimeRef = useRef<number>(0);
   const channelPlaybackStatesRef = useRef<Map<string, ChannelSavedState>>(new Map());
   const failedVideoIdsRef = useRef<Set<string>>(new Set());
+  const skippedVideoAtRef = useRef<Map<string, number>>(new Map());
 
   // Load user state from LocalStorage on mount (PRD Section 8 & 10)
   useEffect(() => {
@@ -139,7 +144,8 @@ export default function TunedApp() {
         target.videos,
         target.categoryId,
         Math.floor(Date.now() / 1000),
-        failedVideoIdsRef.current
+        failedVideoIdsRef.current,
+        skippedVideoAtRef.current
       );
       return { videoIndex: live.videoIndex, seekSeconds: live.seekSeconds };
     },
@@ -217,10 +223,11 @@ export default function TunedApp() {
       setSleepRemainingSec((prev) => {
         if (prev === null) return null;
         if (prev <= 1) {
-          // Time's up: power off TV
-          setIsPlaying(false);
-          setScreenMode('power');
+          // Time's up: power off TV with CRT animation
           setSleepTimerMode('off');
+          setTimeout(() => {
+            handlePowerOff();
+          }, 0);
           return null;
         }
         return prev - 1;
@@ -253,6 +260,12 @@ export default function TunedApp() {
 
   // Handlers for Power Screen
   const handleTurnOn = () => {
+    if (crtTimerRef.current) clearTimeout(crtTimerRef.current);
+    setCrtTransition('on');
+    crtTimerRef.current = setTimeout(() => {
+      setCrtTransition(null);
+    }, 650);
+
     if (isReturningUser) {
       const safeIdx = currentChannelIndex < channels.length ? currentChannelIndex : 0;
       const active = channels[safeIdx] || channels[0];
@@ -374,6 +387,7 @@ export default function TunedApp() {
     const finishedVideo = active.videos[currentVideoIndex];
     if (finishedVideo?.youtubeVideoId) {
       failedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
+      skippedVideoAtRef.current.set(finishedVideo.youtubeVideoId, Math.floor(Date.now() / 1000));
     }
 
     let nextIdx = (currentVideoIndex + 1) % active.videos.length;
@@ -409,7 +423,8 @@ export default function TunedApp() {
       active.videos,
       active.categoryId,
       Math.floor(Date.now() / 1000),
-      failedVideoIdsRef.current
+      failedVideoIdsRef.current,
+      skippedVideoAtRef.current
     );
     setCurrentVideoIndex(live.videoIndex);
     setStartSeconds(live.seekSeconds);
@@ -427,6 +442,7 @@ export default function TunedApp() {
   const handleShortDetected = useCallback(
     (videoId: string) => {
       failedVideoIdsRef.current.add(videoId);
+      skippedVideoAtRef.current.set(videoId, Math.floor(Date.now() / 1000));
       handleNextVideo();
     },
     [handleNextVideo]
@@ -442,11 +458,16 @@ export default function TunedApp() {
     setIsPlaying((prev) => !prev);
   }, []);
 
-  const handlePowerOff = () => {
+  const handlePowerOff = useCallback(() => {
+    if (crtTimerRef.current) clearTimeout(crtTimerRef.current);
     setIsPlaying(false);
     persistState();
-    setScreenMode('power');
-  };
+    setCrtTransition('off');
+    crtTimerRef.current = setTimeout(() => {
+      setScreenMode('power');
+      setCrtTransition(null);
+    }, 520);
+  }, [persistState]);
 
   // Handlers for Manage Screen
   const handleMoveUp = (index: number) => {
@@ -579,120 +600,137 @@ export default function TunedApp() {
   const keepPlayerMounted = channels.length > 0 && screenMode !== 'off';
 
   return (
-    <>
-      {screenMode === 'power' && (
-        <PowerScreen
-          isReturningUser={isReturningUser}
-          lastChannelNumber={currentChannelIndex + 1}
-          lastCategoryName={channels[currentChannelIndex]?.categoryName || 'Tech'}
-          onTurnOn={handleTurnOn}
-          onChangeChannels={handleChangeChannelsFromPower}
-        />
-      )}
+    <div
+      className={`crt-chassis${
+        crtTransition === 'on'
+          ? ' crt-turning-on'
+          : crtTransition === 'off'
+          ? ' crt-turning-off'
+          : ''
+      }`}
+    >
+      <div className="crt-tube">
+        {screenMode === 'power' && (
+          <PowerScreen
+            isReturningUser={isReturningUser}
+            lastChannelNumber={currentChannelIndex + 1}
+            lastCategoryName={channels[currentChannelIndex]?.categoryName || 'Tech'}
+            onTurnOn={handleTurnOn}
+            onChangeChannels={handleChangeChannelsFromPower}
+          />
+        )}
 
-      {screenMode === 'pick' && (
-        <PickInterestsScreen
-          categories={CATEGORIES}
-          selectedIds={pickedCategoryIds}
-          onToggleCategory={handleToggleCategory}
-          onContinue={handleContinuePick}
-          onSkip={handleSkipPick}
-          onBack={() => setScreenMode('power')}
-        />
-      )}
+        {screenMode === 'pick' && (
+          <PickInterestsScreen
+            categories={CATEGORIES}
+            selectedIds={pickedCategoryIds}
+            onToggleCategory={handleToggleCategory}
+            onContinue={handleContinuePick}
+            onSkip={handleSkipPick}
+            onBack={() => setScreenMode('power')}
+          />
+        )}
 
-      {screenMode === 'tuning' && (
-        <TuningScreen
-          channels={pickedCategoryIds.map((id) => {
-            const cat = CATEGORIES.find((c) => c.id === id);
-            const customMeta = customSources.find((cs) => cs.channelId === id);
-            const name = customMeta?.title || cat?.name || id;
-            const hue =
-              cat?.hue ?? ([...name].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360);
-            return {
-              id,
-              name,
-              hue,
-            };
-          })}
-          lineups={channels}
-          onTuningComplete={handleTuningComplete}
-        />
-      )}
+        {screenMode === 'tuning' && (
+          <TuningScreen
+            channels={pickedCategoryIds.map((id) => {
+              const cat = CATEGORIES.find((c) => c.id === id);
+              const customMeta = customSources.find((cs) => cs.channelId === id);
+              const name = customMeta?.title || cat?.name || id;
+              const hue =
+                cat?.hue ?? ([...name].reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360);
+              return {
+                id,
+                name,
+                hue,
+              };
+            })}
+            lineups={channels}
+            onTuningComplete={handleTuningComplete}
+          />
+        )}
 
-      {/* Keep WatchScreen mounted during Guide and Manage so live broadcast audio/video never cuts out */}
-      {keepPlayerMounted && (
-        <WatchScreen
-          channels={channels}
-          currentChannelIndex={currentChannelIndex}
-          previousChannelIndex={previousChannelIndex}
-          currentVideoIndex={currentVideoIndex}
-          startSeconds={startSeconds}
-          tuneKey={tuneKey}
-          isPlaying={isPlaying}
-          isHidden={screenMode !== 'watch'}
-          sleepTimerMode={sleepTimerMode}
-          sleepRemainingSec={sleepRemainingSec}
-          behindLiveSeconds={behindLiveSeconds}
-          onCycleSleepTimer={handleCycleSleepTimer}
-          onSelectChannel={handleSelectChannel}
-          onRecallLastChannel={handleRecallLastChannel}
-          onTogglePlay={handleTogglePlay}
-          onNextVideo={handleNextVideo}
-          onJumpToLive={handleJumpToLive}
-          onShortDetected={handleShortDetected}
-          onProgressUpdate={handleProgressUpdate}
-          onOpenGuide={() => {
-            setScreenMode('guide');
-          }}
-          onOpenManage={() => {
-            setScreenMode('manage');
-          }}
-          onPowerOff={handlePowerOff}
-        />
-      )}
+        {/* Keep WatchScreen mounted during Guide and Manage so live broadcast audio/video never cuts out */}
+        {keepPlayerMounted && (
+          <WatchScreen
+            channels={channels}
+            currentChannelIndex={currentChannelIndex}
+            previousChannelIndex={previousChannelIndex}
+            currentVideoIndex={currentVideoIndex}
+            startSeconds={startSeconds}
+            tuneKey={tuneKey}
+            isPlaying={isPlaying}
+            isHidden={screenMode !== 'watch'}
+            sleepTimerMode={sleepTimerMode}
+            sleepRemainingSec={sleepRemainingSec}
+            behindLiveSeconds={behindLiveSeconds}
+            onCycleSleepTimer={handleCycleSleepTimer}
+            onSelectChannel={handleSelectChannel}
+            onRecallLastChannel={handleRecallLastChannel}
+            onTogglePlay={handleTogglePlay}
+            onNextVideo={handleNextVideo}
+            onJumpToLive={handleJumpToLive}
+            onShortDetected={handleShortDetected}
+            onProgressUpdate={handleProgressUpdate}
+            onOpenGuide={() => {
+              setScreenMode('guide');
+            }}
+            onOpenManage={() => {
+              setScreenMode('manage');
+            }}
+            onPowerOff={handlePowerOff}
+          />
+        )}
 
-      {screenMode === 'guide' && (
-        <GuideScreen
-          channels={channels}
-          currentChannelIndex={currentChannelIndex}
-          currentVideoIndex={currentVideoIndex}
-          currentPlaybackSeconds={currentPlaybackTimeRef.current}
-          savedChannelStates={channelPlaybackStatesRef.current}
-          completedVideoIds={failedVideoIdsRef.current}
-          onBackToWatch={() => setScreenMode('watch')}
-          onTuneChannel={(chIdx) => {
-            if (chIdx !== currentChannelIndex) {
-              handleSelectChannel(chIdx);
-            }
-            setScreenMode('watch');
-          }}
-        />
-      )}
+        {screenMode === 'guide' && (
+          <GuideScreen
+            channels={channels}
+            currentChannelIndex={currentChannelIndex}
+            currentVideoIndex={currentVideoIndex}
+            currentPlaybackSeconds={currentPlaybackTimeRef.current}
+            savedChannelStates={channelPlaybackStatesRef.current}
+            completedVideoIds={failedVideoIdsRef.current}
+            onBackToWatch={() => setScreenMode('watch')}
+            onTuneChannel={(chIdx) => {
+              if (chIdx !== currentChannelIndex) {
+                handleSelectChannel(chIdx);
+              }
+              setScreenMode('watch');
+            }}
+          />
+        )}
 
-      {screenMode === 'manage' && (
-        <ManageScreen
-          channels={channels}
-          allCategories={CATEGORIES}
-          onMoveUp={handleMoveUp}
-          onMoveDown={handleMoveDown}
-          onRemoveChannel={handleRemoveChannel}
-          onAddCategory={handleAddCategory}
-          onAddCustomChannel={handleAddCustomChannel}
-          onRetryChannel={handleRetryChannel}
-          onDone={handleDoneManage}
-          onPreviewOffAir={() => setScreenMode('off')}
-        />
-      )}
+        {screenMode === 'manage' && (
+          <ManageScreen
+            channels={channels}
+            allCategories={CATEGORIES}
+            onMoveUp={handleMoveUp}
+            onMoveDown={handleMoveDown}
+            onRemoveChannel={handleRemoveChannel}
+            onAddCategory={handleAddCategory}
+            onAddCustomChannel={handleAddCustomChannel}
+            onRetryChannel={handleRetryChannel}
+            onDone={handleDoneManage}
+            onPreviewOffAir={() => setScreenMode('off')}
+          />
+        )}
 
-      {screenMode === 'off' && (
-        <OffAirScreen
-          reason={offAirReason}
-          onTryAgain={() => {
-            setScreenMode('tuning');
-          }}
+        {screenMode === 'off' && (
+          <OffAirScreen
+            reason={offAirReason}
+            onTryAgain={() => {
+              setScreenMode('tuning');
+            }}
+          />
+        )}
+      </div>
+
+      {crtTransition && (
+        <div
+          className={`crt-beam-overlay ${crtTransition === 'on' ? 'beam-on' : 'beam-off'}`}
+          aria-hidden
         />
       )}
-    </>
+    </div>
   );
 }

@@ -83,7 +83,8 @@ export function getLiveBroadcastState(
   videos: Video[],
   categoryId: string,
   nowEpochSec: number = Math.floor(Date.now() / 1000),
-  completedIds?: Set<string>
+  completedIds?: Set<string>,
+  skippedAtSecMap?: Map<string, number>
 ): BroadcastState {
   if (!videos || videos.length === 0) {
     return {
@@ -125,19 +126,27 @@ export function getLiveBroadcastState(
       const seek = Math.floor(cycleTime - accumulated);
       const targetVid = videos[i];
 
-      // If the user already completed this exact video in this session (or it's a short), skip forward!
+      // If the user already completed/skipped this exact video in this session (or it's a short),
+      // advance forward continuously from the timestamp it was skipped so returning never resets to 0:00.
       if ((completedIds && completedIds.has(targetVid.youtubeVideoId)) || dur <= 60) {
+        const skippedAt = skippedAtSecMap?.get(targetVid.youtubeVideoId);
+        let remainingElapsed = skippedAt ? Math.max(0, nowEpochSec - skippedAt) : seek;
+
         for (let j = 1; j < videos.length; j++) {
           const nextIdx = (i + j) % videos.length;
+          const nextVid = videos[nextIdx];
           const nextDur = durations[nextIdx];
-          if (!completedIds?.has(videos[nextIdx].youtubeVideoId) && nextDur > 60) {
-            return {
-              videoIndex: nextIdx,
-              seekSeconds: 0,
-              durationSec: nextDur,
-              remainingSec: nextDur,
-              currentVideo: videos[nextIdx],
-            };
+          if (!completedIds?.has(nextVid.youtubeVideoId) && nextDur > 60) {
+            if (remainingElapsed < nextDur) {
+              return {
+                videoIndex: nextIdx,
+                seekSeconds: Math.floor(remainingElapsed),
+                durationSec: nextDur,
+                remainingSec: Math.max(1, nextDur - Math.floor(remainingElapsed)),
+                currentVideo: nextVid,
+              };
+            }
+            remainingElapsed -= nextDur;
           }
         }
       }

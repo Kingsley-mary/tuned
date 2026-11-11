@@ -61,6 +61,12 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const endedFiredRef = useRef<string | null>(null);
   const loadedVideoIdRef = useRef<string>('');
   const loadedTuneKeyRef = useRef<number>(tuneKey);
+  const loadedStartSecRef = useRef<number>(Math.floor(startSeconds || 0));
+  const pendingSeekRef = useRef<{ videoId: string; tuneKey: number; startSeconds: number } | null>(
+    startSeconds && startSeconds > 3
+      ? { videoId, tuneKey, startSeconds: Math.floor(startSeconds) }
+      : null
+  );
 
   // Keep latest props in a ref so YT.Player event listeners never call stale closures
   const latestPropsRef = useRef({
@@ -252,16 +258,27 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
               // If videoId changed while player was initializing, load the latest videoId
               if (cur.videoId && cur.videoId !== loadedVideoIdRef.current) {
+                const targetStart = Math.floor(cur.startSeconds || 0);
                 loadedVideoIdRef.current = cur.videoId;
                 loadedTuneKeyRef.current = cur.tuneKey;
+                loadedStartSecRef.current = targetStart;
+                pendingSeekRef.current =
+                  targetStart > 3
+                    ? { videoId: cur.videoId, tuneKey: cur.tuneKey, startSeconds: targetStart }
+                    : null;
                 playerRef.current?.loadVideoById?.({
                   videoId: cur.videoId,
-                  startSeconds: Math.floor(cur.startSeconds || 0),
+                  startSeconds: targetStart,
                 });
               } else if (cur.isPlaying) {
-                if (cur.startSeconds && cur.startSeconds > 0) {
+                const targetStart = Math.floor(cur.startSeconds || 0);
+                if (targetStart > 0) {
+                  pendingSeekRef.current =
+                    targetStart > 3
+                      ? { videoId: cur.videoId, tuneKey: cur.tuneKey, startSeconds: targetStart }
+                      : null;
                   try {
-                    playerRef.current?.seekTo?.(cur.startSeconds, true);
+                    playerRef.current?.seekTo?.(targetStart, true);
                   } catch {}
                 }
                 playerRef.current?.playVideo?.();
@@ -284,6 +301,19 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               if (event.data === 1) {
                 hasStartedRef.current = true;
                 cur.onBuffering(false);
+
+                // Enforce broadcast live offset if YouTube embed ignored startSeconds on loadVideoById
+                const pending = pendingSeekRef.current;
+                if (pending && pending.videoId === cur.videoId && pending.tuneKey === cur.tuneKey) {
+                  pendingSeekRef.current = null;
+                  try {
+                    const actualPos = playerRef.current?.getCurrentTime?.() || 0;
+                    if (actualPos < pending.startSeconds - 5) {
+                      playerRef.current?.seekTo?.(pending.startSeconds, true);
+                    }
+                  } catch {}
+                }
+
                 try {
                   if (cur.isMuted) {
                     playerRef.current?.mute?.();
@@ -357,35 +387,41 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     };
   }, []);
 
-  // Update videoId or start position when changed
+  // Update videoId or tune position when channel/video/tuneKey changes (never reset on play/pause!)
   useEffect(() => {
-    latestPropsRef.current.onCaptionTracksChange?.([]);
     if (!playerRef.current || !isReadyRef.current || !videoId) return;
 
-    hasStartedRef.current = false;
     const targetStart = Math.floor(startSeconds || 0);
+    const sameTune =
+      loadedVideoIdRef.current === videoId &&
+      loadedTuneKeyRef.current === tuneKey;
+
+    if (sameTune && loadedStartSecRef.current === targetStart) {
+      return;
+    }
+
+    const shouldPlay = latestPropsRef.current.isPlaying;
+    hasStartedRef.current = false;
+    pendingSeekRef.current =
+      targetStart > 3 ? { videoId, tuneKey, startSeconds: targetStart } : null;
 
     try {
-      if (loadedVideoIdRef.current === videoId && loadedTuneKeyRef.current === tuneKey) {
+      if (sameTune) {
+        loadedStartSecRef.current = targetStart;
         playerRef.current.seekTo?.(targetStart, true);
-        if (isPlaying) {
+        if (shouldPlay) {
           playerRef.current.playVideo?.();
         }
       } else {
+        latestPropsRef.current.onCaptionTracksChange?.([]);
         loadedVideoIdRef.current = videoId;
         loadedTuneKeyRef.current = tuneKey;
-        if (isPlaying) {
+        loadedStartSecRef.current = targetStart;
+        if (shouldPlay) {
           playerRef.current.loadVideoById({
             videoId,
             startSeconds: targetStart,
           });
-          setTimeout(() => {
-            try {
-              if (latestPropsRef.current.isPlaying) {
-                playerRef.current?.playVideo?.();
-              }
-            } catch {}
-          }, 150);
         } else {
           playerRef.current.cueVideoById({
             videoId,
@@ -396,7 +432,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     } catch (e) {
       console.warn('Error cueing/loading video:', e);
     }
-  }, [videoId, startSeconds, tuneKey, isPlaying]);
+  }, [videoId, startSeconds, tuneKey]);
 
   // Update caption state (on/off, font size, language) immediately when user changes it
   useEffect(() => {

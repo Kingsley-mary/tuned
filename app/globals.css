@@ -187,7 +187,7 @@ button:focus-visible, input:focus-visible {
   border-color: transparent;
 }
 
-/* CRT Screen Collapse Animation */
+/* Early 90s CRT TV Power-On / Power-Off Animations */
 .power-curtain {
   position: fixed;
   inset: 0;
@@ -198,43 +198,187 @@ button:focus-visible, input:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s cubic-bezier(0.7, 0, 0.2, 1), transform 0.6s cubic-bezier(0.7, 0, 0.2, 1);
 }
 
-.power-curtain.turning-on {
-  animation: crt-power-on 0.75s forwards cubic-bezier(0.7, 0, 0.2, 1);
+.crt-chassis {
+  position: fixed;
+  inset: 0;
+  background: #030305;
+  overflow: hidden;
+}
+
+.crt-tube {
+  position: fixed;
+  inset: 0;
+  transform-origin: center center;
+}
+
+.crt-chassis.crt-turning-on .crt-tube {
+  animation: crt-tube-power-on 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.crt-chassis.crt-turning-off .crt-tube {
+  pointer-events: none;
+  animation: crt-tube-power-off 0.52s cubic-bezier(0.7, 0, 0.25, 1) forwards;
+}
+
+.crt-beam-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
   pointer-events: none;
 }
 
-@keyframes crt-power-on {
+.crt-beam-overlay.beam-on::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: radial-gradient(ellipse at center, #ffffff 0%, #e0f7ff 45%, rgba(255, 255, 255, 0) 85%);
+  box-shadow: 0 0 40px 12px rgba(220, 245, 255, 0.85);
+  animation: crt-beam-on-line 0.58s ease-out forwards;
+}
+
+.crt-beam-overlay.beam-off::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100vw;
+  height: 3px;
+  transform: translate(-50%, -50%) scaleX(0);
+  background: radial-gradient(ellipse at center, #ffffff 0%, #e6f8ff 55%, rgba(255, 255, 255, 0) 90%);
+  box-shadow: 0 0 36px 10px rgba(230, 248, 255, 0.9);
+  animation: crt-beam-off-line 0.52s cubic-bezier(0.7, 0, 0.25, 1) forwards;
+}
+
+.crt-beam-overlay.beam-off::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: #ffffff;
+  box-shadow: 0 0 28px 10px rgba(255, 255, 255, 0.95), 0 0 60px 18px rgba(180, 230, 255, 0.55);
+  animation: crt-phosphor-dot 0.52s ease-out forwards;
+}
+
+@keyframes crt-tube-power-on {
   0% {
-    transform: scale(1);
-    opacity: 1;
-    filter: brightness(1);
+    transform: scaleX(0.06) scaleY(0.008);
+    filter: brightness(3.2) contrast(1.4);
+    opacity: 0.25;
   }
-  40% {
-    transform: scaleY(0.015) scaleX(1);
-    background: #ffffff;
-    filter: brightness(3);
+  28% {
+    transform: scaleX(1.02) scaleY(0.012);
+    filter: brightness(2.6) contrast(1.25);
     opacity: 1;
   }
-  70% {
-    transform: scaleY(0.015) scaleX(0.05);
-    background: #ffffff;
-    opacity: 0.8;
+  72% {
+    transform: scaleX(1) scaleY(1.015);
+    filter: brightness(1.35) contrast(1.06);
+    opacity: 1;
   }
   100% {
-    transform: scale(0);
+    transform: scaleX(1) scaleY(1);
+    filter: brightness(1) contrast(1);
+    opacity: 1;
+  }
+}
+
+@keyframes crt-tube-power-off {
+  0% {
+    transform: scaleX(1) scaleY(1);
+    filter: brightness(1.1);
+    opacity: 1;
+  }
+  42% {
+    transform: scaleX(1.02) scaleY(0.008);
+    filter: brightness(3.2) contrast(1.5);
+    opacity: 1;
+  }
+  74% {
+    transform: scaleX(0.025) scaleY(0.008);
+    filter: brightness(4);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0) scaleY(0);
+    filter: brightness(1);
     opacity: 0;
   }
 }
 
+@keyframes crt-beam-on-line {
+  0% {
+    opacity: 1;
+    transform: translateY(-50%) scaleX(0.15) scaleY(1);
+  }
+  30% {
+    opacity: 0.95;
+    transform: translateY(-50%) scaleX(1) scaleY(2.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(1) scaleY(45);
+  }
+}
+
+@keyframes crt-beam-off-line {
+  0%, 24% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(1) scaleY(1.4);
+  }
+  42% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(1) scaleY(1);
+  }
+  74% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scaleX(0.02) scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0) scaleY(0);
+  }
+}
+
+@keyframes crt-phosphor-dot {
+  0%, 60% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  74% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.25);
+  }
+  88% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .power-curtain.turning-on {
-    animation: simple-fade 0.4s forwards ease;
+  .crt-chassis.crt-turning-on .crt-tube,
+  .crt-chassis.crt-turning-off .crt-tube {
+    animation: simple-fade 0.25s ease forwards;
+  }
+  .crt-beam-overlay {
+    display: none;
   }
   @keyframes simple-fade {
-    to { opacity: 0; visibility: hidden; }
+    from { opacity: 0.5; }
+    to { opacity: 1; }
   }
 }
 
