@@ -355,6 +355,11 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             },
             onError: (event: any) => {
               const cur = latestPropsRef.current;
+              if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+                console.warn('YouTube Player offline error suppressed while disconnected:', event.data);
+                cur.onBuffering(true);
+                return;
+              }
               console.warn('YouTube Player reported error:', event.data, 'for video:', cur.videoId);
               cur.onError(event.data);
             },
@@ -445,6 +450,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     if (!videoId || !isPlaying) return;
 
     const watchdog = setTimeout(() => {
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) return;
       if (!hasStartedRef.current && playerRef.current && isReadyRef.current) {
         try {
           const state = playerRef.current.getPlayerState?.();

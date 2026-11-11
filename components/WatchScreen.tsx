@@ -55,6 +55,7 @@ interface WatchScreenProps {
   onTogglePlay: () => void;
   onNextVideo: (isErrorSkip?: boolean) => void;
   onJumpToLive?: () => void;
+  onSyncToLive?: () => void;
   onShortDetected?: (videoId: string) => void;
   onProgressUpdate?: (currentTime: number, duration: number) => void;
   onOpenGuide: () => void;
@@ -80,6 +81,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   onTogglePlay,
   onNextVideo,
   onJumpToLive,
+  onSyncToLive,
   onShortDetected,
   onProgressUpdate,
   onOpenGuide,
@@ -95,6 +97,53 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isBumperActive, setIsBumperActive] = useState<boolean>(false);
   const [copiedShare, setCopiedShare] = useState<boolean>(false);
+  const [isOnline, setIsOnline] = useState<boolean>(() =>
+    typeof navigator !== 'undefined' ? navigator.onLine : true
+  );
+  const stallStartedAtRef = useRef<number | null>(null);
+  const onSyncToLiveRef = useRef(onSyncToLive);
+  onSyncToLiveRef.current = onSyncToLive;
+
+  // True Live TV: track offline status & long buffering stalls so regaining signal snaps forward to live time
+  useEffect(() => {
+    const handleOffline = () => {
+      setIsOnline(false);
+      if (isPlaying && stallStartedAtRef.current === null) {
+        stallStartedAtRef.current = Date.now();
+      }
+    };
+    const handleOnline = () => {
+      setIsOnline(true);
+      if (isPlaying && behindLiveSeconds === 0) {
+        stallStartedAtRef.current = null;
+        onSyncToLiveRef.current?.();
+      }
+    };
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+    };
+  }, [isPlaying, behindLiveSeconds]);
+
+  useEffect(() => {
+    if (!isPlaying || behindLiveSeconds > 0) {
+      stallStartedAtRef.current = null;
+      return;
+    }
+    if (isBuffering) {
+      if (stallStartedAtRef.current === null) {
+        stallStartedAtRef.current = Date.now();
+      }
+    } else if (stallStartedAtRef.current !== null && isOnline) {
+      const stalledMs = Date.now() - stallStartedAtRef.current;
+      stallStartedAtRef.current = null;
+      if (stalledMs >= 8000) {
+        onSyncToLiveRef.current?.();
+      }
+    }
+  }, [isBuffering, isPlaying, isOnline, behindLiveSeconds]);
 
   // Caption settings (persisted across channels & refreshes)
   const [captionsEnabled, setCaptionsEnabled] = useState<boolean>(false);
@@ -532,7 +581,12 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         </div>
 
         <div className="osd-top-right">
-          {isBuffering && (
+          {!isOnline && (
+            <span className="osd-chip">
+              <Loader2 size={13} className="animate-spin" /> Offline · Reconnecting…
+            </span>
+          )}
+          {isOnline && isBuffering && (
             <span className="osd-chip">
               <Loader2 size={13} className="animate-spin" /> Buffering…
             </span>

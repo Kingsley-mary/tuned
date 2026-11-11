@@ -410,6 +410,44 @@ export default function TunedApp() {
     [channels, currentChannelIndex, currentVideoIndex]
   );
 
+  // True Live TV resync: snaps forward to global wall-clock live position after offline/long buffer recovery
+  const handleSyncToLive = useCallback(() => {
+    const active = channels[currentChannelIndex];
+    if (!active || !active.videos?.length) return;
+
+    const live = getLiveBroadcastState(
+      active.videos,
+      active.categoryId,
+      Math.floor(Date.now() / 1000),
+      failedVideoIdsRef.current
+    );
+
+    if (live.videoIndex !== currentVideoIndex) {
+      setCurrentVideoIndex(live.videoIndex);
+      setStartSeconds(live.seekSeconds);
+      currentPlaybackTimeRef.current = live.seekSeconds;
+      setBehindLiveSeconds(0);
+      setTuneKey((k) => k + 1);
+      setIsPlaying(true);
+    } else if (Math.abs(currentPlaybackTimeRef.current - live.seekSeconds) > 6) {
+      setStartSeconds(live.seekSeconds);
+      currentPlaybackTimeRef.current = live.seekSeconds;
+      setBehindLiveSeconds(0);
+      setIsPlaying(true);
+    }
+  }, [channels, currentChannelIndex, currentVideoIndex]);
+
+  // Auto-resync to True Live TV immediately when browser regains internet while watching
+  useEffect(() => {
+    const onOnline = () => {
+      if (hasEnteredWatch && isPlaying && screenMode !== 'power') {
+        handleSyncToLive();
+      }
+    };
+    window.addEventListener('online', onOnline);
+    return () => window.removeEventListener('online', onOnline);
+  }, [hasEnteredWatch, isPlaying, screenMode, handleSyncToLive]);
+
   const handleJumpToLive = useCallback(() => {
     // If already at live edge (haven't paused), do not switch or reload video!
     if (behindLiveSeconds <= 0) {
@@ -670,6 +708,7 @@ export default function TunedApp() {
             onTogglePlay={handleTogglePlay}
             onNextVideo={handleNextVideo}
             onJumpToLive={handleJumpToLive}
+            onSyncToLive={handleSyncToLive}
             onShortDetected={handleShortDetected}
             onProgressUpdate={handleProgressUpdate}
             onOpenGuide={() => {
