@@ -407,14 +407,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 2528
       },
       {
-        "youtubeVideoId": "WRWbsryyCK4",
-        "title": "SNAP JAW | Official Reveal Trailer",
-        "sourceChannelId": "UCMOBdfLjLT-PzrGzld8GjRw",
-        "sourceChannelTitle": "Carbon",
-        "thumbnailUrl": "https://i.ytimg.com/vi/WRWbsryyCK4/hqdefault.jpg",
-        "durationSec": 73
-      },
-      {
         "youtubeVideoId": "AR3DJ_EniCk",
         "title": "Amazon Can Run a Home Server… Too",
         "sourceChannelId": "UCC_NjLEb2Sley94py4vSYTA",
@@ -671,14 +663,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 3261
       },
       {
-        "youtubeVideoId": "0L1L_3YZjto",
-        "title": "What Happens If You Strap A Jet Engine To Your Fist?",
-        "sourceChannelId": "UCMOBdfLjLT-PzrGzld8GjRw",
-        "sourceChannelTitle": "Carbon",
-        "thumbnailUrl": "https://i.ytimg.com/vi/0L1L_3YZjto/hqdefault.jpg",
-        "durationSec": 89
-      },
-      {
         "youtubeVideoId": "X_Eb3MMD33M",
         "title": "Living with the iPhone Duo is Complicated",
         "sourceChannelId": "UCC_NjLEb2Sley94py4vSYTA",
@@ -925,14 +909,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Bad Decisions Studio ",
         "thumbnailUrl": "https://i.ytimg.com/vi/anYTdbhJWCg/hqdefault.jpg",
         "durationSec": 3811
-      },
-      {
-        "youtubeVideoId": "ZQ09PE__XAM",
-        "title": "Games I Regret Making",
-        "sourceChannelId": "UCMOBdfLjLT-PzrGzld8GjRw",
-        "sourceChannelTitle": "Carbon",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ZQ09PE__XAM/hqdefault.jpg",
-        "durationSec": 943
       },
       {
         "youtubeVideoId": "B84L0wWr93U",
@@ -1909,6 +1885,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Easy Allies Plays",
         "thumbnailUrl": "https://i.ytimg.com/vi/xZ-S0-2zPbM/hqdefault.jpg",
         "durationSec": 17297
+      },
+      {
+        "youtubeVideoId": "WRWbsryyCK4",
+        "title": "SNAP JAW | Official Reveal Trailer",
+        "sourceChannelId": "UCMOBdfLjLT-PzrGzld8GjRw",
+        "sourceChannelTitle": "Carbon",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WRWbsryyCK4/hqdefault.jpg",
+        "durationSec": 73
+      },
+      {
+        "youtubeVideoId": "0L1L_3YZjto",
+        "title": "What Happens If You Strap A Jet Engine To Your Fist?",
+        "sourceChannelId": "UCMOBdfLjLT-PzrGzld8GjRw",
+        "sourceChannelTitle": "Carbon",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0L1L_3YZjto/hqdefault.jpg",
+        "durationSec": 89
+      },
+      {
+        "youtubeVideoId": "ZQ09PE__XAM",
+        "title": "Games I Regret Making",
+        "sourceChannelId": "UCMOBdfLjLT-PzrGzld8GjRw",
+        "sourceChannelTitle": "Carbon",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZQ09PE__XAM/hqdefault.jpg",
+        "durationSec": 943
       }
     ]
   },

@@ -136,15 +136,15 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "CodeTV"
     },
     {
-      "id": "UCMOBdfLjLT-PzrGzld8GjRw",
-      "name": "Carbon"
-    },
-    {
       "id": "UCOQ6GGRyyu8S3jahnUz2zHw",
       "name": "Bad Decisions Studio "
     }
   ],
   "games": [
+    {
+      "id": "UCMOBdfLjLT-PzrGzld8GjRw",
+      "name": "Carbon"
+    },
     {
       "id": "UCqJ-Xo29CKyLTjn6z2XwYAw",
       "name": "Game Maker's Toolkit"

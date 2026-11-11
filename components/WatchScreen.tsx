@@ -6,6 +6,7 @@ import { YouTubePlayer, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule } from '../lib/broadcast-clock';
 import { pickNextBreak, BreakPlan, YouTubeBumperClip } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
+import { BumperStage } from './BumperStage';
 import {
   Play,
   Pause,
@@ -210,6 +211,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     videos.length > 0 ? videos[(currentVideoIndex + 1) % videos.length] : undefined;
   const laterVideo: Video | undefined =
     videos.length > 1 ? videos[(currentVideoIndex + 2) % videos.length] : undefined;
+  const thirdVideo: Video | undefined =
+    videos.length > 2 ? videos[(currentVideoIndex + 3) % videos.length] : undefined;
 
   // Reset local time display and cancel any pending break unless we just promoted a pre-buffered deck
   useEffect(() => {
@@ -415,9 +418,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         : {
             kind: 'motion',
             variant: 'ident',
-            durationMs: 3200,
-            eyebrow: 'STATION ID',
-            cardLine: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
+            durationMs: 4400,
+            cardLead: 'Station identification.',
+            cardPunchline: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
           };
     startMotionBreak(fallbackMotion);
   }, [
@@ -746,69 +749,19 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       {/* Video layer: ping-pong dual decks keep GPU surfaces warm & pre-buffered without gaps */}
       <div className="tv-video">
         {activeMotionBreak && (
-          <div className={`tv-bumper tv-bumper--${activeMotionBreak.variant}`}>
-            <div className="tv-bumper-card">
-              <div className="tv-bumper-head">
-                <div className="brand-logo tv-bumper-brand">
-                  <span className="brand-dot" />
-                  <span>tuned</span>
-                </div>
-                <div className="tv-bumper-pills">
-                  <span className="osd-chip">
-                    <span className="dot" />
-                    CH {String(currentChannelIndex + 1).padStart(2, '0')} · {activeChannel?.categoryName}
-                  </span>
-                  <span className="tv-bumper-next">{activeMotionBreak.eyebrow}</span>
-                </div>
-              </div>
-
-              {activeMotionBreak.variant === 'ident' && (
-                <div className="tv-bumper-body tv-bumper-ident">
-                  <div className="tv-bumper-eq" aria-hidden>
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                  <div className="tv-bumper-kicker">YOU ARE WATCHING</div>
-                  <h3>{activeChannel?.categoryName || 'Tuned'}</h3>
-                  <p>UP NEXT · {nextVideo?.title || 'Continuing broadcast…'}</p>
-                </div>
-              )}
-
-              {activeMotionBreak.variant === 'lineup' && (
-                <div className="tv-bumper-body tv-bumper-lineup">
-                  <div className="tv-bumper-slot">
-                    <span className="tv-bumper-tag">UP NEXT</span>
-                    <strong>{nextVideo?.title || 'Continuing broadcast…'}</strong>
-                    <small>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</small>
-                  </div>
-                  {laterVideo && laterVideo.youtubeVideoId !== nextVideo?.youtubeVideoId && (
-                    <div className="tv-bumper-slot later">
-                      <span className="tv-bumper-tag">LATER</span>
-                      <strong>{laterVideo.title}</strong>
-                      <small>{laterVideo.sourceChannelTitle}</small>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {activeMotionBreak.variant === 'card' && (
-                <div className="tv-bumper-body tv-bumper-note">
-                  <h3>{activeMotionBreak.cardLine}</h3>
-                  <p>UP NEXT · {nextVideo?.title || 'Continuing broadcast…'}</p>
-                </div>
-              )}
-
-              {activeMotionBreak.variant === 'signal' && (
-                <div className="tv-bumper-body tv-bumper-signal">
-                  <div className="tv-bumper-kicker">STEREO BROADCAST · CH {String(currentChannelIndex + 1).padStart(2, '0')}</div>
-                  <h3>{nextVideo?.title || 'Continuing broadcast…'}</h3>
-                  <p>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</p>
-                </div>
-              )}
-            </div>
-          </div>
+          <BumperStage
+            variant={activeMotionBreak.variant}
+            durationMs={activeMotionBreak.durationMs}
+            categoryId={activeChannel?.categoryId || 'tech'}
+            channelNumber={currentChannelIndex + 1}
+            channelName={activeChannel?.categoryName || 'Tuned'}
+            hue={hue}
+            cardLead={activeMotionBreak.cardLead}
+            cardPunchline={activeMotionBreak.cardPunchline}
+            nextVideo={nextVideo}
+            laterVideo={laterVideo}
+            thirdVideo={thirdVideo}
+          />
         )}
 
         {activeClipOverride && !activeMotionBreak && (
@@ -875,9 +828,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                           pendingBreakPlanRef.current = {
                             kind: 'motion',
                             variant: 'ident',
-                            durationMs: 3200,
-                            eyebrow: 'STATION ID',
-                            cardLine: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
+                            durationMs: 4400,
+                            cardLead: 'Station identification.',
+                            cardPunchline: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
                           };
                           if (nextVideo?.youtubeVideoId) {
                             setStandbyTarget({
@@ -897,9 +850,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                       startMotionBreak({
                         kind: 'motion',
                         variant: 'ident',
-                        durationMs: 3000,
-                        eyebrow: 'STATION ID',
-                        cardLine: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
+                        durationMs: 4400,
+                        cardLead: 'Station identification.',
+                        cardPunchline: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
                       });
                       return;
                     }
