@@ -1043,7 +1043,7 @@ button:focus-visible, input:focus-visible {
 .mg-item { display: flex; align-items: center; gap: 10px; width: 100%; height: clamp(42px, 5.2vh, 52px); padding: 0 14px; border-radius: 12px; color: #fff; text-align: left;
   background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.12s ease; }
 .mg-item:hover { background: rgba(255,255,255,0.16); }
-.mg-item.selected { background: rgba(255, 246, 236, 0.92); color: #1a0f0b; transform: scale(1.012); box-shadow: 0 10px 26px rgba(0,0,0,0.35), inset 4px 0 0 hsl(var(--h), 80%, 50%); }
+.mg-item.selected { background: rgba(255, 246, 236, 0.92); color: #1a0f0b; transform: scale(1.012); box-shadow: 0 10px 26px rgba(0,0,0,0.35); border-color: transparent; }
 .mg-num { font-family: var(--font-display); font-weight: 700; font-size: 13px; opacity: 0.6; width: 22px; flex-shrink: 0; }
 .mg-name { flex: 1; min-width: 0; font-size: 18px; font-weight: 600; text-transform: capitalize; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mg-tag { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; background: rgba(255,255,255,0.16); flex-shrink: 0; }
@@ -1056,8 +1056,8 @@ button:focus-visible, input:focus-visible {
 .mg-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .mg-actions .osd-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .mg-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
-.mg-chip { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 999px; color: #fff; font-size: 13px; font-weight: 500; border: 1px solid hsla(var(--h), 70%, 60%, 0.5); background: hsla(var(--h), 70%, 50%, 0.15); transition: background 0.15s ease; }
-.mg-chip:hover { background: hsla(var(--h), 70%, 50%, 0.4); }
+.mg-chip { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 999px; color: #fff; font-size: 13px; font-weight: 500; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.1); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: background 0.15s ease; }
+.mg-chip:hover { background: rgba(255,255,255,0.22); }
 .mg-form { display: flex; gap: 8px; margin-top: 14px; }
 .mg-input { color: #fff; background: rgba(255,255,255,0.08); }
 .osd-btn.active-solid { background: #fff; color: #111; font-weight: 600; }
