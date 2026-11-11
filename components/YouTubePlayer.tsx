@@ -23,10 +23,13 @@ interface YouTubePlayerProps {
   tuneKey?: number;
   isPlaying: boolean;
   isMuted?: boolean;
+  allowShortClip?: boolean;
+  prebufferOnly?: boolean;
   captionsEnabled?: boolean;
   captionFontSize?: CaptionFontSize;
   captionLanguage?: string;
   onCaptionTracksChange?: (tracks: CaptionTrack[]) => void;
+  onPrebuffered?: (videoId: string) => void;
   onEnded: () => void;
   onError: (errorCode: number) => void;
   onTimeUpdate: (currentTime: number, duration: number) => void;
@@ -41,10 +44,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   tuneKey = 0,
   isPlaying,
   isMuted = false,
+  allowShortClip = false,
+  prebufferOnly = false,
   captionsEnabled = false,
   captionFontSize = 0,
   captionLanguage = 'auto',
   onCaptionTracksChange,
+  onPrebuffered,
   onEnded,
   onError,
   onTimeUpdate,
@@ -57,6 +63,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isReadyRef = useRef<boolean>(false);
   const hasStartedRef = useRef<boolean>(false);
+  const prebufferedKeyRef = useRef<string | null>(null);
   const shortCheckDoneRef = useRef<string | null>(null);
   const endedFiredRef = useRef<string | null>(null);
   const loadedVideoIdRef = useRef<string>('');
@@ -75,10 +82,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     tuneKey,
     isPlaying,
     isMuted,
+    allowShortClip,
+    prebufferOnly,
     captionsEnabled,
     captionFontSize,
     captionLanguage,
     onCaptionTracksChange,
+    onPrebuffered,
     onEnded,
     onError,
     onTimeUpdate,
@@ -94,10 +104,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       tuneKey,
       isPlaying,
       isMuted,
+      allowShortClip,
+      prebufferOnly,
       captionsEnabled,
       captionFontSize,
       captionLanguage,
       onCaptionTracksChange,
+      onPrebuffered,
       onEnded,
       onError,
       onTimeUpdate,
@@ -239,7 +252,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               } catch {}
 
               try {
-                if (cur.isMuted) {
+                if (cur.prebufferOnly || cur.isMuted) {
                   playerRef.current?.mute?.();
                 } else {
                   playerRef.current?.unMute?.();
@@ -266,11 +279,18 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                   targetStart > 3
                     ? { videoId: cur.videoId, tuneKey: cur.tuneKey, startSeconds: targetStart }
                     : null;
-                playerRef.current?.loadVideoById?.({
-                  videoId: cur.videoId,
-                  startSeconds: targetStart,
-                });
-              } else if (cur.isPlaying) {
+                if (cur.isPlaying || cur.prebufferOnly) {
+                  playerRef.current?.loadVideoById?.({
+                    videoId: cur.videoId,
+                    startSeconds: targetStart,
+                  });
+                } else {
+                  playerRef.current?.cueVideoById?.({
+                    videoId: cur.videoId,
+                    startSeconds: targetStart,
+                  });
+                }
+              } else if (cur.videoId && (cur.isPlaying || cur.prebufferOnly)) {
                 const targetStart = Math.floor(cur.startSeconds || 0);
                 if (targetStart > 0) {
                   pendingSeekRef.current =
@@ -297,6 +317,21 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             onStateChange: (event: any) => {
               if (isCancelled) return;
               const cur = latestPropsRef.current;
+              if (cur.prebufferOnly) {
+                if (event.data === 1) {
+                  const key = `${cur.videoId}_${cur.tuneKey}`;
+                  try {
+                    playerRef.current?.mute?.();
+                    playerRef.current?.pauseVideo?.();
+                    playerRef.current?.seekTo?.(Math.floor(cur.startSeconds || 0), true);
+                  } catch {}
+                  if (prebufferedKeyRef.current !== key) {
+                    prebufferedKeyRef.current = key;
+                    cur.onPrebuffered?.(cur.videoId);
+                  }
+                }
+                return;
+              }
               // YT.PlayerState: -1 unstarted, 0 ended, 1 playing, 2 paused, 3 buffering, 5 cued
               if (event.data === 1) {
                 hasStartedRef.current = true;
@@ -357,7 +392,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
               const cur = latestPropsRef.current;
               if (typeof navigator !== 'undefined' && navigator.onLine === false) {
                 console.warn('YouTube Player offline error suppressed while disconnected:', event.data);
-                cur.onBuffering(true);
+                if (!cur.prebufferOnly) cur.onBuffering(true);
                 return;
               }
               console.warn('YouTube Player reported error:', event.data, 'for video:', cur.videoId);
@@ -394,7 +429,20 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
   // Update videoId or tune position when channel/video/tuneKey changes (never reset on play/pause!)
   useEffect(() => {
-    if (!playerRef.current || !isReadyRef.current || !videoId) return;
+    if (!playerRef.current || !isReadyRef.current) return;
+
+    if (!videoId) {
+      if (loadedVideoIdRef.current) {
+        loadedVideoIdRef.current = '';
+        loadedTuneKeyRef.current = tuneKey;
+        loadedStartSecRef.current = 0;
+        hasStartedRef.current = false;
+        try {
+          playerRef.current.stopVideo?.();
+        } catch {}
+      }
+      return;
+    }
 
     const targetStart = Math.floor(startSeconds || 0);
     const sameTune =
@@ -405,12 +453,15 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       return;
     }
 
-    const shouldPlay = latestPropsRef.current.isPlaying;
+    const shouldPlay = latestPropsRef.current.isPlaying || latestPropsRef.current.prebufferOnly;
     hasStartedRef.current = false;
     pendingSeekRef.current =
       targetStart > 3 ? { videoId, tuneKey, startSeconds: targetStart } : null;
 
     try {
+      if (latestPropsRef.current.prebufferOnly) {
+        playerRef.current.mute?.();
+      }
       if (sameTune) {
         loadedStartSecRef.current = targetStart;
         playerRef.current.seekTo?.(targetStart, true);
@@ -441,13 +492,13 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
   // Update caption state (on/off, font size, language) immediately when user changes it
   useEffect(() => {
-    if (!playerRef.current || !isReadyRef.current) return;
+    if (!playerRef.current || !isReadyRef.current || prebufferOnly) return;
     applyCaptionSettings(playerRef.current, !!captionsEnabled, captionFontSize, captionLanguage);
-  }, [captionsEnabled, captionFontSize, captionLanguage]);
+  }, [captionsEnabled, captionFontSize, captionLanguage, prebufferOnly]);
 
-  // Watchdog: If video is supposed to play but fails to start within 8s, skip to next video
+  // Watchdog: If video is supposed to play actively but fails to start within 8s, skip to next video
   useEffect(() => {
-    if (!videoId || !isPlaying) return;
+    if (!videoId || !isPlaying || prebufferOnly) return;
 
     const watchdog = setTimeout(() => {
       if (typeof navigator !== 'undefined' && navigator.onLine === false) return;
@@ -465,27 +516,39 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     return () => {
       clearTimeout(watchdog);
     };
-  }, [videoId, tuneKey, isPlaying]);
+  }, [videoId, tuneKey, isPlaying, prebufferOnly]);
 
-  // Handle play / pause changes
+  // Handle play / pause and prebuffer-to-live promotion
   useEffect(() => {
-    if (!playerRef.current || !isReadyRef.current) return;
+    if (!playerRef.current || !isReadyRef.current || !videoId) return;
 
     try {
+      if (prebufferOnly) {
+        playerRef.current.mute?.();
+        return;
+      }
       const state = playerRef.current.getPlayerState?.();
-      if (isPlaying && state !== 1) {
-        playerRef.current.playVideo();
+      if (isPlaying) {
+        if (isMuted) {
+          playerRef.current.mute?.();
+        } else {
+          playerRef.current.unMute?.();
+          playerRef.current.setVolume?.(100);
+        }
+        if (state !== 1) {
+          playerRef.current.playVideo();
+        }
       } else if (!isPlaying && state === 1) {
         playerRef.current.pauseVideo();
       }
     } catch (e) {
       console.warn('Error toggling play/pause:', e);
     }
-  }, [isPlaying]);
+  }, [isPlaying, prebufferOnly, isMuted, videoId]);
 
   // Handle mute / unmute changes
   useEffect(() => {
-    if (!playerRef.current || !isReadyRef.current) return;
+    if (!playerRef.current || !isReadyRef.current || prebufferOnly) return;
     try {
       if (isMuted) {
         playerRef.current.mute?.();
@@ -499,29 +562,33 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     } catch (e) {
       console.warn('Error toggling mute:', e);
     }
-  }, [isMuted]);
+  }, [isMuted, prebufferOnly]);
 
   // Periodic time updates, short detection & end-of-video guard
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       if (!playerRef.current || !isReadyRef.current) return;
       try {
+        const latest = latestPropsRef.current;
+        if (latest.prebufferOnly || !latest.videoId) return;
+
         const cur = playerRef.current.getCurrentTime?.() || 0;
         const dur = playerRef.current.getDuration?.() || 0;
         const state = playerRef.current.getPlayerState?.();
-        const latest = latestPropsRef.current;
 
         latest.onTimeUpdate(cur, dur);
 
-        // YouTube Shorts auto-exclude guard: All Shorts are <= 60s
-        if (dur > 0 && dur <= 60 && shortCheckDoneRef.current !== latest.videoId) {
+        // YouTube Shorts auto-exclude guard: All Shorts are <= 60s (disabled for short bumper clips)
+        if (!latest.allowShortClip && dur > 0 && dur <= 60 && shortCheckDoneRef.current !== latest.videoId) {
           shortCheckDoneRef.current = latest.videoId;
           console.warn(`[Tuned] Video ${latest.videoId} is <=60s (${dur}s). Excluded as YouTube Short.`);
           latest.onShortDetected?.(latest.videoId);
           return;
         }
 
-        if (state === 0 || (dur > 60 && cur >= dur - 0.4 && hasStartedRef.current)) {
+        const nearEndMargin = latest.allowShortClip ? 0.35 : 0.4;
+        const minDurForMargin = latest.allowShortClip ? 1 : 60;
+        if (state === 0 || (dur > minDurForMargin && cur >= dur - nearEndMargin && hasStartedRef.current)) {
           triggerEndedOnce();
           return;
         }

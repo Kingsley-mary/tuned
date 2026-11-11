@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
 import { getLiveBroadcastState, advanceChannelPlayback } from '../lib/broadcast-clock';
+import { unlockBumperAudio } from '../lib/bumper-synth';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
 import { TuningScreen } from '../components/TuningScreen';
@@ -276,6 +277,7 @@ export default function TunedApp() {
 
   // Handlers for Power Screen
   const handleTurnOn = () => {
+    unlockBumperAudio();
     if (crtTimerRef.current) clearTimeout(crtTimerRef.current);
     setCrtTransition('on');
     crtTimerRef.current = setTimeout(() => {

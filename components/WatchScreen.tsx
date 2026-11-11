@@ -4,6 +4,8 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule } from '../lib/broadcast-clock';
+import { pickNextBreak, BreakPlan, YouTubeBumperClip } from '../lib/bumpers';
+import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
 import {
   Play,
   Pause,
@@ -99,10 +101,19 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [isChannelPulsing, setIsChannelPulsing] = useState<boolean>(false);
   const [isBadgeFlipping, setIsBadgeFlipping] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const [isBumperActive, setIsBumperActive] = useState<boolean>(false);
+  const [activeSlot, setActiveSlot] = useState<0 | 1>(0);
+  const [activeClipOverride, setActiveClipOverride] = useState<YouTubeBumperClip | null>(null);
+  const [activeMotionBreak, setActiveMotionBreak] = useState<Extract<BreakPlan, { kind: 'motion' }> | null>(null);
+  const [standbyTarget, setStandbyTarget] = useState<{
+    videoId: string;
+    allowShortClip: boolean;
+    startSeconds: number;
+  } | null>(null);
+  const [promotedTarget, setPromotedTarget] = useState<{ videoId: string } | null>(null);
   const [copiedShare, setCopiedShare] = useState<boolean>(false);
   const [isDockMinimized, setIsDockMinimized] = useState<boolean>(true);
   const [dockAnim, setDockAnim] = useState<'minimizing' | 'maximizing' | null>(null);
+  const isBumperActive = Boolean(activeMotionBreak || activeClipOverride);
   const shareTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isOnline, setIsOnline] = useState<boolean>(() =>
     typeof navigator !== 'undefined' ? navigator.onLine : true
@@ -182,6 +193,12 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   const tvStageRef = useRef<HTMLDivElement>(null);
   const bumperTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const youtubeBumperSafetyRef = useRef<NodeJS.Timeout | null>(null);
+  const deckEpochsRef = useRef<[number, number]>([0, 0]);
+  const promotedPrebufferedIdRef = useRef<string | null>(null);
+  const pendingBreakPlanRef = useRef<BreakPlan | null>(null);
+  const failedBumperIdsRef = useRef<Set<string>>(new Set());
+  const breakCounterRef = useRef<number>(0);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const onNextVideoRef = useRef(onNextVideo);
   onNextVideoRef.current = onNextVideo;
@@ -191,21 +208,43 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const activeVideo: Video | undefined = videos[currentVideoIndex] || videos[0];
   const nextVideo: Video | undefined =
     videos.length > 0 ? videos[(currentVideoIndex + 1) % videos.length] : undefined;
+  const laterVideo: Video | undefined =
+    videos.length > 1 ? videos[(currentVideoIndex + 2) % videos.length] : undefined;
 
-  // Reset local time display and cancel any pending bumper when channel or video switches
+  // Reset local time display and cancel any pending break unless we just promoted a pre-buffered deck
   useEffect(() => {
+    const promotedId = promotedPrebufferedIdRef.current;
+    if (promotedId && activeVideo?.youtubeVideoId === promotedId) {
+      promotedPrebufferedIdRef.current = null;
+      setPromotedTarget(null);
+      setCurrentTime(0);
+      setDuration(activeVideo ? getVideoDuration(activeVideo) : 0);
+      return;
+    }
+
+    promotedPrebufferedIdRef.current = null;
+    setPromotedTarget(null);
     setCurrentTime(startSeconds || 0);
     setDuration(activeVideo ? getVideoDuration(activeVideo) : 0);
     if (bumperTimeoutRef.current) {
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
-    setIsBumperActive(false);
+    if (youtubeBumperSafetyRef.current) {
+      clearTimeout(youtubeBumperSafetyRef.current);
+      youtubeBumperSafetyRef.current = null;
+    }
+    pendingBreakPlanRef.current = null;
+    setActiveMotionBreak(null);
+    setActiveClipOverride(null);
+    setStandbyTarget(null);
+    deckEpochsRef.current[activeSlot] += 1;
   }, [currentChannelIndex, currentVideoIndex, startSeconds, tuneKey]);
 
   useEffect(() => {
     return () => {
       if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
+      if (youtubeBumperSafetyRef.current) clearTimeout(youtubeBumperSafetyRef.current);
     };
   }, []);
 
@@ -268,19 +307,198 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     };
   }, []);
 
-  // Handle natural end of show with a 2.4-second Network Station ID Bumper
-  const handleVideoEndedNaturally = useCallback(() => {
+  // Promote pre-buffered standby slot to foreground (or advance normally if none queued)
+  const advanceFromBreakToNextVideo = useCallback(() => {
+    if (youtubeBumperSafetyRef.current) {
+      clearTimeout(youtubeBumperSafetyRef.current);
+      youtubeBumperSafetyRef.current = null;
+    }
+    if (bumperTimeoutRef.current) {
+      clearTimeout(bumperTimeoutRef.current);
+      bumperTimeoutRef.current = null;
+    }
+    setActiveMotionBreak(null);
+    setActiveClipOverride(null);
+
+    if (nextVideo?.youtubeVideoId && standbyTarget?.videoId === nextVideo.youtubeVideoId) {
+      promotedPrebufferedIdRef.current = nextVideo.youtubeVideoId;
+      setPromotedTarget({ videoId: nextVideo.youtubeVideoId });
+      setActiveSlot((prev) => (prev === 0 ? 1 : 0));
+      setStandbyTarget(null);
+    } else {
+      setStandbyTarget(null);
+    }
+
+    onNextVideoRef.current(false);
+  }, [nextVideo?.youtubeVideoId, standbyTarget?.videoId]);
+
+  const startMotionBreak = useCallback(
+    (motionPlan: Extract<BreakPlan, { kind: 'motion' }>) => {
+      setActiveClipOverride(null);
+      setActiveMotionBreak(motionPlan);
+      playChannelJingle(activeChannel?.categoryId || 'tech', { muted: isMuted });
+
+      // Ensure nextVideo buffers cleanly in the standby slot during the motion ident
+      if (nextVideo?.youtubeVideoId && standbyTarget?.videoId !== nextVideo.youtubeVideoId) {
+        setStandbyTarget({
+          videoId: nextVideo.youtubeVideoId,
+          allowShortClip: false,
+          startSeconds: 0,
+        });
+      }
+
+      if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
+      bumperTimeoutRef.current = setTimeout(() => {
+        advanceFromBreakToNextVideo();
+      }, motionPlan.durationMs);
+    },
+    [activeChannel?.categoryId, isMuted, nextVideo?.youtubeVideoId, standbyTarget?.videoId, advanceFromBreakToNextVideo]
+  );
+
+  // Triggered when a main show or Option 3 YouTube bumper finishes naturally
+  const handleActiveDeckEnded = useCallback(() => {
+    if (activeClipOverride) {
+      advanceFromBreakToNextVideo();
+      return;
+    }
+
     if (sleepTimerMode === 'end') {
       onPowerOff();
       return;
     }
-    setIsBumperActive(true);
-    if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
-    bumperTimeoutRef.current = setTimeout(() => {
-      setIsBumperActive(false);
-      onNextVideoRef.current(false);
-    }, 2400);
-  }, [onPowerOff, sleepTimerMode]);
+
+    const chId = activeChannel?.categoryId || 'tech';
+    const plan =
+      pendingBreakPlanRef.current ||
+      (() => {
+        const picked = pickNextBreak(chId, breakCounterRef.current, failedBumperIdsRef.current);
+        breakCounterRef.current += 1;
+        return picked;
+      })();
+    pendingBreakPlanRef.current = null;
+
+    if (
+      plan.kind === 'youtube' &&
+      !failedBumperIdsRef.current.has(plan.clip.youtubeVideoId)
+    ) {
+      setActiveMotionBreak(null);
+      setActiveClipOverride(plan.clip);
+
+      // Flip immediately to whichever deck was pre-buffering the YouTube bumper clip
+      if (standbyTarget?.videoId === plan.clip.youtubeVideoId) {
+        setActiveSlot((prev) => (prev === 0 ? 1 : 0));
+      } else {
+        deckEpochsRef.current[activeSlot] += 1;
+      }
+
+      // For very short clips (< 4s), begin pre-buffering nextVideo on the new standby deck immediately
+      if (plan.clip.durationSec <= 4 && nextVideo?.youtubeVideoId) {
+        setStandbyTarget({
+          videoId: nextVideo.youtubeVideoId,
+          allowShortClip: false,
+          startSeconds: 0,
+        });
+      } else {
+        setStandbyTarget(null);
+      }
+
+      if (youtubeBumperSafetyRef.current) clearTimeout(youtubeBumperSafetyRef.current);
+      youtubeBumperSafetyRef.current = setTimeout(() => {
+        advanceFromBreakToNextVideo();
+      }, Math.min(25000, (plan.clip.durationSec + 5) * 1000));
+      return;
+    }
+
+    const fallbackMotion: Extract<BreakPlan, { kind: 'motion' }> =
+      plan.kind === 'motion'
+        ? plan
+        : {
+            kind: 'motion',
+            variant: 'ident',
+            durationMs: 3200,
+            eyebrow: 'STATION ID',
+            cardLine: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
+          };
+    startMotionBreak(fallbackMotion);
+  }, [
+    activeClipOverride,
+    activeChannel?.categoryId,
+    activeChannel?.categoryName,
+    activeSlot,
+    advanceFromBreakToNextVideo,
+    nextVideo?.youtubeVideoId,
+    onPowerOff,
+    sleepTimerMode,
+    standbyTarget?.videoId,
+    startMotionBreak,
+  ]);
+
+  // Begin buffering upcoming break or next video ~1.5-2.2s before active video finishes
+  const handleActiveDeckTimeUpdate = useCallback(
+    (cur: number, dur: number) => {
+      if (activeClipOverride) {
+        if (
+          dur > 0 &&
+          dur - cur <= 2.2 &&
+          nextVideo?.youtubeVideoId &&
+          standbyTarget?.videoId !== nextVideo.youtubeVideoId
+        ) {
+          setStandbyTarget({
+            videoId: nextVideo.youtubeVideoId,
+            allowShortClip: false,
+            startSeconds: 0,
+          });
+        }
+        return;
+      }
+
+      setCurrentTime(cur);
+      if (dur > 0) {
+        setDuration(dur);
+        if (activeVideo?.youtubeVideoId) {
+          recordVideoDuration(activeVideo.youtubeVideoId, dur);
+        }
+      }
+      onProgressUpdate?.(cur, dur);
+
+      if (
+        dur > 60 &&
+        cur > 5 &&
+        dur - cur <= 2.2 &&
+        !pendingBreakPlanRef.current &&
+        !activeMotionBreak &&
+        !activeClipOverride
+      ) {
+        const chId = activeChannel?.categoryId || 'tech';
+        const plan = pickNextBreak(chId, breakCounterRef.current, failedBumperIdsRef.current);
+        breakCounterRef.current += 1;
+        pendingBreakPlanRef.current = plan;
+
+        if (plan.kind === 'youtube') {
+          setStandbyTarget({
+            videoId: plan.clip.youtubeVideoId,
+            allowShortClip: true,
+            startSeconds: 0,
+          });
+        } else if (nextVideo?.youtubeVideoId) {
+          setStandbyTarget({
+            videoId: nextVideo.youtubeVideoId,
+            allowShortClip: false,
+            startSeconds: 0,
+          });
+        }
+      }
+    },
+    [
+      activeChannel?.categoryId,
+      activeClipOverride,
+      activeMotionBreak,
+      activeVideo?.youtubeVideoId,
+      nextVideo?.youtubeVideoId,
+      onProgressUpdate,
+      standbyTarget?.videoId,
+    ]
+  );
 
   // Share synchronized channel link (always copy clean URL to clipboard; native share sheet only on touch devices)
   const handleShareChannel = useCallback(async () => {
@@ -525,10 +743,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       onMouseMove={isHidden ? undefined : pokeOsd}
       aria-hidden={isHidden || undefined}
     >
-      {/* Video layer: keep YouTubePlayer mounted at full dimensions so its GPU video surface is never evicted */}
+      {/* Video layer: ping-pong dual decks keep GPU surfaces warm & pre-buffered without gaps */}
       <div className="tv-video">
-        {isBumperActive && (
-          <div className="tv-bumper">
+        {activeMotionBreak && (
+          <div className={`tv-bumper tv-bumper--${activeMotionBreak.variant}`}>
             <div className="tv-bumper-card">
               <div className="tv-bumper-head">
                 <div className="brand-logo tv-bumper-brand">
@@ -540,49 +758,169 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                     <span className="dot" />
                     CH {String(currentChannelIndex + 1).padStart(2, '0')} · {activeChannel?.categoryName}
                   </span>
-                  <span className="tv-bumper-next">UP NEXT</span>
+                  <span className="tv-bumper-next">{activeMotionBreak.eyebrow}</span>
                 </div>
               </div>
-              <h3>{nextVideo?.title || 'Continuing broadcast…'}</h3>
-              <p>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</p>
+
+              {activeMotionBreak.variant === 'ident' && (
+                <div className="tv-bumper-body tv-bumper-ident">
+                  <div className="tv-bumper-eq" aria-hidden>
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <div className="tv-bumper-kicker">YOU ARE WATCHING</div>
+                  <h3>{activeChannel?.categoryName || 'Tuned'}</h3>
+                  <p>UP NEXT · {nextVideo?.title || 'Continuing broadcast…'}</p>
+                </div>
+              )}
+
+              {activeMotionBreak.variant === 'lineup' && (
+                <div className="tv-bumper-body tv-bumper-lineup">
+                  <div className="tv-bumper-slot">
+                    <span className="tv-bumper-tag">UP NEXT</span>
+                    <strong>{nextVideo?.title || 'Continuing broadcast…'}</strong>
+                    <small>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</small>
+                  </div>
+                  {laterVideo && laterVideo.youtubeVideoId !== nextVideo?.youtubeVideoId && (
+                    <div className="tv-bumper-slot later">
+                      <span className="tv-bumper-tag">LATER</span>
+                      <strong>{laterVideo.title}</strong>
+                      <small>{laterVideo.sourceChannelTitle}</small>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {activeMotionBreak.variant === 'card' && (
+                <div className="tv-bumper-body tv-bumper-note">
+                  <h3>{activeMotionBreak.cardLine}</h3>
+                  <p>UP NEXT · {nextVideo?.title || 'Continuing broadcast…'}</p>
+                </div>
+              )}
+
+              {activeMotionBreak.variant === 'signal' && (
+                <div className="tv-bumper-body tv-bumper-signal">
+                  <div className="tv-bumper-kicker">STEREO BROADCAST · CH {String(currentChannelIndex + 1).padStart(2, '0')}</div>
+                  <h3>{nextVideo?.title || 'Continuing broadcast…'}</h3>
+                  <p>{nextVideo?.sourceChannelTitle || activeChannel?.categoryName}</p>
+                </div>
+              )}
             </div>
           </div>
         )}
-        {activeVideo?.youtubeVideoId ? (
-          <div
-            className="tv-yt"
-            style={{
-              opacity: isBumperActive ? 0 : 1,
-              pointerEvents: isBumperActive ? 'none' : undefined,
-            }}
-          >
-            <YouTubePlayer
-              videoId={activeVideo.youtubeVideoId}
-              startSeconds={startSeconds}
-              tuneKey={tuneKey}
-              isPlaying={isPlaying && !isBumperActive}
-              isMuted={isMuted}
-              captionsEnabled={captionsEnabled}
-              captionFontSize={captionFontSize}
-              captionLanguage={captionLanguage}
-              onCaptionTracksChange={setCaptionTracks}
-              onEnded={handleVideoEndedNaturally}
-              onError={(errCode) => {
-                console.warn(`Video ${activeVideo.youtubeVideoId} error (${errCode}), skipping...`);
-                onNextVideoRef.current(true);
-              }}
-              onTimeUpdate={(cur, dur) => {
-                setCurrentTime(cur);
-                if (dur > 0) {
-                  setDuration(dur);
-                  recordVideoDuration(activeVideo.youtubeVideoId, dur);
-                }
-                onProgressUpdate?.(cur, dur);
-              }}
-              onBuffering={setIsBuffering}
-              onShortDetected={onShortDetected}
-            />
+
+        {activeClipOverride && !activeMotionBreak && (
+          <div className="tv-break-bug" aria-hidden>
+            <span className="tv-break-dot" />
+            <span className="tv-break-label">{activeClipOverride.label}</span>
+            {nextVideo?.title && (
+              <span className="tv-break-next">UP NEXT: {nextVideo.title}</span>
+            )}
           </div>
+        )}
+
+        {activeVideo?.youtubeVideoId || activeClipOverride || promotedTarget ? (
+          [0, 1].map((slotIdx) => {
+            const isActiveDeck = slotIdx === activeSlot;
+            const resolvedActiveId = activeClipOverride
+              ? activeClipOverride.youtubeVideoId
+              : promotedTarget?.videoId || activeVideo?.youtubeVideoId || '';
+            const deckVideoId = isActiveDeck ? resolvedActiveId : standbyTarget?.videoId || '';
+            const deckAllowShort = isActiveDeck
+              ? Boolean(activeClipOverride)
+              : Boolean(standbyTarget?.allowShortClip);
+            const deckStart = isActiveDeck
+              ? activeClipOverride || promotedTarget
+                ? 0
+                : startSeconds
+              : standbyTarget?.startSeconds || 0;
+            const deckTuneKey = deckEpochsRef.current[slotIdx];
+            const isVisibleDeck = isActiveDeck && !activeMotionBreak && Boolean(deckVideoId);
+
+            return (
+              <div
+                key={`deck-${slotIdx}`}
+                className="tv-yt"
+                style={{
+                  opacity: isVisibleDeck ? 1 : 0,
+                  pointerEvents: isVisibleDeck ? undefined : 'none',
+                  zIndex: isVisibleDeck ? 1 : 0,
+                }}
+                aria-hidden={!isVisibleDeck || undefined}
+              >
+                <YouTubePlayer
+                  videoId={deckVideoId}
+                  startSeconds={deckStart}
+                  tuneKey={deckTuneKey}
+                  allowShortClip={deckAllowShort}
+                  prebufferOnly={!isActiveDeck || Boolean(activeMotionBreak)}
+                  isPlaying={isActiveDeck && isPlaying && !activeMotionBreak}
+                  isMuted={isActiveDeck ? isMuted : true}
+                  captionsEnabled={isActiveDeck ? captionsEnabled : false}
+                  captionFontSize={captionFontSize}
+                  captionLanguage={captionLanguage}
+                  onCaptionTracksChange={isActiveDeck && !activeClipOverride ? setCaptionTracks : undefined}
+                  onEnded={() => {
+                    if (isActiveDeck) {
+                      handleActiveDeckEnded();
+                    }
+                  }}
+                  onError={(errCode) => {
+                    if (!isActiveDeck) {
+                      if (standbyTarget?.allowShortClip && standbyTarget.videoId) {
+                        failedBumperIdsRef.current.add(standbyTarget.videoId);
+                        if (pendingBreakPlanRef.current?.kind === 'youtube') {
+                          pendingBreakPlanRef.current = {
+                            kind: 'motion',
+                            variant: 'ident',
+                            durationMs: 3200,
+                            eyebrow: 'STATION ID',
+                            cardLine: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
+                          };
+                          if (nextVideo?.youtubeVideoId) {
+                            setStandbyTarget({
+                              videoId: nextVideo.youtubeVideoId,
+                              allowShortClip: false,
+                              startSeconds: 0,
+                            });
+                          } else {
+                            setStandbyTarget(null);
+                          }
+                        }
+                      }
+                      return;
+                    }
+                    if (activeClipOverride) {
+                      failedBumperIdsRef.current.add(activeClipOverride.youtubeVideoId);
+                      startMotionBreak({
+                        kind: 'motion',
+                        variant: 'ident',
+                        durationMs: 3000,
+                        eyebrow: 'STATION ID',
+                        cardLine: `Up next on ${activeChannel?.categoryName || 'Tuned'}.`,
+                      });
+                      return;
+                    }
+                    console.warn(`Video ${deckVideoId} error (${errCode}), skipping...`);
+                    onNextVideoRef.current(true);
+                  }}
+                  onTimeUpdate={(cur, dur) => {
+                    if (isActiveDeck) {
+                      handleActiveDeckTimeUpdate(cur, dur);
+                    }
+                  }}
+                  onBuffering={(buff) => {
+                    if (isActiveDeck && !activeMotionBreak) {
+                      setIsBuffering(buff);
+                    }
+                  }}
+                  onShortDetected={onShortDetected}
+                />
+              </div>
+            );
+          })
         ) : (
           !isBumperActive && (
             <div className="tv-bumper">
@@ -596,6 +934,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       <div
         className="tv-capture"
         onClick={() => {
+          unlockBumperAudio();
           if (captionsMenuOpen) {
             setCaptionsMenuOpen(false);
             pokeOsd();
