@@ -121,8 +121,21 @@ export const ManageScreen: React.FC<ManageScreenProps> = ({
     { offset: colSplit, items: channels.slice(colSplit) },
   ].filter((col) => col.items.length > 0);
 
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    if (target.closest('button, a, input, select, textarea, form, .mg-card, .mg-item')) {
+      return;
+    }
+    onDone();
+  };
+
   return (
-    <div className="gd-screen mg-screen" style={{ ['--h' as string]: selected?.hue ?? 355 } as React.CSSProperties}>
+    <div
+      className="gd-screen mg-screen"
+      onClick={handleBackgroundClick}
+      style={{ ['--h' as string]: selected?.hue ?? 355 } as React.CSSProperties}
+    >
       <header className="gd-header">
         <div>
           <div className="brand-logo" style={{ color: '#fff' }}>

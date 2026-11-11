@@ -352,6 +352,7 @@ export default function TunedApp() {
     setIsPlaying(true);
     setIsReturningUser(true);
     setHasEnteredWatch(true);
+    isDirtyRef.current = false;
     persistState({ isReturningUser: true, lastChannelIndex: safeIdx });
     setScreenMode('watch');
   };
@@ -638,6 +639,7 @@ export default function TunedApp() {
       setScreenMode('tuning');
     } else {
       setHasEnteredWatch(true);
+      setIsPlaying(true);
       setScreenMode('watch');
     }
   };

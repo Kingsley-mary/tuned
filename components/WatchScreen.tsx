@@ -15,6 +15,8 @@ import {
   Loader2,
   Maximize,
   Minimize,
+  Maximize2,
+  Minimize2,
   Volume2,
   VolumeX,
   RotateCcw,
@@ -99,6 +101,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isBumperActive, setIsBumperActive] = useState<boolean>(false);
   const [copiedShare, setCopiedShare] = useState<boolean>(false);
+  const [isDockMinimized, setIsDockMinimized] = useState<boolean>(false);
   const shareTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isOnline, setIsOnline] = useState<boolean>(() =>
     typeof navigator !== 'undefined' ? navigator.onLine : true
@@ -358,11 +361,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       if (e.key === ' ') {
         e.preventDefault();
         onTogglePlay();
-      } else if (e.key === 'ArrowUp') {
+      } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         const nextIdx = (currentChannelIndex - 1 + channels.length) % channels.length;
         onSelectChannel(nextIdx);
-      } else if (e.key === 'ArrowDown') {
+      } else if (e.key === 'ArrowRight') {
         e.preventDefault();
         const nextIdx = (currentChannelIndex + 1) % channels.length;
         onSelectChannel(nextIdx);
@@ -779,7 +782,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           </button>
         </div>
 
-        <div className="osd-panel">
+        <div className={`osd-panel${isDockMinimized ? ' minimized' : ''}`}>
           <div className="osd-head">
             <div className="osd-head-left">
               <span className="osd-time">{hh}</span>
@@ -787,14 +790,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             </div>
 
             <div className="osd-channel">
-              <button onClick={() => stepChannel(-1)} aria-label="Previous channel" title="Previous channel (↑)">
+              <button onClick={() => stepChannel(-1)} aria-label="Previous channel" title="Previous channel (←)">
                 <ChevronUp size={18} style={{ transform: 'rotate(-90deg)' }} />
               </button>
               <span className={`osd-channel-name ${isBadgeFlipping ? 'flip' : ''}`}>
                 <b>{String(currentChannelIndex + 1).padStart(2, '0')}</b>
                 <span style={{ textTransform: 'capitalize' }}>{activeChannel?.categoryName || 'Channel'}</span>
               </span>
-              <button onClick={() => stepChannel(1)} aria-label="Next channel" title="Next channel (↓)">
+              <button onClick={() => stepChannel(1)} aria-label="Next channel" title="Next channel (→)">
                 <ChevronDown size={18} style={{ transform: 'rotate(-90deg)' }} />
               </button>
             </div>
@@ -809,10 +812,22 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   <span className="dot" /> Watching live
                 </span>
               )}
+              <button
+                type="button"
+                className="osd-dock-toggle"
+                onClick={() => {
+                  setIsDockMinimized((prev) => !prev);
+                  pokeOsd();
+                }}
+                aria-label={isDockMinimized ? 'Expand dock' : 'Minimize dock'}
+                title={isDockMinimized ? 'Expand dock' : 'Minimize dock'}
+              >
+                {isDockMinimized ? <Maximize2 size={15} /> : <Minimize2 size={15} />}
+              </button>
             </div>
           </div>
 
-          {rows.map((slot, i) => {
+          {(isDockMinimized ? rows.slice(0, 1) : rows).map((slot, i) => {
             const isNow = i === 0;
             return (
               <div key={slot.video.youtubeVideoId + i} className={`osd-row${isNow ? ' now' : ''}`}>

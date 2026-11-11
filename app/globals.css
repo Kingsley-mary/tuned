@@ -1066,7 +1066,7 @@ button:focus-visible, input:focus-visible {
 .osd-btn.active { color: var(--accent); border-color: var(--accent); }
 .osd-btn.danger { color: #ff7a6e; }
 
-.osd-legend { display: flex; justify-content: flex-end; gap: 22px; padding: 0 8px 12px; flex-wrap: wrap; }
+.osd-legend { display: flex; justify-content: center; gap: 22px; padding: 0 8px 12px; flex-wrap: wrap; }
 .osd-legend button { color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
 .osd-legend button:hover { color: #fff; }
 .kbd-osd { padding: 4px 10px; border-radius: 8px; background: rgba(255,255,255,0.18); font-size: 11px; font-weight: 700; letter-spacing: 0.05em; }
@@ -1082,7 +1082,11 @@ button:focus-visible, input:focus-visible {
 .osd-channel-name { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 20px; font-weight: 600; min-width: 180px; justify-content: center; }
 .osd-channel-name b { padding: 3px 10px; border-radius: 8px; background: hsl(var(--h), 80%, 48%); font-size: 14px; }
 .osd-channel-name.flip { animation: badge-flip 0.5s ease-out; }
-.osd-head-right { display: flex; justify-content: flex-end; }
+.osd-head-right { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+.osd-dock-toggle { width: 34px; height: 34px; border-radius: 50%; color: rgba(255,255,255,0.85); display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); transition: background 0.15s ease, color 0.15s ease; flex-shrink: 0; }
+.osd-dock-toggle:hover { background: rgba(255,255,255,0.22); color: #fff; }
+.osd-panel.minimized .osd-head { padding: 12px 24px; }
+.osd-panel.minimized .osd-row.now { height: 54px; margin: 8px 12px 10px; }
 .osd-live { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; }
 .osd-live.behind { padding: 8px 14px; border-radius: 999px; color: #f59e0b; border: 1px solid rgba(245,158,11,0.5); background: rgba(245,158,11,0.12); }
 

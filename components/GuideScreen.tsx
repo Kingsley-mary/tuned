@@ -421,8 +421,19 @@ export function GuideScreen({
   const nowFraction = (nowMin - w0) / WIN;
   const selChannel = channels[selRow];
 
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    if (
+      target.closest('button, a, input, select, textarea, .ch, .pr, .pgb, .info, .keys > div, .keys > button')
+    ) {
+      return;
+    }
+    onBackToWatch();
+  };
+
   return (
-    <div className="tvg-guide-screen">
+    <div className="tvg-guide-screen" onClick={handleBackgroundClick}>
       <div className="bg" />
       <div className={`toast ${toastOn ? 'on' : ''}`}>{toastMsg}</div>
 
