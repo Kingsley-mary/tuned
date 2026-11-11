@@ -1319,6 +1319,10 @@ button:focus-visible, input:focus-visible {
   color: var(--cd);
   border-color: transparent;
 }
+.tvg-guide-screen .row.foc .ch {
+  background: rgba(255, 255, 255, .24);
+  border-color: rgba(255, 255, 255, .45);
+}
 .tvg-guide-screen .trk {
   position: relative;
 }
