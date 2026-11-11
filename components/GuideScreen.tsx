@@ -55,7 +55,18 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
     }
   };
 
-  const PX_PER_MIN = 5;
+  // Show about 2.5 hours across the screen, like a broadcast guide (responsive to viewport width)
+  const [vw, setVw] = useState(1440);
+  useEffect(() => {
+    const on = () => setVw(window.innerWidth);
+    on();
+    window.addEventListener('resize', on);
+    return () => window.removeEventListener('resize', on);
+  }, []);
+  const chW = vw <= 768 ? 96 : 200;
+  const sidePad = vw <= 768 ? 24 : 96;
+  const PX_PER_MIN = Math.max(3.2, (vw - sidePad - chW - 12) / 150);
+  const MIN_BLOCK = vw <= 768 ? 96 : 150;
   const WINDOW_MIN = 240;
 
   const [nowMs, setNowMs] = useState(() => Date.now());
@@ -70,7 +81,7 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
   const HALF_HOUR = 30 * 60 * 1000;
   const winStart = Math.floor(nowMs / HALF_HOUR) * HALF_HOUR - HALF_HOUR;
   const winEnd = winStart + WINDOW_MIN * 60 * 1000;
-  const trackWidth = WINDOW_MIN * PX_PER_MIN;
+  const baseTrackWidth = WINDOW_MIN * PX_PER_MIN;
   const msToX = (ms: number) => ((ms - winStart) / 60000) * PX_PER_MIN;
 
   const rows = useMemo(() => {
@@ -163,13 +174,27 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus, rows, currentChannelIndex, nowMs]);
 
+  // Lay out each row: first show fills from the left edge, short shows get a readable minimum width,
+  // and later shows are pushed right so blocks never overlap.
+  const layouts = rows.map(({ schedule }) => {
+    let prevRight = 0;
+    return schedule.map((slot, i) => {
+      const natLeft = Math.max(0, msToX(slot.startTimeMs));
+      const left = i === 0 ? 0 : Math.max(natLeft, prevRight);
+      const right = Math.max(msToX(slot.endTimeMs), left + MIN_BLOCK);
+      prevRight = right;
+      return { left, width: right - left - 6 };
+    });
+  });
+  const trackWidth = Math.max(baseTrackWidth, ...layouts.map((l) => (l.length ? l[l.length - 1].left + l[l.length - 1].width + 6 : 0)));
+
   const ticks: number[] = [];
   for (let t = winStart; t < winEnd; t += HALF_HOUR) ticks.push(t);
 
   const nowX = msToX(nowMs);
 
   return (
-    <div className="gd-screen" style={{ ['--h' as string]: focusedChannel?.hue ?? 355 } as React.CSSProperties}>
+    <div className="gd-screen" style={{ ['--h' as string]: focusedChannel?.hue ?? 355, ['--guide-ch-w' as string]: `px` } as React.CSSProperties}>
       <header className="gd-header">
         <div>
           <div className="brand-logo" style={{ color: '#fff' }}>
@@ -214,15 +239,13 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                     title={`Tune to CH ${String(chIdx + 1).padStart(2, '0')} ${ch.categoryName}`}
                   >
                     <span className="gd-ch-num">{String(chIdx + 1).padStart(2, '0')}</span>
-                    <span className="gd-ch-name">{ch.categoryName}</span>
+                    <span className={`gd-ch-name${ch.categoryName.length > 9 ? ' long' : ''}`}>{ch.categoryName}</span>
                     {isCurrentChannel && <Radio size={13} className="gd-ch-live" />}
                   </button>
 
                   <div className="guide-track" style={{ width: trackWidth }}>
                     {schedule.map((slot, c) => {
-                      const left = Math.max(0, msToX(slot.startTimeMs));
-                      const right = Math.min(trackWidth, msToX(slot.endTimeMs));
-                      const width = Math.max(20, right - left - 6);
+                      const { left, width } = layouts[r][c];
                       const isWatchingNow = isCurrentChannel && slot.isLive;
                       const cutLeft = slot.startTimeMs < winStart;
                       const isFocused = focus?.r === r && focus?.c === c;
@@ -251,7 +274,7 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                 </div>
               );
             })}
-            <div className="guide-now-line" style={{ left: `calc(var(--guide-ch-w, 168px) + ${nowX - 1}px)` }} />
+            <div className="guide-now-line" style={{ left: `calc(var(--guide-ch-w, 200px) + ${Math.max(0, nowX) - 1}px)` }} />
           </div>
         </div>
       </div>

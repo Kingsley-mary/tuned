@@ -12,8 +12,6 @@ import {
   Tv,
   Settings,
   Power,
-  Sun,
-  Moon,
   Loader2,
   Maximize,
   Minimize,
@@ -37,12 +35,10 @@ interface WatchScreenProps {
   tuneKey?: number;
   isPlaying: boolean;
   isHidden?: boolean;
-  theme: 'dark' | 'light' | 'system';
   sleepTimerMode: SleepTimerMode;
   sleepRemainingSec: number | null;
   behindLiveSeconds?: number;
   onCycleSleepTimer: () => void;
-  onToggleTheme: () => void;
   onSelectChannel: (channelIndex: number) => void;
   onRecallLastChannel: () => void;
   onTogglePlay: () => void;
@@ -64,12 +60,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   tuneKey = 0,
   isPlaying,
   isHidden = false,
-  theme,
   sleepTimerMode,
   sleepRemainingSec,
   behindLiveSeconds = 0,
   onCycleSleepTimer,
-  onToggleTheme,
   onSelectChannel,
   onRecallLastChannel,
   onTogglePlay,
@@ -426,9 +420,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             aria-label="Sleep Timer"
           >
             <Timer size={16} /> <span>{sleepLabel}</span>
-          </button>
-          <button onClick={onToggleTheme} className="osd-btn icon" aria-label="Toggle theme">
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           <button onClick={onPowerOff} className="osd-btn icon danger" aria-label="Power off" title="Power off">
             <Power size={16} />

@@ -30,7 +30,6 @@ export default function TunedApp() {
   const [startSeconds, setStartSeconds] = useState<number>(0);
   const [tuneKey, setTuneKey] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [theme, setTheme] = useState<'dark' | 'light' | 'system'>('dark');
   const [offAirReason, setOffAirReason] = useState<string>('Nothing playable on this channel right now.');
 
   // Sleep Timer state
@@ -81,9 +80,6 @@ export default function TunedApp() {
         if (typeof parsed.lastChannelIndex === 'number') {
           setCurrentChannelIndex(parsed.lastChannelIndex);
         }
-        if (parsed.theme) {
-          setTheme(parsed.theme);
-        }
       }
 
       // Support shared ?ch=<categoryId> URL parameter
@@ -105,15 +101,10 @@ export default function TunedApp() {
       console.warn('Could not read user state from local storage:', e);
     }
   }, []);
-
-  // Sync theme with DOM
+  // Tuned is dark-only: lock the theme attribute
   useEffect(() => {
-    if (theme === 'system') {
-      document.documentElement.removeAttribute('data-theme');
-    } else {
-      document.documentElement.setAttribute('data-theme', theme);
-    }
-  }, [theme]);
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
 
   // Persist user state to LocalStorage
   const persistState = useCallback(
@@ -125,7 +116,6 @@ export default function TunedApp() {
           lastChannelIndex: currentChannelIndex,
           autoplay: true,
           isReturningUser: true,
-          theme,
           ...overrides,
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
@@ -133,7 +123,7 @@ export default function TunedApp() {
         console.warn('Could not save user state:', e);
       }
     },
-    [pickedCategoryIds, customSources, currentChannelIndex, theme]
+    [pickedCategoryIds, customSources, currentChannelIndex]
   );
 
   // Resolve target channel's live broadcast state from the global deterministic wall-clock
@@ -452,17 +442,6 @@ export default function TunedApp() {
     setIsPlaying((prev) => !prev);
   }, []);
 
-  const handleToggleTheme = () => {
-    const isCurrentlyDark =
-      theme === 'dark' ||
-      (theme === 'system' &&
-        typeof window !== 'undefined' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
-    const nextTheme = isCurrentlyDark ? 'light' : 'dark';
-    setTheme(nextTheme);
-    persistState({ theme: nextTheme });
-  };
-
   const handlePowerOff = () => {
     setIsPlaying(false);
     persistState();
@@ -653,12 +632,10 @@ export default function TunedApp() {
           tuneKey={tuneKey}
           isPlaying={isPlaying}
           isHidden={screenMode !== 'watch'}
-          theme={theme}
           sleepTimerMode={sleepTimerMode}
           sleepRemainingSec={sleepRemainingSec}
           behindLiveSeconds={behindLiveSeconds}
           onCycleSleepTimer={handleCycleSleepTimer}
-          onToggleTheme={handleToggleTheme}
           onSelectChannel={handleSelectChannel}
           onRecallLastChannel={handleRecallLastChannel}
           onTogglePlay={handleTogglePlay}

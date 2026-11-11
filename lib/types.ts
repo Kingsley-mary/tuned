@@ -63,7 +63,7 @@ export interface UserState {
   lastCategoryIndex?: number;
   autoplay: boolean;
   isReturningUser: boolean;
-  theme: 'dark' | 'light' | 'system';
+  theme?: 'dark' | 'light' | 'system'; // deprecated: Tuned is dark-only
 }
 
 export type ScreenMode = 'power' | 'pick' | 'tuning' | 'watch' | 'guide' | 'manage' | 'off';
