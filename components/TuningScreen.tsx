@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ChannelLineup } from '../lib/types';
 import { Radio } from 'lucide-react';
 
@@ -16,6 +16,9 @@ export const TuningScreen: React.FC<TuningScreenProps> = ({
   onTuningComplete,
 }) => {
   const [activeStep, setActiveStep] = useState<number>(0);
+  // Keep the latest callback in a ref so parent re-renders never restart the tuning timers.
+  const completeRef = useRef(onTuningComplete);
+  completeRef.current = onTuningComplete;
 
   useEffect(() => {
     // Light up channels one by one
@@ -31,14 +34,14 @@ export const TuningScreen: React.FC<TuningScreenProps> = ({
     // Minimum display time 2s, max 8s (T-2)
     const minTime = Math.max(2200, channels.length * 350 + 800);
     const timeout = setTimeout(() => {
-      onTuningComplete();
+      completeRef.current();
     }, minTime);
 
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [channels.length, onTuningComplete]);
+  }, [channels.length]);
 
   return (
     <div

@@ -222,7 +222,7 @@ export const GuideScreen: React.FC<GuideScreenProps> = ({
                     {schedule.map((slot, c) => {
                       const left = Math.max(0, msToX(slot.startTimeMs));
                       const right = Math.min(trackWidth, msToX(slot.endTimeMs));
-                      const width = Math.max(48, right - left - 6);
+                      const width = Math.max(20, right - left - 6);
                       const isWatchingNow = isCurrentChannel && slot.isLive;
                       const cutLeft = slot.startTimeMs < winStart;
                       const isFocused = focus?.r === r && focus?.c === c;

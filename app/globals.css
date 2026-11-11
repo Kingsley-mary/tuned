@@ -967,3 +967,61 @@ button:focus-visible, input:focus-visible {
 .pk-screen footer { background: rgba(34, 26, 22, 0.7) !important; border-color: rgba(255,255,255,0.12) !important; color: #fff; }
 .pk-screen footer span { color: inherit !important; }
 .pk-screen .category-grid button { border: 1px solid rgba(255,255,255,0.12) !important; }
+
+
+/* ================= Review fixes ================= */
+/* Pick: let content scroll above the fixed bottom bar instead of flex-shrinking under it */
+.pk-screen { display: block; padding-bottom: 140px; }
+.pk-screen .top-nav { margin-bottom: 20px; }
+
+/* Power */
+.power-curtain p { color: rgba(245, 244, 240, 0.8) !important; }
+.power-curtain button:not(.power-btn) { color: #fff !important; text-decoration: underline; }
+.power-curtain div[style*='font-size: 12px'], .power-curtain div[style*='fontSize: 12'] { color: rgba(255,255,255,0.65) !important; }
+
+/* Tuning contrast in both themes */
+.tuning-chip { color: var(--ink); opacity: 0.7; }
+
+/* Guide: NOW chip sits under the tick labels, not on them */
+.gd-screen .guide-now-chip { top: auto; bottom: -9px; }
+.gd-ruler { margin-bottom: 8px; }
+.gd-scroll { padding-bottom: 16px; }
+.gd-channel { color: #fff; }
+.gd-channel .gd-ch-name, .gd-channel .gd-ch-num { color: inherit; }
+.gd-channel { background: linear-gradient(135deg, hsla(var(--h), 55%, 45%, 0.55), hsla(var(--h), 45%, 30%, 0.4)); }
+.gd-channel.current { background: #fff6ec; color: #1a0f0b; }
+.gd-slot-title span { color: inherit; }
+
+/* Manage */
+.mg-item { outline: none; }
+.mg-item.selected { transform: none; box-shadow: 0 10px 30px rgba(0,0,0,0.35); border-left: 5px solid hsl(var(--h), 80%, 50%); }
+.mg-item:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.osd-btn:disabled { color: rgba(255,255,255,0.4); }
+.mg-link { color: rgba(255,255,255,0.7) !important; }
+
+/* Watch: more room for titles */
+.osd-row { grid-template-columns: 70px 56px minmax(0, 1fr) minmax(0, 160px) 64px; }
+
+@media (max-width: 768px) {
+  /* Watch OSD: compact, readable */
+  .osd-bottom { background: linear-gradient(0deg, rgba(0,0,0,0.9) 40%, transparent); padding-top: 40px; }
+  .osd-legend button { background: rgba(255,255,255,0.14); padding: 8px 14px; border-radius: 999px; font-size: 12px; }
+  .osd-legend { gap: 8px; padding-bottom: 10px; }
+  .osd-row:nth-of-type(n+4) { display: none; }
+  .osd-row { height: 44px; grid-template-columns: 52px minmax(0, 1fr) 48px; }
+  .osd-row.now { height: 52px; margin: 4px 8px; }
+  .osd-row-title { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px; }
+  .osd-head { padding: 10px 12px; gap: 6px; }
+  .osd-head-left { display: none; }
+  .osd-channel-name { min-width: 0; font-size: 16px; }
+
+  /* Guide mobile */
+  :root { --guide-ch-w: 96px; }
+  .gd-legend > span, .gd-legend button:first-child { display: none; }
+  .gd-legend { justify-content: flex-end; }
+  .gd-channel { padding: 0 8px; gap: 6px; }
+  .gd-ch-num { display: none; }
+  .gd-ch-name { font-size: 12px; }
+  .gd-slot-title { font-size: 13px; }
+  .pk-screen { padding: 16px 12px 140px; }
+}

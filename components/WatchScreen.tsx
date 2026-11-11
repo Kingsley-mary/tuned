@@ -338,7 +338,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       onMouseMove={pokeOsd}
     >
       {/* Video layer */}
-      <div className={`tv-video ${isChannelPulsing ? 'pulse-glow' : ''}`}>
+      <div className="tv-video">
         {isBumperActive ? (
           <div
             className="tv-bumper"
