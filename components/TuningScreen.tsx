@@ -63,10 +63,10 @@ export const TuningScreen: React.FC<TuningScreenProps> = ({
       <div
         style={{
           display: 'flex',
-          gap: 12,
+          gap: 9,
           justifyContent: 'center',
           flexWrap: 'wrap',
-          maxWidth: 640,
+          maxWidth: 740,
           marginBottom: 32,
         }}
       >
@@ -76,18 +76,8 @@ export const TuningScreen: React.FC<TuningScreenProps> = ({
             <div
               key={ch.id}
               className={`tuning-chip${isReady ? ' ready' : ''}`}
-              style={{ ['--h' as string]: ch.hue } as React.CSSProperties}
             >
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  background: `hsl(${ch.hue}, 85%, 55%)`,
-                  boxShadow: isReady ? `0 0 10px hsl(${ch.hue}, 85%, 55%)` : 'none',
-                  display: 'inline-block',
-                }}
-              />
+              <span className="tuning-dot" />
               <span>
                 {String(idx + 1).padStart(2, '0')} {ch.name}
               </span>
@@ -96,9 +86,9 @@ export const TuningScreen: React.FC<TuningScreenProps> = ({
         })}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'var(--ink-secondary)' }}>
-        <Radio size={18} className="animate-pulse" style={{ color: 'var(--accent)' }} />
-        <p style={{ fontSize: 15, fontWeight: 500 }}>Tuning your channels…</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'rgba(255,255,255,0.72)' }}>
+        <Radio size={16} className="animate-pulse" style={{ color: '#fff' }} />
+        <p style={{ fontSize: 14, fontWeight: 500, letterSpacing: '0.01em' }}>Tuning your channels…</p>
       </div>
       <div className="tuning-bar"><div style={{ width: `${Math.min(100, (activeStep / Math.max(1, channels.length)) * 100)}%` }} /></div>
     </div>
