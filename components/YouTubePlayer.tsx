@@ -227,6 +227,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
             start: Math.floor(initial.startSeconds || 0),
             iv_load_policy: 3,
             origin: typeof window !== 'undefined' ? window.location.origin : undefined,
+            widget_referrer: typeof window !== 'undefined' ? window.location.href : undefined,
           },
           events: {
             onReady: (event: any) => {

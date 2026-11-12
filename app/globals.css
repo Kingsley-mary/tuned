@@ -981,7 +981,8 @@ button:focus-visible, input:focus-visible {
 
 /* ================= Watch: full-bleed stage + OSD ================= */
 .tv-stage { position: fixed; inset: 0; background: #000; overflow: hidden; z-index: 5; color: #fff; }
-.tv-stage:fullscreen { width: 100vw; height: 100vh; }
+.tv-stage:fullscreen,
+.tv-stage.is-fullscreen { width: 100vw; width: 100dvw; height: 100vh; height: 100dvh; }
 .tv-video { position: relative; width: 100%; height: 100%; background: #000; overflow: hidden; }
 .tv-yt { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(100vw, 177.78vh); height: min(56.25vw, 100vh); aspect-ratio: 16 / 9; max-height: 100vh; transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
 .yt-aspect-ratio-box, .yt-aspect-ratio-box iframe { width: 100% !important; height: 100% !important; display: block !important; border: 0; }
@@ -1463,9 +1464,44 @@ button:focus-visible, input:focus-visible {
 .osd-upcoming-inner .osd-row:first-child .osd-row-tag { visibility: visible; }
 .osd-row-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .osd-row-src { font-size: 12px; opacity: 0.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.osd-row-src-live { opacity: 1; display: flex; align-items: center; gap: 8px; overflow: visible; }
+.osd-row-src-name { opacity: 0.65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.osd-yt-btn { display: inline-flex; align-items: center; flex-shrink: 0; padding: 3px 5px; border-radius: 999px; border: 1px solid transparent; background: rgba(0, 0, 0, 0.28); color: #fff; text-decoration: none; cursor: pointer; pointer-events: auto; transform-origin: left center; transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, background-color 0.22s ease, padding 0.22s cubic-bezier(0.22, 1, 0.36, 1); }
+.osd-yt-label { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.01em; margin-right: 0; transition: max-width 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.18s ease, margin-right 0.24s cubic-bezier(0.22, 1, 0.36, 1); }
+.osd-yt-icon { width: 16px; height: 16px; display: block; flex-shrink: 0; }
+.osd-yt-btn:hover, .osd-yt-btn:focus-visible { transform: scale(1.06); padding: 3px 8px; border-color: #ff2a2a; background: rgba(20, 10, 10, 0.85); }
+.osd-yt-btn:hover .osd-yt-label, .osd-yt-btn:focus-visible .osd-yt-label { max-width: 84px; opacity: 1; margin-right: 6px; }
 .osd-row-dur { font-size: 12px; text-align: center; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.14); font-variant-numeric: tabular-nums; }
 .osd-row-progress { position: absolute; left: 16px; right: 16px; bottom: 6px; height: 3px; border-radius: 3px; background: rgba(255,255,255,0.18); overflow: hidden; }
 .osd-row-progress > span { display: block; height: 100%; background: #fff; }
+
+.osd-top-left { display: flex; align-items: center; gap: 10px; }
+.osd-rotate-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 42, 42, 0.22);
+  border: 1px solid rgba(255, 42, 42, 0.45);
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  animation: pulseRotate 2.5s infinite ease-in-out;
+}
+.osd-rotate-pill .osd-rotate-spin {
+  animation: spinSlow 3s infinite linear;
+}
+@keyframes pulseRotate {
+  0%, 100% { opacity: 0.88; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
 @media (max-width: 768px) {
   .osd-top { padding: 12px 14px; }

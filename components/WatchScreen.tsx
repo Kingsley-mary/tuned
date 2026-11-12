@@ -69,6 +69,16 @@ interface WatchScreenProps {
   onPowerOff: () => void;
 }
 
+function isMobileTouchDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  const hasTouch = 'ontouchstart' in window || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+  if (!hasTouch) return false;
+  const isCoarse = typeof window.matchMedia === 'function' ? window.matchMedia('(pointer: coarse)').matches : false;
+  const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
+  const isSmallScreen = Math.min(window.screen.width, window.screen.height) <= 1024;
+  return isCoarse || isMobileUA || isSmallScreen;
+}
+
 export const WatchScreen: React.FC<WatchScreenProps> = ({
   channels,
   currentChannelIndex,
@@ -102,6 +112,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const [isChannelPulsing, setIsChannelPulsing] = useState<boolean>(false);
   const [isBadgeFlipping, setIsBadgeFlipping] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [isMobilePortrait, setIsMobilePortrait] = useState<boolean>(false);
+  const lastOrientationRef = useRef<'portrait' | 'landscape' | null>(null);
+  const pendingFullscreenRef = useRef<boolean>(false);
   const [activeSlot, setActiveSlot] = useState<0 | 1>(0);
   const [activeClipOverride, setActiveClipOverride] = useState<YouTubeBumperClip | null>(null);
   const [activeMotionBreak, setActiveMotionBreak] = useState<Extract<BreakPlan, { kind: 'motion' }> | null>(null);
@@ -267,33 +280,65 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     return () => clearTimeout(timer);
   }, [currentChannelIndex, activeChannel?.hue]);
 
-  // Fullscreen toggle handler on tvStageRef (with iOS Safari graceful fallback)
-  const toggleFullscreen = useCallback(async () => {
+  // Enter fullscreen helper with Screen Orientation API lock to landscape
+  const enterFullscreen = useCallback(async () => {
     try {
       const docAny = document as any;
       const stageAny = tvStageRef.current as any;
-      if (!document.fullscreenElement && !docAny.webkitFullscreenElement) {
-        if (stageAny?.requestFullscreen) {
+      const isAlreadyFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement);
+      if (!isAlreadyFs && stageAny) {
+        if (stageAny.requestFullscreen) {
           await stageAny.requestFullscreen();
-        } else if (stageAny?.webkitRequestFullscreen) {
+        } else if (stageAny.webkitRequestFullscreen) {
           await stageAny.webkitRequestFullscreen();
-        } else {
-          // iOS Safari does not support requestFullscreen on div elements; toggle immersive OSD-hidden state
-          setIsFullscreen((prev) => !prev);
-          setOsdOpen(false);
         }
-      } else {
+      }
+      setIsFullscreen(true);
+      pendingFullscreenRef.current = false;
+      if (typeof screen !== 'undefined' && screen.orientation && 'lock' in screen.orientation) {
+        (screen.orientation as any).lock('landscape').catch(() => {});
+      }
+    } catch {
+      // Browser blocked requestFullscreen (e.g. requires transient user gesture)
+      setIsFullscreen(true);
+      pendingFullscreenRef.current = true;
+    }
+  }, []);
+
+  // Exit fullscreen helper
+  const exitFullscreen = useCallback(async () => {
+    pendingFullscreenRef.current = false;
+    try {
+      const docAny = document as any;
+      const isAlreadyFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement);
+      if (isAlreadyFs) {
         if (document.exitFullscreen) {
           await document.exitFullscreen();
         } else if (docAny.webkitExitFullscreen) {
           await docAny.webkitExitFullscreen();
         }
       }
-    } catch (err) {
-      setIsFullscreen((prev) => !prev);
-      setOsdOpen(false);
+      setIsFullscreen(false);
+      if (typeof screen !== 'undefined' && screen.orientation && 'unlock' in screen.orientation) {
+        try {
+          screen.orientation.unlock();
+        } catch {}
+      }
+    } catch {
+      setIsFullscreen(false);
     }
   }, []);
+
+  // Fullscreen toggle handler on tvStageRef (with iOS Safari graceful fallback)
+  const toggleFullscreen = useCallback(async () => {
+    const docAny = document as any;
+    const isFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement || isFullscreen);
+    if (isFs) {
+      await exitFullscreen();
+    } else {
+      await enterFullscreen();
+    }
+  }, [isFullscreen, enterFullscreen, exitFullscreen]);
 
   // Listen for fullscreen state changes
   useEffect(() => {
@@ -309,6 +354,68 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       document.removeEventListener('webkitfullscreenchange', handleFsChange);
     };
   }, []);
+
+  // Auto-fullscreen on mobile landscape & auto-exit on mobile portrait
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const checkOrientation = () => {
+      if (!isMobileTouchDevice()) {
+        setIsMobilePortrait(false);
+        return;
+      }
+
+      const isLandscape =
+        window.matchMedia('(orientation: landscape)').matches ||
+        window.innerWidth > window.innerHeight;
+
+      setIsMobilePortrait(!isLandscape);
+
+      const currentOrientation = isLandscape ? 'landscape' : 'portrait';
+
+      if (lastOrientationRef.current !== currentOrientation) {
+        const prev = lastOrientationRef.current;
+        lastOrientationRef.current = currentOrientation;
+
+        if (isLandscape) {
+          enterFullscreen();
+        } else if (prev !== null) {
+          exitFullscreen();
+        }
+      }
+    };
+
+    checkOrientation();
+
+    const mql = window.matchMedia('(orientation: landscape)');
+    const handleMql = () => checkOrientation();
+
+    if (mql.addEventListener) {
+      mql.addEventListener('change', handleMql);
+    } else if ((mql as any).addListener) {
+      (mql as any).addListener(handleMql);
+    }
+
+    if (window.screen?.orientation?.addEventListener) {
+      window.screen.orientation.addEventListener('change', checkOrientation);
+    }
+
+    window.addEventListener('orientationchange', checkOrientation);
+    window.addEventListener('resize', checkOrientation);
+
+    return () => {
+      if (mql.removeEventListener) {
+        mql.removeEventListener('change', handleMql);
+      } else if ((mql as any).removeListener) {
+        (mql as any).removeListener(handleMql);
+      }
+      if (window.screen?.orientation?.removeEventListener) {
+        window.screen.orientation.removeEventListener('change', checkOrientation);
+      }
+      window.removeEventListener('orientationchange', checkOrientation);
+      window.removeEventListener('resize', checkOrientation);
+    };
+  }, [enterFullscreen, exitFullscreen]);
 
   // Promote pre-buffered standby slot to foreground (or advance normally if none queued)
   const advanceFromBreakToNextVideo = useCallback(() => {
@@ -698,6 +805,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   // Touch swipe gestures for mobile channel surfing (Swipe Up/Left = Next Ch, Swipe Down/Right = Prev Ch)
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (pendingFullscreenRef.current && isMobileTouchDevice()) {
+      const isLandscape =
+        window.matchMedia('(orientation: landscape)').matches ||
+        window.innerWidth > window.innerHeight;
+      if (isLandscape) {
+        enterFullscreen();
+      }
+    }
     const t = e.touches[0];
     if (!t) return;
     touchStartRef.current = { x: t.clientX, y: t.clientY, time: Date.now() };
@@ -735,7 +850,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   return (
     <div
       ref={tvStageRef}
-      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}`}
+      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}${isFullscreen ? ' is-fullscreen' : ''}`}
       style={
         {
           visibility: isHidden && !keepVideoVisible ? 'hidden' : 'visible',
@@ -912,9 +1027,22 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         }}
         onTouchStart={() => pokeOsd()}
       >
-        <div className="brand-logo" style={{ color: '#fff' }}>
-          <span className="brand-dot" />
-          <span>tuned</span>
+        <div className="osd-top-left">
+          <div className="brand-logo" style={{ color: '#fff' }}>
+            <span className="brand-dot" />
+            <span>tuned</span>
+          </div>
+          {isMobilePortrait && (
+            <button
+              className="osd-rotate-pill"
+              onClick={enterFullscreen}
+              title="Rotate device to landscape for fullscreen TV"
+              aria-label="Rotate device to landscape for fullscreen TV"
+            >
+              <RotateCcw size={12} className="osd-rotate-spin" />
+              <span>Rotate for TV</span>
+            </button>
+          )}
         </div>
 
         <div className="osd-top-right">
@@ -1136,7 +1264,27 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
               <span className="osd-row-tag">LIVE</span>
               <span className="osd-row-title">{activeVideo?.title || slot.video.title}</span>
-              <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>
+              <span className="osd-row-src osd-row-src-live">
+                <a
+                  href={`https://www.youtube.com/watch?v=${activeVideo?.youtubeVideoId || slot.video.youtubeVideoId}&t=${Math.max(0, Math.floor(currentTime))}s`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="osd-yt-btn"
+                  aria-label="Watch on YouTube"
+                  title="Watch on YouTube"
+                >
+                  <span className="osd-yt-label">Watch on YT</span>
+                  <svg className="osd-yt-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="#FF0000"
+                      d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"
+                    />
+                    <path fill="#FFFFFF" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                </a>
+                <span className="osd-row-src-name">{slot.video.sourceChannelTitle}</span>
+              </span>
               <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
               <span className="osd-row-progress">
                 <span style={{ width: `${progressPercent}%` }} />

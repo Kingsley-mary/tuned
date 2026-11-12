@@ -1348,8 +1348,8 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "Two Times Elliott"
     },
     {
-      "id": "UCwOFqUE6Er2hfCvtLGMTW6Q",
-      "name": "RIGHT ALIGNED"
+      "id": "UCN-ZY6GN60Qe53DhqYaK1Kw",
+      "name": "Right Aligned"
     },
     {
       "id": "UC98Glz-MWdnqeZDBxRPUUvQ",
@@ -1454,6 +1454,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCRnX4Yc585eRTj4UvNkBM8w",
       "name": "Autodesk"
+    },
+    {
+      "id": "UCWhRfxKSqHU8hjx7mbmKVxA",
+      "name": "Maxon"
     }
   ],
   "learning": [
