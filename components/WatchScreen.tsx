@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule } from '../lib/broadcast-clock';
-import { pickNextBreak, BreakPlan } from '../lib/bumpers';
+import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
 import { BumperStage } from './BumperStage';
 import {
@@ -206,9 +206,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   const tvStageRef = useRef<HTMLDivElement>(null);
   const bumperTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const breakQueueRef = useRef<BreakPlan[]>([]);
   const deckEpochsRef = useRef<[number, number]>([0, 0]);
   const promotedPrebufferedIdRef = useRef<string | null>(null);
-  const pendingBreakPlanRef = useRef<BreakPlan | null>(null);
+  const pendingBreakPlansRef = useRef<BreakPlan[] | null>(null);
   const failedBumperIdsRef = useRef<Set<string>>(new Set());
   const breakCounterRef = useRef<number>(0);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
@@ -253,7 +254,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
-    pendingBreakPlanRef.current = null;
+    breakQueueRef.current = [];
+    pendingBreakPlansRef.current = null;
     setActiveMotionBreak(null);
     setStandbyTarget(null);
     deckEpochsRef.current[activeSlot] += 1;
@@ -424,6 +426,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
+    breakQueueRef.current = [];
     setActiveMotionBreak(null);
 
     if (nextVideo?.youtubeVideoId && standbyTarget?.videoId === nextVideo.youtubeVideoId) {
@@ -438,13 +441,59 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     onNextVideoRef.current(false);
   }, [nextVideo?.youtubeVideoId, standbyTarget?.videoId]);
 
-  const startMotionBreak = useCallback(
-    (motionPlan: BreakPlan) => {
-      setActiveMotionBreak(motionPlan);
-      playChannelJingle(activeChannel?.categoryId || 'tech', { muted: isMuted });
+  const handleExitPreview = useCallback(() => {
+    if (bumperTimeoutRef.current) {
+      clearTimeout(bumperTimeoutRef.current);
+      bumperTimeoutRef.current = null;
+    }
+    breakQueueRef.current = [];
+    setActiveMotionBreak(null);
+  }, []);
 
-      // Ensure next full-length television show buffers cleanly in the standby slot during the 3D ident
-      if (nextVideo?.youtubeVideoId && standbyTarget?.videoId !== nextVideo.youtubeVideoId) {
+  const advanceBreakQueue = useCallback(() => {
+    if (bumperTimeoutRef.current) {
+      clearTimeout(bumperTimeoutRef.current);
+      bumperTimeoutRef.current = null;
+    }
+
+    const nextPlan = breakQueueRef.current.shift();
+    if (!nextPlan) {
+      if (activeMotionBreak?.isPreview) {
+        // Manual station ID preview finished: dismiss preview, NEVER advance video!
+        setActiveMotionBreak(null);
+      } else {
+        // Real commercial break finished: advance to next show!
+        advanceFromBreakToNextVideo();
+      }
+      return;
+    }
+
+    setActiveMotionBreak(nextPlan);
+    const isFirst = (nextPlan.bumperIndex ?? 1) === 1;
+
+    if (nextPlan.kind === 'motion') {
+      playChannelJingle(activeChannel?.categoryId || 'tech', {
+        muted: isMuted,
+        volume: isFirst ? 0.24 : 0.16,
+      });
+    }
+
+    bumperTimeoutRef.current = setTimeout(() => {
+      advanceBreakQueue();
+    }, nextPlan.durationMs);
+  }, [activeMotionBreak?.isPreview, activeChannel?.categoryId, isMuted, advanceFromBreakToNextVideo]);
+
+  const startBreakSequence = useCallback(
+    (packagePlans: BreakPlan[]) => {
+      if (!packagePlans || packagePlans.length === 0) {
+        advanceFromBreakToNextVideo();
+        return;
+      }
+
+      const isPreview = Boolean(packagePlans[0]?.isPreview);
+
+      // Only pre-buffer standby slot if this is a REAL commercial break between shows
+      if (!isPreview && nextVideo?.youtubeVideoId && standbyTarget?.videoId !== nextVideo.youtubeVideoId) {
         setStandbyTarget({
           videoId: nextVideo.youtubeVideoId,
           allowShortClip: false,
@@ -452,12 +501,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         });
       }
 
-      if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
-      bumperTimeoutRef.current = setTimeout(() => {
-        advanceFromBreakToNextVideo();
-      }, motionPlan.durationMs);
+      breakQueueRef.current = [...packagePlans];
+      advanceBreakQueue();
     },
-    [activeChannel?.categoryId, isMuted, nextVideo?.youtubeVideoId, standbyTarget?.videoId, advanceFromBreakToNextVideo]
+    [advanceBreakQueue, nextVideo?.youtubeVideoId, standbyTarget?.videoId, advanceFromBreakToNextVideo]
   );
 
   // Triggered when a main show finishes naturally
@@ -468,29 +515,57 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     }
 
     const chId = activeChannel?.categoryId || 'tech';
-    const plan =
-      pendingBreakPlanRef.current ||
+    const isMarathon = Boolean(
+      activeVideo?.sourceChannelTitle &&
+      nextVideo?.sourceChannelTitle &&
+      activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
+    );
+    const marathonCreator = isMarathon ? activeVideo?.sourceChannelTitle : undefined;
+    const plans =
+      pendingBreakPlansRef.current ||
       (() => {
-        const picked = pickNextBreak(chId, breakCounterRef.current, failedBumperIdsRef.current);
+        const picked = pickBreakPackage(chId, breakCounterRef.current, marathonCreator, false);
         breakCounterRef.current += 1;
         return picked;
       })();
-    pendingBreakPlanRef.current = null;
-    startMotionBreak(plan);
+    pendingBreakPlansRef.current = null;
+    startBreakSequence(plans);
   }, [
     activeChannel?.categoryId,
+    activeVideo?.sourceChannelTitle,
+    nextVideo?.sourceChannelTitle,
     onPowerOff,
     sleepTimerMode,
-    startMotionBreak,
+    startBreakSequence,
   ]);
 
   const triggerManualBreak = useCallback(() => {
-    if (isBumperActive || !activeChannel) return;
+    // If preview is ALREADY playing, pressing B again immediately closes it!
+    if (activeMotionBreak?.isPreview) {
+      handleExitPreview();
+      return;
+    }
+
+    if (!activeChannel) return;
     breakCounterRef.current += 1;
     const chId = activeChannel.categoryId || 'tech';
-    const plan = pickNextBreak(chId, breakCounterRef.current, failedBumperIdsRef.current);
-    startMotionBreak(plan);
-  }, [isBumperActive, activeChannel, startMotionBreak]);
+    const isMarathon = Boolean(
+      activeVideo?.sourceChannelTitle &&
+      nextVideo?.sourceChannelTitle &&
+      activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
+    );
+    const marathonCreator = isMarathon ? activeVideo?.sourceChannelTitle : undefined;
+    // Pass isPreview = true: strictly a preview, never advances the broadcast!
+    const plans = pickBreakPackage(chId, breakCounterRef.current, marathonCreator, true);
+    startBreakSequence(plans);
+  }, [
+    activeMotionBreak?.isPreview,
+    handleExitPreview,
+    activeChannel,
+    activeVideo?.sourceChannelTitle,
+    nextVideo?.sourceChannelTitle,
+    startBreakSequence,
+  ]);
 
   // Begin buffering upcoming break or next video ~1.5-2.2s before active video finishes
   const handleActiveDeckTimeUpdate = useCallback(
@@ -508,13 +583,19 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         dur > 60 &&
         cur > 5 &&
         dur - cur <= 2.2 &&
-        !pendingBreakPlanRef.current &&
+        !pendingBreakPlansRef.current &&
         !activeMotionBreak
       ) {
         const chId = activeChannel?.categoryId || 'tech';
-        const plan = pickNextBreak(chId, breakCounterRef.current, failedBumperIdsRef.current);
+        const isMarathon = Boolean(
+          activeVideo?.sourceChannelTitle &&
+          nextVideo?.sourceChannelTitle &&
+          activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
+        );
+        const marathonCreator = isMarathon ? activeVideo?.sourceChannelTitle : undefined;
+        const plans = pickBreakPackage(chId, breakCounterRef.current, marathonCreator);
         breakCounterRef.current += 1;
-        pendingBreakPlanRef.current = plan;
+        pendingBreakPlansRef.current = plans;
 
         if (nextVideo?.youtubeVideoId) {
           setStandbyTarget({
@@ -528,7 +609,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     [
       activeChannel?.categoryId,
       activeMotionBreak,
+      activeVideo?.sourceChannelTitle,
       activeVideo?.youtubeVideoId,
+      nextVideo?.sourceChannelTitle,
       nextVideo?.youtubeVideoId,
       onProgressUpdate,
     ]
@@ -683,25 +766,40 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   captionsMenuOpenRef.current = captionsMenuOpen;
 
   const pokeOsd = useCallback(() => {
+    // When bumper/ident is showing, do NOT automatically pop up the OSD!
+    if (activeMotionBreak) {
+      setOsdOpen(false);
+      return;
+    }
     setOsdOpen(true);
     if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
     osdTimerRef.current = setTimeout(() => {
       if (!osdHoverRef.current && !captionsMenuOpenRef.current) setOsdOpen(false);
     }, 5000);
-  }, []);
+  }, [activeMotionBreak]);
 
   useEffect(() => {
-    pokeOsd();
+    if (activeMotionBreak) {
+      setOsdOpen(false);
+      if (osdTimerRef.current) {
+        clearTimeout(osdTimerRef.current);
+        osdTimerRef.current = null;
+      }
+    } else {
+      pokeOsd();
+    }
     return () => {
       if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
     };
-  }, [currentChannelIndex, currentVideoIndex, tuneKey, pokeOsd]);
+  }, [currentChannelIndex, currentVideoIndex, tuneKey, activeMotionBreak, pokeOsd]);
 
   useEffect(() => {
     if (isHidden) return;
     const onKey = (e: KeyboardEvent) => {
       if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
-      pokeOsd();
+      if (!activeMotionBreak) {
+        pokeOsd();
+      }
       if (e.key === 'g' || e.key === 'G') {
         e.preventDefault();
         setCaptionsMenuOpen(false);
@@ -709,9 +807,15 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       } else if (e.key === 'c' || e.key === 'C') {
         e.preventDefault();
         setCaptionsEnabled((prev) => !prev);
-      } else if (e.key === 'Escape' && captionsMenuOpenRef.current) {
+      } else if (e.key === 'Escape') {
         e.preventDefault();
-        setCaptionsMenuOpen(false);
+        if (activeMotionBreak?.isPreview) {
+          handleExitPreview();
+          return;
+        }
+        if (captionsMenuOpenRef.current) {
+          setCaptionsMenuOpen(false);
+        }
       } else if (e.key === 'i' || e.key === 'I' || e.key === 'Enter') {
         e.preventDefault();
         setCaptionsMenuOpen(false);
@@ -778,7 +882,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   return (
     <div
       ref={tvStageRef}
-      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}${isFullscreen ? ' is-fullscreen' : ''}`}
+      className={`tv-stage${osdOpen && !isHidden && !activeMotionBreak ? ' osd-on' : ''}${isFullscreen ? ' is-fullscreen' : ''}`}
       style={
         {
           visibility: isHidden && !keepVideoVisible ? 'hidden' : 'visible',
@@ -793,17 +897,20 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       <div className="tv-video">
         {activeMotionBreak && (
           <BumperStage
-            variant={activeMotionBreak.variant}
+            plan={activeMotionBreak}
             durationMs={activeMotionBreak.durationMs}
             categoryId={activeChannel?.categoryId || 'tech'}
             channelNumber={currentChannelIndex + 1}
             channelName={activeChannel?.categoryName || 'Tuned'}
             hue={hue}
-            cardLead={activeMotionBreak.cardLead}
-            cardPunchline={activeMotionBreak.cardPunchline}
+            isMuted={isMuted}
             nextVideo={nextVideo}
             laterVideo={laterVideo}
             thirdVideo={thirdVideo}
+            onExitPreview={handleExitPreview}
+            onEnded={() => {
+              advanceBreakQueue();
+            }}
           />
         )}
 
@@ -898,7 +1005,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
       {/* Top bar */}
       <div
-        className="osd-top"
+        className={`osd-top${activeMotionBreak ? ' osd-hidden' : ''}`}
+        style={activeMotionBreak ? { opacity: 0, pointerEvents: 'none', display: 'none' } : undefined}
         onMouseEnter={() => (osdHoverRef.current = true)}
         onMouseLeave={() => {
           osdHoverRef.current = false;
@@ -1037,7 +1145,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
       {/* Bottom OSD */}
       <div
-        className="osd-bottom"
+        className={`osd-bottom${activeMotionBreak ? ' osd-hidden' : ''}`}
+        style={activeMotionBreak ? { opacity: 0, pointerEvents: 'none', display: 'none' } : undefined}
         onMouseEnter={() => (osdHoverRef.current = true)}
         onMouseLeave={() => {
           osdHoverRef.current = false;
@@ -1067,9 +1176,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             type="button"
             onClick={() => {
               triggerManualBreak();
-              pokeOsd();
             }}
-            title="Play Station ID & Bumper (B)"
+            title="Preview Station ID & Bumper (B)"
           >
             Ident <span className="kbd-osd">B</span>
           </button>
@@ -1113,6 +1221,13 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               <span className={`osd-channel-name ${isBadgeFlipping ? 'flip' : ''}`}>
                 <b>{String(currentChannelIndex + 1).padStart(2, '0')}</b>
                 <span style={{ textTransform: 'capitalize' }}>{activeChannel?.categoryName || 'Channel'}</span>
+                {activeVideo?.sourceChannelTitle &&
+                  nextVideo?.sourceChannelTitle &&
+                  activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase() && (
+                    <span className="osd-marathon-pill" title={`Continuous marathon of ${activeVideo.sourceChannelTitle}`}>
+                      🔥 MARATHON
+                    </span>
+                  )}
               </span>
               <button onClick={() => stepChannel(1)} aria-label="Next channel" title="Next channel (→)">
                 <ChevronDown size={18} style={{ transform: 'rotate(-90deg)' }} />
@@ -1148,51 +1263,77 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             </div>
           </div>
 
-          {rows.slice(0, 1).map((slot) => (
-            <div key={slot.video.youtubeVideoId + 'now'} className="osd-row now">
-              <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
-              <span className="osd-row-tag">LIVE</span>
-              <span className="osd-row-title">{activeVideo?.title || slot.video.title}</span>
-              <span className="osd-row-src osd-row-src-live">
-                <a
-                  href={`https://www.youtube.com/watch?v=${activeVideo?.youtubeVideoId || slot.video.youtubeVideoId}&t=${Math.max(0, Math.floor(currentTime))}s`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="osd-yt-btn"
-                  aria-label="Watch on YouTube"
-                  title="Watch on YouTube"
-                >
-                  <span className="osd-yt-label">Watch on YT</span>
-                  <svg className="osd-yt-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fill="#FF0000"
-                      d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"
-                    />
-                    <path fill="#FFFFFF" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                  </svg>
-                </a>
-                <span className="osd-row-src-name">{slot.video.sourceChannelTitle}</span>
-              </span>
-              <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
-              <span className="osd-row-progress">
-                <span style={{ width: `${progressPercent}%` }} />
-              </span>
-            </div>
-          ))}
+          {rows.slice(0, 1).map((slot) => {
+            const isMarathonActive = Boolean(
+              activeVideo?.sourceChannelTitle &&
+              nextVideo?.sourceChannelTitle &&
+              activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
+            );
+
+            return (
+              <div key={slot.video.youtubeVideoId + 'now'} className="osd-row now">
+                <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
+                <span className="osd-row-tag">LIVE</span>
+                <span className="osd-row-title">
+                  {isMarathonActive && (
+                    <span className="osd-marathon-pill" title={`All-${slot.video.sourceChannelTitle} marathon block`}>
+                      🔥 MARATHON
+                    </span>
+                  )}
+                  {activeVideo?.title || slot.video.title}
+                </span>
+                <span className="osd-row-src osd-row-src-live">
+                  <a
+                    href={`https://www.youtube.com/watch?v=${activeVideo?.youtubeVideoId || slot.video.youtubeVideoId}&t=${Math.max(0, Math.floor(currentTime))}s`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="osd-yt-btn"
+                    aria-label="Watch on YouTube"
+                    title="Watch on YouTube"
+                  >
+                    <span className="osd-yt-label">Watch on YT</span>
+                    <svg className="osd-yt-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        fill="#FF0000"
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"
+                      />
+                      <path fill="#FFFFFF" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                  </a>
+                  <span className="osd-row-src-name">{slot.video.sourceChannelTitle}</span>
+                </span>
+                <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
+                <span className="osd-row-progress">
+                  <span style={{ width: `${progressPercent}%` }} />
+                </span>
+              </div>
+            );
+          })}
 
           {rows.length > 1 && (
             <div className="osd-upcoming" aria-hidden={isDockMinimized}>
               <div className="osd-upcoming-inner">
-                {rows.slice(1).map((slot, i) => (
-                  <div key={slot.video.youtubeVideoId + (i + 1)} className="osd-row">
-                    <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
-                    <span className="osd-row-tag">{i === 0 ? 'NEXT' : ''}</span>
-                    <span className="osd-row-title">{slot.video.title}</span>
-                    <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>
-                    <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
-                  </div>
-                ))}
+                {rows.slice(1).map((slot, i) => {
+                  const isUpcomingMarathon = Boolean(
+                    activeVideo?.sourceChannelTitle &&
+                    slot.video?.sourceChannelTitle &&
+                    activeVideo.sourceChannelTitle.toLowerCase() === slot.video.sourceChannelTitle.toLowerCase()
+                  );
+
+                  return (
+                    <div key={slot.video.youtubeVideoId + (i + 1)} className="osd-row">
+                      <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
+                      <span className="osd-row-tag">{i === 0 ? (isUpcomingMarathon ? 'MARATHON' : 'NEXT') : ''}</span>
+                      <span className="osd-row-title">
+                        {isUpcomingMarathon && <span className="osd-marathon-mini">🔥</span>}
+                        {slot.video.title}
+                      </span>
+                      <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>
+                      <span className="osd-row-dur">{formatTime(slot.durationSec)}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

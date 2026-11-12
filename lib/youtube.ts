@@ -2551,26 +2551,50 @@ export async function fetchChannelUploads(channelId: string, channelName: string
   }
 }
 
-// Interleave multiple arrays round-robin so adjacent videos come from different creators
+// Interleaves creator video lists with occasional creator marathon blocks (1 to 5 videos from the same creator),
+// replicating classic television programming blocks (like Nickelodeon all-night SpongeBob marathons).
 function roundRobinInterleave(lists: Video[][]): Video[] {
   const result: Video[] = [];
   const seenIds = new Set<string>();
+  const pointers = new Array(lists.length).fill(0);
   let hasMore = true;
-  let round = 0;
+  let cycle = 0;
+
+  // Simple deterministic pseudo-random generator
+  let seed = 0x85ebca6b;
+  const nextRng = () => {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
 
   while (hasMore) {
     hasMore = false;
-    for (const list of lists) {
-      if (round < list.length) {
-        const item = list[round];
-        if (!seenIds.has(item.youtubeVideoId)) {
-          seenIds.add(item.youtubeVideoId);
-          result.push(item);
-        }
+    cycle++;
+
+    // Occasional creator marathon block (approx 1 out of every 4 cycles has a 2-5 video marathon)
+    const isMarathonCycle = cycle % 4 === 2;
+    const marathonCreatorIdx = isMarathonCycle ? Math.floor(nextRng() * lists.length) : -1;
+    const marathonLength = 2 + Math.floor(nextRng() * 4); // 2, 3, 4, or 5 consecutive videos
+
+    for (let cIdx = 0; cIdx < lists.length; cIdx++) {
+      const list = lists[cIdx];
+      if (pointers[cIdx] < list.length) {
         hasMore = true;
+        const takeCount = (cIdx === marathonCreatorIdx)
+          ? Math.min(marathonLength, list.length - pointers[cIdx])
+          : 1;
+
+        for (let k = 0; k < takeCount; k++) {
+          if (pointers[cIdx] < list.length) {
+            const item = list[pointers[cIdx]++];
+            if (!seenIds.has(item.youtubeVideoId)) {
+              seenIds.add(item.youtubeVideoId);
+              result.push(item);
+            }
+          }
+        }
       }
     }
-    round++;
   }
 
   return result;

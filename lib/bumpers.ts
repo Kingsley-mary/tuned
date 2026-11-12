@@ -13,13 +13,29 @@ export interface YouTubeBumperClip {
   durationSec: number;
 }
 
-export type BreakPlan = {
-  kind: 'motion';
-  variant: MotionBumperVariant;
-  durationMs: number;
-  cardLead: string;
-  cardPunchline: string;
-};
+export type BreakPlan =
+  | {
+      kind: 'motion';
+      variant: MotionBumperVariant;
+      durationMs: number;
+      cardLead: string;
+      cardPunchline: string;
+      bumperIndex?: number;
+      totalBumpers?: number;
+      isMarathon?: boolean;
+      marathonCreator?: string;
+      isPreview?: boolean;
+    }
+  | {
+      kind: 'youtube';
+      clip: YouTubeBumperClip;
+      durationMs: number;
+      bumperIndex?: number;
+      totalBumpers?: number;
+      isMarathon?: boolean;
+      marathonCreator?: string;
+      isPreview?: boolean;
+    };
 
 // Curated, verified widescreen broadcast idents, intros & promos across all 22 categories
 const CLIPS = {
@@ -200,30 +216,125 @@ const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = 
 ];
 
 /**
- * Picks the next station break.
- * All bumpers are bespoke Three.js 3D scenes (cinemascope, cybermatrix, synthwave, resonator, quantum,
- * architect, velocity, broadcast, aurora, plasma), station idents, and 2D editorial lineup/slate cards.
- * No YouTube video clips / Shorts are ever used in station breaks.
+ * Picks a station break package of 1 to 3 bumpers back-to-back ("random, not all the time"),
+ * or a single preview bumper when triggered manually (B key / Ident button).
+ *
+ * Combines:
+ * 1. Bespoke Three.js 3D motion scenes (cinemascope, cybermatrix, synthwave, resonator, quantum, architect)
+ * 2. Authentic retro broadcast video idents, network bumps & intros (Cartoon Network, Adult Swim, MTV, PS1, HBO, etc.)
+ * 3. 2D Swiss broadcast lineup schedules & editorial cards
  */
-export function pickNextBreak(
+export function pickBreakPackage(
   categoryId: string,
   breakCount: number,
-  _failedIds?: Set<string>
-): BreakPlan {
-  const motionIdx = breakCount % MOTION_ROTATION.length;
-  const template = MOTION_ROTATION[motionIdx];
+  marathonCreator?: string,
+  isPreview: boolean = false
+): BreakPlan[] {
+  const clipPool = YOUTUBE_BUMPERS_BY_CHANNEL[categoryId] || GENERAL_YOUTUBE_BUMPERS;
 
+  // If manual preview from pressing 'B', return a single punchy preview bumper!
+  if (isPreview) {
+    // Alternate preview between 3D Three.js ident and retro channel clip!
+    if (breakCount % 2 === 1 && clipPool.length > 0) {
+      const clip = clipPool[breakCount % clipPool.length];
+      return [
+        {
+          kind: 'youtube',
+          clip,
+          durationMs: (clip.durationSec || 10) * 1000,
+          bumperIndex: 1,
+          totalBumpers: 1,
+          isMarathon: Boolean(marathonCreator),
+          marathonCreator,
+          isPreview: true,
+        },
+      ];
+    }
+
+    const template = MOTION_ROTATION[breakCount % MOTION_ROTATION.length];
+    const baseCards = CHANNEL_CARDS[categoryId] || DEFAULT_CARDS;
+    const card = baseCards[breakCount % baseCards.length];
+    return [
+      {
+        kind: 'motion',
+        variant: template.variant,
+        durationMs: template.durationMs,
+        cardLead: marathonCreator ? `MARATHON PREVIEW` : card.lead,
+        cardPunchline: marathonCreator ? `All-${marathonCreator} block` : card.punchline,
+        bumperIndex: 1,
+        totalBumpers: 1,
+        isMarathon: Boolean(marathonCreator),
+        marathonCreator,
+        isPreview: true,
+      },
+    ];
+  }
+
+  // Real scheduled break: roll for 1, 2, or 3 bumpers
+  const roll = (Math.abs(Math.sin(breakCount * 9301 + 49297) * 233280)) % 100;
+  const count = roll < 45 ? 1 : roll < 85 ? 2 : 3;
+
+  const result: BreakPlan[] = [];
   const hour = typeof window !== 'undefined' ? new Date().getHours() : 20;
   const isLateNight = hour >= 0 && hour < 5;
   const baseCards = CHANNEL_CARDS[categoryId] || DEFAULT_CARDS;
   const cardPool = isLateNight ? [...LATE_NIGHT_CARDS, ...baseCards] : baseCards;
-  const pickedCard = cardPool[breakCount % cardPool.length];
 
-  return {
-    kind: 'motion',
-    variant: template.variant,
-    durationMs: template.durationMs,
-    cardLead: pickedCard.lead,
-    cardPunchline: pickedCard.punchline,
-  };
+  for (let step = 0; step < count; step++) {
+    // Interleave retro video clips with 3D scenes (unless it's an all-creator marathon block)
+    const isClipSlot = !marathonCreator && clipPool.length > 0 && ((breakCount + step) % 2 === 1);
+
+    if (isClipSlot) {
+      const clip = clipPool[(breakCount + step) % clipPool.length];
+      const dur = Math.min(16000, (clip.durationSec || 10) * 1000);
+      result.push({
+        kind: 'youtube',
+        clip,
+        durationMs: dur,
+        bumperIndex: step + 1,
+        totalBumpers: count,
+        isMarathon: false,
+        marathonCreator: undefined,
+        isPreview: false,
+      });
+    } else {
+      const motionIdx = (breakCount * 2 + step) % MOTION_ROTATION.length;
+      const template = MOTION_ROTATION[motionIdx];
+      let dur = template.durationMs;
+      if (count === 2) dur = Math.min(3600, Math.floor(dur * 0.82));
+      else if (count === 3) dur = Math.min(3100, Math.floor(dur * 0.72));
+
+      const pickedCard = cardPool[(breakCount + step) % cardPool.length];
+      const lead = marathonCreator ? `MARATHON IN PROGRESS` : pickedCard.lead;
+      const punchline = marathonCreator
+        ? `All-${marathonCreator} block continues right after this.`
+        : pickedCard.punchline;
+
+      result.push({
+        kind: 'motion',
+        variant: template.variant,
+        durationMs: dur,
+        cardLead: lead,
+        cardPunchline: punchline,
+        bumperIndex: step + 1,
+        totalBumpers: count,
+        isMarathon: Boolean(marathonCreator),
+        marathonCreator,
+        isPreview: false,
+      });
+    }
+  }
+
+  return result;
+}
+
+export function pickNextBreak(
+  categoryId: string,
+  breakCount: number,
+  _failedIds?: Set<string>,
+  marathonCreator?: string,
+  isPreview: boolean = false
+): BreakPlan {
+  const pkg = pickBreakPackage(categoryId, breakCount, marathonCreator, isPreview);
+  return pkg[0];
 }

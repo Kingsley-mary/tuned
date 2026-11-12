@@ -276,7 +276,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
   channelNumber = 1,
   channelName = 'Tuned',
   categoryId,
-  showStationPlate = true,
+  showStationPlate = false,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -412,6 +412,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       const monoMesh = new THREE.Mesh(monoGeo, [
         monoMat, monoMat, monoMat, monoMat, faceMat, monoMat,
       ]);
+      monoMesh.visible = showStationPlate;
       monolithGroup.add(monoMesh);
 
       // Anamorphic horizontal lens flare streak
@@ -535,6 +536,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0.35, -0.6);
       scene.add(plate);
 
@@ -651,6 +653,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, -0.4, 0.2);
       scene.add(plate);
 
@@ -765,6 +768,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0, 1.4);
       scene.add(plate);
 
@@ -998,6 +1002,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, -0.2, 1.2);
       scene.add(plate);
 
@@ -1091,6 +1096,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0, 0.8);
       scene.add(plate);
 
@@ -1177,6 +1183,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0, 1.3);
       scene.add(plate);
 
@@ -1271,6 +1278,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0, 0.4);
       scene.add(plate);
 
@@ -1332,6 +1340,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0, -2.5);
       scene.add(plate);
 
@@ -1397,6 +1406,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0, 1.4);
       scene.add(plate);
 

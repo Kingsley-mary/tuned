@@ -148,23 +148,46 @@ async function fetchLatestViaChannelPage(
 function roundRobinInterleave(lists: Video[][], limit: number): Video[] {
   const result: Video[] = [];
   const seen = new Set<string>();
-  let round = 0;
+  const pointers = new Array(lists.length).fill(0);
   let hasMore = true;
+  let cycle = 0;
+
+  let seed = 0x85ebca6b;
+  const nextRng = () => {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
 
   while (hasMore && result.length < limit) {
     hasMore = false;
-    for (const list of lists) {
-      if (round < list.length) {
-        const item = list[round];
-        if (!seen.has(item.youtubeVideoId)) {
-          seen.add(item.youtubeVideoId);
-          result.push(item);
-          if (result.length >= limit) break;
-        }
+    cycle++;
+
+    // Occasional creator marathon block (approx 1 out of every 4 cycles has a 2-5 video marathon)
+    const isMarathonCycle = cycle % 4 === 2;
+    const marathonCreatorIdx = isMarathonCycle ? Math.floor(nextRng() * lists.length) : -1;
+    const marathonLength = 2 + Math.floor(nextRng() * 4); // 2, 3, 4, or 5 consecutive videos
+
+    for (let cIdx = 0; cIdx < lists.length; cIdx++) {
+      const list = lists[cIdx];
+      if (pointers[cIdx] < list.length) {
         hasMore = true;
+        const takeCount = (cIdx === marathonCreatorIdx)
+          ? Math.min(marathonLength, list.length - pointers[cIdx])
+          : 1;
+
+        for (let k = 0; k < takeCount; k++) {
+          if (pointers[cIdx] < list.length) {
+            const item = list[pointers[cIdx]++];
+            if (!seen.has(item.youtubeVideoId)) {
+              seen.add(item.youtubeVideoId);
+              result.push(item);
+              if (result.length >= limit) break;
+            }
+          }
+        }
+        if (result.length >= limit) break;
       }
     }
-    round++;
   }
 
   return result;

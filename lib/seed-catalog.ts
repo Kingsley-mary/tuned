@@ -10687,12 +10687,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1403
       },
       {
+        "youtubeVideoId": "40eX2RznSMo",
+        "title": "Witkoff and Kushner arrive in Moscow ahead of talks with Putin",
+        "sourceChannelId": "UCupvZG-5ko_eiXAupbDfxWw",
+        "sourceChannelTitle": "CNN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/40eX2RznSMo/hqdefault.jpg",
+        "durationSec": 480
+      },
+      {
         "youtubeVideoId": "AyRdDfuHTTk",
         "title": "This Morning’s Top Headlines – Nov. 11 | Morning News NOW",
         "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
         "sourceChannelTitle": "NBC News",
         "thumbnailUrl": "https://i.ytimg.com/vi/AyRdDfuHTTk/hqdefault.jpg",
         "durationSec": 1494
+      },
+      {
+        "youtubeVideoId": "FtAoOYi_S9Q",
+        "title": "How the Nvidia selloff hits your 401(k)",
+        "sourceChannelId": "UCupvZG-5ko_eiXAupbDfxWw",
+        "sourceChannelTitle": "CNN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FtAoOYi_S9Q/hqdefault.jpg",
+        "durationSec": 520
       },
       {
         "youtubeVideoId": "61MTSbL6hOA",
@@ -10703,12 +10719,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1492
       },
       {
+        "youtubeVideoId": "cZdid6PVoLo",
+        "title": "Protesters clash with police during Spain's first nationwide walkout since 2012",
+        "sourceChannelId": "UCupvZG-5ko_eiXAupbDfxWw",
+        "sourceChannelTitle": "CNN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cZdid6PVoLo/hqdefault.jpg",
+        "durationSec": 360
+      },
+      {
         "youtubeVideoId": "pbfskD7GRFk",
         "title": "Kornacki: How Republicans’ redistricting gamble ended up ‘firing up’ Democrats in North Carolina",
         "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
         "sourceChannelTitle": "NBC News",
         "thumbnailUrl": "https://i.ytimg.com/vi/pbfskD7GRFk/hqdefault.jpg",
         "durationSec": 309
+      },
+      {
+        "youtubeVideoId": "yNJ9GxietzA",
+        "title": "Watch the world’s fastest transatlantic ocean liner sink in Florida",
+        "sourceChannelId": "UCupvZG-5ko_eiXAupbDfxWw",
+        "sourceChannelTitle": "CNN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yNJ9GxietzA/hqdefault.jpg",
+        "durationSec": 410
       },
       {
         "youtubeVideoId": "cw-X0DGpx-U",
@@ -10719,12 +10751,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1400
       },
       {
+        "youtubeVideoId": "Z3OyGJbzmlY",
+        "title": "Nvidia board preparing to oust Huang after report of second affair",
+        "sourceChannelId": "UCupvZG-5ko_eiXAupbDfxWw",
+        "sourceChannelTitle": "CNN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Z3OyGJbzmlY/hqdefault.jpg",
+        "durationSec": 390
+      },
+      {
         "youtubeVideoId": "OXsmwfMv8A0",
         "title": "NBC Nightly News with Tom Llamas Full Episode - Nov. 10",
         "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
         "sourceChannelTitle": "NBC News",
         "thumbnailUrl": "https://i.ytimg.com/vi/OXsmwfMv8A0/hqdefault.jpg",
         "durationSec": 1124
+      },
+      {
+        "youtubeVideoId": "9yJpbBYo4Ig",
+        "title": "‘It just split’: Witness captures moments after Brooklyn building collapses",
+        "sourceChannelId": "UCupvZG-5ko_eiXAupbDfxWw",
+        "sourceChannelTitle": "CNN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9yJpbBYo4Ig/hqdefault.jpg",
+        "durationSec": 320
       }
     ]
   },
