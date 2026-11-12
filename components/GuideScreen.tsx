@@ -29,6 +29,7 @@ interface GuideSlot {
   t: string;
   src: string;
   videoId: string;
+  isMarathon?: boolean;
 }
 
 const VIS = 7;
@@ -210,7 +211,22 @@ export function GuideScreen({
         stepBack++;
       }
 
-      return [...pastSlots, ...forwardSlots];
+      const allSlots = [...pastSlots, ...forwardSlots];
+      // Mark marathon slots: if creator matches previous or next video on this channel
+      return allSlots.map((slot, sIdx) => {
+        const prev = allSlots[sIdx - 1];
+        const next = allSlots[sIdx + 1];
+        const src = slot.src?.trim();
+        const isMarathon = Boolean(
+          src &&
+          ((prev?.src && prev.src.trim().toLowerCase() === src.toLowerCase()) ||
+           (next?.src && next.src.trim().toLowerCase() === src.toLowerCase()))
+        );
+        return {
+          ...slot,
+          isMarathon,
+        };
+      });
     });
   }, [
     channels,
@@ -527,7 +543,7 @@ export function GuideScreen({
                           <button
                             key={p.id}
                             type="button"
-                            className={`pr ${air ? 'air' : ''} ${isOn ? 'on' : ''} ${cl ? 'cl' : ''} ${cr ? 'cr' : ''}`}
+                            className={`pr ${air ? 'air' : ''} ${isOn ? 'on' : ''} ${cl ? 'cl' : ''} ${cr ? 'cr' : ''} ${p.isMarathon ? 'is-marathon' : ''}`}
                             style={{
                               left: `${leftPct}%`,
                               width: widthPct > 0.8 ? `calc(${widthPct}% - 4px)` : `${widthPct}%`,
@@ -545,6 +561,11 @@ export function GuideScreen({
                               }
                             }}
                           >
+                            {p.isMarathon && (
+                              <span className="gd-marathon-badge" title={`Continuous marathon of ${p.src}`}>
+                                🔥 MARATHON
+                              </span>
+                            )}
                             <span>{p.t}</span>
                           </button>
                         );
@@ -583,7 +604,14 @@ export function GuideScreen({
                 <div className="tm">
                   {hm(selectedSlot.s)} – {hm(selectedSlot.e)}
                 </div>
-                <div className="tt">{selectedSlot.t}</div>
+                <div className="tt">
+                  {selectedSlot.isMarathon && (
+                    <span className="osd-row-tag is-marathon" style={{ marginRight: '8px', verticalAlign: 'middle', display: 'inline-flex' }}>
+                      🔥 MARATHON
+                    </span>
+                  )}
+                  {selectedSlot.t}
+                </div>
                 <div className="rt">
                   <span>
                     CH {pad(selRow + 1)} · {selChannel.categoryName} · {selectedSlot.src}

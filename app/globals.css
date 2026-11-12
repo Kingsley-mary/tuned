@@ -1629,13 +1629,59 @@ button:focus-visible, input:focus-visible {
   white-space: nowrap !important;
 }
 .osd-row-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.osd-row.now .osd-row-title { padding-right: 36px; }
 .osd-row-src { font-size: 12px; opacity: 0.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.osd-row-src-live { opacity: 1; display: flex; align-items: center; gap: 8px; overflow: visible; }
-.osd-row-src-name { opacity: 0.65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-.osd-yt-btn { display: inline-flex; align-items: center; flex-shrink: 0; padding: 3px 5px; border-radius: 999px; border: 1px solid transparent; background: rgba(0, 0, 0, 0.28); color: #fff; text-decoration: none; cursor: pointer; pointer-events: auto; transform-origin: left center; transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease, background-color 0.22s ease, padding 0.22s cubic-bezier(0.22, 1, 0.36, 1); }
-.osd-yt-label { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.01em; margin-right: 0; transition: max-width 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.18s ease, margin-right 0.24s cubic-bezier(0.22, 1, 0.36, 1); }
+.osd-row-src-live { position: relative; display: flex; align-items: center; min-width: 0; overflow: visible; opacity: 1; }
+.osd-row-src-name { font-size: 12px; opacity: 0.65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; display: block; }
+.osd-yt-btn {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  padding: 3px 5px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-origin: right center;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.22s ease,
+              background-color 0.22s ease,
+              padding 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.22s ease;
+  z-index: 4;
+}
+.osd-yt-label {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-right: 0;
+  transition: max-width 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.18s ease,
+              margin-right 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
 .osd-yt-icon { width: 16px; height: 16px; display: block; flex-shrink: 0; }
-.osd-yt-btn:hover, .osd-yt-btn:focus-visible { transform: scale(1.06); padding: 3px 8px; border-color: #ff2a2a; background: rgba(20, 10, 10, 0.85); }
+.osd-yt-btn:hover, .osd-yt-btn:focus-visible {
+  transform: translateY(-50%) scale(1.05);
+  padding: 3px 8px;
+  border-color: #ff2a2a;
+  background: rgba(24, 10, 10, 0.94);
+  box-shadow: 0 0 12px rgba(255, 42, 42, 0.4);
+}
 .osd-yt-btn:hover .osd-yt-label, .osd-yt-btn:focus-visible .osd-yt-label { max-width: 84px; opacity: 1; margin-right: 6px; }
 .osd-row-dur { font-size: 12px; text-align: center; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.14); font-variant-numeric: tabular-nums; }
 .osd-row-progress { position: absolute; left: 16px; right: 16px; bottom: 6px; height: 3px; border-radius: 3px; background: rgba(255,255,255,0.18); overflow: hidden; }
@@ -2385,6 +2431,26 @@ button:focus-visible, input:focus-visible {
 }
 .tvg-guide-screen .pr.air {
   background: var(--dk);
+}
+.tvg-guide-screen .pr.is-marathon {
+  border-left: 3px solid #ff4500;
+}
+.gd-marathon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #ff4500, #ff8c00);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-right: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(255, 69, 0, 0.4);
+  vertical-align: middle;
+  line-height: 1.2;
 }
 .tvg-guide-screen .pr:hover {
   background: rgba(255, 255, 255, .2);

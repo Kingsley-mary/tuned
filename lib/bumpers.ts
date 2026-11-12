@@ -338,12 +338,12 @@ const DEFAULT_CARDS: DeadpanCard[] = [
 
 // All motion bumper templates render immersive channel-specific Three.js 3D worlds with a strict minimum of 5 seconds (5000ms)
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
-  { variant: 'cinematic', durationMs: 6200 },
-  { variant: 'ident', durationMs: 5600 },
-  { variant: 'field', durationMs: 5800 },
-  { variant: 'visualizer', durationMs: 5500 },
-  { variant: 'lineup', durationMs: 5600 },
-  { variant: 'slate', durationMs: 5400 },
+  { variant: 'cinematic', durationMs: 6500 },
+  { variant: 'ident', durationMs: 5800 },
+  { variant: 'field', durationMs: 6000 },
+  { variant: 'visualizer', durationMs: 5600 },
+  { variant: 'lineup', durationMs: 5800 },
+  { variant: 'slate', durationMs: 5600 },
 ];
 
 /**
@@ -352,7 +352,7 @@ const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = 
  *
  * Rules:
  * - Every bumper has a strict minimum duration of 5 seconds (5000ms).
- * - Video clips play for their full natural broadcast length (5s up to 22s).
+ * - Video clips play for their full natural broadcast length (at least 5s, no artificial cutoffs).
  * - When multiple bumpers play back-to-back, each individual bumper gets at least 5000ms.
  */
 export function pickBreakPackage(
@@ -368,7 +368,7 @@ export function pickBreakPackage(
     // Alternate preview between 3D Three.js ident and retro channel clip!
     if (breakCount % 2 === 1 && clipPool.length > 0) {
       const clip = clipPool[breakCount % clipPool.length];
-      const dur = Math.max(5000, Math.min(20000, (clip.durationSec || 10) * 1000));
+      const dur = Math.max(5000, (clip.durationSec || 12) * 1000);
       return [
         {
           kind: 'youtube',
@@ -418,8 +418,8 @@ export function pickBreakPackage(
 
     if (isClipSlot) {
       const clip = clipPool[(breakCount + step) % clipPool.length];
-      // Video clips: minimum 5.0 seconds, maximum 22.0 seconds
-      const dur = Math.max(5000, Math.min(22000, (clip.durationSec || 10) * 1000));
+      // Video clips: full natural length, strictly at least 5.0 seconds
+      const dur = Math.max(5000, (clip.durationSec || 12) * 1000);
       result.push({
         kind: 'youtube',
         clip,

@@ -334,122 +334,241 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
     // SCENE 1: CINEMASCOPE (Movies, Film, Documentaries)
     // -------------------------------------------------------------
     if (kind === 'cinemascope') {
-      scene.background = new THREE.Color(0x060405);
-      scene.fog = new THREE.FogExp2(0x060405, 0.045);
+      scene.background = new THREE.Color(0x050305);
+      scene.fog = new THREE.FogExp2(0x050305, 0.042);
 
-      const hemi = new THREE.HemisphereLight(0xfff0e4, 0x10080c, 0.7);
-      const rim = new THREE.DirectionalLight(0xffdfa0, 4.8);
-      rim.position.set(0, 3.5, -4.5);
-      const fill = new THREE.DirectionalLight(0xa0c8ff, 1.4);
-      fill.position.set(-3.5, 2.0, 3.5);
-      scene.add(hemi, rim, fill);
+      // 1. Lighting: warm theater ambiance with golden highlights and cool fill
+      const hemi = new THREE.HemisphereLight(0xfff5e6, 0x140a12, 0.85);
+      const keyLight = new THREE.DirectionalLight(0xffdf98, 4.5);
+      keyLight.position.set(3.2, 4.0, 2.5);
+      const fillLight = new THREE.DirectionalLight(0x7292c8, 1.6);
+      fillLight.position.set(-3.5, -1.5, 2.8);
+      const backRim = new THREE.DirectionalLight(0xffe6b0, 3.8);
+      backRim.position.set(0, 2.5, -4.2);
+      scene.add(hemi, keyLight, fillLight, backRim);
 
-      // 1. Volumetric projector light cone cutting through the darkness
-      const coneGeo = new THREE.CylinderGeometry(0.3, 5.4, 9.5, 32, 1, true);
-      geometries.push(coneGeo);
-      const coneMat = new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0 },
-          uColor: { value: goldAccent },
-        },
-        vertexShader: PROJECTOR_CONE_VERT,
-        fragmentShader: PROJECTOR_CONE_FRAG,
-        transparent: true,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        side: THREE.DoubleSide,
+      // 2. Central Monument: Iconic 3D 70mm Panavision Studio Film Reel
+      const reelGroup = new THREE.Group();
+
+      const reelGoldMat = new THREE.MeshPhysicalMaterial({
+        color: 0xd4af37,
+        metalness: 0.94,
+        roughness: 0.2,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.12,
       });
-      materials.push(coneMat);
-      const cone = new THREE.Mesh(coneGeo, coneMat);
-      cone.rotation.x = Math.PI / 2.15;
-      cone.position.set(0, 0.8, -1.8);
-      scene.add(cone);
+      const reelDarkMat = new THREE.MeshPhysicalMaterial({
+        color: 0x161214,
+        metalness: 0.88,
+        roughness: 0.32,
+      });
+      materials.push(reelGoldMat, reelDarkMat);
 
-      // 2. Swirling floating 35mm projector dust motes
-      const dustCount = 220;
-      const dustPositions = new Float32Array(dustCount * 3);
-      for (let i = 0; i < dustCount; i++) {
-        dustPositions[i * 3] = (Math.random() - 0.5) * 4.5;
-        dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 3.2;
-        dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 5.0 - 0.5;
+      // Outer precision gold rim
+      const outerRimGeo = new THREE.TorusGeometry(1.68, 0.055, 16, 64);
+      geometries.push(outerRimGeo);
+      const outerRim = new THREE.Mesh(outerRimGeo, reelGoldMat);
+      reelGroup.add(outerRim);
+
+      // Secondary inner concentric rim
+      const innerRimGeo = new THREE.TorusGeometry(1.12, 0.038, 16, 64);
+      geometries.push(innerRimGeo);
+      const innerRim = new THREE.Mesh(innerRimGeo, reelGoldMat);
+      reelGroup.add(innerRim);
+
+      // Center film core cylinder
+      const coreGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.12, 32);
+      geometries.push(coreGeo);
+      const coreMesh = new THREE.Mesh(coreGeo, reelGoldMat);
+      coreMesh.rotation.x = Math.PI / 2;
+      reelGroup.add(coreMesh);
+
+      // Center spindle axis hole
+      const spindleGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.14, 24);
+      geometries.push(spindleGeo);
+      const spindleMesh = new THREE.Mesh(spindleGeo, reelDarkMat);
+      spindleMesh.rotation.x = Math.PI / 2;
+      reelGroup.add(spindleMesh);
+
+      // 5 Elegant radial spokes connecting the core to the outer rim
+      for (let i = 0; i < 5; i++) {
+        const spokeGeo = new THREE.BoxGeometry(0.065, 1.25, 0.04);
+        geometries.push(spokeGeo);
+        const spoke = new THREE.Mesh(spokeGeo, reelGoldMat);
+        const ang = (i * Math.PI * 2) / 5;
+        spoke.position.set(Math.cos(ang) * 0.95, Math.sin(ang) * 0.95, 0);
+        spoke.rotation.z = ang - Math.PI / 2;
+        reelGroup.add(spoke);
+
+        // 5 circular film reel apertures between inner and outer rims
+        const apertureGeo = new THREE.TorusGeometry(0.24, 0.024, 12, 32);
+        geometries.push(apertureGeo);
+        const aperture = new THREE.Mesh(apertureGeo, reelGoldMat);
+        const holeDist = 0.85;
+        aperture.position.set(Math.cos(ang + Math.PI / 5) * holeDist, Math.sin(ang + Math.PI / 5) * holeDist, 0);
+        reelGroup.add(aperture);
       }
-      const dustGeo = new THREE.BufferGeometry();
-      dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
-      geometries.push(dustGeo);
-      const dustMat = new THREE.PointsMaterial({
-        color: 0xfff4d0,
-        size: 0.038,
-        transparent: true,
-        opacity: 0.75,
-        blending: THREE.AdditiveBlending,
+
+      // Elegant orbiting 35mm golden film ribbon ring
+      const ribbonGeo = new THREE.TorusGeometry(2.15, 0.022, 12, 80);
+      geometries.push(ribbonGeo);
+      const ribbonMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffd978,
+        metalness: 0.98,
+        roughness: 0.1,
+        emissive: 0x4a3410,
+        emissiveIntensity: 0.35,
       });
-      materials.push(dustMat);
-      const dust = new THREE.Points(dustGeo, dustMat);
-      scene.add(dust);
+      materials.push(ribbonMat);
+      const ribbon = new THREE.Mesh(ribbonGeo, ribbonMat);
+      ribbon.rotation.x = Math.PI / 3.2;
+      reelGroup.add(ribbon);
 
-      // 3. Floating monolithic obsidian studio monument
-      const monolithGroup = new THREE.Group();
-      const monoGeo = new THREE.BoxGeometry(2.2, 1.35, 0.28);
+      // Station Plate monument (guarded by showStationPlate)
+      const plateGroup = new THREE.Group();
+      const monoGeo = new THREE.BoxGeometry(2.1, 1.25, 0.22);
       geometries.push(monoGeo);
-
       const plateTex = createChannelPlateTexture(channelNumber, channelName, hue);
       textures.push(plateTex);
-
       const monoMat = new THREE.MeshPhysicalMaterial({
         color: 0x141012,
         metalness: 0.94,
         roughness: 0.16,
         clearcoat: 1.0,
-        clearcoatRoughness: 0.1,
       });
-      const faceMat = new THREE.MeshBasicMaterial({
-        map: plateTex,
-        transparent: true,
-      });
+      const faceMat = new THREE.MeshBasicMaterial({ map: plateTex, transparent: true });
       materials.push(monoMat, faceMat);
-
-      // Multi-material box: front face has channel plate, sides are polished obsidian
-      const monoMesh = new THREE.Mesh(monoGeo, [
-        monoMat, monoMat, monoMat, monoMat, faceMat, monoMat,
-      ]);
+      const monoMesh = new THREE.Mesh(monoGeo, [monoMat, monoMat, monoMat, monoMat, faceMat, monoMat]);
       monoMesh.visible = showStationPlate;
-      monolithGroup.add(monoMesh);
+      plateGroup.add(monoMesh);
+      reelGroup.add(plateGroup);
 
-      // Anamorphic horizontal lens flare streak
-      const streakGeo = new THREE.PlaneGeometry(16, 0.045);
-      geometries.push(streakGeo);
-      const streakMat = new THREE.MeshBasicMaterial({
-        color: 0xffdf88,
+      scene.add(reelGroup);
+
+      // 3. Dual sweeping Hollywood premiere searchlight beams
+      const beamGeo = new THREE.CylinderGeometry(0.12, 2.4, 11.0, 24, 1, true);
+      geometries.push(beamGeo);
+
+      const BEAM_FRAG = /* glsl */ `
+        uniform float uTime;
+        uniform vec3 uColor;
+        varying vec2 vUv;
+        void main() {
+          float lengthFalloff = pow(1.0 - vUv.y, 2.2);
+          float widthFalloff = sin(vUv.x * 3.14159);
+          float flicker = 0.95 + 0.05 * sin(uTime * 18.0);
+          float intensity = lengthFalloff * widthFalloff * 0.42 * flicker;
+          gl_FragColor = vec4(uColor * intensity, intensity * 0.65);
+        }
+      `;
+      const BEAM_VERT = /* glsl */ `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `;
+
+      const beamMatLeft = new THREE.ShaderMaterial({
+        uniforms: { uTime: { value: 0 }, uColor: { value: goldAccent } },
+        vertexShader: BEAM_VERT,
+        fragmentShader: BEAM_FRAG,
         transparent: true,
-        opacity: 0.45,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
+        side: THREE.DoubleSide,
       });
-      materials.push(streakMat);
-      const streak = new THREE.Mesh(streakGeo, streakMat);
-      streak.position.z = 0.18;
-      monolithGroup.add(streak);
+      const beamMatRight = new THREE.ShaderMaterial({
+        uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color(0xffeec8) } },
+        vertexShader: BEAM_VERT,
+        fragmentShader: BEAM_FRAG,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      });
+      materials.push(beamMatLeft, beamMatRight);
 
-      scene.add(monolithGroup);
+      const beamLeft = new THREE.Mesh(beamGeo, beamMatLeft);
+      beamLeft.position.set(-3.2, -3.2, -1.8);
+      beamLeft.rotation.z = -0.32;
+      scene.add(beamLeft);
+
+      const beamRight = new THREE.Mesh(beamGeo, beamMatRight);
+      beamRight.position.set(3.2, -3.2, -1.8);
+      beamRight.rotation.z = 0.32;
+      scene.add(beamRight);
+
+      // 4. Soft circular 35mm film bokeh particles
+      const bokehCanvas = document.createElement('canvas');
+      bokehCanvas.width = 64;
+      bokehCanvas.height = 64;
+      const bCtx = bokehCanvas.getContext('2d');
+      if (bCtx) {
+        const bGrad = bCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+        bGrad.addColorStop(0, 'rgba(255, 238, 195, 0.95)');
+        bGrad.addColorStop(0.38, 'rgba(255, 222, 160, 0.42)');
+        bGrad.addColorStop(0.75, 'rgba(255, 195, 120, 0.12)');
+        bGrad.addColorStop(1, 'rgba(255, 195, 120, 0)');
+        bCtx.fillStyle = bGrad;
+        bCtx.fillRect(0, 0, 64, 64);
+      }
+      const bokehTex = new THREE.CanvasTexture(bokehCanvas);
+      textures.push(bokehTex);
+
+      const dustCount = 140;
+      const dustPositions = new Float32Array(dustCount * 3);
+      for (let i = 0; i < dustCount; i++) {
+        dustPositions[i * 3] = (Math.random() - 0.5) * 6.5;
+        dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 4.5;
+        dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 4.0 - 0.5;
+      }
+      const dustGeo = new THREE.BufferGeometry();
+      dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+      geometries.push(dustGeo);
+
+      const dustMat = new THREE.PointsMaterial({
+        map: bokehTex,
+        size: 0.18,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        opacity: 0.85,
+      });
+      materials.push(dustMat);
+      const dust = new THREE.Points(dustGeo, dustMat);
+      scene.add(dust);
 
       updateScene = (t) => {
-        coneMat.uniforms.uTime.value = t;
+        beamMatLeft.uniforms.uTime.value = t;
+        beamMatRight.uniforms.uTime.value = t;
         const intro = 1 - Math.pow(1 - Math.min(1, t / 1.3), 3);
 
-        // Gentle floating drift
-        monolithGroup.position.set(0, Math.sin(t * 0.8) * 0.08, -0.6);
-        monolithGroup.rotation.y = Math.sin(t * 0.35) * 0.14;
-        monolithGroup.rotation.x = 0.04 + Math.cos(t * 0.4) * 0.03;
+        // Slow cinematic rotation of the 35mm film reel monument
+        reelGroup.rotation.z = t * 0.18;
+        reelGroup.rotation.y = Math.sin(t * 0.35) * 0.22;
+        reelGroup.rotation.x = 0.06 + Math.cos(t * 0.3) * 0.05;
+        reelGroup.position.set(0, Math.sin(t * 0.7) * 0.08, -0.4);
+
+        // Counter-orbiting film ribbon
+        ribbon.rotation.z = -t * 0.28;
+        ribbon.rotation.y = Math.sin(t * 0.4) * 0.3;
+
+        // Hollywood searchlight beams sweeping the night sky
+        beamLeft.rotation.z = -0.32 + Math.sin(t * 0.45) * 0.16;
+        beamLeft.rotation.x = Math.cos(t * 0.35) * 0.1;
+        beamRight.rotation.z = 0.32 - Math.sin(t * 0.45 + 1.1) * 0.16;
+        beamRight.rotation.x = Math.sin(t * 0.35 + 0.8) * 0.1;
 
         // Cinematic camera push-in
-        camera.position.set(Math.sin(t * 0.2) * 0.22, 0.12, 5.8 - intro * 0.85);
-        camera.lookAt(0, 0, -0.6);
+        camera.position.set(Math.sin(t * 0.18) * 0.25, 0.12, 5.6 - intro * 0.75);
+        camera.lookAt(0, 0, -0.4);
 
-        // Dust motes drift in the beam
+        // Soft bokeh orbs drift gently
         const pos = dustGeo.attributes.position.array as Float32Array;
         for (let i = 0; i < dustCount; i++) {
-          pos[i * 3 + 1] += Math.sin(t * 1.5 + i) * 0.0025;
-          pos[i * 3] += Math.cos(t * 0.8 + i) * 0.0018;
+          pos[i * 3 + 1] += Math.sin(t * 1.2 + i) * 0.002;
+          pos[i * 3] += Math.cos(t * 0.7 + i) * 0.0015;
         }
         dustGeo.attributes.position.needsUpdate = true;
       };

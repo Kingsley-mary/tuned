@@ -207,6 +207,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const tvStageRef = useRef<HTMLDivElement>(null);
   const bumperTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const breakQueueRef = useRef<BreakPlan[]>([]);
+  const isPreviewActiveRef = useRef<boolean>(false);
+  const activeBreakPlanRef = useRef<BreakPlan | null>(null);
+  const bumperStartTimeRef = useRef<number>(0);
   const deckEpochsRef = useRef<[number, number]>([0, 0]);
   const promotedPrebufferedIdRef = useRef<string | null>(null);
   const pendingBreakPlansRef = useRef<BreakPlan[] | null>(null);
@@ -256,6 +259,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     }
     breakQueueRef.current = [];
     pendingBreakPlansRef.current = null;
+    isPreviewActiveRef.current = false;
+    activeBreakPlanRef.current = null;
     setActiveMotionBreak(null);
     setStandbyTarget(null);
     deckEpochsRef.current[activeSlot] += 1;
@@ -446,6 +451,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
+    isPreviewActiveRef.current = false;
+    activeBreakPlanRef.current = null;
     breakQueueRef.current = [];
     setActiveMotionBreak(null);
   }, []);
@@ -456,19 +463,38 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       bumperTimeoutRef.current = null;
     }
 
+    const isPreview = isPreviewActiveRef.current;
+
+    // Continuous Preview Mode:
+    // If user pressed B to preview, when a bumper finishes, queue and play the NEXT bumper in rotation!
+    // Never advance or interrupt the broadcast show during preview!
+    if (isPreview && breakQueueRef.current.length === 0) {
+      breakCounterRef.current += 1;
+      const chId = activeChannel?.categoryId || 'tech';
+      const isMarathon = Boolean(
+        activeVideo?.sourceChannelTitle &&
+        nextVideo?.sourceChannelTitle &&
+        activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
+      );
+      const marathonCreator = isMarathon ? activeVideo?.sourceChannelTitle : undefined;
+      const nextPreviewPlans = pickBreakPackage(chId, breakCounterRef.current, marathonCreator, true);
+      breakQueueRef.current = [...nextPreviewPlans];
+    }
+
     const nextPlan = breakQueueRef.current.shift();
     if (!nextPlan) {
-      if (activeMotionBreak?.isPreview) {
-        // Manual station ID preview finished: dismiss preview, NEVER advance video!
-        setActiveMotionBreak(null);
-      } else {
-        // Real commercial break finished: advance to next show!
-        advanceFromBreakToNextVideo();
-      }
+      // Natural scheduled commercial break completed: advance to next show!
+      isPreviewActiveRef.current = false;
+      activeBreakPlanRef.current = null;
+      setActiveMotionBreak(null);
+      advanceFromBreakToNextVideo();
       return;
     }
 
+    activeBreakPlanRef.current = nextPlan;
     setActiveMotionBreak(nextPlan);
+    bumperStartTimeRef.current = Date.now();
+
     const isFirst = (nextPlan.bumperIndex ?? 1) === 1;
 
     if (nextPlan.kind === 'motion') {
@@ -476,12 +502,50 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         muted: isMuted,
         volume: isFirst ? 0.24 : 0.16,
       });
+
+      // Procedural 3D motion bumper: strict minimum 5.0 seconds
+      const motionDur = Math.max(5000, nextPlan.durationMs);
+      bumperTimeoutRef.current = setTimeout(() => {
+        advanceBreakQueue();
+      }, motionDur);
+    } else {
+      // YouTube video bumper clip:
+      // Broadcast clips have varying length! Let the video play for its FULL natural duration.
+      // We do NOT set a short 10s cutoff timer.
+      // Instead, we set a generous safety watchdog (45s) only as fallback in case iframe freezes.
+      const safetyLimit = Math.max(45000, (nextPlan.clip.durationSec || 20) * 1000 + 15000);
+      bumperTimeoutRef.current = setTimeout(() => {
+        console.warn('[Tuned] Video bumper safety watchdog fired after', safetyLimit, 'ms');
+        advanceBreakQueue();
+      }, safetyLimit);
+    }
+  }, [
+    activeChannel?.categoryId,
+    activeVideo?.sourceChannelTitle,
+    nextVideo?.sourceChannelTitle,
+    isMuted,
+    advanceFromBreakToNextVideo,
+  ]);
+
+  const handleBumperEnded = useCallback(() => {
+    const active = activeBreakPlanRef.current;
+    if (!active) return;
+
+    // Minimum 5 seconds rule:
+    // "bumpers playing back to back should have a minimum of 5 seconds each"
+    const elapsed = Date.now() - bumperStartTimeRef.current;
+    const minMs = 5000;
+    if (elapsed < minMs) {
+      const waitRemaining = minMs - elapsed;
+      if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
+      bumperTimeoutRef.current = setTimeout(() => {
+        advanceBreakQueue();
+      }, waitRemaining);
+      return;
     }
 
-    bumperTimeoutRef.current = setTimeout(() => {
-      advanceBreakQueue();
-    }, nextPlan.durationMs);
-  }, [activeMotionBreak?.isPreview, activeChannel?.categoryId, isMuted, advanceFromBreakToNextVideo]);
+    advanceBreakQueue();
+  }, [advanceBreakQueue]);
 
   const startBreakSequence = useCallback(
     (packagePlans: BreakPlan[]) => {
@@ -491,6 +555,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       }
 
       const isPreview = Boolean(packagePlans[0]?.isPreview);
+      isPreviewActiveRef.current = isPreview;
 
       // Only pre-buffer standby slot if this is a REAL commercial break between shows
       if (!isPreview && nextVideo?.youtubeVideoId && standbyTarget?.videoId !== nextVideo.youtubeVideoId) {
@@ -541,13 +606,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   const triggerManualBreak = useCallback(() => {
     // If preview is ALREADY playing, pressing B again immediately closes it!
-    if (activeMotionBreak?.isPreview) {
+    if (isPreviewActiveRef.current || activeMotionBreak?.isPreview) {
       handleExitPreview();
       return;
     }
 
     if (!activeChannel) return;
     breakCounterRef.current += 1;
+    isPreviewActiveRef.current = true;
     const chId = activeChannel.categoryId || 'tech';
     const isMarathon = Boolean(
       activeVideo?.sourceChannelTitle &&
@@ -809,7 +875,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         setCaptionsEnabled((prev) => !prev);
       } else if (e.key === 'Escape') {
         e.preventDefault();
-        if (activeMotionBreak?.isPreview) {
+        if (activeMotionBreak?.isPreview || isPreviewActiveRef.current) {
           handleExitPreview();
           return;
         }
@@ -908,9 +974,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             laterVideo={laterVideo}
             thirdVideo={thirdVideo}
             onExitPreview={handleExitPreview}
-            onEnded={() => {
-              advanceBreakQueue();
-            }}
+            onEnded={handleBumperEnded}
           />
         )}
 

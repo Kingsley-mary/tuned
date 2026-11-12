@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Video } from '../lib/types';
 import { MotionBumperVariant, YouTubeBumperClip, BreakPlan } from '../lib/bumpers';
 import { ThreeBumperCanvas, getSceneKindForCategory } from './ThreeBumperCanvas';
@@ -56,6 +56,16 @@ export const BumperStage: React.FC<BumperStageProps> = ({
   onExitPreview,
 }) => {
   const [fallbackTo3D, setFallbackTo3D] = useState(false);
+
+  // If a YouTube clip errors out and falls back to 3D, let the 3D scene play for at least 5.5s
+  useEffect(() => {
+    if (fallbackTo3D) {
+      const timer = setTimeout(() => {
+        onEnded?.();
+      }, 5500);
+      return () => clearTimeout(timer);
+    }
+  }, [fallbackTo3D, onEnded]);
 
   const resolvedKind = fallbackTo3D ? 'motion' : (plan?.kind || propKind || 'motion');
   const resolvedVariant = plan && plan.kind === 'motion' ? plan.variant : (propVariant || 'ident');
