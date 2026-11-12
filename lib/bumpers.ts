@@ -128,6 +128,105 @@ const CLIPS = {
   // Travel / Food / Religion
   bourdainParts: { youtubeVideoId: 'hF2V-5lBWoo', label: 'Parts Unknown Promo', durationSec: 31 },
   bourdainNoRes: { youtubeVideoId: 'V03F545Gd38', label: 'No Reservations Intro', durationSec: 24 },
+
+  // Additional Curated Widescreen Broadcast Bumpers, Commercials & Station IDs
+  // Cars & Racing
+  topGearWorld: { youtubeVideoId: 'EkrCqQ9VCI4', label: 'Top Gear Bumper', durationSec: 12 },
+  audiR8: { youtubeVideoId: 'XflP9D53slY', label: 'Audi R8 Spot', durationSec: 62 },
+  f1Bbc: { youtubeVideoId: 'ChxX3tR4mD0', label: 'Formula 1 Opener', durationSec: 62 },
+  porsche911: { youtubeVideoId: 'DZAdVY9kKbc', label: 'Porsche 911 GT3', durationSec: 57 },
+  hondaCog: { youtubeVideoId: 'bl2U1p3fVRk', label: 'Honda Accord Cog', durationSec: 121 },
+
+  // Religion & Sacred Architecture
+  notreDameOrgan: { youtubeVideoId: '_7ndrXCaEOw', label: 'Notre Dame Organ', durationSec: 126 },
+  vaticanBells: { youtubeVideoId: '_DnheFu1dqQ', label: 'St. Peter Basilica Bells', durationSec: 17 },
+  kingsChoir: { youtubeVideoId: 'g-qDQSjnzH8', label: 'Kings College Choir', durationSec: 149 },
+
+  // Food & Culinary Nostalgia
+  foodNetPromo: { youtubeVideoId: 'PGe_xPuNYIU', label: 'Food Network 1997 ID', durationSec: 30 },
+  heinzKetchup: { youtubeVideoId: '0IobpIKshr8', label: 'Heinz Ketchup 1978', durationSec: 30 },
+  mcDonalds86: { youtubeVideoId: 'nsVl1RhCrPc', label: 'McDonalds Field Trip', durationSec: 61 },
+  tabascoMosquito: { youtubeVideoId: 'XZubL4mZ5n0', label: 'Tabasco Commercial', durationSec: 31 },
+  cokeHilltop: { youtubeVideoId: '1VM2eLhvsSM', label: 'Coca-Cola Hilltop 1971', durationSec: 60 },
+
+  // Fitness & Athletic Heritage
+  reebokPump: { youtubeVideoId: 'VDwFD9tH93I', label: 'Reebok Pump 1991', durationSec: 30 },
+  sportsCenterLineup: { youtubeVideoId: 'RFAQMnztwJ8', label: 'This is SportsCenter', durationSec: 30 },
+  adidasAli: { youtubeVideoId: 'ifuO7QB0i6w', label: 'Adidas Impossible is Nothing', durationSec: 72 },
+  nikeFirst1988: { youtubeVideoId: '0yO7xLAGugQ', label: 'Nike Just Do It 1988', durationSec: 31 },
+  gatoradeJordan: { youtubeVideoId: 'Hu3FE489LUQ', label: 'Be Like Mike Gatorade', durationSec: 70 },
+
+  // Business & Market Television
+  bloomberg2009: { youtubeVideoId: 'hN-jdPPRSO8', label: 'Bloomberg TV Bumper', durationSec: 23 },
+  cnbcBell: { youtubeVideoId: 'u2HlXLCPDek', label: 'CNBC Opening Bell', durationSec: 62 },
+  appleThinkDiff: { youtubeVideoId: '5sMBhDv4sik', label: 'Apple Think Different', durationSec: 70 },
+  nyseBell: { youtubeVideoId: '3qCDlUtzEVI', label: 'NYSE Opening Bell', durationSec: 50 },
+  fedExFast: { youtubeVideoId: 'NeK5ZjtpO-M', label: 'FedEx Fast Paced World', durationSec: 57 },
+  etradeBaby: { youtubeVideoId: 'EbnWbdR9wSY', label: 'E*Trade Baby', durationSec: 34 },
+
+  // Architecture & Structural Icons
+  fallingwater: { youtubeVideoId: 'C3RTgK0zipY', label: 'Fallingwater Masterwork', durationSec: 67 },
+  bauhausDessau: { youtubeVideoId: 'tFXA0fR3D8I', label: 'Bauhaus Dessau Manifesto', durationSec: 174 },
+  sydneyOpera: { youtubeVideoId: 'UV2nnsjNh2w', label: 'Sydney Opera House', durationSec: 139 },
+
+  // Music & Broadcast Culture
+  mtv1990: { youtubeVideoId: 'CsGD5XXWUmg', label: 'MTV 1990 Ident', durationSec: 24 },
+  topOfThePops: { youtubeVideoId: 'ZRNsn7t17ac', label: 'Top of the Pops 1990s', durationSec: 25 },
+  bbcEssentialMix: { youtubeVideoId: 'gm8-fyJ9yLg', label: 'BBC Radio 1 Essential Mix', durationSec: 37 },
+  mtv1981: { youtubeVideoId: 'HvGiRElg3nQ', label: 'MTV 1981 Launch', durationSec: 69 },
+  vh1PopUp: { youtubeVideoId: 'OUBCRdINnDo', label: 'VH1 Pop-Up Video', durationSec: 29 },
+
+  // Movies / Studio Fanfares
+  paramount100: { youtubeVideoId: 'JWb9v8OB8HA', label: 'Paramount Centennial', durationSec: 21 },
+  columbiaTorch: { youtubeVideoId: 'm3BMBnQnEWY', label: 'Columbia Pictures Torch Lady', durationSec: 22 },
+  mgmLion: { youtubeVideoId: 'MLR9-ymUvjE', label: 'MGM Lion Intro', durationSec: 15 },
+  universal100: { youtubeVideoId: 'bNJW113tbKk', label: 'Universal Centennial', durationSec: 24 },
+
+  // Cartoons & Classic Animation
+  cartoonCartoons: { youtubeVideoId: 'AC26hc1N1fc', label: 'Cartoon Cartoons Intro', durationSec: 178 },
+  hannaBarberaSwirl: { youtubeVideoId: 'GpE2IuAyVt4', label: 'Hanna-Barbera Swirling Star', durationSec: 6 },
+  nicktoonsBlob: { youtubeVideoId: 'w5nV_VNpWzA', label: 'Nicktoons Blob ID', durationSec: 20 },
+  porkyPigEnding: { youtubeVideoId: 'gBzJGckMYO4', label: "That's All Folks!", durationSec: 8 },
+
+  // Industry & Manufacturing
+  boeing787: { youtubeVideoId: 'w3UNIqdV4gw', label: 'Boeing 787 Assembly', durationSec: 168 },
+  apollo11Launch: { youtubeVideoId: 'UExTN3_UOIY', label: 'Apollo 11 Launch', durationSec: 104 },
+  roboticArms: { youtubeVideoId: 'csifG1AM5d8', label: 'Industrial Robotics', durationSec: 44 },
+
+  // Science & Discovery
+  cosmosTitle: { youtubeVideoId: 'GwzmCS-Eczo', label: 'Cosmos Opening Theme', durationSec: 98 },
+  discoveryBoomDeYada: { youtubeVideoId: 'at_f98qOGY0', label: 'The World is Just Awesome', durationSec: 60 },
+  marsLanding: { youtubeVideoId: 'pYSztFFpDPc', label: 'NASA Mars Rover Landing', durationSec: 98 },
+
+  // Sports & Arenas
+  nbaRoundballRock: { youtubeVideoId: 'u-cSFPglc90', label: 'NBA on NBC Theme', durationSec: 133 },
+  championsLeague: { youtubeVideoId: 'LwKqcM4E3J8', label: 'Champions League Intro', durationSec: 39 },
+
+  // Travel & Aviation
+  britishAirwaysFace: { youtubeVideoId: 'hVGHmRweMbA', label: 'British Airways Face 1989', durationSec: 95 },
+  panAm1968: { youtubeVideoId: 'ILpYbT3NTZQ', label: 'Pan American 1968', durationSec: 63 },
+  natGeoExplorer: { youtubeVideoId: 'Lu6lI0vVm0s', label: 'NatGeo Explorer', durationSec: 69 },
+
+  // Entertainment & Primetime
+  comedyCentral91: { youtubeVideoId: 'rmcYCbggS_w', label: 'Comedy Central ID 1991', durationSec: 14 },
+  nbcMustSeeTV: { youtubeVideoId: 'pnh9TfS3Cyw', label: 'NBC Must See TV 1996', durationSec: 61 },
+  conanIntro: { youtubeVideoId: 'BcmYs3RnolM', label: 'Late Night Conan Intro', durationSec: 73 },
+
+  // News Desks
+  nbcChimes: { youtubeVideoId: 'A7-nHycrDy0', label: 'NBC Chimes Evolutions', durationSec: 18 },
+  cbsCronkite: { youtubeVideoId: 'WyzynG3TXJY', label: 'CBS Evening News', durationSec: 93 },
+
+  // Games & Console Boots
+  ps2Boot: { youtubeVideoId: 'y9Ln-qyvX_I', label: 'PS2 Startup Screen', durationSec: 17 },
+  xboxBoot: { youtubeVideoId: '6w75IVld3QI', label: 'Original Xbox Boot', durationSec: 12 },
+  segaScream: { youtubeVideoId: 'rh5eis0sMHI', label: 'SEGA Scream', durationSec: 5 },
+
+  // Tech Innovations
+  ipodJet: { youtubeVideoId: 'GMlDzBWU4b4', label: 'Apple iPod Silhouette', durationSec: 32 },
+
+  // Design & Typography
+  helveticaTrailer: { youtubeVideoId: 'X80kSDxF4rg', label: 'Helvetica Film Trailer', durationSec: 95 },
+  braunDieterRams: { youtubeVideoId: 'GHyEnrMy-Fc', label: 'Braun TP1 Dieter Rams', durationSec: 69 },
 } satisfies Record<string, YouTubeBumperClip>;
 
 const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
@@ -137,9 +236,29 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.macBookProKeynote,
     CLIPS.quantumAegiq,
     CLIPS.siemensRobotics,
+    CLIPS.ipodJet,
+    CLIPS.appleThinkDiff,
   ],
-  movies: [CLIPS.featurePres, CLIPS.hbo1992, CLIPS.thxDeepNote, CLIPS.driveInDog],
-  film: [CLIPS.featurePres, CLIPS.hbo1992, CLIPS.thxDeepNote, CLIPS.driveInDog],
+  movies: [
+    CLIPS.featurePres,
+    CLIPS.hbo1992,
+    CLIPS.thxDeepNote,
+    CLIPS.driveInDog,
+    CLIPS.paramount100,
+    CLIPS.columbiaTorch,
+    CLIPS.mgmLion,
+    CLIPS.universal100,
+  ],
+  film: [
+    CLIPS.featurePres,
+    CLIPS.hbo1992,
+    CLIPS.thxDeepNote,
+    CLIPS.driveInDog,
+    CLIPS.paramount100,
+    CLIPS.columbiaTorch,
+    CLIPS.mgmLion,
+    CLIPS.universal100,
+  ],
   cartoons: [
     CLIPS.cnCity1,
     CLIPS.asCheckered1,
@@ -149,18 +268,31 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.cnPowerhouse,
     CLIPS.pixarFriends,
     CLIPS.lofiGift,
+    CLIPS.cartoonCartoons,
+    CLIPS.hannaBarberaSwirl,
+    CLIPS.nicktoonsBlob,
+    CLIPS.porkyPigEnding,
   ],
   industry: [
     CLIPS.howItsMade,
     CLIPS.siemensRobotics,
     CLIPS.cnbcAuto3D,
     CLIPS.discoveryHd,
+    CLIPS.boeing787,
+    CLIPS.apollo11Launch,
+    CLIPS.roboticArms,
+    CLIPS.hondaCog,
   ],
   music: [
     CLIPS.mtvKaiju,
     CLIPS.mtvChainsaw,
     CLIPS.vh1Ident,
     CLIPS.vh1Europe,
+    CLIPS.mtv1990,
+    CLIPS.topOfThePops,
+    CLIPS.bbcEssentialMix,
+    CLIPS.mtv1981,
+    CLIPS.vh1PopUp,
   ],
   science: [
     CLIPS.discoveryHd,
@@ -169,8 +301,20 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.natGeo,
     CLIPS.bbc1980s,
     CLIPS.bbc100,
+    CLIPS.cosmosTitle,
+    CLIPS.discoveryBoomDeYada,
+    CLIPS.marsLanding,
   ],
-  food: [CLIPS.driveInDog, CLIPS.bourdainNoRes, CLIPS.bourdainParts],
+  food: [
+    CLIPS.driveInDog,
+    CLIPS.bourdainNoRes,
+    CLIPS.bourdainParts,
+    CLIPS.foodNetPromo,
+    CLIPS.heinzKetchup,
+    CLIPS.mcDonalds86,
+    CLIPS.tabascoMosquito,
+    CLIPS.cokeHilltop,
+  ],
   games: [
     CLIPS.ps1Boot,
     CLIPS.gcBoot,
@@ -178,43 +322,120 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.gta6Trailer,
     CLIPS.switch2Minecraft,
     CLIPS.outerWorlds2,
+    CLIPS.ps2Boot,
+    CLIPS.xboxBoot,
+    CLIPS.segaScream,
   ],
   sports: [
     CLIPS.f12026Titles,
     CLIPS.itvSport,
     CLIPS.nikeSpot,
     CLIPS.googleHoops,
+    CLIPS.nbaRoundballRock,
+    CLIPS.championsLeague,
+    CLIPS.gatoradeJordan,
+    CLIPS.sportsCenterLineup,
+    CLIPS.f1Bbc,
   ],
-  travel: [CLIPS.bourdainParts, CLIPS.bourdainNoRes, CLIPS.natGeo, CLIPS.bbc100],
-  fitness: [CLIPS.nikeSpot, CLIPS.itvSport, CLIPS.googleHoops],
+  travel: [
+    CLIPS.bourdainParts,
+    CLIPS.bourdainNoRes,
+    CLIPS.natGeo,
+    CLIPS.bbc100,
+    CLIPS.britishAirwaysFace,
+    CLIPS.panAm1968,
+    CLIPS.natGeoExplorer,
+  ],
+  fitness: [
+    CLIPS.nikeSpot,
+    CLIPS.itvSport,
+    CLIPS.googleHoops,
+    CLIPS.reebokPump,
+    CLIPS.sportsCenterLineup,
+    CLIPS.adidasAli,
+    CLIPS.nikeFirst1988,
+    CLIPS.gatoradeJordan,
+  ],
   art: [
     CLIPS.bbcPaint,
     CLIPS.tateModern,
     CLIPS.momaMoment,
     CLIPS.bbcOptics,
     CLIPS.louvreIntro,
+    CLIPS.helveticaTrailer,
+    CLIPS.fallingwater,
+    CLIPS.bauhausDessau,
   ],
   design: [
     CLIPS.mac1984,
     CLIPS.win95Ad,
     CLIPS.appleDesign20,
     CLIPS.appleWatchSteel,
+    CLIPS.helveticaTrailer,
+    CLIPS.braunDieterRams,
+    CLIPS.appleThinkDiff,
+    CLIPS.fallingwater,
+    CLIPS.bauhausDessau,
   ],
-  learning: [CLIPS.pbs1990s, CLIPS.billNye, CLIPS.pbsKids, CLIPS.bbc100, CLIPS.discoveryBumper],
-  documentaries: [CLIPS.natGeo, CLIPS.bbc1980s, CLIPS.bbc100, CLIPS.discoveryHd, CLIPS.discoveryBumper],
+  learning: [
+    CLIPS.pbs1990s,
+    CLIPS.billNye,
+    CLIPS.pbsKids,
+    CLIPS.bbc100,
+    CLIPS.discoveryBumper,
+    CLIPS.cosmosTitle,
+    CLIPS.discoveryBoomDeYada,
+    CLIPS.natGeoExplorer,
+  ],
+  documentaries: [
+    CLIPS.natGeo,
+    CLIPS.bbc1980s,
+    CLIPS.bbc100,
+    CLIPS.discoveryHd,
+    CLIPS.discoveryBumper,
+    CLIPS.cosmosTitle,
+    CLIPS.apollo11Launch,
+    CLIPS.natGeoExplorer,
+  ],
   architecture: [
     CLIPS.appleDesign20,
     CLIPS.louvreIntro,
     CLIPS.bbcOptics,
     CLIPS.tateModern,
+    CLIPS.fallingwater,
+    CLIPS.bauhausDessau,
+    CLIPS.sydneyOpera,
   ],
-  religion: [CLIPS.bbc100, CLIPS.featurePres],
-  cars: [CLIPS.topGear, CLIPS.f12026Titles, CLIPS.itvSport],
+  religion: [
+    CLIPS.bbc100,
+    CLIPS.featurePres,
+    CLIPS.notreDameOrgan,
+    CLIPS.vaticanBells,
+    CLIPS.kingsChoir,
+    CLIPS.louvreIntro,
+    CLIPS.tateModern,
+  ],
+  cars: [
+    CLIPS.topGear,
+    CLIPS.f12026Titles,
+    CLIPS.itvSport,
+    CLIPS.topGearWorld,
+    CLIPS.audiR8,
+    CLIPS.f1Bbc,
+    CLIPS.porsche911,
+    CLIPS.hondaCog,
+  ],
   business: [
     CLIPS.bloombergBumper,
     CLIPS.cnbcIdent,
     CLIPS.cnbcBreak,
     CLIPS.cnbcAuto3D,
+    CLIPS.bloomberg2009,
+    CLIPS.cnbcBell,
+    CLIPS.appleThinkDiff,
+    CLIPS.nyseBell,
+    CLIPS.fedExFast,
+    CLIPS.etradeBaby,
   ],
   news: [
     CLIPS.cnnSpecialReport,
@@ -224,8 +445,19 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.bbcNewsTheme,
     CLIPS.kadnNews,
     CLIPS.abcNews,
+    CLIPS.nbcChimes,
+    CLIPS.cbsCronkite,
   ],
-  entertainment: [CLIPS.hbo1992, CLIPS.vh1Europe, CLIPS.googleHoops, CLIPS.pixarFriends],
+  entertainment: [
+    CLIPS.hbo1992,
+    CLIPS.vh1Europe,
+    CLIPS.googleHoops,
+    CLIPS.pixarFriends,
+    CLIPS.comedyCentral91,
+    CLIPS.nbcMustSeeTV,
+    CLIPS.conanIntro,
+    CLIPS.vh1PopUp,
+  ],
 };
 
 const GENERAL_YOUTUBE_BUMPERS: YouTubeBumperClip[] = [
@@ -234,6 +466,10 @@ const GENERAL_YOUTUBE_BUMPERS: YouTubeBumperClip[] = [
   CLIPS.natGeo,
   CLIPS.bbc100,
   CLIPS.featurePres,
+  CLIPS.appleThinkDiff,
+  CLIPS.universal100,
+  CLIPS.cokeHilltop,
+  CLIPS.porkyPigEnding,
 ];
 
 interface DeadpanCard {
@@ -245,75 +481,112 @@ const CHANNEL_CARDS: Record<string, DeadpanCard[]> = {
   tech: [
     { lead: 'Checking thermal paste…', punchline: 'All circuits nominal. Next teardown in five.' },
     { lead: 'You could be scrolling a feed.', punchline: 'Instead you are watching linear television.' },
+    { lead: 'Compiling shaders…', punchline: 'Zero dropouts detected. Next tech segment rolling.' },
   ],
   movies: [
     { lead: 'Changing 35mm reels.', punchline: 'Silence your phone in row G.' },
     { lead: 'No skip-intro button here.', punchline: 'Next feature presentation rolling shortly.' },
+    { lead: 'Please visit the concession stand.', punchline: 'The projector cools down for nobody.' },
   ],
   cartoons: [
     { lead: 'Don’t touch that dial.', punchline: 'More animation right after this.' },
     { lead: 'Fresh ink drying.', punchline: 'Stay tuned — cartoons continue in seconds.' },
+    { lead: 'Commercial timeout for Saturday morning.', punchline: 'Pour another bowl of cereal.' },
   ],
   industry: [
     { lead: 'Shift changeover.', punchline: 'Calibrating tolerances for the next build.' },
+    { lead: 'Hydraulics pressure nominal.', punchline: 'Next factory inspection rolling shortly.' },
+    { lead: 'Quality control checkpoint.', punchline: 'Assembly resumes on the other side.' },
   ],
   music: [
     { lead: 'Side A complete.', punchline: 'Flipping the tape to Side B now.' },
+    { lead: 'Needle drop pending.', punchline: 'Check your turntable tracking weight.' },
+    { lead: 'Broadcasting in stereo sound.', punchline: 'Turn up the monitors.' },
   ],
   science: [
     { lead: 'Peer review complete.', punchline: 'Next experiment begins in five seconds.' },
+    { lead: 'Calibrating telescope mirrors.', punchline: 'Deep field observation continues.' },
+    { lead: 'Hypothesis confirmed.', punchline: 'Resuming laboratory transmission now.' },
   ],
   food: [
     { lead: 'Letting the pan hit smoke point.', punchline: 'Order up in a moment.' },
+    { lead: 'Deglazing the fond.', punchline: 'Next culinary journey plating shortly.' },
+    { lead: 'Sharp knives only.', punchline: 'Dinner service resumes in seconds.' },
   ],
   games: [
     { lead: 'Memory card detected.', punchline: 'Loading next stage — stay locked in.' },
+    { lead: 'Please do not turn off your console.', punchline: 'Saving state… next run begins in moments.' },
+    { lead: 'Insert Coin to continue.', punchline: 'No continues needed — linear gaming rolls on.' },
   ],
   sports: [
     { lead: 'Television timeout.', punchline: 'Back to live coverage in seconds.' },
+    { lead: 'Checking the replay booth.', punchline: 'Call stands. Action resumes now.' },
+    { lead: 'Commercial break on court.', punchline: 'Both benches huddled. Resuming shortly.' },
   ],
   travel: [
     { lead: 'Next departure boarding.', punchline: 'Keep your window seat.' },
+    { lead: 'Final call at Gate 4.', punchline: 'Wheels up in five seconds.' },
+    { lead: 'Passport control clear.', punchline: 'Next destination on the horizon.' },
   ],
   film: [
     { lead: '24 frames per second.', punchline: 'Back to the director’s chair in five.' },
+    { lead: 'Lighting check on set.', punchline: 'Quiet on set. Rolling sound in seconds.' },
+    { lead: 'Director’s cut in progress.', punchline: 'No theatrical edits here.' },
   ],
   fitness: [
     { lead: 'Rest timer ending.', punchline: 'Next set starts shortly.' },
+    { lead: 'Chalk your hands.', punchline: 'Next round begins right now.' },
+    { lead: 'Active recovery period.', punchline: 'Heart rate steady. Resuming in seconds.' },
   ],
   art: [
     { lead: 'First layer drying.', punchline: 'Back in the studio in a second.' },
+    { lead: 'Please do not touch the canvas.', punchline: 'Exhibition continues on the other side.' },
+    { lead: 'Adjusting gallery spotlights.', punchline: 'Next piece coming into focus.' },
   ],
   design: [
     { lead: 'Tightening the kerning.', punchline: 'Next breakdown coming right up.' },
+    { lead: 'Aligning to the 8pt grid.', punchline: 'Form follows function. Resuming shortly.' },
+    { lead: 'Checking the Pantone swatch.', punchline: 'Next design study in seconds.' },
   ],
   learning: [
     { lead: 'Turning to chapter two.', punchline: 'Stay curious.' },
+    { lead: 'Class is in session.', punchline: 'Next lecture rolling right up.' },
+    { lead: 'Archival retrieval in progress.', punchline: 'Educational broadcast continues.' },
   ],
   documentaries: [
     { lead: 'Cueing archival reel.', punchline: 'Broadcast resumes in seconds.' },
+    { lead: 'History in high definition.', punchline: 'Next chapter rolling in moments.' },
+    { lead: 'Field researchers regrouping.', punchline: 'Transmission resumes shortly.' },
   ],
   cars: [
     { lead: 'Four fresh tires.', punchline: 'Back out on track now.' },
     { lead: 'Redlining the tachometer.', punchline: 'Next sprint rolling right after this.' },
+    { lead: 'Pit stop complete — 2.1 seconds.', punchline: 'Green light is on.' },
   ],
   business: [
     { lead: 'Checking the ticker.', punchline: 'The invisible hand is taking a commercial break.' },
     { lead: 'Quarterly report nominal.', punchline: 'Next breakdown begins in moments.' },
+    { lead: 'Market trading halt lifted.', punchline: 'Resuming business broadcast.' },
   ],
   news: [
     { lead: 'Developing story.', punchline: 'Anchors adjusting ties. Resuming in seconds.' },
     { lead: 'The world is still turning.', punchline: 'Stay tuned for continued coverage.' },
+    { lead: 'Wire report incoming.', punchline: 'Updating the newsroom teleprompter.' },
   ],
   religion: [
     { lead: 'A moment of stillness.', punchline: 'Continuing broadcast right now.' },
+    { lead: 'Cathedral bells chiming.', punchline: 'Quiet reflection continues.' },
+    { lead: 'Sacred choral intermission.', punchline: 'Transmission resumes in seconds.' },
   ],
   entertainment: [
     { lead: 'Grabbing a cold drink.', punchline: 'Do not touch that dial. More laughs in seconds.' },
     { lead: 'Commercial timeout.', punchline: 'Back to the antics on the other side.' },
+    { lead: 'Live studio audience applause.', punchline: 'Show returns in moments.' },
   ],
   architecture: [
     { lead: 'Checking the blueprints.', punchline: 'Next architectural tour begins shortly.' },
+    { lead: 'Load-bearing inspection nominal.', punchline: 'Cantilevered views ahead.' },
+    { lead: 'Concrete curing in progress.', punchline: 'Next monument rolling right up.' },
   ],
 };
 
