@@ -337,24 +337,25 @@ const DEFAULT_CARDS: DeadpanCard[] = [
 ];
 
 // Alternate bespoke 3D WebGL scenes ('ident', 'cinematic', 'field', 'visualizer') with 2D editorial cards ('lineup', 'slate', 'card')
+// All motion bumper templates are designed with a minimum of 5 seconds (5000ms)
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
-  { variant: 'ident', durationMs: 4400 },
-  { variant: 'cinematic', durationMs: 4600 },
-  { variant: 'lineup', durationMs: 4400 },
-  { variant: 'visualizer', durationMs: 4300 },
-  { variant: 'slate', durationMs: 4200 },
-  { variant: 'field', durationMs: 4400 },
-  { variant: 'card', durationMs: 4100 },
+  { variant: 'ident', durationMs: 5600 },
+  { variant: 'cinematic', durationMs: 6200 },
+  { variant: 'lineup', durationMs: 5400 },
+  { variant: 'visualizer', durationMs: 5500 },
+  { variant: 'slate', durationMs: 5200 },
+  { variant: 'field', durationMs: 5800 },
+  { variant: 'card', durationMs: 5200 },
 ];
 
 /**
  * Picks a station break package of 1 to 3 bumpers back-to-back ("random, not all the time"),
  * or a single preview bumper when triggered manually (B key / Ident button).
  *
- * Combines:
- * 1. Bespoke Three.js 3D motion scenes (cinemascope, cybermatrix, synthwave, resonator, quantum, architect)
- * 2. Authentic retro broadcast video idents, network bumps & intros (Cartoon Network, Adult Swim, MTV, PS1, HBO, etc.)
- * 3. 2D Swiss broadcast lineup schedules & editorial cards
+ * Rules:
+ * - Every bumper has a strict minimum duration of 5 seconds (5000ms).
+ * - Video clips play for their full natural broadcast length (5s up to 22s).
+ * - When multiple bumpers play back-to-back, each individual bumper gets at least 5000ms.
  */
 export function pickBreakPackage(
   categoryId: string,
@@ -369,11 +370,12 @@ export function pickBreakPackage(
     // Alternate preview between 3D Three.js ident and retro channel clip!
     if (breakCount % 2 === 1 && clipPool.length > 0) {
       const clip = clipPool[breakCount % clipPool.length];
+      const dur = Math.max(5000, Math.min(20000, (clip.durationSec || 10) * 1000));
       return [
         {
           kind: 'youtube',
           clip,
-          durationMs: (clip.durationSec || 10) * 1000,
+          durationMs: dur,
           bumperIndex: 1,
           totalBumpers: 1,
           isMarathon: Boolean(marathonCreator),
@@ -390,7 +392,7 @@ export function pickBreakPackage(
       {
         kind: 'motion',
         variant: template.variant,
-        durationMs: template.durationMs,
+        durationMs: Math.max(5000, template.durationMs),
         cardLead: marathonCreator ? `MARATHON PREVIEW` : card.lead,
         cardPunchline: marathonCreator ? `All-${marathonCreator} block` : card.punchline,
         bumperIndex: 1,
@@ -418,7 +420,8 @@ export function pickBreakPackage(
 
     if (isClipSlot) {
       const clip = clipPool[(breakCount + step) % clipPool.length];
-      const dur = Math.min(16000, (clip.durationSec || 10) * 1000);
+      // Video clips: minimum 5.0 seconds, maximum 22.0 seconds
+      const dur = Math.max(5000, Math.min(22000, (clip.durationSec || 10) * 1000));
       result.push({
         kind: 'youtube',
         clip,
@@ -432,9 +435,8 @@ export function pickBreakPackage(
     } else {
       const motionIdx = (breakCount * 2 + step) % MOTION_ROTATION.length;
       const template = MOTION_ROTATION[motionIdx];
-      let dur = template.durationMs;
-      if (count === 2) dur = Math.min(3600, Math.floor(dur * 0.82));
-      else if (count === 3) dur = Math.min(3100, Math.floor(dur * 0.72));
+      // Back-to-back bumpers strictly maintain at least 5.0 seconds (5000ms) each
+      const dur = Math.max(5000, template.durationMs);
 
       const pickedCard = cardPool[(breakCount + step) % cardPool.length];
       const lead = marathonCreator ? `MARATHON IN PROGRESS` : pickedCard.lead;
