@@ -645,6 +645,14 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
           return;
         }
 
+        // Bumper safety guard: if bumper clip title contains #shorts, trigger auto-fallback to 3D scene
+        if (latest.allowShortClip && isShortByTitle && shortCheckDoneRef.current !== latest.videoId) {
+          shortCheckDoneRef.current = latest.videoId;
+          console.warn(`[Tuned] Bumper clip ${latest.videoId} ("${rawTitle}") excluded as YouTube Short.`);
+          latest.onShortDetected?.(latest.videoId);
+          return;
+        }
+
         if (state === 0) {
           triggerEndedOnce();
           return;

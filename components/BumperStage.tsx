@@ -139,6 +139,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
               allowShortClip={true}
               onEnded={onEnded || (() => {})}
               onError={() => setFallbackTo3D(true)}
+              onShortDetected={() => setFallbackTo3D(true)}
               onTimeUpdate={() => {}}
               onBuffering={() => {}}
             />

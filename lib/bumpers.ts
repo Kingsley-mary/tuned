@@ -55,14 +55,13 @@ const CLIPS = {
   // Games
   ps1Boot: { youtubeVideoId: 'oAhvQoLpvsM', label: 'PlayStation Ident', durationSec: 16 },
   ps1StartupSound: { youtubeVideoId: 'BOPViekdacQ', label: 'PS1 Audio Startup', durationSec: 16 },
-  gcBoot: { youtubeVideoId: 'HKfKk40dPr8', label: 'GameCube Ident', durationSec: 6 },
-  ps2Boot: { youtubeVideoId: '-gHkJliF_v4', label: 'PS2 Startup', durationSec: 14 },
+  gcBoot: { youtubeVideoId: 'ctYQ08gxkqA', label: 'GameCube Ident', durationSec: 34 },
   gta6Trailer: { youtubeVideoId: 'rz1B4B2yBZY', label: 'Rockstar Showcase', durationSec: 91 },
   switch2Minecraft: { youtubeVideoId: 'npFlBoJM2Ts', label: 'Nintendo Switch 2 Ident', durationSec: 76 },
   outerWorlds2: { youtubeVideoId: 'WjlWK1Wl6dc', label: 'PS5 Showcase Bumper', durationSec: 119 },
 
   // Tech
-  mac1984: { youtubeVideoId: 'EKrxM65enjs', label: 'Macintosh 1984', durationSec: 21 },
+  mac1984: { youtubeVideoId: 'VtvjbmoDx-I', label: 'Macintosh 1984', durationSec: 60 },
   win95Ad: { youtubeVideoId: 'Tw-GGT6900s', label: 'Windows 95 Spot', durationSec: 32 },
   macBookProKeynote: { youtubeVideoId: 'hnZI5uUSdEo', label: 'Apple Mac Showcase', durationSec: 117 },
   quantumAegiq: { youtubeVideoId: 'N5YLi8Ar3Wg', label: 'Quantum Silicon Showcase', durationSec: 106 },
@@ -73,7 +72,6 @@ const CLIPS = {
   mtvKaiju: { youtubeVideoId: 'Y41t0L-pfVc', label: 'MTV Kaiju ID', durationSec: 21 },
   vh1Ident: { youtubeVideoId: 'LPhUn9YB0JE', label: 'VH1 Station ID', durationSec: 36 },
   vh1Europe: { youtubeVideoId: '0KYpemsVClg', label: 'VH1 Europe Ident', durationSec: 15 },
-  vevoPop: { youtubeVideoId: 'vEhlyN9TU6c', label: 'Vevo Pop Culture', durationSec: 73 },
 
   // Movies / Film
   featurePres: { youtubeVideoId: '8HEL4YHdj68', label: 'Feature Presentation', durationSec: 18 },
@@ -92,10 +90,6 @@ const CLIPS = {
   appleDesign20: { youtubeVideoId: 'SGMMHik5ksQ', label: 'Designed by Apple in California', durationSec: 156 },
   appleWatchSteel: { youtubeVideoId: '5SjIuzhdd_g', label: 'Apple Watch Steel Design', durationSec: 151 },
 
-  // Architecture (Architectural Digest Short Featurettes)
-  adEmma: { youtubeVideoId: 'ioEa9fe_rc4', label: 'Architectural Digest', durationSec: 15 },
-  adWinnie: { youtubeVideoId: 'pxTXmz_tPYU', label: 'Architectural Digest', durationSec: 13 },
-
   // News (CNN, CNBC, BBC News, NBC, ABC)
   cnnSpecialReport: { youtubeVideoId: 'DZ8aTk92qV4', label: 'CNN Special Report', durationSec: 7 },
   bbcNewsCount2024: { youtubeVideoId: '6p366osoEuc', label: 'BBC News Countdown', durationSec: 99 },
@@ -107,14 +101,11 @@ const CLIPS = {
 
   // Business (CNBC, Bloomberg TV, Financial Markets)
   bloombergBumper: { youtubeVideoId: 'zixr0VOg2m0', label: 'Bloomberg Bumper', durationSec: 19 },
-  cnbcStocks: { youtubeVideoId: 'rkDiNKDv3Cg', label: 'CNBC Stock Report', durationSec: 68 },
   cnbcAuto3D: { youtubeVideoId: '9YLr-qa6Qq8', label: 'CNBC Industrial Report', durationSec: 148 },
-  cnbcDebt: { youtubeVideoId: '6Q08nql7vCA', label: 'CNBC Market News', durationSec: 62 },
 
   // Sports & Cars
-  topGear: { youtubeVideoId: 'QbyOvkELZ3Y', label: 'Top Gear Intro', durationSec: 20 },
+  topGear: { youtubeVideoId: 'H72XigM0jjQ', label: 'Top Gear Intro', durationSec: 98 },
   f12026Titles: { youtubeVideoId: 'Sks_fMr2Yss', label: 'Formula 1 Opening Titles', durationSec: 58 },
-  f1McLaren: { youtubeVideoId: 'xvKfKnx2wOc', label: 'F1 Opener', durationSec: 24 },
   itvSport: { youtubeVideoId: 'W4jCRwJh87o', label: 'ITV Sport Bumper', durationSec: 5 },
   nikeSpot: { youtubeVideoId: '18XjACKal0o', label: 'Nike Commercial', durationSec: 16 },
   googleHoops: { youtubeVideoId: 'WMjVP7QQyDI', label: 'Google Athletic Culture', durationSec: 73 },
@@ -135,7 +126,6 @@ const CLIPS = {
   // Travel / Food / Religion
   bourdainParts: { youtubeVideoId: 'hF2V-5lBWoo', label: 'Parts Unknown Promo', durationSec: 31 },
   bourdainNoRes: { youtubeVideoId: 'V03F545Gd38', label: 'No Reservations Intro', durationSec: 24 },
-  cathedralOrgan: { youtubeVideoId: 'evxtlaSmedg', label: 'Cathedral Chime', durationSec: 18 },
 } satisfies Record<string, YouTubeBumperClip>;
 
 const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
@@ -169,7 +159,6 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.mtvChainsaw,
     CLIPS.vh1Ident,
     CLIPS.vh1Europe,
-    CLIPS.vevoPop,
   ],
   science: [
     CLIPS.discoveryHd,
@@ -183,7 +172,6 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
   games: [
     CLIPS.ps1Boot,
     CLIPS.gcBoot,
-    CLIPS.ps2Boot,
     CLIPS.ps1StartupSound,
     CLIPS.gta6Trailer,
     CLIPS.switch2Minecraft,
@@ -191,13 +179,12 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
   ],
   sports: [
     CLIPS.f12026Titles,
-    CLIPS.f1McLaren,
     CLIPS.itvSport,
     CLIPS.nikeSpot,
     CLIPS.googleHoops,
   ],
   travel: [CLIPS.bourdainParts, CLIPS.bourdainNoRes, CLIPS.natGeo, CLIPS.bbc100],
-  fitness: [CLIPS.nikeSpot, CLIPS.itvSport, CLIPS.googleHoops, CLIPS.f1McLaren],
+  fitness: [CLIPS.nikeSpot, CLIPS.itvSport, CLIPS.googleHoops],
   art: [
     CLIPS.bbcPaint,
     CLIPS.tateModern,
@@ -210,22 +197,21 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.win95Ad,
     CLIPS.appleDesign20,
     CLIPS.appleWatchSteel,
-    CLIPS.adEmma,
   ],
   learning: [CLIPS.pbs1990s, CLIPS.billNye, CLIPS.pbsKids, CLIPS.bbc100, CLIPS.discoveryBumper],
   documentaries: [CLIPS.natGeo, CLIPS.bbc1980s, CLIPS.bbc100, CLIPS.discoveryHd, CLIPS.discoveryBumper],
   architecture: [
-    CLIPS.adEmma,
-    CLIPS.adWinnie,
+    CLIPS.appleDesign20,
+    CLIPS.louvreIntro,
+    CLIPS.bbcOptics,
+    CLIPS.tateModern,
   ],
-  religion: [CLIPS.cathedralOrgan, CLIPS.bbc100],
-  cars: [CLIPS.topGear, CLIPS.f1McLaren, CLIPS.f12026Titles],
+  religion: [CLIPS.bbc100, CLIPS.featurePres],
+  cars: [CLIPS.topGear, CLIPS.f12026Titles, CLIPS.itvSport],
   business: [
     CLIPS.bloombergBumper,
     CLIPS.cnbcIdent,
     CLIPS.cnbcBreak,
-    CLIPS.cnbcStocks,
-    CLIPS.cnbcDebt,
     CLIPS.cnbcAuto3D,
   ],
   news: [
@@ -237,7 +223,7 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.kadnNews,
     CLIPS.abcNews,
   ],
-  entertainment: [CLIPS.hbo1992, CLIPS.vh1Europe, CLIPS.googleHoops, CLIPS.vevoPop],
+  entertainment: [CLIPS.hbo1992, CLIPS.vh1Europe, CLIPS.googleHoops, CLIPS.pixarFriends],
 };
 
 const GENERAL_YOUTUBE_BUMPERS: YouTubeBumperClip[] = [
