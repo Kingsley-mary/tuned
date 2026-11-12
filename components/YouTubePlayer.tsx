@@ -512,24 +512,11 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
       loadedVideoIdRef.current === videoId &&
       loadedTuneKeyRef.current === tuneKey;
 
-    if (sameTune && loadedStartSecRef.current === targetStart) {
+    if (sameTune) {
       return;
     }
 
     const shouldPlay = latestPropsRef.current.isPlaying || latestPropsRef.current.prebufferOnly;
-    if (sameTune) {
-      if (Math.abs(loadedStartSecRef.current - targetStart) > 0.5) {
-        loadedStartSecRef.current = targetStart;
-        try {
-          playerRef.current?.seekTo?.(targetStart, true);
-          if (shouldPlay) {
-            playerRef.current?.playVideo?.();
-          }
-        } catch {}
-      }
-      return;
-    }
-
     hasStartedRef.current = false;
     pendingSeekRef.current =
       targetStart > 3 ? { videoId, tuneKey, startSeconds: targetStart } : null;
@@ -556,7 +543,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     } catch (e) {
       console.warn('Error cueing/loading video:', e);
     }
-  }, [videoId, startSeconds, tuneKey]);
+  }, [videoId, tuneKey]);
 
   // Update caption state (on/off, font size, language) immediately when user changes it
   useEffect(() => {

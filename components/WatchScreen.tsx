@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
-import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec } from '../lib/broadcast-clock';
+import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs } from '../lib/broadcast-clock';
 import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
 import { BumperStage } from './BumperStage';
@@ -756,21 +756,24 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       if (
         !activeMotionBreak &&
         behindLiveSeconds === 0 &&
-        activeChannel?.videos?.length &&
+        eligibleVideos.length > 0 &&
         isPlaying &&
-        cur > 0.3
+        cur > 0.8
       ) {
+        const nowMs = getSyncedNowMs();
+        const subSecOffset = (nowMs % 1000) / 1000;
         const live = getLiveBroadcastState(
-          activeChannel.videos,
+          eligibleVideos,
           activeChannel.categoryId,
-          getSyncedNowSec()
+          Math.floor(nowMs / 1000)
         );
 
         if (live.videoIndex !== currentVideoIndex) {
           // Program finished on the global broadcast clock — transition to next program
           onSyncToLiveRef.current?.();
         } else {
-          const expectedSec = live.seekSeconds;
+          // True floating-point live second (eliminates up to 0.99s Math.floor jitter)
+          const expectedSec = live.seekSeconds + subSecOffset;
           const drift = expectedSec - cur;
           const activeKey = `${activeChannel.categoryId}_${currentVideoIndex}_${activeVideo?.youtubeVideoId}`;
           const activePlayer = deckPlayerRefs[activeSlot].current;
@@ -781,20 +784,21 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           if (initialBufferSyncedRef.current !== activeKey) {
             initialBufferSyncedRef.current = activeKey;
             lastSyncSeekTimeRef.current = Date.now();
-            if (Math.abs(drift) > 0.5) {
-              console.log(`[Tuned Sync] Compensating initial buffering drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec}s`);
+            if (Math.abs(drift) > 0.75) {
+              console.log(`[Tuned Sync] Compensating initial buffering drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec.toFixed(2)}s`);
               activePlayer?.seekTo(expectedSec, true);
               return;
             }
           }
 
           // 2. Continuous Broadcast Lock:
-          // If network stalls, tab throttling, or frame drops cause the device to lag by > 0.85s,
+          // If network stalls, tab throttling, or frame drops cause the device to lag by > 1.35s,
           // imperatively snap back into lockstep without reloading the video.
+          // 1.35s threshold prevents YouTube keyframe rounding from causing repeated seeks.
           const now = Date.now();
-          if (now - lastSyncSeekTimeRef.current > 4000) {
-            if (Math.abs(drift) > 0.85) {
-              console.log(`[Tuned Sync] Correcting live drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec}s`);
+          if (now - lastSyncSeekTimeRef.current > 5000) {
+            if (Math.abs(drift) > 1.35) {
+              console.log(`[Tuned Sync] Correcting live drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec.toFixed(2)}s`);
               lastSyncSeekTimeRef.current = now;
               activePlayer?.seekTo(expectedSec, true);
             }
@@ -832,8 +836,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     [
       activeChannel?.categoryId,
       activeMotionBreak,
+      activeSlot,
       activeVideo?.sourceChannelTitle,
       activeVideo?.youtubeVideoId,
+      behindLiveSeconds,
+      currentVideoIndex,
+      deckPlayerRefs,
+      eligibleVideos,
+      isPlaying,
       nextVideo?.sourceChannelTitle,
       nextVideo?.youtubeVideoId,
       onProgressUpdate,
@@ -966,7 +976,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   ]);
 
   // Compute true linear schedule for Up Next (3 upcoming shows)
-  const schedule = buildChannelSchedule(videos, currentVideoIndex, currentTime, 4);
+  const schedule = buildChannelSchedule(eligibleVideos, currentVideoIndex, currentTime, 4);
 
   const effectiveDuration = duration > 0 ? duration : activeVideo ? getVideoDuration(activeVideo) : 600;
   const progressPercent =
