@@ -6,8 +6,9 @@ import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } fro
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs } from '../lib/broadcast-clock';
 import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
-import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
+import { playChannelJingle, unlockBumperAudio, playRemoteKeyBeep, playErrorBuzz } from '../lib/bumper-synth';
 import { BumperStage } from './BumperStage';
+import { ChannelDialOverlay } from './ChannelDialOverlay';
 import {
   Play,
   Pause,
@@ -30,6 +31,7 @@ import {
   Clock,
   Captions,
   CaptionsOff,
+  Hash,
 } from 'lucide-react';
 
 const CAPTION_PREFS_KEY = 'tuned_caption_prefs_v1';
@@ -226,6 +228,27 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     isPreview: boolean;
   }
   const channelBreaksRef = useRef<Map<string, ChannelBreakSession>>(new Map());
+
+  // Direct TV channel number dialing overlay & timer
+  const [dialBuffer, setDialBuffer] = useState<string>('');
+  const [dialStatus, setDialStatus] = useState<'dialing' | 'tuning' | 'invalid'>('dialing');
+  const [dialTimeoutMs, setDialTimeoutMs] = useState<number>(1800);
+  const [dialTimerKey, setDialTimerKey] = useState<number>(0);
+  const [showDialNumpad, setShowDialNumpad] = useState<boolean>(false);
+  const dialTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dialBufferRef = useRef<string>('');
+  dialBufferRef.current = dialBuffer;
+  const dialStatusRef = useRef<'dialing' | 'tuning' | 'invalid'>('dialing');
+  dialStatusRef.current = dialStatus;
+
+  const maxDialDigits = useMemo(() => Math.max(2, String(channels.length).length), [channels.length]);
+
+  const previewChannel = useMemo(() => {
+    if (!dialBuffer) return null;
+    const num = parseInt(dialBuffer, 10);
+    if (isNaN(num) || num < 1 || num > channels.length) return null;
+    return channels[num - 1] || null;
+  }, [dialBuffer, channels]);
 
   const activeChannel = channels[currentChannelIndex] || channels[0];
   const videos = activeChannel?.videos || [];
@@ -1011,7 +1034,178 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     }
   };
 
-  // Keyboard navigation (PRD W-10 + Number keys 1-8 + L/Backspace Recall + M Mute + F Fullscreen)
+  // ---- DStv-style on-screen display (OSD) ----
+  const [osdOpen, setOsdOpen] = useState<boolean>(true);
+  const osdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const osdHoverRef = useRef<boolean>(false);
+  const captionsMenuOpenRef = useRef<boolean>(false);
+  captionsMenuOpenRef.current = captionsMenuOpen;
+  const prevBumperActiveRef = useRef<boolean>(false);
+
+  const pokeOsd = useCallback(() => {
+    setOsdOpen(true);
+    if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
+    osdTimerRef.current = setTimeout(() => {
+      if (!osdHoverRef.current && !captionsMenuOpenRef.current) setOsdOpen(false);
+    }, 5000);
+  }, []);
+
+  const cancelDial = useCallback(() => {
+    if (dialTimerRef.current) {
+      clearTimeout(dialTimerRef.current);
+      dialTimerRef.current = null;
+    }
+    setDialBuffer('');
+    setShowDialNumpad(false);
+    setDialStatus('dialing');
+  }, []);
+
+  const executeDial = useCallback(
+    (explicitBuffer?: string) => {
+      if (dialTimerRef.current) {
+        clearTimeout(dialTimerRef.current);
+        dialTimerRef.current = null;
+      }
+      const raw = explicitBuffer !== undefined ? explicitBuffer : dialBufferRef.current;
+      const chNum = parseInt(raw, 10);
+
+      if (!isNaN(chNum) && chNum >= 1 && chNum <= channels.length) {
+        setDialStatus('tuning');
+        unlockBumperAudio();
+        const targetIdx = chNum - 1;
+        playChannelJingle(channels[targetIdx]?.categoryId || 'tech', { muted: isMutedRef.current });
+        onSelectChannel(targetIdx);
+        pokeOsd();
+
+        dialTimerRef.current = setTimeout(() => {
+          setDialBuffer('');
+          setShowDialNumpad(false);
+          setDialStatus('dialing');
+          dialTimerRef.current = null;
+        }, 380);
+      } else {
+        setDialStatus('invalid');
+        playErrorBuzz();
+        dialTimerRef.current = setTimeout(() => {
+          setDialBuffer('');
+          setShowDialNumpad(false);
+          setDialStatus('dialing');
+          dialTimerRef.current = null;
+        }, 1200);
+      }
+    },
+    [channels, onSelectChannel, pokeOsd]
+  );
+
+  const handleDialDigit = useCallback(
+    (digit: string) => {
+      unlockBumperAudio();
+      playRemoteKeyBeep();
+
+      if (dialTimerRef.current) {
+        clearTimeout(dialTimerRef.current);
+        dialTimerRef.current = null;
+      }
+
+      let nextBuffer = dialBufferRef.current;
+      if (dialStatusRef.current !== 'dialing' || nextBuffer.length >= maxDialDigits) {
+        nextBuffer = digit;
+      } else {
+        nextBuffer = nextBuffer + digit;
+      }
+
+      setDialBuffer(nextBuffer);
+
+      const chNum = parseInt(nextBuffer, 10);
+      const isCandidateValid = !isNaN(chNum) && chNum >= 1 && chNum <= channels.length;
+
+      if (!isCandidateValid && chNum > channels.length) {
+        setDialStatus('invalid');
+        playErrorBuzz();
+        setDialTimeoutMs(1200);
+        setDialTimerKey((k) => k + 1);
+        dialTimerRef.current = setTimeout(() => {
+          setDialBuffer('');
+          setShowDialNumpad(false);
+          setDialStatus('dialing');
+          dialTimerRef.current = null;
+        }, 1200);
+        return;
+      }
+
+      setDialStatus('dialing');
+      const waitMs = nextBuffer.length >= maxDialDigits ? 900 : 1800;
+      setDialTimeoutMs(waitMs);
+      setDialTimerKey((k) => k + 1);
+
+      dialTimerRef.current = setTimeout(() => {
+        executeDial(nextBuffer);
+      }, waitMs);
+    },
+    [channels.length, executeDial, maxDialDigits]
+  );
+
+  const handleDialBackspace = useCallback(() => {
+    unlockBumperAudio();
+    playRemoteKeyBeep();
+
+    if (dialTimerRef.current) {
+      clearTimeout(dialTimerRef.current);
+      dialTimerRef.current = null;
+    }
+
+    const current = dialBufferRef.current;
+    if (current.length <= 1) {
+      if (showDialNumpad) {
+        setDialBuffer('');
+        setDialStatus('dialing');
+      } else {
+        cancelDial();
+      }
+      return;
+    }
+
+    const trimmed = current.slice(0, -1);
+    setDialBuffer(trimmed);
+    setDialStatus('dialing');
+    setDialTimeoutMs(1800);
+    setDialTimerKey((k) => k + 1);
+
+    dialTimerRef.current = setTimeout(() => {
+      executeDial(trimmed);
+    }, 1800);
+  }, [cancelDial, executeDial, showDialNumpad]);
+
+  const openDialerWithNumpad = useCallback(() => {
+    unlockBumperAudio();
+    playRemoteKeyBeep();
+    pokeOsd();
+
+    if (dialBufferRef.current || showDialNumpad) {
+      cancelDial();
+    } else {
+      setShowDialNumpad(true);
+      setDialStatus('dialing');
+      setDialTimeoutMs(4000);
+      setDialTimerKey((k) => k + 1);
+      if (dialTimerRef.current) clearTimeout(dialTimerRef.current);
+      dialTimerRef.current = setTimeout(() => {
+        if (!dialBufferRef.current) {
+          cancelDial();
+        }
+      }, 4000);
+    }
+  }, [cancelDial, pokeOsd, showDialNumpad]);
+
+  useEffect(() => {
+    return () => {
+      if (dialTimerRef.current) {
+        clearTimeout(dialTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Keyboard navigation (PRD W-10 + Direct Channel Dialing 0-9 + L/Backspace Recall + M Mute + F Fullscreen)
   useEffect(() => {
     if (isHidden) return;
 
@@ -1035,7 +1229,15 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       } else if (e.key === 'm' || e.key === 'M') {
         e.preventDefault();
         setIsMuted((prev) => !prev);
-      } else if (e.key === 'l' || e.key === 'L' || e.key === 'Backspace') {
+      } else if (e.key === 'Backspace') {
+        if (dialBufferRef.current) {
+          e.preventDefault();
+          handleDialBackspace();
+        } else if (previousChannelIndex !== null && previousChannelIndex !== currentChannelIndex) {
+          e.preventDefault();
+          onRecallLastChannel();
+        }
+      } else if (e.key === 'l' || e.key === 'L') {
         if (previousChannelIndex !== null && previousChannelIndex !== currentChannelIndex) {
           e.preventDefault();
           onRecallLastChannel();
@@ -1043,12 +1245,12 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       } else if (e.key === 'b' || e.key === 'B') {
         e.preventDefault();
         triggerManualBreak();
-      } else if (/^[1-9]$/.test(e.key)) {
-        const targetIdx = parseInt(e.key, 10) - 1;
-        if (targetIdx >= 0 && targetIdx < channels.length && targetIdx !== currentChannelIndex) {
-          e.preventDefault();
-          onSelectChannel(targetIdx);
-        }
+      } else if (e.key === '#') {
+        e.preventDefault();
+        openDialerWithNumpad();
+      } else if (/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+        handleDialDigit(e.key);
       }
     };
 
@@ -1064,6 +1266,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     onRecallLastChannel,
     toggleFullscreen,
     triggerManualBreak,
+    handleDialDigit,
+    handleDialBackspace,
+    openDialerWithNumpad,
   ]);
 
   // Compute true linear schedule for Up Next (3 upcoming shows)
@@ -1088,22 +1293,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       : sleepRemainingSec !== null
       ? `Sleep ${Math.ceil(sleepRemainingSec / 60)}m`
       : `Sleep ${sleepTimerMode}`;
-
-  // ---- DStv-style on-screen display (OSD) ----
-  const [osdOpen, setOsdOpen] = useState<boolean>(true);
-  const osdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const osdHoverRef = useRef<boolean>(false);
-  const captionsMenuOpenRef = useRef<boolean>(false);
-  captionsMenuOpenRef.current = captionsMenuOpen;
-  const prevBumperActiveRef = useRef<boolean>(false);
-
-  const pokeOsd = useCallback(() => {
-    setOsdOpen(true);
-    if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
-    osdTimerRef.current = setTimeout(() => {
-      if (!osdHoverRef.current && !captionsMenuOpenRef.current) setOsdOpen(false);
-    }, 5000);
-  }, []);
 
   useEffect(() => {
     const isBumperNow = Boolean(activeMotionBreak);
@@ -1141,6 +1330,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         setCaptionsEnabled((prev) => !prev);
       } else if (e.key === 'Escape') {
         e.preventDefault();
+        if (dialBufferRef.current || showDialNumpad) {
+          cancelDial();
+          return;
+        }
         if (activeMotionBreak?.isPreview || isPreviewActiveRef.current) {
           handleExitPreview();
           return;
@@ -1148,7 +1341,16 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         if (captionsMenuOpenRef.current) {
           setCaptionsMenuOpen(false);
         }
-      } else if (e.key === 'i' || e.key === 'I' || e.key === 'Enter') {
+      } else if (e.key === 'Enter') {
+        if (dialBufferRef.current) {
+          e.preventDefault();
+          executeDial();
+          return;
+        }
+        e.preventDefault();
+        setCaptionsMenuOpen(false);
+        setOsdOpen((o) => !o);
+      } else if (e.key === 'i' || e.key === 'I') {
         e.preventDefault();
         setCaptionsMenuOpen(false);
         setOsdOpen((o) => !o);
@@ -1156,7 +1358,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [isHidden, onOpenGuide, pokeOsd]);
+  }, [isHidden, onOpenGuide, pokeOsd, cancelDial, executeDial, showDialNumpad]);
 
   const stepChannel = useCallback(
     (dir: 1 | -1) => {
@@ -1325,6 +1527,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         className="tv-capture"
         onClick={() => {
           unlockBumperAudio();
+          if (dialBufferRef.current || showDialNumpad) {
+            cancelDial();
+            return;
+          }
           if (captionsMenuOpen) {
             setCaptionsMenuOpen(false);
             pokeOsd();
@@ -1338,6 +1544,26 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         onTouchEnd={handleTouchEnd}
         aria-hidden
       />
+
+      {/* Direct channel dialing HUD */}
+      {(dialBuffer || showDialNumpad) && (
+        <div className="tv-dial-layer">
+          <ChannelDialOverlay
+            dialBuffer={dialBuffer}
+            previewChannel={previewChannel}
+            totalChannels={channels.length}
+            status={dialStatus}
+            timeoutMs={dialTimeoutMs}
+            timerKey={dialTimerKey}
+            showNumpad={showDialNumpad}
+            onDigitPress={handleDialDigit}
+            onEnter={() => executeDial()}
+            onBackspace={handleDialBackspace}
+            onClose={cancelDial}
+            onToggleNumpad={() => setShowDialNumpad((p) => !p)}
+          />
+        </div>
+      )}
 
       {/* Top bar */}
       <div
@@ -1391,6 +1617,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           >
             {captionsEnabled ? <Captions size={16} /> : <CaptionsOff size={16} />}
             <span>CC</span>
+          </button>
+          <button
+            onClick={openDialerWithNumpad}
+            className={`osd-btn${dialBuffer || showDialNumpad ? ' active' : ''}`}
+            aria-label="Direct channel dialer"
+            title="Dial Channel Number (# or 0-9)"
+          >
+            <Hash size={16} /> <span>Dial</span>
           </button>
           <button onClick={onOpenGuide} className="osd-btn" aria-label="Open TV Guide">
             <Tv size={16} /> <span>Guide</span>
@@ -1515,6 +1749,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           >
             Ident <span className="kbd-osd">B</span>
           </button>
+          <button onClick={openDialerWithNumpad} title="Direct Channel Tuning (0-9 or #)">
+            Dial <span className="kbd-osd">#</span>
+          </button>
           <button onClick={onOpenGuide}>
             Guide <span className="kbd-osd">G</span>
           </button>
@@ -1552,7 +1789,12 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               <button onClick={() => stepChannel(-1)} aria-label="Previous channel" title="Previous channel (←)">
                 <ChevronUp size={18} style={{ transform: 'rotate(-90deg)' }} />
               </button>
-              <span className={`osd-channel-name ${isBadgeFlipping ? 'flip' : ''}`}>
+              <span
+                className={`osd-channel-name ${isBadgeFlipping ? 'flip' : ''}`}
+                onClick={openDialerWithNumpad}
+                title="Direct Channel Tuning (Press 0-9 or click to dial)"
+                style={{ cursor: 'pointer' }}
+              >
                 <b>{String(currentChannelIndex + 1).padStart(2, '0')}</b>
                 <span style={{ textTransform: 'capitalize' }}>{activeChannel?.categoryName || 'Channel'}</span>
                 {activeVideo?.sourceChannelTitle &&

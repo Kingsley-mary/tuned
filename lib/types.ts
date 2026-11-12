@@ -30,6 +30,7 @@ export interface ChannelLineup {
   hue: number;
   videos: Video[];
   builtAt: number;
+  description?: string;
   error?: string;
 }
 
