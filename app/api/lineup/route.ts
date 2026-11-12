@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   if (categoryId) {
     try {
       const lineup = await getLineupForCategory(categoryId);
-      return NextResponse.json({ ...lineup, serverTimeMs: Date.now() }, {
+      return NextResponse.json(lineup, {
         headers: {
           'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=3600',
         },
@@ -20,10 +20,10 @@ export async function GET(request: NextRequest) {
       console.error(`Lineup error for ${categoryId}:`, error);
       const fallback = SEED_LINEUPS[categoryId] || null;
       if (fallback) {
-        return NextResponse.json({ ...fallback, serverTimeMs: Date.now() });
+        return NextResponse.json(fallback);
       }
       return NextResponse.json(
-        { error: 'Failed to fetch lineup', serverTimeMs: Date.now() },
+        { error: 'Failed to fetch lineup' },
         { status: 500 }
       );
     }
@@ -38,7 +38,6 @@ export async function GET(request: NextRequest) {
         {
           lineups,
           quota,
-          serverTimeMs: Date.now(),
         },
         {
           headers: {
@@ -48,7 +47,7 @@ export async function GET(request: NextRequest) {
       );
     } catch (err: any) {
       console.error('Lineups batch error:', err);
-      return NextResponse.json({ error: err?.message || 'Failed to load lineups', serverTimeMs: Date.now() }, { status: 500 });
+      return NextResponse.json({ error: err?.message || 'Failed to load lineups' }, { status: 500 });
     }
   }
 

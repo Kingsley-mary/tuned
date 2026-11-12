@@ -17,6 +17,16 @@ export interface CaptionTrack {
   isDefault?: boolean;
 }
 
+export interface YouTubePlayerHandle {
+  seekTo: (seconds: number, allowSeekAhead?: boolean) => void;
+  getCurrentTime: () => number;
+  getDuration: () => number;
+  getPlayerState: () => number;
+  setVolume: (volume: number) => void;
+  mute: () => void;
+  unMute: () => void;
+}
+
 interface YouTubePlayerProps {
   videoId: string;
   startSeconds?: number;
@@ -38,26 +48,28 @@ interface YouTubePlayerProps {
   onShortDetected?: (videoId: string) => void;
 }
 
-export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
-  videoId,
-  startSeconds = 0,
-  tuneKey = 0,
-  isPlaying,
-  isMuted = false,
-  allowShortClip = false,
-  prebufferOnly = false,
-  captionsEnabled = false,
-  captionFontSize = 0,
-  captionLanguage = 'auto',
-  onCaptionTracksChange,
-  onPrebuffered,
-  onEnded,
-  onError,
-  onTimeUpdate,
-  onBuffering,
-  onReady,
-  onShortDetected,
-}) => {
+export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayerProps>((props, ref) => {
+  const {
+    videoId,
+    startSeconds = 0,
+    tuneKey = 0,
+    isPlaying,
+    isMuted = false,
+    allowShortClip = false,
+    prebufferOnly = false,
+    captionsEnabled = false,
+    captionFontSize = 0,
+    captionLanguage = 'auto',
+    onCaptionTracksChange,
+    onPrebuffered,
+    onEnded,
+    onError,
+    onTimeUpdate,
+    onBuffering,
+    onReady,
+    onShortDetected,
+  } = props;
+
   const wrapperRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -73,6 +85,56 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     startSeconds && startSeconds > 3
       ? { videoId, tuneKey, startSeconds: Math.floor(startSeconds) }
       : null
+  );
+
+  React.useImperativeHandle(
+    ref,
+    () => ({
+      seekTo: (seconds: number, allowSeekAhead: boolean = true) => {
+        try {
+          if (playerRef.current && isReadyRef.current) {
+            playerRef.current.seekTo(seconds, allowSeekAhead);
+          }
+        } catch {}
+      },
+      getCurrentTime: () => {
+        try {
+          return playerRef.current?.getCurrentTime?.() || 0;
+        } catch {
+          return 0;
+        }
+      },
+      getDuration: () => {
+        try {
+          return playerRef.current?.getDuration?.() || 0;
+        } catch {
+          return 0;
+        }
+      },
+      getPlayerState: () => {
+        try {
+          return playerRef.current?.getPlayerState?.() ?? -1;
+        } catch {
+          return -1;
+        }
+      },
+      setVolume: (vol: number) => {
+        try {
+          playerRef.current?.setVolume?.(vol);
+        } catch {}
+      },
+      mute: () => {
+        try {
+          playerRef.current?.mute?.();
+        } catch {}
+      },
+      unMute: () => {
+        try {
+          playerRef.current?.unMute?.();
+        } catch {}
+      },
+    }),
+    []
   );
 
   // Keep latest props in a ref so YT.Player event listeners never call stale closures
@@ -455,6 +517,19 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
     }
 
     const shouldPlay = latestPropsRef.current.isPlaying || latestPropsRef.current.prebufferOnly;
+    if (sameTune) {
+      if (Math.abs(loadedStartSecRef.current - targetStart) > 0.5) {
+        loadedStartSecRef.current = targetStart;
+        try {
+          playerRef.current?.seekTo?.(targetStart, true);
+          if (shouldPlay) {
+            playerRef.current?.playVideo?.();
+          }
+        } catch {}
+      }
+      return;
+    }
+
     hasStartedRef.current = false;
     pendingSeekRef.current =
       targetStart > 3 ? { videoId, tuneKey, startSeconds: targetStart } : null;
@@ -463,28 +538,20 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       if (latestPropsRef.current.prebufferOnly) {
         playerRef.current.mute?.();
       }
-      if (sameTune) {
-        loadedStartSecRef.current = targetStart;
-        playerRef.current.seekTo?.(targetStart, true);
-        if (shouldPlay) {
-          playerRef.current.playVideo?.();
-        }
+      latestPropsRef.current.onCaptionTracksChange?.([]);
+      loadedVideoIdRef.current = videoId;
+      loadedTuneKeyRef.current = tuneKey;
+      loadedStartSecRef.current = targetStart;
+      if (shouldPlay) {
+        playerRef.current.loadVideoById({
+          videoId,
+          startSeconds: targetStart,
+        });
       } else {
-        latestPropsRef.current.onCaptionTracksChange?.([]);
-        loadedVideoIdRef.current = videoId;
-        loadedTuneKeyRef.current = tuneKey;
-        loadedStartSecRef.current = targetStart;
-        if (shouldPlay) {
-          playerRef.current.loadVideoById({
-            videoId,
-            startSeconds: targetStart,
-          });
-        } else {
-          playerRef.current.cueVideoById({
-            videoId,
-            startSeconds: targetStart,
-          });
-        }
+        playerRef.current.cueVideoById({
+          videoId,
+          startSeconds: targetStart,
+        });
       }
     } catch (e) {
       console.warn('Error cueing/loading video:', e);
@@ -633,4 +700,6 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
       />
     </div>
   );
-};
+});
+
+YouTubePlayer.displayName = 'YouTubePlayer';

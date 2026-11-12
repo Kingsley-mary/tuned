@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
-import { YouTubePlayer, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
+import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec } from '../lib/broadcast-clock';
 import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
@@ -211,6 +211,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const activeBreakPlanRef = useRef<BreakPlan | null>(null);
   const bumperStartTimeRef = useRef<number>(0);
   const deckEpochsRef = useRef<[number, number]>([0, 0]);
+  const deckPlayerRef0 = useRef<YouTubePlayerHandle | null>(null);
+  const deckPlayerRef1 = useRef<YouTubePlayerHandle | null>(null);
+  const deckPlayerRefs = useRef([deckPlayerRef0, deckPlayerRef1]).current;
+  const initialBufferSyncedRef = useRef<string | null>(null);
+  const lastSyncSeekTimeRef = useRef<number>(0);
   const promotedPrebufferedIdRef = useRef<string | null>(null);
   const pendingBreakPlansRef = useRef<BreakPlan[] | null>(null);
   const failedBumperIdsRef = useRef<Set<string>>(new Set());
@@ -226,7 +231,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     isPreview: boolean;
   }
   const channelBreaksRef = useRef<Map<string, ChannelBreakSession>>(new Map());
-  const hasInitialSyncedRef = useRef<boolean>(false);
 
   const activeChannel = channels[currentChannelIndex] || channels[0];
   const videos = activeChannel?.videos || [];
@@ -249,7 +253,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   // Reset local time display and check if the tuned channel is in the middle of a continuous station break
   useEffect(() => {
-    hasInitialSyncedRef.current = false;
+    initialBufferSyncedRef.current = null;
+    lastSyncSeekTimeRef.current = 0;
     const promotedId = promotedPrebufferedIdRef.current;
     if (promotedId && activeVideo?.youtubeVideoId === promotedId) {
       promotedPrebufferedIdRef.current = null;
@@ -315,10 +320,12 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     pendingBreakPlansRef.current = null;
     isPreviewActiveRef.current = false;
     activeBreakPlanRef.current = null;
+    initialBufferSyncedRef.current = null;
+    lastSyncSeekTimeRef.current = 0;
     setActiveMotionBreak(null);
     setStandbyTarget(null);
     deckEpochsRef.current[activeSlot] += 1;
-  }, [currentChannelIndex, currentVideoIndex, startSeconds, tuneKey]);
+  }, [currentChannelIndex, currentVideoIndex, tuneKey]);
 
   useEffect(() => {
     return () => {
@@ -744,24 +751,53 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       }
       onProgressUpdate?.(cur, dur);
 
-      // Multi-device sync alignment: on video startup, compensate for network buffer latency
+      // Multi-device broadcast synchronizer (Lockstep Linear TV):
+      // When watching live TV (not paused, not in station break), keep playback locked to the global broadcast clock.
       if (
-        !hasInitialSyncedRef.current &&
-        cur > 0.8 &&
         !activeMotionBreak &&
-        activeChannel?.videos?.length
+        behindLiveSeconds === 0 &&
+        activeChannel?.videos?.length &&
+        isPlaying &&
+        cur > 0.3
       ) {
-        hasInitialSyncedRef.current = true;
         const live = getLiveBroadcastState(
           activeChannel.videos,
           activeChannel.categoryId,
           getSyncedNowSec()
         );
-        if (live.videoIndex === currentVideoIndex) {
-          const offset = live.seekSeconds - cur;
-          // If device buffering caused the stream to lag by > 1.4s, snap to true synchronized broadcast position
-          if (offset > 1.4 || offset < -1.8) {
-            onSyncToLive?.();
+
+        if (live.videoIndex !== currentVideoIndex) {
+          // Program finished on the global broadcast clock — transition to next program
+          onSyncToLiveRef.current?.();
+        } else {
+          const expectedSec = live.seekSeconds;
+          const drift = expectedSec - cur;
+          const activeKey = `${activeChannel.categoryId}_${currentVideoIndex}_${activeVideo?.youtubeVideoId}`;
+          const activePlayer = deckPlayerRefs[activeSlot].current;
+
+          // 1. Startup Buffering Latency Compensation:
+          // Devices take different amounts of time (1-5s) to buffer the video iframe stream.
+          // Once the video starts playing, snap immediately to the true wall-clock second.
+          if (initialBufferSyncedRef.current !== activeKey) {
+            initialBufferSyncedRef.current = activeKey;
+            lastSyncSeekTimeRef.current = Date.now();
+            if (Math.abs(drift) > 0.5) {
+              console.log(`[Tuned Sync] Compensating initial buffering drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec}s`);
+              activePlayer?.seekTo(expectedSec, true);
+              return;
+            }
+          }
+
+          // 2. Continuous Broadcast Lock:
+          // If network stalls, tab throttling, or frame drops cause the device to lag by > 0.85s,
+          // imperatively snap back into lockstep without reloading the video.
+          const now = Date.now();
+          if (now - lastSyncSeekTimeRef.current > 4000) {
+            if (Math.abs(drift) > 0.85) {
+              console.log(`[Tuned Sync] Correcting live drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec}s`);
+              lastSyncSeekTimeRef.current = now;
+              activePlayer?.seekTo(expectedSec, true);
+            }
           }
         }
       }
@@ -1118,6 +1154,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 aria-hidden={!isVisibleDeck || undefined}
               >
                 <YouTubePlayer
+                  ref={deckPlayerRefs[slotIdx]}
                   videoId={deckVideoId}
                   startSeconds={deckStart}
                   tuneKey={deckTuneKey}

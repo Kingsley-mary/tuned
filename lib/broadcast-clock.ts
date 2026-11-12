@@ -6,6 +6,51 @@ const KNOWN_DURATIONS = new Map<string, number>();
 // Network-compensated server clock offset to keep separate devices in absolute synchronization
 let serverClockOffsetMs = 0;
 let isClockSynced = false;
+let isCalibrating = false;
+
+/**
+ * Calibrates client clock with server UTC time using Cristian's algorithm over multiple samples.
+ * Measures round-trip time (RTT) and picks the sample with lowest latency to eliminate network jitter.
+ */
+export async function calibrateServerClock(): Promise<number> {
+  if (typeof window === 'undefined') return 0;
+  if (isCalibrating) return serverClockOffsetMs;
+  isCalibrating = true;
+
+  try {
+    let bestRtt = Infinity;
+    let bestOffset = serverClockOffsetMs;
+
+    for (let i = 0; i < 3; i++) {
+      try {
+        const t0 = performance.now();
+        const clientSendEpoch = Date.now();
+        const res = await fetch(`/api/time?t=${clientSendEpoch}`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache', Pragma: 'no-cache' },
+        });
+        const t1 = performance.now();
+        const clientRecvEpoch = Date.now();
+        const rtt = Math.max(0, t1 - t0);
+
+        if (res.ok) {
+          const data = await res.json();
+          if (typeof data.serverTimeMs === 'number' && rtt < bestRtt) {
+            bestRtt = rtt;
+            const estimatedServerNowAtRecv = data.serverTimeMs + Math.round(rtt / 2);
+            bestOffset = estimatedServerNowAtRecv - clientRecvEpoch;
+          }
+        }
+      } catch {}
+    }
+
+    serverClockOffsetMs = bestOffset;
+    isClockSynced = true;
+    return serverClockOffsetMs;
+  } finally {
+    isCalibrating = false;
+  }
+}
 
 /**
  * Record server timestamp and client ping timing to calibrate the global broadcast clock.
@@ -40,6 +85,13 @@ export function getSyncedNowSec(): number {
 }
 
 /**
+ * Returns the currently active server clock offset in milliseconds.
+ */
+export function getServerClockOffsetMs(): number {
+  return serverClockOffsetMs;
+}
+
+/**
  * Record true runtime in seconds reported by the official YouTube player.
  */
 export function recordVideoDuration(videoId: string, durationSec: number): void {
@@ -55,7 +107,7 @@ export function recordVideoDuration(videoId: string, durationSec: number): void 
 export function getDeterministicDuration(video: Video): number {
   if (!video) return 600;
 
-  if (video.durationSec && video.durationSec > 60 && video.durationSec !== 600) {
+  if (video.durationSec && video.durationSec > 60) {
     return video.durationSec;
   }
 
@@ -80,13 +132,8 @@ export function getDeterministicDuration(video: Video): number {
 export function getVideoDuration(video: Video): number {
   if (!video) return 600;
 
-  if (video.durationSec && video.durationSec > 60 && video.durationSec !== 600) {
+  if (video.durationSec && video.durationSec > 60) {
     return video.durationSec;
-  }
-
-  const id = video.youtubeVideoId || '';
-  if (KNOWN_DURATIONS.has(id)) {
-    return KNOWN_DURATIONS.get(id)!;
   }
 
   return getDeterministicDuration(video);
@@ -147,7 +194,7 @@ export function getLiveBroadcastState(
 
   // Use strictly deterministic durations for cycle math so all devices on Earth remain perfectly locked in sync
   const durations = videos.map((v) => {
-    if (v.durationSec && v.durationSec > 60 && v.durationSec !== 600) {
+    if (v.durationSec && v.durationSec > 60) {
       return v.durationSec;
     }
     return getDeterministicDuration(v);
