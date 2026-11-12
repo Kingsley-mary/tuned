@@ -155,6 +155,7 @@ export function getChannelTimeOffset(categoryId: string): number {
 export interface BroadcastState {
   videoIndex: number;
   seekSeconds: number;
+  seekSecondsFloat?: number;
   durationSec: number;
   remainingSec: number;
   currentVideo: Video | null;
@@ -162,6 +163,18 @@ export interface BroadcastState {
   activeBreakPlans?: BreakPlan[];      // Remaining plans in the current break, starting from the active bumper
   activeBumperElapsedMs?: number;      // How many ms into activeBreakPlans[0] we currently are
   activeBumperRemainingMs?: number;    // How many ms remain in activeBreakPlans[0]
+}
+
+/**
+ * Filter out any YouTube Shorts or clips <= 60s so all broadcasts are full-length television programs.
+ */
+export function getEligibleVideos(videos: Video[]): Video[] {
+  if (!videos || !Array.isArray(videos)) return [];
+  return videos.filter(
+    (v) =>
+      (!v.durationSec || v.durationSec > 60) &&
+      !/#shorts?\b|[\(\[]shorts?[\)\]]|(\bshorts\b.*#)/i.test(v.title || '')
+  );
 }
 
 export interface ScheduledProgram {
@@ -188,10 +201,14 @@ export function getLiveBroadcastState(
   nowTimeInput?: number,
   completedIds?: Set<string>
 ): BroadcastState {
-  if (!videos || videos.length === 0) {
+  const eligibleVideos = getEligibleVideos(videos);
+  const activeVideos = eligibleVideos.length > 0 ? eligibleVideos : videos;
+
+  if (!activeVideos || activeVideos.length === 0) {
     return {
       videoIndex: 0,
       seekSeconds: 0,
+      seekSecondsFloat: 0,
       durationSec: 600,
       remainingSec: 600,
       currentVideo: null,
@@ -207,8 +224,7 @@ export function getLiveBroadcastState(
         : nowTimeInput * 1000
       : getSyncedNowMs();
 
-  const nowEpochSec = Math.floor(nowMs / 1000);
-  const subSecMs = nowMs % 1000;
+  const nowSecFloat = nowMs / 1000;
 
   // Build slot configurations: for each video slot i, compute deterministic video duration and break package
   const slotConfigs: {
@@ -217,11 +233,11 @@ export function getLiveBroadcastState(
     slotDur: number;
   }[] = [];
 
-  for (let i = 0; i < videos.length; i++) {
-    const v = videos[i];
+  for (let i = 0; i < activeVideos.length; i++) {
+    const v = activeVideos[i];
     const vidDur =
       v.durationSec && v.durationSec > 60 ? v.durationSec : getDeterministicDuration(v);
-    const breakInfo = getSlotBreakPackage(videos, categoryId, i);
+    const breakInfo = getSlotBreakPackage(activeVideos, categoryId, i);
     const slotDur = vidDur + breakInfo.totalBreakSec;
     slotConfigs.push({ vidDur, breakInfo, slotDur });
   }
@@ -232,37 +248,41 @@ export function getLiveBroadcastState(
     return {
       videoIndex: 0,
       seekSeconds: 0,
+      seekSecondsFloat: 0,
       durationSec: 600,
       remainingSec: 600,
-      currentVideo: videos[0],
+      currentVideo: activeVideos[0],
       isBumperBreak: false,
     };
   }
 
   const channelOffset = getChannelTimeOffset(categoryId);
-  const secondsInBroadcastWindow = nowEpochSec % 604800; // 7-day rolling broadcast window
+  const secondsInBroadcastWindow = nowSecFloat % 604800; // 7-day rolling broadcast window
   const cycleTime = (secondsInBroadcastWindow + channelOffset) % totalCycleSec;
 
   let accumulated = 0;
-  for (let i = 0; i < videos.length; i++) {
+  for (let i = 0; i < activeVideos.length; i++) {
     const { vidDur, breakInfo, slotDur } = slotConfigs[i];
     if (cycleTime < accumulated + slotDur) {
-      const offsetInSlot = Math.floor(cycleTime - accumulated);
-      const targetVid = videos[i];
+      const offsetInSlotFloat = cycleTime - accumulated;
+      const offsetInSlot = Math.floor(offsetInSlotFloat);
+      const targetVid = activeVideos[i];
 
       // Case A: Show is airing
-      if (offsetInSlot < vidDur) {
+      if (offsetInSlotFloat < vidDur) {
         // If this slot is unplayable / completed, find next playable video slot
         if ((completedIds && completedIds.has(targetVid.youtubeVideoId)) || vidDur <= 60) {
-          for (let j = 1; j < videos.length; j++) {
-            const nextIdx = (i + j) % videos.length;
-            const nextVid = videos[nextIdx];
+          for (let j = 1; j < activeVideos.length; j++) {
+            const nextIdx = (i + j) % activeVideos.length;
+            const nextVid = activeVideos[nextIdx];
             const nextDur = slotConfigs[nextIdx].vidDur;
             if (!completedIds?.has(nextVid.youtubeVideoId) && nextDur > 60) {
-              const deterministicSeek = Math.floor(offsetInSlot % nextDur);
+              const deterministicSeekFloat = offsetInSlotFloat % nextDur;
+              const deterministicSeek = Math.floor(deterministicSeekFloat);
               return {
                 videoIndex: nextIdx,
                 seekSeconds: deterministicSeek,
+                seekSecondsFloat: deterministicSeekFloat,
                 durationSec: nextDur,
                 remainingSec: Math.max(1, nextDur - deterministicSeek),
                 currentVideo: nextVid,
@@ -275,6 +295,7 @@ export function getLiveBroadcastState(
         return {
           videoIndex: i,
           seekSeconds: Math.max(0, offsetInSlot),
+          seekSecondsFloat: Math.max(0, offsetInSlotFloat),
           durationSec: vidDur,
           remainingSec: Math.max(0, vidDur - offsetInSlot),
           currentVideo: targetVid,
@@ -283,7 +304,7 @@ export function getLiveBroadcastState(
       }
 
       // Case B: Station break is airing!
-      const breakElapsedMs = (offsetInSlot - vidDur) * 1000 + subSecMs;
+      const breakElapsedMs = (offsetInSlotFloat - vidDur) * 1000;
       const plans = breakInfo.plans;
       const totalBreakMs = breakInfo.totalBreakSec * 1000;
 
@@ -291,6 +312,7 @@ export function getLiveBroadcastState(
         return {
           videoIndex: i,
           seekSeconds: vidDur,
+          seekSecondsFloat: vidDur,
           durationSec: vidDur,
           remainingSec: 0,
           currentVideo: targetVid,
@@ -327,6 +349,7 @@ export function getLiveBroadcastState(
       return {
         videoIndex: i,
         seekSeconds: vidDur,
+        seekSecondsFloat: vidDur,
         durationSec: vidDur,
         remainingSec: 0,
         currentVideo: targetVid,
@@ -342,9 +365,10 @@ export function getLiveBroadcastState(
   return {
     videoIndex: 0,
     seekSeconds: 0,
+    seekSecondsFloat: 0,
     durationSec: slotConfigs[0]?.vidDur || 600,
     remainingSec: slotConfigs[0]?.vidDur || 600,
-    currentVideo: videos[0],
+    currentVideo: activeVideos[0] || null,
     isBumperBreak: false,
   };
 }
@@ -405,13 +429,15 @@ export function buildChannelSchedule(
   nowMs: number = getSyncedNowMs(),
   categoryId: string = 'general'
 ): ScheduledProgram[] {
-  if (!videos || videos.length === 0) return [];
+  const eligibleVideos = getEligibleVideos(videos);
+  const activeVideos = eligibleVideos.length > 0 ? eligibleVideos : videos;
+  if (!activeVideos || activeVideos.length === 0) return [];
 
   const schedule: ScheduledProgram[] = [];
-  const safeStartIdx = ((activeVideoIndex % videos.length) + videos.length) % videos.length;
-  const activeVideo = videos[safeStartIdx];
+  const safeStartIdx = ((activeVideoIndex % activeVideos.length) + activeVideos.length) % activeVideos.length;
+  const activeVideo = activeVideos[safeStartIdx];
   const activeDur = getVideoDuration(activeVideo);
-  const activeBreakInfo = getSlotBreakPackage(videos, categoryId, safeStartIdx);
+  const activeBreakInfo = getSlotBreakPackage(activeVideos, categoryId, safeStartIdx);
   const clampedSeek = Math.min(Math.max(0, activeSeekSeconds), Math.max(0, activeDur - 1));
   const remainingActiveSec = Math.max(1, activeDur - clampedSeek);
 
@@ -434,12 +460,12 @@ export function buildChannelSchedule(
   let cursorMs = currentEndMs + activeBreakInfo.totalBreakSec * 1000;
   let accumulatedWaitSec = remainingActiveSec + activeBreakInfo.totalBreakSec;
 
-  const limit = Math.min(count, videos.length);
+  const limit = Math.min(count, activeVideos.length);
   for (let offset = 1; offset < limit; offset++) {
-    const idx = (safeStartIdx + offset) % videos.length;
-    const vid = videos[idx];
+    const idx = (safeStartIdx + offset) % activeVideos.length;
+    const vid = activeVideos[idx];
     const dur = getVideoDuration(vid);
-    const breakInfo = getSlotBreakPackage(videos, categoryId, idx);
+    const breakInfo = getSlotBreakPackage(activeVideos, categoryId, idx);
     const startMs = cursorMs;
     const endMs = startMs + dur * 1000;
 

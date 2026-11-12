@@ -225,6 +225,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const onNextVideoRef = useRef(onNextVideo);
   onNextVideoRef.current = onNextVideo;
   const advanceBreakQueueRef = useRef<() => void>(() => {});
+  const startupSyncDoneRef = useRef<string | null>(null);
+  const startupSeekAttemptsRef = useRef<number>(0);
 
   // Persist ongoing bumper breaks per channel across channel surfing (True Live TV Continuity)
   interface ChannelBreakSession {
@@ -253,35 +255,62 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const thirdVideo: Video | undefined =
     eligibleVideos.length > 2 ? eligibleVideos[(currentVideoIndex + 3) % eligibleVideos.length] : undefined;
 
+  // Stale closure guards for tuning and synchronizing
+  const behindLiveSecondsRef = useRef(behindLiveSeconds);
+  behindLiveSecondsRef.current = behindLiveSeconds;
+  const eligibleVideosRef = useRef(eligibleVideos);
+  eligibleVideosRef.current = eligibleVideos;
+  const activeChannelRef = useRef(activeChannel);
+  activeChannelRef.current = activeChannel;
+  const isMutedRef = useRef(isMuted);
+  isMutedRef.current = isMuted;
+  const nextVideoRef = useRef(nextVideo);
+  nextVideoRef.current = nextVideo;
+  const activeSlotRef = useRef(activeSlot);
+  activeSlotRef.current = activeSlot;
+  const activeVideoRef = useRef(activeVideo);
+  activeVideoRef.current = activeVideo;
+  const startSecondsRef = useRef(startSeconds);
+  startSecondsRef.current = startSeconds;
+
   // Reset local time display and check if the tuned channel is in the middle of a continuous station break
   useEffect(() => {
+    startupSyncDoneRef.current = null;
+    startupSeekAttemptsRef.current = 0;
     initialBufferSyncedRef.current = null;
     lastSyncSeekTimeRef.current = 0;
+    const curActiveVideo = activeVideoRef.current;
     const promotedId = promotedPrebufferedIdRef.current;
-    if (promotedId && activeVideo?.youtubeVideoId === promotedId) {
+    if (promotedId && curActiveVideo?.youtubeVideoId === promotedId) {
       promotedPrebufferedIdRef.current = null;
       setPromotedTarget(null);
       setCurrentTime(0);
-      setDuration(activeVideo ? getVideoDuration(activeVideo) : 0);
+      setDuration(curActiveVideo ? getVideoDuration(curActiveVideo) : 0);
       return;
     }
 
     promotedPrebufferedIdRef.current = null;
     setPromotedTarget(null);
     setCurrentTime(startSeconds || 0);
-    setDuration(activeVideo ? getVideoDuration(activeVideo) : 0);
+    setDuration(curActiveVideo ? getVideoDuration(curActiveVideo) : 0);
 
     if (bumperTimeoutRef.current) {
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
 
+    const curBehindLive = behindLiveSecondsRef.current;
+    const curEligible = eligibleVideosRef.current;
+    const curChannel = activeChannelRef.current;
+    const curSlot = activeSlotRef.current;
+    const curNextVideo = nextVideoRef.current;
+
     // Check if this channel is currently airing a global synchronized station break!
-    if (behindLiveSeconds === 0 && eligibleVideos.length > 0) {
+    if (curBehindLive === 0 && curEligible.length > 0) {
       const nowMs = getSyncedNowMs();
       const live = getLiveBroadcastState(
-        eligibleVideos,
-        activeChannel?.categoryId || 'tech',
+        curEligible,
+        curChannel?.categoryId || 'tech',
         nowMs
       );
 
@@ -299,8 +328,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         bumperStartTimeRef.current = Date.now() - elapsed;
 
         if (firstBumper.kind === 'motion') {
-          playChannelJingle(activeChannel?.categoryId || 'tech', {
-            muted: isMuted,
+          playChannelJingle(curChannel?.categoryId || 'tech', {
+            muted: isMutedRef.current,
             volume: 0.2,
           });
           bumperTimeoutRef.current = setTimeout(() => {
@@ -313,9 +342,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         }
 
         // Pre-buffer next video at 0:00 on standby deck
-        if (nextVideo?.youtubeVideoId) {
+        if (curNextVideo?.youtubeVideoId) {
           setStandbyTarget({
-            videoId: nextVideo.youtubeVideoId,
+            videoId: curNextVideo.youtubeVideoId,
             allowShortClip: false,
             startSeconds: 0,
           });
@@ -333,19 +362,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     lastSyncSeekTimeRef.current = 0;
     setActiveMotionBreak(null);
     setStandbyTarget(null);
-    deckEpochsRef.current[activeSlot] += 1;
+    deckEpochsRef.current[curSlot] += 1;
   }, [
     currentChannelIndex,
     currentVideoIndex,
     tuneKey,
-    behindLiveSeconds,
-    eligibleVideos,
-    activeChannel?.categoryId,
-    isMuted,
-    nextVideo?.youtubeVideoId,
-    activeSlot,
-    activeVideo,
-    startSeconds,
   ]);
 
   useEffect(() => {
@@ -821,11 +842,11 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               volume: 0.2,
             });
             bumperTimeoutRef.current = setTimeout(() => {
-              advanceBreakQueue();
+              advanceBreakQueueRef.current();
             }, Math.max(1000, remaining));
           } else {
             bumperTimeoutRef.current = setTimeout(() => {
-              advanceBreakQueue();
+              advanceBreakQueueRef.current();
             }, Math.max(1000, remaining + 12000));
           }
 
@@ -844,34 +865,42 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           onSyncToLiveRef.current?.();
         } else {
           // True floating-point live second (eliminates up to 0.99s Math.floor jitter)
-          const expectedSec = live.seekSeconds + subSecOffset;
+          const expectedSec = live.seekSecondsFloat ?? (live.seekSeconds + subSecOffset);
           const drift = expectedSec - cur;
           const activeKey = `${activeChannel.categoryId}_${currentVideoIndex}_${activeVideo?.youtubeVideoId}`;
           const activePlayer = deckPlayerRefs[activeSlot].current;
+          const now = Date.now();
 
-          // 1. Startup Buffering Latency Compensation:
+          // 1. Startup Buffering Latency Alignment:
           // Devices take different amounts of time (1-5s) to buffer the video iframe stream.
           // Once the video starts playing, snap immediately to the true wall-clock second.
-          if (initialBufferSyncedRef.current !== activeKey) {
-            initialBufferSyncedRef.current = activeKey;
-            lastSyncSeekTimeRef.current = Date.now();
-            if (Math.abs(drift) > 0.75) {
-              console.log(`[Tuned Sync] Compensating initial buffering drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec.toFixed(2)}s`);
+          if (startupSyncDoneRef.current !== activeKey) {
+            if (Math.abs(drift) <= 0.30) {
+              startupSyncDoneRef.current = activeKey;
+            } else if (now - lastSyncSeekTimeRef.current >= 1200) {
+              startupSeekAttemptsRef.current = (startupSeekAttemptsRef.current || 0) + 1;
+              lastSyncSeekTimeRef.current = now;
+              console.log(
+                `[Tuned Sync] Aligning startup drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec.toFixed(2)}s (attempt ${startupSeekAttemptsRef.current})`
+              );
               activePlayer?.seekTo(expectedSec, true);
+              if (startupSeekAttemptsRef.current >= 3) {
+                startupSyncDoneRef.current = activeKey;
+              }
               return;
             }
-          }
-
-          // 2. Continuous Broadcast Lock:
-          // If network stalls, tab throttling, or frame drops cause the device to lag by > 1.35s,
-          // imperatively snap back into lockstep without reloading the video.
-          // 1.35s threshold prevents YouTube keyframe rounding from causing repeated seeks.
-          const now = Date.now();
-          if (now - lastSyncSeekTimeRef.current > 5000) {
-            if (Math.abs(drift) > 1.35) {
-              console.log(`[Tuned Sync] Correcting live drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec.toFixed(2)}s`);
-              lastSyncSeekTimeRef.current = now;
-              activePlayer?.seekTo(expectedSec, true);
+          } else {
+            // 2. Continuous Broadcast Lock:
+            // If network stalls, tab throttling, or frame drops cause the device to lag by > 0.55s,
+            // imperatively snap back into lockstep without reloading the video.
+            if (now - lastSyncSeekTimeRef.current > 3500) {
+              if (Math.abs(drift) > 0.55) {
+                console.log(
+                  `[Tuned Sync] Correcting live drift: ${drift.toFixed(2)}s -> seeking to ${expectedSec.toFixed(2)}s`
+                );
+                lastSyncSeekTimeRef.current = now;
+                activePlayer?.seekTo(expectedSec, true);
+              }
             }
           }
         }

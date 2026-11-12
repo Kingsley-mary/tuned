@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
-import { getLiveBroadcastState, advanceChannelPlayback, calibrateServerClock, getSyncedNowSec } from '../lib/broadcast-clock';
+import { getLiveBroadcastState, advanceChannelPlayback, calibrateServerClock, getSyncedNowSec, getSyncedNowMs, getEligibleVideos } from '../lib/broadcast-clock';
 import { unlockBumperAudio } from '../lib/bumper-synth';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
@@ -53,6 +53,8 @@ export default function TunedApp() {
   customSourcesRef.current = customSources;
   const currentChannelIndexRef = useRef<number>(currentChannelIndex);
   currentChannelIndexRef.current = currentChannelIndex;
+  const channelsRef = useRef<ChannelLineup[]>(channels);
+  channelsRef.current = channels;
   const currentPlaybackTimeRef = useRef<number>(0);
   const channelPlaybackStatesRef = useRef<Map<string, ChannelSavedState>>(new Map());
   const failedVideoIdsRef = useRef<Set<string>>(new Set());
@@ -145,7 +147,24 @@ export default function TunedApp() {
 
   // Synchronize client wall clock with server UTC to eliminate cross-device offset
   useEffect(() => {
-    calibrateServerClock();
+    let mounted = true;
+
+    // Perform initial Cristian's algorithm calibration
+    calibrateServerClock().then((offset) => {
+      if (!mounted) return;
+      // If server clock had significant skew, realign the initial channel's broadcast position
+      if (Math.abs(offset) > 200) {
+        const loadedChannels = channelsRef.current;
+        const safeChIdx = currentChannelIndexRef.current < loadedChannels.length ? currentChannelIndexRef.current : 0;
+        const active = loadedChannels[safeChIdx] || loadedChannels[0];
+        if (active && active.videos?.length > 0) {
+          const pos = resolveChannelContinuousState(active);
+          setCurrentVideoIndex(pos.videoIndex);
+          setStartSeconds(pos.seekSeconds);
+          currentPlaybackTimeRef.current = pos.seekSeconds;
+        }
+      }
+    });
 
     // Periodic calibration every 45s prevents system clock skew
     const interval = setInterval(() => {
@@ -162,6 +181,7 @@ export default function TunedApp() {
     window.addEventListener('online', onFocusOrVisible);
 
     return () => {
+      mounted = false;
       clearInterval(interval);
       window.removeEventListener('focus', onFocusOrVisible);
       document.removeEventListener('visibilitychange', onFocusOrVisible);
@@ -181,7 +201,7 @@ export default function TunedApp() {
       const live = getLiveBroadcastState(
         target.videos,
         target.categoryId,
-        getSyncedNowSec(),
+        getSyncedNowMs(),
         failedVideoIdsRef.current
       );
       return { videoIndex: live.videoIndex, seekSeconds: live.seekSeconds };
@@ -207,13 +227,11 @@ export default function TunedApp() {
             })
             .map((lineup: ChannelLineup) => {
               const customMeta = knownCustomSources.find((cs) => cs.channelId === lineup.categoryId);
-              if (customMeta && customMeta.title) {
-                return {
-                  ...lineup,
-                  categoryName: customMeta.title,
-                };
-              }
-              return lineup;
+              return {
+                ...lineup,
+                categoryName: customMeta?.title || lineup.categoryName,
+                videos: getEligibleVideos(lineup.videos),
+              };
             });
         }
       } catch (err) {
@@ -231,7 +249,10 @@ export default function TunedApp() {
           builtAt: Date.now(),
           videos: SEED_LINEUPS.tech.videos,
         };
-        return seed;
+        return {
+          ...seed,
+          videos: getEligibleVideos(seed.videos),
+        };
       });
     },
     [customSources]
@@ -480,7 +501,7 @@ export default function TunedApp() {
     const live = getLiveBroadcastState(
       active.videos,
       active.categoryId,
-      getSyncedNowSec(),
+      getSyncedNowMs(),
       failedVideoIdsRef.current
     );
 
@@ -523,7 +544,7 @@ export default function TunedApp() {
     const live = getLiveBroadcastState(
       active.videos,
       active.categoryId,
-      getSyncedNowSec(),
+      getSyncedNowMs(),
       failedVideoIdsRef.current
     );
     setCurrentVideoIndex(live.videoIndex);

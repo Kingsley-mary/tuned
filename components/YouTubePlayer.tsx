@@ -406,7 +406,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                   pendingSeekRef.current = null;
                   try {
                     const actualPos = playerRef.current?.getCurrentTime?.() || 0;
-                    if (actualPos < pending.startSeconds - 1.2 || actualPos > pending.startSeconds + 3.0) {
+                    if (actualPos < pending.startSeconds - 1.0 || actualPos > pending.startSeconds + 1.8) {
                       playerRef.current?.seekTo?.(pending.startSeconds, true);
                     }
                   } catch {}
