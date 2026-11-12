@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
 import { getLiveBroadcastState, advanceChannelPlayback, calibrateServerClock, getSyncedNowSec, getSyncedNowMs, getEligibleVideos } from '../lib/broadcast-clock';
+import { isMobileTouchDevice, isLandscapeViewport, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { unlockBumperAudio } from '../lib/bumper-synth';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
@@ -12,6 +13,7 @@ import { WatchScreen, SleepTimerMode } from '../components/WatchScreen';
 import { GuideScreen, ChannelSavedState } from '../components/GuideScreen';
 import { ManageScreen } from '../components/ManageScreen';
 import { OffAirScreen } from '../components/OffAirScreen';
+import { RotateDeviceOverlay } from '../components/RotateDeviceOverlay';
 
 const STORAGE_KEY = 'tuned_user_state_v1';
 const PLAYBACK_STORAGE_KEY = 'tuned_playback_session_v1';
@@ -39,6 +41,11 @@ export default function TunedApp() {
   const [sleepTimerMode, setSleepTimerMode] = useState<SleepTimerMode>('off');
   const [sleepRemainingSec, setSleepRemainingSec] = useState<number | null>(null);
   const [behindLiveSeconds, setBehindLiveSeconds] = useState<number>(0);
+
+  // Mobile Landscape & Orientation Fullscreen state
+  const [isMobilePortrait, setIsMobilePortrait] = useState<boolean>(false);
+  const lastOrientationRef = useRef<'portrait' | 'landscape' | null>(null);
+  const pendingFullscreenRef = useRef<boolean>(false);
 
   // Early 90s CRT Power On/Off Transition state
   const [crtTransition, setCrtTransition] = useState<'on' | 'off' | null>(null);
@@ -125,6 +132,102 @@ export default function TunedApp() {
   // Tuned is dark-only: lock the theme attribute
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
+
+  // Auto-fullscreen on mobile landscape & auto-exit on mobile portrait (Hardcoded Mobile Landscape)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const checkOrientation = () => {
+      if (!isMobileTouchDevice()) {
+        setIsMobilePortrait(false);
+        return;
+      }
+
+      const isLandscape = isLandscapeViewport();
+      setIsMobilePortrait(!isLandscape);
+
+      const currentOrientation = isLandscape ? 'landscape' : 'portrait';
+
+      if (lastOrientationRef.current !== currentOrientation) {
+        const prev = lastOrientationRef.current;
+        lastOrientationRef.current = currentOrientation;
+
+        if (isLandscape) {
+          // Entering landscape on mobile: auto enter fullscreen
+          enterAppFullscreen().then((success) => {
+            pendingFullscreenRef.current = !success;
+          });
+        } else if (prev !== null) {
+          // Entering portrait on mobile: auto exit fullscreen
+          pendingFullscreenRef.current = false;
+          exitAppFullscreen();
+        }
+      }
+    };
+
+    // Immediate initial check
+    checkOrientation();
+
+    // Re-check after minor layout reflows (essential for iOS Safari dimension updates)
+    const t1 = setTimeout(checkOrientation, 150);
+    const t2 = setTimeout(checkOrientation, 350);
+
+    const handleOrientationChange = () => {
+      checkOrientation();
+      setTimeout(checkOrientation, 150);
+      setTimeout(checkOrientation, 350);
+    };
+
+    const mql = typeof window.matchMedia === 'function' ? window.matchMedia('(orientation: landscape)') : null;
+    if (mql) {
+      if (mql.addEventListener) {
+        mql.addEventListener('change', handleOrientationChange);
+      } else if ((mql as any).addListener) {
+        (mql as any).addListener(handleOrientationChange);
+      }
+    }
+
+    if (window.screen?.orientation?.addEventListener) {
+      window.screen.orientation.addEventListener('change', handleOrientationChange);
+    }
+
+    window.addEventListener('orientationchange', handleOrientationChange);
+    window.addEventListener('resize', handleOrientationChange);
+
+    // If browser required a transient user gesture to enter fullscreen,
+    // trigger on the very first touch/tap on the screen
+    const handlePendingTouch = () => {
+      if (pendingFullscreenRef.current && isMobileTouchDevice() && isLandscapeViewport()) {
+        enterAppFullscreen().then((success) => {
+          if (success) pendingFullscreenRef.current = false;
+        });
+      }
+    };
+
+    window.addEventListener('touchstart', handlePendingTouch, { passive: true });
+    window.addEventListener('pointerdown', handlePendingTouch, { passive: true });
+    window.addEventListener('click', handlePendingTouch);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      if (mql) {
+        if (mql.removeEventListener) {
+          mql.removeEventListener('change', handleOrientationChange);
+        } else if ((mql as any).removeListener) {
+          (mql as any).removeListener(handleOrientationChange);
+        }
+      }
+      if (window.screen?.orientation?.removeEventListener) {
+        window.screen.orientation.removeEventListener('change', handleOrientationChange);
+      }
+      window.removeEventListener('orientationchange', handleOrientationChange);
+      window.removeEventListener('resize', handleOrientationChange);
+      window.removeEventListener('touchstart', handlePendingTouch);
+      window.removeEventListener('pointerdown', handlePendingTouch);
+      window.removeEventListener('click', handlePendingTouch);
+    };
   }, []);
 
   // Persist user state to LocalStorage
@@ -874,6 +977,19 @@ export default function TunedApp() {
         <div
           className={`crt-beam-overlay ${crtTransition === 'on' ? 'beam-on' : 'beam-off'}`}
           aria-hidden
+        />
+      )}
+
+      {/* Hardcoded Landscape Mobile Prompt: prompts user to rotate device to landscape */}
+      {isMobilePortrait && (
+        <RotateDeviceOverlay
+          onEnterFullscreen={() => {
+            enterAppFullscreen().then((success) => {
+              if (success) {
+                pendingFullscreenRef.current = false;
+              }
+            });
+          }}
         />
       )}
     </div>

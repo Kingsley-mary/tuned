@@ -300,6 +300,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
         powerPreference: 'high-performance',
       });
     } catch {
+      container.innerHTML = `<div style="position:absolute;inset:0;background:radial-gradient(circle at center, hsla(${hue}, 85%, 35%, 0.3) 0%, #060507 80%);overflow:hidden;"><div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.3) 0px,rgba(0,0,0,0.3) 1px,transparent 1px,transparent 3px);opacity:0.6;"></div></div>`;
       return;
     }
 

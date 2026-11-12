@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs } from '../lib/broadcast-clock';
+import { isMobileTouchDevice, isLandscapeViewport, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
 import { BumperStage } from './BumperStage';
@@ -67,16 +68,6 @@ interface WatchScreenProps {
   onOpenGuide: () => void;
   onOpenManage: () => void;
   onPowerOff: () => void;
-}
-
-function isMobileTouchDevice(): boolean {
-  if (typeof window === 'undefined') return false;
-  const hasTouch = 'ontouchstart' in window || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-  if (!hasTouch) return false;
-  const isCoarse = typeof window.matchMedia === 'function' ? window.matchMedia('(pointer: coarse)').matches : false;
-  const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
-  const isSmallScreen = Math.min(window.screen.width, window.screen.height) <= 1024;
-  return isCoarse || isMobileUA || isSmallScreen;
 }
 
 export const WatchScreen: React.FC<WatchScreenProps> = ({
@@ -393,57 +384,21 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   // Enter fullscreen helper with Screen Orientation API lock to landscape
   const enterFullscreen = useCallback(async () => {
-    try {
-      const docAny = document as any;
-      const stageAny = tvStageRef.current as any;
-      const isAlreadyFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement);
-      if (!isAlreadyFs && stageAny) {
-        if (stageAny.requestFullscreen) {
-          await stageAny.requestFullscreen();
-        } else if (stageAny.webkitRequestFullscreen) {
-          await stageAny.webkitRequestFullscreen();
-        }
-      }
-      setIsFullscreen(true);
-      pendingFullscreenRef.current = false;
-      if (typeof screen !== 'undefined' && screen.orientation && 'lock' in screen.orientation) {
-        (screen.orientation as any).lock('landscape').catch(() => {});
-      }
-    } catch {
-      // Browser blocked requestFullscreen (e.g. requires transient user gesture)
-      setIsFullscreen(true);
-      pendingFullscreenRef.current = true;
-    }
+    const success = await enterAppFullscreen(tvStageRef.current);
+    setIsFullscreen(true);
+    pendingFullscreenRef.current = !success;
   }, []);
 
   // Exit fullscreen helper
   const exitFullscreen = useCallback(async () => {
     pendingFullscreenRef.current = false;
-    try {
-      const docAny = document as any;
-      const isAlreadyFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement);
-      if (isAlreadyFs) {
-        if (document.exitFullscreen) {
-          await document.exitFullscreen();
-        } else if (docAny.webkitExitFullscreen) {
-          await docAny.webkitExitFullscreen();
-        }
-      }
-      setIsFullscreen(false);
-      if (typeof screen !== 'undefined' && screen.orientation && 'unlock' in screen.orientation) {
-        try {
-          screen.orientation.unlock();
-        } catch {}
-      }
-    } catch {
-      setIsFullscreen(false);
-    }
+    await exitAppFullscreen();
+    setIsFullscreen(false);
   }, []);
 
   // Fullscreen toggle handler on tvStageRef (with iOS Safari graceful fallback)
   const toggleFullscreen = useCallback(async () => {
-    const docAny = document as any;
-    const isFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement || isFullscreen);
+    const isFs = !!(document.fullscreenElement || (document as any).webkitFullscreenElement || isFullscreen);
     if (isFs) {
       await exitFullscreen();
     } else {
@@ -476,10 +431,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         return;
       }
 
-      const isLandscape =
-        window.matchMedia('(orientation: landscape)').matches ||
-        window.innerWidth > window.innerHeight;
-
+      const isLandscape = isLandscapeViewport();
       setIsMobilePortrait(!isLandscape);
 
       const currentOrientation = isLandscape ? 'landscape' : 'portrait';
@@ -498,33 +450,47 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
     checkOrientation();
 
-    const mql = window.matchMedia('(orientation: landscape)');
-    const handleMql = () => checkOrientation();
+    // Check with slight delays for iOS Safari delayed reflow
+    const t1 = setTimeout(checkOrientation, 150);
+    const t2 = setTimeout(checkOrientation, 350);
 
-    if (mql.addEventListener) {
-      mql.addEventListener('change', handleMql);
-    } else if ((mql as any).addListener) {
-      (mql as any).addListener(handleMql);
+    const handleOrientation = () => {
+      checkOrientation();
+      setTimeout(checkOrientation, 150);
+      setTimeout(checkOrientation, 350);
+    };
+
+    const mql = typeof window.matchMedia === 'function' ? window.matchMedia('(orientation: landscape)') : null;
+    if (mql) {
+      if (mql.addEventListener) {
+        mql.addEventListener('change', handleOrientation);
+      } else if ((mql as any).addListener) {
+        (mql as any).addListener(handleOrientation);
+      }
     }
 
     if (window.screen?.orientation?.addEventListener) {
-      window.screen.orientation.addEventListener('change', checkOrientation);
+      window.screen.orientation.addEventListener('change', handleOrientation);
     }
 
-    window.addEventListener('orientationchange', checkOrientation);
-    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', handleOrientation);
+    window.addEventListener('resize', handleOrientation);
 
     return () => {
-      if (mql.removeEventListener) {
-        mql.removeEventListener('change', handleMql);
-      } else if ((mql as any).removeListener) {
-        (mql as any).removeListener(handleMql);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      if (mql) {
+        if (mql.removeEventListener) {
+          mql.removeEventListener('change', handleOrientation);
+        } else if ((mql as any).removeListener) {
+          (mql as any).removeListener(handleOrientation);
+        }
       }
       if (window.screen?.orientation?.removeEventListener) {
-        window.screen.orientation.removeEventListener('change', checkOrientation);
+        window.screen.orientation.removeEventListener('change', handleOrientation);
       }
-      window.removeEventListener('orientationchange', checkOrientation);
-      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', handleOrientation);
+      window.removeEventListener('resize', handleOrientation);
     };
   }, [enterFullscreen, exitFullscreen]);
 

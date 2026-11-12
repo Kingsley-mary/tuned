@@ -1029,13 +1029,24 @@ button:focus-visible, input:focus-visible {
   overflow: hidden;
 }
 
-.bm-youtube-foot {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-  z-index: 5;
+.bm-youtube-foot,
+.bm-cinematic-foot {
+  position: absolute !important;
+  bottom: max(20px, env(safe-area-inset-bottom, 0px)) !important;
+  left: max(24px, env(safe-area-inset-left, 0px)) !important;
+  right: max(24px, env(safe-area-inset-right, 0px)) !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  width: auto !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+}
+
+.bm-youtube-foot .bm-next-pill,
+.bm-cinematic-foot .bm-next-pill {
+  max-width: min(520px, 55vw) !important;
 }
 
 .bm-youtube-media {
@@ -1159,10 +1170,21 @@ button:focus-visible, input:focus-visible {
   padding: clamp(20px, 4vw, 44px);
 }
 .bm-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  position: absolute !important;
+  top: max(16px, env(safe-area-inset-top, 0px)) !important;
+  left: max(24px, env(safe-area-inset-left, 0px)) !important;
+  right: max(24px, env(safe-area-inset-right, 0px)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  width: auto !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+}
+
+.bm-top-bar * {
+  pointer-events: auto !important;
 }
 .bm-ident-center {
   text-align: center;
@@ -3212,3 +3234,295 @@ button:focus-visible, input:focus-visible {
     height: 88px;
   }
 }
+
+/* ==========================================================================
+   Hardcoded Mobile Landscape & Rotate Device Prompt (PRD Mobile Experience)
+   ========================================================================== */
+
+/* Hardcode the entire application layout to landscape on mobile / touch devices */
+@media (max-width: 1024px) and (orientation: landscape) {
+  html, body {
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden !important;
+    position: fixed !important;
+    inset: 0 !important;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .crt-chassis,
+  .crt-container,
+  .crt-tube {
+    width: 100vw !important;
+    width: 100dvw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: none !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+  }
+
+  .tv-stage {
+    width: 100vw !important;
+    width: 100dvw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    inset: 0 !important;
+  }
+
+  .tv-yt {
+    width: 100vw !important;
+    width: 100dvw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    aspect-ratio: 16 / 9;
+  }
+
+  .bm-youtube-foot,
+  .bm-cinematic-foot {
+    bottom: max(10px, env(safe-area-inset-bottom, 0px)) !important;
+    left: max(14px, env(safe-area-inset-left, 0px)) !important;
+    right: max(14px, env(safe-area-inset-right, 0px)) !important;
+    gap: 10px !important;
+  }
+
+  .bm-top-bar {
+    top: max(8px, env(safe-area-inset-top, 0px)) !important;
+    left: max(14px, env(safe-area-inset-left, 0px)) !important;
+    right: max(14px, env(safe-area-inset-right, 0px)) !important;
+  }
+
+  .bm-cinematic-bug {
+    padding: 6px 12px !important;
+  }
+
+  .bm-cinematic-tag {
+    font-size: 9px !important;
+  }
+
+  .bm-cinematic-ch {
+    font-size: 13px !important;
+  }
+
+  .bm-next-pill {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+    max-width: 48vw !important;
+  }
+}
+
+/* Fullscreen Overlay Prompt when Mobile Device is in Portrait */
+.rotate-device-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: radial-gradient(circle at center, #141218 0%, #060507 70%, #000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: #fff;
+  overflow: hidden;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  animation: rotate-overlay-fade 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes rotate-overlay-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rotate-device-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.35) 0px,
+    rgba(0, 0, 0, 0.35) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.rotate-device-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 360px;
+}
+
+/* Animated rotating phone demonstration */
+.rotate-phone-anim {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.rotate-phone-device {
+  width: 54px;
+  height: 96px;
+  border: 2.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  background: rgba(18, 16, 22, 0.95);
+  box-shadow: 0 0 24px rgba(255, 59, 48, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px;
+  position: relative;
+  animation: phone-rotate-tilt 3s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  transform-origin: center center;
+}
+
+@keyframes phone-rotate-tilt {
+  0%, 15% {
+    transform: rotate(0deg) scale(1);
+  }
+  45%, 70% {
+    transform: rotate(90deg) scale(1.08);
+  }
+  90%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.rotate-phone-notch {
+  width: 18px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  margin-bottom: 6px;
+}
+
+.rotate-phone-screen {
+  flex: 1;
+  width: 100%;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.rotate-screen-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff3b30;
+  box-shadow: 0 0 8px #ff3b30;
+}
+
+.rotate-screen-text {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.rotate-arrow-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  animation: rotate-arc-pulse 3s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes rotate-arc-pulse {
+  0%, 15% {
+    opacity: 0.25;
+    transform: scale(0.95);
+  }
+  45%, 70% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  90%, 100% {
+    opacity: 0.25;
+    transform: scale(0.95);
+  }
+}
+
+.rotate-device-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 59, 48, 0.15);
+  border: 1px solid rgba(255, 59, 48, 0.35);
+  color: #ff3b30;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 14px;
+}
+
+.rotate-device-title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.rotate-device-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 24px;
+}
+
+.rotate-device-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.rotate-device-btn:hover,
+.rotate-device-btn:active {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.02);
+}
+

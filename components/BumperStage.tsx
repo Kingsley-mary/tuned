@@ -251,7 +251,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
             </div>
           )}
 
-          {/* 2. Fullscreen Immersive 3D Cinematic Intermission */}
+          {/* 2. Fullscreen Immersive 3D Cinematic Intermission (Unobstructed 3D scene with corner lower-thirds) */}
           {resolvedVariant === 'cinematic' && (
             <div className="bm-layer bm-cinematic-layer">
               <div className="bm-top-bar">
@@ -262,21 +262,6 @@ export const BumperStage: React.FC<BumperStageProps> = ({
                 <span className="osd-chip bm-cinema-chip">
                   <span className="dot" /> CH {chCode} · {resolvedIsMarathon ? `MARATHON BLOCK` : channelName.toUpperCase()} {isMultiBreak ? `(${resolvedBumperIndex}/${resolvedTotalBumpers})` : ''}
                 </span>
-              </div>
-
-              <div className="bm-lead bm-ident-center">
-                <div className="bm-ident-card">
-                  <div className="bm-ident-eyebrow">
-                    <span className="bm-ident-dot" />
-                    <span>{resolvedIsMarathon ? `🔥 ${(resolvedMarathonCreator || channelName).toUpperCase()} MARATHON` : `SPECIAL PRESENTATION`}</span>
-                  </div>
-                  <h1 className="bm-ident-title">{channelName}</h1>
-                  <p className="bm-ident-sub">
-                    {resolvedIsMarathon
-                      ? `Continuous marathon continues next`
-                      : `Channel ${chCode} · Continuous Linear Broadcast`}
-                  </p>
-                </div>
               </div>
 
               <div className="bm-support bm-cinematic-foot">

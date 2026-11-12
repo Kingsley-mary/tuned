@@ -26,8 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="orientation" content="landscape" />
         <meta name="screen-orientation" content="landscape" />
         <meta name="x5-orientation" content="landscape" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-orientations" content="landscape" />
         <script src="https://www.youtube.com/iframe_api" async></script>
       </head>
       <body>{children}</body>
