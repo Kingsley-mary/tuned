@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
 import { getLiveBroadcastState, advanceChannelPlayback, calibrateServerClock, getSyncedNowSec, getSyncedNowMs, getEligibleVideos } from '../lib/broadcast-clock';
-import { isMobileTouchDevice, isLandscapeViewport, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
+import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { unlockBumperAudio } from '../lib/bumper-synth';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
@@ -155,7 +155,7 @@ export default function TunedApp() {
 
         if (isLandscape) {
           // Entering landscape on mobile: auto enter fullscreen
-          enterAppFullscreen().then((success) => {
+          enterAppFullscreen(document.documentElement).then((success) => {
             pendingFullscreenRef.current = !success;
           });
         } else if (prev !== null) {
@@ -195,19 +195,17 @@ export default function TunedApp() {
     window.addEventListener('orientationchange', handleOrientationChange);
     window.addEventListener('resize', handleOrientationChange);
 
-    // If browser required a transient user gesture to enter fullscreen,
-    // trigger on the very first touch/tap on the screen
+    // Any user touch/click in landscape seamlessly upgrades to native fullscreen
     const handlePendingTouch = () => {
-      if (pendingFullscreenRef.current && isMobileTouchDevice() && isLandscapeViewport()) {
-        enterAppFullscreen().then((success) => {
+      if (isMobileTouchDevice() && isLandscapeViewport() && !isDeviceFullscreen()) {
+        enterAppFullscreen(document.documentElement).then((success) => {
           if (success) pendingFullscreenRef.current = false;
         });
       }
     };
 
-    window.addEventListener('touchstart', handlePendingTouch, { passive: true });
-    window.addEventListener('pointerdown', handlePendingTouch, { passive: true });
-    window.addEventListener('click', handlePendingTouch);
+    window.addEventListener('touchend', handlePendingTouch, { capture: true });
+    window.addEventListener('click', handlePendingTouch, { capture: true });
 
     return () => {
       clearTimeout(t1);
@@ -224,9 +222,8 @@ export default function TunedApp() {
       }
       window.removeEventListener('orientationchange', handleOrientationChange);
       window.removeEventListener('resize', handleOrientationChange);
-      window.removeEventListener('touchstart', handlePendingTouch);
-      window.removeEventListener('pointerdown', handlePendingTouch);
-      window.removeEventListener('click', handlePendingTouch);
+      window.removeEventListener('touchend', handlePendingTouch, { capture: true });
+      window.removeEventListener('click', handlePendingTouch, { capture: true });
     };
   }, []);
 
@@ -428,6 +425,9 @@ export default function TunedApp() {
   // Handlers for Power Screen
   const handleTurnOn = () => {
     unlockBumperAudio();
+    if (isMobileTouchDevice()) {
+      enterAppFullscreen(document.documentElement);
+    }
     if (crtTimerRef.current) clearTimeout(crtTimerRef.current);
     setCrtTransition('on');
     crtTimerRef.current = setTimeout(() => {
@@ -984,7 +984,7 @@ export default function TunedApp() {
       {isMobilePortrait && (
         <RotateDeviceOverlay
           onEnterFullscreen={() => {
-            enterAppFullscreen().then((success) => {
+            enterAppFullscreen(document.documentElement).then((success) => {
               if (success) {
                 pendingFullscreenRef.current = false;
               }

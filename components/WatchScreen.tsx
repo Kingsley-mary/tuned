@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs } from '../lib/broadcast-clock';
-import { isMobileTouchDevice, isLandscapeViewport, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
+import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
 import { BumperStage } from './BumperStage';
@@ -385,8 +385,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
   // Enter fullscreen helper with Screen Orientation API lock to landscape
   const enterFullscreen = useCallback(async () => {
-    const success = await enterAppFullscreen(tvStageRef.current);
-    setIsFullscreen(true);
+    const success = await enterAppFullscreen(document.documentElement);
+    setIsFullscreen(isDeviceFullscreen());
     pendingFullscreenRef.current = !success;
   }, []);
 
@@ -397,30 +397,50 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     setIsFullscreen(false);
   }, []);
 
-  // Fullscreen toggle handler on tvStageRef (with iOS Safari graceful fallback)
+  // Fullscreen toggle handler (with iOS Safari graceful fallback)
   const toggleFullscreen = useCallback(async () => {
-    const isFs = !!(document.fullscreenElement || (document as any).webkitFullscreenElement || isFullscreen);
-    if (isFs) {
+    if (isDeviceFullscreen()) {
       await exitFullscreen();
     } else {
       await enterFullscreen();
     }
-  }, [isFullscreen, enterFullscreen, exitFullscreen]);
+  }, [enterFullscreen, exitFullscreen]);
 
   // Listen for fullscreen state changes
   useEffect(() => {
     const handleFsChange = () => {
-      const isFs = !!(document.fullscreenElement || (document as any).webkitFullscreenElement);
-      setIsFullscreen(isFs);
+      setIsFullscreen(isDeviceFullscreen());
     };
 
     document.addEventListener('fullscreenchange', handleFsChange);
     document.addEventListener('webkitfullscreenchange', handleFsChange);
+    document.addEventListener('mozfullscreenchange', handleFsChange);
+    document.addEventListener('MSFullscreenChange', handleFsChange);
     return () => {
       document.removeEventListener('fullscreenchange', handleFsChange);
       document.removeEventListener('webkitfullscreenchange', handleFsChange);
+      document.removeEventListener('mozfullscreenchange', handleFsChange);
+      document.removeEventListener('MSFullscreenChange', handleFsChange);
     };
   }, []);
+
+  // When on mobile in landscape, ANY user tap/touch seamlessly upgrades to native fullscreen
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleLandscapeUserGesture = () => {
+      if (isMobileTouchDevice() && isLandscapeViewport() && !isDeviceFullscreen()) {
+        enterFullscreen();
+      }
+    };
+
+    window.addEventListener('click', handleLandscapeUserGesture, { capture: true });
+    window.addEventListener('touchend', handleLandscapeUserGesture, { capture: true });
+    return () => {
+      window.removeEventListener('click', handleLandscapeUserGesture, { capture: true });
+      window.removeEventListener('touchend', handleLandscapeUserGesture, { capture: true });
+    };
+  }, [enterFullscreen]);
 
   // Auto-fullscreen on mobile landscape & auto-exit on mobile portrait
   useEffect(() => {
@@ -1190,10 +1210,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const hue = activeChannel?.hue ?? 355;
   const rows = schedule.slice(0, 4);
 
+  // Effective fullscreen: either native browser fullscreen OR mobile in landscape orientation
+  const isMobileLandscape = isMobileTouchDevice() && !isMobilePortrait;
+  const isEffectiveFullscreen = isFullscreen || isMobileLandscape;
+
   return (
     <div
       ref={tvStageRef}
-      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}${isFullscreen ? ' is-fullscreen' : ''}`}
+      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}${isEffectiveFullscreen ? ' is-fullscreen' : ''}`}
       style={
         {
           visibility: isHidden && !keepVideoVisible ? 'hidden' : 'visible',
@@ -1649,6 +1673,23 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           )}
         </div>
       </div>
+
+      {/* Mobile Landscape Floating Fullscreen Pill (appears if native fullscreen was blocked without user gesture) */}
+      {isMobileTouchDevice() && !isMobilePortrait && !isFullscreen && (
+        <button
+          type="button"
+          className="tv-floating-fs-pill"
+          onClick={(e) => {
+            e.stopPropagation();
+            enterFullscreen();
+          }}
+          title="Tap for Fullscreen"
+          aria-label="Tap for Fullscreen"
+        >
+          <Maximize2 size={13} />
+          <span>Fullscreen</span>
+        </button>
+      )}
     </div>
   );
 };

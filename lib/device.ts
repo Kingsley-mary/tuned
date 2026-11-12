@@ -32,62 +32,116 @@ export function isMobileTouchDevice(): boolean {
 export function isLandscapeViewport(): boolean {
   if (typeof window === 'undefined') return true;
 
-  // 1. Standard Screen Orientation API
+  // 1. Direct viewport dimensions (immediate, accurate to layout reflow)
+  const isWidthGreater = window.innerWidth > window.innerHeight;
+
+  // 2. Standard Screen Orientation API
   if (window.screen?.orientation?.type) {
-    return window.screen.orientation.type.includes('landscape');
+    const isApiLandscape = window.screen.orientation.type.includes('landscape');
+    if (isApiLandscape || isWidthGreater) return true;
+    return false;
   }
 
-  // 2. Legacy window.orientation (iOS Safari: 90 / -90 is landscape, 0 / 180 is portrait)
+  // 3. Legacy window.orientation (iOS Safari: 90 / -90 is landscape, 0 / 180 is portrait)
   if (typeof (window as any).orientation === 'number') {
     const o = (window as any).orientation;
     if (o === 90 || o === -90) return true;
     if (o === 0 || o === 180) return false;
   }
 
-  // 3. CSS Media Query
+  // 4. CSS Media Query
   if (typeof window.matchMedia === 'function') {
     const mql = window.matchMedia('(orientation: landscape)');
     if (mql && typeof mql.matches === 'boolean') {
-      return mql.matches;
+      return mql.matches || isWidthGreater;
     }
   }
 
-  // 4. Viewport Dimensions Fallback
-  return window.innerWidth > window.innerHeight;
+  return isWidthGreater;
 }
 
 /**
- * Requests native fullscreen on the provided element (defaults to document.documentElement).
- * Automatically locks orientation to landscape if the Screen Orientation API is supported.
+ * Checks whether the browser is currently in native fullscreen.
+ */
+export function isDeviceFullscreen(): boolean {
+  if (typeof document === 'undefined') return false;
+  const docAny = document as any;
+  return !!(
+    document.fullscreenElement ||
+    docAny.webkitFullscreenElement ||
+    docAny.mozFullScreenElement ||
+    docAny.msFullscreenElement
+  );
+}
+
+/**
+ * Requests native fullscreen on the target element (defaults to document.documentElement).
+ * Automatically locks orientation to landscape once fullscreen is engaged.
+ * Preserves transient user activation by synchronously executing requestFullscreen first.
  */
 export async function enterAppFullscreen(targetElement?: Element | null): Promise<boolean> {
   if (typeof document === 'undefined') return false;
   const target = targetElement || document.documentElement;
-  const docAny = document as any;
-  const isAlreadyFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement);
 
-  // Attempt orientation lock
+  // 1. If already in native fullscreen, ensure orientation lock is active and return true
+  if (isDeviceFullscreen()) {
+    if (typeof screen !== 'undefined' && screen.orientation && 'lock' in screen.orientation) {
+      try {
+        await (screen.orientation as any).lock('landscape');
+      } catch {}
+    }
+    return true;
+  }
+
+  // 2. Request native fullscreen (SYNCHRONOUS invocation first to preserve transient user activation!)
+  let entered = false;
+  try {
+    const elAny = target as any;
+    if (elAny.requestFullscreen) {
+      await elAny.requestFullscreen({ navigationUI: 'hide' } as any);
+      entered = true;
+    } else if (elAny.webkitRequestFullscreen) {
+      await elAny.webkitRequestFullscreen();
+      entered = true;
+    } else if (elAny.mozRequestFullScreen) {
+      await elAny.mozRequestFullScreen();
+      entered = true;
+    } else if (elAny.msRequestFullscreen) {
+      await elAny.msRequestFullscreen();
+      entered = true;
+    }
+  } catch {
+    // If target element failed (e.g. element inside container), fall back to document.documentElement
+    try {
+      const docEl = document.documentElement as any;
+      if (docEl && docEl !== target) {
+        if (docEl.requestFullscreen) {
+          await docEl.requestFullscreen({ navigationUI: 'hide' } as any);
+          entered = true;
+        } else if (docEl.webkitRequestFullscreen) {
+          await docEl.webkitRequestFullscreen();
+          entered = true;
+        }
+      }
+    } catch {}
+  }
+
+  // 3. AFTER entering fullscreen, lock screen orientation to landscape
   if (typeof screen !== 'undefined' && screen.orientation && 'lock' in screen.orientation) {
     try {
       await (screen.orientation as any).lock('landscape');
     } catch {}
   }
 
-  if (isAlreadyFs) return true;
-
-  try {
-    const elAny = target as any;
-    if (elAny.requestFullscreen) {
-      await elAny.requestFullscreen({ navigationUI: 'hide' } as any);
-      return true;
-    } else if (elAny.webkitRequestFullscreen) {
-      await elAny.webkitRequestFullscreen();
-      return true;
-    }
-    return true;
-  } catch {
-    return false;
+  // 4. Mobile browser viewport scroll trick (iOS Safari / mobile Chrome toolbar collapse)
+  if (typeof window !== 'undefined') {
+    try {
+      window.scrollTo(0, 1);
+      setTimeout(() => window.scrollTo(0, 0), 50);
+    } catch {}
   }
+
+  return entered || isDeviceFullscreen();
 }
 
 /**
@@ -96,7 +150,6 @@ export async function enterAppFullscreen(targetElement?: Element | null): Promis
 export async function exitAppFullscreen(): Promise<boolean> {
   if (typeof document === 'undefined') return false;
   const docAny = document as any;
-  const isAlreadyFs = !!(document.fullscreenElement || docAny.webkitFullscreenElement);
 
   if (typeof screen !== 'undefined' && screen.orientation && 'unlock' in screen.orientation) {
     try {
@@ -104,7 +157,7 @@ export async function exitAppFullscreen(): Promise<boolean> {
     } catch {}
   }
 
-  if (!isAlreadyFs) return true;
+  if (!isDeviceFullscreen()) return true;
 
   try {
     if (document.exitFullscreen) {
@@ -112,6 +165,12 @@ export async function exitAppFullscreen(): Promise<boolean> {
       return true;
     } else if (docAny.webkitExitFullscreen) {
       await docAny.webkitExitFullscreen();
+      return true;
+    } else if (docAny.mozCancelFullScreen) {
+      await docAny.mozCancelFullScreen();
+      return true;
+    } else if (docAny.msExitFullscreen) {
+      await docAny.msExitFullscreen();
       return true;
     }
     return true;
