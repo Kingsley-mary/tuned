@@ -336,16 +336,14 @@ const DEFAULT_CARDS: DeadpanCard[] = [
   { lead: 'Station identification.', punchline: 'Continuing uninterrupted broadcast now.' },
 ];
 
-// Alternate bespoke 3D WebGL scenes ('ident', 'cinematic', 'field', 'visualizer') with 2D editorial cards ('lineup', 'slate', 'card')
-// All motion bumper templates are designed with a minimum of 5 seconds (5000ms)
+// All motion bumper templates render immersive channel-specific Three.js 3D worlds with a strict minimum of 5 seconds (5000ms)
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
-  { variant: 'ident', durationMs: 5600 },
   { variant: 'cinematic', durationMs: 6200 },
-  { variant: 'lineup', durationMs: 5400 },
-  { variant: 'visualizer', durationMs: 5500 },
-  { variant: 'slate', durationMs: 5200 },
+  { variant: 'ident', durationMs: 5600 },
   { variant: 'field', durationMs: 5800 },
-  { variant: 'card', durationMs: 5200 },
+  { variant: 'visualizer', durationMs: 5500 },
+  { variant: 'lineup', durationMs: 5600 },
+  { variant: 'slate', durationMs: 5400 },
 ];
 
 /**

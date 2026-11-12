@@ -96,12 +96,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
       : null,
   ].filter(Boolean) as { tag: string; video: Video }[];
 
-  const usesThreeScene =
-    resolvedKind === 'motion' &&
-    (resolvedVariant === 'ident' ||
-      resolvedVariant === 'cinematic' ||
-      resolvedVariant === 'field' ||
-      resolvedVariant === 'visualizer');
+  const usesThreeScene = resolvedKind === 'motion';
 
   const sceneKind =
     resolvedVariant === 'field'
@@ -308,6 +303,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
 
               <div className="bm-support bm-slate-foot">
                 <span>STATION IDENTIFICATION · TUNED LINEAR BROADCAST</span>
+                <span>CH {chCode} · {channelName.toUpperCase()}</span>
               </div>
             </div>
           )}
