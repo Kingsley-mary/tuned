@@ -824,6 +824,18 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCyGa1YEx9ST66rYrJTGIKOw",
       "name": "UEFA"
+    },
+    {
+      "id": "UCNMg6XDhRZI2QzL4pWOvP_w",
+      "name": "Volleyball World"
+    },
+    {
+      "id": "UCS0IaWDSGudH0E7nygXpejA",
+      "name": "Volleyball University"
+    },
+    {
+      "id": "UCoEMagRUvrXELuJZwS4DevA",
+      "name": "Elevate Yourself"
     }
   ],
   "travel": [
@@ -1226,6 +1238,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC3nHsBfXNXSXRFWt_zt7l6A",
       "name": "SeanNalewanyj"
+    },
+    {
+      "id": "UCGk5LGakzD4dlWFNy70kSIw",
+      "name": "Yellow Dude"
     }
   ],
   "art": [

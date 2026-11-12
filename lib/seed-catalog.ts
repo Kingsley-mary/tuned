@@ -3940,7 +3940,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "sports",
     "categoryName": "Sports",
     "hue": 140,
-    "builtAt": 1794494891201,
+    "builtAt": 1794511660595,
     "videos": [
       {
         "youtubeVideoId": "kqt1A8oB0BE",
@@ -4079,6 +4079,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 81
       },
       {
+        "youtubeVideoId": "wpfWm3FvqSU",
+        "title": "France 🇫🇷 vs. Finland 🇫🇮 | Full Match | World Championship 2025 - Men",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wpfWm3FvqSU/hqdefault.jpg",
+        "durationSec": 7807
+      },
+      {
+        "youtubeVideoId": "GMolDxFaNgM",
+        "title": "How to Practice Volleyball at Home (Just a Ball and a Wall)",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GMolDxFaNgM/hqdefault.jpg",
+        "durationSec": 848
+      },
+      {
+        "youtubeVideoId": "IofHAd7__1M",
+        "title": "October 2026 Members Only Q&A",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IofHAd7__1M/hqdefault.jpg",
+        "durationSec": 704
+      },
+      {
         "youtubeVideoId": "ZYmzHbM5lHI",
         "title": "Champions' Chat with Alisha and Doriane 🎙️ 🏆 | F1 ACADEMY",
         "sourceChannelId": "UCNtiHO5dvgowvZScesaKUqA",
@@ -4125,6 +4149,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Almost Athletes with Dude Perfect",
         "thumbnailUrl": "https://i.ytimg.com/vi/mq-uDRYTi6g/hqdefault.jpg",
         "durationSec": 5037
+      },
+      {
+        "youtubeVideoId": "mqeTIFCNwiE",
+        "title": "Dude Perfect Picks Season 1 Fan Fail WINNER!",
+        "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
+        "sourceChannelTitle": "Almost Athletes with Dude Perfect",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqeTIFCNwiE/hqdefault.jpg",
+        "durationSec": 1306
       },
       {
         "youtubeVideoId": "nXiFBPABGsQ",
@@ -4191,6 +4223,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 79
       },
       {
+        "youtubeVideoId": "ARDzd-oPBCk",
+        "title": "Olsztyn vs. BOGDANKA LUK Lublin - Highlights | TAURON Liga 26/27 - Matchday 6",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ARDzd-oPBCk/hqdefault.jpg",
+        "durationSec": 600
+      },
+      {
+        "youtubeVideoId": "g676YLnGQms",
+        "title": "My FULL Setting Guide",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/g676YLnGQms/hqdefault.jpg",
+        "durationSec": 843
+      },
+      {
+        "youtubeVideoId": "ldBhnO-ZKh4",
+        "title": "Girls Can Jump Serve Too | Full Volleyball Clinic for Girl's Jump Topspin Serve",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ldBhnO-ZKh4/hqdefault.jpg",
+        "durationSec": 5102
+      },
+      {
         "youtubeVideoId": "LOGqTyDxy7w",
         "title": "The American Academy 📚🇺🇸  | F1 ACADEMY",
         "sourceChannelId": "UCNtiHO5dvgowvZScesaKUqA",
@@ -4229,14 +4285,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Olympics Gymnastics",
         "thumbnailUrl": "https://i.ytimg.com/vi/ShpQZ-RLibQ/hqdefault.jpg",
         "durationSec": 137
-      },
-      {
-        "youtubeVideoId": "mqeTIFCNwiE",
-        "title": "Dude Perfect Picks Season 1 Fan Fail WINNER!",
-        "sourceChannelId": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
-        "sourceChannelTitle": "Almost Athletes with Dude Perfect",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mqeTIFCNwiE/hqdefault.jpg",
-        "durationSec": 1306
       },
       {
         "youtubeVideoId": "CuhVdH5QGbg",
@@ -4295,6 +4343,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 283
       },
       {
+        "youtubeVideoId": "svYuCKcFdGA",
+        "title": "Poland 🇵🇱 vs. Germany 🇩🇪 | Full Match | World Championships 2025 - Women",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/svYuCKcFdGA/hqdefault.jpg",
+        "durationSec": 8275
+      },
+      {
+        "youtubeVideoId": "q62ITUHBHqQ",
+        "title": "Why You’re Not Getting Better at Volleyball",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/q62ITUHBHqQ/hqdefault.jpg",
+        "durationSec": 353
+      },
+      {
+        "youtubeVideoId": "01fuoswlBRQ",
+        "title": "Women's College Volleyball JUMP SPIN SERVE Clinic",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/01fuoswlBRQ/hqdefault.jpg",
+        "durationSec": 7144
+      },
+      {
         "youtubeVideoId": "1_91kDYtHbo",
         "title": "Street Fighter's Most Competitive Rivalry | Tokido vs MenaRD",
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
@@ -4343,6 +4415,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 16855
       },
       {
+        "youtubeVideoId": "Ga-q5CvFFjA",
+        "title": "Trentino vs. Perugia - Highlights | SuperLega 26/27 - Matchday 5",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ga-q5CvFFjA/hqdefault.jpg",
+        "durationSec": 601
+      },
+      {
+        "youtubeVideoId": "5sqozZasVaA",
+        "title": "How to Become a STANDOUT Player",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5sqozZasVaA/hqdefault.jpg",
+        "durationSec": 165
+      },
+      {
+        "youtubeVideoId": "KPd9rCUl5sA",
+        "title": "Setter Tempo & Location | Pro Setting Lesson with Joe Worsley PART 2",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KPd9rCUl5sA/hqdefault.jpg",
+        "durationSec": 872
+      },
+      {
         "youtubeVideoId": "pfhw6GwCzlI",
         "title": "HE WAITED 7 YEARS FOR THIS REVENGE! | Big Bird vs Bonchan",
         "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
@@ -4359,12 +4455,60 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1276
       },
       {
+        "youtubeVideoId": "8kPJPowsl4Y",
+        "title": "Brazil 🇧🇷 vs. Puerto Rico 🇵🇷 | Full Match | World Championships 2025 - Women",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8kPJPowsl4Y/hqdefault.jpg",
+        "durationSec": 4572
+      },
+      {
+        "youtubeVideoId": "U7WRSY6l2Cw",
+        "title": "EVERYTHING You Need To Know About Underarmour Next Volleyball Events",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/U7WRSY6l2Cw/hqdefault.jpg",
+        "durationSec": 2187
+      },
+      {
+        "youtubeVideoId": "nxAb0EVfCEw",
+        "title": "Rotationless Volleyball, Plans for 2027 VLA Season, Should I quit volleyball : Members Q & A",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nxAb0EVfCEw/hqdefault.jpg",
+        "durationSec": 533
+      },
+      {
         "youtubeVideoId": "ijov3YH8npk",
         "title": "DON'T Set Your Week 10 Lineup Until You Watch This | Fantasy Focus",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
         "thumbnailUrl": "https://i.ytimg.com/vi/ijov3YH8npk/hqdefault.jpg",
         "durationSec": 565
+      },
+      {
+        "youtubeVideoId": "IKMgNQWWVM4",
+        "title": "Lube vs. Modena - Highlights | Superlega 26/27 - Matchday 4",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IKMgNQWWVM4/hqdefault.jpg",
+        "durationSec": 599
+      },
+      {
+        "youtubeVideoId": "6CkxP_1Ya6c",
+        "title": "My Interview With a Neuroscientist Who Works for Nike",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6CkxP_1Ya6c/hqdefault.jpg",
+        "durationSec": 3453
+      },
+      {
+        "youtubeVideoId": "Py2C5hNnJpk",
+        "title": "Pro Setting Lesson with Joe Worsley PART 1 | Dynamic Setter Warmup & Setting Out of System",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Py2C5hNnJpk/hqdefault.jpg",
+        "durationSec": 1127
       },
       {
         "youtubeVideoId": "eYaAZ1riCoo",
@@ -4375,12 +4519,60 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1249
       },
       {
+        "youtubeVideoId": "qVm6lkfgxxA",
+        "title": "Slovenia 🇸🇮 vs. Germany 🇩🇪 | Full Match | World Championship 2025 - Men",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qVm6lkfgxxA/hqdefault.jpg",
+        "durationSec": 6769
+      },
+      {
+        "youtubeVideoId": "Ty_YrFmaJZE",
+        "title": "VBU Skills Lab Feedback Example",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ty_YrFmaJZE/hqdefault.jpg",
+        "durationSec": 91
+      },
+      {
+        "youtubeVideoId": "Ll4fMQ3-7oM",
+        "title": "2 Weeks of Traveling in Phoenix! | Boys Junior Nationals 2026 Vlog Part 2",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ll4fMQ3-7oM/hqdefault.jpg",
+        "durationSec": 1339
+      },
+      {
         "youtubeVideoId": "-ugxiI5Bu08",
         "title": "Who proved us RIGHT and WRONG + more midseason AWARDS | Move the Sticks",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
         "thumbnailUrl": "https://i.ytimg.com/vi/-ugxiI5Bu08/hqdefault.jpg",
         "durationSec": 791
+      },
+      {
+        "youtubeVideoId": "GrsfkrLgdxg",
+        "title": "BOGDANKA LUK Lublin vs. PGE Giek SKRA - Highlights | TAURON Liga 26/27 - Matchday 5",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GrsfkrLgdxg/hqdefault.jpg",
+        "durationSec": 601
+      },
+      {
+        "youtubeVideoId": "cQMhiCa0OwM",
+        "title": "3 Visual Cues You Miss As A Blocker",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cQMhiCa0OwM/hqdefault.jpg",
+        "durationSec": 491
+      },
+      {
+        "youtubeVideoId": "bE4s191c_zk",
+        "title": "How Left Handed OPPOSITES Hit Sharp Angle & Line",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bE4s191c_zk/hqdefault.jpg",
+        "durationSec": 1200
       },
       {
         "youtubeVideoId": "79IqrDAuQGQ",
@@ -4391,12 +4583,60 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1141
       },
       {
+        "youtubeVideoId": "7f7A5Lplxcg",
+        "title": "Germany 🇩🇪 vs. Vietnam 🇻🇳 | Full Match | World Championships 2025 - Women",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7f7A5Lplxcg/hqdefault.jpg",
+        "durationSec": 4647
+      },
+      {
+        "youtubeVideoId": "Nl93v7vk9A4",
+        "title": "How to Side Set (Full Tutorial)",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Nl93v7vk9A4/hqdefault.jpg",
+        "durationSec": 322
+      },
+      {
+        "youtubeVideoId": "CByto0x_4Wg",
+        "title": "New Vlogging Style for Boys Junior Nationals! | 2026 Tournament Vlog Part 1",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CByto0x_4Wg/hqdefault.jpg",
+        "durationSec": 1230
+      },
+      {
         "youtubeVideoId": "YpwAjHDgn4w",
         "title": "How J.J. McCarthy can take it to the NEXT LEVEL for the Giants 📈 + Saints WRs breakdown 🎥 | NFL Live",
         "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
         "sourceChannelTitle": "NFL on ESPN",
         "thumbnailUrl": "https://i.ytimg.com/vi/YpwAjHDgn4w/hqdefault.jpg",
         "durationSec": 1071
+      },
+      {
+        "youtubeVideoId": "awQPGalxvkA",
+        "title": "Canada 🇨🇦 vs. Türkiye 🇹🇷 | Full Match | World Championship 2025 - Men",
+        "sourceChannelId": "UCNMg6XDhRZI2QzL4pWOvP_w",
+        "sourceChannelTitle": "Volleyball World",
+        "thumbnailUrl": "https://i.ytimg.com/vi/awQPGalxvkA/hqdefault.jpg",
+        "durationSec": 4974
+      },
+      {
+        "youtubeVideoId": "HFSC61JqOQo",
+        "title": "What is The VBU Skills Lab?",
+        "sourceChannelId": "UCS0IaWDSGudH0E7nygXpejA",
+        "sourceChannelTitle": "Volleyball University",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HFSC61JqOQo/hqdefault.jpg",
+        "durationSec": 447
+      },
+      {
+        "youtubeVideoId": "nj0ZT4E1WCw",
+        "title": "Learn Volleyball Referee Signals! | Volleyball Officiating Tutorial",
+        "sourceChannelId": "UCoEMagRUvrXELuJZwS4DevA",
+        "sourceChannelTitle": "Elevate Yourself",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nj0ZT4E1WCw/hqdefault.jpg",
+        "durationSec": 1611
       },
       {
         "youtubeVideoId": "G4faEbqRUGQ",
@@ -6148,7 +6388,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "fitness",
     "categoryName": "Fitness",
     "hue": 100,
-    "builtAt": 1794494891201,
+    "builtAt": 1794511650602,
     "videos": [
       {
         "youtubeVideoId": "xVuvVmZdIpQ",
@@ -6247,6 +6487,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 710
       },
       {
+        "youtubeVideoId": "0RQ1uGgmJUI",
+        "title": "If you're miserable, squat. I'm not joking.",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0RQ1uGgmJUI/hqdefault.jpg",
+        "durationSec": 483
+      },
+      {
         "youtubeVideoId": "CoWcu2b498g",
         "title": "How to find your purpose",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
@@ -6277,6 +6525,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Yoga With Adriene",
         "thumbnailUrl": "https://i.ytimg.com/vi/E9AwOaDbclg/hqdefault.jpg",
         "durationSec": 805
+      },
+      {
+        "youtubeVideoId": "aA9EI3NKUS4",
+        "title": "Find Your Flexibility | Full Body Yoga",
+        "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
+        "sourceChannelTitle": "Yoga With Adriene",
+        "thumbnailUrl": "https://i.ytimg.com/vi/aA9EI3NKUS4/hqdefault.jpg",
+        "durationSec": 1523
+      },
+      {
+        "youtubeVideoId": "oqqcuzv0wJ4",
+        "title": "Yoga for Healthy Feet | Strengthen, Stretch & Restore",
+        "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
+        "sourceChannelTitle": "Yoga With Adriene",
+        "thumbnailUrl": "https://i.ytimg.com/vi/oqqcuzv0wJ4/hqdefault.jpg",
+        "durationSec": 414
+      },
+      {
+        "youtubeVideoId": "eQeNhnAHXP4",
+        "title": "Yoga for Better Posture | Chest, Shoulders & Upper Back",
+        "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
+        "sourceChannelTitle": "Yoga With Adriene",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eQeNhnAHXP4/hqdefault.jpg",
+        "durationSec": 1513
       },
       {
         "youtubeVideoId": "k0E1uGBFxv4",
@@ -6327,6 +6599,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 897
       },
       {
+        "youtubeVideoId": "_XktpWR3bSQ",
+        "title": "This feels useless, but it fixes tendon pain",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_XktpWR3bSQ/hqdefault.jpg",
+        "durationSec": 598
+      },
+      {
         "youtubeVideoId": "hzU-Zy1aAgM",
         "title": "Reducing procrastination",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
@@ -6349,14 +6629,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "FitnessBlender",
         "thumbnailUrl": "https://i.ytimg.com/vi/6QBodF49E1s/hqdefault.jpg",
         "durationSec": 1256
-      },
-      {
-        "youtubeVideoId": "aA9EI3NKUS4",
-        "title": "Find Your Flexibility | Full Body Yoga",
-        "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
-        "sourceChannelTitle": "Yoga With Adriene",
-        "thumbnailUrl": "https://i.ytimg.com/vi/aA9EI3NKUS4/hqdefault.jpg",
-        "durationSec": 1523
       },
       {
         "youtubeVideoId": "nuIkrzh7H9M",
@@ -6407,6 +6679,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 694
       },
       {
+        "youtubeVideoId": "MnBZHpR22M0",
+        "title": "Your first pull-up, without ever training hard",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MnBZHpR22M0/hqdefault.jpg",
+        "durationSec": 533
+      },
+      {
         "youtubeVideoId": "pcvzzVeE4c8",
         "title": "How to share your thoughts clearly",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
@@ -6429,14 +6709,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "FitnessBlender",
         "thumbnailUrl": "https://i.ytimg.com/vi/WRIOtDa2tG0/hqdefault.jpg",
         "durationSec": 1336
-      },
-      {
-        "youtubeVideoId": "oqqcuzv0wJ4",
-        "title": "Yoga for Healthy Feet | Strengthen, Stretch & Restore",
-        "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
-        "sourceChannelTitle": "Yoga With Adriene",
-        "thumbnailUrl": "https://i.ytimg.com/vi/oqqcuzv0wJ4/hqdefault.jpg",
-        "durationSec": 414
       },
       {
         "youtubeVideoId": "qdUg4vvDxGI",
@@ -6479,6 +6751,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1170
       },
       {
+        "youtubeVideoId": "ZmG6jt432Y8",
+        "title": "You’re already strong enough for a planche",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZmG6jt432Y8/hqdefault.jpg",
+        "durationSec": 541
+      },
+      {
         "youtubeVideoId": "KtCbv0U_e8A",
         "title": "How to feel grateful for life (without gaslighting yourself)",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
@@ -6493,14 +6773,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "ATHLEAN-X™",
         "thumbnailUrl": "https://i.ytimg.com/vi/X6LXOWzmUmY/hqdefault.jpg",
         "durationSec": 308
-      },
-      {
-        "youtubeVideoId": "eQeNhnAHXP4",
-        "title": "Yoga for Better Posture | Chest, Shoulders & Upper Back",
-        "sourceChannelId": "UCFKE7WVJfvaHW5q283SxchA",
-        "sourceChannelTitle": "Yoga With Adriene",
-        "thumbnailUrl": "https://i.ytimg.com/vi/eQeNhnAHXP4/hqdefault.jpg",
-        "durationSec": 1513
       },
       {
         "youtubeVideoId": "Hf_NBDid0d0",
@@ -6543,12 +6815,36 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 781
       },
       {
+        "youtubeVideoId": "rJ-40de0DyU",
+        "title": "Being wrecked doesn't mean you’re getting stronger",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rJ-40de0DyU/hqdefault.jpg",
+        "durationSec": 544
+      },
+      {
         "youtubeVideoId": "RtLUWw0IViI",
         "title": "Patience can help you achieve your goals faster (if you understand it)",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/RtLUWw0IViI/hqdefault.jpg",
         "durationSec": 728
+      },
+      {
+        "youtubeVideoId": "bcx79dIUIdU",
+        "title": "It's Extreme, But I'll NEVER Eat These 7 Foods Again!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bcx79dIUIdU/hqdefault.jpg",
+        "durationSec": 573
+      },
+      {
+        "youtubeVideoId": "iZNm0zr_gc8",
+        "title": "Start with this calisthenics workout. Or don't.",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iZNm0zr_gc8/hqdefault.jpg",
+        "durationSec": 505
       },
       {
         "youtubeVideoId": "F5SB9FKJbsg",
@@ -6559,12 +6855,44 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1356
       },
       {
+        "youtubeVideoId": "5dyW5aTV67c",
+        "title": "I'm 51. This is What I Eat EVERY Day to Be Lean.",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5dyW5aTV67c/hqdefault.jpg",
+        "durationSec": 999
+      },
+      {
+        "youtubeVideoId": "Mn2jfbtDPZk",
+        "title": "Nothing in here will impress anyone but it works! (feat. Cali Move)",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Mn2jfbtDPZk/hqdefault.jpg",
+        "durationSec": 257
+      },
+      {
         "youtubeVideoId": "dMk4xLKL6lU",
         "title": "watch this if you're worried about growing up",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/dMk4xLKL6lU/hqdefault.jpg",
         "durationSec": 1432
+      },
+      {
+        "youtubeVideoId": "ng4G8F5jPyI",
+        "title": "Do This AFTER Every Workout (NON NEGOTIABLE!)",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ng4G8F5jPyI/hqdefault.jpg",
+        "durationSec": 1105
+      },
+      {
+        "youtubeVideoId": "LFob77ijACc",
+        "title": "You're already strong enough for a pull-up (UNCUT)",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LFob77ijACc/hqdefault.jpg",
+        "durationSec": 496
       },
       {
         "youtubeVideoId": "jT3h8Mu0l74",
@@ -6575,12 +6903,44 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 614
       },
       {
+        "youtubeVideoId": "aWRyB-OpI7w",
+        "title": "How to Do More Pullups in Your NEXT Set (GUARANTEED!)",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/aWRyB-OpI7w/hqdefault.jpg",
+        "durationSec": 704
+      },
+      {
+        "youtubeVideoId": "5lE8-EAC4mU",
+        "title": "How to do a front lever",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5lE8-EAC4mU/hqdefault.jpg",
+        "durationSec": 613
+      },
+      {
         "youtubeVideoId": "KBB27UC4nRc",
         "title": "how to make friends (as an adult)",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/KBB27UC4nRc/hqdefault.jpg",
         "durationSec": 777
+      },
+      {
+        "youtubeVideoId": "bIV-K2vGu2g",
+        "title": "STOP, You're Training Your Chest All Wrong!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bIV-K2vGu2g/hqdefault.jpg",
+        "durationSec": 1420
+      },
+      {
+        "youtubeVideoId": "CHuKBugD8Zk",
+        "title": "You're not too weak for the planche",
+        "sourceChannelId": "UCGk5LGakzD4dlWFNy70kSIw",
+        "sourceChannelTitle": "Yellow Dude",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CHuKBugD8Zk/hqdefault.jpg",
+        "durationSec": 610
       },
       {
         "youtubeVideoId": "K8eTKeKj85Y",
@@ -6591,6 +6951,14 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 857
       },
       {
+        "youtubeVideoId": "BJ6UVAUUJIs",
+        "title": "STOP, You're Training Your Biceps All Wrong!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BJ6UVAUUJIs/hqdefault.jpg",
+        "durationSec": 1342
+      },
+      {
         "youtubeVideoId": "KyB6GACrOow",
         "title": "Simple method to make (almost) any decision better and faster",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
@@ -6599,12 +6967,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1036
       },
       {
+        "youtubeVideoId": "avvv8uCrft8",
+        "title": "STOP, You're Training Your Triceps All Wrong!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/avvv8uCrft8/hqdefault.jpg",
+        "durationSec": 599
+      },
+      {
         "youtubeVideoId": "fjtsT8y0vlU",
         "title": "balancing hard work and mental health",
         "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/fjtsT8y0vlU/hqdefault.jpg",
         "durationSec": 1281
+      },
+      {
+        "youtubeVideoId": "IoFNx4-Ivwo",
+        "title": "5 Bodyweight Exercises That Fix 95% Of Your Problems",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IoFNx4-Ivwo/hqdefault.jpg",
+        "durationSec": 1176
       },
       {
         "youtubeVideoId": "lfsS_a5n8JY",
@@ -6621,70 +7005,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/PLYcw2nWF24/hqdefault.jpg",
         "durationSec": 1410
-      },
-      {
-        "youtubeVideoId": "bcx79dIUIdU",
-        "title": "It's Extreme, But I'll NEVER Eat These 7 Foods Again!",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bcx79dIUIdU/hqdefault.jpg",
-        "durationSec": 573
-      },
-      {
-        "youtubeVideoId": "5dyW5aTV67c",
-        "title": "I'm 51. This is What I Eat EVERY Day to Be Lean.",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5dyW5aTV67c/hqdefault.jpg",
-        "durationSec": 999
-      },
-      {
-        "youtubeVideoId": "ng4G8F5jPyI",
-        "title": "Do This AFTER Every Workout (NON NEGOTIABLE!)",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/ng4G8F5jPyI/hqdefault.jpg",
-        "durationSec": 1105
-      },
-      {
-        "youtubeVideoId": "aWRyB-OpI7w",
-        "title": "How to Do More Pullups in Your NEXT Set (GUARANTEED!)",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/aWRyB-OpI7w/hqdefault.jpg",
-        "durationSec": 704
-      },
-      {
-        "youtubeVideoId": "bIV-K2vGu2g",
-        "title": "STOP, You're Training Your Chest All Wrong!",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/bIV-K2vGu2g/hqdefault.jpg",
-        "durationSec": 1420
-      },
-      {
-        "youtubeVideoId": "BJ6UVAUUJIs",
-        "title": "STOP, You're Training Your Biceps All Wrong!",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/BJ6UVAUUJIs/hqdefault.jpg",
-        "durationSec": 1342
-      },
-      {
-        "youtubeVideoId": "avvv8uCrft8",
-        "title": "STOP, You're Training Your Triceps All Wrong!",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/avvv8uCrft8/hqdefault.jpg",
-        "durationSec": 599
-      },
-      {
-        "youtubeVideoId": "IoFNx4-Ivwo",
-        "title": "5 Bodyweight Exercises That Fix 95% Of Your Problems",
-        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
-        "sourceChannelTitle": "ATHLEAN-X™",
-        "thumbnailUrl": "https://i.ytimg.com/vi/IoFNx4-Ivwo/hqdefault.jpg",
-        "durationSec": 1176
       }
     ]
   },
