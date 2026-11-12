@@ -1547,7 +1547,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
       {/* Direct channel dialing HUD */}
       {(dialBuffer || showDialNumpad) && (
-        <div className="tv-dial-layer">
+        <div className="tv-dial-layer" onClick={cancelDial}>
           <ChannelDialOverlay
             dialBuffer={dialBuffer}
             previewChannel={previewChannel}

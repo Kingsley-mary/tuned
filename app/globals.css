@@ -3762,267 +3762,208 @@ button:focus-visible, input:focus-visible {
   transform: scale(1.02);
 }
 
-/* ================= Channel Direct Dial Overlay ================= */
+/* ================= Channel Direct Dial HUD (Centered Broadcast OSD) ================= */
 .tv-dial-layer {
   position: absolute;
-  top: calc(18px + env(safe-area-inset-top));
-  right: calc(22px + env(safe-area-inset-right));
-  z-index: 6000;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5500;
   pointer-events: auto;
-  animation: tvDialEntrance 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  padding: 24px;
+  animation: tvDialBackdropIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes tvDialEntrance {
+@keyframes tvDialBackdropIn {
   from {
     opacity: 0;
-    transform: translateY(-8px) scale(0.96);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 
-.tv-dial-card {
-  width: min(340px, calc(100vw - 36px));
-  background: rgba(13, 15, 20, 0.94);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 14px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 20px hsla(var(--ch-hue, 200), 100%, 50%, 0.15);
-  padding: 16px 18px 14px;
+.tv-dial-hud {
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
+  min-width: 220px;
+  max-width: min(440px, calc(100vw - 48px));
+  padding: 24px 44px 20px;
+  border-radius: 28px;
+  background: rgba(20, 16, 14, 0.78);
+  backdrop-filter: blur(32px) saturate(1.4);
+  -webkit-backdrop-filter: blur(32px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.75),
+    0 0 45px hsla(var(--dial-accent-hue, 355), 85%, 52%, 0.18);
   color: #fff;
   user-select: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  animation: tvDialHudPop 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: border-color 0.2s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
-.tv-dial-card.status-tuning {
+@keyframes tvDialHudPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.tv-dial-hud.status-tuning {
   border-color: rgba(59, 245, 137, 0.5);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 28px rgba(59, 245, 137, 0.3);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.8),
+    0 0 45px rgba(59, 245, 137, 0.3);
 }
 
-.tv-dial-card.status-invalid {
-  border-color: rgba(255, 77, 77, 0.6);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 28px rgba(255, 77, 77, 0.35);
-  animation: tvDialShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+.tv-dial-hud.status-invalid {
+  border-color: rgba(255, 85, 68, 0.6);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.8),
+    0 0 45px rgba(255, 85, 68, 0.35);
+  animation: tvDialShake 0.38s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 @keyframes tvDialShake {
-  10%, 90% { transform: translate3d(-1px, 0, 0); }
-  20%, 80% { transform: translate3d(2px, 0, 0); }
-  30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
-  40%, 60% { transform: translate3d(3px, 0, 0); }
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(3px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
 }
 
-.tv-dial-head {
+/* Digits display: perfectly centered */
+.tv-dial-digits-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.tv-dial-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.tv-dial-indicator-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--dial-accent, #3bf589);
-  box-shadow: 0 0 8px var(--dial-accent, #3bf589);
-  animation: tvDialDotPulse 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes tvDialDotPulse {
-  from { opacity: 0.4; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1.15); }
-}
-
-.tv-dial-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.tv-dial-action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.tv-dial-action-btn:hover {
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.24);
-}
-
-.tv-dial-action-btn.active {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.35);
-  color: #fff;
-}
-
-.tv-dial-action-btn.icon-only {
-  padding: 4px;
-}
-
-.tv-dial-display-row {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  padding: 2px 0;
-}
-
-.tv-dial-prefix {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.45);
-  font-family: var(--font-mono), monospace;
-}
-
-.tv-dial-digits {
-  font-size: 46px;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  font-family: var(--font-mono), monospace;
-  color: var(--dial-accent, #3bf589);
-  text-shadow: 0 0 16px var(--dial-accent, #3bf589);
-}
-
-.tv-dial-cursor {
-  display: inline-block;
-  opacity: 0.85;
-  margin-left: 2px;
-  animation: tvDialCursorBlink 0.7s step-start infinite;
-}
-
-@keyframes tvDialCursorBlink {
-  50% { opacity: 0; }
-}
-
-.tv-dial-info-row {
-  min-height: 38px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  gap: 10px;
+  line-height: 1;
 }
 
-.tv-dial-preview-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.tv-dial-badge-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tv-dial-badge {
+.tv-dial-digit {
   display: inline-flex;
   align-items: center;
-  padding: 2px 9px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-.tv-dial-channel-index {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.55);
-  font-weight: 600;
-  font-family: var(--font-mono), monospace;
-}
-
-.tv-dial-desc {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.35;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.tv-dial-status-msg {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(74px, 12vw, 116px);
   font-weight: 700;
+  line-height: 0.92;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+  text-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.8),
+    0 0 35px hsla(var(--dial-accent-hue, 355), 90%, 55%, 0.25);
+  animation: tvDialDigitPunch 0.16s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.tv-dial-status-msg.tuning {
-  color: #3bf589;
-  letter-spacing: 0.04em;
+.tv-dial-digit.placeholder {
+  color: rgba(255, 255, 255, 0.3);
 }
 
-.tv-dial-status-msg.invalid {
-  color: #ff5252;
-  letter-spacing: 0.04em;
+@keyframes tvDialDigitPunch {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.tv-dial-status-msg.prompt {
-  color: rgba(255, 255, 255, 0.5);
-  font-style: italic;
+/* Channel pill beneath digits (consistent with .osd-channel-name) */
+.tv-dial-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
 }
 
-.tv-dial-spinner {
-  width: 12px;
-  height: 12px;
-  border: 2px solid rgba(59, 245, 137, 0.25);
-  border-top-color: #3bf589;
-  border-radius: 50%;
-  animation: tvDialSpin 0.6s linear infinite;
+.tv-dial-channel-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 14px 4px 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
 }
 
-@keyframes tvDialSpin {
-  to { transform: rotate(360deg); }
+.tv-dial-channel-badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+.tv-dial-channel-name {
+  font-family: var(--font-logo);
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.tv-dial-channel-pill.invalid {
+  padding: 6px 14px;
+  background: rgba(255, 85, 68, 0.15);
+  border-color: rgba(255, 85, 68, 0.4);
+}
+
+.tv-dial-channel-error {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff8577;
+  letter-spacing: 0.01em;
+}
+
+.tv-dial-channel-pill.placeholder {
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.tv-dial-channel-hint {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Minimal Countdown Progress Bar */
 .tv-dial-timer-track {
-  width: 100%;
+  width: 140px;
   height: 3px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
   overflow: hidden;
-  position: relative;
+  margin-top: 2px;
 }
 
 .tv-dial-timer-fill {
   width: 100%;
   height: 100%;
-  background: var(--dial-accent, #3bf589);
-  box-shadow: 0 0 10px var(--dial-accent, #3bf589);
+  background: var(--dial-accent, #ffffff);
+  box-shadow: 0 0 8px var(--dial-accent, #ffffff);
   animation-name: tvDialCountdown;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
@@ -4034,93 +3975,96 @@ button:focus-visible, input:focus-visible {
   to { width: 0%; }
 }
 
-.tv-dial-footer {
+/* Optional Touch Keypad */
+.tv-dial-keypad-wrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
-  padding-top: 4px;
+  margin-top: 6px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
 }
 
-.tv-dial-hint {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.02em;
-}
-
-.tv-dial-hint b {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.tv-dial-enter-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--dial-accent, #3bf589);
-  color: #0c0e12;
-  border: none;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: transform 0.1s ease, filter 0.15s ease;
-}
-
-.tv-dial-enter-pill:hover {
-  filter: brightness(1.1);
-  transform: scale(1.04);
-}
-
-/* Touch numpad */
-.tv-dial-numpad {
+.tv-dial-keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 8px;
+  width: 100%;
+  max-width: 220px;
 }
 
-.tv-dial-num-btn {
-  height: 42px;
+.tv-dial-key-btn {
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
   color: #fff;
-  font-size: 17px;
-  font-weight: 700;
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   transition: all 0.12s ease;
 }
 
-.tv-dial-num-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.22);
+.tv-dial-key-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-.tv-dial-num-btn:active {
-  transform: scale(0.94);
-  background: var(--dial-accent, #3bf589);
+.tv-dial-key-btn:active {
+  transform: scale(0.92);
+  background: var(--dial-accent, #ffffff);
   color: #0c0e12;
 }
 
-.tv-dial-num-btn.fn-btn {
+.tv-dial-key-btn.fn-btn {
   color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
 }
 
-.tv-dial-num-btn.enter-btn {
-  background: var(--dial-accent, #3bf589);
+.tv-dial-key-btn.enter-btn {
+  background: var(--dial-accent, #ffffff);
   color: #0c0e12;
   border-color: transparent;
 }
 
+.tv-dial-keypad-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 4px 12px;
+  border-radius: 999px;
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+
+.tv-dial-keypad-close:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile & Small Landscape screens */
+@media (max-width: 600px), (max-height: 500px) {
+  .tv-dial-hud {
+    padding: 18px 28px 16px;
+    gap: 8px;
+  }
+  .tv-dial-digit {
+    font-size: clamp(56px, 14vw, 82px);
+  }
+  .tv-dial-channel-name {
+    font-size: 22px;
+  }
+  .tv-dial-key-btn {
+    height: 38px;
+    font-size: 16px;
+  }
+}
