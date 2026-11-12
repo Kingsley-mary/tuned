@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { ChannelLineup } from '../lib/types';
-import { getLiveBroadcastState, buildChannelSchedule, getVideoDuration } from '../lib/broadcast-clock';
+import { getLiveBroadcastState, buildChannelSchedule, getVideoDuration, getSyncedNowMs } from '../lib/broadcast-clock';
 
 export interface ChannelSavedState {
   videoIndex: number;
@@ -124,8 +124,9 @@ export function GuideScreen({
 
   // Tick real-time clock every 1 second so the NOW line and clock track live time continuously
   useEffect(() => {
+    setNowMs(getSyncedNowMs());
     const id = setInterval(() => {
-      setNowMs(Date.now());
+      setNowMs(getSyncedNowMs());
     }, 1000);
     return () => clearInterval(id);
   }, []);

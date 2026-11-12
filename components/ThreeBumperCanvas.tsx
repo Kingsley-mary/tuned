@@ -186,11 +186,13 @@ const PROJECTOR_CONE_FRAG = /* glsl */ `
   varying vec3 vWorldPos;
 
   void main() {
-    float beam = pow(1.0 - vUv.y, 1.6);
-    float dust = sin(vUv.x * 32.0 + uTime * 1.8) * cos(vWorldPos.y * 8.0 - uTime * 2.2);
-    float flicker = 0.94 + 0.06 * sin(uTime * 32.0);
-    float intensity = beam * (0.28 + 0.12 * dust) * flicker;
-    gl_FragColor = vec4(uColor * intensity, intensity * 0.85);
+    float safeY = clamp(1.0 - vUv.y, 0.0, 1.0);
+    float beam = pow(safeY, 1.6);
+    float safeX = clamp(vUv.x, 0.0, 1.0);
+    float dust = sin(safeX * 32.0 + uTime * 1.8) * cos(vWorldPos.y * 8.0 - uTime * 2.2);
+    float flicker = clamp(0.94 + 0.06 * sin(uTime * 32.0), 0.8, 1.1);
+    float intensity = clamp(beam * (0.28 + 0.12 * dust) * flicker, 0.0, 1.0);
+    gl_FragColor = vec4(clamp(uColor * intensity, 0.0, 1.0), clamp(intensity * 0.85, 0.0, 1.0));
   }
 `;
 
@@ -209,13 +211,13 @@ const RETRO_SUN_FRAG = /* glsl */ `
   varying vec2 vUv;
 
   void main() {
-    float y = vUv.y;
+    float y = clamp(vUv.y, 0.0, 1.0);
     // Horizontal retro raster blinds with widening gaps near bottom
     float stripes = sin((y + uTime * 0.05) * 44.0);
     float gapWidth = smoothstep(0.7, 0.1, y) * 0.55;
     if (stripes < gapWidth && y < 0.72) discard;
 
-    vec3 col = mix(uColorBottom, uColorTop, pow(y, 1.4));
+    vec3 col = mix(uColorBottom, uColorTop, pow(max(0.0001, y), 1.4));
     gl_FragColor = vec4(col, 0.95);
   }
 `;
@@ -454,11 +456,13 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
         uniform vec3 uColor;
         varying vec2 vUv;
         void main() {
-          float lengthFalloff = pow(1.0 - vUv.y, 2.2);
-          float widthFalloff = sin(vUv.x * 3.14159);
-          float flicker = 0.95 + 0.05 * sin(uTime * 18.0);
-          float intensity = lengthFalloff * widthFalloff * 0.42 * flicker;
-          gl_FragColor = vec4(uColor * intensity, intensity * 0.65);
+          float safeY = clamp(1.0 - vUv.y, 0.0, 1.0);
+          float lengthFalloff = pow(safeY, 2.2);
+          float safeX = clamp(vUv.x, 0.0, 1.0);
+          float widthFalloff = max(0.0, sin(safeX * 3.14159265));
+          float flicker = clamp(0.95 + 0.05 * sin(uTime * 18.0), 0.85, 1.1);
+          float intensity = clamp(lengthFalloff * widthFalloff * 0.42 * flicker, 0.0, 1.0);
+          gl_FragColor = vec4(clamp(uColor * intensity, 0.0, 1.0), clamp(intensity * 0.65, 0.0, 1.0));
         }
       `;
       const BEAM_VERT = /* glsl */ `

@@ -142,34 +142,52 @@ export const BumperStage: React.FC<BumperStageProps> = ({
             />
           </div>
           <div className="bm-scanlines" />
-          <div className="bm-cinematic-bug">
-            <span className="bm-cinematic-tag">
-              {resolvedIsPreview
-                ? 'STATION ID PREVIEW'
-                : resolvedIsMarathon
-                ? '🔥 MARATHON BLOCK'
-                : isMultiBreak
-                ? `BREAK ${resolvedBumperIndex}/${resolvedTotalBumpers}`
-                : 'STATION BREAK'}
-            </span>
-            <span className="bm-cinematic-ch">{resolvedClip.label || channelName}</span>
-          </div>
-          {safeNext?.title && (
-            <div className="bm-next-pill">
-              <b>UP NEXT</b>
-              <span>{safeNext.title}</span>
+
+          {/* Top Bar for video bumpers: Brand + Channel / Break Chip + Exit Preview Button */}
+          <div className="bm-top-bar">
+            <div className="brand-logo bm-logo">
+              <span className="brand-dot" />
+              <span>tuned</span>
             </div>
-          )}
-          {resolvedIsPreview && (
-            <button
-              type="button"
-              className="bm-preview-exit-btn"
-              onClick={onExitPreview}
-              title="Exit Preview (B / ESC)"
-            >
-              PREVIEW · PRESS B OR ESC TO EXIT ✕
-            </button>
-          )}
+            <div className="bm-top-right-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span className="osd-chip">
+                <span className="dot" /> CH {chCode} · {resolvedIsMarathon ? `MARATHON` : isMultiBreak ? `BREAK ${resolvedBumperIndex}/${resolvedTotalBumpers}` : channelName.toUpperCase()}
+              </span>
+              {resolvedIsPreview && (
+                <button
+                  type="button"
+                  className="bm-preview-exit-btn"
+                  onClick={onExitPreview}
+                  title="Exit Preview (B / ESC)"
+                  style={{ position: 'static' }}
+                >
+                  PREVIEW · PRESS B OR ESC TO EXIT ✕
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Authentic linear broadcast lower-third: Pinned to bottom-left and bottom-right corners */}
+          <div className="bm-support bm-youtube-foot">
+            <div className="bm-cinematic-bug">
+              <span className="bm-cinematic-tag">
+                {resolvedIsPreview
+                  ? 'STATION ID PREVIEW'
+                  : resolvedIsMarathon
+                  ? '🔥 MARATHON BLOCK'
+                  : isMultiBreak
+                  ? `BREAK ${resolvedBumperIndex}/${resolvedTotalBumpers}`
+                  : 'STATION BREAK'}
+              </span>
+              <span className="bm-cinematic-ch">{resolvedClip.label || channelName}</span>
+            </div>
+            {safeNext?.title && (
+              <div className="bm-next-pill">
+                <b>UP NEXT</b>
+                <span>{safeNext.title}</span>
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <>
@@ -294,20 +312,38 @@ export const BumperStage: React.FC<BumperStageProps> = ({
                   {resolvedIsMarathon ? `🔥 ALL-${(resolvedMarathonCreator || channelName).toUpperCase()} MARATHON` : 'COMING UP'}
                 </div>
                 <div className="bm-schedule-list">
-                  {queueSlots.map((slot, idx) => (
-                    <div
-                      key={slot.video.youtubeVideoId + idx}
-                      className={`bm-schedule-item${idx === 0 ? ' current' : ''}`}
-                    >
-                      <span className="bm-item-tag">{slot.tag}</span>
-                      <div className="bm-item-body">
-                        <h3>{slot.video.title}</h3>
-                        {slot.video.sourceChannelTitle && (
-                          <p>{slot.video.sourceChannelTitle}</p>
-                        )}
+                  {queueSlots.map((slot, idx) => {
+                    const thumbUrl =
+                      slot.video.thumbnailUrl ||
+                      `https://img.youtube.com/vi/${slot.video.youtubeVideoId}/mqdefault.jpg`;
+                    return (
+                      <div
+                        key={slot.video.youtubeVideoId + idx}
+                        className={`bm-schedule-item${idx === 0 ? ' current' : ''}`}
+                      >
+                        <div className="bm-schedule-item-thumb">
+                          <img
+                            src={thumbUrl}
+                            alt=""
+                            loading="eager"
+                            onError={(e) => {
+                              const target = e.currentTarget;
+                              if (!target.src.includes('mqdefault')) {
+                                target.src = `https://img.youtube.com/vi/${slot.video.youtubeVideoId}/mqdefault.jpg`;
+                              }
+                            }}
+                          />
+                          <span className="bm-item-tag">{slot.tag}</span>
+                        </div>
+                        <div className="bm-item-body">
+                          <h3>{slot.video.title}</h3>
+                          {slot.video.sourceChannelTitle && (
+                            <p>{slot.video.sourceChannelTitle}</p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>

@@ -3,6 +3,42 @@ import { Video } from './types';
 // In-memory cache of true video durations captured from the YouTube player
 const KNOWN_DURATIONS = new Map<string, number>();
 
+// Network-compensated server clock offset to keep separate devices in absolute synchronization
+let serverClockOffsetMs = 0;
+let isClockSynced = false;
+
+/**
+ * Record server timestamp and client ping timing to calibrate the global broadcast clock.
+ */
+export function recordServerTime(
+  serverTimeMs: number,
+  clientSendTimeMs?: number,
+  clientReceiveTimeMs?: number
+): void {
+  if (!serverTimeMs) return;
+  const now = Date.now();
+  const send = clientSendTimeMs || now;
+  const receive = clientReceiveTimeMs || now;
+  const rtt = Math.max(0, receive - send);
+  const estimatedServerNow = serverTimeMs + Math.floor(rtt / 2);
+  serverClockOffsetMs = estimatedServerNow - receive;
+  isClockSynced = true;
+}
+
+/**
+ * Synchronized wall-clock timestamp in milliseconds across all devices.
+ */
+export function getSyncedNowMs(): number {
+  return Date.now() + serverClockOffsetMs;
+}
+
+/**
+ * Synchronized wall-clock timestamp in seconds across all devices.
+ */
+export function getSyncedNowSec(): number {
+  return Math.floor(getSyncedNowMs() / 1000);
+}
+
 /**
  * Record true runtime in seconds reported by the official YouTube player.
  */
@@ -10,6 +46,31 @@ export function recordVideoDuration(videoId: string, durationSec: number): void 
   if (videoId && durationSec > 0) {
     KNOWN_DURATIONS.set(videoId, Math.floor(durationSec));
   }
+}
+
+/**
+ * Deterministic television program runtime calculation.
+ * Guaranteed to produce the exact same second value across every device on Earth.
+ */
+export function getDeterministicDuration(video: Video): number {
+  if (!video) return 600;
+
+  if (video.durationSec && video.durationSec > 60 && video.durationSec !== 600) {
+    return video.durationSec;
+  }
+
+  const id = video.youtubeVideoId || '';
+  // Deterministic hash based on YouTube video ID
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = (hash << 5) - hash + id.charCodeAt(i);
+    hash |= 0;
+  }
+
+  // Typical TV show length range: 480s (8m) to 1440s (24m)
+  const minSec = 480;
+  const maxSec = 1440;
+  return minSec + (Math.abs(hash) % (maxSec - minSec));
 }
 
 /**
@@ -28,18 +89,7 @@ export function getVideoDuration(video: Video): number {
     return KNOWN_DURATIONS.get(id)!;
   }
 
-  // Deterministic hash based on YouTube video ID
-  let hash = 0;
-  for (let i = 0; i < id.length; i++) {
-    hash = (hash << 5) - hash + id.charCodeAt(i);
-    hash |= 0;
-  }
-
-  // Typical TV show length range: 480s (8m) to 1440s (24m)
-  const minSec = 480;
-  const maxSec = 1440;
-  const dur = minSec + (Math.abs(hash) % (maxSec - minSec));
-  return dur;
+  return getDeterministicDuration(video);
 }
 
 /**
@@ -82,7 +132,7 @@ export interface ScheduledProgram {
 export function getLiveBroadcastState(
   videos: Video[],
   categoryId: string,
-  nowEpochSec: number = Math.floor(Date.now() / 1000),
+  nowEpochSec: number = getSyncedNowSec(),
   completedIds?: Set<string>
 ): BroadcastState {
   if (!videos || videos.length === 0) {
@@ -95,12 +145,12 @@ export function getLiveBroadcastState(
     };
   }
 
-  // Use stable catalog durations for cycle math so live player updates never scramble the modulo
+  // Use strictly deterministic durations for cycle math so all devices on Earth remain perfectly locked in sync
   const durations = videos.map((v) => {
     if (v.durationSec && v.durationSec > 60 && v.durationSec !== 600) {
       return v.durationSec;
     }
-    return getVideoDuration(v);
+    return getDeterministicDuration(v);
   });
   const totalCycleSec = durations.reduce((acc, d) => acc + d, 0);
 
@@ -217,7 +267,7 @@ export function buildChannelSchedule(
   activeVideoIndex: number,
   activeSeekSeconds: number,
   count: number = 12,
-  nowMs: number = Date.now()
+  nowMs: number = getSyncedNowMs()
 ): ScheduledProgram[] {
   if (!videos || videos.length === 0) return [];
 

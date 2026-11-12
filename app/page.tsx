@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
-import { getLiveBroadcastState, advanceChannelPlayback } from '../lib/broadcast-clock';
+import { getLiveBroadcastState, advanceChannelPlayback, recordServerTime, getSyncedNowSec } from '../lib/broadcast-clock';
 import { unlockBumperAudio } from '../lib/bumper-synth';
 import { PowerScreen } from '../components/PowerScreen';
 import { PickInterestsScreen } from '../components/PickInterestsScreen';
@@ -143,6 +143,18 @@ export default function TunedApp() {
     }
   }, []);
 
+  // Synchronize client wall clock with server UTC to eliminate cross-device offset
+  useEffect(() => {
+    const t0 = Date.now();
+    fetch('/api/time')
+      .then((r) => r.json())
+      .then((d) => {
+        const t1 = Date.now();
+        if (d?.serverTimeMs) recordServerTime(d.serverTimeMs, t0, t1);
+      })
+      .catch(() => {});
+  }, []);
+
   // Resolve target channel's live broadcast state from the global deterministic wall-clock
   // Guarantees every browser, tab, and device sees the exact same video & timestamp,
   // while channels continue advancing in real time while you watch other channels!
@@ -155,7 +167,7 @@ export default function TunedApp() {
       const live = getLiveBroadcastState(
         target.videos,
         target.categoryId,
-        Math.floor(Date.now() / 1000),
+        getSyncedNowSec(),
         failedVideoIdsRef.current
       );
       return { videoIndex: live.videoIndex, seekSeconds: live.seekSeconds };
@@ -168,9 +180,14 @@ export default function TunedApp() {
     async (categoryIds: string[], knownCustomSources: CustomSource[] = customSources): Promise<ChannelLineup[]> => {
       const uniqueIds = Array.from(new Set(categoryIds));
       try {
+        const t0 = Date.now();
         const res = await fetch(`/api/lineup?ids=${uniqueIds.join(',')}`);
+        const t1 = Date.now();
         if (!res.ok) throw new Error('API lineup fetch failed');
         const data = await res.json();
+        if (data.serverTimeMs) {
+          recordServerTime(data.serverTimeMs, t0, t1);
+        }
         if (data.lineups && Array.isArray(data.lineups) && data.lineups.length > 0) {
           const seen = new Set<string>();
           return data.lineups
@@ -454,7 +471,7 @@ export default function TunedApp() {
     const live = getLiveBroadcastState(
       active.videos,
       active.categoryId,
-      Math.floor(Date.now() / 1000),
+      getSyncedNowSec(),
       failedVideoIdsRef.current
     );
 
@@ -465,7 +482,7 @@ export default function TunedApp() {
       setBehindLiveSeconds(0);
       setTuneKey((k) => k + 1);
       setIsPlaying(true);
-    } else if (Math.abs(currentPlaybackTimeRef.current - live.seekSeconds) > 6) {
+    } else if (Math.abs(currentPlaybackTimeRef.current - live.seekSeconds) > 1.8) {
       setStartSeconds(live.seekSeconds);
       currentPlaybackTimeRef.current = live.seekSeconds;
       setBehindLiveSeconds(0);

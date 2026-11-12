@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
-import { recordVideoDuration, getVideoDuration, buildChannelSchedule } from '../lib/broadcast-clock';
+import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec } from '../lib/broadcast-clock';
 import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio } from '../lib/bumper-synth';
 import { BumperStage } from './BumperStage';
@@ -219,6 +219,15 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const onNextVideoRef = useRef(onNextVideo);
   onNextVideoRef.current = onNextVideo;
 
+  // Persist ongoing bumper breaks per channel across channel surfing (True Live TV Continuity)
+  interface ChannelBreakSession {
+    plans: BreakPlan[];
+    breakStartedAtMs: number;
+    isPreview: boolean;
+  }
+  const channelBreaksRef = useRef<Map<string, ChannelBreakSession>>(new Map());
+  const hasInitialSyncedRef = useRef<boolean>(false);
+
   const activeChannel = channels[currentChannelIndex] || channels[0];
   const videos = activeChannel?.videos || [];
 
@@ -238,8 +247,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const thirdVideo: Video | undefined =
     eligibleVideos.length > 2 ? eligibleVideos[(currentVideoIndex + 3) % eligibleVideos.length] : undefined;
 
-  // Reset local time display and cancel any pending break unless we just promoted a pre-buffered deck
+  // Reset local time display and check if the tuned channel is in the middle of a continuous station break
   useEffect(() => {
+    hasInitialSyncedRef.current = false;
     const promotedId = promotedPrebufferedIdRef.current;
     if (promotedId && activeVideo?.youtubeVideoId === promotedId) {
       promotedPrebufferedIdRef.current = null;
@@ -253,10 +263,54 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     setPromotedTarget(null);
     setCurrentTime(startSeconds || 0);
     setDuration(activeVideo ? getVideoDuration(activeVideo) : 0);
+
     if (bumperTimeoutRef.current) {
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
+
+    // Check if this channel has an active bumper break that is still ongoing in real time!
+    const chId = activeChannel?.categoryId;
+    const savedBreak = chId ? channelBreaksRef.current.get(chId) : null;
+    if (savedBreak && savedBreak.plans.length > 0) {
+      let totalDurMs = 0;
+      for (const p of savedBreak.plans) {
+        const pDur = p.kind === 'motion' ? Math.max(5000, p.durationMs) : ((p.clip?.durationSec || 20) * 1000);
+        totalDurMs += pDur;
+      }
+      const elapsed = Date.now() - savedBreak.breakStartedAtMs;
+      if (elapsed < totalDurMs) {
+        // Break is still on the air! Resume the exact active bumper at its elapsed offset
+        let accumulated = 0;
+        for (let i = 0; i < savedBreak.plans.length; i++) {
+          const p = savedBreak.plans[i];
+          const pDur = p.kind === 'motion' ? Math.max(5000, p.durationMs) : ((p.clip?.durationSec || 20) * 1000);
+          if (elapsed < accumulated + pDur) {
+            const remainingDurMs = accumulated + pDur - elapsed;
+            isPreviewActiveRef.current = savedBreak.isPreview;
+            activeBreakPlanRef.current = p;
+            breakQueueRef.current = savedBreak.plans.slice(i + 1);
+            setActiveMotionBreak(p);
+            bumperStartTimeRef.current = Date.now() - (elapsed - accumulated);
+
+            if (p.kind === 'motion') {
+              bumperTimeoutRef.current = setTimeout(() => {
+                advanceBreakQueue();
+              }, Math.max(1000, remainingDurMs));
+            } else {
+              bumperTimeoutRef.current = setTimeout(() => {
+                advanceBreakQueue();
+              }, Math.max(1000, remainingDurMs + 12000));
+            }
+            return;
+          }
+          accumulated += pDur;
+        }
+      } else {
+        if (chId) channelBreaksRef.current.delete(chId);
+      }
+    }
+
     breakQueueRef.current = [];
     pendingBreakPlansRef.current = null;
     isPreviewActiveRef.current = false;
@@ -431,6 +485,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
+    const chId = activeChannel?.categoryId;
+    if (chId) channelBreaksRef.current.delete(chId);
     breakQueueRef.current = [];
     setActiveMotionBreak(null);
 
@@ -444,18 +500,20 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     }
 
     onNextVideoRef.current(false);
-  }, [nextVideo?.youtubeVideoId, standbyTarget?.videoId]);
+  }, [activeChannel?.categoryId, nextVideo?.youtubeVideoId, standbyTarget?.videoId]);
 
   const handleExitPreview = useCallback(() => {
     if (bumperTimeoutRef.current) {
       clearTimeout(bumperTimeoutRef.current);
       bumperTimeoutRef.current = null;
     }
+    const chId = activeChannel?.categoryId;
+    if (chId) channelBreaksRef.current.delete(chId);
     isPreviewActiveRef.current = false;
     activeBreakPlanRef.current = null;
     breakQueueRef.current = [];
     setActiveMotionBreak(null);
-  }, []);
+  }, [activeChannel?.categoryId]);
 
   const advanceBreakQueue = useCallback(() => {
     if (bumperTimeoutRef.current) {
@@ -484,6 +542,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     const nextPlan = breakQueueRef.current.shift();
     if (!nextPlan) {
       // Natural scheduled commercial break completed: advance to next show!
+      const chId = activeChannel?.categoryId;
+      if (chId) channelBreaksRef.current.delete(chId);
       isPreviewActiveRef.current = false;
       activeBreakPlanRef.current = null;
       setActiveMotionBreak(null);
@@ -494,6 +554,15 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     activeBreakPlanRef.current = nextPlan;
     setActiveMotionBreak(nextPlan);
     bumperStartTimeRef.current = Date.now();
+
+    const chId = activeChannel?.categoryId;
+    if (chId) {
+      channelBreaksRef.current.set(chId, {
+        plans: [nextPlan, ...breakQueueRef.current],
+        breakStartedAtMs: bumperStartTimeRef.current,
+        isPreview,
+      });
+    }
 
     const isFirst = (nextPlan.bumperIndex ?? 1) === 1;
 
@@ -578,6 +647,15 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       const isPreview = Boolean(packagePlans[0]?.isPreview);
       isPreviewActiveRef.current = isPreview;
 
+      const chId = activeChannel?.categoryId;
+      if (chId) {
+        channelBreaksRef.current.set(chId, {
+          plans: [...packagePlans],
+          breakStartedAtMs: Date.now(),
+          isPreview,
+        });
+      }
+
       // Only pre-buffer standby slot if this is a REAL commercial break between shows
       if (!isPreview && nextVideo?.youtubeVideoId && standbyTarget?.videoId !== nextVideo.youtubeVideoId) {
         setStandbyTarget({
@@ -590,7 +668,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       breakQueueRef.current = [...packagePlans];
       advanceBreakQueue();
     },
-    [advanceBreakQueue, nextVideo?.youtubeVideoId, standbyTarget?.videoId, advanceFromBreakToNextVideo]
+    [advanceBreakQueue, nextVideo?.youtubeVideoId, standbyTarget?.videoId, advanceFromBreakToNextVideo, activeChannel?.categoryId]
   );
 
   // Triggered when a main show finishes naturally
@@ -665,6 +743,28 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         }
       }
       onProgressUpdate?.(cur, dur);
+
+      // Multi-device sync alignment: on video startup, compensate for network buffer latency
+      if (
+        !hasInitialSyncedRef.current &&
+        cur > 0.8 &&
+        !activeMotionBreak &&
+        activeChannel?.videos?.length
+      ) {
+        hasInitialSyncedRef.current = true;
+        const live = getLiveBroadcastState(
+          activeChannel.videos,
+          activeChannel.categoryId,
+          getSyncedNowSec()
+        );
+        if (live.videoIndex === currentVideoIndex) {
+          const offset = live.seekSeconds - cur;
+          // If device buffering caused the stream to lag by > 1.4s, snap to true synchronized broadcast position
+          if (offset > 1.4 || offset < -1.8) {
+            onSyncToLive?.();
+          }
+        }
+      }
 
       if (
         dur > 60 &&
@@ -853,20 +953,16 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   captionsMenuOpenRef.current = captionsMenuOpen;
 
   const pokeOsd = useCallback(() => {
-    // When bumper/ident is showing, do NOT automatically pop up the OSD!
-    if (activeMotionBreak) {
-      setOsdOpen(false);
-      return;
-    }
     setOsdOpen(true);
     if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
     osdTimerRef.current = setTimeout(() => {
       if (!osdHoverRef.current && !captionsMenuOpenRef.current) setOsdOpen(false);
     }, 5000);
-  }, [activeMotionBreak]);
+  }, []);
 
   useEffect(() => {
     if (activeMotionBreak) {
+      // Do NOT auto-show OSD when a bumper begins, but keep it accessible on demand
       setOsdOpen(false);
       if (osdTimerRef.current) {
         clearTimeout(osdTimerRef.current);
@@ -884,9 +980,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     if (isHidden) return;
     const onKey = (e: KeyboardEvent) => {
       if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
-      if (!activeMotionBreak) {
-        pokeOsd();
-      }
+      pokeOsd();
       if (e.key === 'g' || e.key === 'G') {
         e.preventDefault();
         setCaptionsMenuOpen(false);
@@ -1090,8 +1184,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
       {/* Top bar */}
       <div
-        className={`osd-top${activeMotionBreak ? ' osd-hidden' : ''}`}
-        style={activeMotionBreak ? { opacity: 0, pointerEvents: 'none', display: 'none' } : undefined}
+        className={`osd-top${!osdOpen ? ' osd-hidden' : ''}`}
         onMouseEnter={() => (osdHoverRef.current = true)}
         onMouseLeave={() => {
           osdHoverRef.current = false;
@@ -1230,8 +1323,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
 
       {/* Bottom OSD */}
       <div
-        className={`osd-bottom${activeMotionBreak ? ' osd-hidden' : ''}`}
-        style={activeMotionBreak ? { opacity: 0, pointerEvents: 'none', display: 'none' } : undefined}
+        className={`osd-bottom${!osdOpen ? ' osd-hidden' : ''}`}
         onMouseEnter={() => (osdHoverRef.current = true)}
         onMouseLeave={() => {
           osdHoverRef.current = false;

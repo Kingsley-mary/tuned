@@ -344,7 +344,7 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
                   pendingSeekRef.current = null;
                   try {
                     const actualPos = playerRef.current?.getCurrentTime?.() || 0;
-                    if (actualPos < pending.startSeconds - 5) {
+                    if (actualPos < pending.startSeconds - 1.2 || actualPos > pending.startSeconds + 3.0) {
                       playerRef.current?.seekTo?.(pending.startSeconds, true);
                     }
                   } catch {}
