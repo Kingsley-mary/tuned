@@ -141,15 +141,52 @@ export function getVideoDuration(video: Video): number {
 }
 
 /**
- * Deterministic channel time offset so different TV channels aren't in lockstep.
+ * In-memory memoization cache for daily channel lineups:
+ * key: `${categoryId}_dow_${dayOfWeek}_len_${videos.length}`
  */
-export function getChannelTimeOffset(categoryId: string): number {
+const DAILY_LINEUP_CACHE = new Map<string, Video[]>();
+
+/**
+ * Deterministic pseudo-random number generator (Mulberry32).
+ */
+function createMulberry32(seed: number) {
+  let s = seed >>> 0;
+  return () => {
+    s |= 0;
+    s = (s + 0x6d2b79f5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Deterministic day-of-week hash seed for a channel.
+ * Cycles cleanly across the 7 days of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday).
+ */
+export function getCalendarDaySeed(categoryId: string, nowMs: number = getSyncedNowMs()): number {
+  const dayIndex = Math.floor(nowMs / 86400000);
+  const dayOfWeek = (dayIndex + 4) % 7; // Unix epoch Jan 1 1970 was Thursday (4)
+  let hash = 0;
+  const str = `${categoryId}_dow_${dayOfWeek}`;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+
+/**
+ * Deterministic channel time offset combining channel ID and calendar-day seed.
+ */
+export function getChannelTimeOffset(categoryId: string, nowMs: number = getSyncedNowMs()): number {
   let hash = 0;
   for (let i = 0; i < categoryId.length; i++) {
     hash = (hash << 5) - hash + categoryId.charCodeAt(i);
     hash |= 0;
   }
-  return Math.abs(hash) % 86400; // Offset within a 24-hour broadcast day
+  const daySeed = getCalendarDaySeed(categoryId, nowMs);
+  return (Math.abs(hash) + (daySeed % 86400)) % 86400; // Offset within a 24-hour broadcast day
 }
 
 export interface BroadcastState {
@@ -177,6 +214,68 @@ export function getEligibleVideos(videos: Video[]): Video[] {
   );
 }
 
+/**
+ * Returns a deterministically shuffled channel lineup for the current calendar day of the week.
+ *
+ * Preserves creator marathon blocks (2–5 consecutive episodes by the same creator)
+ * so marathons remain intact, but re-orders the blocks so every day of the week airs
+ * a fresh, non-repeating program sequence.
+ *
+ * 100% deterministic across all clients globally.
+ */
+export function getDailyChannelLineup(
+  videos: Video[],
+  categoryId: string,
+  nowMs: number = getSyncedNowMs()
+): Video[] {
+  const eligible = getEligibleVideos(videos);
+  const base = eligible.length > 0 ? eligible : videos;
+  if (!base || base.length <= 2) return base;
+
+  const dayIndex = Math.floor(nowMs / 86400000);
+  const dayOfWeek = (dayIndex + 4) % 7;
+  const cacheKey = `${categoryId}_dow_${dayOfWeek}_len_${base.length}`;
+  const cached = DAILY_LINEUP_CACHE.get(cacheKey);
+  if (cached) return cached;
+
+  // 1. Group consecutive episodes by the same creator into marathon blocks
+  const blocks: Video[][] = [];
+  let currentBlock: Video[] = [base[0]];
+
+  for (let i = 1; i < base.length; i++) {
+    const prev = base[i - 1];
+    const curr = base[i];
+    const prevCreator = (prev.sourceChannelTitle || '').trim().toLowerCase();
+    const currCreator = (curr.sourceChannelTitle || '').trim().toLowerCase();
+
+    if (prevCreator && currCreator && prevCreator === currCreator && currentBlock.length < 5) {
+      currentBlock.push(curr);
+    } else {
+      blocks.push(currentBlock);
+      currentBlock = [curr];
+    }
+  }
+  if (currentBlock.length > 0) {
+    blocks.push(currentBlock);
+  }
+
+  // 2. Deterministic Fisher-Yates shuffle seeded by day-of-week
+  const seed = getCalendarDaySeed(categoryId, nowMs);
+  const prng = createMulberry32(seed);
+
+  const shuffledBlocks = [...blocks];
+  for (let i = shuffledBlocks.length - 1; i > 0; i--) {
+    const j = Math.floor(prng() * (i + 1));
+    const temp = shuffledBlocks[i];
+    shuffledBlocks[i] = shuffledBlocks[j];
+    shuffledBlocks[j] = temp;
+  }
+
+  const result = shuffledBlocks.flat();
+  DAILY_LINEUP_CACHE.set(cacheKey, result);
+  return result;
+}
+
 export interface ScheduledProgram {
   videoIndex: number;
   video: Video;
@@ -201,8 +300,15 @@ export function getLiveBroadcastState(
   nowTimeInput?: number,
   completedIds?: Set<string>
 ): BroadcastState {
-  const eligibleVideos = getEligibleVideos(videos);
-  const activeVideos = eligibleVideos.length > 0 ? eligibleVideos : videos;
+  // Single clock read: caller provides nowTimeInput or we sample getSyncedNowMs() exactly once
+  const nowMs =
+    typeof nowTimeInput === 'number'
+      ? nowTimeInput > 1e11
+        ? nowTimeInput
+        : nowTimeInput * 1000
+      : getSyncedNowMs();
+
+  const activeVideos = getDailyChannelLineup(videos, categoryId, nowMs);
 
   if (!activeVideos || activeVideos.length === 0) {
     return {
@@ -215,14 +321,6 @@ export function getLiveBroadcastState(
       isBumperBreak: false,
     };
   }
-
-  // Single clock read: caller provides nowTimeInput or we sample getSyncedNowMs() exactly once
-  const nowMs =
-    typeof nowTimeInput === 'number'
-      ? nowTimeInput > 1e11
-        ? nowTimeInput
-        : nowTimeInput * 1000
-      : getSyncedNowMs();
 
   const nowSecFloat = nowMs / 1000;
 
@@ -256,9 +354,9 @@ export function getLiveBroadcastState(
     };
   }
 
-  const channelOffset = getChannelTimeOffset(categoryId);
-  const secondsInBroadcastWindow = nowSecFloat % 604800; // 7-day rolling broadcast window
-  const cycleTime = (secondsInBroadcastWindow + channelOffset) % totalCycleSec;
+  const channelOffset = getChannelTimeOffset(categoryId, nowMs);
+  const secondsInBroadcastDay = ((nowSecFloat % 86400) + 86400) % 86400;
+  const cycleTime = (secondsInBroadcastDay + channelOffset) % totalCycleSec;
 
   let accumulated = 0;
   for (let i = 0; i < activeVideos.length; i++) {
@@ -429,8 +527,7 @@ export function buildChannelSchedule(
   nowMs: number = getSyncedNowMs(),
   categoryId: string = 'general'
 ): ScheduledProgram[] {
-  const eligibleVideos = getEligibleVideos(videos);
-  const activeVideos = eligibleVideos.length > 0 ? eligibleVideos : videos;
+  const activeVideos = getDailyChannelLineup(videos, categoryId, nowMs);
   if (!activeVideos || activeVideos.length === 0) return [];
 
   const schedule: ScheduledProgram[] = [];

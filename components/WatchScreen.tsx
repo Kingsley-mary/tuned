@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
-import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs } from '../lib/broadcast-clock';
+import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs, getDailyChannelLineup } from '../lib/broadcast-clock';
 import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio, playRemoteKeyBeep, playErrorBuzz } from '../lib/bumper-synth';
@@ -253,13 +253,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const activeChannel = channels[currentChannelIndex] || channels[0];
   const videos = activeChannel?.videos || [];
 
-  // Filter out any YouTube Shorts from queue and bumpers so all television broadcasts are full-length
+  // Daily shuffled channel lineup with day-of-week seed and creator marathon preservation
   const eligibleVideos = useMemo(
-    () =>
-      videos.filter(
-        (v) => (!v.durationSec || v.durationSec > 60) && !/#shorts?\b|[\(\[]shorts?[\)\]]|(\bshorts\b.*#)/i.test(v.title)
-      ),
-    [videos]
+    () => getDailyChannelLineup(videos, activeChannel?.categoryId || 'general', getSyncedNowMs()),
+    [videos, activeChannel?.categoryId]
   );
   const activeVideo: Video | undefined = eligibleVideos[currentVideoIndex] || eligibleVideos[0] || videos[0];
   const nextVideo: Video | undefined =

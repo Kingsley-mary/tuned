@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { ChannelLineup } from '../lib/types';
-import { getLiveBroadcastState, buildChannelSchedule, getVideoDuration, getSyncedNowMs } from '../lib/broadcast-clock';
+import { getLiveBroadcastState, buildChannelSchedule, getVideoDuration, getSyncedNowMs, getDailyChannelLineup } from '../lib/broadcast-clock';
 
 export interface ChannelSavedState {
   videoIndex: number;
@@ -138,6 +138,8 @@ export function GuideScreen({
     const nowEpochSec = Math.floor(scheduleAnchorMs / 1000);
     return channels.map((ch, idx) => {
       if (!ch.videos || ch.videos.length === 0) return [];
+      const dailyVideos = getDailyChannelLineup(ch.videos, ch.categoryId, scheduleAnchorMs);
+      if (!dailyVideos || dailyVideos.length === 0) return [];
 
       let activeIdx = 0;
       let activeSeek = 0;
@@ -147,7 +149,7 @@ export function GuideScreen({
         activeSeek = currentPlaybackSeconds + Math.max(0, (scheduleAnchorMs - nowMs) / 1000);
       } else {
         const live = getLiveBroadcastState(
-          ch.videos,
+          dailyVideos,
           ch.categoryId,
           nowEpochSec,
           completedVideoIds
@@ -157,10 +159,10 @@ export function GuideScreen({
       }
 
       const forward = buildChannelSchedule(
-        ch.videos,
+        dailyVideos,
         activeIdx,
         activeSeek,
-        Math.min(36, ch.videos.length),
+        Math.min(36, dailyVideos.length),
         scheduleAnchorMs,
         ch.categoryId
       );
@@ -178,8 +180,8 @@ export function GuideScreen({
       let forwardCursorMin = forwardSlots[forwardSlots.length - 1]?.e ?? (scheduleAnchorMs - dayStartMs) / 60000;
       let nextOffset = forwardSlots.length;
       while (forwardCursorMin < maxTargetMin && nextOffset < 200) {
-        const nextIdx = (activeIdx + nextOffset) % ch.videos.length;
-        const vid = ch.videos[nextIdx];
+        const nextIdx = (activeIdx + nextOffset) % dailyVideos.length;
+        const vid = dailyVideos[nextIdx];
         const durMin = Math.max(1 / 60, getVideoDuration(vid) / 60);
         const slotStart = forwardCursorMin;
         const slotEnd = slotStart + durMin;
@@ -202,8 +204,8 @@ export function GuideScreen({
       let stepBack = 1;
       while (cursorStartMin > minTargetMin && stepBack <= 200) {
         const prevIdx =
-          (((activeIdx - stepBack) % ch.videos.length) + ch.videos.length) % ch.videos.length;
-        const prevVid = ch.videos[prevIdx];
+          (((activeIdx - stepBack) % dailyVideos.length) + dailyVideos.length) % dailyVideos.length;
+        const prevVid = dailyVideos[prevIdx];
         const prevDurMin = getVideoDuration(prevVid) / 60;
         const prevEndMin = cursorStartMin;
         const prevStartMin = prevEndMin - prevDurMin;
