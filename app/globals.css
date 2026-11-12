@@ -1293,13 +1293,6 @@ button:focus-visible, input:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
-.bm-cinematic-foot {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-}
 .bm-cinematic-bug {
   display: flex;
   flex-direction: column;

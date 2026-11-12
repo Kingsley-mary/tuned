@@ -645,11 +645,23 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
           return;
         }
 
-        const nearEndMargin = latest.allowShortClip ? 0.35 : 0.4;
-        const minDurForMargin = latest.allowShortClip ? 1 : 60;
-        if (state === 0 || (dur > minDurForMargin && cur >= dur - nearEndMargin && hasStartedRef.current)) {
+        if (state === 0) {
           triggerEndedOnce();
           return;
+        }
+
+        if (latest.allowShortClip) {
+          // Bumper clip: only trigger fallback if video has reached within 0.05s of the very end
+          if (dur > 1 && cur >= dur - 0.05 && hasStartedRef.current) {
+            triggerEndedOnce();
+            return;
+          }
+        } else {
+          // Main show video:
+          if (dur > 60 && cur >= dur - 0.4 && hasStartedRef.current) {
+            triggerEndedOnce();
+            return;
+          }
         }
 
         if (dur > 60 && latest.startSeconds >= dur - 2 && shortCheckDoneRef.current !== `seek_${latest.videoId}_${latest.tuneKey}`) {

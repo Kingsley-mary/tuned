@@ -327,9 +327,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             advanceBreakQueueRef.current();
           }, Math.max(1000, remaining));
         } else {
+          const clipDur = firstBumper.clip.durationSec || 30;
           bumperTimeoutRef.current = setTimeout(() => {
             advanceBreakQueueRef.current();
-          }, Math.max(1000, remaining + 12000));
+          }, Math.max(120000, (remaining || clipDur * 1000) + 45000));
         }
 
         // Pre-buffer next video at 0:00 on standby deck
@@ -597,9 +598,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     } else {
       // YouTube video bumper clip:
       // Broadcast clips have varying length! Let the video play for its FULL natural duration.
-      // We do NOT set a short 10s cutoff timer.
-      // Instead, we set a generous safety watchdog (45s) only as fallback in case iframe freezes.
-      const safetyLimit = Math.max(45000, (nextPlan.clip.durationSec || 20) * 1000 + 15000);
+      // YouTubePlayer fires onEnded when the clip completes naturally.
+      // We set a very generous safety watchdog (at least 3 min or clip + 45s) only as an extreme fallback in case the iframe freezes.
+      const clipDurSec = nextPlan.clip.durationSec || 30;
+      const safetyLimit = Math.max(180000, clipDurSec * 1000 + 45000);
       bumperTimeoutRef.current = setTimeout(() => {
         console.warn('[Tuned] Video bumper safety watchdog fired after', safetyLimit, 'ms');
         advanceBreakQueue();
@@ -811,9 +813,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               advanceBreakQueueRef.current();
             }, Math.max(1000, remaining));
           } else {
+            const clipDur = firstBumper.clip.durationSec || 30;
             bumperTimeoutRef.current = setTimeout(() => {
               advanceBreakQueueRef.current();
-            }, Math.max(1000, remaining + 12000));
+            }, Math.max(120000, (remaining || clipDur * 1000) + 45000));
           }
 
           if (nextVideo?.youtubeVideoId) {
