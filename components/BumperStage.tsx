@@ -3,7 +3,7 @@
 import React from 'react';
 import { Video } from '../lib/types';
 import { MotionBumperVariant } from '../lib/bumpers';
-import { ThreeBumperCanvas } from './ThreeBumperCanvas';
+import { ThreeBumperCanvas, getSceneKindForCategory } from './ThreeBumperCanvas';
 
 interface BumperStageProps {
   variant: MotionBumperVariant;
@@ -22,6 +22,7 @@ interface BumperStageProps {
 export const BumperStage: React.FC<BumperStageProps> = ({
   variant,
   durationMs,
+  categoryId,
   channelNumber,
   channelName,
   hue,
@@ -50,9 +51,18 @@ export const BumperStage: React.FC<BumperStageProps> = ({
       : null,
   ].filter(Boolean) as { tag: string; video: Video }[];
 
-  const usesThreeScene = variant === 'ident' || variant === 'field' || variant === 'visualizer';
+  const usesThreeScene =
+    variant === 'ident' ||
+    variant === 'cinematic' ||
+    variant === 'field' ||
+    variant === 'visualizer';
+
   const sceneKind =
-    variant === 'ident' ? 'aurora' : variant === 'field' ? 'field' : 'plasma';
+    variant === 'field'
+      ? 'field'
+      : variant === 'visualizer'
+      ? (categoryId === 'music' ? 'resonator' : 'plasma')
+      : getSceneKindForCategory(categoryId);
 
   return (
     <div
@@ -70,6 +80,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
           hue={hue}
           channelNumber={channelNumber}
           channelName={channelName}
+          categoryId={categoryId}
         />
       )}
 
@@ -92,6 +103,32 @@ export const BumperStage: React.FC<BumperStageProps> = ({
           </div>
 
           <div className="bm-support bm-bottom-bar">
+            <div className="bm-next-pill">
+              <b>UP NEXT</b>
+              <span>{nextVideo?.title || `Continuing ${channelName}`}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 2. Fullscreen Immersive 3D Cinematic Intermission */}
+      {variant === 'cinematic' && (
+        <div className="bm-layer bm-cinematic-layer">
+          <div className="bm-top-bar">
+            <div className="brand-logo bm-logo">
+              <span className="brand-dot" />
+              <span>tuned</span>
+            </div>
+            <span className="osd-chip bm-cinema-chip">
+              <span className="dot" /> CH {chCode} · {channelName.toUpperCase()}
+            </span>
+          </div>
+
+          <div className="bm-support bm-cinematic-foot">
+            <div className="bm-cinematic-bug">
+              <span className="bm-cinematic-tag">STATION BREAK</span>
+              <span className="bm-cinematic-ch">{channelName}</span>
+            </div>
             <div className="bm-next-pill">
               <b>UP NEXT</b>
               <span>{nextVideo?.title || `Continuing ${channelName}`}</span>

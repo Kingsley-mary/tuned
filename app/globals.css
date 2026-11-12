@@ -1124,6 +1124,52 @@ button:focus-visible, input:focus-visible {
   animation: bm-bar-fill var(--bm-dur, 4400ms) linear both;
 }
 
+/* --- Fullscreen Immersive 3D Cinematic Intermission --- */
+.bm-cinematic-layer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(20px, 4vw, 44px);
+  pointer-events: none;
+}
+.bm-cinema-chip {
+  background: rgba(14, 12, 16, 0.76) !important;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+.bm-cinematic-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+.bm-cinematic-bug {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: rgba(10, 8, 12, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+.bm-cinematic-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.bm-cinematic-ch {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
 /* --- Option 1B: Split-Frame Preview + Staggered Schedule --- */
 .bm-split {
   display: grid;

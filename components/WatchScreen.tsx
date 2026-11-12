@@ -543,6 +543,22 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     startMotionBreak,
   ]);
 
+  const triggerManualBreak = useCallback(() => {
+    if (isBumperActive || !activeChannel) return;
+    breakCounterRef.current += 1;
+    const chId = activeChannel.categoryId || 'tech';
+    const plan = pickNextBreak(chId, breakCounterRef.current, failedBumperIdsRef.current);
+    if (plan.kind === 'motion') {
+      startMotionBreak(plan);
+    } else {
+      setActiveClipOverride(plan.clip);
+      if (youtubeBumperSafetyRef.current) clearTimeout(youtubeBumperSafetyRef.current);
+      youtubeBumperSafetyRef.current = setTimeout(() => {
+        advanceFromBreakToNextVideo();
+      }, (plan.clip.durationSec + 2) * 1000);
+    }
+  }, [isBumperActive, activeChannel, startMotionBreak, advanceFromBreakToNextVideo]);
+
   // Begin buffering upcoming break or next video ~1.5-2.2s before active video finishes
   const handleActiveDeckTimeUpdate = useCallback(
     (cur: number, dur: number) => {
@@ -709,6 +725,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           e.preventDefault();
           onRecallLastChannel();
         }
+      } else if (e.key === 'b' || e.key === 'B') {
+        e.preventDefault();
+        triggerManualBreak();
       } else if (/^[1-9]$/.test(e.key)) {
         const targetIdx = parseInt(e.key, 10) - 1;
         if (targetIdx >= 0 && targetIdx < channels.length && targetIdx !== currentChannelIndex) {
@@ -729,6 +748,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     onSelectChannel,
     onRecallLastChannel,
     toggleFullscreen,
+    triggerManualBreak,
   ]);
 
   // Compute true linear schedule for Up Next (3 upcoming shows)
@@ -1183,6 +1203,16 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           </button>
           <button onClick={toggleFullscreen}>
             {isFullscreen ? 'Exit full' : 'Fullscreen'} <span className="kbd-osd">F</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              triggerManualBreak();
+              pokeOsd();
+            }}
+            title="Play Station ID & Bumper (B)"
+          >
+            Ident <span className="kbd-osd">B</span>
           </button>
           <button onClick={onOpenGuide}>
             Guide <span className="kbd-osd">G</span>

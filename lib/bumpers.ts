@@ -1,4 +1,11 @@
-export type MotionBumperVariant = 'ident' | 'lineup' | 'slate' | 'field' | 'card' | 'visualizer';
+export type MotionBumperVariant =
+  | 'ident'
+  | 'cinematic'
+  | 'lineup'
+  | 'slate'
+  | 'field'
+  | 'card'
+  | 'visualizer';
 
 export interface YouTubeBumperClip {
   youtubeVideoId: string;
@@ -186,14 +193,15 @@ const DEFAULT_CARDS: DeadpanCard[] = [
   { lead: 'Station identification.', punchline: 'Continuing uninterrupted broadcast now.' },
 ];
 
-// Alternate 2D editorial/typographic bumpers ('lineup', 'slate', 'card') with custom 3D WebGL shaders/instancing ('ident', 'field', 'visualizer')
+// Alternate bespoke 3D WebGL scenes ('ident', 'cinematic', 'field', 'visualizer') with 2D editorial cards ('lineup', 'slate', 'card')
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
+  { variant: 'ident', durationMs: 4400 },
+  { variant: 'cinematic', durationMs: 4600 },
   { variant: 'lineup', durationMs: 4400 },
-  { variant: 'ident', durationMs: 4300 },
+  { variant: 'visualizer', durationMs: 4300 },
   { variant: 'slate', durationMs: 4200 },
   { variant: 'field', durationMs: 4400 },
   { variant: 'card', durationMs: 4100 },
-  { variant: 'visualizer', durationMs: 4300 },
 ];
 
 /**

@@ -188,6 +188,113 @@ export function playChannelJingle(
   categoryId: string,
   options: { volume?: number; muted?: boolean } = {}
 ): void {
+  if (options.muted || typeof window === 'undefined') return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
   const notes = getChannelChimeNotes(categoryId);
   playJingle(notes, options);
+
+  try {
+    const now = ctx.currentTime + 0.01;
+    const masterVolume = Math.max(0.02, Math.min(1, options.volume ?? 0.24));
+
+    // 1. Cinematic sub-bass swell for Movies, Film, Documentaries
+    if (categoryId === 'movies' || categoryId === 'film' || categoryId === 'documentaries') {
+      const subOsc = ctx.createOscillator();
+      subOsc.type = 'sawtooth';
+      subOsc.frequency.setValueAtTime(55, now); // A1 fundamental
+      const subFilter = ctx.createBiquadFilter();
+      subFilter.type = 'lowpass';
+      subFilter.frequency.setValueAtTime(120, now);
+      subFilter.frequency.exponentialRampToValueAtTime(340, now + 0.5);
+      subFilter.frequency.exponentialRampToValueAtTime(70, now + 2.2);
+
+      const subGain = ctx.createGain();
+      subGain.gain.setValueAtTime(0.0001, now);
+      subGain.gain.linearRampToValueAtTime(masterVolume * 0.55, now + 0.25);
+      subGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
+
+      subOsc.connect(subFilter);
+      subFilter.connect(subGain);
+      subGain.connect(ctx.destination);
+      subOsc.start(now);
+      subOsc.stop(now + 2.6);
+    }
+
+    // 2. Aerodynamic supersonic whoosh for Cars & Sports
+    else if (categoryId === 'cars' || categoryId === 'sports' || categoryId === 'fitness') {
+      const bufferSize = Math.floor(ctx.sampleRate * 1.4);
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const sweep = ctx.createBiquadFilter();
+      sweep.type = 'bandpass';
+      sweep.Q.setValueAtTime(3.5, now);
+      sweep.frequency.setValueAtTime(240, now);
+      sweep.frequency.exponentialRampToValueAtTime(2200, now + 0.45);
+      sweep.frequency.exponentialRampToValueAtTime(320, now + 1.3);
+
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.0001, now);
+      noiseGain.gain.linearRampToValueAtTime(masterVolume * 0.38, now + 0.2);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.35);
+
+      noise.connect(sweep);
+      sweep.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+      noise.start(now);
+      noise.stop(now + 1.4);
+    }
+
+    // 3. Cyber resonant analog filter drop for Tech & Industry
+    else if (categoryId === 'tech' || categoryId === 'industry') {
+      const cyberOsc = ctx.createOscillator();
+      cyberOsc.type = 'sawtooth';
+      cyberOsc.frequency.setValueAtTime(220, now);
+      cyberOsc.frequency.exponentialRampToValueAtTime(110, now + 0.6);
+
+      const cyberFilter = ctx.createBiquadFilter();
+      cyberFilter.type = 'lowpass';
+      cyberFilter.Q.setValueAtTime(6.0, now);
+      cyberFilter.frequency.setValueAtTime(2800, now);
+      cyberFilter.frequency.exponentialRampToValueAtTime(450, now + 0.8);
+
+      const cyberGain = ctx.createGain();
+      cyberGain.gain.setValueAtTime(0.0001, now);
+      cyberGain.gain.linearRampToValueAtTime(masterVolume * 0.35, now + 0.08);
+      cyberGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+
+      cyberOsc.connect(cyberFilter);
+      cyberFilter.connect(cyberGain);
+      cyberGain.connect(ctx.destination);
+      cyberOsc.start(now);
+      cyberOsc.stop(now + 1.3);
+    }
+
+    // 4. Retro 8-bit power arpeggio for Games
+    else if (categoryId === 'games') {
+      const squareOsc = ctx.createOscillator();
+      squareOsc.type = 'square';
+      const root = notes[0] * 0.5;
+      squareOsc.frequency.setValueAtTime(root, now);
+      squareOsc.frequency.setValueAtTime(root * 1.5, now + 0.08);
+      squareOsc.frequency.setValueAtTime(root * 2.0, now + 0.16);
+
+      const squareGain = ctx.createGain();
+      squareGain.gain.setValueAtTime(0.0001, now);
+      squareGain.gain.linearRampToValueAtTime(masterVolume * 0.22, now + 0.02);
+      squareGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.85);
+
+      squareOsc.connect(squareGain);
+      squareGain.connect(ctx.destination);
+      squareOsc.start(now);
+      squareOsc.stop(now + 0.9);
+    }
+  } catch (err) {
+    console.warn('Cinematic audio layer skipped:', err);
+  }
 }
