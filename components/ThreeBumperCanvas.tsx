@@ -889,6 +889,7 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       });
       materials.push(plateMat);
       const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.visible = showStationPlate;
       plate.position.set(0, 0, 1.5);
       scene.add(plate);
 
