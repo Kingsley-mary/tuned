@@ -1,7 +1,7 @@
-import { ChannelLineup, Video } from './types';
+import { ChannelLineup, Video, YouTubeBumperClip } from './types';
 import { CATEGORIES, SEED_LINEUPS } from './seed-catalog';
 import { getVideoDuration } from './broadcast-clock';
-import { readCatalogSnapshot } from './catalog-storage';
+import { readCatalogSnapshot, readFullCatalogSnapshot } from './catalog-storage';
 import { isYouTubeShort, MAX_SHORT_DURATION_SEC } from './youtube-shorts';
 
 // Comprehensive roster of verified top creators per television channel (11-16 creators per channel)
@@ -2682,6 +2682,16 @@ export async function getLineupForCategory(categoryId: string): Promise<ChannelL
     builtAt: Date.now(),
     videos: []
   };
+}
+
+// Read dynamic YouTube bumper clips stored alongside lineups in the catalog snapshot
+export async function getDynamicBumpersFromSnapshot(): Promise<Record<string, YouTubeBumperClip[]>> {
+  try {
+    const snap = await readFullCatalogSnapshot();
+    return snap?.dynamicBumpers || {};
+  } catch {
+    return {};
+  }
 }
 
 // Resolve YouTube channel handle or URL to { channelId, title }

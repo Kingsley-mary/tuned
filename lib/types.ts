@@ -67,4 +67,17 @@ export interface UserState {
   theme?: 'dark' | 'light' | 'system'; // deprecated: Tuned is dark-only
 }
 
+export interface YouTubeBumperClip {
+  youtubeVideoId: string;
+  label: string;
+  durationSec: number;
+  sourceChannelId?: string;
+  categoryId?: string;
+}
+
+export interface CatalogSnapshot {
+  lineups: Record<string, ChannelLineup>;
+  dynamicBumpers?: Record<string, YouTubeBumperClip[]>;
+}
+
 export type ScreenMode = 'power' | 'pick' | 'tuning' | 'watch' | 'guide' | 'manage' | 'off';

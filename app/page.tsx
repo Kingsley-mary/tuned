@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
 import { getLiveBroadcastState, advanceChannelPlayback, calibrateServerClock, getSyncedNowSec, getSyncedNowMs, getEligibleVideos } from '../lib/broadcast-clock';
+import { registerDynamicBumpers } from '../lib/bumpers';
 import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { unlockBumperAudio } from '../lib/bumper-synth';
 import { PowerScreen } from '../components/PowerScreen';
@@ -317,6 +318,9 @@ export default function TunedApp() {
         const res = await fetch(`/api/lineup?ids=${uniqueIds.join(',')}`);
         if (!res.ok) throw new Error('API lineup fetch failed');
         const data = await res.json();
+        if (data.dynamicBumpers && typeof data.dynamicBumpers === 'object') {
+          registerDynamicBumpers(data.dynamicBumpers);
+        }
         if (data.lineups && Array.isArray(data.lineups) && data.lineups.length > 0) {
           const seen = new Set<string>();
           return data.lineups

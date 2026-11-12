@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Video } from '../lib/types';
 import { MotionBumperVariant, YouTubeBumperClip, BreakPlan } from '../lib/bumpers';
+import { getMarathonScheduleLabel } from '../lib/broadcast-clock';
 import { ThreeBumperCanvas, getSceneKindForCategory } from './ThreeBumperCanvas';
 import { YouTubePlayer } from './YouTubePlayer';
 
@@ -140,6 +141,8 @@ export const BumperStage: React.FC<BumperStageProps> = ({
               isPlaying={true}
               isMuted={isMuted}
               allowShortClip={true}
+              captionsEnabled={false}
+              disableCaptions={true}
               onEnded={onEnded || (() => {})}
               onError={() => setFallbackTo3D(true)}
               onShortDetected={() => setFallbackTo3D(true)}
@@ -157,7 +160,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
             </div>
             <div className="bm-top-right-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span className="osd-chip">
-                <span className="dot" /> CH {chCode} · {resolvedIsMarathon ? `MARATHON` : isMultiBreak ? `BREAK ${resolvedBumperIndex}/${resolvedTotalBumpers}` : channelName.toUpperCase()}
+                <span className="dot" /> CH {chCode} · {resolvedIsMarathon ? (getMarathonScheduleLabel() || 'MARATHON') : isMultiBreak ? `BREAK ${resolvedBumperIndex}/${resolvedTotalBumpers}` : channelName.toUpperCase()}
               </span>
               {resolvedIsPreview && (
                 <button
@@ -180,7 +183,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
                 {resolvedIsPreview
                   ? 'STATION ID PREVIEW'
                   : resolvedIsMarathon
-                  ? '🔥 MARATHON BLOCK'
+                  ? `🔥 ${getMarathonScheduleLabel() || 'MARATHON BLOCK'}`
                   : isMultiBreak
                   ? `BREAK ${resolvedBumperIndex}/${resolvedTotalBumpers}`
                   : 'STATION BREAK'}

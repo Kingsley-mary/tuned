@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { BROADCAST_CHANNELS_MAP } from '@/lib/youtube';
 import { refreshAllLineups } from '@/lib/catalog-refresher';
-import { readCatalogSnapshot, writeCatalogSnapshot } from '@/lib/catalog-storage';
+import { readFullCatalogSnapshot, writeCatalogSnapshot } from '@/lib/catalog-storage';
 
 // Fluid Compute allows up to 300s on Hobby and 800s on Pro
 export const maxDuration = 300;
@@ -16,9 +16,16 @@ export async function GET(req: Request) {
   }
 
   try {
-    const existing = await readCatalogSnapshot();
-    const result = await refreshAllLineups(BROADCAST_CHANNELS_MAP, existing);
-    const stored = await writeCatalogSnapshot(result.snapshot);
+    const existing = await readFullCatalogSnapshot();
+    const result = await refreshAllLineups(
+      BROADCAST_CHANNELS_MAP,
+      existing?.lineups,
+      existing?.dynamicBumpers
+    );
+    const stored = await writeCatalogSnapshot({
+      lineups: result.snapshot,
+      dynamicBumpers: result.dynamicBumpers,
+    });
 
     return NextResponse.json({
       ok: true,
@@ -26,6 +33,7 @@ export async function GET(req: Request) {
       categoriesUpdated: result.categoriesUpdated,
       creatorsChecked: result.creatorsChecked,
       newVideosFound: result.newVideosFound,
+      dynamicBumpersFound: result.dynamicBumpersFound,
       refreshedAt: result.refreshedAt,
       blobPathname: stored.pathname,
     });

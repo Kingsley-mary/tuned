@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { ChannelLineup } from '../lib/types';
-import { getLiveBroadcastState, buildChannelSchedule, getVideoDuration, getSyncedNowMs, getDailyChannelLineup } from '../lib/broadcast-clock';
+import { getLiveBroadcastState, buildChannelSchedule, getVideoDuration, getSyncedNowMs, getDailyChannelLineup, getMarathonScheduleLabel } from '../lib/broadcast-clock';
+import { computeChannelTransitions } from '../lib/bumpers';
 
 export interface ChannelSavedState {
   videoIndex: number;
@@ -158,6 +159,7 @@ export function GuideScreen({
         activeSeek = live.seekSeconds;
       }
 
+      const transitions = computeChannelTransitions(dailyVideos, ch.categoryId);
       const forward = buildChannelSchedule(
         dailyVideos,
         activeIdx,
@@ -177,12 +179,17 @@ export function GuideScreen({
 
       // Keep appending wrapped slots until the schedule covers the full scrollable horizon (+6h)
       const maxTargetMin = liveW0 + 460;
-      let forwardCursorMin = forwardSlots[forwardSlots.length - 1]?.e ?? (scheduleAnchorMs - dayStartMs) / 60000;
+      const lastForwardSlot = forward[forward.length - 1];
+      const lastForwardBreakMin = lastForwardSlot
+        ? (transitions[lastForwardSlot.videoIndex]?.totalBreakSec ?? 0) / 60
+        : 0;
+      let forwardCursorMin = (forwardSlots[forwardSlots.length - 1]?.e ?? (scheduleAnchorMs - dayStartMs) / 60000) + lastForwardBreakMin;
       let nextOffset = forwardSlots.length;
       while (forwardCursorMin < maxTargetMin && nextOffset < 200) {
         const nextIdx = (activeIdx + nextOffset) % dailyVideos.length;
         const vid = dailyVideos[nextIdx];
         const durMin = Math.max(1 / 60, getVideoDuration(vid) / 60);
+        const breakMin = (transitions[nextIdx]?.totalBreakSec ?? 0) / 60;
         const slotStart = forwardCursorMin;
         const slotEnd = slotStart + durMin;
         forwardSlots.push({
@@ -193,7 +200,7 @@ export function GuideScreen({
           src: vid.sourceChannelTitle,
           videoId: vid.youtubeVideoId,
         });
-        forwardCursorMin = slotEnd;
+        forwardCursorMin = slotEnd + breakMin;
         nextOffset++;
       }
 
@@ -207,7 +214,8 @@ export function GuideScreen({
           (((activeIdx - stepBack) % dailyVideos.length) + dailyVideos.length) % dailyVideos.length;
         const prevVid = dailyVideos[prevIdx];
         const prevDurMin = getVideoDuration(prevVid) / 60;
-        const prevEndMin = cursorStartMin;
+        const prevBreakMin = (transitions[prevIdx]?.totalBreakSec ?? 0) / 60;
+        const prevEndMin = cursorStartMin - prevBreakMin;
         const prevStartMin = prevEndMin - prevDurMin;
         pastSlots.unshift({
           id: `${ch.categoryId}-p${stepBack}-${prevVid.youtubeVideoId}`,
@@ -573,7 +581,7 @@ export function GuideScreen({
                           >
                             {p.isMarathon && (
                               <span className="gd-marathon-badge" title={`Continuous marathon of ${p.src}`}>
-                                🔥 MARATHON
+                                🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
                               </span>
                             )}
                             <span>{p.t}</span>
@@ -617,7 +625,7 @@ export function GuideScreen({
                 <div className="tt">
                   {selectedSlot.isMarathon && (
                     <span className="osd-row-tag is-marathon" style={{ marginRight: '8px', verticalAlign: 'middle', display: 'inline-flex' }}>
-                      🔥 MARATHON
+                      🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
                     </span>
                   )}
                   {selectedSlot.t}

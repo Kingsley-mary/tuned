@@ -36,6 +36,7 @@ interface YouTubePlayerProps {
   allowShortClip?: boolean;
   prebufferOnly?: boolean;
   captionsEnabled?: boolean;
+  disableCaptions?: boolean;
   captionFontSize?: CaptionFontSize;
   captionLanguage?: string;
   onCaptionTracksChange?: (tracks: CaptionTrack[]) => void;
@@ -58,6 +59,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     allowShortClip = false,
     prebufferOnly = false,
     captionsEnabled = false,
+    disableCaptions = false,
     captionFontSize = 0,
     captionLanguage = 'auto',
     onCaptionTracksChange,
@@ -147,6 +149,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     allowShortClip,
     prebufferOnly,
     captionsEnabled,
+    disableCaptions,
     captionFontSize,
     captionLanguage,
     onCaptionTracksChange,
@@ -169,6 +172,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
       allowShortClip,
       prebufferOnly,
       captionsEnabled,
+      disableCaptions,
       captionFontSize,
       captionLanguage,
       onCaptionTracksChange,
@@ -182,15 +186,32 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     };
   });
 
+  // Unload caption modules and clear any active subtitle tracks
+  const suppressCaptions = (player: any) => {
+    if (!player) return;
+    try {
+      player.setOption?.('captions', 'track', {});
+      player.setOption?.('cc', 'track', {});
+      player.unloadModule?.('captions');
+      player.unloadModule?.('cc');
+    } catch {}
+  };
+
   // Read available caption tracks and apply enable/disable, language, and fontSize
   const applyCaptionSettings = (
     player: any,
     enabled: boolean,
     fontSize: CaptionFontSize,
-    preferredLang: string = 'auto'
+    preferredLang: string = 'auto',
+    forceDisable: boolean = false
   ) => {
     if (!player) return;
     try {
+      if (forceDisable) {
+        suppressCaptions(player);
+        return;
+      }
+
       let collectedTracks: CaptionTrack[] = [];
       for (const mod of ['captions', 'cc']) {
         try {
@@ -213,10 +234,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
       }
 
       if (!enabled) {
-        player.setOption?.('captions', 'track', {});
-        player.setOption?.('cc', 'track', {});
-        player.unloadModule?.('captions');
-        player.unloadModule?.('cc');
+        suppressCaptions(player);
       } else {
         player.loadModule?.('captions');
         player.loadModule?.('cc');
@@ -284,7 +302,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
             rel: 0,
             playsinline: 1,
             fs: 1,
-            cc_load_policy: initial.captionsEnabled ? 1 : 0,
+            cc_load_policy: initial.disableCaptions ? 0 : (initial.captionsEnabled ? 1 : 0),
             hl: 'en',
             start: Math.floor(initial.startSeconds || 0),
             iv_load_policy: 3,
@@ -325,9 +343,10 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
 
               applyCaptionSettings(
                 playerRef.current,
-                !!cur.captionsEnabled,
+                !!cur.captionsEnabled && !cur.disableCaptions,
                 cur.captionFontSize ?? 0,
-                cur.captionLanguage ?? 'auto'
+                cur.captionLanguage ?? 'auto',
+                !!cur.disableCaptions
               );
 
               cur.onReady?.();
@@ -372,9 +391,10 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
               const cur = latestPropsRef.current;
               applyCaptionSettings(
                 playerRef.current,
-                !!cur.captionsEnabled,
+                !!cur.captionsEnabled && !cur.disableCaptions,
                 cur.captionFontSize ?? 0,
-                cur.captionLanguage ?? 'auto'
+                cur.captionLanguage ?? 'auto',
+                !!cur.disableCaptions
               );
             },
             onStateChange: (event: any) => {
@@ -423,21 +443,30 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                 // Re-apply caption state once playback starts so forced creator captions respect user setting
                 applyCaptionSettings(
                   playerRef.current,
-                  !!cur.captionsEnabled,
+                  !!cur.captionsEnabled && !cur.disableCaptions,
                   cur.captionFontSize ?? 0,
-                  cur.captionLanguage ?? 'auto'
+                  cur.captionLanguage ?? 'auto',
+                  !!cur.disableCaptions
                 );
                 setTimeout(() => {
                   if (!isCancelled) {
                     const latest = latestPropsRef.current;
                     applyCaptionSettings(
                       playerRef.current,
-                      !!latest.captionsEnabled,
+                      !!latest.captionsEnabled && !latest.disableCaptions,
                       latest.captionFontSize ?? 0,
-                      latest.captionLanguage ?? 'auto'
+                      latest.captionLanguage ?? 'auto',
+                      !!latest.disableCaptions
                     );
                   }
                 }, 600);
+                if (cur.disableCaptions) {
+                  setTimeout(() => {
+                    if (!isCancelled && latestPropsRef.current.disableCaptions) {
+                      suppressCaptions(playerRef.current);
+                    }
+                  }, 1500);
+                }
               } else if (event.data === 0) {
                 cur.onBuffering(false);
                 triggerEndedOnce();
@@ -548,8 +577,14 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
   // Update caption state (on/off, font size, language) immediately when user changes it
   useEffect(() => {
     if (!playerRef.current || !isReadyRef.current || prebufferOnly) return;
-    applyCaptionSettings(playerRef.current, !!captionsEnabled, captionFontSize, captionLanguage);
-  }, [captionsEnabled, captionFontSize, captionLanguage, prebufferOnly]);
+    applyCaptionSettings(
+      playerRef.current,
+      !!captionsEnabled && !disableCaptions,
+      captionFontSize,
+      captionLanguage,
+      !!disableCaptions
+    );
+  }, [captionsEnabled, disableCaptions, captionFontSize, captionLanguage, prebufferOnly]);
 
   // Watchdog: If video is supposed to play actively but fails to start within 8s, skip to next video
   useEffect(() => {
@@ -626,6 +661,10 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
       try {
         const latest = latestPropsRef.current;
         if (latest.prebufferOnly || !latest.videoId) return;
+
+        if (latest.disableCaptions) {
+          suppressCaptions(playerRef.current);
+        }
 
         const cur = playerRef.current.getCurrentTime?.() || 0;
         const dur = playerRef.current.getDuration?.() || 0;

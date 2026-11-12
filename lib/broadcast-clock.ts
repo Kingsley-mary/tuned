@@ -1,5 +1,8 @@
 import { Video } from './types';
-import { BreakPlan, getSlotBreakPackage } from './bumpers';
+import { BreakPlan, computeChannelTransitions } from './bumpers';
+import { getDeterministicDuration, getVideoDuration } from './video-duration';
+
+export { getDeterministicDuration, getVideoDuration };
 
 // In-memory cache of true video durations captured from the YouTube player
 const KNOWN_DURATIONS = new Map<string, number>();
@@ -102,47 +105,8 @@ export function recordVideoDuration(videoId: string, durationSec: number): void 
 }
 
 /**
- * Deterministic television program runtime calculation.
- * Guaranteed to produce the exact same second value across every device on Earth.
- */
-export function getDeterministicDuration(video: Video): number {
-  if (!video) return 600;
-
-  if (video.durationSec && video.durationSec > 60) {
-    return video.durationSec;
-  }
-
-  const id = video.youtubeVideoId || '';
-  // Deterministic hash based on YouTube video ID
-  let hash = 0;
-  for (let i = 0; i < id.length; i++) {
-    hash = (hash << 5) - hash + id.charCodeAt(i);
-    hash |= 0;
-  }
-
-  // Typical TV show length range: 480s (8m) to 1440s (24m)
-  const minSec = 480;
-  const maxSec = 1440;
-  return minSec + (Math.abs(hash) % (maxSec - minSec));
-}
-
-/**
- * Returns the true runtime if known, otherwise calculates a deterministic pseudo-duration.
- * Yields realistic television programming runtimes between 8 mins (480s) and 24 mins (1440s).
- */
-export function getVideoDuration(video: Video): number {
-  if (!video) return 600;
-
-  if (video.durationSec && video.durationSec > 60) {
-    return video.durationSec;
-  }
-
-  return getDeterministicDuration(video);
-}
-
-/**
  * In-memory memoization cache for daily channel lineups:
- * key: `${categoryId}_dow_${dayOfWeek}_len_${videos.length}`
+ * key: `${categoryId}_dow_${localDay}_m${isMarathonPeriod ? 1 : 0}_len_${videos.length}`
  */
 const DAILY_LINEUP_CACHE = new Map<string, Video[]>();
 
@@ -161,12 +125,39 @@ function createMulberry32(seed: number) {
 }
 
 /**
+ * Returns true during Prime-Time Friday Night (Fri >= 18:00), Saturday (all day),
+ * Sunday (all day), and late Sunday Night into early Monday morning (< 06:00).
+ * During this window, channels guarantee multi-episode creator marathon programming!
+ */
+export function isWeekendOrFridayNight(nowMs: number = getSyncedNowMs()): boolean {
+  const d = new Date(nowMs);
+  const day = d.getDay(); // 0 = Sun, 1 = Mon, ..., 5 = Fri, 6 = Sat
+  const hour = d.getHours();
+  if (day === 5 && hour >= 18) return true;
+  if (day === 6 || day === 0) return true;
+  if (day === 1 && hour < 6) return true;
+  return false;
+}
+
+/**
+ * Returns a contextual label for active marathon badges.
+ */
+export function getMarathonScheduleLabel(nowMs: number = getSyncedNowMs()): string {
+  const d = new Date(nowMs);
+  const day = d.getDay();
+  const hour = d.getHours();
+  if (day === 5 && hour >= 18) return 'FRIDAY MARATHON';
+  if (day === 6 || day === 0 || (day === 1 && hour < 6)) return 'WEEKEND MARATHON';
+  return 'MARATHON';
+}
+
+/**
  * Deterministic day-of-week hash seed for a channel.
  * Cycles cleanly across the 7 days of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday).
  */
 export function getCalendarDaySeed(categoryId: string, nowMs: number = getSyncedNowMs()): number {
-  const dayIndex = Math.floor(nowMs / 86400000);
-  const dayOfWeek = (dayIndex + 4) % 7; // Unix epoch Jan 1 1970 was Thursday (4)
+  const d = new Date(nowMs);
+  const dayOfWeek = d.getDay();
   let hash = 0;
   const str = `${categoryId}_dow_${dayOfWeek}`;
   for (let i = 0; i < str.length; i++) {
@@ -217,11 +208,13 @@ export function getEligibleVideos(videos: Video[]): Video[] {
 /**
  * Returns a deterministically shuffled channel lineup for the current calendar day of the week.
  *
- * Preserves creator marathon blocks (2–5 consecutive episodes by the same creator)
- * so marathons remain intact, but re-orders the blocks so every day of the week airs
- * a fresh, non-repeating program sequence.
+ * - On Friday Night & Weekends: Actively clusters every creator's catalog into guaranteed
+ *   back-to-back Marathon Blocks (3-5 consecutive episodes per creator) and shuffles blocks
+ *   by day-of-week seed so viewers are guaranteed continuous creator marathons all weekend!
+ * - On Mon-Fri Daytime: Preserves existing marathon blocks from the interleaved schedule
+ *   and shuffles blocks deterministically per day of the week.
  *
- * 100% deterministic across all clients globally.
+ * 100% deterministic across all clients sharing the schedule period.
  */
 export function getDailyChannelLineup(
   videos: Video[],
@@ -232,37 +225,96 @@ export function getDailyChannelLineup(
   const base = eligible.length > 0 ? eligible : videos;
   if (!base || base.length <= 2) return base;
 
-  const dayIndex = Math.floor(nowMs / 86400000);
-  const dayOfWeek = (dayIndex + 4) % 7;
-  const cacheKey = `${categoryId}_dow_${dayOfWeek}_len_${base.length}`;
+  const d = new Date(nowMs);
+  const dayOfWeek = d.getDay();
+  const isMarathonPeriod = isWeekendOrFridayNight(nowMs);
+  const cacheKey = `${categoryId}_dow_${dayOfWeek}_m${isMarathonPeriod ? 1 : 0}_len_${base.length}`;
   const cached = DAILY_LINEUP_CACHE.get(cacheKey);
   if (cached) return cached;
 
-  // 1. Group consecutive episodes by the same creator into marathon blocks
-  const blocks: Video[][] = [];
-  let currentBlock: Video[] = [base[0]];
-
-  for (let i = 1; i < base.length; i++) {
-    const prev = base[i - 1];
-    const curr = base[i];
-    const prevCreator = (prev.sourceChannelTitle || '').trim().toLowerCase();
-    const currCreator = (curr.sourceChannelTitle || '').trim().toLowerCase();
-
-    if (prevCreator && currCreator && prevCreator === currCreator && currentBlock.length < 5) {
-      currentBlock.push(curr);
-    } else {
-      blocks.push(currentBlock);
-      currentBlock = [curr];
-    }
-  }
-  if (currentBlock.length > 0) {
-    blocks.push(currentBlock);
-  }
-
-  // 2. Deterministic Fisher-Yates shuffle seeded by day-of-week
-  const seed = getCalendarDaySeed(categoryId, nowMs);
+  const seed = getCalendarDaySeed(categoryId, nowMs) + (isMarathonPeriod ? 777 : 0);
   const prng = createMulberry32(seed);
 
+  let blocks: Video[][] = [];
+
+  if (isMarathonPeriod) {
+    // Guaranteed Weekend / Friday Night Marathon Mode:
+    // Group all channel videos by creator and pack into 3-5 episode marathon blocks!
+    const byCreator = new Map<string, Video[]>();
+    for (const v of base) {
+      const creatorKey = (v.sourceChannelTitle || 'Various').trim().toLowerCase();
+      if (!byCreator.has(creatorKey)) {
+        byCreator.set(creatorKey, []);
+      }
+      byCreator.get(creatorKey)!.push(v);
+    }
+
+    const soloHolders: Video[] = [];
+    for (const [, creatorVideos] of byCreator.entries()) {
+      if (creatorVideos.length === 1) {
+        // Keep rare single-video creators separate so they never interrupt a multi-episode marathon
+        soloHolders.push(creatorVideos[0]);
+        continue;
+      }
+
+      // Rotate creator's episodes by day seed so each weekend day starts with fresh episodes
+      const offset = Math.floor(prng() * creatorVideos.length);
+      const rotated = [...creatorVideos.slice(offset), ...creatorVideos.slice(0, offset)];
+
+      let idx = 0;
+      while (idx < rotated.length) {
+        const remaining = rotated.length - idx;
+        let blockSize = 3;
+        if (remaining === 5) blockSize = 5;
+        else if (remaining === 4) blockSize = 4;
+        else if (remaining >= 6) blockSize = 3 + Math.floor(prng() * 3); // 3, 4, or 5
+        else blockSize = remaining; // 2 (or trailing 1 attached cleanly below)
+
+        if (blockSize === 1 && blocks.length > 0) {
+          // Attach trailing single episode to the creator's previous block if < 6
+          const prevBlock = blocks[blocks.length - 1];
+          if (
+            prevBlock[0].sourceChannelTitle?.trim().toLowerCase() ===
+              rotated[idx].sourceChannelTitle?.trim().toLowerCase() &&
+            prevBlock.length < 6
+          ) {
+            prevBlock.push(rotated[idx]);
+          } else {
+            blocks.push([rotated[idx]]);
+          }
+        } else {
+          blocks.push(rotated.slice(idx, idx + blockSize));
+        }
+        idx += blockSize;
+      }
+    }
+
+    if (soloHolders.length > 0) {
+      blocks.push(soloHolders);
+    }
+  } else {
+    // Mon-Fri Daytime: preserve existing consecutive creator marathon blocks
+    let currentBlock: Video[] = [base[0]];
+
+    for (let i = 1; i < base.length; i++) {
+      const prev = base[i - 1];
+      const curr = base[i];
+      const prevCreator = (prev.sourceChannelTitle || '').trim().toLowerCase();
+      const currCreator = (curr.sourceChannelTitle || '').trim().toLowerCase();
+
+      if (prevCreator && currCreator && prevCreator === currCreator && currentBlock.length < 5) {
+        currentBlock.push(curr);
+      } else {
+        blocks.push(currentBlock);
+        currentBlock = [curr];
+      }
+    }
+    if (currentBlock.length > 0) {
+      blocks.push(currentBlock);
+    }
+  }
+
+  // Deterministic Fisher-Yates shuffle of blocks seeded by day-of-week
   const shuffledBlocks = [...blocks];
   for (let i = shuffledBlocks.length - 1; i > 0; i--) {
     const j = Math.floor(prng() * (i + 1));
@@ -272,6 +324,7 @@ export function getDailyChannelLineup(
   }
 
   const result = shuffledBlocks.flat();
+  if (DAILY_LINEUP_CACHE.size > 80) DAILY_LINEUP_CACHE.clear();
   DAILY_LINEUP_CACHE.set(cacheKey, result);
   return result;
 }
@@ -291,8 +344,8 @@ export interface ScheduledProgram {
  * Computes the real-time live television broadcast state for a channel's lineup
  * based on wall-clock time (Linear Broadcast Clock).
  *
- * Automatically bakes deterministic station break packages into program slots,
- * so breaks and shows are 100% globally synchronized across all devices.
+ * Uses computeChannelTransitions() to bake HOT_SWITCH (0s), SHORT_BUMPER, and BLOCK_IDENT
+ * transitions directly into each slot's cycle time so every device stays locked in sync.
  */
 export function getLiveBroadcastState(
   videos: Video[],
@@ -323,8 +376,9 @@ export function getLiveBroadcastState(
   }
 
   const nowSecFloat = nowMs / 1000;
+  const transitions = computeChannelTransitions(activeVideos, categoryId);
 
-  // Build slot configurations: for each video slot i, compute deterministic video duration and break package
+  // Build slot configurations using pure precomputed transition breaks
   const slotConfigs: {
     vidDur: number;
     breakInfo: { plans: BreakPlan[]; totalBreakSec: number };
@@ -333,9 +387,9 @@ export function getLiveBroadcastState(
 
   for (let i = 0; i < activeVideos.length; i++) {
     const v = activeVideos[i];
-    const vidDur =
-      v.durationSec && v.durationSec > 60 ? v.durationSec : getDeterministicDuration(v);
-    const breakInfo = getSlotBreakPackage(activeVideos, categoryId, i);
+    const vidDur = getVideoDuration(v);
+    const t = transitions[i] || { tier: 'short_bumper', plans: [], totalBreakSec: 0 };
+    const breakInfo = { plans: t.plans, totalBreakSec: t.totalBreakSec };
     const slotDur = vidDur + breakInfo.totalBreakSec;
     slotConfigs.push({ vidDur, breakInfo, slotDur });
   }
@@ -530,11 +584,12 @@ export function buildChannelSchedule(
   const activeVideos = getDailyChannelLineup(videos, categoryId, nowMs);
   if (!activeVideos || activeVideos.length === 0) return [];
 
+  const transitions = computeChannelTransitions(activeVideos, categoryId);
   const schedule: ScheduledProgram[] = [];
   const safeStartIdx = ((activeVideoIndex % activeVideos.length) + activeVideos.length) % activeVideos.length;
   const activeVideo = activeVideos[safeStartIdx];
   const activeDur = getVideoDuration(activeVideo);
-  const activeBreakInfo = getSlotBreakPackage(activeVideos, categoryId, safeStartIdx);
+  const activeBreakSec = transitions[safeStartIdx]?.totalBreakSec ?? 0;
   const clampedSeek = Math.min(Math.max(0, activeSeekSeconds), Math.max(0, activeDur - 1));
   const remainingActiveSec = Math.max(1, activeDur - clampedSeek);
 
@@ -554,15 +609,15 @@ export function buildChannelSchedule(
   });
 
   // Next show starts AFTER the active show ends PLUS its break duration!
-  let cursorMs = currentEndMs + activeBreakInfo.totalBreakSec * 1000;
-  let accumulatedWaitSec = remainingActiveSec + activeBreakInfo.totalBreakSec;
+  let cursorMs = currentEndMs + activeBreakSec * 1000;
+  let accumulatedWaitSec = remainingActiveSec + activeBreakSec;
 
   const limit = Math.min(count, activeVideos.length);
   for (let offset = 1; offset < limit; offset++) {
     const idx = (safeStartIdx + offset) % activeVideos.length;
     const vid = activeVideos[idx];
     const dur = getVideoDuration(vid);
-    const breakInfo = getSlotBreakPackage(activeVideos, categoryId, idx);
+    const breakSec = transitions[idx]?.totalBreakSec ?? 0;
     const startMs = cursorMs;
     const endMs = startMs + dur * 1000;
 
@@ -577,8 +632,8 @@ export function buildChannelSchedule(
       progressPercent: 0,
     });
 
-    cursorMs = endMs + breakInfo.totalBreakSec * 1000;
-    accumulatedWaitSec += dur + breakInfo.totalBreakSec;
+    cursorMs = endMs + breakSec * 1000;
+    accumulatedWaitSec += dur + breakSec;
   }
 
   return schedule;

@@ -3,9 +3,9 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
 import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
-import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs, getDailyChannelLineup } from '../lib/broadcast-clock';
+import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs, getDailyChannelLineup, getMarathonScheduleLabel } from '../lib/broadcast-clock';
 import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
-import { pickNextBreak, pickBreakPackage, BreakPlan } from '../lib/bumpers';
+import { pickNextBreak, pickBreakPackage, computeChannelTransitions, BreakPlan } from '../lib/bumpers';
 import { playChannelJingle, unlockBumperAudio, playRemoteKeyBeep, playErrorBuzz } from '../lib/bumper-synth';
 import { BumperStage } from './BumperStage';
 import { ChannelDialOverlay } from './ChannelDialOverlay';
@@ -253,10 +253,27 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const activeChannel = channels[currentChannelIndex] || channels[0];
   const videos = activeChannel?.videos || [];
 
+  // Periodic bucket so midnight day-rollover or Friday 18:00 / Mon 06:00 marathon window flips cleanly
+  const [scheduleBucket, setScheduleBucket] = useState<string>(() => {
+    const now = getSyncedNowMs();
+    const d = new Date(now);
+    return `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}-${getMarathonScheduleLabel(now) || 'std'}`;
+  });
+  useEffect(() => {
+    const id = setInterval(() => {
+      const now = getSyncedNowMs();
+      const d = new Date(now);
+      const next = `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}-${getMarathonScheduleLabel(now) || 'std'}`;
+      setScheduleBucket((prev) => (prev === next ? prev : next));
+    }, 60000);
+    return () => clearInterval(id);
+  }, []);
+
   // Daily shuffled channel lineup with day-of-week seed and creator marathon preservation
   const eligibleVideos = useMemo(
     () => getDailyChannelLineup(videos, activeChannel?.categoryId || 'general', getSyncedNowMs()),
-    [videos, activeChannel?.categoryId]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [videos, activeChannel?.categoryId, scheduleBucket]
   );
   const activeVideo: Video | undefined = eligibleVideos[currentVideoIndex] || eligibleVideos[0] || videos[0];
   const nextVideo: Video | undefined =
@@ -545,6 +562,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     const chId = activeChannel?.categoryId;
     if (chId) channelBreaksRef.current.delete(chId);
     breakQueueRef.current = [];
+    pendingBreakPlansRef.current = null;
     setActiveBumperInitialElapsedMs(0);
     setActiveMotionBreak(null);
 
@@ -747,26 +765,25 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     }
 
     const chId = activeChannel?.categoryId || 'tech';
-    const isMarathon = Boolean(
-      activeVideo?.sourceChannelTitle &&
-      nextVideo?.sourceChannelTitle &&
-      activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
-    );
-    const marathonCreator = isMarathon ? activeVideo?.sourceChannelTitle : undefined;
     const plans =
       pendingBreakPlansRef.current ||
-      (() => {
-        const picked = pickBreakPackage(chId, currentVideoIndex, marathonCreator, false);
-        return picked;
-      })();
+      computeChannelTransitions(eligibleVideos, chId)[currentVideoIndex]?.plans ||
+      [];
     pendingBreakPlansRef.current = null;
+
+    if (plans.length === 0) {
+      // HOT_SWITCH (0s break): cut directly to pre-buffered standby deck on next frame
+      advanceFromBreakToNextVideo();
+      return;
+    }
+
     startBreakSequence(plans);
   }, [
     activeChannel?.categoryId,
-    activeVideo?.sourceChannelTitle,
+    advanceFromBreakToNextVideo,
     behindLiveSeconds,
     currentVideoIndex,
-    nextVideo?.sourceChannelTitle,
+    eligibleVideos,
     onJumpToLive,
     onPowerOff,
     sleepTimerMode,
@@ -924,14 +941,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         !activeMotionBreak
       ) {
         const chId = activeChannel?.categoryId || 'tech';
-        const isMarathon = Boolean(
-          activeVideo?.sourceChannelTitle &&
-          nextVideo?.sourceChannelTitle &&
-          activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
-        );
-        const marathonCreator = isMarathon ? activeVideo?.sourceChannelTitle : undefined;
-        const plans = pickBreakPackage(chId, currentVideoIndex, marathonCreator);
-        pendingBreakPlansRef.current = plans;
+        const slotTransition = computeChannelTransitions(eligibleVideos, chId)[currentVideoIndex];
+        pendingBreakPlansRef.current = slotTransition ? slotTransition.plans : [];
 
         if (nextVideo?.youtubeVideoId) {
           setStandbyTarget({
@@ -1481,7 +1492,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   prebufferOnly={!isActiveDeck || Boolean(activeMotionBreak)}
                   isPlaying={isActiveDeck && isPlaying && !activeMotionBreak}
                   isMuted={isActiveDeck ? isMuted : true}
-                  captionsEnabled={isActiveDeck ? captionsEnabled : false}
+                  captionsEnabled={isActiveDeck && !activeMotionBreak ? captionsEnabled : false}
+                  disableCaptions={Boolean(activeMotionBreak)}
                   captionFontSize={captionFontSize}
                   captionLanguage={captionLanguage}
                   onCaptionTracksChange={isActiveDeck ? setCaptionTracks : undefined}
@@ -1798,7 +1810,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   nextVideo?.sourceChannelTitle &&
                   activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase() && (
                     <span className="osd-marathon-pill" title={`Continuous marathon of ${activeVideo.sourceChannelTitle}`}>
-                      🔥 MARATHON
+                      🔥 {getMarathonScheduleLabel() || 'MARATHON'}
                     </span>
                   )}
               </span>
@@ -1850,7 +1862,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                 <span className="osd-row-title">
                   {isMarathonActive && (
                     <span className="osd-marathon-pill" title={`All-${slot.video.sourceChannelTitle} marathon block`}>
-                      🔥 MARATHON
+                      🔥 {getMarathonScheduleLabel() || 'MARATHON'}
                     </span>
                   )}
                   {activeVideo?.title || slot.video.title}
@@ -1898,7 +1910,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                     <div key={slot.video.youtubeVideoId + (i + 1)} className="osd-row">
                       <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
                       <span className={`osd-row-tag${isUpcomingMarathon && i === 0 ? ' is-marathon' : ''}`}>
-                        {i === 0 ? (isUpcomingMarathon ? '🔥 MARATHON' : 'NEXT') : ''}
+                        {i === 0 ? (isUpcomingMarathon ? `🔥 ${getMarathonScheduleLabel() || 'MARATHON'}` : 'NEXT') : ''}
                       </span>
                       <span className="osd-row-title">
                         {slot.video.title}

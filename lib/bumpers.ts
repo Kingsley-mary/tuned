@@ -1,4 +1,15 @@
-import { Video } from './types';
+import { Video, YouTubeBumperClip } from './types';
+import { getVideoDuration } from './video-duration';
+
+export type { YouTubeBumperClip };
+
+export type TransitionTier = 'hot_switch' | 'short_bumper' | 'block_ident';
+
+export interface SlotTransition {
+  tier: TransitionTier;
+  plans: BreakPlan[];
+  totalBreakSec: number;
+}
 
 export type MotionBumperVariant =
   | 'ident'
@@ -10,12 +21,6 @@ export type MotionBumperVariant =
   | 'visualizer'
   | 'testcard'
   | 'vhs';
-
-export interface YouTubeBumperClip {
-  youtubeVideoId: string;
-  label: string;
-  durationSec: number;
-}
 
 export type BreakPlan =
   | {
@@ -719,19 +724,78 @@ const CHANNEL_CARDS: Record<string, DeadpanCard[]> = {
   ],
 };
 
-const LATE_NIGHT_CARDS: DeadpanCard[] = [
-  { lead: 'It is late.', punchline: 'Nobody else is watching this channel right now. Except you.' },
-  { lead: 'Past midnight broadcast.', punchline: 'Still no algorithm. Just television.' },
-];
+// Module-level registry hydrated from /api/lineup snapshot dynamicBumpers
+let DYNAMIC_BUMPERS_REGISTRY: Record<string, YouTubeBumperClip[]> = {};
+let dynamicRegistryVersion = 0;
 
-const DEFAULT_CARDS: DeadpanCard[] = [
-  { lead: 'Zero feeds. Zero doomscroll.', punchline: 'Just Tuned. Up next in seconds.' },
-  { lead: 'Station identification.', punchline: 'Continuing uninterrupted broadcast now.' },
-  { lead: 'Broadcasting in stereo.', punchline: 'Next feature presentation rolling shortly.' },
-];
+// Pure transition memoization cache keyed by lineup signature + registry version
+const TRANSITION_CACHE = new Map<string, SlotTransition[]>();
 
-// All motion bumper templates render immersive channel-specific Three.js 3D worlds with a strict minimum of 5 seconds (5000ms)
-// Durations are rounded to exact whole seconds to eliminate fractional-second rounding gaps
+/**
+ * Registers dynamic YouTube bumpers (15s - 300s) fetched by the catalog refresher.
+ * Automatically clears cached transitions if the dynamic pool changed.
+ */
+export function registerDynamicBumpers(
+  dynamicBumpers?: Record<string, YouTubeBumperClip[]> | null
+): void {
+  if (!dynamicBumpers || typeof dynamicBumpers !== 'object') return;
+  const serializedNew = JSON.stringify(dynamicBumpers);
+  const serializedOld = JSON.stringify(DYNAMIC_BUMPERS_REGISTRY);
+  if (serializedNew === serializedOld) return;
+
+  DYNAMIC_BUMPERS_REGISTRY = { ...dynamicBumpers };
+  dynamicRegistryVersion += 1;
+  TRANSITION_CACHE.clear();
+}
+
+export function getDynamicBumpersRegistry(): Record<string, YouTubeBumperClip[]> {
+  return DYNAMIC_BUMPERS_REGISTRY;
+}
+
+/**
+ * Returns a channel's combined evergreen classic CLIPS + dynamic bumpers,
+ * strictly preserving all classic entries and deduplicating by youtubeVideoId.
+ */
+export function getMergedChannelClips(
+  categoryId: string,
+  dynamicBumpersOverride?: Record<string, YouTubeBumperClip[]>
+): YouTubeBumperClip[] {
+  const classics = YOUTUBE_BUMPERS_BY_CHANNEL[categoryId] || GENERAL_YOUTUBE_BUMPERS;
+  const dynamicSource = dynamicBumpersOverride ?? DYNAMIC_BUMPERS_REGISTRY;
+  const dynamicList = dynamicSource?.[categoryId] || [];
+  if (dynamicList.length === 0) return classics;
+
+  const seenIds = new Set<string>(classics.map((c) => c.youtubeVideoId));
+  const merged: YouTubeBumperClip[] = [...classics];
+  for (const dyn of dynamicList) {
+    if (
+      dyn &&
+      dyn.youtubeVideoId &&
+      dyn.durationSec >= 5 &&
+      dyn.durationSec <= 300 &&
+      !seenIds.has(dyn.youtubeVideoId)
+    ) {
+      seenIds.add(dyn.youtubeVideoId);
+      merged.push({
+        youtubeVideoId: dyn.youtubeVideoId,
+        label: dyn.label || 'Station Promo',
+        durationSec: Math.round(dyn.durationSec),
+      });
+    }
+  }
+  return merged;
+}
+
+const PREMIUM_PUBLIC_CHANNELS = new Set([
+  'movies',
+  'film',
+  'documentaries',
+  'science',
+  'learning',
+]);
+
+// All motion bumper templates render immersive channel-specific Three.js 3D worlds
+// Durations are exact integer seconds (6000ms-15000ms) so totalBreakSec is always whole seconds
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
   { variant: 'cinematic', durationMs: 7000 },
   { variant: 'ident', durationMs: 6000 },
@@ -739,34 +803,76 @@ const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = 
   { variant: 'field', durationMs: 6000 },
   { variant: 'vhs', durationMs: 6000 },
   { variant: 'visualizer', durationMs: 6000 },
-  { variant: 'lineup', durationMs: 6000 },
+  { variant: 'lineup', durationMs: 8000 },
   { variant: 'slate', durationMs: 6000 },
-  { variant: 'card', durationMs: 6000 },
+  { variant: 'card', durationMs: 7000 },
 ];
 
+function buildMotionPlan(
+  categoryId: string,
+  variant: MotionBumperVariant,
+  durationMs: number,
+  stepIndex: number,
+  totalBumpers: number,
+  seedIdx: number,
+  marathonCreator?: string,
+  isPreview: boolean = false
+): BreakPlan {
+  const cardPool = CHANNEL_CARDS[categoryId] || CHANNEL_CARDS.tech;
+  const pickedCard = cardPool[seedIdx % cardPool.length];
+  const exactSecMs = Math.max(6000, Math.round(durationMs / 1000) * 1000);
+  const lead = isPreview && marathonCreator
+    ? 'MARATHON PREVIEW'
+    : marathonCreator
+    ? 'MARATHON IN PROGRESS'
+    : pickedCard.lead;
+  const punchline = isPreview && marathonCreator
+    ? `All-${marathonCreator} block`
+    : marathonCreator
+    ? `All-${marathonCreator} block continues right after this.`
+    : pickedCard.punchline;
+
+  return {
+    kind: 'motion',
+    variant,
+    durationMs: exactSecMs,
+    cardLead: lead,
+    cardPunchline: punchline,
+    bumperIndex: stepIndex + 1,
+    totalBumpers,
+    isMarathon: Boolean(marathonCreator),
+    marathonCreator,
+    isPreview,
+  };
+}
+
 /**
- * Picks a station break package of 1 to 3 bumpers back-to-back ("random, not all the time"),
- * or a single preview bumper when triggered manually (B key / Ident button).
+ * Picks a station break package for a given category, transition tier, and break index.
+ * Strictly time-invariant (zero Date.getHours() dependency) with integer-second durations.
  *
- * Rules:
- * - Every bumper has a strict minimum duration of 5 seconds (5000ms).
- * - Video clips play for their full natural broadcast length (at least 5s, no artificial cutoffs).
- * - When multiple bumpers play back-to-back, each individual bumper gets at least 5000ms.
+ * Smart Pacing Rules:
+ * - short_bumper: 1 crisp bumper (alternating 6s-15s 3D motion ident/card and <=45s classic clip)
+ * - block_ident: Full 2-3 item station package (network ident + 3D lineup/ident card + promo),
+ *   OR a single standalone spot (count = 1) if a >45s feature trailer/product film (46s-300s) is selected.
+ * - isPreview: Single bumper preview when triggered manually via B key / Ident button.
  */
 export function pickBreakPackage(
   categoryId: string,
   breakCount: number,
   marathonCreator?: string,
-  isPreview: boolean = false
+  isPreview: boolean = false,
+  tier: TransitionTier = 'block_ident',
+  dynamicBumpersOverride?: Record<string, YouTubeBumperClip[]>
 ): BreakPlan[] {
-  const clipPool = YOUTUBE_BUMPERS_BY_CHANNEL[categoryId] || GENERAL_YOUTUBE_BUMPERS;
+  const clipPool = getMergedChannelClips(categoryId, dynamicBumpersOverride);
+  const shortClips = clipPool.filter((c) => (c.durationSec || 12) <= 45);
+  const crispShortClips = shortClips.filter((c) => (c.durationSec || 12) >= 6 && (c.durationSec || 12) <= 15);
 
-  // If manual preview from pressing 'B', return a single punchy preview bumper!
+  // Manual preview from pressing 'B' key / Ident button
   if (isPreview) {
-    // Alternate preview between 3D Three.js ident and retro channel clip!
     if (breakCount % 2 === 1 && clipPool.length > 0) {
       const clip = clipPool[breakCount % clipPool.length];
-      const dur = Math.max(5000, (clip.durationSec || 12) * 1000);
+      const dur = Math.max(5000, Math.round(clip.durationSec || 12) * 1000);
       return [
         {
           kind: 'youtube',
@@ -782,101 +888,310 @@ export function pickBreakPackage(
     }
 
     const template = MOTION_ROTATION[breakCount % MOTION_ROTATION.length];
-    const baseCards = CHANNEL_CARDS[categoryId] || DEFAULT_CARDS;
-    const card = baseCards[breakCount % baseCards.length];
+    return [
+      buildMotionPlan(
+        categoryId,
+        template.variant,
+        template.durationMs,
+        0,
+        1,
+        breakCount,
+        marathonCreator,
+        true
+      ),
+    ];
+  }
+
+  // Tier: hot_switch has zero break
+  if (tier === 'hot_switch') {
+    return [];
+  }
+
+  // Tier: short_bumper — 1 crisp bumper (6s-15s motion or <=45s short retro clip)
+  if (tier === 'short_bumper') {
+    const useClip = !marathonCreator && shortClips.length > 0 && breakCount % 2 === 1;
+    if (useClip) {
+      const candidatePool = crispShortClips.length > 0 ? crispShortClips : shortClips;
+      const clip = candidatePool[breakCount % candidatePool.length];
+      const durMs = Math.max(5000, Math.round(clip.durationSec || 12) * 1000);
+      return [
+        {
+          kind: 'youtube',
+          clip,
+          durationMs: durMs,
+          bumperIndex: 1,
+          totalBumpers: 1,
+          isMarathon: false,
+          marathonCreator: undefined,
+          isPreview: false,
+        },
+      ];
+    }
+
+    const shortMotionVariants: MotionBumperVariant[] = ['ident', 'card', 'cinematic', 'slate'];
+    const variant = shortMotionVariants[breakCount % shortMotionVariants.length];
+    const durMs = 6000 + (breakCount % 4) * 2000; // 6s, 8s, 10s, or 12s
+    return [
+      buildMotionPlan(categoryId, variant, durMs, 0, 1, breakCount, marathonCreator, false),
+    ];
+  }
+
+  // Tier: block_ident
+  // Marathon Break (every 3rd consecutive episode or crossing block boundary during marathon):
+  // 2 bumpers (3D ident + lineup card with marathonCreator)
+  if (marathonCreator) {
+    return [
+      buildMotionPlan(categoryId, 'ident', 8000, 0, 2, breakCount, marathonCreator, false),
+      buildMotionPlan(categoryId, 'lineup', 10000, 1, 2, breakCount + 1, marathonCreator, false),
+    ];
+  }
+
+  // Standard or Premium block_ident:
+  // If a >45s feature trailer / product film is picked from the merged pool, cap package at 1 single clip!
+  const pickedClip = clipPool.length > 0 ? clipPool[breakCount % clipPool.length] : null;
+  if (pickedClip && (pickedClip.durationSec || 12) > 45) {
+    const durMs = Math.max(6000, Math.round(pickedClip.durationSec) * 1000);
     return [
       {
-        kind: 'motion',
-        variant: template.variant,
-        durationMs: Math.max(5000, template.durationMs),
-        cardLead: marathonCreator ? `MARATHON PREVIEW` : card.lead,
-        cardPunchline: marathonCreator ? `All-${marathonCreator} block` : card.punchline,
+        kind: 'youtube',
+        clip: pickedClip,
+        durationMs: durMs,
         bumperIndex: 1,
         totalBumpers: 1,
-        isMarathon: Boolean(marathonCreator),
-        marathonCreator,
-        isPreview: true,
+        isMarathon: false,
+        marathonCreator: undefined,
+        isPreview: false,
       },
     ];
   }
 
-  // Real scheduled break: roll for 1, 2, or 3 bumpers
-  const roll = (Math.abs(Math.sin(breakCount * 9301 + 49297) * 233280)) % 100;
-  let count = roll < 45 ? 1 : roll < 85 ? 2 : 3;
+  // Short-clip block_ident package (18s - 32s):
+  // Network Ident clip (<=45s) + 3D Lineup ("Up Next") card (+ optional 3D bumper on standard channels)
+  const isPremiumPublic = PREMIUM_PUBLIC_CHANNELS.has(categoryId);
+  const identClipPool = shortClips.length > 0 ? shortClips : clipPool;
+  const networkClip =
+    identClipPool.length > 0 ? identClipPool[breakCount % identClipPool.length] : null;
 
-  // Rule: If a video clip is less than 5 seconds long, it qualifies for a second bumper to play after it
-  const isFirstClip = !marathonCreator && clipPool.length > 0 && (breakCount % 2 === 1);
-  if (isFirstClip) {
-    const firstClip = clipPool[breakCount % clipPool.length];
-    if ((firstClip.durationSec || 10) < 5 && count < 2) {
-      count = 2;
+  if (isPremiumPublic) {
+    if (networkClip) {
+      const clipMs = Math.max(6000, Math.round(networkClip.durationSec || 12) * 1000);
+      return [
+        {
+          kind: 'youtube',
+          clip: networkClip,
+          durationMs: clipMs,
+          bumperIndex: 1,
+          totalBumpers: 2,
+          isMarathon: false,
+          marathonCreator: undefined,
+          isPreview: false,
+        },
+        buildMotionPlan(categoryId, 'lineup', 10000, 1, 2, breakCount + 1, undefined, false),
+      ];
     }
+    return [
+      buildMotionPlan(categoryId, 'ident', 8000, 0, 2, breakCount, undefined, false),
+      buildMotionPlan(categoryId, 'lineup', 10000, 1, 2, breakCount + 1, undefined, false),
+    ];
   }
 
-  const result: BreakPlan[] = [];
-  const cardPool = CHANNEL_CARDS[categoryId] || DEFAULT_CARDS;
+  // Standard Commercial Channels block_ident: 2–3 bumpers (Network Ident + Lineup card + optional promo/bumper)
+  const plans: BreakPlan[] = [];
+  const roll = Math.abs(Math.sin(breakCount * 9301 + 49297) * 233280) % 100;
+  const includeThirdPromo = roll >= 55 && identClipPool.length > 1;
+  const totalCount = (networkClip ? 1 : 1) + 1 + (includeThirdPromo ? 1 : 0);
 
-  for (let step = 0; step < count; step++) {
-    // Interleave retro video clips with 3D scenes (unless it's an all-creator marathon block)
-    const isClipSlot = !marathonCreator && clipPool.length > 0 && ((breakCount + step) % 2 === 1);
+  if (networkClip) {
+    plans.push({
+      kind: 'youtube',
+      clip: networkClip,
+      durationMs: Math.max(6000, Math.round(networkClip.durationSec || 12) * 1000),
+      bumperIndex: 1,
+      totalBumpers: totalCount,
+      isMarathon: false,
+      marathonCreator: undefined,
+      isPreview: false,
+    });
+  } else {
+    plans.push(
+      buildMotionPlan(categoryId, 'ident', 8000, 0, totalCount, breakCount, undefined, false)
+    );
+  }
 
-    if (isClipSlot) {
-      const clip = clipPool[(breakCount + step) % clipPool.length];
-      // Video clips: full natural length, strictly at least 5.0 seconds
-      const dur = Math.max(5000, (clip.durationSec || 12) * 1000);
-      result.push({
+  plans.push(
+    buildMotionPlan(categoryId, 'lineup', 10000, 1, totalCount, breakCount + 1, undefined, false)
+  );
+
+  if (includeThirdPromo) {
+    const promoClip = identClipPool[(breakCount + 1) % identClipPool.length];
+    if (promoClip && promoClip.youtubeVideoId !== networkClip?.youtubeVideoId && promoClip.durationSec <= 45) {
+      plans.push({
         kind: 'youtube',
-        clip,
-        durationMs: dur,
-        bumperIndex: step + 1,
-        totalBumpers: count,
+        clip: promoClip,
+        durationMs: Math.max(6000, Math.round(promoClip.durationSec || 12) * 1000),
+        bumperIndex: 3,
+        totalBumpers: totalCount,
         isMarathon: false,
         marathonCreator: undefined,
         isPreview: false,
       });
     } else {
-      const motionIdx = (breakCount * 2 + step) % MOTION_ROTATION.length;
-      const template = MOTION_ROTATION[motionIdx];
-      // Back-to-back bumpers strictly maintain at least 5.0 seconds (5000ms) each
-      const dur = Math.max(5000, template.durationMs);
-
-      const pickedCard = cardPool[(breakCount + step) % cardPool.length];
-      const lead = marathonCreator ? `MARATHON IN PROGRESS` : pickedCard.lead;
-      const punchline = marathonCreator
-        ? `All-${marathonCreator} block continues right after this.`
-        : pickedCard.punchline;
-
-      result.push({
-        kind: 'motion',
-        variant: template.variant,
-        durationMs: dur,
-        cardLead: lead,
-        cardPunchline: punchline,
-        bumperIndex: step + 1,
-        totalBumpers: count,
-        isMarathon: Boolean(marathonCreator),
-        marathonCreator,
-        isPreview: false,
-      });
+      plans.push(
+        buildMotionPlan(categoryId, 'cinematic', 7000, 2, totalCount, breakCount + 2, undefined, false)
+      );
     }
   }
 
-  // Ensure total duration of any non-preview break package is an exact multiple of 1000ms
-  // with zero fractional-second rounding gaps or dead-air remainder
-  if (!isPreview && result.length > 0) {
-    const totalMs = result.reduce((sum, p) => sum + p.durationMs, 0);
-    const remainder = totalMs % 1000;
-    if (remainder !== 0) {
-      result[result.length - 1].durationMs += 1000 - remainder;
-    }
+  // Guarantee exact 1000ms multiples
+  const totalMs = plans.reduce((sum, p) => sum + p.durationMs, 0);
+  const remainder = totalMs % 1000;
+  if (remainder !== 0 && plans.length > 0) {
+    plans[plans.length - 1].durationMs += 1000 - remainder;
   }
-
-  return result;
+  return plans;
 }
 
 /**
- * Pure, deterministic helper returning the break package and its duration in integer seconds for slotIndex.
- * Perfectly synchronized across all devices globally with zero dead-air remainder.
+ * Pure, time-invariant broadcast block transition analyzer.
+ * Walks videos[0 .. length-1] deterministically using getVideoDuration(v) and assigns
+ * HOT_SWITCH (0s), SHORT_BUMPER (1 crisp bumper), or BLOCK_IDENT (2-3 bumper package or 1 feature spot).
+ *
+ * Contains ZERO dependency on new Date().getHours() so every device worldwide stays locked in sync.
+ */
+export function computeChannelTransitions(
+  videos: Video[],
+  categoryId: string,
+  dynamicBumpersOverride?: Record<string, YouTubeBumperClip[]>
+): SlotTransition[] {
+  if (!videos || videos.length === 0) return [];
+
+  const firstId = videos[0]?.youtubeVideoId || '';
+  const lastId = videos[videos.length - 1]?.youtubeVideoId || '';
+  const cacheKey = `${categoryId}:${dynamicRegistryVersion}:${videos.length}:${firstId}:${lastId}`;
+  if (!dynamicBumpersOverride) {
+    const cached = TRANSITION_CACHE.get(cacheKey);
+    if (cached && cached.length === videos.length) {
+      return cached;
+    }
+  }
+
+  const isPremiumPublic = PREMIUM_PUBLIC_CHANNELS.has(categoryId);
+  const blockThresholdSec = isPremiumPublic ? 3600 : 1800;
+
+  let accumulatedBlockSec = 0;
+  let consecutiveHotSwitches = 0;
+  let marathonStreak = 0;
+
+  const transitions: SlotTransition[] = [];
+
+  for (let i = 0; i < videos.length; i++) {
+    const curr = videos[i];
+    const next = videos[(i + 1) % videos.length];
+    const vidDur = getVideoDuration(curr);
+
+    const currCreator = (curr?.sourceChannelTitle || '').trim().toLowerCase();
+    const nextCreator = (next?.sourceChannelTitle || '').trim().toLowerCase();
+    const isSameCreatorNext = Boolean(
+      currCreator && nextCreator && currCreator === nextCreator && videos.length > 1
+    );
+
+    let tier: TransitionTier;
+    let plans: BreakPlan[];
+
+    if (isSameCreatorNext) {
+      // Rule A — Marathon Hot-Switch
+      const nextStreak = marathonStreak + 1;
+      if (nextStreak < 3 && accumulatedBlockSec + vidDur < blockThresholdSec) {
+        tier = 'hot_switch';
+        plans = [];
+        marathonStreak = nextStreak;
+        accumulatedBlockSec += vidDur;
+        consecutiveHotSwitches = 1;
+      } else {
+        // 3rd consecutive marathon video (or crossed block threshold): marathon ident break
+        tier = 'block_ident';
+        plans = pickBreakPackage(
+          categoryId,
+          i,
+          curr.sourceChannelTitle,
+          false,
+          'block_ident',
+          dynamicBumpersOverride
+        );
+        marathonStreak = 0;
+        accumulatedBlockSec = 0;
+        consecutiveHotSwitches = 0;
+      }
+    } else if (accumulatedBlockSec + vidDur >= blockThresholdSec || vidDur >= 1680) {
+      // Rule B — Block Boundary (30m/60m) or Long Feature (> 28m)
+      tier = 'block_ident';
+      plans = pickBreakPackage(
+        categoryId,
+        i,
+        undefined,
+        false,
+        'block_ident',
+        dynamicBumpersOverride
+      );
+      marathonStreak = 0;
+      accumulatedBlockSec = 0;
+      consecutiveHotSwitches = 0;
+    } else if (vidDur < 720 && consecutiveHotSwitches === 0) {
+      // Rule C — Paired Short Videos (< 12 min)
+      tier = 'hot_switch';
+      plans = [];
+      marathonStreak = 0;
+      accumulatedBlockSec += vidDur;
+      consecutiveHotSwitches = 1;
+    } else if (isPremiumPublic) {
+      // Rule D (Premium/Public mid-block): default to hot_switch until 60m block boundary
+      tier = 'hot_switch';
+      plans = [];
+      marathonStreak = 0;
+      accumulatedBlockSec += vidDur;
+      consecutiveHotSwitches = 1;
+    } else {
+      // Rule D (Standard Commercial Channels mid-block): 1 crisp short_bumper
+      tier = 'short_bumper';
+      plans = pickBreakPackage(
+        categoryId,
+        i,
+        undefined,
+        false,
+        'short_bumper',
+        dynamicBumpersOverride
+      );
+      marathonStreak = 0;
+      accumulatedBlockSec += vidDur;
+      consecutiveHotSwitches = 0;
+    }
+
+    // Guarantee exact integer-second durationMs across all plans
+    for (const p of plans) {
+      p.durationMs = Math.max(5000, Math.round(p.durationMs / 1000) * 1000);
+    }
+
+    const totalBreakMs = plans.reduce((acc, p) => acc + p.durationMs, 0);
+    const totalBreakSec = Math.floor(totalBreakMs / 1000);
+
+    transitions.push({
+      tier,
+      plans,
+      totalBreakSec,
+    });
+  }
+
+  if (!dynamicBumpersOverride) {
+    if (TRANSITION_CACHE.size > 60) TRANSITION_CACHE.clear();
+    TRANSITION_CACHE.set(cacheKey, transitions);
+  }
+
+  return transitions;
+}
+
+/**
+ * Pure, deterministic helper returning the break package and integer-second duration for slotIndex,
+ * driven by computeChannelTransitions().
  */
 export function getSlotBreakPackage(
   videos: Video[],
@@ -887,19 +1202,12 @@ export function getSlotBreakPackage(
     return { plans: [], totalBreakSec: 0 };
   }
   const safeIdx = ((slotIndex % videos.length) + videos.length) % videos.length;
-  const curr = videos[safeIdx];
-  const next = videos[(safeIdx + 1) % videos.length];
-  const marathonCreator =
-    curr?.sourceChannelTitle &&
-    next?.sourceChannelTitle &&
-    curr.sourceChannelTitle.toLowerCase() === next.sourceChannelTitle.toLowerCase()
-      ? curr.sourceChannelTitle
-      : undefined;
-
-  const plans = pickBreakPackage(categoryId, safeIdx, marathonCreator, false);
-  const totalBreakMs = plans.reduce((acc, p) => acc + p.durationMs, 0);
-  const totalBreakSec = Math.floor(totalBreakMs / 1000);
-  return { plans, totalBreakSec };
+  const transitions = computeChannelTransitions(videos, categoryId);
+  const slot = transitions[safeIdx];
+  if (!slot) {
+    return { plans: [], totalBreakSec: 0 };
+  }
+  return { plans: slot.plans, totalBreakSec: slot.totalBreakSec };
 }
 
 export function pickNextBreak(

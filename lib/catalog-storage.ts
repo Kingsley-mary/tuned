@@ -1,10 +1,10 @@
 import { get, put } from '@vercel/blob';
-import { ChannelLineup } from './types';
+import { CatalogSnapshot, ChannelLineup } from './types';
 
 export const CATALOG_BLOB_PATH = 'lineups/catalog.json';
 
 interface CachedSnapshot {
-  data: Record<string, ChannelLineup>;
+  data: CatalogSnapshot;
   fetchedAt: number;
 }
 
@@ -20,10 +20,37 @@ function hasBlobCredentials(): boolean {
 }
 
 /**
- * Reads the shared channel catalog snapshot from private Vercel Blob storage.
- * Returns null if Blob is unconfigured, empty, or unreachable so callers cleanly fall back to SEED_LINEUPS.
+ * Normalizes both modern `{ lineups, dynamicBumpers }` snapshots and legacy
+ * top-level `Record<string, ChannelLineup>` snapshots into a unified CatalogSnapshot.
  */
-export async function readCatalogSnapshot(): Promise<Record<string, ChannelLineup> | null> {
+function normalizeSnapshot(parsed: unknown): CatalogSnapshot | null {
+  if (!parsed || typeof parsed !== 'object') return null;
+  const obj = parsed as Record<string, any>;
+
+  if (obj.lineups && typeof obj.lineups === 'object' && !Array.isArray(obj.lineups)) {
+    if (Object.keys(obj.lineups).length === 0) return null;
+    return {
+      lineups: obj.lineups as Record<string, ChannelLineup>,
+      dynamicBumpers:
+        obj.dynamicBumpers && typeof obj.dynamicBumpers === 'object'
+          ? obj.dynamicBumpers
+          : undefined,
+    };
+  }
+
+  // Legacy format: top-level keys are category IDs mapping directly to ChannelLineup objects
+  if (Object.keys(obj).length === 0) return null;
+  return {
+    lineups: obj as Record<string, ChannelLineup>,
+    dynamicBumpers: undefined,
+  };
+}
+
+/**
+ * Reads the full catalog snapshot ({ lineups, dynamicBumpers }) from private Vercel Blob storage.
+ * Returns null if Blob is unconfigured, empty, or unreachable.
+ */
+export async function readFullCatalogSnapshot(): Promise<CatalogSnapshot | null> {
   if (inMemorySnapshot && Date.now() - inMemorySnapshot.fetchedAt < SNAPSHOT_CACHE_TTL_MS) {
     return inMemorySnapshot.data;
   }
@@ -43,16 +70,17 @@ export async function readCatalogSnapshot(): Promise<Record<string, ChannelLineu
     }
 
     const text = await new Response(result.stream).text();
-    const parsed = JSON.parse(text) as Record<string, ChannelLineup>;
-    if (!parsed || typeof parsed !== 'object' || Object.keys(parsed).length === 0) {
+    const parsed = JSON.parse(text);
+    const normalized = normalizeSnapshot(parsed);
+    if (!normalized) {
       return null;
     }
 
     inMemorySnapshot = {
-      data: parsed,
+      data: normalized,
       fetchedAt: Date.now(),
     };
-    return parsed;
+    return normalized;
   } catch (err) {
     console.error('[catalog-storage] Failed to read catalog snapshot from Vercel Blob:', err);
     return null;
@@ -60,12 +88,27 @@ export async function readCatalogSnapshot(): Promise<Record<string, ChannelLineu
 }
 
 /**
- * Atomically overwrites the shared channel catalog snapshot in private Vercel Blob storage.
+ * Reads the shared channel lineups map from private Vercel Blob storage.
+ * Returns null if Blob is unconfigured, empty, or unreachable so callers cleanly fall back to SEED_LINEUPS.
+ */
+export async function readCatalogSnapshot(): Promise<Record<string, ChannelLineup> | null> {
+  const full = await readFullCatalogSnapshot();
+  return full?.lineups || null;
+}
+
+/**
+ * Atomically overwrites the shared catalog snapshot in private Vercel Blob storage.
+ * Supports either full `{ lineups, dynamicBumpers }` or a legacy lineups map.
  */
 export async function writeCatalogSnapshot(
-  snapshot: Record<string, ChannelLineup>
+  snapshot: CatalogSnapshot | Record<string, ChannelLineup>
 ): Promise<{ url: string; pathname: string }> {
-  const payload = JSON.stringify(snapshot);
+  const normalized: CatalogSnapshot =
+    'lineups' in snapshot && snapshot.lineups && typeof snapshot.lineups === 'object'
+      ? (snapshot as CatalogSnapshot)
+      : { lineups: snapshot as Record<string, ChannelLineup> };
+
+  const payload = JSON.stringify(normalized);
   const blob = await put(CATALOG_BLOB_PATH, payload, {
     access: 'private',
     addRandomSuffix: false,
@@ -75,7 +118,7 @@ export async function writeCatalogSnapshot(
   });
 
   inMemorySnapshot = {
-    data: snapshot,
+    data: normalized,
     fetchedAt: Date.now(),
   };
 

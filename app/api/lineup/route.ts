@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getLineupForCategory } from '@/lib/youtube';
+import { getLineupForCategory, getDynamicBumpersFromSnapshot } from '@/lib/youtube';
 import { getQuotaStatus } from '@/lib/quota';
 import { SEED_LINEUPS } from '@/lib/seed-catalog';
 
@@ -10,12 +10,21 @@ export async function GET(request: NextRequest) {
 
   if (categoryId) {
     try {
-      const lineup = await getLineupForCategory(categoryId);
-      return NextResponse.json(lineup, {
-        headers: {
-          'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=3600',
+      const [lineup, dynamicBumpers] = await Promise.all([
+        getLineupForCategory(categoryId),
+        getDynamicBumpersFromSnapshot(),
+      ]);
+      return NextResponse.json(
+        {
+          ...lineup,
+          dynamicBumpers: dynamicBumpers[categoryId] || [],
         },
-      });
+        {
+          headers: {
+            'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=3600',
+          },
+        }
+      );
     } catch (error) {
       console.error(`Lineup error for ${categoryId}:`, error);
       const fallback = SEED_LINEUPS[categoryId] || null;
@@ -32,12 +41,16 @@ export async function GET(request: NextRequest) {
   if (idsParam) {
     const ids = idsParam.split(',').map((id) => id.trim()).filter(Boolean);
     try {
-      const lineups = await Promise.all(ids.map((id) => getLineupForCategory(id)));
+      const [lineups, dynamicBumpers] = await Promise.all([
+        Promise.all(ids.map((id) => getLineupForCategory(id))),
+        getDynamicBumpersFromSnapshot(),
+      ]);
       const quota = getQuotaStatus();
       return NextResponse.json(
         {
           lineups,
           quota,
+          dynamicBumpers,
         },
         {
           headers: {
