@@ -1998,6 +1998,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCpFFItkfZz1qz5PpHpqzYBw",
       "name": "Nexpo"
+    },
+    {
+      "id": "UCxs87BsBSzw8FC7IlvfQ5kA",
+      "name": "Asa Park"
     }
   ],
   "religion": [
@@ -2404,10 +2408,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCADEYQiszEI_cMARTSi5GdQ",
       "name": "Papiens"
-    },
-    {
-      "id": "UCxs87BsBSzw8FC7IlvfQ5kA",
-      "name": "Asa Park"
     },
     {
       "id": "UCY0LR5f4leMPO-O9VP4NB_A",

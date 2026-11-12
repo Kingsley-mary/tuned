@@ -11325,6 +11325,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Stewart Hicks",
         "thumbnailUrl": "https://i.ytimg.com/vi/jHIkiGJ1PxM/hqdefault.jpg",
         "durationSec": 773
+      },
+      {
+        "youtubeVideoId": "4mMFLbwR5Z0",
+        "title": "Why People Hate Louis Theroux",
+        "sourceChannelId": "UCxs87BsBSzw8FC7IlvfQ5kA",
+        "sourceChannelTitle": "Asa Park",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4mMFLbwR5Z0/hqdefault.jpg",
+        "durationSec": 1537
+      },
+      {
+        "youtubeVideoId": "4qrcdXangR0",
+        "title": "Gambling Just Got Even Worse",
+        "sourceChannelId": "UCxs87BsBSzw8FC7IlvfQ5kA",
+        "sourceChannelTitle": "Asa Park",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4qrcdXangR0/hqdefault.jpg",
+        "durationSec": 1630
+      },
+      {
+        "youtubeVideoId": "dhM5jAt_-T0",
+        "title": "Why Hollywood Can’t Stop Paying Adam Sandler",
+        "sourceChannelId": "UCxs87BsBSzw8FC7IlvfQ5kA",
+        "sourceChannelTitle": "Asa Park",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dhM5jAt_-T0/hqdefault.jpg",
+        "durationSec": 1422
       }
     ]
   },
@@ -13551,14 +13575,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1194
       },
       {
-        "youtubeVideoId": "4mMFLbwR5Z0",
-        "title": "Why People Hate Louis Theroux",
-        "sourceChannelId": "UCxs87BsBSzw8FC7IlvfQ5kA",
-        "sourceChannelTitle": "Asa Park",
-        "thumbnailUrl": "https://i.ytimg.com/vi/4mMFLbwR5Z0/hqdefault.jpg",
-        "durationSec": 1537
-      },
-      {
         "youtubeVideoId": "osLPD9SnBQ0",
         "title": "the page knows something you don't.",
         "sourceChannelId": "UCY0LR5f4leMPO-O9VP4NB_A",
@@ -13639,14 +13655,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1067
       },
       {
-        "youtubeVideoId": "4qrcdXangR0",
-        "title": "Gambling Just Got Even Worse",
-        "sourceChannelId": "UCxs87BsBSzw8FC7IlvfQ5kA",
-        "sourceChannelTitle": "Asa Park",
-        "thumbnailUrl": "https://i.ytimg.com/vi/4qrcdXangR0/hqdefault.jpg",
-        "durationSec": 1630
-      },
-      {
         "youtubeVideoId": "D6toNc_UAsU",
         "title": "how to stop living for other people’s approval.",
         "sourceChannelId": "UCY0LR5f4leMPO-O9VP4NB_A",
@@ -13725,14 +13733,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Idy Archibong",
         "thumbnailUrl": "https://i.ytimg.com/vi/A043NZTI44o/hqdefault.jpg",
         "durationSec": 1933
-      },
-      {
-        "youtubeVideoId": "dhM5jAt_-T0",
-        "title": "Why Hollywood Can’t Stop Paying Adam Sandler",
-        "sourceChannelId": "UCxs87BsBSzw8FC7IlvfQ5kA",
-        "sourceChannelTitle": "Asa Park",
-        "thumbnailUrl": "https://i.ytimg.com/vi/dhM5jAt_-T0/hqdefault.jpg",
-        "durationSec": 1422
       },
       {
         "youtubeVideoId": "UhaVDzeY6zY",
