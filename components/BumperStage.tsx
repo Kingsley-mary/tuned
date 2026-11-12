@@ -208,8 +208,18 @@ export const BumperStage: React.FC<BumperStageProps> = ({
               </div>
 
               <div className="bm-lead bm-ident-center">
-                <span className="bm-eyebrow">YOU ARE WATCHING</span>
-                <h2>{channelName}</h2>
+                <div className="bm-ident-card">
+                  <div className="bm-ident-eyebrow">
+                    <span className="bm-ident-dot" />
+                    <span>{resolvedIsMarathon ? `🔥 ${(resolvedMarathonCreator || channelName).toUpperCase()} MARATHON` : `CHANNEL ${chCode}`}</span>
+                  </div>
+                  <h1 className="bm-ident-title">{channelName}</h1>
+                  <p className="bm-ident-sub">
+                    {resolvedIsMarathon
+                      ? `All-${resolvedMarathonCreator || channelName} block in progress`
+                      : 'Station Identification · Tuned Broadcast'}
+                  </p>
+                </div>
               </div>
 
               <div className="bm-support bm-bottom-bar">
@@ -232,6 +242,21 @@ export const BumperStage: React.FC<BumperStageProps> = ({
                 <span className="osd-chip bm-cinema-chip">
                   <span className="dot" /> CH {chCode} · {resolvedIsMarathon ? `MARATHON BLOCK` : channelName.toUpperCase()} {isMultiBreak ? `(${resolvedBumperIndex}/${resolvedTotalBumpers})` : ''}
                 </span>
+              </div>
+
+              <div className="bm-lead bm-ident-center">
+                <div className="bm-ident-card">
+                  <div className="bm-ident-eyebrow">
+                    <span className="bm-ident-dot" />
+                    <span>{resolvedIsMarathon ? `🔥 ${(resolvedMarathonCreator || channelName).toUpperCase()} MARATHON` : `SPECIAL PRESENTATION`}</span>
+                  </div>
+                  <h1 className="bm-ident-title">{channelName}</h1>
+                  <p className="bm-ident-sub">
+                    {resolvedIsMarathon
+                      ? `Continuous marathon continues next`
+                      : `Channel ${chCode} · Continuous Linear Broadcast`}
+                  </p>
+                </div>
               </div>
 
               <div className="bm-support bm-cinematic-foot">
@@ -351,6 +376,21 @@ export const BumperStage: React.FC<BumperStageProps> = ({
                 </span>
               </div>
 
+              <div className="bm-lead bm-ident-center">
+                <div className="bm-ident-card">
+                  <div className="bm-ident-eyebrow">
+                    <span className="bm-ident-dot" />
+                    <span>{resolvedIsMarathon ? `🔥 ${(resolvedMarathonCreator || channelName).toUpperCase()} MARATHON` : `CHANNEL ${chCode}`}</span>
+                  </div>
+                  <h1 className="bm-ident-title">{channelName}</h1>
+                  <p className="bm-ident-sub">
+                    {resolvedIsMarathon
+                      ? `Continuous all-${resolvedMarathonCreator || channelName} block`
+                      : 'Tuned Linear Television'}
+                  </p>
+                </div>
+              </div>
+
               <div className="bm-support bm-orbital-foot">
                 <div className="bm-next-pill">
                   <b>UP NEXT</b>
@@ -376,8 +416,14 @@ export const BumperStage: React.FC<BumperStageProps> = ({
               </div>
 
               <div className="bm-lead bm-ident-center">
-                <span className="bm-eyebrow">STAY TUNED</span>
-                <h2>{channelName}</h2>
+                <div className="bm-ident-card">
+                  <div className="bm-ident-eyebrow">
+                    <span className="bm-ident-dot" />
+                    <span>STAY TUNED</span>
+                  </div>
+                  <h1 className="bm-ident-title">{channelName}</h1>
+                  <p className="bm-ident-sub">Up Next in Seconds</p>
+                </div>
               </div>
 
               <div className="bm-support bm-orbital-foot">
