@@ -79,9 +79,11 @@ export function isDeviceFullscreen(): boolean {
  * Automatically locks orientation to landscape once fullscreen is engaged.
  * Preserves transient user activation by synchronously executing requestFullscreen first.
  */
-export async function enterAppFullscreen(targetElement?: Element | null): Promise<boolean> {
+export async function enterAppFullscreen(_targetElement?: Element | null): Promise<boolean> {
   if (typeof document === 'undefined') return false;
-  const target = targetElement || document.documentElement;
+  // Always fullscreen the root document element so all application screens (WatchScreen, GuideScreen, ManageScreen, PowerScreen)
+  // remain fully visible and operational inside the browser's native Top Layer.
+  const target = document.documentElement;
 
   // 1. If already in native fullscreen, ensure orientation lock is active and return true
   if (isDeviceFullscreen()) {

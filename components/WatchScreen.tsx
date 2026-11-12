@@ -429,6 +429,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     if (typeof window === 'undefined') return;
 
     const handleLandscapeUserGesture = () => {
+      if (isHidden) return;
       if (isMobileTouchDevice() && isLandscapeViewport() && !isDeviceFullscreen()) {
         enterFullscreen();
       }
@@ -1675,7 +1676,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       </div>
 
       {/* Mobile Landscape Floating Fullscreen Pill (appears if native fullscreen was blocked without user gesture) */}
-      {isMobileTouchDevice() && !isMobilePortrait && !isFullscreen && (
+      {!isHidden && isMobileTouchDevice() && !isMobilePortrait && !isFullscreen && (
         <button
           type="button"
           className="tv-floating-fs-pill"
