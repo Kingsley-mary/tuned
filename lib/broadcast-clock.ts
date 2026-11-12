@@ -1,4 +1,5 @@
 import { Video } from './types';
+import { BreakPlan, getSlotBreakPackage } from './bumpers';
 
 // In-memory cache of true video durations captured from the YouTube player
 const KNOWN_DURATIONS = new Map<string, number>();
@@ -157,6 +158,10 @@ export interface BroadcastState {
   durationSec: number;
   remainingSec: number;
   currentVideo: Video | null;
+  isBumperBreak?: boolean;
+  activeBreakPlans?: BreakPlan[];      // Remaining plans in the current break, starting from the active bumper
+  activeBumperElapsedMs?: number;      // How many ms into activeBreakPlans[0] we currently are
+  activeBumperRemainingMs?: number;    // How many ms remain in activeBreakPlans[0]
 }
 
 export interface ScheduledProgram {
@@ -174,12 +179,13 @@ export interface ScheduledProgram {
  * Computes the real-time live television broadcast state for a channel's lineup
  * based on wall-clock time (Linear Broadcast Clock).
  *
- * Automatically filters out any shows the user has already completed in this session.
+ * Automatically bakes deterministic station break packages into program slots,
+ * so breaks and shows are 100% globally synchronized across all devices.
  */
 export function getLiveBroadcastState(
   videos: Video[],
   categoryId: string,
-  nowEpochSec: number = getSyncedNowSec(),
+  nowTimeInput?: number,
   completedIds?: Set<string>
 ): BroadcastState {
   if (!videos || videos.length === 0) {
@@ -189,17 +195,38 @@ export function getLiveBroadcastState(
       durationSec: 600,
       remainingSec: 600,
       currentVideo: null,
+      isBumperBreak: false,
     };
   }
 
-  // Use strictly deterministic durations for cycle math so all devices on Earth remain perfectly locked in sync
-  const durations = videos.map((v) => {
-    if (v.durationSec && v.durationSec > 60) {
-      return v.durationSec;
-    }
-    return getDeterministicDuration(v);
-  });
-  const totalCycleSec = durations.reduce((acc, d) => acc + d, 0);
+  // Single clock read: caller provides nowTimeInput or we sample getSyncedNowMs() exactly once
+  const nowMs =
+    typeof nowTimeInput === 'number'
+      ? nowTimeInput > 1e11
+        ? nowTimeInput
+        : nowTimeInput * 1000
+      : getSyncedNowMs();
+
+  const nowEpochSec = Math.floor(nowMs / 1000);
+  const subSecMs = nowMs % 1000;
+
+  // Build slot configurations: for each video slot i, compute deterministic video duration and break package
+  const slotConfigs: {
+    vidDur: number;
+    breakInfo: { plans: BreakPlan[]; totalBreakSec: number };
+    slotDur: number;
+  }[] = [];
+
+  for (let i = 0; i < videos.length; i++) {
+    const v = videos[i];
+    const vidDur =
+      v.durationSec && v.durationSec > 60 ? v.durationSec : getDeterministicDuration(v);
+    const breakInfo = getSlotBreakPackage(videos, categoryId, i);
+    const slotDur = vidDur + breakInfo.totalBreakSec;
+    slotConfigs.push({ vidDur, breakInfo, slotDur });
+  }
+
+  const totalCycleSec = slotConfigs.reduce((acc, s) => acc + s.slotDur, 0);
 
   if (totalCycleSec <= 0) {
     return {
@@ -208,6 +235,7 @@ export function getLiveBroadcastState(
       durationSec: 600,
       remainingSec: 600,
       currentVideo: videos[0],
+      isBumperBreak: false,
     };
   }
 
@@ -217,48 +245,107 @@ export function getLiveBroadcastState(
 
   let accumulated = 0;
   for (let i = 0; i < videos.length; i++) {
-    const dur = durations[i];
-    if (cycleTime < accumulated + dur) {
-      const seek = Math.floor(cycleTime - accumulated);
+    const { vidDur, breakInfo, slotDur } = slotConfigs[i];
+    if (cycleTime < accumulated + slotDur) {
+      const offsetInSlot = Math.floor(cycleTime - accumulated);
       const targetVid = videos[i];
 
-      // If this slot is an unplayable/Short video, deterministically jump to the next playable slot
-      // using the global UTC broadcast offset `seek` so every browser stays synchronized.
-      if ((completedIds && completedIds.has(targetVid.youtubeVideoId)) || dur <= 60) {
-        for (let j = 1; j < videos.length; j++) {
-          const nextIdx = (i + j) % videos.length;
-          const nextVid = videos[nextIdx];
-          const nextDur = durations[nextIdx];
-          if (!completedIds?.has(nextVid.youtubeVideoId) && nextDur > 60) {
-            const deterministicSeek = Math.floor(seek % nextDur);
-            return {
-              videoIndex: nextIdx,
-              seekSeconds: deterministicSeek,
-              durationSec: nextDur,
-              remainingSec: Math.max(1, nextDur - deterministicSeek),
-              currentVideo: nextVid,
-            };
+      // Case A: Show is airing
+      if (offsetInSlot < vidDur) {
+        // If this slot is unplayable / completed, find next playable video slot
+        if ((completedIds && completedIds.has(targetVid.youtubeVideoId)) || vidDur <= 60) {
+          for (let j = 1; j < videos.length; j++) {
+            const nextIdx = (i + j) % videos.length;
+            const nextVid = videos[nextIdx];
+            const nextDur = slotConfigs[nextIdx].vidDur;
+            if (!completedIds?.has(nextVid.youtubeVideoId) && nextDur > 60) {
+              const deterministicSeek = Math.floor(offsetInSlot % nextDur);
+              return {
+                videoIndex: nextIdx,
+                seekSeconds: deterministicSeek,
+                durationSec: nextDur,
+                remainingSec: Math.max(1, nextDur - deterministicSeek),
+                currentVideo: nextVid,
+                isBumperBreak: false,
+              };
+            }
           }
         }
+
+        return {
+          videoIndex: i,
+          seekSeconds: Math.max(0, offsetInSlot),
+          durationSec: vidDur,
+          remainingSec: Math.max(0, vidDur - offsetInSlot),
+          currentVideo: targetVid,
+          isBumperBreak: false,
+        };
       }
+
+      // Case B: Station break is airing!
+      const breakElapsedMs = (offsetInSlot - vidDur) * 1000 + subSecMs;
+      const plans = breakInfo.plans;
+      const totalBreakMs = breakInfo.totalBreakSec * 1000;
+
+      if (!plans || plans.length === 0) {
+        return {
+          videoIndex: i,
+          seekSeconds: vidDur,
+          durationSec: vidDur,
+          remainingSec: 0,
+          currentVideo: targetVid,
+          isBumperBreak: false,
+        };
+      }
+
+      let bumperAccumMs = 0;
+      let activePlanIndex = plans.length - 1;
+      let activeElapsedMs = 0;
+      let activeRemainingMs = 250;
+
+      for (let pIdx = 0; pIdx < plans.length; pIdx++) {
+        const planDur = plans[pIdx].durationMs;
+        if (breakElapsedMs < bumperAccumMs + planDur) {
+          activePlanIndex = pIdx;
+          activeElapsedMs = breakElapsedMs - bumperAccumMs;
+          activeRemainingMs = Math.max(250, planDur - activeElapsedMs);
+          break;
+        }
+        bumperAccumMs += planDur;
+      }
+
+      // Dead-air clamp guard: if breakElapsedMs >= totalBreakMs, clamp to last bumper
+      if (breakElapsedMs >= totalBreakMs) {
+        activePlanIndex = plans.length - 1;
+        const lastPlan = plans[activePlanIndex];
+        activeElapsedMs = Math.min(lastPlan.durationMs - 250, breakElapsedMs);
+        activeRemainingMs = Math.max(250, totalBreakMs - breakElapsedMs);
+      }
+
+      const activeBreakPlans = plans.slice(activePlanIndex);
 
       return {
         videoIndex: i,
-        seekSeconds: Math.max(0, seek),
-        durationSec: dur,
-        remainingSec: Math.max(0, dur - seek),
+        seekSeconds: vidDur,
+        durationSec: vidDur,
+        remainingSec: 0,
         currentVideo: targetVid,
+        isBumperBreak: true,
+        activeBreakPlans,
+        activeBumperElapsedMs: activeElapsedMs,
+        activeBumperRemainingMs: activeRemainingMs,
       };
     }
-    accumulated += dur;
+    accumulated += slotDur;
   }
 
   return {
     videoIndex: 0,
     seekSeconds: 0,
-    durationSec: durations[0],
-    remainingSec: durations[0],
+    durationSec: slotConfigs[0]?.vidDur || 600,
+    remainingSec: slotConfigs[0]?.vidDur || 600,
     currentVideo: videos[0],
+    isBumperBreak: false,
   };
 }
 
@@ -307,14 +394,16 @@ export function advanceChannelPlayback(
 
 /**
  * Builds a linear TV schedule starting from a channel's current broadcast state,
- * calculating exact wall-clock start/end times for the current show and upcoming programs.
+ * calculating exact wall-clock start/end times for the current show and upcoming programs,
+ * precisely accounting for deterministic station break packages between shows.
  */
 export function buildChannelSchedule(
   videos: Video[],
   activeVideoIndex: number,
   activeSeekSeconds: number,
   count: number = 12,
-  nowMs: number = getSyncedNowMs()
+  nowMs: number = getSyncedNowMs(),
+  categoryId: string = 'general'
 ): ScheduledProgram[] {
   if (!videos || videos.length === 0) return [];
 
@@ -322,6 +411,7 @@ export function buildChannelSchedule(
   const safeStartIdx = ((activeVideoIndex % videos.length) + videos.length) % videos.length;
   const activeVideo = videos[safeStartIdx];
   const activeDur = getVideoDuration(activeVideo);
+  const activeBreakInfo = getSlotBreakPackage(videos, categoryId, safeStartIdx);
   const clampedSeek = Math.min(Math.max(0, activeSeekSeconds), Math.max(0, activeDur - 1));
   const remainingActiveSec = Math.max(1, activeDur - clampedSeek);
 
@@ -340,14 +430,16 @@ export function buildChannelSchedule(
     progressPercent: activeDur > 0 ? Math.min(100, (clampedSeek / activeDur) * 100) : 0,
   });
 
-  let cursorMs = currentEndMs;
-  let accumulatedWaitSec = remainingActiveSec;
+  // Next show starts AFTER the active show ends PLUS its break duration!
+  let cursorMs = currentEndMs + activeBreakInfo.totalBreakSec * 1000;
+  let accumulatedWaitSec = remainingActiveSec + activeBreakInfo.totalBreakSec;
 
   const limit = Math.min(count, videos.length);
   for (let offset = 1; offset < limit; offset++) {
     const idx = (safeStartIdx + offset) % videos.length;
     const vid = videos[idx];
     const dur = getVideoDuration(vid);
+    const breakInfo = getSlotBreakPackage(videos, categoryId, idx);
     const startMs = cursorMs;
     const endMs = startMs + dur * 1000;
 
@@ -362,8 +454,8 @@ export function buildChannelSchedule(
       progressPercent: 0,
     });
 
-    cursorMs = endMs;
-    accumulatedWaitSec += dur;
+    cursorMs = endMs + breakInfo.totalBreakSec * 1000;
+    accumulatedWaitSec += dur + breakInfo.totalBreakSec;
   }
 
   return schedule;

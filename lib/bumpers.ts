@@ -1,3 +1,5 @@
+import { Video } from './types';
+
 export type MotionBumperVariant =
   | 'ident'
   | 'cinematic'
@@ -337,13 +339,14 @@ const DEFAULT_CARDS: DeadpanCard[] = [
 ];
 
 // All motion bumper templates render immersive channel-specific Three.js 3D worlds with a strict minimum of 5 seconds (5000ms)
+// Durations are rounded to exact whole seconds to eliminate fractional-second rounding gaps
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
-  { variant: 'cinematic', durationMs: 6500 },
-  { variant: 'ident', durationMs: 5800 },
+  { variant: 'cinematic', durationMs: 7000 },
+  { variant: 'ident', durationMs: 6000 },
   { variant: 'field', durationMs: 6000 },
-  { variant: 'visualizer', durationMs: 5600 },
-  { variant: 'lineup', durationMs: 5800 },
-  { variant: 'slate', durationMs: 5600 },
+  { variant: 'visualizer', durationMs: 6000 },
+  { variant: 'lineup', durationMs: 6000 },
+  { variant: 'slate', durationMs: 6000 },
 ];
 
 /**
@@ -416,10 +419,7 @@ export function pickBreakPackage(
   }
 
   const result: BreakPlan[] = [];
-  const hour = typeof window !== 'undefined' ? new Date().getHours() : 20;
-  const isLateNight = hour >= 0 && hour < 5;
-  const baseCards = CHANNEL_CARDS[categoryId] || DEFAULT_CARDS;
-  const cardPool = isLateNight ? [...LATE_NIGHT_CARDS, ...baseCards] : baseCards;
+  const cardPool = CHANNEL_CARDS[categoryId] || DEFAULT_CARDS;
 
   for (let step = 0; step < count; step++) {
     // Interleave retro video clips with 3D scenes (unless it's an all-creator marathon block)
@@ -466,7 +466,45 @@ export function pickBreakPackage(
     }
   }
 
+  // Ensure total duration of any non-preview break package is an exact multiple of 1000ms
+  // with zero fractional-second rounding gaps or dead-air remainder
+  if (!isPreview && result.length > 0) {
+    const totalMs = result.reduce((sum, p) => sum + p.durationMs, 0);
+    const remainder = totalMs % 1000;
+    if (remainder !== 0) {
+      result[result.length - 1].durationMs += 1000 - remainder;
+    }
+  }
+
   return result;
+}
+
+/**
+ * Pure, deterministic helper returning the break package and its duration in integer seconds for slotIndex.
+ * Perfectly synchronized across all devices globally with zero dead-air remainder.
+ */
+export function getSlotBreakPackage(
+  videos: Video[],
+  categoryId: string,
+  slotIndex: number
+): { plans: BreakPlan[]; totalBreakSec: number } {
+  if (!videos || videos.length === 0) {
+    return { plans: [], totalBreakSec: 0 };
+  }
+  const safeIdx = ((slotIndex % videos.length) + videos.length) % videos.length;
+  const curr = videos[safeIdx];
+  const next = videos[(safeIdx + 1) % videos.length];
+  const marathonCreator =
+    curr?.sourceChannelTitle &&
+    next?.sourceChannelTitle &&
+    curr.sourceChannelTitle.toLowerCase() === next.sourceChannelTitle.toLowerCase()
+      ? curr.sourceChannelTitle
+      : undefined;
+
+  const plans = pickBreakPackage(categoryId, safeIdx, marathonCreator, false);
+  const totalBreakMs = plans.reduce((acc, p) => acc + p.durationMs, 0);
+  const totalBreakSec = Math.floor(totalBreakMs / 1000);
+  return { plans, totalBreakSec };
 }
 
 export function pickNextBreak(

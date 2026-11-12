@@ -12,6 +12,7 @@ interface BumperStageProps {
   variant?: MotionBumperVariant;
   clip?: YouTubeBumperClip;
   durationMs: number;
+  initialElapsedMs?: number;
   categoryId: string;
   channelNumber: number;
   channelName: string;
@@ -37,6 +38,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
   variant: propVariant,
   clip: propClip,
   durationMs,
+  initialElapsedMs = 0,
   categoryId,
   channelNumber,
   channelName,
@@ -131,7 +133,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
           <div className="bm-youtube-media">
             <YouTubePlayer
               videoId={resolvedClip.youtubeVideoId}
-              startSeconds={0}
+              startSeconds={Math.max(0, Math.floor((initialElapsedMs || 0) / 1000))}
               isPlaying={true}
               isMuted={isMuted}
               allowShortClip={true}

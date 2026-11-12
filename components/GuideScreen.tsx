@@ -156,7 +156,14 @@ export function GuideScreen({
         activeSeek = live.seekSeconds;
       }
 
-      const forward = buildChannelSchedule(ch.videos, activeIdx, activeSeek, Math.min(36, ch.videos.length), scheduleAnchorMs);
+      const forward = buildChannelSchedule(
+        ch.videos,
+        activeIdx,
+        activeSeek,
+        Math.min(36, ch.videos.length),
+        scheduleAnchorMs,
+        ch.categoryId
+      );
       const forwardSlots: GuideSlot[] = forward.map((slot, sIdx) => ({
         id: `${ch.categoryId}-f${sIdx}-${slot.video.youtubeVideoId}`,
         s: (slot.startTimeMs - dayStartMs) / 60000,
