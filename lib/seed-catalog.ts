@@ -140,7 +140,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "tech",
     "categoryName": "Tech",
     "hue": 355,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "0LqLBHercIo",
@@ -948,7 +948,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "games",
     "categoryName": "Games",
     "hue": 268,
-    "builtAt": 1794338232374,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "nM21hVqvhmk",
@@ -1916,7 +1916,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "music",
     "categoryName": "Music",
     "hue": 205,
-    "builtAt": 1794338232822,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "A8lEleHtqQc",
@@ -2908,7 +2908,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "food",
     "categoryName": "Food",
     "hue": 22,
-    "builtAt": 1794338233231,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "5LKOoqiQGDQ",
@@ -3381,6 +3381,30 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Gordon Ramsay",
         "thumbnailUrl": "https://i.ytimg.com/vi/0Nxldbd3oQ0/hqdefault.jpg",
         "durationSec": 2037
+      },
+      {
+        "youtubeVideoId": "xFG_hyO0yTY",
+        "title": "Recreating The Foods From TONY | Binging with Babish",
+        "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
+        "sourceChannelTitle": "Binging with Babish",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xFG_hyO0yTY/hqdefault.jpg",
+        "durationSec": 1210
+      },
+      {
+        "youtubeVideoId": "gfOwrH8n6Jc",
+        "title": "How To Make The World's Best Chicken (5 Ways) | With Babish",
+        "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
+        "sourceChannelTitle": "Binging with Babish",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gfOwrH8n6Jc/hqdefault.jpg",
+        "durationSec": 604
+      },
+      {
+        "youtubeVideoId": "0lOY9GwjgRc",
+        "title": "I Made EVERY Salsa",
+        "sourceChannelId": "UCJHA_jMfCvEnv-3kRjTCQXw",
+        "sourceChannelTitle": "Binging with Babish",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0lOY9GwjgRc/hqdefault.jpg",
+        "durationSec": 913
       }
     ]
   },
@@ -3388,7 +3412,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "science",
     "categoryName": "Science",
     "hue": 170,
-    "builtAt": 1794338233582,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "7zkt-FdPC2Y",
@@ -3813,6 +3837,102 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
         "thumbnailUrl": "https://i.ytimg.com/vi/ujkD4SxPKOI/hqdefault.jpg",
         "durationSec": 808
+      },
+      {
+        "youtubeVideoId": "0NY2gAftzJE",
+        "title": "This Woman Cured Her Cancer with an Insane Method",
+        "sourceChannelId": "UCsXVk37bltHxD1rDPwtNM8Q",
+        "sourceChannelTitle": "Kurzgesagt – In a Nutshell",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0NY2gAftzJE/hqdefault.jpg",
+        "durationSec": 1194
+      },
+      {
+        "youtubeVideoId": "TTipD_G73iQ",
+        "title": "Smarter Every Day 2 Live Stream",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TTipD_G73iQ/hqdefault.jpg",
+        "durationSec": 887
+      },
+      {
+        "youtubeVideoId": "tNlmWBTOxtg",
+        "title": "What Has Changed Over 10 Years...... (Not Forgotten Update) Smarter Every Day 2",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/tNlmWBTOxtg/hqdefault.jpg",
+        "durationSec": 842
+      },
+      {
+        "youtubeVideoId": "OVzNPO1pZGo",
+        "title": "I Explored MORE OF the World's First Nuclear Power Plant (and How It Works) Smarter Every Day 306B",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OVzNPO1pZGo/hqdefault.jpg",
+        "durationSec": 585
+      },
+      {
+        "youtubeVideoId": "WUyIfkKUEjs",
+        "title": "Behind The Scenes at MVP Disc Sports - (Disc Golf Disc Factory LONG CUT) - Smarter Every Day 301B",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WUyIfkKUEjs/hqdefault.jpg",
+        "durationSec": 593
+      },
+      {
+        "youtubeVideoId": "X5uVsmMsiEA",
+        "title": "Nature's Incredible MOTOR - Smarter Every Day 300B",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/X5uVsmMsiEA/hqdefault.jpg",
+        "durationSec": 729
+      },
+      {
+        "youtubeVideoId": "FMMRzFFCKJ0",
+        "title": "Destin Asks Questions At A Big Video Game Convention (PAX West) - Smarter Every Day 291B",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FMMRzFFCKJ0/hqdefault.jpg",
+        "durationSec": 1284
+      },
+      {
+        "youtubeVideoId": "7gNFD6q7tbI",
+        "title": "How to get the Film Eclipse Photo from Destin - Smarter Every Day 298B",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7gNFD6q7tbI/hqdefault.jpg",
+        "durationSec": 731
+      },
+      {
+        "youtubeVideoId": "7wZKAoUeGRw",
+        "title": "EXTENDED CUT: 2024 Solar Eclipse Preparation - Smarter Every Day 295B",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7wZKAoUeGRw/hqdefault.jpg",
+        "durationSec": 861
+      },
+      {
+        "youtubeVideoId": "NIlq6pB90aE",
+        "title": "What they're studying at Not Forgotten 2024 Project For Awesome Update",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NIlq6pB90aE/hqdefault.jpg",
+        "durationSec": 1091
+      },
+      {
+        "youtubeVideoId": "27vF357_wqc",
+        "title": "While Striking a Match With a Bullet, These Weird Things Happened- Smarter Every Day 294B",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/27vF357_wqc/hqdefault.jpg",
+        "durationSec": 970
+      },
+      {
+        "youtubeVideoId": "CQpAXLTFpAM",
+        "title": "Behind the Scenes at Kamerastore in Finland - Smarter Every Day 2",
+        "sourceChannelId": "UC8VkNBOwvsTlFjoSnNSMmxw",
+        "sourceChannelTitle": "Smarter Every Day 2",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CQpAXLTFpAM/hqdefault.jpg",
+        "durationSec": 1207
       }
     ]
   },
@@ -3820,7 +3940,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "sports",
     "categoryName": "Sports",
     "hue": 140,
-    "builtAt": 1794338234020,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "kqt1A8oB0BE",
@@ -4221,6 +4341,94 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Olympic Games",
         "thumbnailUrl": "https://i.ytimg.com/vi/ta-sP-EY8aM/hqdefault.jpg",
         "durationSec": 16855
+      },
+      {
+        "youtubeVideoId": "pfhw6GwCzlI",
+        "title": "HE WAITED 7 YEARS FOR THIS REVENGE! | Big Bird vs Bonchan",
+        "sourceChannelId": "UC8VddvuHJzIj__Ud0rY2_ww",
+        "sourceChannelTitle": "Red Bull Esports",
+        "thumbnailUrl": "https://i.ytimg.com/vi/pfhw6GwCzlI/hqdefault.jpg",
+        "durationSec": 1291
+      },
+      {
+        "youtubeVideoId": "6DllrS7t10o",
+        "title": "Taylor Lewan calls for the Giants to protect J.J. McCarthy 👀 | Get Up",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6DllrS7t10o/hqdefault.jpg",
+        "durationSec": 1276
+      },
+      {
+        "youtubeVideoId": "ijov3YH8npk",
+        "title": "DON'T Set Your Week 10 Lineup Until You Watch This | Fantasy Focus",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ijov3YH8npk/hqdefault.jpg",
+        "durationSec": 565
+      },
+      {
+        "youtubeVideoId": "eYaAZ1riCoo",
+        "title": "Domonique Foxworth's Bold Take on the Vikings' Coaching Future",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eYaAZ1riCoo/hqdefault.jpg",
+        "durationSec": 1249
+      },
+      {
+        "youtubeVideoId": "-ugxiI5Bu08",
+        "title": "Who proved us RIGHT and WRONG + more midseason AWARDS | Move the Sticks",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-ugxiI5Bu08/hqdefault.jpg",
+        "durationSec": 791
+      },
+      {
+        "youtubeVideoId": "79IqrDAuQGQ",
+        "title": "How Joe Burrow reignited the Bengals' offense + Kirk Cousins' trade surprise and more | Leaguewide",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/79IqrDAuQGQ/hqdefault.jpg",
+        "durationSec": 1141
+      },
+      {
+        "youtubeVideoId": "YpwAjHDgn4w",
+        "title": "How J.J. McCarthy can take it to the NEXT LEVEL for the Giants 📈 + Saints WRs breakdown 🎥 | NFL Live",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YpwAjHDgn4w/hqdefault.jpg",
+        "durationSec": 1071
+      },
+      {
+        "youtubeVideoId": "G4faEbqRUGQ",
+        "title": "Will Kirk Cousins start Week 10 against the Packers? | NFL Live",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/G4faEbqRUGQ/hqdefault.jpg",
+        "durationSec": 665
+      },
+      {
+        "youtubeVideoId": "FCvR0WuyhSs",
+        "title": "Kirk Cousins reacts to Vikings-Raiders trade, reuniting him with Minnesota | NFL on ESPN",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FCvR0WuyhSs/hqdefault.jpg",
+        "durationSec": 1116
+      },
+      {
+        "youtubeVideoId": "ut0TBSA-N2s",
+        "title": "The Worst NFL Trade of the Past 5 Years | The Bill Barnwell Show",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ut0TBSA-N2s/hqdefault.jpg",
+        "durationSec": 1009
+      },
+      {
+        "youtubeVideoId": "r9O5le5Vn0U",
+        "title": "Will Derrick Henry SMASH in Week 10?! | Fantasy Focus",
+        "sourceChannelId": "UCiio0ydw439X13KyZgMIcHw",
+        "sourceChannelTitle": "NFL on ESPN",
+        "thumbnailUrl": "https://i.ytimg.com/vi/r9O5le5Vn0U/hqdefault.jpg",
+        "durationSec": 628
       }
     ]
   },
@@ -4228,7 +4436,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "travel",
     "categoryName": "Travel",
     "hue": 190,
-    "builtAt": 1794338234296,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "rvs9_MK4cH8",
@@ -4637,6 +4845,94 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Christian LeBlanc",
         "thumbnailUrl": "https://i.ytimg.com/vi/EFczZrLwS_I/hqdefault.jpg",
         "durationSec": 1639
+      },
+      {
+        "youtubeVideoId": "diKUDlmVG78",
+        "title": "The Capital One Venture Review",
+        "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
+        "sourceChannelTitle": "Daily Drop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/diKUDlmVG78/hqdefault.jpg",
+        "durationSec": 552
+      },
+      {
+        "youtubeVideoId": "ydnDb1h1evo",
+        "title": "We Took a Cruise to the Top of the World | Arctic Expedition",
+        "sourceChannelId": "UCneNuMawbfqgXCew2EdZMcQ",
+        "sourceChannelTitle": "Daily Drop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ydnDb1h1evo/hqdefault.jpg",
+        "durationSec": 731
+      },
+      {
+        "youtubeVideoId": "CQWd_dpPKwI",
+        "title": "Surprising a Subscriber with Her First Trip Ever!",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CQWd_dpPKwI/hqdefault.jpg",
+        "durationSec": 1283
+      },
+      {
+        "youtubeVideoId": "hvXROd8XwcU",
+        "title": "My Taxi Driver Gives Life Advice to Mr. Beast (deleted scenes)",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hvXROd8XwcU/hqdefault.jpg",
+        "durationSec": 812
+      },
+      {
+        "youtubeVideoId": "eHRZd5rJYG0",
+        "title": "I Moved into the Strange Town that Lives in One Building (how do they survive?)",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/eHRZd5rJYG0/hqdefault.jpg",
+        "durationSec": 754
+      },
+      {
+        "youtubeVideoId": "karLaadPGKg",
+        "title": "I Can't Sleep",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/karLaadPGKg/hqdefault.jpg",
+        "durationSec": 999
+      },
+      {
+        "youtubeVideoId": "mbj4psaOTPU",
+        "title": "The Island Where People Forget to Die",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mbj4psaOTPU/hqdefault.jpg",
+        "durationSec": 713
+      },
+      {
+        "youtubeVideoId": "P4YxU0_qke0",
+        "title": "Why I'm not quitting YouTube (yet)",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/P4YxU0_qke0/hqdefault.jpg",
+        "durationSec": 1062
+      },
+      {
+        "youtubeVideoId": "3_MwvpwNmw0",
+        "title": "Exploring the City with 30% of the World’s Ancient Treasures",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3_MwvpwNmw0/hqdefault.jpg",
+        "durationSec": 1343
+      },
+      {
+        "youtubeVideoId": "VTIDJ5fr5vM",
+        "title": "We Opened the First Yes Theory Hostel",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VTIDJ5fr5vM/hqdefault.jpg",
+        "durationSec": 1380
+      },
+      {
+        "youtubeVideoId": "a68T976CLvQ",
+        "title": "I Took a Chinese Dad to China's Most Beautiful Place",
+        "sourceChannelId": "UCTd7KzdwnFE3lm6LCfYDmUQ",
+        "sourceChannelTitle": "Seek Discomfort",
+        "thumbnailUrl": "https://i.ytimg.com/vi/a68T976CLvQ/hqdefault.jpg",
+        "durationSec": 1333
       }
     ]
   },
@@ -4644,7 +4940,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "film",
     "categoryName": "Film",
     "hue": 300,
-    "builtAt": 1794338234810,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "Y9S0x-KL1nk",
@@ -5852,7 +6148,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "fitness",
     "categoryName": "Fitness",
     "hue": 100,
-    "builtAt": 1794338235193,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "xVuvVmZdIpQ",
@@ -6253,6 +6549,142 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Coffee With Hampton",
         "thumbnailUrl": "https://i.ytimg.com/vi/RtLUWw0IViI/hqdefault.jpg",
         "durationSec": 728
+      },
+      {
+        "youtubeVideoId": "F5SB9FKJbsg",
+        "title": "how to attract like-minded people",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/F5SB9FKJbsg/hqdefault.jpg",
+        "durationSec": 1356
+      },
+      {
+        "youtubeVideoId": "dMk4xLKL6lU",
+        "title": "watch this if you're worried about growing up",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dMk4xLKL6lU/hqdefault.jpg",
+        "durationSec": 1432
+      },
+      {
+        "youtubeVideoId": "jT3h8Mu0l74",
+        "title": "how to communicate so people actually listen",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jT3h8Mu0l74/hqdefault.jpg",
+        "durationSec": 614
+      },
+      {
+        "youtubeVideoId": "KBB27UC4nRc",
+        "title": "how to make friends (as an adult)",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KBB27UC4nRc/hqdefault.jpg",
+        "durationSec": 777
+      },
+      {
+        "youtubeVideoId": "K8eTKeKj85Y",
+        "title": "how to build confidence that doesn't feel \"fake\"",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/K8eTKeKj85Y/hqdefault.jpg",
+        "durationSec": 857
+      },
+      {
+        "youtubeVideoId": "KyB6GACrOow",
+        "title": "Simple method to make (almost) any decision better and faster",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KyB6GACrOow/hqdefault.jpg",
+        "durationSec": 1036
+      },
+      {
+        "youtubeVideoId": "fjtsT8y0vlU",
+        "title": "balancing hard work and mental health",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fjtsT8y0vlU/hqdefault.jpg",
+        "durationSec": 1281
+      },
+      {
+        "youtubeVideoId": "lfsS_a5n8JY",
+        "title": "kombucha tier list (unsponsored review)",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/lfsS_a5n8JY/hqdefault.jpg",
+        "durationSec": 814
+      },
+      {
+        "youtubeVideoId": "PLYcw2nWF24",
+        "title": "Try this simple method to (consistently) get stuff done",
+        "sourceChannelId": "UCmCnayXABSyVjexptPEQxlA",
+        "sourceChannelTitle": "Coffee With Hampton",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PLYcw2nWF24/hqdefault.jpg",
+        "durationSec": 1410
+      },
+      {
+        "youtubeVideoId": "bcx79dIUIdU",
+        "title": "It's Extreme, But I'll NEVER Eat These 7 Foods Again!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bcx79dIUIdU/hqdefault.jpg",
+        "durationSec": 573
+      },
+      {
+        "youtubeVideoId": "5dyW5aTV67c",
+        "title": "I'm 51. This is What I Eat EVERY Day to Be Lean.",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5dyW5aTV67c/hqdefault.jpg",
+        "durationSec": 999
+      },
+      {
+        "youtubeVideoId": "ng4G8F5jPyI",
+        "title": "Do This AFTER Every Workout (NON NEGOTIABLE!)",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ng4G8F5jPyI/hqdefault.jpg",
+        "durationSec": 1105
+      },
+      {
+        "youtubeVideoId": "aWRyB-OpI7w",
+        "title": "How to Do More Pullups in Your NEXT Set (GUARANTEED!)",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/aWRyB-OpI7w/hqdefault.jpg",
+        "durationSec": 704
+      },
+      {
+        "youtubeVideoId": "bIV-K2vGu2g",
+        "title": "STOP, You're Training Your Chest All Wrong!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bIV-K2vGu2g/hqdefault.jpg",
+        "durationSec": 1420
+      },
+      {
+        "youtubeVideoId": "BJ6UVAUUJIs",
+        "title": "STOP, You're Training Your Biceps All Wrong!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BJ6UVAUUJIs/hqdefault.jpg",
+        "durationSec": 1342
+      },
+      {
+        "youtubeVideoId": "avvv8uCrft8",
+        "title": "STOP, You're Training Your Triceps All Wrong!",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/avvv8uCrft8/hqdefault.jpg",
+        "durationSec": 599
+      },
+      {
+        "youtubeVideoId": "IoFNx4-Ivwo",
+        "title": "5 Bodyweight Exercises That Fix 95% Of Your Problems",
+        "sourceChannelId": "UCe0TLA0EsQbE-MjuHXevj2A",
+        "sourceChannelTitle": "ATHLEAN-X™",
+        "thumbnailUrl": "https://i.ytimg.com/vi/IoFNx4-Ivwo/hqdefault.jpg",
+        "durationSec": 1176
       }
     ]
   },
@@ -6260,7 +6692,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "art",
     "categoryName": "Art",
     "hue": 330,
-    "builtAt": 1794338235757,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "5Gz60WNz6mk",
@@ -6988,7 +7420,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "design",
     "categoryName": "Design",
     "hue": 45,
-    "builtAt": 1794338236111,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "cfIpjDhtDvc",
@@ -7652,7 +8084,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "learning",
     "categoryName": "Learning",
     "hue": 235,
-    "builtAt": 1794338236477,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "OOxp8bShXaQ",
@@ -8324,7 +8756,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "movies",
     "categoryName": "Movies",
     "hue": 12,
-    "builtAt": 1794346171198,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "nfz6SaMOEd8",
@@ -8844,7 +9276,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "cartoons",
     "categoryName": "Animations",
     "hue": 48,
-    "builtAt": 1794346171198,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "P0_5DU3A9Cg",
@@ -9293,6 +9725,86 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Cartoon Network",
         "thumbnailUrl": "https://i.ytimg.com/vi/brWNC87c3Ac/hqdefault.jpg",
         "durationSec": 1097
+      },
+      {
+        "youtubeVideoId": "vluX-LA1Vc8",
+        "title": "KNIGHTS OF GUINEVERE: Ep 2 - Wolves Around The Corner",
+        "sourceChannelId": "UCn_FAXem2-e3HQvmK-mOH4g",
+        "sourceChannelTitle": "GLITCH",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vluX-LA1Vc8/hqdefault.jpg",
+        "durationSec": 669
+      },
+      {
+        "youtubeVideoId": "1AkIiMyDQ4g",
+        "title": "Helluva Boss Season 3: The New Collection is Here!",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1AkIiMyDQ4g/hqdefault.jpg",
+        "durationSec": 1127
+      },
+      {
+        "youtubeVideoId": "EyiIvpOwSSs",
+        "title": "Helluva's Hottest Cosplays Just Arrived at Moeflavor",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EyiIvpOwSSs/hqdefault.jpg",
+        "durationSec": 1437
+      },
+      {
+        "youtubeVideoId": "qJuPDHE5jug",
+        "title": "HELLUVA SHORTS 14 // THE PRINCESS & THE PUPPER // HELLUVA BOSS",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qJuPDHE5jug/hqdefault.jpg",
+        "durationSec": 1108
+      },
+      {
+        "youtubeVideoId": "FYTrFwtYu2c",
+        "title": "The Adventure Begins with Imps & Imbeciles!",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FYTrFwtYu2c/hqdefault.jpg",
+        "durationSec": 865
+      },
+      {
+        "youtubeVideoId": "EEGMd2g5VOo",
+        "title": "Helluva Boss Kigurumis Teach You Halloween Safety",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EEGMd2g5VOo/hqdefault.jpg",
+        "durationSec": 948
+      },
+      {
+        "youtubeVideoId": "oREAk4tdUQc",
+        "title": "Loona Reads Your Tarot Cards",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/oREAk4tdUQc/hqdefault.jpg",
+        "durationSec": 1361
+      },
+      {
+        "youtubeVideoId": "AaOIorKeVCM",
+        "title": "(I Don't Want to Be) Nobody's Baybay - Helluva Boss Season 3 Clip",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AaOIorKeVCM/hqdefault.jpg",
+        "durationSec": 841
+      },
+      {
+        "youtubeVideoId": "-Fq4VRxhdKI",
+        "title": "Helluva Boss Season 3 Part 1 Official Trailer",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-Fq4VRxhdKI/hqdefault.jpg",
+        "durationSec": 1254
+      },
+      {
+        "youtubeVideoId": "_LO2RgKrO4Q",
+        "title": "Showdown At the Wrath Ring Saloon",
+        "sourceChannelId": "UCzfyYtgvkx5mLy8nlLlayYg",
+        "sourceChannelTitle": "Vivziepop",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_LO2RgKrO4Q/hqdefault.jpg",
+        "durationSec": 608
       }
     ]
   },
@@ -9300,7 +9812,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "industry",
     "categoryName": "Industry",
     "hue": 32,
-    "builtAt": 1794347206006,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "ZMf6mL9xehI",
@@ -9605,6 +10117,190 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "プロセスX",
         "thumbnailUrl": "https://i.ytimg.com/vi/H9TM5ObQrPU/hqdefault.jpg",
         "durationSec": 1060
+      },
+      {
+        "youtubeVideoId": "9hZdAURhTQA",
+        "title": "日本の脅威のリサイクルプロセス！５０００トンの豚骨ラーメンガラを肥料にするプロセス。",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9hZdAURhTQA/hqdefault.jpg",
+        "durationSec": 1025
+      },
+      {
+        "youtubeVideoId": "x2tDxRTDiC4",
+        "title": "【日本の神技術】世界が絶賛する「船外機」と巨大機械の製造プロセスまとめ",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/x2tDxRTDiC4/hqdefault.jpg",
+        "durationSec": 762
+      },
+      {
+        "youtubeVideoId": "kbsbQyW-zJM",
+        "title": "ヴィンテージデニムを最新技術で再現せよ！“あの風合い”を量産する全プロセス",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kbsbQyW-zJM/hqdefault.jpg",
+        "durationSec": 1031
+      },
+      {
+        "youtubeVideoId": "ZB8vC3beNZg",
+        "title": "世界一のカメラ用交換レンズを作るプロセス。日本の光学機器メーカー。",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZB8vC3beNZg/hqdefault.jpg",
+        "durationSec": 798
+      },
+      {
+        "youtubeVideoId": "UNywhKF75tA",
+        "title": "サインペンを大量生産するプロセス。100以上の国と地域で、全世界累計23億本以上販売している水性ペンを作る工場。",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/UNywhKF75tA/hqdefault.jpg",
+        "durationSec": 1015
+      },
+      {
+        "youtubeVideoId": "NgnrX4Ho1zM",
+        "title": "生涯を捧げた手仕事｜失われゆく日本の神技 5選",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NgnrX4Ho1zM/hqdefault.jpg",
+        "durationSec": 708
+      },
+      {
+        "youtubeVideoId": "_c_s8va8nPE",
+        "title": "猛毒のハブから極上の革製品へ。日本の職人が魅せる沖縄伝統の技",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_c_s8va8nPE/hqdefault.jpg",
+        "durationSec": 554
+      },
+      {
+        "youtubeVideoId": "-CaCo-6bvRA",
+        "title": "新鮮なモヤシとカット野菜ができるまで！日本の野菜工場の大量生産プロセス",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-CaCo-6bvRA/hqdefault.jpg",
+        "durationSec": 1021
+      },
+      {
+        "youtubeVideoId": "B-dCM0_FxeI",
+        "title": "段ボールを大量生産するプロセス。創業85年以上、製造から販売まで一貫して行う段ボール工場。",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/B-dCM0_FxeI/hqdefault.jpg",
+        "durationSec": 632
+      },
+      {
+        "youtubeVideoId": "3czaZRJvudE",
+        "title": "鉄の骨組みから完成まで！日本の工場で巨大バスが次々と生まれる製造プロセス",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3czaZRJvudE/hqdefault.jpg",
+        "durationSec": 1339
+      },
+      {
+        "youtubeVideoId": "6IIvVRbpylE",
+        "title": "グレーチングができるまで｜街中でよく見かける「あの網目」を作る日本の工場",
+        "sourceChannelId": "UChZgikssAJkmiQOv_sO-ngQ",
+        "sourceChannelTitle": "プロセスX",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6IIvVRbpylE/hqdefault.jpg",
+        "durationSec": 1144
+      },
+      {
+        "youtubeVideoId": "vU8Xr4NVeww",
+        "title": "Inside a Chinese PC Power Supply Factory How It's Made",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vU8Xr4NVeww/hqdefault.jpg",
+        "durationSec": 1284
+      },
+      {
+        "youtubeVideoId": "nd1hPjVgsTI",
+        "title": "Inside China’s Factories 5 Amazing Manufacturing Processes You Need to See",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nd1hPjVgsTI/hqdefault.jpg",
+        "durationSec": 912
+      },
+      {
+        "youtubeVideoId": "bH_Dn_T09Fs",
+        "title": "Inside a Chinese Factory Making Stand Mixers",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bH_Dn_T09Fs/hqdefault.jpg",
+        "durationSec": 690
+      },
+      {
+        "youtubeVideoId": "TS6jFvrx-rc",
+        "title": "Inside a Chinese Factory How Industrial Transformers Are Made",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TS6jFvrx-rc/hqdefault.jpg",
+        "durationSec": 715
+      },
+      {
+        "youtubeVideoId": "V2vxtTefezs",
+        "title": "How Millions of Capsule Coffee Machines Are Really Made",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/V2vxtTefezs/hqdefault.jpg",
+        "durationSec": 1023
+      },
+      {
+        "youtubeVideoId": "wH0HR6KxdPU",
+        "title": "Satisfying Process Raw Wood to Matches & Bamboo to Board",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wH0HR6KxdPU/hqdefault.jpg",
+        "durationSec": 783
+      },
+      {
+        "youtubeVideoId": "2Iw0i9ATwGw",
+        "title": "How Pottery Is Fired in a 1,000 Year Old Dragon Kiln",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2Iw0i9ATwGw/hqdefault.jpg",
+        "durationSec": 1396
+      },
+      {
+        "youtubeVideoId": "WTEzpWMDyc8",
+        "title": "I Found the World’s Hardest Screen Protector Factory",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WTEzpWMDyc8/hqdefault.jpg",
+        "durationSec": 1314
+      },
+      {
+        "youtubeVideoId": "hk3S71ViRJo",
+        "title": "4 Incredible Chinese Mega Factories You Must See",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hk3S71ViRJo/hqdefault.jpg",
+        "durationSec": 1113
+      },
+      {
+        "youtubeVideoId": "t0TlZVIWY0M",
+        "title": "How Concrete Houses Are Built In Just 10 Days",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/t0TlZVIWY0M/hqdefault.jpg",
+        "durationSec": 488
+      },
+      {
+        "youtubeVideoId": "x1mRgiaW12U",
+        "title": "How Mini Twin Tub Washing Machines Are Made Factory Tour",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/x1mRgiaW12U/hqdefault.jpg",
+        "durationSec": 1218
+      },
+      {
+        "youtubeVideoId": "OpaFJz0JMuw",
+        "title": "Yadea Hub Motor Manufacturing Process Inside the Modern Factory",
+        "sourceChannelId": "UC-b5z1biw_Qra-eOfC4kuqQ",
+        "sourceChannelTitle": "Miracle Process",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OpaFJz0JMuw/hqdefault.jpg",
+        "durationSec": 897
       }
     ]
   },
@@ -9612,7 +10308,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "documentaries",
     "categoryName": "Documentaries",
     "hue": 215,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "AbJqhYqB5ZY",
@@ -9781,6 +10477,374 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "WELT Documentary",
         "thumbnailUrl": "https://i.ytimg.com/vi/MHpdN-ShQNY/hqdefault.jpg",
         "durationSec": 3000
+      },
+      {
+        "youtubeVideoId": "e5vGY4uDfZE",
+        "title": "The Deadly Ice That Grows Beneath The Ocean",
+        "sourceChannelId": "UCWBtLCE-BnzZx3DneqDiXWQ",
+        "sourceChannelTitle": "Astrum Earth",
+        "thumbnailUrl": "https://i.ytimg.com/vi/e5vGY4uDfZE/hqdefault.jpg",
+        "durationSec": 486
+      },
+      {
+        "youtubeVideoId": "bl-wJbqyu-M",
+        "title": "We Found a Two Billion-Year-Old Nuclear Reactor",
+        "sourceChannelId": "UCWBtLCE-BnzZx3DneqDiXWQ",
+        "sourceChannelTitle": "Astrum Earth",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bl-wJbqyu-M/hqdefault.jpg",
+        "durationSec": 1249
+      },
+      {
+        "youtubeVideoId": "W29EGYxXrzQ",
+        "title": "There’s Only One Volcano Like This on Earth",
+        "sourceChannelId": "UCWBtLCE-BnzZx3DneqDiXWQ",
+        "sourceChannelTitle": "Astrum Earth",
+        "thumbnailUrl": "https://i.ytimg.com/vi/W29EGYxXrzQ/hqdefault.jpg",
+        "durationSec": 560
+      },
+      {
+        "youtubeVideoId": "U1DedLVjeE0",
+        "title": "This New Evidence Could Rewrite the Dinosaur Extinction",
+        "sourceChannelId": "UCWBtLCE-BnzZx3DneqDiXWQ",
+        "sourceChannelTitle": "Astrum Earth",
+        "thumbnailUrl": "https://i.ytimg.com/vi/U1DedLVjeE0/hqdefault.jpg",
+        "durationSec": 809
+      },
+      {
+        "youtubeVideoId": "4KE8qmJlEzY",
+        "title": "This Is What Would Take Over the Earth If Humans Vanished",
+        "sourceChannelId": "UCWBtLCE-BnzZx3DneqDiXWQ",
+        "sourceChannelTitle": "Astrum Earth",
+        "thumbnailUrl": "https://i.ytimg.com/vi/4KE8qmJlEzY/hqdefault.jpg",
+        "durationSec": 484
+      },
+      {
+        "youtubeVideoId": "I4MlC1hCIs4",
+        "title": "PANSPERMIA:  The Radical Theory of Life's Origins  |  Life Beyond 4",
+        "sourceChannelId": "UCR9sFzaG9Ia_kXJhfxtFMBA",
+        "sourceChannelTitle": "melodysheep",
+        "thumbnailUrl": "https://i.ytimg.com/vi/I4MlC1hCIs4/hqdefault.jpg",
+        "durationSec": 969
+      },
+      {
+        "youtubeVideoId": "HfMUvZgSlzA",
+        "title": "LIFE BEYOND 4:  Official Trailer",
+        "sourceChannelId": "UCR9sFzaG9Ia_kXJhfxtFMBA",
+        "sourceChannelTitle": "melodysheep",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HfMUvZgSlzA/hqdefault.jpg",
+        "durationSec": 1373
+      },
+      {
+        "youtubeVideoId": "rN5f72lhJz8",
+        "title": "ENGINEERING EARTH:  Sci-fi Solutions to Earth's Problems | 4K Documentary",
+        "sourceChannelId": "UCR9sFzaG9Ia_kXJhfxtFMBA",
+        "sourceChannelTitle": "melodysheep",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rN5f72lhJz8/hqdefault.jpg",
+        "durationSec": 1436
+      },
+      {
+        "youtubeVideoId": "Qvn0Fkt6OsU",
+        "title": "How to Make a Mammoth (and save the world)",
+        "sourceChannelId": "UCR9sFzaG9Ia_kXJhfxtFMBA",
+        "sourceChannelTitle": "melodysheep",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Qvn0Fkt6OsU/hqdefault.jpg",
+        "durationSec": 963
+      },
+      {
+        "youtubeVideoId": "xC2ccYpjPHE",
+        "title": "ENGINEERING EARTH: Official Trailer",
+        "sourceChannelId": "UCR9sFzaG9Ia_kXJhfxtFMBA",
+        "sourceChannelTitle": "melodysheep",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xC2ccYpjPHE/hqdefault.jpg",
+        "durationSec": 1375
+      },
+      {
+        "youtubeVideoId": "iiGIJQxXNZM",
+        "title": "The Mysterious Stars at the Center of the Galaxy",
+        "sourceChannelId": "UCR9sFzaG9Ia_kXJhfxtFMBA",
+        "sourceChannelTitle": "melodysheep",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iiGIJQxXNZM/hqdefault.jpg",
+        "durationSec": 552
+      },
+      {
+        "youtubeVideoId": "CsyQa8_9tlw",
+        "title": "How The CIA Hacked Russia",
+        "sourceChannelId": "UClZbmi9JzfnB2CEb0fG8iew",
+        "sourceChannelTitle": "Primal Space",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CsyQa8_9tlw/hqdefault.jpg",
+        "durationSec": 838
+      },
+      {
+        "youtubeVideoId": "P0BUbWXvySE",
+        "title": "The Escape of Europe’s Smartest Criminal",
+        "sourceChannelId": "UClZbmi9JzfnB2CEb0fG8iew",
+        "sourceChannelTitle": "Primal Space",
+        "thumbnailUrl": "https://i.ytimg.com/vi/P0BUbWXvySE/hqdefault.jpg",
+        "durationSec": 1051
+      },
+      {
+        "youtubeVideoId": "YY-9ne5Kzjc",
+        "title": "How this Nigerian Man became a Billionaire Shoe Maker",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YY-9ne5Kzjc/hqdefault.jpg",
+        "durationSec": 1274
+      },
+      {
+        "youtubeVideoId": "oEYV57ZgIlI",
+        "title": "I survived Africa's strangest River 🇳🇬 (Monster Fishes)",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/oEYV57ZgIlI/hqdefault.jpg",
+        "durationSec": 580
+      },
+      {
+        "youtubeVideoId": "KzL-gVU0iA0",
+        "title": "Inside the Ojude Oba Festival | Travel Guide",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KzL-gVU0iA0/hqdefault.jpg",
+        "durationSec": 1246
+      },
+      {
+        "youtubeVideoId": "VhVESFwl8Cs",
+        "title": "Ojude Oba: Yoruba Heritage | A Short Film",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VhVESFwl8Cs/hqdefault.jpg",
+        "durationSec": 1313
+      },
+      {
+        "youtubeVideoId": "VTBy0fTEq0w",
+        "title": "Africa's hidden cloud village | Amedzofe, Ghana",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VTBy0fTEq0w/hqdefault.jpg",
+        "durationSec": 764
+      },
+      {
+        "youtubeVideoId": "BjZnFAlvVF0",
+        "title": "Inside Africa's Biggest Street Party  (Nigeria's Calabar Carnival)",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BjZnFAlvVF0/hqdefault.jpg",
+        "durationSec": 1407
+      },
+      {
+        "youtubeVideoId": "2Y-cCNZHB9E",
+        "title": "Where the RICH hide in Lagos | Lakowe Lakes, Nigeria",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2Y-cCNZHB9E/hqdefault.jpg",
+        "durationSec": 712
+      },
+      {
+        "youtubeVideoId": "1XTGrFegGyc",
+        "title": "Inside Northern Nigeria's Ancient City | Kano Durbar",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1XTGrFegGyc/hqdefault.jpg",
+        "durationSec": 767
+      },
+      {
+        "youtubeVideoId": "mPIOVjiuIFs",
+        "title": "I never expected this to exist in Africa  |  Lake Natron, Tanzania",
+        "sourceChannelId": "UCWAqXzY2MLxYUf8qVFuJedg",
+        "sourceChannelTitle": "Theniyifagbemi",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mPIOVjiuIFs/hqdefault.jpg",
+        "durationSec": 1139
+      },
+      {
+        "youtubeVideoId": "04uEBj0ftj8",
+        "title": "World's Toughest Cruise Ships | Extreme Voyages: Sailing to the Ends of the Earth | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/04uEBj0ftj8/hqdefault.jpg",
+        "durationSec": 624
+      },
+      {
+        "youtubeVideoId": "cZ-9gfffuZY",
+        "title": "A Life at 4,000 Meters | Peru: The Quechua People's Fight for Survival | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cZ-9gfffuZY/hqdefault.jpg",
+        "durationSec": 782
+      },
+      {
+        "youtubeVideoId": "Vud0P5qWNPU",
+        "title": "1 Town, 13 Prisons | Inside America's Prison Capital | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Vud0P5qWNPU/hqdefault.jpg",
+        "durationSec": 1251
+      },
+      {
+        "youtubeVideoId": "SxF7mCAXPVM",
+        "title": "The Kichwa People | Ecuador: The Amazon Tribe That Fought Back | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SxF7mCAXPVM/hqdefault.jpg",
+        "durationSec": 1436
+      },
+      {
+        "youtubeVideoId": "ZF04tFSVNgw",
+        "title": "World's Toughest Ships | Deep-Sea Jobs: Working Under Crushing Pressure | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZF04tFSVNgw/hqdefault.jpg",
+        "durationSec": 1177
+      },
+      {
+        "youtubeVideoId": "9vUdCbm6mg0",
+        "title": "Earth Untold: Tunisia | Hidden Tales from the Crossroads of North Africa | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9vUdCbm6mg0/hqdefault.jpg",
+        "durationSec": 1410
+      },
+      {
+        "youtubeVideoId": "mjYJ0fLd09w",
+        "title": "Prison Girls | MSCC Women's Prison: Surviving the Hardest Days Behind Bars | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mjYJ0fLd09w/hqdefault.jpg",
+        "durationSec": 526
+      },
+      {
+        "youtubeVideoId": "bY-8ZGM2u34",
+        "title": "World's Largest Ship Graveyard | Bangladesh: Meet the Extreme Shipbreakers | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bY-8ZGM2u34/hqdefault.jpg",
+        "durationSec": 542
+      },
+      {
+        "youtubeVideoId": "F8LeM6RuEDM",
+        "title": "Casablanca: Inside Morocco's City of Extreme Contrasts | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/F8LeM6RuEDM/hqdefault.jpg",
+        "durationSec": 983
+      },
+      {
+        "youtubeVideoId": "C5c-LEJ-HRA",
+        "title": "The City Without Sewers | Dar es Salaam: Inside Tanzania's Most Toxic Slum | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/C5c-LEJ-HRA/hqdefault.jpg",
+        "durationSec": 831
+      },
+      {
+        "youtubeVideoId": "_aNBYIlOAp4",
+        "title": "Prison Girls | MSCC Women's Prison: What Happens When the Cell Door Closes | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_aNBYIlOAp4/hqdefault.jpg",
+        "durationSec": 580
+      },
+      {
+        "youtubeVideoId": "QSNwmBAPGsU",
+        "title": "America, But Not Quite: Inside Puerto Rico | Free Documentary",
+        "sourceChannelId": "UCijcd0GR0fkxCAZwkiuWqtQ",
+        "sourceChannelTitle": "Free Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QSNwmBAPGsU/hqdefault.jpg",
+        "durationSec": 678
+      },
+      {
+        "youtubeVideoId": "mZkpSpvOeNE",
+        "title": "SPACETIME TO SLEEP: Sail through the infinite Sea of Stars | Season 7 I WELT HD Documentary",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mZkpSpvOeNE/hqdefault.jpg",
+        "durationSec": 1036
+      },
+      {
+        "youtubeVideoId": "xrE1R3d6MMU",
+        "title": "SPACETIME TO SLEEP: Fly through Space and Time with Intergalactic Knowledge | Season 6 I WELT HD",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xrE1R3d6MMU/hqdefault.jpg",
+        "durationSec": 644
+      },
+      {
+        "youtubeVideoId": "yOvNnrUjauk",
+        "title": "THE ZEPPELIN RETURNS: Inside Germany’s Factory Building a 75-Meter Giant | WELT Documentary",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yOvNnrUjauk/hqdefault.jpg",
+        "durationSec": 752
+      },
+      {
+        "youtubeVideoId": "yPgDqNTcfIk",
+        "title": "SPACETIME TO SLEEP: Dream beyond the Edge of the Universe | Season 5 I WELT HD Documentary",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yPgDqNTcfIk/hqdefault.jpg",
+        "durationSec": 696
+      },
+      {
+        "youtubeVideoId": "e5ycJIsPy9U",
+        "title": "ICE GIANTS AND GAS GIANTS: Diamond Rain and Other Secrets of the Solar System | SPACETIME S08E06",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/e5ycJIsPy9U/hqdefault.jpg",
+        "durationSec": 543
+      },
+      {
+        "youtubeVideoId": "daGTpfoIACE",
+        "title": "MEASURING THE COSMOS: Exploring the Limits of Time and Space | SPACETIME S08E05",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/daGTpfoIACE/hqdefault.jpg",
+        "durationSec": 1111
+      },
+      {
+        "youtubeVideoId": "LHHMAtgDPSA",
+        "title": "STARDUST: The Incredible Power of Carbon | SPACETIME S08E04",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LHHMAtgDPSA/hqdefault.jpg",
+        "durationSec": 1165
+      },
+      {
+        "youtubeVideoId": "1MnUU8Gcj4U",
+        "title": "Inside the Pentagon’s UFO Files: U.S. Military UAP Footage Explained | WELT Documentary",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1MnUU8Gcj4U/hqdefault.jpg",
+        "durationSec": 841
+      },
+      {
+        "youtubeVideoId": "7iSlTATXHzg",
+        "title": "EYES IN SPACE: Every Place on Earth, Every Single Day | SPACETIME S08E03",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7iSlTATXHzg/hqdefault.jpg",
+        "durationSec": 615
+      },
+      {
+        "youtubeVideoId": "tmu-_eOWx1c",
+        "title": "BEYOND THE EVENT HORIZON: Where does a Black Hole lead?  SPACETIME S08E02",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/tmu-_eOWx1c/hqdefault.jpg",
+        "durationSec": 981
+      },
+      {
+        "youtubeVideoId": "1GH_pMnOAxU",
+        "title": "BIG BANG: The Birth of Everything? James Webb Is Forcing Scientists to Rethink! SPACETIME S08E01",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1GH_pMnOAxU/hqdefault.jpg",
+        "durationSec": 1363
+      },
+      {
+        "youtubeVideoId": "twRsIFEFlhg",
+        "title": "Ernstfall: Inside a German Wargame – Episode 5: Moment of Truth | Podcast",
+        "sourceChannelId": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
+        "sourceChannelTitle": "WELT Documentary",
+        "thumbnailUrl": "https://i.ytimg.com/vi/twRsIFEFlhg/hqdefault.jpg",
+        "durationSec": 1047
       }
     ]
   },
@@ -9788,7 +10852,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "architecture",
     "categoryName": "Architecture",
     "hue": 28,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "J0L9gEZ-Ht8",
@@ -10268,7 +11332,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "religion",
     "categoryName": "Religion",
     "hue": 42,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "8i8V5jjEHoU",
@@ -10413,6 +11477,430 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Ascension Presents",
         "thumbnailUrl": "https://i.ytimg.com/vi/f-1LiVaXfvU/hqdefault.jpg",
         "durationSec": 2923
+      },
+      {
+        "youtubeVideoId": "GZtJ9cG6Cos",
+        "title": "St. Bridget 12-Year Devotion — Prayers Honoring the 7 Times Jesus Shed His Blood",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GZtJ9cG6Cos/hqdefault.jpg",
+        "durationSec": 1243
+      },
+      {
+        "youtubeVideoId": "XMo1AEeLIVQ",
+        "title": "St. Jude Novena — Worker of Miracles (Prayer for ALL 9 Days)",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/XMo1AEeLIVQ/hqdefault.jpg",
+        "durationSec": 606
+      },
+      {
+        "youtubeVideoId": "V_ZeT07RAXs",
+        "title": "Deliverance Prayer from All Evil — Break Chains for You & Your Family",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/V_ZeT07RAXs/hqdefault.jpg",
+        "durationSec": 1393
+      },
+      {
+        "youtubeVideoId": "SeSY7hKxRxw",
+        "title": "Novena to St. Carlo Acutis",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SeSY7hKxRxw/hqdefault.jpg",
+        "durationSec": 965
+      },
+      {
+        "youtubeVideoId": "X78M-tz2Ols",
+        "title": "A Prayer to Mary to Crush the Serpent",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/X78M-tz2Ols/hqdefault.jpg",
+        "durationSec": 707
+      },
+      {
+        "youtubeVideoId": "gA_veg2imtM",
+        "title": "Litany of St. Padre Pio of Pietrelcina",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gA_veg2imtM/hqdefault.jpg",
+        "durationSec": 1436
+      },
+      {
+        "youtubeVideoId": "2jcS3dEdF-0",
+        "title": "Prayer to Our Lady of La Leche | For Fertility & Pregnancy",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2jcS3dEdF-0/hqdefault.jpg",
+        "durationSec": 1329
+      },
+      {
+        "youtubeVideoId": "NDP9vh6PHp0",
+        "title": "Healing Prayer to Our Lady of Good Health (Vailankanni)",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NDP9vh6PHp0/hqdefault.jpg",
+        "durationSec": 1123
+      },
+      {
+        "youtubeVideoId": "AJ-xbdM9gWs",
+        "title": "The Litany of Gratitude — Thank You, Lord!",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AJ-xbdM9gWs/hqdefault.jpg",
+        "durationSec": 737
+      },
+      {
+        "youtubeVideoId": "sq15IiYG2sE",
+        "title": "Chaplet of St. Monica — For the Conversion of Sons & Daughters",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sq15IiYG2sE/hqdefault.jpg",
+        "durationSec": 1332
+      },
+      {
+        "youtubeVideoId": "opxhdfZY5yo",
+        "title": "Novena to St Monica — For the Conversion of Loved Ones",
+        "sourceChannelId": "UC27F-5DfIOEitDEazCwdHWw",
+        "sourceChannelTitle": "The Catholic Crusade",
+        "thumbnailUrl": "https://i.ytimg.com/vi/opxhdfZY5yo/hqdefault.jpg",
+        "durationSec": 921
+      },
+      {
+        "youtubeVideoId": "nS4lWM_hz8w",
+        "title": "misty flip   courchevel 1850 720p",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nS4lWM_hz8w/hqdefault.jpg",
+        "durationSec": 1347
+      },
+      {
+        "youtubeVideoId": "1IINdWpCyoE",
+        "title": "The Wilsons in... A Christmas like no other",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1IINdWpCyoE/hqdefault.jpg",
+        "durationSec": 1164
+      },
+      {
+        "youtubeVideoId": "WpiZ9_Z3PRk",
+        "title": "360 test",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WpiZ9_Z3PRk/hqdefault.jpg",
+        "durationSec": 576
+      },
+      {
+        "youtubeVideoId": "DK-UMuoGmYk",
+        "title": "flycam",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/DK-UMuoGmYk/hqdefault.jpg",
+        "durationSec": 1424
+      },
+      {
+        "youtubeVideoId": "SUjWK_i6FB8",
+        "title": "fly cam",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SUjWK_i6FB8/hqdefault.jpg",
+        "durationSec": 1068
+      },
+      {
+        "youtubeVideoId": "d5rMMo73NbE",
+        "title": "Alex Wilson Live Stream",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/d5rMMo73NbE/hqdefault.jpg",
+        "durationSec": 569
+      },
+      {
+        "youtubeVideoId": "gCcvzofqVxQ",
+        "title": "The Robbery",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gCcvzofqVxQ/hqdefault.jpg",
+        "durationSec": 960
+      },
+      {
+        "youtubeVideoId": "Xglaquj-mSI",
+        "title": "Blasting through Witley Common",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Xglaquj-mSI/hqdefault.jpg",
+        "durationSec": 872
+      },
+      {
+        "youtubeVideoId": "SwfexDZp2rI",
+        "title": "Witley Common",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SwfexDZp2rI/hqdefault.jpg",
+        "durationSec": 676
+      },
+      {
+        "youtubeVideoId": "KVpliD6yHGc",
+        "title": "Hitting some jumps at the Whinlatter in the Lake District",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KVpliD6yHGc/hqdefault.jpg",
+        "durationSec": 865
+      },
+      {
+        "youtubeVideoId": "E9__p3zqIdA",
+        "title": "Into the woods",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/E9__p3zqIdA/hqdefault.jpg",
+        "durationSec": 616
+      },
+      {
+        "youtubeVideoId": "CD7SYeHpsgY",
+        "title": "Ride around Caesar's Camp",
+        "sourceChannelId": "UCw_FuPznUUVSLtPnSMQnZQw",
+        "sourceChannelTitle": "Alexander Wilson",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CD7SYeHpsgY/hqdefault.jpg",
+        "durationSec": 980
+      },
+      {
+        "youtubeVideoId": "Ll-sRBTPnvU",
+        "title": "Why God Hasn't Taken Away Your Struggles",
+        "sourceChannelId": "UCVdGX3N-WIJ5nUvklBTNhAw",
+        "sourceChannelTitle": "Ascension Presents",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ll-sRBTPnvU/hqdefault.jpg",
+        "durationSec": 1403
+      },
+      {
+        "youtubeVideoId": "zDvVWnV49Do",
+        "title": "Called to Evangelize Through Innovation w/ Fr. Mike Schmitz and Jonathan Strate",
+        "sourceChannelId": "UCVdGX3N-WIJ5nUvklBTNhAw",
+        "sourceChannelTitle": "Ascension Presents",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zDvVWnV49Do/hqdefault.jpg",
+        "durationSec": 1051
+      },
+      {
+        "youtubeVideoId": "H9XV9GLqtPs",
+        "title": "What Every Catholic Should Hear About Friendship w/ Fr. Gregory Pine",
+        "sourceChannelId": "UCVdGX3N-WIJ5nUvklBTNhAw",
+        "sourceChannelTitle": "Ascension Presents",
+        "thumbnailUrl": "https://i.ytimg.com/vi/H9XV9GLqtPs/hqdefault.jpg",
+        "durationSec": 629
+      },
+      {
+        "youtubeVideoId": "6CmW-tnlGyo",
+        "title": "Catholic Trivia: Husband vs. Wife (David and Maria Henrie)",
+        "sourceChannelId": "UCVdGX3N-WIJ5nUvklBTNhAw",
+        "sourceChannelTitle": "Ascension Presents",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6CmW-tnlGyo/hqdefault.jpg",
+        "durationSec": 575
+      },
+      {
+        "youtubeVideoId": "gr4mIyuFuUY",
+        "title": "Why You Can’t Enjoy Where You Are",
+        "sourceChannelId": "UCVdGX3N-WIJ5nUvklBTNhAw",
+        "sourceChannelTitle": "Ascension Presents",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gr4mIyuFuUY/hqdefault.jpg",
+        "durationSec": 716
+      },
+      {
+        "youtubeVideoId": "yJ1fMALMnHY",
+        "title": "What Was Mary’s First Communion Like?",
+        "sourceChannelId": "UCVdGX3N-WIJ5nUvklBTNhAw",
+        "sourceChannelTitle": "Ascension Presents",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yJ1fMALMnHY/hqdefault.jpg",
+        "durationSec": 932
+      },
+      {
+        "youtubeVideoId": "cyH4ndoLEYw",
+        "title": "Solemnity of All Saints - Mass with Fr. Mike Schmitz",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cyH4ndoLEYw/hqdefault.jpg",
+        "durationSec": 1390
+      },
+      {
+        "youtubeVideoId": "xWu5-bj95k0",
+        "title": "\"Your Spiritual Posse\" | Jeff Cavins' Reflection for the Solemnity of All Saints",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xWu5-bj95k0/hqdefault.jpg",
+        "durationSec": 1335
+      },
+      {
+        "youtubeVideoId": "qXRbKEdqiJM",
+        "title": "\"Overnight Success'\" | 30th Sunday in Ordinary Time (Fr. Mike's Homily) #sundayhomily",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qXRbKEdqiJM/hqdefault.jpg",
+        "durationSec": 1330
+      },
+      {
+        "youtubeVideoId": "wqBczS6ACDg",
+        "title": "Thirtieth Sunday in Ordinary Time - Mass with Fr. Mike Schmitz",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wqBczS6ACDg/hqdefault.jpg",
+        "durationSec": 1095
+      },
+      {
+        "youtubeVideoId": "dMTuyPep_6A",
+        "title": "\"Apostrophe S\" | 29th Sunday in Ordinary Time (Fr. Mike's Homily) #sundayhomily",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dMTuyPep_6A/hqdefault.jpg",
+        "durationSec": 1054
+      },
+      {
+        "youtubeVideoId": "JQxmL0Af8ps",
+        "title": "Twenty-ninth Sunday in Ordinary Time - Mass with Fr. Mike Schmitz",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JQxmL0Af8ps/hqdefault.jpg",
+        "durationSec": 598
+      },
+      {
+        "youtubeVideoId": "VbmssACwIbg",
+        "title": "\"Blind Spots: Practical Atheism\" | 28th Sunday in Ordinary Time (Fr. Mike's Homily) #sundayhomily",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VbmssACwIbg/hqdefault.jpg",
+        "durationSec": 646
+      },
+      {
+        "youtubeVideoId": "MOpWi05M7FU",
+        "title": "Twenty-eighth Sunday in Ordinary Time - Mass with Fr. Mike Schmitz",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MOpWi05M7FU/hqdefault.jpg",
+        "durationSec": 830
+      },
+      {
+        "youtubeVideoId": "Vzj_3z3nctA",
+        "title": "\"Blind Spots: Worry\" | 27th Sunday in Ordinary Time (Fr. Mike's Homily) #sundayhomily",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Vzj_3z3nctA/hqdefault.jpg",
+        "durationSec": 1067
+      },
+      {
+        "youtubeVideoId": "OhjiUoprw-w",
+        "title": "Twenty-seventh Sunday in Ordinary Time - Mass with Fr. Mike Schmitz",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OhjiUoprw-w/hqdefault.jpg",
+        "durationSec": 563
+      },
+      {
+        "youtubeVideoId": "wDU3XTEaNK0",
+        "title": "\"Blind Spots: Complaint\" | 26th Sunday in Ordinary Time (Fr. Mike's Homily) #sundayhomily",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wDU3XTEaNK0/hqdefault.jpg",
+        "durationSec": 528
+      },
+      {
+        "youtubeVideoId": "-MQ-pmGM7qs",
+        "title": "Twenty-sixth Sunday in Ordinary Time - Mass with Fr. Mike Schmitz",
+        "sourceChannelId": "UCZpWMxP4e8sQLZjbYQmanIw",
+        "sourceChannelTitle": "Sundays with Ascension",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-MQ-pmGM7qs/hqdefault.jpg",
+        "durationSec": 1222
+      },
+      {
+        "youtubeVideoId": "9Axq1OhmdIY",
+        "title": "Why I wrote a book on a typewriter in 2026.",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9Axq1OhmdIY/hqdefault.jpg",
+        "durationSec": 976
+      },
+      {
+        "youtubeVideoId": "-5PvhCpniOo",
+        "title": "Post-Summer Productivity Reset 2026",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-5PvhCpniOo/hqdefault.jpg",
+        "durationSec": 1022
+      },
+      {
+        "youtubeVideoId": "hef4wEwBBOI",
+        "title": "Why you always quit right before it gets good.",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hef4wEwBBOI/hqdefault.jpg",
+        "durationSec": 664
+      },
+      {
+        "youtubeVideoId": "Ad-aeGetd2E",
+        "title": "Your to-do list won’t matter in 100 years.",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ad-aeGetd2E/hqdefault.jpg",
+        "durationSec": 1423
+      },
+      {
+        "youtubeVideoId": "D31uTW6_WSI",
+        "title": "I’m begging you to take your faith seriously",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/D31uTW6_WSI/hqdefault.jpg",
+        "durationSec": 1390
+      },
+      {
+        "youtubeVideoId": "1kHrbo9e-mY",
+        "title": "Why Christians Are Afraid to Want More (And What the Bible Really Says About Ambition)",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1kHrbo9e-mY/hqdefault.jpg",
+        "durationSec": 484
+      },
+      {
+        "youtubeVideoId": "-vtc3gHhbds",
+        "title": "How to biblically fix your attention span",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-vtc3gHhbds/hqdefault.jpg",
+        "durationSec": 837
+      },
+      {
+        "youtubeVideoId": "7FdD2xf4PTw",
+        "title": "Limiting Beliefs: What the Bible Really Says",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/7FdD2xf4PTw/hqdefault.jpg",
+        "durationSec": 912
+      },
+      {
+        "youtubeVideoId": "bCKxZ9PUofI",
+        "title": "How I Use Apple Watch as My Only Phone",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bCKxZ9PUofI/hqdefault.jpg",
+        "durationSec": 1184
+      },
+      {
+        "youtubeVideoId": "Zi3OpLf5e00",
+        "title": "How to Stay on Track While Still Enjoying Your Summer",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zi3OpLf5e00/hqdefault.jpg",
+        "durationSec": 945
+      },
+      {
+        "youtubeVideoId": "MPd4dGidPSs",
+        "title": "Don't Give Up",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MPd4dGidPSs/hqdefault.jpg",
+        "durationSec": 607
+      },
+      {
+        "youtubeVideoId": "LtZQssQwWwQ",
+        "title": "2 Years Without a Smartphone",
+        "sourceChannelId": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
+        "sourceChannelTitle": "Redeeming Productivity",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LtZQssQwWwQ/hqdefault.jpg",
+        "durationSec": 1036
       }
     ]
   },
@@ -10420,7 +11908,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "cars",
     "categoryName": "Cars",
     "hue": 8,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "rCyPtYiL-jE",
@@ -10517,6 +12005,494 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "Polestar",
         "thumbnailUrl": "https://i.ytimg.com/vi/xsQXO6gM_S8/hqdefault.jpg",
         "durationSec": 292
+      },
+      {
+        "youtubeVideoId": "aJBlV5J0xFk",
+        "title": "Porsche x La Marzocco | Carrera RS 2.7 Collection",
+        "sourceChannelId": "UC_BaxRhNREI_V0DVXjXDALA",
+        "sourceChannelTitle": "Porsche",
+        "thumbnailUrl": "https://i.ytimg.com/vi/aJBlV5J0xFk/hqdefault.jpg",
+        "durationSec": 1157
+      },
+      {
+        "youtubeVideoId": "LCi5E0Tf2jA",
+        "title": "Wireless charging for the new Porsche Cayenne Electric | Porsche Deep Dives​",
+        "sourceChannelId": "UC_BaxRhNREI_V0DVXjXDALA",
+        "sourceChannelTitle": "Porsche",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LCi5E0Tf2jA/hqdefault.jpg",
+        "durationSec": 1193
+      },
+      {
+        "youtubeVideoId": "EtGu4AgRH-I",
+        "title": "Porsche Mission S | Design Walkaround with Tobias Sühlmann​",
+        "sourceChannelId": "UC_BaxRhNREI_V0DVXjXDALA",
+        "sourceChannelTitle": "Porsche",
+        "thumbnailUrl": "https://i.ytimg.com/vi/EtGu4AgRH-I/hqdefault.jpg",
+        "durationSec": 497
+      },
+      {
+        "youtubeVideoId": "axeNSZBf8sE",
+        "title": "Mission S. Authentic. Consequent. Timeless.",
+        "sourceChannelId": "UC_BaxRhNREI_V0DVXjXDALA",
+        "sourceChannelTitle": "Porsche",
+        "thumbnailUrl": "https://i.ytimg.com/vi/axeNSZBf8sE/hqdefault.jpg",
+        "durationSec": 1121
+      },
+      {
+        "youtubeVideoId": "MSUpZ_cxl_Y",
+        "title": "Formula 2030: Our vision for the future | Polestar",
+        "sourceChannelId": "UC9ZqNBEjEU1NK475EvqmlLA",
+        "sourceChannelTitle": "Polestar",
+        "thumbnailUrl": "https://i.ytimg.com/vi/MSUpZ_cxl_Y/hqdefault.jpg",
+        "durationSec": 1045
+      },
+      {
+        "youtubeVideoId": "linRE2nftrQ",
+        "title": "We experiment on Ben Collins using Polestar 5 | The anatomy of performance | Ep. 3 | Polestar",
+        "sourceChannelId": "UC9ZqNBEjEU1NK475EvqmlLA",
+        "sourceChannelTitle": "Polestar",
+        "thumbnailUrl": "https://i.ytimg.com/vi/linRE2nftrQ/hqdefault.jpg",
+        "durationSec": 947
+      },
+      {
+        "youtubeVideoId": "WPxZG31RFxI",
+        "title": "What happens in your brain when you drive? | The anatomy of performance | Ep. 2 | Polestar",
+        "sourceChannelId": "UC9ZqNBEjEU1NK475EvqmlLA",
+        "sourceChannelTitle": "Polestar",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WPxZG31RFxI/hqdefault.jpg",
+        "durationSec": 913
+      },
+      {
+        "youtubeVideoId": "KzCTjDuW6RA",
+        "title": "Can we measure the thrill of driving? | The anatomy of performance | Ep. 1 | Polestar",
+        "sourceChannelId": "UC9ZqNBEjEU1NK475EvqmlLA",
+        "sourceChannelTitle": "Polestar",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KzCTjDuW6RA/hqdefault.jpg",
+        "durationSec": 617
+      },
+      {
+        "youtubeVideoId": "GB6lntnVi4A",
+        "title": "Is Tesla Model S Plaid Signature a Future Collectible?",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GB6lntnVi4A/hqdefault.jpg",
+        "durationSec": 969
+      },
+      {
+        "youtubeVideoId": "QQ97R1nhq4M",
+        "title": "This EV Doesn't Make Any Sense",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QQ97R1nhq4M/hqdefault.jpg",
+        "durationSec": 499
+      },
+      {
+        "youtubeVideoId": "5C60QMnLtX8",
+        "title": "Corvette GrandSport X - Porsche 911 Performance for a Model S Price!",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5C60QMnLtX8/hqdefault.jpg",
+        "durationSec": 814
+      },
+      {
+        "youtubeVideoId": "-l28H03fnKk",
+        "title": "Ferrari Luce First Drive - Can it Overcome the Looks?",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-l28H03fnKk/hqdefault.jpg",
+        "durationSec": 622
+      },
+      {
+        "youtubeVideoId": "FefIWhfl5Lg",
+        "title": "Porsche Macan Turbo EV - Worth 3 Model Ys?",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FefIWhfl5Lg/hqdefault.jpg",
+        "durationSec": 1111
+      },
+      {
+        "youtubeVideoId": "d0t7wpkFc6U",
+        "title": "Slate Truck First Look: The $25,000 Modular EV!",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/d0t7wpkFc6U/hqdefault.jpg",
+        "durationSec": 737
+      },
+      {
+        "youtubeVideoId": "clsbuM6uf1A",
+        "title": "2026 Nissan Leaf Graduated from Glow-Up University",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/clsbuM6uf1A/hqdefault.jpg",
+        "durationSec": 665
+      },
+      {
+        "youtubeVideoId": "6Reu1WS3BhM",
+        "title": "Ferrari Luce is the Most Controversial Ferrari Ever",
+        "sourceChannelId": "UC2J-0g_nxlwcD9JBK1eTleQ",
+        "sourceChannelTitle": "Auto Focus",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6Reu1WS3BhM/hqdefault.jpg",
+        "durationSec": 949
+      },
+      {
+        "youtubeVideoId": "cOt42JZ5mu8",
+        "title": "Does Size Matter? 7.4L V8-swap E30 v BMW M2 DRAG RACE",
+        "sourceChannelId": "UCUhFaUpnq31m6TNX2VKVSVA",
+        "sourceChannelTitle": "carwow",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cOt42JZ5mu8/hqdefault.jpg",
+        "durationSec": 1297
+      },
+      {
+        "youtubeVideoId": "Bk_rcuhlN1o",
+        "title": "New 217mph Audi Nuvolari made me SICK!",
+        "sourceChannelId": "UCUhFaUpnq31m6TNX2VKVSVA",
+        "sourceChannelTitle": "carwow",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Bk_rcuhlN1o/hqdefault.jpg",
+        "durationSec": 1402
+      },
+      {
+        "youtubeVideoId": "wU6wOxGtW7A",
+        "title": "World's greatest engine: DRAG RACE",
+        "sourceChannelId": "UCUhFaUpnq31m6TNX2VKVSVA",
+        "sourceChannelTitle": "carwow",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wU6wOxGtW7A/hqdefault.jpg",
+        "durationSec": 1196
+      },
+      {
+        "youtubeVideoId": "uP4oLIupBUE",
+        "title": "Are old Supercars RUBBISH? V12 Lambo v 7-seat Volvo DRAG RACE!",
+        "sourceChannelId": "UCUhFaUpnq31m6TNX2VKVSVA",
+        "sourceChannelTitle": "carwow",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uP4oLIupBUE/hqdefault.jpg",
+        "durationSec": 668
+      },
+      {
+        "youtubeVideoId": "8w4uzDrbWAE",
+        "title": "Audi A6 Allroad Review: it proves SUVs are STUPID!",
+        "sourceChannelId": "UCUhFaUpnq31m6TNX2VKVSVA",
+        "sourceChannelTitle": "carwow",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8w4uzDrbWAE/hqdefault.jpg",
+        "durationSec": 481
+      },
+      {
+        "youtubeVideoId": "nUPSOIpFujc",
+        "title": "I Bought a (Different) Ford GT!",
+        "sourceChannelId": "UCsqjHFMB_JYTaEnf_vmTNqg",
+        "sourceChannelTitle": "Doug DeMuro",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nUPSOIpFujc/hqdefault.jpg",
+        "durationSec": 1356
+      },
+      {
+        "youtubeVideoId": "OrhYVPmlJ1Q",
+        "title": "A Gallardo Restomod?! Bugatti CEO’s Bugatti STOLEN! Civic Type R HRC! THIS CAR POD! EP136",
+        "sourceChannelId": "UCsqjHFMB_JYTaEnf_vmTNqg",
+        "sourceChannelTitle": "Doug DeMuro",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OrhYVPmlJ1Q/hqdefault.jpg",
+        "durationSec": 637
+      },
+      {
+        "youtubeVideoId": "HhO4IR-gdqk",
+        "title": "This Crazy Pontiac Firebird Trans Am Ruled the 1980s",
+        "sourceChannelId": "UCsqjHFMB_JYTaEnf_vmTNqg",
+        "sourceChannelTitle": "Doug DeMuro",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HhO4IR-gdqk/hqdefault.jpg",
+        "durationSec": 906
+      },
+      {
+        "youtubeVideoId": "F7K1K2BJTrA",
+        "title": "Aston Martin Valhalla: $1 Million Crazy Hypercar From Aston?!",
+        "sourceChannelId": "UCsqjHFMB_JYTaEnf_vmTNqg",
+        "sourceChannelTitle": "Doug DeMuro",
+        "thumbnailUrl": "https://i.ytimg.com/vi/F7K1K2BJTrA/hqdefault.jpg",
+        "durationSec": 701
+      },
+      {
+        "youtubeVideoId": "0lPIv62a9Mo",
+        "title": "TWR Supercat Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0lPIv62a9Mo/hqdefault.jpg",
+        "durationSec": 649
+      },
+      {
+        "youtubeVideoId": "Ch8M04UO1aQ",
+        "title": "Morgan Supersport 400 Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ch8M04UO1aQ/hqdefault.jpg",
+        "durationSec": 1385
+      },
+      {
+        "youtubeVideoId": "RNEJORtu_Vg",
+        "title": "I Secretly Bought Thomas' Dream Car...For Myself",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RNEJORtu_Vg/hqdefault.jpg",
+        "durationSec": 1323
+      },
+      {
+        "youtubeVideoId": "HXi5LXm5yv4",
+        "title": "Aston Martin Valhalla Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HXi5LXm5yv4/hqdefault.jpg",
+        "durationSec": 1255
+      },
+      {
+        "youtubeVideoId": "-gRXjuFNK1g",
+        "title": "2027 Audi RS5 Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-gRXjuFNK1g/hqdefault.jpg",
+        "durationSec": 942
+      },
+      {
+        "youtubeVideoId": "un26G9lc7po",
+        "title": "I Built My Dream Alfa Romeo",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/un26G9lc7po/hqdefault.jpg",
+        "durationSec": 592
+      },
+      {
+        "youtubeVideoId": "Vq7wmfZMcvY",
+        "title": "Driving Francis Bourgeois' $70,000 Honda Jazz",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Vq7wmfZMcvY/hqdefault.jpg",
+        "durationSec": 703
+      },
+      {
+        "youtubeVideoId": "NIl_yrLzt7s",
+        "title": "2027 BMW iX3 Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NIl_yrLzt7s/hqdefault.jpg",
+        "durationSec": 485
+      },
+      {
+        "youtubeVideoId": "w4TLAad_uRY",
+        "title": "Road Trip Of Regret In The New Lexus ES",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/w4TLAad_uRY/hqdefault.jpg",
+        "durationSec": 1420
+      },
+      {
+        "youtubeVideoId": "xTeCI3Rv0UY",
+        "title": "I Bought an Alfa Romeo Giulia Quadrifoglio",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xTeCI3Rv0UY/hqdefault.jpg",
+        "durationSec": 1132
+      },
+      {
+        "youtubeVideoId": "cFkDwMQxcNc",
+        "title": "Audi RS4 vs Mercedes C63 vs BMW M3 // $30,000 Question",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cFkDwMQxcNc/hqdefault.jpg",
+        "durationSec": 1343
+      },
+      {
+        "youtubeVideoId": "PSlHRkRytt0",
+        "title": "TVR Sagaris Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PSlHRkRytt0/hqdefault.jpg",
+        "durationSec": 849
+      },
+      {
+        "youtubeVideoId": "r0TQBdUAfWg",
+        "title": "2026 Ferrari 12Cilindri Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/r0TQBdUAfWg/hqdefault.jpg",
+        "durationSec": 1427
+      },
+      {
+        "youtubeVideoId": "cjwCDiaQgCU",
+        "title": "2026 BMW M2 CS Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cjwCDiaQgCU/hqdefault.jpg",
+        "durationSec": 1423
+      },
+      {
+        "youtubeVideoId": "In7bohxb35U",
+        "title": "Porsche 911 Reimagined by Singer DLS Review",
+        "sourceChannelId": "UCyXiDU5qjfOPxgOPeFWGwKw",
+        "sourceChannelTitle": "Throttle House",
+        "thumbnailUrl": "https://i.ytimg.com/vi/In7bohxb35U/hqdefault.jpg",
+        "durationSec": 1120
+      },
+      {
+        "youtubeVideoId": "qo2YqpDEG6A",
+        "title": "Testing Our Junkyard Baja Bug vs $1 Million Trophy Truck!",
+        "sourceChannelId": "UCL6JmiMXKoXS6bpP1D3bk8g",
+        "sourceChannelTitle": "Donut",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qo2YqpDEG6A/hqdefault.jpg",
+        "durationSec": 1427
+      },
+      {
+        "youtubeVideoId": "S19nPbFFmT8",
+        "title": "Buying and Fixing a Wrecked Baja Bug!",
+        "sourceChannelId": "UCL6JmiMXKoXS6bpP1D3bk8g",
+        "sourceChannelTitle": "Donut",
+        "thumbnailUrl": "https://i.ytimg.com/vi/S19nPbFFmT8/hqdefault.jpg",
+        "durationSec": 852
+      },
+      {
+        "youtubeVideoId": "AhNNITBS9V0",
+        "title": "$32,000 vs $100,000 Nissan S15 Build | HiLow Finale!",
+        "sourceChannelId": "UCL6JmiMXKoXS6bpP1D3bk8g",
+        "sourceChannelTitle": "Donut",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AhNNITBS9V0/hqdefault.jpg",
+        "durationSec": 560
+      },
+      {
+        "youtubeVideoId": "lPNcLFWGMJs",
+        "title": "Cheap vs Expensive Paint Jobs! | HiLow",
+        "sourceChannelId": "UCL6JmiMXKoXS6bpP1D3bk8g",
+        "sourceChannelTitle": "Donut",
+        "thumbnailUrl": "https://i.ytimg.com/vi/lPNcLFWGMJs/hqdefault.jpg",
+        "durationSec": 1101
+      },
+      {
+        "youtubeVideoId": "htqV6nlbHI4",
+        "title": "$300 vs $3000 Body Kit | HiLow",
+        "sourceChannelId": "UCL6JmiMXKoXS6bpP1D3bk8g",
+        "sourceChannelTitle": "Donut",
+        "thumbnailUrl": "https://i.ytimg.com/vi/htqV6nlbHI4/hqdefault.jpg",
+        "durationSec": 532
+      },
+      {
+        "youtubeVideoId": "0cuRBQUrDpk",
+        "title": "Cheap vs Expensive Drift Upgrades! | HiLow",
+        "sourceChannelId": "UCL6JmiMXKoXS6bpP1D3bk8g",
+        "sourceChannelTitle": "Donut",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0cuRBQUrDpk/hqdefault.jpg",
+        "durationSec": 669
+      },
+      {
+        "youtubeVideoId": "ebJT5Q_fVlo",
+        "title": "Tired of 911 restomods? Try this Porsche 356 instead | Henry Catchpole - The Driver's Seat",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ebJT5Q_fVlo/hqdefault.jpg",
+        "durationSec": 913
+      },
+      {
+        "youtubeVideoId": "mmLu-EFW1zc",
+        "title": "Saving Her Late Husband’s Project: 1970 Camaro Runs for the First Time in 40 Years | Driveway Finds",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mmLu-EFW1zc/hqdefault.jpg",
+        "durationSec": 1048
+      },
+      {
+        "youtubeVideoId": "Mi52KsXh0f8",
+        "title": "This Stick Shift, 455 HP Porsche Weighs as Much as a Mazda Miata | Capturing Car Culture",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Mi52KsXh0f8/hqdefault.jpg",
+        "durationSec": 1169
+      },
+      {
+        "youtubeVideoId": "F4-RPcSGVFI",
+        "title": "Driving Every V10 Ever Made: The History of the World's Best-Sounding Engine — Jason Cammisa ICONS",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/F4-RPcSGVFI/hqdefault.jpg",
+        "durationSec": 673
+      },
+      {
+        "youtubeVideoId": "NG0whdWVO0o",
+        "title": "Driving the fabulous Sports Purpose Porsche 911 | Henry Catchpole - The Driver's Seat",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NG0whdWVO0o/hqdefault.jpg",
+        "durationSec": 755
+      },
+      {
+        "youtubeVideoId": "LDfICeVa4Rw",
+        "title": "The Votes Are In: Who Wins the RADwood Build Challenge? | RADwood Build Challenge Ep 6 - The Finale!",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/LDfICeVa4Rw/hqdefault.jpg",
+        "durationSec": 913
+      },
+      {
+        "youtubeVideoId": "DWgP15VFjLQ",
+        "title": "You Asked, I Delivered: Touring 25G Secret Car Museum in Thailand | Capturing Car Culture",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/DWgP15VFjLQ/hqdefault.jpg",
+        "durationSec": 863
+      },
+      {
+        "youtubeVideoId": "TL988B7ffu8",
+        "title": "Three Builds, Zero Days to Spare: RADwood Build Challenge Ep. 5",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/TL988B7ffu8/hqdefault.jpg",
+        "durationSec": 825
+      },
+      {
+        "youtubeVideoId": "-5vuipaI7l0",
+        "title": "Ferrari's 12Cilindri Manuale Reinvented the Transmission: Here’s Why It Matters. Jason Cammisa ICONS",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-5vuipaI7l0/hqdefault.jpg",
+        "durationSec": 1285
+      },
+      {
+        "youtubeVideoId": "CKE0HaBkzsg",
+        "title": "This Father-Son Duo Builds Cars From Scratch, Even the Engines | Barn Find Hunter",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CKE0HaBkzsg/hqdefault.jpg",
+        "durationSec": 743
+      },
+      {
+        "youtubeVideoId": "22rvpUecLts",
+        "title": "The FLYING Tesla Roadster explained by the man who engineered it",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/22rvpUecLts/hqdefault.jpg",
+        "durationSec": 1092
+      },
+      {
+        "youtubeVideoId": "RQkLgYkPlcw",
+        "title": "Two Weeks Until RADwood: Is Anyone Actually Going to Finish in Time? | RADwood Build Challenge Ep 4",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RQkLgYkPlcw/hqdefault.jpg",
+        "durationSec": 759
+      },
+      {
+        "youtubeVideoId": "rdIAbr-EQ3k",
+        "title": "This garage find 1966 GTO sat for 25 years. Can we get this Tri-Power going again? | Driveway Finds",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rdIAbr-EQ3k/hqdefault.jpg",
+        "durationSec": 631
+      },
+      {
+        "youtubeVideoId": "1a8gs_mX5P4",
+        "title": "Fast & The Furious Thai Delivery Trucks: Eat, Sleep, Play, Work | Capturing Car Culture",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/1a8gs_mX5P4/hqdefault.jpg",
+        "durationSec": 925
+      },
+      {
+        "youtubeVideoId": "U0t_k5oQ4eI",
+        "title": "Trash Talk, Typhoons and a Truck That Doesn't Fit: RADwood Build Challenge",
+        "sourceChannelId": "UCLgEVx4mzk3T3mzgbKG54Eg",
+        "sourceChannelTitle": "Hagerty",
+        "thumbnailUrl": "https://i.ytimg.com/vi/U0t_k5oQ4eI/hqdefault.jpg",
+        "durationSec": 1286
       }
     ]
   },
@@ -10524,7 +12500,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "business",
     "categoryName": "Business",
     "hue": 155,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "TGZTqbfDzcM",
@@ -10669,6 +12645,342 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "The Numbers Game",
         "thumbnailUrl": "https://i.ytimg.com/vi/-Pq1qcCdRHQ/hqdefault.jpg",
         "durationSec": 1601
+      },
+      {
+        "youtubeVideoId": "0aLYK6tBoJo",
+        "title": "This Guy Sells a CRAZY Amount of Cheesesteaks ($492K/Month)...How?!",
+        "sourceChannelId": "UChFahjDeMBV67DSXiF5pwBA",
+        "sourceChannelTitle": "UpFlip",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0aLYK6tBoJo/hqdefault.jpg",
+        "durationSec": 957
+      },
+      {
+        "youtubeVideoId": "Kg6CCVJsoWw",
+        "title": "This Small Farm Makes $480K/Year with a Secret Most Farms Miss",
+        "sourceChannelId": "UChFahjDeMBV67DSXiF5pwBA",
+        "sourceChannelTitle": "UpFlip",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Kg6CCVJsoWw/hqdefault.jpg",
+        "durationSec": 1206
+      },
+      {
+        "youtubeVideoId": "FRoQOzZRcpw",
+        "title": "The Brain Doctor That Figured Out The Cause Of Dementia - Dr. David Perlmutter",
+        "sourceChannelId": "UCGq-a57w-aPwyi3pW7XLiHw",
+        "sourceChannelTitle": "The Diary Of A CEO",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FRoQOzZRcpw/hqdefault.jpg",
+        "durationSec": 985
+      },
+      {
+        "youtubeVideoId": "3kuNW8hRc2U",
+        "title": "WW3 Threat Expert: The Warning We Are Ignoring, The Only Way Out Is THIS! | Dr Sarah Paine",
+        "sourceChannelId": "UCGq-a57w-aPwyi3pW7XLiHw",
+        "sourceChannelTitle": "The Diary Of A CEO",
+        "thumbnailUrl": "https://i.ytimg.com/vi/3kuNW8hRc2U/hqdefault.jpg",
+        "durationSec": 982
+      },
+      {
+        "youtubeVideoId": "6VTSAs4Rsck",
+        "title": "Mark Cuban: The Brutal Truth About The Next Market Crash!",
+        "sourceChannelId": "UCGq-a57w-aPwyi3pW7XLiHw",
+        "sourceChannelTitle": "The Diary Of A CEO",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6VTSAs4Rsck/hqdefault.jpg",
+        "durationSec": 716
+      },
+      {
+        "youtubeVideoId": "6zkBdg8tx30",
+        "title": "10 Businesses You Should Probably Never Start",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6zkBdg8tx30/hqdefault.jpg",
+        "durationSec": 1413
+      },
+      {
+        "youtubeVideoId": "VX0tIPJiBB8",
+        "title": "Why Your Favorite Company Gets Worse After Someone Buys It",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VX0tIPJiBB8/hqdefault.jpg",
+        "durationSec": 780
+      },
+      {
+        "youtubeVideoId": "nwgAOcsaDNI",
+        "title": "The Smartest Way to Invest $1 Million",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nwgAOcsaDNI/hqdefault.jpg",
+        "durationSec": 1414
+      },
+      {
+        "youtubeVideoId": "WEShMbKZKjM",
+        "title": "How Airlines Actually Work",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WEShMbKZKjM/hqdefault.jpg",
+        "durationSec": 967
+      },
+      {
+        "youtubeVideoId": "jh3Jr9eROso",
+        "title": "How to Get a Better Deal on Almost Anything",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jh3Jr9eROso/hqdefault.jpg",
+        "durationSec": 994
+      },
+      {
+        "youtubeVideoId": "nyUCVI_JHvQ",
+        "title": "No Revenue. No Product. Worth Billions.",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/nyUCVI_JHvQ/hqdefault.jpg",
+        "durationSec": 716
+      },
+      {
+        "youtubeVideoId": "_FRs_15e8DQ",
+        "title": "10 Assets That Can Pay You $1 Million a Year",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_FRs_15e8DQ/hqdefault.jpg",
+        "durationSec": 763
+      },
+      {
+        "youtubeVideoId": "Lj4uUaPl3jc",
+        "title": "How the Food Industry Actually Works",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Lj4uUaPl3jc/hqdefault.jpg",
+        "durationSec": 709
+      },
+      {
+        "youtubeVideoId": "rXw9pkEFE9g",
+        "title": "How Much Does It Cost to Live Like a Millionaire?",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rXw9pkEFE9g/hqdefault.jpg",
+        "durationSec": 1039
+      },
+      {
+        "youtubeVideoId": "NMgV4hOr7ys",
+        "title": "Build a Business That Runs Without You (and Sells for $1M)",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/NMgV4hOr7ys/hqdefault.jpg",
+        "durationSec": 628
+      },
+      {
+        "youtubeVideoId": "8brPnApuYjE",
+        "title": "How Much Money Do You Need to Stop Working?",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8brPnApuYjE/hqdefault.jpg",
+        "durationSec": 588
+      },
+      {
+        "youtubeVideoId": "FHTJyj2Z1lA",
+        "title": "How Big Oil Actually Works",
+        "sourceChannelId": "UCNjPtOCvMrKY5eLwr_-7eUg",
+        "sourceChannelTitle": "Alux.com",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FHTJyj2Z1lA/hqdefault.jpg",
+        "durationSec": 811
+      },
+      {
+        "youtubeVideoId": "M68aNF_vBMw",
+        "title": "⁠How I Built One Of Europe's Biggest Clothing Brands",
+        "sourceChannelId": "UCyRtUwLylsFqguBvV6Kwlfw",
+        "sourceChannelTitle": "The Numbers Game",
+        "thumbnailUrl": "https://i.ytimg.com/vi/M68aNF_vBMw/hqdefault.jpg",
+        "durationSec": 981
+      },
+      {
+        "youtubeVideoId": "jKnXF1aKs8g",
+        "title": "How We Make $3M A Month Selling Luxury Watches",
+        "sourceChannelId": "UCyRtUwLylsFqguBvV6Kwlfw",
+        "sourceChannelTitle": "The Numbers Game",
+        "thumbnailUrl": "https://i.ytimg.com/vi/jKnXF1aKs8g/hqdefault.jpg",
+        "durationSec": 1410
+      },
+      {
+        "youtubeVideoId": "Cwq3jKl1ZFg",
+        "title": "How I Built The World's Biggest African Restaurant Making $10M A Year",
+        "sourceChannelId": "UCyRtUwLylsFqguBvV6Kwlfw",
+        "sourceChannelTitle": "The Numbers Game",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Cwq3jKl1ZFg/hqdefault.jpg",
+        "durationSec": 1087
+      },
+      {
+        "youtubeVideoId": "ZB3h6Te19xA",
+        "title": "How I Sold My Company For $40M Before I Turned 27",
+        "sourceChannelId": "UCyRtUwLylsFqguBvV6Kwlfw",
+        "sourceChannelTitle": "The Numbers Game",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ZB3h6Te19xA/hqdefault.jpg",
+        "durationSec": 645
+      },
+      {
+        "youtubeVideoId": "UvGnhOtFUn0",
+        "title": "Spencer Owen: How I Built A $10M YouTube Football Team (Hashtag United)",
+        "sourceChannelId": "UCyRtUwLylsFqguBvV6Kwlfw",
+        "sourceChannelTitle": "The Numbers Game",
+        "thumbnailUrl": "https://i.ytimg.com/vi/UvGnhOtFUn0/hqdefault.jpg",
+        "durationSec": 1002
+      },
+      {
+        "youtubeVideoId": "VrF2-zKdF4s",
+        "title": "How I Make $1,000,000 A Night Selling Art",
+        "sourceChannelId": "UCyRtUwLylsFqguBvV6Kwlfw",
+        "sourceChannelTitle": "The Numbers Game",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VrF2-zKdF4s/hqdefault.jpg",
+        "durationSec": 905
+      },
+      {
+        "youtubeVideoId": "v-JActTuGHg",
+        "title": "Krissy Cela: How I Built A $100M/Year Clothing Brand & Fitness App",
+        "sourceChannelId": "UCyRtUwLylsFqguBvV6Kwlfw",
+        "sourceChannelTitle": "The Numbers Game",
+        "thumbnailUrl": "https://i.ytimg.com/vi/v-JActTuGHg/hqdefault.jpg",
+        "durationSec": 518
+      },
+      {
+        "youtubeVideoId": "AQ13d8dJMy0",
+        "title": "How I Live Alone in Oslo, Norway on $78,000 A Year | The Pay Check",
+        "sourceChannelId": "UCcyq283he07B7_KUX07mmtA",
+        "sourceChannelTitle": "Business Insider",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AQ13d8dJMy0/hqdefault.jpg",
+        "durationSec": 824
+      },
+      {
+        "youtubeVideoId": "Qbe0I3X6R-o",
+        "title": "The INSANE Truth About YouTube",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Qbe0I3X6R-o/hqdefault.jpg",
+        "durationSec": 528
+      },
+      {
+        "youtubeVideoId": "dsDcQmJHwQc",
+        "title": "The INSANE Truth About OpenAI",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dsDcQmJHwQc/hqdefault.jpg",
+        "durationSec": 991
+      },
+      {
+        "youtubeVideoId": "AafeUIwSLvw",
+        "title": "Thomas Edison: The IDIOT Who Changed The World",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/AafeUIwSLvw/hqdefault.jpg",
+        "durationSec": 898
+      },
+      {
+        "youtubeVideoId": "I45qsMJbMQU",
+        "title": "The Family That Drugged America",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/I45qsMJbMQU/hqdefault.jpg",
+        "durationSec": 1224
+      },
+      {
+        "youtubeVideoId": "2bMYyzO8SnM",
+        "title": "The Scariest Business In The World",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/2bMYyzO8SnM/hqdefault.jpg",
+        "durationSec": 1228
+      },
+      {
+        "youtubeVideoId": "Re79GF_fxik",
+        "title": "The World’s Most Wanted Woman",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Re79GF_fxik/hqdefault.jpg",
+        "durationSec": 671
+      },
+      {
+        "youtubeVideoId": "GfOAw9dUpYI",
+        "title": "Diamonds: An Evil Scam",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GfOAw9dUpYI/hqdefault.jpg",
+        "durationSec": 900
+      },
+      {
+        "youtubeVideoId": "c9Xm1bT50DQ",
+        "title": "The $47 Billion Cult",
+        "sourceChannelId": "UCE4Gn00XZbpWvGUfIslT-tA",
+        "sourceChannelTitle": "MagnatesMedia",
+        "thumbnailUrl": "https://i.ytimg.com/vi/c9Xm1bT50DQ/hqdefault.jpg",
+        "durationSec": 1088
+      },
+      {
+        "youtubeVideoId": "C89c0fsHYIQ",
+        "title": "Why Tech Workers Are Flocking To NYC",
+        "sourceChannelId": "UCH5_L3ytGbBziX0CLuYdQ1Q",
+        "sourceChannelTitle": "CNBC Make It",
+        "thumbnailUrl": "https://i.ytimg.com/vi/C89c0fsHYIQ/hqdefault.jpg",
+        "durationSec": 855
+      },
+      {
+        "youtubeVideoId": "ao-BzLbFObI",
+        "title": "I’m A Dumpster Diver – And I Bring In $140K/Year",
+        "sourceChannelId": "UCH5_L3ytGbBziX0CLuYdQ1Q",
+        "sourceChannelTitle": "CNBC Make It",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ao-BzLbFObI/hqdefault.jpg",
+        "durationSec": 675
+      },
+      {
+        "youtubeVideoId": "5zs1ze3P7Oc",
+        "title": "How GLP-1s Are Reshaping The Workforce",
+        "sourceChannelId": "UCH5_L3ytGbBziX0CLuYdQ1Q",
+        "sourceChannelTitle": "CNBC Make It",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5zs1ze3P7Oc/hqdefault.jpg",
+        "durationSec": 960
+      },
+      {
+        "youtubeVideoId": "evQcbeOlvWc",
+        "title": "Jensen Huang on Leading Nvidia, Developing a Flat Management Style, and Keeping Humans in the Loop",
+        "sourceChannelId": "UCWo4IA01TXzBeGJJKWHOG9g",
+        "sourceChannelTitle": "Harvard Business Review",
+        "thumbnailUrl": "https://i.ytimg.com/vi/evQcbeOlvWc/hqdefault.jpg",
+        "durationSec": 959
+      },
+      {
+        "youtubeVideoId": "YLN930f7RE0",
+        "title": "Why Optimistic Leaders Get Better Results",
+        "sourceChannelId": "UCWo4IA01TXzBeGJJKWHOG9g",
+        "sourceChannelTitle": "Harvard Business Review",
+        "thumbnailUrl": "https://i.ytimg.com/vi/YLN930f7RE0/hqdefault.jpg",
+        "durationSec": 785
+      },
+      {
+        "youtubeVideoId": "M6SA3g-8pwQ",
+        "title": "Why Great Teams Don't Need to Like Each Other",
+        "sourceChannelId": "UCWo4IA01TXzBeGJJKWHOG9g",
+        "sourceChannelTitle": "Harvard Business Review",
+        "thumbnailUrl": "https://i.ytimg.com/vi/M6SA3g-8pwQ/hqdefault.jpg",
+        "durationSec": 1228
+      },
+      {
+        "youtubeVideoId": "9f3qnX6aiIE",
+        "title": "How AI Is Changing Strategy—and 4 Skills Leaders Need Next",
+        "sourceChannelId": "UCWo4IA01TXzBeGJJKWHOG9g",
+        "sourceChannelTitle": "Harvard Business Review",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9f3qnX6aiIE/hqdefault.jpg",
+        "durationSec": 741
+      },
+      {
+        "youtubeVideoId": "VP7i4BLrrrg",
+        "title": "Inside Ken Griffin's Miami",
+        "sourceChannelId": "UCoUxsWakJucWg46KW5RsvPw",
+        "sourceChannelTitle": "Financial Times",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VP7i4BLrrrg/hqdefault.jpg",
+        "durationSec": 519
+      },
+      {
+        "youtubeVideoId": "uVcqgwWvWUw",
+        "title": "UK Defence Secretary Wes Streeting on the challenges and threats Britain faces | FT Interview",
+        "sourceChannelId": "UCoUxsWakJucWg46KW5RsvPw",
+        "sourceChannelTitle": "Financial Times",
+        "thumbnailUrl": "https://i.ytimg.com/vi/uVcqgwWvWUw/hqdefault.jpg",
+        "durationSec": 1115
       }
     ]
   },
@@ -10676,7 +12988,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "news",
     "categoryName": "News",
     "hue": 200,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "ZyQiOBS79UU",
@@ -10821,6 +13133,350 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "CNN",
         "thumbnailUrl": "https://i.ytimg.com/vi/9yJpbBYo4Ig/hqdefault.jpg",
         "durationSec": 320
+      },
+      {
+        "youtubeVideoId": "mycXOrK7rDQ",
+        "title": "Nvidia CEO Jensen Huang resigns after reports of extramarital relationships",
+        "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
+        "sourceChannelTitle": "NBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mycXOrK7rDQ/hqdefault.jpg",
+        "durationSec": 783
+      },
+      {
+        "youtubeVideoId": "qH0sA6xS0ug",
+        "title": "The Cost of Loneliness Project launches the first National Day of Connection",
+        "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
+        "sourceChannelTitle": "NBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qH0sA6xS0ug/hqdefault.jpg",
+        "durationSec": 1096
+      },
+      {
+        "youtubeVideoId": "GVWjmn0ks78",
+        "title": "Iran's security chief threatens consequences if U.S. strikes resume",
+        "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
+        "sourceChannelTitle": "NBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/GVWjmn0ks78/hqdefault.jpg",
+        "durationSec": 1334
+      },
+      {
+        "youtubeVideoId": "xaIA4Ph11UI",
+        "title": "This Morning’s Top Headlines – Nov. 12 | Morning News NOW",
+        "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
+        "sourceChannelTitle": "NBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xaIA4Ph11UI/hqdefault.jpg",
+        "durationSec": 831
+      },
+      {
+        "youtubeVideoId": "cWdSlxa4Hhk",
+        "title": "LIVE: NBC News NOW - Nov. 12",
+        "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
+        "sourceChannelTitle": "NBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cWdSlxa4Hhk/hqdefault.jpg",
+        "durationSec": 1065
+      },
+      {
+        "youtubeVideoId": "03AHTk83K0I",
+        "title": "Full Speech: Scott Colom projected winner in Mississippi Senate race",
+        "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
+        "sourceChannelTitle": "NBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/03AHTk83K0I/hqdefault.jpg",
+        "durationSec": 1016
+      },
+      {
+        "youtubeVideoId": "t1dwd4BsLqI",
+        "title": "NBC Nightly News with Tom Llamas Full Episode - Nov. 11",
+        "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
+        "sourceChannelTitle": "NBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/t1dwd4BsLqI/hqdefault.jpg",
+        "durationSec": 755
+      },
+      {
+        "youtubeVideoId": "ziA2gvnL4bY",
+        "title": "GTA 6 Launch Day Is Scary…",
+        "sourceChannelId": "UCzPpbeK8ANcNKg5aoMB0miw",
+        "sourceChannelTitle": "Dylan Page",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ziA2gvnL4bY/hqdefault.jpg",
+        "durationSec": 1374
+      },
+      {
+        "youtubeVideoId": "iADdQRrd1uI",
+        "title": "This Week Could Change Everything!",
+        "sourceChannelId": "UCzPpbeK8ANcNKg5aoMB0miw",
+        "sourceChannelTitle": "Dylan Page",
+        "thumbnailUrl": "https://i.ytimg.com/vi/iADdQRrd1uI/hqdefault.jpg",
+        "durationSec": 1210
+      },
+      {
+        "youtubeVideoId": "cNaX7T17VbU",
+        "title": "This Is A Disaster Waiting To Happen...",
+        "sourceChannelId": "UCzPpbeK8ANcNKg5aoMB0miw",
+        "sourceChannelTitle": "Dylan Page",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cNaX7T17VbU/hqdefault.jpg",
+        "durationSec": 892
+      },
+      {
+        "youtubeVideoId": "mSoj9v5I1q8",
+        "title": "Is Kim Jong-Un Actually Dead?",
+        "sourceChannelId": "UCzPpbeK8ANcNKg5aoMB0miw",
+        "sourceChannelTitle": "Dylan Page",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mSoj9v5I1q8/hqdefault.jpg",
+        "durationSec": 646
+      },
+      {
+        "youtubeVideoId": "C65qIOHyT3A",
+        "title": "Can Nvidia's CEO Jensen Huang be replaced? | BBC News",
+        "sourceChannelId": "UC16niRr50-MSBwiO3YDb3RA",
+        "sourceChannelTitle": "BBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/C65qIOHyT3A/hqdefault.jpg",
+        "durationSec": 996
+      },
+      {
+        "youtubeVideoId": "379BagNcNf4",
+        "title": "The new Tourette's device improving teenagers' lives | BBC News",
+        "sourceChannelId": "UC16niRr50-MSBwiO3YDb3RA",
+        "sourceChannelTitle": "BBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/379BagNcNf4/hqdefault.jpg",
+        "durationSec": 716
+      },
+      {
+        "youtubeVideoId": "zzle_Rcx8ig",
+        "title": "Democrat wins Mississippi Senate race in surprise US midterms victory | BBC News",
+        "sourceChannelId": "UC16niRr50-MSBwiO3YDb3RA",
+        "sourceChannelTitle": "BBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/zzle_Rcx8ig/hqdefault.jpg",
+        "durationSec": 1429
+      },
+      {
+        "youtubeVideoId": "Lymb1n_iUdQ",
+        "title": "Nvidia reportedly weighs ousting CEO Jensen Huang as shares plunge | BBC News",
+        "sourceChannelId": "UC16niRr50-MSBwiO3YDb3RA",
+        "sourceChannelTitle": "BBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Lymb1n_iUdQ/hqdefault.jpg",
+        "durationSec": 1017
+      },
+      {
+        "youtubeVideoId": "Bco12rDLjQg",
+        "title": "Clashes erupt in Spain as thousands join general strike over living costs | BBC News",
+        "sourceChannelId": "UC16niRr50-MSBwiO3YDb3RA",
+        "sourceChannelTitle": "BBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Bco12rDLjQg/hqdefault.jpg",
+        "durationSec": 1109
+      },
+      {
+        "youtubeVideoId": "OF5_sxcMLow",
+        "title": "Why winter gets some of us down – and not others | BBC News",
+        "sourceChannelId": "UC16niRr50-MSBwiO3YDb3RA",
+        "sourceChannelTitle": "BBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OF5_sxcMLow/hqdefault.jpg",
+        "durationSec": 828
+      },
+      {
+        "youtubeVideoId": "S8sEl5AZXoU",
+        "title": "Tehran vows to strike US bases in Europe if they are used to attack Iran | BBC News",
+        "sourceChannelId": "UC16niRr50-MSBwiO3YDb3RA",
+        "sourceChannelTitle": "BBC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/S8sEl5AZXoU/hqdefault.jpg",
+        "durationSec": 667
+      },
+      {
+        "youtubeVideoId": "d5hcfvtggJo",
+        "title": "Jensen Huang Ousted as Nvidia CEO",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/d5hcfvtggJo/hqdefault.jpg",
+        "durationSec": 1021
+      },
+      {
+        "youtubeVideoId": "Ks8wNJlVwO0",
+        "title": "What Huang's Departure Means for the Future of Nvidia",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ks8wNJlVwO0/hqdefault.jpg",
+        "durationSec": 1141
+      },
+      {
+        "youtubeVideoId": "Mh9zuoYtGeg",
+        "title": "Nvidia Board Considers Jensen Huang's Future After Affair",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Mh9zuoYtGeg/hqdefault.jpg",
+        "durationSec": 1336
+      },
+      {
+        "youtubeVideoId": "cW_9FeipFxM",
+        "title": "Jensen Huang Resigns as Nvidia CEO",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cW_9FeipFxM/hqdefault.jpg",
+        "durationSec": 729
+      },
+      {
+        "youtubeVideoId": "CgXdL2unP9Q",
+        "title": "Stocks Fall on Nvidia Worries; Nvidia Board Considers Huang's Future",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CgXdL2unP9Q/hqdefault.jpg",
+        "durationSec": 903
+      },
+      {
+        "youtubeVideoId": "8qxIcpGfWUM",
+        "title": "Nvidia Board Meets to Consider Replacing Jensen Huang",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8qxIcpGfWUM/hqdefault.jpg",
+        "durationSec": 1063
+      },
+      {
+        "youtubeVideoId": "yxIjIQ8GKz0",
+        "title": "UN Secretary-General Warns of ‘Perfect Storm’ of Global Risks",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yxIjIQ8GKz0/hqdefault.jpg",
+        "durationSec": 1174
+      },
+      {
+        "youtubeVideoId": "31KLRe0keMA",
+        "title": "Nvidia CEO Crisis Deepens as Board Weighs Jensen Huang Future",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/31KLRe0keMA/hqdefault.jpg",
+        "durationSec": 1004
+      },
+      {
+        "youtubeVideoId": "pTMMuKYpc_E",
+        "title": "Why The Fed Is A Bigger Risk For The AI Boom Than Nvidia",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/pTMMuKYpc_E/hqdefault.jpg",
+        "durationSec": 1416
+      },
+      {
+        "youtubeVideoId": "f3kPI-H0WqA",
+        "title": "Nvidia's Board Weighs Huang's Future After Affairs",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/f3kPI-H0WqA/hqdefault.jpg",
+        "durationSec": 599
+      },
+      {
+        "youtubeVideoId": "FNvEJmjlmHs",
+        "title": "Nvidia Board Considers Replacing CEO Jensen Huang",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FNvEJmjlmHs/hqdefault.jpg",
+        "durationSec": 1028
+      },
+      {
+        "youtubeVideoId": "K86aHmOW6fw",
+        "title": "Nvidia Board Weighs Huang’s Future as Congress Prepares Subpoena",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/K86aHmOW6fw/hqdefault.jpg",
+        "durationSec": 642
+      },
+      {
+        "youtubeVideoId": "_mSNtS8GgR4",
+        "title": "China and Korea Will Outperform Taiwan: Market Analysis",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/_mSNtS8GgR4/hqdefault.jpg",
+        "durationSec": 558
+      },
+      {
+        "youtubeVideoId": "RGbKbVxM-G0",
+        "title": "Ruchir Sharma on AI Bubble Risks, Opportunities in India",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RGbKbVxM-G0/hqdefault.jpg",
+        "durationSec": 1231
+      },
+      {
+        "youtubeVideoId": "KYbqmVOxQH4",
+        "title": "Nvidia Board Meets As Jensen Huang Fallout Widens",
+        "sourceChannelId": "UCIALMKvObZNtJ6AmdCLP7Lg",
+        "sourceChannelTitle": "Bloomberg Television",
+        "thumbnailUrl": "https://i.ytimg.com/vi/KYbqmVOxQH4/hqdefault.jpg",
+        "durationSec": 878
+      },
+      {
+        "youtubeVideoId": "hmyLdfwM7RI",
+        "title": "4 shot in Washington, DC as police respond to active shooting: Sources",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/hmyLdfwM7RI/hqdefault.jpg",
+        "durationSec": 674
+      },
+      {
+        "youtubeVideoId": "-W4YpONINp4",
+        "title": "Nvidia CEO Jensen Huang resigns after alleged affair with suspected Chinese spy",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/-W4YpONINp4/hqdefault.jpg",
+        "durationSec": 1033
+      },
+      {
+        "youtubeVideoId": "VUi2GyGikys",
+        "title": "Democrat Scott Colom flips Mississippi Senate seat, the 8th Democratic pickup in Senate",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/VUi2GyGikys/hqdefault.jpg",
+        "durationSec": 1175
+      },
+      {
+        "youtubeVideoId": "HhQA9FVllsQ",
+        "title": "Urgent search for survivors after deadly building collapse in New York City",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/HhQA9FVllsQ/hqdefault.jpg",
+        "durationSec": 841
+      },
+      {
+        "youtubeVideoId": "8z4VKWaTZug",
+        "title": "Good Morning America: News to start your day | November 12",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8z4VKWaTZug/hqdefault.jpg",
+        "durationSec": 1033
+      },
+      {
+        "youtubeVideoId": "bKGWT273SvA",
+        "title": "Historic ocean liner sunk to become artificial reef",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bKGWT273SvA/hqdefault.jpg",
+        "durationSec": 693
+      },
+      {
+        "youtubeVideoId": "k8PPKs-v_Mc",
+        "title": "Multiple Dead in Brooklyn Building Collapse. What You Need to Know - November 12, 2026",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/k8PPKs-v_Mc/hqdefault.jpg",
+        "durationSec": 617
+      },
+      {
+        "youtubeVideoId": "O3-ms1WiLQk",
+        "title": "Start Here Nov. 12 | The South’s Latest Shocker: Mississippi Turns Blue",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/O3-ms1WiLQk/hqdefault.jpg",
+        "durationSec": 690
+      },
+      {
+        "youtubeVideoId": "8JK_3tFkXe0",
+        "title": "LIVE: ABC News Live - Thursday, November 12",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8JK_3tFkXe0/hqdefault.jpg",
+        "durationSec": 1111
+      },
+      {
+        "youtubeVideoId": "kw0CYhPQq34",
+        "title": "ICE officer in Maine fatal shooting had anti-immigrant views, sister says",
+        "sourceChannelId": "UCBi2mrWuNuyYy4gbM6fU18Q",
+        "sourceChannelTitle": "ABC News",
+        "thumbnailUrl": "https://i.ytimg.com/vi/kw0CYhPQq34/hqdefault.jpg",
+        "durationSec": 1373
       }
     ]
   },
@@ -10828,7 +13484,7 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
     "categoryId": "entertainment",
     "categoryName": "Entertainment",
     "hue": 320,
-    "builtAt": 1794338232065,
+    "builtAt": 1794494891201,
     "videos": [
       {
         "youtubeVideoId": "_c2e1NcI3Sc",
@@ -11093,6 +13749,262 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "NBC",
         "thumbnailUrl": "https://i.ytimg.com/vi/f2z1L2O2Gfw/hqdefault.jpg",
         "durationSec": 307
+      },
+      {
+        "youtubeVideoId": "v9QtM6qnG50",
+        "title": "I Built A City To Save Kids From Illegal Labor",
+        "sourceChannelId": "UCX6OQ3DkcsbYNE6H8uQQuVA",
+        "sourceChannelTitle": "MrBeast",
+        "thumbnailUrl": "https://i.ytimg.com/vi/v9QtM6qnG50/hqdefault.jpg",
+        "durationSec": 1174
+      },
+      {
+        "youtubeVideoId": "gTKS8SAwUzE",
+        "title": "I Survived The Most Extreme Places On Earth",
+        "sourceChannelId": "UCX6OQ3DkcsbYNE6H8uQQuVA",
+        "sourceChannelTitle": "MrBeast",
+        "thumbnailUrl": "https://i.ytimg.com/vi/gTKS8SAwUzE/hqdefault.jpg",
+        "durationSec": 1050
+      },
+      {
+        "youtubeVideoId": "Qtl8lJwbd4g",
+        "title": "Escape 100 Cops, Win $500,000",
+        "sourceChannelId": "UCX6OQ3DkcsbYNE6H8uQQuVA",
+        "sourceChannelTitle": "MrBeast",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Qtl8lJwbd4g/hqdefault.jpg",
+        "durationSec": 1025
+      },
+      {
+        "youtubeVideoId": "g3AEaeM-2iw",
+        "title": "JOYRIDE Day 2026 🔴 24-Hour Livestream",
+        "sourceChannelId": "UCnmGIkw-KdI0W5siakKPKog",
+        "sourceChannelTitle": "Ryan Trahan",
+        "thumbnailUrl": "https://i.ytimg.com/vi/g3AEaeM-2iw/hqdefault.jpg",
+        "durationSec": 1204
+      },
+      {
+        "youtubeVideoId": "q4PVuuV1ZdU",
+        "title": "KSI REACTS TO PRIME FC vs TOMA FC! (BALLER LEAGUE UK)",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/q4PVuuV1ZdU/hqdefault.jpg",
+        "durationSec": 505
+      },
+      {
+        "youtubeVideoId": "5xeuwF64Q00",
+        "title": "KSI REACTS TO PRIME FC vs N5 FC! (BALLER LEAGUE UK)",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5xeuwF64Q00/hqdefault.jpg",
+        "durationSec": 945
+      },
+      {
+        "youtubeVideoId": "xEULhK1ReUU",
+        "title": "ya boy is playing the new EAFC 27 with some peeps",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/xEULhK1ReUU/hqdefault.jpg",
+        "durationSec": 483
+      },
+      {
+        "youtubeVideoId": "9olLm7RkiX0",
+        "title": "DAGGERS VS SLOUGH TOWN IRL WITH MY BRO DEJI",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9olLm7RkiX0/hqdefault.jpg",
+        "durationSec": 1288
+      },
+      {
+        "youtubeVideoId": "Y-SqKeCxkv4",
+        "title": "Make Us Laugh, Win $1,000 (Ft. Bad Friends Podcast)",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Y-SqKeCxkv4/hqdefault.jpg",
+        "durationSec": 728
+      },
+      {
+        "youtubeVideoId": "BNha3nxMJWc",
+        "title": "DAGGERS VS FARNHAM TOWN | FULL IRL STREAM",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BNha3nxMJWc/hqdefault.jpg",
+        "durationSec": 959
+      },
+      {
+        "youtubeVideoId": "J0gaa02lg7E",
+        "title": "Guess The Real UFC Fighter",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/J0gaa02lg7E/hqdefault.jpg",
+        "durationSec": 492
+      },
+      {
+        "youtubeVideoId": "O9XQDICB3to",
+        "title": "Roast Us, Win $1,000 ft. DEJI",
+        "sourceChannelId": "UCGmnsW623G1r-Chmo5RB4Yw",
+        "sourceChannelTitle": "KSI",
+        "thumbnailUrl": "https://i.ytimg.com/vi/O9XQDICB3to/hqdefault.jpg",
+        "durationSec": 633
+      },
+      {
+        "youtubeVideoId": "QNYQ3V1PEcE",
+        "title": "FUNNIEST BROMANCE CLIPS! | ShxtsnGigs Reacts",
+        "sourceChannelId": "UC4pFQ-V4RUtnWZ3ksRfRl-Q",
+        "sourceChannelTitle": "ShxtsnGigs Reacts",
+        "thumbnailUrl": "https://i.ytimg.com/vi/QNYQ3V1PEcE/hqdefault.jpg",
+        "durationSec": 528
+      },
+      {
+        "youtubeVideoId": "Hc6yPDtT-hQ",
+        "title": "HALLOWEEN WENT TOO FAR! | ShxtsnGigs Reacts",
+        "sourceChannelId": "UC4pFQ-V4RUtnWZ3ksRfRl-Q",
+        "sourceChannelTitle": "ShxtsnGigs Reacts",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Hc6yPDtT-hQ/hqdefault.jpg",
+        "durationSec": 636
+      },
+      {
+        "youtubeVideoId": "wEq1bgYu260",
+        "title": "Living alone in my 20s | my friends say I should go out more",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/wEq1bgYu260/hqdefault.jpg",
+        "durationSec": 669
+      },
+      {
+        "youtubeVideoId": "vkDNPmaFKaA",
+        "title": "MOVING VLOG EP. 1 | APARTMENT TOUR + SET UP & DECOR",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vkDNPmaFKaA/hqdefault.jpg",
+        "durationSec": 1066
+      },
+      {
+        "youtubeVideoId": "PcILCmh6Rx0",
+        "title": "Lagos apartment hunting (+ prices & tour)",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/PcILCmh6Rx0/hqdefault.jpg",
+        "durationSec": 612
+      },
+      {
+        "youtubeVideoId": "dcKzpjufXjk",
+        "title": "Living alone in Lagos - For the girl who's just a girl",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dcKzpjufXjk/hqdefault.jpg",
+        "durationSec": 768
+      },
+      {
+        "youtubeVideoId": "BMOoV2jNrEk",
+        "title": "Living alone in Lagos | Fasting & The art of being a homebody",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BMOoV2jNrEk/hqdefault.jpg",
+        "durationSec": 1235
+      },
+      {
+        "youtubeVideoId": "Xk-AuF0G9TA",
+        "title": "Tired.",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Xk-AuF0G9TA/hqdefault.jpg",
+        "durationSec": 855
+      },
+      {
+        "youtubeVideoId": "h936tpqu99Y",
+        "title": "5 things that make you instantly more attractive",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/h936tpqu99Y/hqdefault.jpg",
+        "durationSec": 773
+      },
+      {
+        "youtubeVideoId": "mCZXJlWxeAM",
+        "title": "I traveled to the UK to surprise my family (AFTER 1 YEAR APART)",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mCZXJlWxeAM/hqdefault.jpg",
+        "durationSec": 506
+      },
+      {
+        "youtubeVideoId": "Y6dAYFsAETs",
+        "title": "The most terrifying 12 minutes of my life",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Y6dAYFsAETs/hqdefault.jpg",
+        "durationSec": 1103
+      },
+      {
+        "youtubeVideoId": "561i2g7feJo",
+        "title": "If my bed could talk",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/561i2g7feJo/hqdefault.jpg",
+        "durationSec": 589
+      },
+      {
+        "youtubeVideoId": "6yZApI-M4zo",
+        "title": "I crashed the AMVCA 🤫",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6yZApI-M4zo/hqdefault.jpg",
+        "durationSec": 1382
+      },
+      {
+        "youtubeVideoId": "yBh2WE7OqsY",
+        "title": "SHOULD WOMEN SHOOT THEIR SHOT?! (I asked men)",
+        "sourceChannelId": "UC1TyJa3QI9JzqCTcO_cfhmg",
+        "sourceChannelTitle": "Idy Archibong",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yBh2WE7OqsY/hqdefault.jpg",
+        "durationSec": 1150
+      },
+      {
+        "youtubeVideoId": "l6QND-WgsZs",
+        "title": "Can 4 Real SIBLINGS find the secret NON-SIBLINGS Amongst Them?",
+        "sourceChannelId": "UCOvGHa9GYZyyatJqsKTCWSA",
+        "sourceChannelTitle": "Cruise",
+        "thumbnailUrl": "https://i.ytimg.com/vi/l6QND-WgsZs/hqdefault.jpg",
+        "durationSec": 1004
+      },
+      {
+        "youtubeVideoId": "dHqlDvVCxUE",
+        "title": "The Love Box | Season 1 (Trailer 2)",
+        "sourceChannelId": "UCOvGHa9GYZyyatJqsKTCWSA",
+        "sourceChannelTitle": "Cruise",
+        "thumbnailUrl": "https://i.ytimg.com/vi/dHqlDvVCxUE/hqdefault.jpg",
+        "durationSec": 1142
+      },
+      {
+        "youtubeVideoId": "tGHnUzu5FaU",
+        "title": "Children vs General Knowledge Quiz",
+        "sourceChannelId": "UCOvGHa9GYZyyatJqsKTCWSA",
+        "sourceChannelTitle": "Cruise",
+        "thumbnailUrl": "https://i.ytimg.com/vi/tGHnUzu5FaU/hqdefault.jpg",
+        "durationSec": 1252
+      },
+      {
+        "youtubeVideoId": "tAO7GloBV8I",
+        "title": "(PART 2) 50 Singles go SPEED DATING",
+        "sourceChannelId": "UCOvGHa9GYZyyatJqsKTCWSA",
+        "sourceChannelTitle": "Cruise",
+        "thumbnailUrl": "https://i.ytimg.com/vi/tAO7GloBV8I/hqdefault.jpg",
+        "durationSec": 998
+      },
+      {
+        "youtubeVideoId": "CRDvLvLRYcw",
+        "title": "50 Singles go SPEED DATING",
+        "sourceChannelId": "UCOvGHa9GYZyyatJqsKTCWSA",
+        "sourceChannelTitle": "Cruise",
+        "thumbnailUrl": "https://i.ytimg.com/vi/CRDvLvLRYcw/hqdefault.jpg",
+        "durationSec": 772
+      },
+      {
+        "youtubeVideoId": "yXcovgcJoRY",
+        "title": "Couples vs General Knowledge Quiz",
+        "sourceChannelId": "UCOvGHa9GYZyyatJqsKTCWSA",
+        "sourceChannelTitle": "Cruise",
+        "thumbnailUrl": "https://i.ytimg.com/vi/yXcovgcJoRY/hqdefault.jpg",
+        "durationSec": 1389
       }
     ]
   }

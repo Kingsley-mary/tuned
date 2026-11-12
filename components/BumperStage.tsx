@@ -108,7 +108,10 @@ export const BumperStage: React.FC<BumperStageProps> = ({
       : null,
   ].filter(Boolean) as { tag: string; video: Video }[];
 
-  const usesThreeScene = resolvedKind === 'motion';
+  const usesThreeScene =
+    resolvedKind === 'motion' &&
+    resolvedVariant !== 'testcard' &&
+    resolvedVariant !== 'vhs';
 
   const sceneKind =
     resolvedVariant === 'field'
@@ -427,6 +430,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
             </div>
           )}
 
+          {/* 7. Real-Time Resonator / Plasma Visualizer */}
           {resolvedVariant === 'visualizer' && (
             <div className="bm-layer bm-orbital-layer">
               <div className="bm-top-bar">
@@ -458,6 +462,88 @@ export const BumperStage: React.FC<BumperStageProps> = ({
                 <div className="bm-progress-track">
                   <div className="bm-progress-fill" />
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* 8. Retro Broadcast SMPTE Color Bars Calibration Testcard */}
+          {resolvedVariant === 'testcard' && (
+            <div className="bm-layer bm-testcard-layer">
+              <div className="bm-smpte-bars">
+                <div className="smpte-bar smpte-white" />
+                <div className="smpte-bar smpte-yellow" />
+                <div className="smpte-bar smpte-cyan" />
+                <div className="smpte-bar smpte-green" />
+                <div className="smpte-bar smpte-magenta" />
+                <div className="smpte-bar smpte-red" />
+                <div className="smpte-bar smpte-blue" />
+              </div>
+              <div className="bm-smpte-subbars">
+                <div className="smpte-sub smpte-blue" />
+                <div className="smpte-sub smpte-black" />
+                <div className="smpte-sub smpte-magenta" />
+                <div className="smpte-sub smpte-black" />
+                <div className="smpte-sub smpte-cyan" />
+                <div className="smpte-sub smpte-black" />
+                <div className="smpte-sub smpte-gray" />
+              </div>
+
+              <div className="bm-testcard-center">
+                <div className="bm-testcard-badge">
+                  <div className="bm-testcard-callsign">TUNED BROADCAST SYSTEM</div>
+                  <div className="bm-testcard-ch">CH {chCode} // {channelName.toUpperCase()}</div>
+                  <div className="bm-testcard-status">FEED NOMINAL · 1080p60 STEREO</div>
+                </div>
+              </div>
+
+              <div className="bm-support bm-cinematic-foot">
+                <div className="bm-cinematic-bug">
+                  <span className="bm-cinematic-tag">STATION CALIBRATION</span>
+                  <span className="bm-cinematic-ch">{channelName}</span>
+                </div>
+                {safeNext?.title && (
+                  <div className="bm-next-pill">
+                    <b>UP NEXT</b>
+                    <span>{safeNext.title}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* 9. 1990s Analog VHS Tape Intermission */}
+          {resolvedVariant === 'vhs' && (
+            <div className="bm-layer bm-vhs-layer">
+              <div className="bm-vhs-static" />
+              <div className="bm-vhs-tracking-bar" />
+              <div className="bm-vhs-osd-top">
+                <span className="bm-vhs-play">PLAY ▶</span>
+                <span className="bm-vhs-speed">SP 0:00:15</span>
+                <span className="bm-vhs-hifi">HI-FI STEREO</span>
+              </div>
+
+              <div className="bm-lead bm-vhs-center">
+                <div className="bm-vhs-card">
+                  <div className="bm-vhs-eyebrow">
+                    <span className="bm-vhs-dot" />
+                    <span>BROADCAST INTERMISSION</span>
+                  </div>
+                  <h1 className="bm-vhs-title">{channelName}</h1>
+                  <p className="bm-vhs-sub">Channel {chCode} · Continuous Cable Feed</p>
+                </div>
+              </div>
+
+              <div className="bm-support bm-cinematic-foot">
+                <div className="bm-cinematic-bug">
+                  <span className="bm-cinematic-tag">TAPE TRACKING</span>
+                  <span className="bm-cinematic-ch">{channelName}</span>
+                </div>
+                {safeNext?.title && (
+                  <div className="bm-next-pill">
+                    <b>UP NEXT</b>
+                    <span>{safeNext.title}</span>
+                  </div>
+                )}
               </div>
             </div>
           )}

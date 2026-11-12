@@ -1628,6 +1628,203 @@ button:focus-visible, input:focus-visible {
   color: rgba(255, 255, 255, 0.55) !important;
   margin-top: auto !important;
 }
+
+/* --- Retro Broadcast SMPTE Color Bars Calibration Testcard --- */
+.bm-testcard-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.bm-smpte-bars {
+  display: flex;
+  width: 100%;
+  height: 68%;
+}
+
+.smpte-bar {
+  flex: 1;
+  height: 100%;
+}
+.smpte-white { background: #c0c0c0; }
+.smpte-yellow { background: #c0c000; }
+.smpte-cyan { background: #00c0c0; }
+.smpte-green { background: #00c000; }
+.smpte-magenta { background: #c000c0; }
+.smpte-red { background: #c00000; }
+.smpte-blue { background: #0000c0; }
+
+.bm-smpte-subbars {
+  display: flex;
+  width: 100%;
+  height: 10%;
+}
+
+.smpte-sub {
+  flex: 1;
+  height: 100%;
+}
+.smpte-black { background: #000000; }
+.smpte-gray { background: #131313; }
+
+.bm-testcard-center {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.bm-testcard-badge {
+  background: rgba(10, 10, 14, 0.92);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.1);
+  padding: 18px 36px;
+  border-radius: 8px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.bm-testcard-callsign {
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(11px, 1.1vw, 13px);
+  letter-spacing: 0.28em;
+  font-weight: 800;
+  color: #ff3344;
+  margin-bottom: 6px;
+}
+
+.bm-testcard-ch {
+  font-family: "Poppins", "Poppins Local", var(--font-display), sans-serif;
+  font-size: clamp(20px, 2.8vw, 36px);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.bm-testcard-status {
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(10px, 1vw, 12px);
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* --- 1990s Analog VHS Tape Intermission --- */
+.bm-vhs-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #001244 0%, #000414 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(24px, 4vw, 48px);
+  z-index: 2;
+  overflow: hidden;
+}
+
+.bm-vhs-static {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02), rgba(0,0,0,0.4) 2px);
+  opacity: 0.6;
+}
+
+.bm-vhs-tracking-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  filter: blur(4px);
+  animation: vhs-track 4s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes vhs-track {
+  0% { top: -20px; opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.bm-vhs-osd-top {
+  position: absolute;
+  top: max(20px, env(safe-area-inset-top, 0px));
+  left: max(24px, env(safe-area-inset-left, 0px));
+  right: max(24px, env(safe-area-inset-right, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono), "Courier New", monospace;
+  font-size: clamp(14px, 1.6vw, 20px);
+  font-weight: 800;
+  color: #2bf062;
+  text-shadow: 0 0 10px rgba(43, 240, 98, 0.7);
+  letter-spacing: 0.1em;
+  z-index: 5;
+}
+
+.bm-vhs-center {
+  margin: auto;
+  text-align: center;
+  z-index: 4;
+}
+
+.bm-vhs-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.bm-vhs-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: #ffcc00;
+  text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+}
+
+.bm-vhs-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffcc00;
+  box-shadow: 0 0 8px #ffcc00;
+}
+
+.bm-vhs-title {
+  font-family: "Poppins", "Poppins Local", var(--font-display), sans-serif;
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.4), 2px 2px 0px rgba(0, 200, 255, 0.7), -2px -2px 0px rgba(255, 0, 100, 0.7);
+  margin: 0;
+}
+
+.bm-vhs-sub {
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(12px, 1.2vw, 15px);
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.1em;
+  margin: 0;
+}
 @media (prefers-reduced-motion: reduce) {
   .tv-bumper,
   .bm-lead,

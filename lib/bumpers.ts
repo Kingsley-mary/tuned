@@ -7,7 +7,9 @@ export type MotionBumperVariant =
   | 'slate'
   | 'field'
   | 'card'
-  | 'visualizer';
+  | 'visualizer'
+  | 'testcard'
+  | 'vhs';
 
 export interface YouTubeBumperClip {
   youtubeVideoId: string;
@@ -293,6 +295,25 @@ const CHANNEL_CARDS: Record<string, DeadpanCard[]> = {
   ],
   cars: [
     { lead: 'Four fresh tires.', punchline: 'Back out on track now.' },
+    { lead: 'Redlining the tachometer.', punchline: 'Next sprint rolling right after this.' },
+  ],
+  business: [
+    { lead: 'Checking the ticker.', punchline: 'The invisible hand is taking a commercial break.' },
+    { lead: 'Quarterly report nominal.', punchline: 'Next breakdown begins in moments.' },
+  ],
+  news: [
+    { lead: 'Developing story.', punchline: 'Anchors adjusting ties. Resuming in seconds.' },
+    { lead: 'The world is still turning.', punchline: 'Stay tuned for continued coverage.' },
+  ],
+  religion: [
+    { lead: 'A moment of stillness.', punchline: 'Continuing broadcast right now.' },
+  ],
+  entertainment: [
+    { lead: 'Grabbing a cold drink.', punchline: 'Do not touch that dial. More laughs in seconds.' },
+    { lead: 'Commercial timeout.', punchline: 'Back to the antics on the other side.' },
+  ],
+  architecture: [
+    { lead: 'Checking the blueprints.', punchline: 'Next architectural tour begins shortly.' },
   ],
 };
 
@@ -304,6 +325,7 @@ const LATE_NIGHT_CARDS: DeadpanCard[] = [
 const DEFAULT_CARDS: DeadpanCard[] = [
   { lead: 'Zero feeds. Zero doomscroll.', punchline: 'Just Tuned. Up next in seconds.' },
   { lead: 'Station identification.', punchline: 'Continuing uninterrupted broadcast now.' },
+  { lead: 'Broadcasting in stereo.', punchline: 'Next feature presentation rolling shortly.' },
 ];
 
 // All motion bumper templates render immersive channel-specific Three.js 3D worlds with a strict minimum of 5 seconds (5000ms)
@@ -311,10 +333,13 @@ const DEFAULT_CARDS: DeadpanCard[] = [
 const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = [
   { variant: 'cinematic', durationMs: 7000 },
   { variant: 'ident', durationMs: 6000 },
+  { variant: 'testcard', durationMs: 6000 },
   { variant: 'field', durationMs: 6000 },
+  { variant: 'vhs', durationMs: 6000 },
   { variant: 'visualizer', durationMs: 6000 },
   { variant: 'lineup', durationMs: 6000 },
   { variant: 'slate', durationMs: 6000 },
+  { variant: 'card', durationMs: 6000 },
 ];
 
 /**
