@@ -162,10 +162,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "Game Maker's Toolkit"
     },
     {
-      "id": "UCGiJeCKTVKIxtaYZOidh19g",
-      "name": "videogamedunkey"
-    },
-    {
       "id": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
       "name": "IGN"
     },
@@ -203,7 +199,7 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     },
     {
       "id": "UCsvn_Po0SmunchJYOWpOxMg",
-      "name": "Dunkey"
+      "name": "videogamedunkey"
     },
     {
       "id": "UC2eEGT06FrWFU6VBnPOR9lg",
@@ -234,7 +230,7 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "Rockstar Games"
     },
     {
-      "id": "UCbVrK84jqRDbN3pPf25TDDw",
+      "id": "UCuzWsvCIGy56ELIsKc4MOUQ",
       "name": "Flow State"
     },
     {
@@ -316,6 +312,22 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC1MaLhSumVa9tx_qL2BR-ug",
       "name": "ApolloTV"
+    },
+    {
+      "id": "UCGIY_O-8vW4rfX98KlMkvRg",
+      "name": "Nintendo of America"
+    },
+    {
+      "id": "UC0fDG3byEcMtbOqPMymDNbw",
+      "name": "Noclip"
+    },
+    {
+      "id": "UCSHBlPhuCd1sDOdNANCwjrA",
+      "name": "Noclip Podcast"
+    },
+    {
+      "id": "UCBobmJyzsJ6Ll7UbfhI4iwQ",
+      "name": "Unreal Engine"
     }
   ],
   "music": [
@@ -1434,6 +1446,14 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC2fWPPz3TVhVWcqWT-D6ufA",
       "name": "Hatch Conference"
+    },
+    {
+      "id": "UCSMOQeBJ2RAnuFungnQOxLg",
+      "name": "Blender"
+    },
+    {
+      "id": "UCRnX4Yc585eRTj4UvNkBM8w",
+      "name": "Autodesk"
     }
   ],
   "learning": [
