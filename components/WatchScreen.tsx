@@ -531,21 +531,42 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     const active = activeBreakPlanRef.current;
     if (!active) return;
 
-    // Minimum 5 seconds rule:
-    // "bumpers playing back to back should have a minimum of 5 seconds each"
     const elapsed = Date.now() - bumperStartTimeRef.current;
-    const minMs = 5000;
-    if (elapsed < minMs) {
-      const waitRemaining = minMs - elapsed;
-      if (bumperTimeoutRef.current) clearTimeout(bumperTimeoutRef.current);
-      bumperTimeoutRef.current = setTimeout(() => {
-        advanceBreakQueue();
-      }, waitRemaining);
-      return;
+
+    // Rule: "If a video is less than 5 seconds long then it qualifies for a second bumper to play after it"
+    if (active.kind === 'youtube' && elapsed < 5000) {
+      if (breakQueueRef.current.length === 0) {
+        breakCounterRef.current += 1;
+        const chId = activeChannel?.categoryId || 'tech';
+        const isMarathon = Boolean(
+          activeVideo?.sourceChannelTitle &&
+          nextVideo?.sourceChannelTitle &&
+          activeVideo.sourceChannelTitle.toLowerCase() === nextVideo.sourceChannelTitle.toLowerCase()
+        );
+        const marathonCreator = isMarathon ? activeVideo?.sourceChannelTitle : undefined;
+        // Schedule a follow-up 3D motion bumper to play immediately after the short video
+        const followUpPlans = pickBreakPackage(
+          chId,
+          breakCounterRef.current,
+          marathonCreator,
+          isPreviewActiveRef.current
+        );
+        const secondBumper = followUpPlans[0];
+        if (secondBumper) {
+          secondBumper.bumperIndex = 2;
+          secondBumper.totalBumpers = 2;
+          breakQueueRef.current.push(secondBumper);
+        }
+      }
     }
 
     advanceBreakQueue();
-  }, [advanceBreakQueue]);
+  }, [
+    activeChannel?.categoryId,
+    activeVideo?.sourceChannelTitle,
+    nextVideo?.sourceChannelTitle,
+    advanceBreakQueue,
+  ]);
 
   const startBreakSequence = useCallback(
     (packagePlans: BreakPlan[]) => {

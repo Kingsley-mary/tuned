@@ -404,7 +404,16 @@ export function pickBreakPackage(
 
   // Real scheduled break: roll for 1, 2, or 3 bumpers
   const roll = (Math.abs(Math.sin(breakCount * 9301 + 49297) * 233280)) % 100;
-  const count = roll < 45 ? 1 : roll < 85 ? 2 : 3;
+  let count = roll < 45 ? 1 : roll < 85 ? 2 : 3;
+
+  // Rule: If a video clip is less than 5 seconds long, it qualifies for a second bumper to play after it
+  const isFirstClip = !marathonCreator && clipPool.length > 0 && (breakCount % 2 === 1);
+  if (isFirstClip) {
+    const firstClip = clipPool[breakCount % clipPool.length];
+    if ((firstClip.durationSec || 10) < 5 && count < 2) {
+      count = 2;
+    }
+  }
 
   const result: BreakPlan[] = [];
   const hour = typeof window !== 'undefined' ? new Date().getHours() : 20;
