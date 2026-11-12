@@ -39,15 +39,22 @@ export const BumperStage: React.FC<BumperStageProps> = ({
     hour12: false,
   });
 
+  const isNotShort = (v?: Video): v is Video =>
+    Boolean(v && (!v.durationSec || v.durationSec > 60) && !/#shorts?\b|[\(\[]shorts?[\)\]]|(\bshorts\b.*#)/i.test(v.title));
+
+  const safeNext = isNotShort(nextVideo) ? nextVideo : undefined;
+  const safeLater = isNotShort(laterVideo) ? laterVideo : undefined;
+  const safeThird = isNotShort(thirdVideo) ? thirdVideo : undefined;
+
   const queueSlots = [
-    nextVideo ? { tag: 'UP NEXT', video: nextVideo } : null,
-    laterVideo && laterVideo.youtubeVideoId !== nextVideo?.youtubeVideoId
-      ? { tag: 'LATER', video: laterVideo }
+    safeNext ? { tag: 'UP NEXT', video: safeNext } : null,
+    safeLater && safeLater.youtubeVideoId !== safeNext?.youtubeVideoId
+      ? { tag: 'LATER', video: safeLater }
       : null,
-    thirdVideo &&
-    thirdVideo.youtubeVideoId !== nextVideo?.youtubeVideoId &&
-    thirdVideo.youtubeVideoId !== laterVideo?.youtubeVideoId
-      ? { tag: 'STILL TO COME', video: thirdVideo }
+    safeThird &&
+    safeThird.youtubeVideoId !== safeNext?.youtubeVideoId &&
+    safeThird.youtubeVideoId !== safeLater?.youtubeVideoId
+      ? { tag: 'STILL TO COME', video: safeThird }
       : null,
   ].filter(Boolean) as { tag: string; video: Video }[];
 
@@ -105,7 +112,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
           <div className="bm-support bm-bottom-bar">
             <div className="bm-next-pill">
               <b>UP NEXT</b>
-              <span>{nextVideo?.title || `Continuing ${channelName}`}</span>
+              <span>{safeNext?.title || `Continuing ${channelName}`}</span>
             </div>
           </div>
         </div>
@@ -131,21 +138,21 @@ export const BumperStage: React.FC<BumperStageProps> = ({
             </div>
             <div className="bm-next-pill">
               <b>UP NEXT</b>
-              <span>{nextVideo?.title || `Continuing ${channelName}`}</span>
+              <span>{safeNext?.title || `Continuing ${channelName}`}</span>
             </div>
           </div>
         </div>
       )}
 
-      {/* 2. Pure 2D Editorial Split-Frame Schedule Promo */}
+      {/* 3. Pure 2D Editorial Split-Frame Schedule Promo */}
       {variant === 'lineup' && (
         <div className="bm-layer bm-split">
           <div className="bm-lead bm-split-left">
             <div className="bm-preview-frame">
-              {nextVideo?.thumbnailUrl ? (
+              {safeNext?.thumbnailUrl ? (
                 <img
-                  src={nextVideo.thumbnailUrl}
-                  alt={nextVideo.title}
+                  src={safeNext.thumbnailUrl}
+                  alt={safeNext.title}
                   className="bm-preview-img"
                 />
               ) : (
@@ -154,7 +161,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
               <div className="bm-preview-scrim" />
               <div className="bm-preview-meta">
                 <span className="bm-eyebrow">CH {chCode} · {channelName}</span>
-                <h3>{nextVideo?.title || `Continuing ${channelName}`}</h3>
+                <h3>{safeNext?.title || `Continuing ${channelName}`}</h3>
               </div>
             </div>
           </div>
@@ -191,9 +198,9 @@ export const BumperStage: React.FC<BumperStageProps> = ({
 
           <div className="bm-lead bm-slate-center">
             <div className="bm-slate-badge">{channelName.toUpperCase()}</div>
-            <h2>{nextVideo?.title || `Continuing ${channelName}`}</h2>
-            {nextVideo?.sourceChannelTitle && (
-              <p className="bm-slate-sub">{nextVideo.sourceChannelTitle}</p>
+            <h2>{safeNext?.title || `Continuing ${channelName}`}</h2>
+            {safeNext?.sourceChannelTitle && (
+              <p className="bm-slate-sub">{safeNext.sourceChannelTitle}</p>
             )}
           </div>
 
@@ -223,7 +230,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
               <span>[tuned]</span>
             </div>
             <span className="bm-blackcard-next">
-              CH {chCode} · Up next: {nextVideo?.title || 'continuing broadcast'}
+              CH {chCode} · Up next: {safeNext?.title || 'continuing broadcast'}
             </span>
           </div>
         </div>
@@ -245,7 +252,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
           <div className="bm-support bm-orbital-foot">
             <div className="bm-next-pill">
               <b>UP NEXT</b>
-              <span>{nextVideo?.title || `Continuing ${channelName}`}</span>
+              <span>{safeNext?.title || `Continuing ${channelName}`}</span>
             </div>
             <div className="bm-progress-track">
               <div className="bm-progress-fill" />
@@ -274,7 +281,7 @@ export const BumperStage: React.FC<BumperStageProps> = ({
           <div className="bm-support bm-orbital-foot">
             <div className="bm-next-pill">
               <b>UP NEXT</b>
-              <span>{nextVideo?.title || `Continuing ${channelName}`}</span>
+              <span>{safeNext?.title || `Continuing ${channelName}`}</span>
             </div>
             <div className="bm-progress-track">
               <div className="bm-progress-fill" />

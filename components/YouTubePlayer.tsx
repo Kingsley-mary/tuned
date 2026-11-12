@@ -579,10 +579,14 @@ export const YouTubePlayer: React.FC<YouTubePlayerProps> = ({
 
         latest.onTimeUpdate(cur, dur);
 
-        // YouTube Shorts auto-exclude guard: All Shorts are <= 60s (disabled for short bumper clips)
-        if (!latest.allowShortClip && dur > 0 && dur <= 60 && shortCheckDoneRef.current !== latest.videoId) {
+        // YouTube Shorts auto-exclude guard: All Shorts are <= 60s or marked #shorts
+        const videoData = (playerRef.current as unknown as { getVideoData?: () => { title?: string } }).getVideoData?.();
+        const rawTitle = videoData?.title || '';
+        const isShortByTitle = /#shorts?\b|[\(\[]shorts?[\)\]]|(\bshorts\b.*#)/i.test(rawTitle);
+
+        if (!latest.allowShortClip && (dur > 0 && dur <= 60 || isShortByTitle) && shortCheckDoneRef.current !== latest.videoId) {
           shortCheckDoneRef.current = latest.videoId;
-          console.warn(`[Tuned] Video ${latest.videoId} is <=60s (${dur}s). Excluded as YouTube Short.`);
+          console.warn(`[Tuned] Video ${latest.videoId} (${dur}s, "${rawTitle}") excluded as YouTube Short.`);
           latest.onShortDetected?.(latest.videoId);
           return;
         }

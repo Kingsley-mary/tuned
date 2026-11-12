@@ -13,18 +13,13 @@ export interface YouTubeBumperClip {
   durationSec: number;
 }
 
-export type BreakPlan =
-  | {
-      kind: 'motion';
-      variant: MotionBumperVariant;
-      durationMs: number;
-      cardLead: string;
-      cardPunchline: string;
-    }
-  | {
-      kind: 'youtube';
-      clip: YouTubeBumperClip;
-    };
+export type BreakPlan = {
+  kind: 'motion';
+  variant: MotionBumperVariant;
+  durationMs: number;
+  cardLead: string;
+  cardPunchline: string;
+};
 
 // Curated, verified widescreen broadcast idents, intros & promos across all 22 categories
 const CLIPS = {
@@ -205,28 +200,17 @@ const MOTION_ROTATION: { variant: MotionBumperVariant; durationMs: number }[] = 
 ];
 
 /**
- * Picks the next station break at a 50/50 mix:
- * even breaks cycle across 2D editorial cards, Swiss broadcast slates, Adult Swim cards & 3D WebGL scenes;
- * odd breaks play curated widescreen YouTube broadcast idents/promos matched to the channel.
+ * Picks the next station break.
+ * All bumpers are bespoke Three.js 3D scenes (cinemascope, cybermatrix, synthwave, resonator, quantum,
+ * architect, velocity, broadcast, aurora, plasma), station idents, and 2D editorial lineup/slate cards.
+ * No YouTube video clips / Shorts are ever used in station breaks.
  */
 export function pickNextBreak(
   categoryId: string,
   breakCount: number,
-  failedIds?: Set<string>
+  _failedIds?: Set<string>
 ): BreakPlan {
-  const pool = (YOUTUBE_BUMPERS_BY_CHANNEL[categoryId] || GENERAL_YOUTUBE_BUMPERS).filter(
-    (clip) => !failedIds?.has(clip.youtubeVideoId)
-  );
-
-  if (pool.length > 0 && breakCount % 2 === 1) {
-    const clipIdx = Math.floor(breakCount / 2) % pool.length;
-    return {
-      kind: 'youtube',
-      clip: pool[clipIdx],
-    };
-  }
-
-  const motionIdx = (pool.length > 0 ? Math.floor(breakCount / 2) : breakCount) % MOTION_ROTATION.length;
+  const motionIdx = breakCount % MOTION_ROTATION.length;
   const template = MOTION_ROTATION[motionIdx];
 
   const hour = typeof window !== 'undefined' ? new Date().getHours() : 20;
