@@ -1668,7 +1668,7 @@ button:focus-visible, input:focus-visible {
 .osd-top, .osd-bottom { position: absolute; left: 0; right: 0; z-index: 3; transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .osd-top { top: 0; display: flex; justify-content: space-between; align-items: center; padding: 20px 28px; background: linear-gradient(180deg, rgba(0,0,0,0.65), transparent); opacity: 0; transform: translateY(-12px); pointer-events: none; }
 .osd-bottom { bottom: 0; padding: 0 28px 24px; background: linear-gradient(0deg, rgba(0,0,0,0.78), transparent 100%); opacity: 0; transform: translateY(24px); pointer-events: none; }
-.tv-stage.osd-on .osd-top, .tv-stage.osd-on .osd-bottom { opacity: 1; transform: none; pointer-events: auto; }
+.tv-stage.osd-on .osd-top, .tv-stage.osd-on .osd-bottom { opacity: 1; transform: none; pointer-events: auto; z-index: 50; }
 .osd-top-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .osd-btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14); color: #fff; font-size: 13px; font-weight: 500; backdrop-filter: blur(16px); transition: background 0.15s ease; }
 .osd-btn:hover { background: rgba(255,255,255,0.22); }

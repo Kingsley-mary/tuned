@@ -1109,7 +1109,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   return (
     <div
       ref={tvStageRef}
-      className={`tv-stage${osdOpen && !isHidden && !activeMotionBreak ? ' osd-on' : ''}${isFullscreen ? ' is-fullscreen' : ''}`}
+      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}${isFullscreen ? ' is-fullscreen' : ''}`}
       style={
         {
           visibility: isHidden && !keepVideoVisible ? 'hidden' : 'visible',
