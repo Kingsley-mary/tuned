@@ -138,6 +138,18 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCOQ6GGRyyu8S3jahnUz2zHw",
       "name": "Bad Decisions Studio "
+    },
+    {
+      "id": "UC1W5EP62dPAx7nmyspMACkw",
+      "name": "Helsing"
+    },
+    {
+      "id": "UCDB_E_nUM5rLplQKgkibFNg",
+      "name": "SECTOR 07"
+    },
+    {
+      "id": "UCnv0gfLQFNGPJ5MHSGuIAkw",
+      "name": "HACKADAY"
     }
   ],
   "games": [
@@ -434,6 +446,78 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC3JhfsgFPLSLNEROQCdj-GQ",
       "name": "Headspace"
+    },
+    {
+      "id": "UCK7oVw_ftuBIwiipiBf7ogA",
+      "name": "Ayra Starr"
+    },
+    {
+      "id": "UCCQ1pIRRzHMigvFqnwQyqfw",
+      "name": "GENER8ION"
+    },
+    {
+      "id": "UCdI8MAC5HoPJSJ4zrgDDI-Q",
+      "name": "Tame Impala"
+    },
+    {
+      "id": "UCMrrA4mjaYpt2FH6QnEP8nw",
+      "name": "JohnMichaelHowell"
+    },
+    {
+      "id": "UCU9R50wyBPKpdbcIScAyZig",
+      "name": "ASAKE"
+    },
+    {
+      "id": "UCP55DP1xXupgE8nm2mZG6MQ",
+      "name": "MarvelMusicVEVO"
+    },
+    {
+      "id": "UCiGm_E4ZwYSHV3bcW1pnSeQ",
+      "name": "Billie Eilish"
+    },
+    {
+      "id": "UCRE-097LGtx_Zo7LrHvkycA",
+      "name": "JISOO"
+    },
+    {
+      "id": "UC0WP5P-ufpRfjbNrmOWwLBQ",
+      "name": "The Weeknd"
+    },
+    {
+      "id": "UC5-cg5RahETrjGu-r8zjYCQ",
+      "name": "Santan Dave"
+    },
+    {
+      "id": "UC5OrDvL9DscpcAstz7JnQGA",
+      "name": "Michael Jackson"
+    },
+    {
+      "id": "UC8HOgNWipVorrlBH8oN2R-A",
+      "name": "Tyla"
+    },
+    {
+      "id": "UC4YUMK5ygB3blN0161SHkkw",
+      "name": "Violin Guy"
+    },
+    {
+      "id": "UCzTdZz7z2sPRGCImodwOw0g",
+      "name": "JT Music"
+    },
+    {
+      "id": "UCWypM0ZUsWlg4Ey4_9s38-A",
+      "name": "THEODORA"
+    },
+    {
+      "id": "UCjNRJBlxvvS0UXAT2Ack-QQ",
+      "name": "Zara Larsson"
+    },
+    {
+      "id": "UCTI94gkv6LUW6Rc8YeoMEdw",
+      "name": "Qing Madi"
+    },
+    {
+      "id": "UCyp1dAHaDeDr_o_DKXIIxhA",
+      "name": "AnthonyHamiltonVEVO"
     }
   ],
   "food": [
@@ -504,6 +588,18 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCMyOj6fhvKFMjxUCp3b_3gA",
       "name": "Nick DiGiovanni"
+    },
+    {
+      "id": "UCDq5v10l4wkV5-ZBIJJFbzQ",
+      "name": "Ethan Chlebowski"
+    },
+    {
+      "id": "UCqqJQ_cXSat0KIAVfIfKkVA",
+      "name": "J. Kenji López-Alt"
+    },
+    {
+      "id": "UCn5fhcGRrCvrmFibPbT6q1A",
+      "name": "Brian Lagerstrom"
     }
   ],
   "science": [
@@ -566,6 +662,30 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UClYDoTmBdnafBCHhnUCqvtw",
       "name": "Epic Spaceman"
+    },
+    {
+      "id": "UCftwRNsjfRo08xYE31tkiyw",
+      "name": "WIRED"
+    },
+    {
+      "id": "UCgqt1RE0k0MIr0LoyJRy2lg",
+      "name": "Rational Animations"
+    },
+    {
+      "id": "UCEIwxahdLz7bap-VDs9h35A",
+      "name": "Steve Mould"
+    },
+    {
+      "id": "UC7DdEm33SyaTDtWYGO2CwdA",
+      "name": "Physics Girl"
+    },
+    {
+      "id": "UCSIvk78tK2TiviLQn4fSHaw",
+      "name": "Up and Atom"
+    },
+    {
+      "id": "UCGHZpIpAWJQ-Jy_CeCdXhMA",
+      "name": "Cool Worlds"
     }
   ],
   "sports": [
@@ -587,7 +707,7 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     },
     {
       "id": "UC_kdjhHnkUbSImMrezjRyDQ",
-      "name": "Olympics"
+      "name": "Olympics Gymnastics"
     },
     {
       "id": "UCJrWyyCRROi8NlQ6Xd9dx5Q",
@@ -640,6 +760,58 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCQctwMz9ErTyK6ZpguWNH5Q",
       "name": "The Grid"
+    },
+    {
+      "id": "UCl9E4Zxa8CVr2LBLD0_TaNg",
+      "name": "Jomboy Media"
+    },
+    {
+      "id": "UCbcxFkd6B9xUU54InHv4Tig",
+      "name": "Tennis TV"
+    },
+    {
+      "id": "UCQk7fWv15ChjMJLCRVmtApw",
+      "name": "World Athletics"
+    },
+    {
+      "id": "UCKwGZZMrhNYKzucCtTPY2Nw",
+      "name": "PGA Tour"
+    },
+    {
+      "id": "UCt2JXOLNxqry7B_4rRZME3Q",
+      "name": "ICC"
+    },
+    {
+      "id": "UCbzRzJNHx7ZLlJML9BjZQVQ",
+      "name": "Top Rank Boxing"
+    },
+    {
+      "id": "UCurvRE5fGcdUgCYWgh-BDsg",
+      "name": "DAZN Boxing"
+    },
+    {
+      "id": "UCE28rwYoaV7jvU6GVzdu_GQ",
+      "name": "World Rugby"
+    },
+    {
+      "id": "UC8pYaQzbBBXg9GIOHRvTmDQ",
+      "name": "MotoGP"
+    },
+    {
+      "id": "UCuTaETsuCOkJ0H_GAztWt0Q",
+      "name": "Global Cycling Network"
+    },
+    {
+      "id": "UChuLeaTGRcfzo0UjL-2qSbQ",
+      "name": "World Surf League"
+    },
+    {
+      "id": "UCG5qGWdu8nIRZqJ_GgDwQ-w",
+      "name": "Premier League"
+    },
+    {
+      "id": "UCyGa1YEx9ST66rYrJTGIKOw",
+      "name": "UEFA"
     }
   ],
   "travel": [
@@ -698,6 +870,38 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC8p_y3iHPe-n3zRfXK2czWA",
       "name": "Tayo Aina"
+    },
+    {
+      "id": "UCf9YWhTNz6G2Sn1Rd7cwZNQ",
+      "name": "Katie Roams"
+    },
+    {
+      "id": "UCEIs9nkveW9WmYtsOcJBwTg",
+      "name": "Itchy Boots"
+    },
+    {
+      "id": "UCvjJzc-UcTv2P5LR6NGP2lg",
+      "name": "DownieLive"
+    },
+    {
+      "id": "UC3Vuq4Q1bKFtAiKYlwRv3oA",
+      "name": "Peter Santenello"
+    },
+    {
+      "id": "UCfYCRj25JJQ41JGPqiqXmJw",
+      "name": "Sam Chui"
+    },
+    {
+      "id": "UCxkM67T_Iele-mRVUiBkRqg",
+      "name": "Jet Lag: The Game"
+    },
+    {
+      "id": "UCHASrbCS-niYRn-Y3WX38pA",
+      "name": "Small Brained American"
+    },
+    {
+      "id": "UCbkrifxiaHa0nVwW2sDCVqw",
+      "name": "Attaché"
     }
   ],
   "film": [
@@ -916,6 +1120,14 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC2iUwfYi_1FCGGqhOUNx-iA",
       "name": "ScreenRant"
+    },
+    {
+      "id": "UCuPivVjnfNo4mb3Oog_frZg",
+      "name": "A24"
+    },
+    {
+      "id": "UCwDxUt_GJc_dwn0xOp0zRBw",
+      "name": "MTube"
     }
   ],
   "fitness": [
@@ -966,16 +1178,48 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCgFItI58gEggW1-39DxjVbA",
       "name": "Calisthenics Family"
+    },
+    {
+      "id": "UC68TLK0mAEzUyHx5x5k-S1Q",
+      "name": "Jeff Nippard"
+    },
+    {
+      "id": "UCfQgsKhHjSyRLOp9mnffqVg",
+      "name": "Renaissance Periodization"
+    },
+    {
+      "id": "UCB2wtYpfbCpYDc5TeTwuqFA",
+      "name": "Will Tennyson"
+    },
+    {
+      "id": "UCERm5yFZ1SptUEU4wZ2vJvw",
+      "name": "Jeremy Ethier"
+    },
+    {
+      "id": "UCyPYQTT20IgzVw92LDvtClw",
+      "name": "Squat University"
+    },
+    {
+      "id": "UCpis3RcTw6t47XO0R_KY4WQ",
+      "name": "Caroline Girvan"
+    },
+    {
+      "id": "UCZUUZFex6AaIU4QTopFudYA",
+      "name": "growwithjo"
+    },
+    {
+      "id": "UCbfPq-uRqonJQli41muSLeQ",
+      "name": "Breathe and Flow"
+    },
+    {
+      "id": "UC3nHsBfXNXSXRFWt_zt7l6A",
+      "name": "SeanNalewanyj"
     }
   ],
   "art": [
     {
       "id": "UClM2LuQ1q5WEc23462tQzBg",
       "name": "Proko"
-    },
-    {
-      "id": "UC3BCGz72VQcFdoBiZtKfOpg",
-      "name": "Jazza"
     },
     {
       "id": "UCoal_hpPIPAnWlG-kWHLheA",
@@ -1072,16 +1316,16 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCLMkh2PYXpQh52d3m2bzNNA",
       "name": "KeshArt"
+    },
+    {
+      "id": "UCggHsHce2n3vvbJf_8YKrMA",
+      "name": "Nerdforge"
     }
   ],
   "design": [
     {
       "id": "UC-b3c7kxa5vU-bnmaROgvog",
       "name": "The Futur"
-    },
-    {
-      "id": "UC_kjXjYwOlMZeLMkAanRn3g",
-      "name": "Design Theory"
     },
     {
       "id": "UCSb-xYOELhIqVr2n9s-b_4w",
@@ -1186,6 +1430,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCkcBDNWKUSczL9TIx-7h6Qw",
       "name": "David Fragomeni"
+    },
+    {
+      "id": "UC2fWPPz3TVhVWcqWT-D6ufA",
+      "name": "Hatch Conference"
     }
   ],
   "learning": [
@@ -1288,6 +1536,14 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC-dmJ79518WlKMbsu50eMTQ",
       "name": "Clark Kegley"
+    },
+    {
+      "id": "UCuXCgyOCMXic7j0_wghXnRA",
+      "name": "Mitsi Studio"
+    },
+    {
+      "id": "UCy6v91210figZrnMvfnhZhw",
+      "name": "Mysteries of Mythology"
     }
   ],
   "movies": [
@@ -1320,12 +1576,16 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "ALTER"
     },
     {
-      "id": "UCE34fwgW7kWr7tc7YiOWtRw",
-      "name": "PizzaFlix"
+      "id": "UCPPPrnT5080hPMxK1N4QSjA",
+      "name": "V Movies"
     },
     {
-      "id": "UCEK3tT7DcfWGWJpNEDBdWog",
-      "name": "Mosfilm"
+      "id": "UC6A_LC-A5NVJ2vw9A0OjCug",
+      "name": "The Midnight Screening"
+    },
+    {
+      "id": "UCJuyiB0GT9-q92gC_M3XLpg",
+      "name": "Indie Rights Movies For Free"
     },
     {
       "id": "UCoulHkEKWQ1t36oBheqEE_g",
@@ -1350,6 +1610,22 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCX1nchEcBshItKBeJvH-YMw",
       "name": "FREE MOVIES"
+    },
+    {
+      "id": "UCyp-EzJrdTOd9uNPvmdst-w",
+      "name": "Short of the Week"
+    },
+    {
+      "id": "UC-1rx8j9Ggp8mp4uD0ZdEIA",
+      "name": "TheCGBros"
+    },
+    {
+      "id": "UCZEQZQ8HhFbyFjXUT46XH8g",
+      "name": "EncourageTV"
+    },
+    {
+      "id": "UCNDsk0uhSlG1-br1Ex2Rgfg",
+      "name": "Tubi"
     }
   ],
   "cartoons": [
@@ -1428,6 +1704,22 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCpHWSOWGarUZIjTvTjbQkDA",
       "name": "OnzLemur"
+    },
+    {
+      "id": "UCNSyOUwDIn_PUfXSQQKDhHQ",
+      "name": "No Villains Are SAFE!"
+    },
+    {
+      "id": "UC5GpNHRBAaYi-l1k2cXXNyQ",
+      "name": "Scribbl"
+    },
+    {
+      "id": "UCHjNlp7-558arbLBcYn0Prg",
+      "name": "Dahboy!"
+    },
+    {
+      "id": "UChdHQcTHJ8inhKivfdJsCAA",
+      "name": "YAL00 at your service"
     }
   ],
   "industry": [
@@ -1482,6 +1774,34 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC2wdo5vU7bPBNzyC2nnwmNQ",
       "name": "Cutting Edge Engineering"
+    },
+    {
+      "id": "UCp68_FLety0O-n9QU6phsgw",
+      "name": "colinfurze"
+    },
+    {
+      "id": "UCivA7_KLKWo43tFcCkFvydw",
+      "name": "Applied Science"
+    },
+    {
+      "id": "UCcXhhVwCT6_WqjkEniejRJQ",
+      "name": "Wintergatan"
+    },
+    {
+      "id": "UCWizIdwZdmr43zfxlCktmNw",
+      "name": "Alec Steele"
+    },
+    {
+      "id": "UC6I0KzAD7uFTL1qzxyunkvA",
+      "name": "Blacktail Studio"
+    },
+    {
+      "id": "UCckETVOT59aYw80B36aP9vw",
+      "name": "MatthiasWandel"
+    },
+    {
+      "id": "UCFtc3XdXgLFwhlDajMGK69w",
+      "name": "NightHawkInLight"
     }
   ],
   "architecture": [
@@ -1538,10 +1858,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "COMPOUND"
     },
     {
-      "id": "UCRSRvZQ0PgbINaDIF1QTTRQ",
-      "name": "Dami Lee"
-    },
-    {
       "id": "UCOn4OkRtzsN4EP8pWM-IYVw",
       "name": "Property London"
     },
@@ -1552,6 +1868,22 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC6TY36Ys_J6UPKd75TpRuUw",
       "name": "MegaBuilds"
+    },
+    {
+      "id": "UCcbZ6rsKJ7ie5EvFmqHqfZw",
+      "name": "Spaces"
+    },
+    {
+      "id": "UC4lH-odQ5ll-85fkpWxDYmA",
+      "name": "Steven Ndukwu"
+    },
+    {
+      "id": "UCza-OKitUR3TZZ_Xdq5w8GQ",
+      "name": "Bespoke Careers"
+    },
+    {
+      "id": "UC4UQOr_Cu9k2RRjhE0mUdpg",
+      "name": "Design Anthology"
     }
   ],
   "documentaries": [
@@ -1576,16 +1908,72 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "Theniyifagbemi"
     },
     {
-      "id": "UC4lH-odQ5ll-85fkpWxDYmA",
-      "name": "Steven Ndukwu"
-    },
-    {
       "id": "UCijcd0GR0fkxCAZwkiuWqtQ",
       "name": "Free Documentary"
     },
     {
       "id": "UCBAeFXaLV1ZqKqc-Uf3pKaA",
       "name": "WELT Documentary"
+    },
+    {
+      "id": "UCW39zufHfsuGgpLviKh297Q",
+      "name": "DW Documentary"
+    },
+    {
+      "id": "UCu4XcDBdnZkV6-5z2f16M0g",
+      "name": "Real Stories"
+    },
+    {
+      "id": "UCZwU2G-KVl-P-O-B35chZOQ",
+      "name": "History Hit"
+    },
+    {
+      "id": "UCuCuEKq1xuRA0dFQj1qg9-Q",
+      "name": "Knowledgia"
+    },
+    {
+      "id": "UCnZJt7yQw5IztVwe-Dscd-Q",
+      "name": "The Operations Room"
+    },
+    {
+      "id": "UC4QZ_LsYcvcq7qOsOhpAX4A",
+      "name": "ColdFusion"
+    },
+    {
+      "id": "UCG9E2kOVf3OPldZNV_1rPqQ",
+      "name": "Mustard"
+    },
+    {
+      "id": "UCmGSJVG3mCRXVOP4yZrU1Dw",
+      "name": "Johnny Harris"
+    },
+    {
+      "id": "UCRcgy6GzDeccI7dkbbBna3Q",
+      "name": "LEMMiNO"
+    },
+    {
+      "id": "UCP5tjEmvPItGyLhmjdwP7Ww",
+      "name": "RealLifeLore"
+    },
+    {
+      "id": "UCSPLhwvj0gBufjDRzSQb3GQ",
+      "name": "BobbyBroccoli"
+    },
+    {
+      "id": "UCtRFmSyL4fSLQkn-wMqlmdA",
+      "name": "History of the Universe"
+    },
+    {
+      "id": "UC_aOteuWIY8ITg7DQQspG1g",
+      "name": "History of the Earth"
+    },
+    {
+      "id": "UC9PIn6-XuRKZ5HmYeu46AIw",
+      "name": "Barely Sociable"
+    },
+    {
+      "id": "UCpFFItkfZz1qz5PpHpqzYBw",
+      "name": "Nexpo"
     }
   ],
   "religion": [
@@ -1612,6 +2000,62 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCEp5Q6cb6GQr5XIZ_2blTjQ",
       "name": "Redeeming Productivity"
+    },
+    {
+      "id": "UCcMjLgeWNwqL2LBGS-iPb1A",
+      "name": "Bishop Robert Barron"
+    },
+    {
+      "id": "UCVfwlh9XpX2Y_tQfjeln9QA",
+      "name": "BibleProject"
+    },
+    {
+      "id": "UCDcdVPVsJRxAVKq4vY0NYeg",
+      "name": "Breaking In The Habit"
+    },
+    {
+      "id": "UClh4JeqYB1QN6f1h_bzmEng",
+      "name": "Matt Fradd"
+    },
+    {
+      "id": "UCnrFlpro0xfYjz6s5Xa8WWw",
+      "name": "Desiring God"
+    },
+    {
+      "id": "UCQMwm-DeHyFK5VPp6KySR5Q",
+      "name": "The Gospel Coalition"
+    },
+    {
+      "id": "UC5qDet6sa6rODi7t6wfpg8g",
+      "name": "InspiringPhilosophy"
+    },
+    {
+      "id": "UC7u2HaYBKDaLPcWmldxgGEA",
+      "name": "Mike Winger"
+    },
+    {
+      "id": "UCLrUV5FkWV8lm9omd5vQApQ",
+      "name": "YaQeen Institute"
+    },
+    {
+      "id": "UCNB_OaI4524fASt8h0IL8dw",
+      "name": "Mufti Menk"
+    },
+    {
+      "id": "UCzUZD3iCxkHmwYkCqYn8fBw",
+      "name": "The Bible in a Year & More: Fr. Mike & Jeff Cavins"
+    },
+    {
+      "id": "UCedYGs_lqq1uNet0u7qlSyQ",
+      "name": "Cross Examined"
+    },
+    {
+      "id": "UCaxAnjdU0EfausRUCG7iO0g",
+      "name": "The Ten Minute Bible Hour Podcast"
+    },
+    {
+      "id": "UCXHkMZGwB9g4rW4BV45ISbA",
+      "name": "ReasonableFaithOrg"
     }
   ],
   "cars": [
@@ -1630,6 +2074,102 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC2J-0g_nxlwcD9JBK1eTleQ",
       "name": "Auto Focus"
+    },
+    {
+      "id": "UCUhFaUpnq31m6TNX2VKVSVA",
+      "name": "carwow"
+    },
+    {
+      "id": "UCsqjHFMB_JYTaEnf_vmTNqg",
+      "name": "Doug DeMuro"
+    },
+    {
+      "id": "UCyXiDU5qjfOPxgOPeFWGwKw",
+      "name": "Throttle House"
+    },
+    {
+      "id": "UCL6JmiMXKoXS6bpP1D3bk8g",
+      "name": "Donut"
+    },
+    {
+      "id": "UCLgEVx4mzk3T3mzgbKG54Eg",
+      "name": "Hagerty"
+    },
+    {
+      "id": "UCjOl2AUblVmg2rA_cRgZkFg",
+      "name": "Top Gear"
+    },
+    {
+      "id": "UCgUvk6jVaf-1uKOqG8XNcaQ",
+      "name": "savagegeese"
+    },
+    {
+      "id": "UC86SBFIAgnYL3ll2ZDgmsuA",
+      "name": "TheStraightPipes"
+    },
+    {
+      "id": "UCvAhDxNNUDhi78tMXVGBUaQ",
+      "name": "Tavarish"
+    },
+    {
+      "id": "UCes1EvRjcKU4sY_UEavndBw",
+      "name": "ChrisFix"
+    },
+    {
+      "id": "UClqhvGmHcvWL9w3R48t9QXQ",
+      "name": "Engineering Explained"
+    },
+    {
+      "id": "UCIRgR4iANHI2taJdz8hjwLw",
+      "name": "Shmee150"
+    },
+    {
+      "id": "UC9DXAsBD4-ITVuvpd68401Q",
+      "name": "AutoTopNL"
+    },
+    {
+      "id": "UCwocwQcOwYxK2r53YTD0_IQ",
+      "name": "redlinereviews"
+    },
+    {
+      "id": "UCcLYOTz3ct6_lk9iLToxxAw",
+      "name": "Mat Armstrong"
+    },
+    {
+      "id": "UCqE3IQPWUDA9PZGaT6BDAKw",
+      "name": "Gears and Gasoline"
+    },
+    {
+      "id": "UCgeGealT0QYcrnoYRMltDZg",
+      "name": "TheSmokingTire"
+    },
+    {
+      "id": "UCOqhTsqySBCBTy571GArcXg",
+      "name": "Car and Driver"
+    },
+    {
+      "id": "UCzoKvjXr87KFhDw7sWLWelw",
+      "name": "Restoration"
+    },
+    {
+      "id": "UCLLpxcworT8275nBXODXyqw",
+      "name": "M539 Restorations"
+    },
+    {
+      "id": "UCT-2OPZT6P8j4nEKW3DXpOA",
+      "name": "LegitStreetCars"
+    },
+    {
+      "id": "UCsfu-jdkX2_v2t3_igVQebg",
+      "name": "Vice Grip Garage"
+    },
+    {
+      "id": "UCS87-wYrvmexsLkBj0jhrnQ",
+      "name": "Junkyard Digs"
+    },
+    {
+      "id": "UCwO_xoYm2vjhu4kZSxFO5mA",
+      "name": "goonzquad"
     }
   ],
   "business": [
@@ -1660,6 +2200,62 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCyRtUwLylsFqguBvV6Kwlfw",
       "name": "The Numbers Game"
+    },
+    {
+      "id": "UCcyq283he07B7_KUX07mmtA",
+      "name": "Business Insider"
+    },
+    {
+      "id": "UCE4Gn00XZbpWvGUfIslT-tA",
+      "name": "MagnatesMedia"
+    },
+    {
+      "id": "UCH5_L3ytGbBziX0CLuYdQ1Q",
+      "name": "CNBC Make It"
+    },
+    {
+      "id": "UCWo4IA01TXzBeGJJKWHOG9g",
+      "name": "Harvard Business Review"
+    },
+    {
+      "id": "UCoUxsWakJucWg46KW5RsvPw",
+      "name": "Financial Times"
+    },
+    {
+      "id": "UC0p5jTq6Xx_DosDFxVXnWaQ",
+      "name": "The Economist"
+    },
+    {
+      "id": "UC4bq21IPPbpu0Qrsl7LW0sw",
+      "name": "Slidebean"
+    },
+    {
+      "id": "UCb4xHi3i7upzKMaLrauVFtg",
+      "name": "companyman"
+    },
+    {
+      "id": "UCkCGANrihzExmu9QiqZpPlQ",
+      "name": "How Money Works"
+    },
+    {
+      "id": "UCZ4AMrDcNrfy3X6nsU8-rPg",
+      "name": "Economics Explained"
+    },
+    {
+      "id": "UCbzVRTkX3bzNZuBd9In4XyA",
+      "name": "Modern MBA"
+    },
+    {
+      "id": "UCcefcZRL2oaA_uBNeo5UOWg",
+      "name": "Y Combinator"
+    },
+    {
+      "id": "UCDgcdHwUMdDgEcNCfsouLgA",
+      "name": "myfirstmillion"
+    },
+    {
+      "id": "UCV6KDgJskWaEckne5aPA0aQ",
+      "name": "Graham Stephan"
     }
   ],
   "news": [
@@ -1670,6 +2266,86 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCzPpbeK8ANcNKg5aoMB0miw",
       "name": "Dylan Page"
+    },
+    {
+      "id": "UC16niRr50-MSBwiO3YDb3RA",
+      "name": "BBC News"
+    },
+    {
+      "id": "UCIALMKvObZNtJ6AmdCLP7Lg",
+      "name": "Bloomberg"
+    },
+    {
+      "id": "UCBi2mrWuNuyYy4gbM6fU18Q",
+      "name": "ABC News"
+    },
+    {
+      "id": "UCupvZG-5ko_eiXAupbDfxWw",
+      "name": "CNN"
+    },
+    {
+      "id": "UC8p1vwvWtl6T73JiExfWs1g",
+      "name": "CBS News"
+    },
+    {
+      "id": "UCoMdktPbSTixAyNGwb-UYkQ",
+      "name": "Sky News"
+    },
+    {
+      "id": "UCNye-wNBqNL5ZzHSJj3l8Bg",
+      "name": "Al Jazeera English"
+    },
+    {
+      "id": "UCknLrEdhRCp1aegoMqRaCZg",
+      "name": "DW News"
+    },
+    {
+      "id": "UCQfwfsi5VrQ8yKZ-UWmAEFg",
+      "name": "FRANCE 24 English"
+    },
+    {
+      "id": "UChqUTb7kYRX8-EiaN3XFrSQ",
+      "name": "Reuters"
+    },
+    {
+      "id": "UC52X5wxOL_s5yw0dQk7NtgA",
+      "name": "Associated Press"
+    },
+    {
+      "id": "UCvJJ_dzjViJCoLf5uKUTwoA",
+      "name": "CNBC"
+    },
+    {
+      "id": "UCTrQ7HXWRRxr7OsOtodr2_w",
+      "name": "Channel 4 News"
+    },
+    {
+      "id": "UC6ZFN9Tx6xh-skXCuRHCDpQ",
+      "name": "PBS NewsHour"
+    },
+    {
+      "id": "UCHpw8xwDNhU9gdohEcJu4aA",
+      "name": "The Guardian"
+    },
+    {
+      "id": "UCK7tptUDHh-RYDsdxO1-5QQ",
+      "name": "The Wall Street Journal"
+    },
+    {
+      "id": "UC_gUM8rL-Lrg6O3adPW9K1g",
+      "name": "WION"
+    },
+    {
+      "id": "UCSrZ3UV4jOidv8ppoVuvW9Q",
+      "name": "euronews"
+    },
+    {
+      "id": "UChLtXXpo4Ge1ReTEboVvTDg",
+      "name": "Global News"
+    },
+    {
+      "id": "UCVgO39Bk5sMo66-6o6Spn6Q",
+      "name": "ABC News (Australia)"
     }
   ],
   "entertainment": [
@@ -1716,6 +2392,46 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCccjdJEay2hpb5scz61zY6Q",
       "name": "NBC"
+    },
+    {
+      "id": "UCUMZ7gohGI9HcU9VNsr2FJQ",
+      "name": "Bloomberg Originals"
+    },
+    {
+      "id": "UCGkesoYk3NROnpJyVVHURsQ",
+      "name": "amahd"
+    },
+    {
+      "id": "UCdqp0KK_Io7TwK5cJMBvB0Q",
+      "name": "WhistlinDiesel"
+    },
+    {
+      "id": "UCDogdKl7t7NHzQ95aEwkdMw",
+      "name": "Sidemen"
+    },
+    {
+      "id": "UCt3JiNkefsfbA2N4SgEkoiQ",
+      "name": "Visual Venture"
+    },
+    {
+      "id": "UCxOzbkk0bdVl6-tH1Fcajfg",
+      "name": "Beta Squad"
+    },
+    {
+      "id": "UCJjSDX-jUChzOEyok9XYRJQ",
+      "name": "Jubilee"
+    },
+    {
+      "id": "UCbaGn5VkOVlcRgIWAHcrJKA",
+      "name": "Cut"
+    },
+    {
+      "id": "UCMseH1ZPtQQu-u7EB4ehyyw",
+      "name": "The Skin Deep"
+    },
+    {
+      "id": "UCTFFhYhkLkxjhcCdwUKmQ5g",
+      "name": "korty eo"
     }
   ]
 };

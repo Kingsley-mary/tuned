@@ -228,9 +228,14 @@ export async function refreshAllLineups(
   let newVideosFound = 0;
 
   for (const cat of CATEGORIES) {
+    const allowedCreatorIds = new Set((channelsMap[cat.id] || []).map((c) => c.id));
     const existingLineup = baseLineups[cat.id] || SEED_LINEUPS[cat.id];
     const existingVideos = (existingLineup?.videos || []).filter(
-      (v) => v.durationSec && v.durationSec > 60 && v.durationSec !== 600
+      (v) =>
+        allowedCreatorIds.has(v.sourceChannelId) &&
+        v.durationSec &&
+        v.durationSec > 60 &&
+        v.durationSec !== 600
     );
     const existingIds = new Set(existingVideos.map((v) => v.youtubeVideoId));
 
