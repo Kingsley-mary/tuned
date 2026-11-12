@@ -922,75 +922,126 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
     }
 
     // -------------------------------------------------------------
-    // SCENE 6: ARCHITECT (Design, Architecture, Art)
+    // SCENE 6: ARCHITECT / MINIMALIST (Design, Architecture, Art)
+    // High-concept Swiss/Bauhaus kinetic sculpture: precision golden-ratio rings,
+    // floating refractive crystal octahedron, and razor-thin architectural drafting planes.
     // -------------------------------------------------------------
     else if (kind === 'architect') {
-      scene.background = new THREE.Color(0x0e0d10);
-      scene.fog = new THREE.FogExp2(0x0e0d10, 0.042);
+      scene.background = new THREE.Color(0x0a090c);
+      scene.fog = new THREE.FogExp2(0x0a090c, 0.04);
 
-      // Precise museum lighting
-      const key = new THREE.DirectionalLight(0xfff6eb, 3.2);
-      key.position.set(4, 7, 5);
-      const fill = new THREE.DirectionalLight(0x8898b0, 0.8);
-      fill.position.set(-4, -2, 2);
-      const hemi = new THREE.HemisphereLight(0xffffff, 0x121014, 0.5);
-      scene.add(key, fill, hemi);
+      // Studio Gallery Lighting (soft key, cool rim, warm floor bounce)
+      const keyLight = new THREE.DirectionalLight(0xfff5ea, 3.8);
+      keyLight.position.set(5, 8, 6);
+      const fillLight = new THREE.DirectionalLight(0x7890b0, 1.2);
+      fillLight.position.set(-6, -3, 3);
+      const accentSpot = new THREE.PointLight(colorA, 120, 16, 2);
+      accentSpot.position.set(0, 0, 3);
+      const hemi = new THREE.HemisphereLight(0xffffff, 0x080709, 0.6);
+      scene.add(keyLight, fillLight, accentSpot, hemi);
 
-      const sculptureGroup = new THREE.Group();
+      const kineticGroup = new THREE.Group();
 
-      // 1. Frosted refractive glass prism monolith
-      const glassGeo = new THREE.BoxGeometry(1.4, 2.3, 0.32);
-      geometries.push(glassGeo);
-      const glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0xf5f3f0,
-        metalness: 0.05,
-        roughness: 0.12,
-        transmission: 0.88,
-        thickness: 0.6,
+      // 1. Primary Precision Architectural Ring (Brushed Golden Ratio Torus)
+      const ringGeoA = new THREE.TorusGeometry(1.68, 0.052, 32, 120);
+      geometries.push(ringGeoA);
+      const ringMatA = new THREE.MeshPhysicalMaterial({
+        color: 0xf5f3ee,
+        metalness: 0.94,
+        roughness: 0.14,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.08,
+      });
+      materials.push(ringMatA);
+      const ringMeshA = new THREE.Mesh(ringGeoA, ringMatA);
+      ringMeshA.rotation.x = Math.PI / 3.4;
+      kineticGroup.add(ringMeshA);
+
+      // 2. Secondary Gimbal Ring (Accent Tone)
+      const ringGeoB = new THREE.TorusGeometry(1.42, 0.038, 24, 96);
+      geometries.push(ringGeoB);
+      const ringMatB = new THREE.MeshStandardMaterial({
+        color: colorB,
+        metalness: 0.85,
+        roughness: 0.22,
+        emissive: colorB,
+        emissiveIntensity: 0.28,
+      });
+      materials.push(ringMatB);
+      const ringMeshB = new THREE.Mesh(ringGeoB, ringMatB);
+      ringMeshB.rotation.y = Math.PI / 2.6;
+      kineticGroup.add(ringMeshB);
+
+      // 3. Central Suspended Refractive Crystal (Precision Octahedron)
+      const crystalGeo = new THREE.OctahedronGeometry(0.85, 0);
+      geometries.push(crystalGeo);
+      const crystalMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        metalness: 0.04,
+        roughness: 0.08,
+        transmission: 0.92,
+        thickness: 0.85,
+        ior: 1.54,
         clearcoat: 1.0,
       });
-      materials.push(glassMat);
-      const glassMesh = new THREE.Mesh(glassGeo, glassMat);
-      glassMesh.position.set(-0.25, 0.1, 0);
-      sculptureGroup.add(glassMesh);
+      materials.push(crystalMat);
+      const crystalMesh = new THREE.Mesh(crystalGeo, crystalMat);
+      kineticGroup.add(crystalMesh);
 
-      // 2. Brushed brass architectural column
-      const brassGeo = new THREE.CylinderGeometry(0.32, 0.32, 2.6, 48);
-      geometries.push(brassGeo);
-      const brassMat = new THREE.MeshPhysicalMaterial({
-        color: 0xd4af37,
-        metalness: 0.88,
-        roughness: 0.24,
-        clearcoat: 0.8,
+      // 4. Razor-fine Wireframe Framing of the Crystal
+      const crystalEdges = new THREE.EdgesGeometry(crystalGeo);
+      geometries.push(crystalEdges);
+      const edgeMat = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.65,
       });
-      materials.push(brassMat);
-      const brassMesh = new THREE.Mesh(brassGeo, brassMat);
-      brassMesh.position.set(0.75, 0.25, -0.3);
-      sculptureGroup.add(brassMesh);
+      materials.push(edgeMat);
+      const edgeMesh = new THREE.LineSegments(crystalEdges, edgeMat);
+      crystalMesh.add(edgeMesh);
 
-      // 3. Basalt plinth
-      const plinthGeo = new THREE.BoxGeometry(3.2, 0.22, 2.2);
-      geometries.push(plinthGeo);
-      const plinthMat = new THREE.MeshPhysicalMaterial({
-        color: 0x181618,
-        metalness: 0.6,
-        roughness: 0.45,
+      // 5. Architectural Drafting Grids (Golden Ratio calibration marks & axes)
+      const gridGroup = new THREE.Group();
+      const circlePts: THREE.Vector3[] = [];
+      const circleRad = 2.15;
+      for (let i = 0; i <= 64; i++) {
+        const theta = (i / 64) * Math.PI * 2;
+        circlePts.push(new THREE.Vector3(Math.cos(theta) * circleRad, Math.sin(theta) * circleRad, 0));
+      }
+      const circleGeo = new THREE.BufferGeometry().setFromPoints(circlePts);
+      geometries.push(circleGeo);
+      const circleMat = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.18,
       });
-      materials.push(plinthMat);
-      const plinth = new THREE.Mesh(plinthGeo, plinthMat);
-      plinth.position.set(0, -1.2, 0);
-      sculptureGroup.add(plinth);
+      materials.push(circleMat);
+      const circleLine = new THREE.Line(circleGeo, circleMat);
+      gridGroup.add(circleLine);
 
-      // 4. White blueprint wireframe overlay
-      const wireGeo = new THREE.EdgesGeometry(glassGeo);
-      geometries.push(wireGeo);
-      const wireMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.4 });
-      materials.push(wireMat);
-      const wireMesh = new THREE.LineSegments(wireGeo, wireMat);
-      wireMesh.position.copy(glassMesh.position);
-      sculptureGroup.add(wireMesh);
+      // Subtle crosshair drafting ticks
+      const tickGeo = new THREE.BufferGeometry();
+      const tickPos = new Float32Array([
+        -0.18, 0, 0,  0.18, 0, 0,
+        0, -0.18, 0,  0, 0.18, 0,
+        -circleRad - 0.1, 0, 0, -circleRad + 0.1, 0, 0,
+        circleRad - 0.1, 0, 0, circleRad + 0.1, 0, 0,
+        0, -circleRad - 0.1, 0, 0, -circleRad + 0.1, 0,
+        0, circleRad - 0.1, 0, 0, circleRad + 0.1, 0,
+      ]);
+      tickGeo.setAttribute('position', new THREE.BufferAttribute(tickPos, 3));
+      geometries.push(tickGeo);
+      const tickMat = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.4,
+      });
+      materials.push(tickMat);
+      const ticks = new THREE.LineSegments(tickGeo, tickMat);
+      gridGroup.add(ticks);
 
-      scene.add(sculptureGroup);
+      scene.add(kineticGroup);
+      scene.add(gridGroup);
 
       // Station badge
       const plateTex = createChannelPlateTexture(channelNumber, channelName, hue);
@@ -1008,12 +1059,30 @@ export const ThreeBumperCanvas: React.FC<ThreeBumperCanvasProps> = ({
       scene.add(plate);
 
       updateScene = (t) => {
-        const intro = 1 - Math.pow(1 - Math.min(1, t / 1.1), 3);
-        sculptureGroup.rotation.y = Math.sin(t * 0.25) * 0.18 + 0.15;
+        const intro = 1 - Math.pow(1 - Math.min(1, t / 1.2), 3);
+
+        // Harmonic kinetic rotation (Euler gimbal breathing)
+        ringMeshA.rotation.x = Math.PI / 3.4 + t * 0.22;
+        ringMeshA.rotation.z = Math.sin(t * 0.3) * 0.15;
+
+        ringMeshB.rotation.y = Math.PI / 2.6 - t * 0.28;
+        ringMeshB.rotation.x = Math.cos(t * 0.25) * 0.18;
+
+        crystalMesh.rotation.y = t * 0.42;
+        crystalMesh.rotation.x = Math.sin(t * 0.35) * 0.25;
+
+        gridGroup.rotation.z = -t * 0.08;
+        gridGroup.position.z = -0.4;
+
+        kineticGroup.scale.setScalar(0.92 + intro * 0.08);
         plate.position.z = 1.2 - (1 - intro) * 0.5;
 
-        // Telephoto 65mm smooth slow pan
-        camera.position.set(Math.sin(t * 0.18) * 0.35, 0.25, 5.8 - intro * 0.5);
+        // Smooth architectural slow-motion camera glide
+        camera.position.set(
+          Math.sin(t * 0.16) * 0.45,
+          0.15 + Math.cos(t * 0.2) * 0.1,
+          5.6 - intro * 0.4
+        );
         camera.lookAt(0, 0, 0);
       };
     }

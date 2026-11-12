@@ -39,7 +39,7 @@ export type BreakPlan =
 
 // Curated, verified widescreen broadcast idents, intros & promos across all 22 categories
 const CLIPS = {
-  // Animations
+  // Animations & Cartoons
   cnCity1: { youtubeVideoId: 'h9IPZC6giFM', label: 'Cartoon Network Ident', durationSec: 10 },
   cnCity2: { youtubeVideoId: 'boaUvdivics', label: 'Cartoon Network Bumper', durationSec: 10 },
   cnPowerhouse: { youtubeVideoId: 'MzFF_5Tf98s', label: 'Powerhouse Ident', durationSec: 10 },
@@ -47,55 +47,116 @@ const CLIPS = {
   asCheckered2: { youtubeVideoId: 'M6svpGyleCQ', label: '[adult swim] Bumper', durationSec: 15 },
   nick2001: { youtubeVideoId: 'p0DOSv1sA2w', label: 'Nickelodeon Ident', durationSec: 10 },
   pixarFriends: { youtubeVideoId: 'JUoxyPvdgk8', label: 'Studio Ident', durationSec: 26 },
+  lofiGift: { youtubeVideoId: 'd3QQHqRmvH4', label: 'Lofi Animation Bump', durationSec: 18 },
+
   // Games
   ps1Boot: { youtubeVideoId: 'oAhvQoLpvsM', label: 'PlayStation Ident', durationSec: 16 },
+  ps1StartupSound: { youtubeVideoId: 'BOPViekdacQ', label: 'PS1 Audio Startup', durationSec: 12 },
   gcBoot: { youtubeVideoId: 'HKfKk40dPr8', label: 'GameCube Ident', durationSec: 6 },
   ps2Boot: { youtubeVideoId: '-gHkJliF_v4', label: 'PS2 Startup', durationSec: 14 },
+  gta6Trailer: { youtubeVideoId: 'rz1B4B2yBZY', label: 'Rockstar Showcase', durationSec: 30 },
+  switch2Minecraft: { youtubeVideoId: 'npFlBoJM2Ts', label: 'Nintendo Switch 2 Ident', durationSec: 20 },
+  outerWorlds2: { youtubeVideoId: 'WjlWK1Wl6dc', label: 'PS5 Showcase Bumper', durationSec: 25 },
+
   // Tech
   mac1984: { youtubeVideoId: 'EKrxM65enjs', label: 'Macintosh 1984', durationSec: 21 },
   win95Ad: { youtubeVideoId: 'Tw-GGT6900s', label: 'Windows 95 Spot', durationSec: 32 },
+  macBookProKeynote: { youtubeVideoId: 'hnZI5uUSdEo', label: 'Apple Mac Showcase', durationSec: 26 },
+  quantumAegiq: { youtubeVideoId: 'N5YLi8Ar3Wg', label: 'Quantum Silicon Showcase', durationSec: 22 },
+  siemensRobotics: { youtubeVideoId: '784YQBiZArk', label: 'Siemens Robotics AI', durationSec: 25 },
+
   // Music
   mtvChainsaw: { youtubeVideoId: 'he3SszCkNOc', label: 'MTV Station ID', durationSec: 11 },
   mtvKaiju: { youtubeVideoId: 'Y41t0L-pfVc', label: 'MTV Kaiju ID', durationSec: 21 },
   vh1Ident: { youtubeVideoId: 'LPhUn9YB0JE', label: 'VH1 Station ID', durationSec: 35 },
-  // Movies / Film / Entertainment
+  vh1Europe: { youtubeVideoId: '0KYpemsVClg', label: 'VH1 Europe Ident', durationSec: 15 },
+  vevoPop: { youtubeVideoId: 'vEhlyN9TU6c', label: 'Vevo Pop Culture', durationSec: 16 },
+
+  // Movies / Film
   featurePres: { youtubeVideoId: '8HEL4YHdj68', label: 'Feature Presentation', durationSec: 17 },
   thxDeepNote: { youtubeVideoId: 'i43WNXnlGMs', label: 'THX Deep Note', durationSec: 32 },
   hbo1992: { youtubeVideoId: 'kISr9-2ANDA', label: 'Special Presentation', durationSec: 19 },
-  vh1Europe: { youtubeVideoId: '0KYpemsVClg', label: 'VH1 Europe Ident', durationSec: 15 },
+  driveInDog: { youtubeVideoId: 'H8WA6ceRfEQ', label: 'Drive-In Intermission', durationSec: 25 },
+
+  // Art (Genuine Fine Art, Galleries, Contemporary Culture — No MTV!)
+  bbcPaint: { youtubeVideoId: '6TUJkWw1b6Q', label: 'BBC Two Paint Ident', durationSec: 15 },
+  tateModern: { youtubeVideoId: 'vXNQGjdGiMQ', label: 'Tate Modern Ident', durationSec: 20 },
+  momaMoment: { youtubeVideoId: 'p-_LdW1quyk', label: 'MoMA Modern Art', durationSec: 22 },
+  tateWarhol: { youtubeVideoId: 'ZjgAd6Z-dd0', label: 'Tate Modern Tour', durationSec: 25 },
+  bbcOptics: { youtubeVideoId: 'bhnwxQQz5BY', label: 'BBC Two Optics Ident', durationSec: 15 },
+  louvreIntro: { youtubeVideoId: 'zp1BXPX8jcU', label: 'Louvre Museum Intro', durationSec: 30 },
+
+  // Design (Bauhaus, Dieter Rams, Apple Industrial Design, Swiss Typography — No MTV!)
+  bauhaus100: { youtubeVideoId: 'X59FCW3vOlE', label: 'Bauhaus Design Movement', durationSec: 20 },
+  bauhausIntro: { youtubeVideoId: 'Y69wOKg6yp4', label: 'Bauhaus 7 Min Intro', durationSec: 25 },
+  appleDesign20: { youtubeVideoId: 'SGMMHik5ksQ', label: 'Designed by Apple in California', durationSec: 24 },
+  jonyIveLegacy: { youtubeVideoId: 'ZWvO6VA2HQU', label: 'Jony Ive Design Film', durationSec: 30 },
+  appleWatchSteel: { youtubeVideoId: '5SjIuzhdd_g', label: 'Apple Watch Steel Design', durationSec: 18 },
+
+  // Architecture
+  adEmma: { youtubeVideoId: 'ioEa9fe_rc4', label: 'Architectural Digest', durationSec: 14 },
+  adWinnie: { youtubeVideoId: 'pxTXmz_tPYU', label: 'Architectural Digest', durationSec: 13 },
+  adOpenDoorAtlanta: { youtubeVideoId: 'mNAiN-tl7E4', label: 'AD Open Door Atlanta', durationSec: 20 },
+  adOpenDoorParis: { youtubeVideoId: '1EftZvRGquA', label: 'AD Open Door Paris', durationSec: 20 },
+  adOpenDoorKenya: { youtubeVideoId: 'KIqQ0gowzt4', label: 'AD Open Door Kenya', durationSec: 20 },
+
+  // News (CNN, CNBC, BBC News, NBC, ABC)
+  cnnSpecialReport: { youtubeVideoId: 'DZ8aTk92qV4', label: 'CNN Special Report', durationSec: 10 },
+  cnnBreakingNews: { youtubeVideoId: 'TAGroTmWvt4', label: 'CNN Breaking News', durationSec: 8 },
+  bbcNewsCount2024: { youtubeVideoId: '6p366osoEuc', label: 'BBC News Countdown', durationSec: 30 },
+  bbcNewsTheme: { youtubeVideoId: '1m739e8fV2A', label: 'BBC News Countdown Theme', durationSec: 25 },
+  cnbcIdent: { youtubeVideoId: 'ISNsB4Ta70A', label: 'CNBC Station ID', durationSec: 10 },
+  cnbcBreak: { youtubeVideoId: '590wrWi2y0I', label: 'CNBC Break ID', durationSec: 5 },
+  kadnNews: { youtubeVideoId: 'mg5gUVCaRvA', label: 'News Desk ID', durationSec: 5 },
+  abcNews: { youtubeVideoId: 'WOmvzb9IBEA', label: 'WLS News ID', durationSec: 5 },
+
+  // Business (CNBC, Bloomberg TV, Financial Markets)
+  bloombergBumper: { youtubeVideoId: 'zixr0VOg2m0', label: 'Bloomberg Bumper', durationSec: 18 },
+  cnbcAnthropic: { youtubeVideoId: 'bOcwOqyZGNw', label: 'CNBC Tech & Markets', durationSec: 25 },
+  cnbcStocks: { youtubeVideoId: 'rkDiNKDv3Cg', label: 'CNBC Stock Report', durationSec: 15 },
+  cnbcAuto3D: { youtubeVideoId: '9YLr-qa6Qq8', label: 'CNBC Industrial Report', durationSec: 20 },
+  cnbcDebt: { youtubeVideoId: '6Q08nql7vCA', label: 'CNBC Market News', durationSec: 18 },
+  cnbcDataCenters: { youtubeVideoId: 'qxB2eeHud6Q', label: 'CNBC Infrastructure', durationSec: 25 },
+
+  // Sports & Cars
+  topGear: { youtubeVideoId: 'QbyOvkELZ3Y', label: 'Top Gear Intro', durationSec: 20 },
+  f12026Titles: { youtubeVideoId: 'Sks_fMr2Yss', label: 'Formula 1 Opening Titles', durationSec: 24 },
+  f1ConcertTheme: { youtubeVideoId: '8AYy-BcjRXg', label: 'Formula 1 Theme', durationSec: 28 },
+  f1McLaren: { youtubeVideoId: 'xvKfKnx2wOc', label: 'F1 Opener', durationSec: 23 },
+  itvSport: { youtubeVideoId: 'W4jCRwJh87o', label: 'ITV Sport Bumper', durationSec: 5 },
+  nikeSpot: { youtubeVideoId: '18XjACKal0o', label: 'Nike Commercial', durationSec: 15 },
+  googleHoops: { youtubeVideoId: 'WMjVP7QQyDI', label: 'Google Athletic Culture', durationSec: 15 },
+
   // Science / Learning / Documentaries
   discoveryHd: { youtubeVideoId: '1pTqM9c7DO8', label: 'Discovery Ident', durationSec: 5 },
   discoveryBumper: { youtubeVideoId: '7ynDcJBJlMU', label: 'Discovery Bumper', durationSec: 27 },
   billNye: { youtubeVideoId: 'UtVJdPfm0F8', label: 'Science Intro', durationSec: 31 },
   natGeo: { youtubeVideoId: 'r_NfprynbLk', label: 'NatGeo Ident', durationSec: 13 },
+  nasaLaunch4k: { youtubeVideoId: '21X5lGlDOfg', label: 'NASA 4K Launch', durationSec: 20 },
   bbc1980s: { youtubeVideoId: 'fEF82qBFo9I', label: 'BBC Video Ident', durationSec: 37 },
   bbc100: { youtubeVideoId: 'H81x-4oYvCo', label: 'BBC Ident', durationSec: 17 },
   pbs1990s: { youtubeVideoId: 'Jb35JfWbpaY', label: 'PBS Station ID', durationSec: 5 },
   pbsKids: { youtubeVideoId: 'KPCpTyDhgfs', label: 'PBS P-Pals ID', durationSec: 8 },
-  // Industry / Architecture / Design
+
+  // Industry / Engineering
   howItsMade: { youtubeVideoId: 'h0L3J5p3lcE', label: "How It's Made Intro", durationSec: 22 },
-  adEmma: { youtubeVideoId: 'ioEa9fe_rc4', label: 'Architectural Digest', durationSec: 14 },
-  adWinnie: { youtubeVideoId: 'pxTXmz_tPYU', label: 'Architectural Digest', durationSec: 13 },
-  // Cars / Sports / Travel / Food / Fitness / Business / News / Religion
-  topGear: { youtubeVideoId: 'QbyOvkELZ3Y', label: 'Top Gear Intro', durationSec: 20 },
-  f1McLaren: { youtubeVideoId: 'xvKfKnx2wOc', label: 'F1 Opener', durationSec: 23 },
-  itvSport: { youtubeVideoId: 'W4jCRwJh87o', label: 'ITV Sport Bumper', durationSec: 5 },
+
+  // Travel / Food / Religion
   bourdainParts: { youtubeVideoId: 'hF2V-5lBWoo', label: 'Parts Unknown Promo', durationSec: 30 },
   bourdainNoRes: { youtubeVideoId: 'V03F545Gd38', label: 'No Reservations Intro', durationSec: 24 },
-  driveInDog: { youtubeVideoId: 'H8WA6ceRfEQ', label: 'Drive-In Intermission', durationSec: 25 },
-  nikeSpot: { youtubeVideoId: '18XjACKal0o', label: 'Nike Commercial', durationSec: 15 },
-  bloombergBumper: { youtubeVideoId: 'zixr0VOg2m0', label: 'Bloomberg Bumper', durationSec: 18 },
-  cnbcBreak: { youtubeVideoId: '590wrWi2y0I', label: 'CNBC Break ID', durationSec: 5 },
-  cnbcIdent: { youtubeVideoId: 'ISNsB4Ta70A', label: 'CNBC Station ID', durationSec: 10 },
-  kadnNews: { youtubeVideoId: 'mg5gUVCaRvA', label: 'News Desk ID', durationSec: 5 },
-  abcNews: { youtubeVideoId: 'WOmvzb9IBEA', label: 'WLS News ID', durationSec: 5 },
   cathedralOrgan: { youtubeVideoId: 'evxtlaSmedg', label: 'Cathedral Chime', durationSec: 17 },
 } satisfies Record<string, YouTubeBumperClip>;
 
 const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
-  tech: [CLIPS.mac1984, CLIPS.ps2Boot, CLIPS.win95Ad],
-  movies: [CLIPS.featurePres, CLIPS.hbo1992, CLIPS.thxDeepNote],
-  film: [CLIPS.featurePres, CLIPS.hbo1992, CLIPS.thxDeepNote],
+  tech: [
+    CLIPS.mac1984,
+    CLIPS.win95Ad,
+    CLIPS.macBookProKeynote,
+    CLIPS.quantumAegiq,
+    CLIPS.siemensRobotics,
+  ],
+  movies: [CLIPS.featurePres, CLIPS.hbo1992, CLIPS.thxDeepNote, CLIPS.driveInDog],
+  film: [CLIPS.featurePres, CLIPS.hbo1992, CLIPS.thxDeepNote, CLIPS.driveInDog],
   cartoons: [
     CLIPS.cnCity1,
     CLIPS.asCheckered1,
@@ -104,32 +165,103 @@ const YOUTUBE_BUMPERS_BY_CHANNEL: Record<string, YouTubeBumperClip[]> = {
     CLIPS.asCheckered2,
     CLIPS.cnPowerhouse,
     CLIPS.pixarFriends,
+    CLIPS.lofiGift,
   ],
-  industry: [CLIPS.howItsMade, CLIPS.discoveryHd],
-  music: [CLIPS.mtvKaiju, CLIPS.mtvChainsaw, CLIPS.vh1Ident],
-  science: [CLIPS.discoveryHd, CLIPS.billNye, CLIPS.discoveryBumper],
-  food: [CLIPS.driveInDog, CLIPS.bourdainNoRes],
-  games: [CLIPS.ps1Boot, CLIPS.gcBoot, CLIPS.ps2Boot],
-  sports: [CLIPS.itvSport, CLIPS.f1McLaren],
-  travel: [CLIPS.bourdainParts, CLIPS.bourdainNoRes],
-  fitness: [CLIPS.nikeSpot, CLIPS.itvSport],
-  art: [CLIPS.vh1Europe, CLIPS.mtvChainsaw],
-  design: [CLIPS.vh1Europe, CLIPS.adEmma],
-  learning: [CLIPS.pbs1990s, CLIPS.billNye, CLIPS.pbsKids],
-  documentaries: [CLIPS.natGeo, CLIPS.bbc1980s, CLIPS.bbc100],
-  architecture: [CLIPS.adEmma, CLIPS.adWinnie],
-  religion: [CLIPS.cathedralOrgan],
-  cars: [CLIPS.topGear, CLIPS.f1McLaren],
-  business: [CLIPS.bloombergBumper, CLIPS.cnbcIdent, CLIPS.cnbcBreak],
-  news: [CLIPS.kadnNews, CLIPS.abcNews, CLIPS.cnbcIdent],
-  entertainment: [CLIPS.hbo1992, CLIPS.vh1Europe],
+  industry: [
+    CLIPS.howItsMade,
+    CLIPS.siemensRobotics,
+    CLIPS.cnbcAuto3D,
+    CLIPS.discoveryHd,
+  ],
+  music: [
+    CLIPS.mtvKaiju,
+    CLIPS.mtvChainsaw,
+    CLIPS.vh1Ident,
+    CLIPS.vh1Europe,
+    CLIPS.vevoPop,
+  ],
+  science: [
+    CLIPS.discoveryHd,
+    CLIPS.billNye,
+    CLIPS.discoveryBumper,
+    CLIPS.nasaLaunch4k,
+    CLIPS.natGeo,
+    CLIPS.bbc1980s,
+  ],
+  food: [CLIPS.driveInDog, CLIPS.bourdainNoRes, CLIPS.bourdainParts],
+  games: [
+    CLIPS.ps1Boot,
+    CLIPS.gcBoot,
+    CLIPS.ps2Boot,
+    CLIPS.ps1StartupSound,
+    CLIPS.gta6Trailer,
+    CLIPS.switch2Minecraft,
+    CLIPS.outerWorlds2,
+  ],
+  sports: [
+    CLIPS.f12026Titles,
+    CLIPS.f1ConcertTheme,
+    CLIPS.f1McLaren,
+    CLIPS.itvSport,
+    CLIPS.nikeSpot,
+    CLIPS.googleHoops,
+  ],
+  travel: [CLIPS.bourdainParts, CLIPS.bourdainNoRes, CLIPS.natGeo, CLIPS.bbc100],
+  fitness: [CLIPS.nikeSpot, CLIPS.itvSport, CLIPS.googleHoops, CLIPS.f1McLaren],
+  art: [
+    CLIPS.bbcPaint,
+    CLIPS.tateModern,
+    CLIPS.momaMoment,
+    CLIPS.tateWarhol,
+    CLIPS.bbcOptics,
+    CLIPS.louvreIntro,
+  ],
+  design: [
+    CLIPS.bauhaus100,
+    CLIPS.appleDesign20,
+    CLIPS.jonyIveLegacy,
+    CLIPS.bauhausIntro,
+    CLIPS.appleWatchSteel,
+    CLIPS.adEmma,
+  ],
+  learning: [CLIPS.pbs1990s, CLIPS.billNye, CLIPS.pbsKids, CLIPS.bbc100, CLIPS.discoveryBumper],
+  documentaries: [CLIPS.natGeo, CLIPS.bbc1980s, CLIPS.bbc100, CLIPS.discoveryHd, CLIPS.discoveryBumper],
+  architecture: [
+    CLIPS.adOpenDoorAtlanta,
+    CLIPS.adOpenDoorParis,
+    CLIPS.adOpenDoorKenya,
+    CLIPS.adEmma,
+    CLIPS.adWinnie,
+  ],
+  religion: [CLIPS.cathedralOrgan, CLIPS.bbc100],
+  cars: [CLIPS.topGear, CLIPS.f1McLaren, CLIPS.f12026Titles, CLIPS.f1ConcertTheme],
+  business: [
+    CLIPS.bloombergBumper,
+    CLIPS.cnbcIdent,
+    CLIPS.cnbcAnthropic,
+    CLIPS.cnbcBreak,
+    CLIPS.cnbcStocks,
+    CLIPS.cnbcDebt,
+  ],
+  news: [
+    CLIPS.cnnSpecialReport,
+    CLIPS.bbcNewsCount2024,
+    CLIPS.cnbcIdent,
+    CLIPS.cnnBreakingNews,
+    CLIPS.cnbcBreak,
+    CLIPS.bbcNewsTheme,
+    CLIPS.kadnNews,
+    CLIPS.abcNews,
+  ],
+  entertainment: [CLIPS.hbo1992, CLIPS.vh1Europe, CLIPS.googleHoops, CLIPS.vevoPop],
 };
 
 const GENERAL_YOUTUBE_BUMPERS: YouTubeBumperClip[] = [
   CLIPS.hbo1992,
   CLIPS.pbs1990s,
   CLIPS.natGeo,
-  CLIPS.cnCity1,
+  CLIPS.bbc100,
+  CLIPS.featurePres,
 ];
 
 interface DeadpanCard {

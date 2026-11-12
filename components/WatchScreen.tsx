@@ -1324,9 +1324,10 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   return (
                     <div key={slot.video.youtubeVideoId + (i + 1)} className="osd-row">
                       <span className="osd-row-time">{formatClockTime(slot.startTimeMs)}</span>
-                      <span className="osd-row-tag">{i === 0 ? (isUpcomingMarathon ? 'MARATHON' : 'NEXT') : ''}</span>
+                      <span className={`osd-row-tag${isUpcomingMarathon && i === 0 ? ' is-marathon' : ''}`}>
+                        {i === 0 ? (isUpcomingMarathon ? '🔥 MARATHON' : 'NEXT') : ''}
+                      </span>
                       <span className="osd-row-title">
-                        {isUpcomingMarathon && <span className="osd-marathon-mini">🔥</span>}
                         {slot.video.title}
                       </span>
                       <span className="osd-row-src">{slot.video.sourceChannelTitle}</span>

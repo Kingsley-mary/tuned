@@ -1566,13 +1566,29 @@ button:focus-visible, input:focus-visible {
 .osd-live { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; }
 .osd-live.behind { padding: 8px 14px; border-radius: 999px; color: #f59e0b; border: 1px solid rgba(245,158,11,0.5); background: rgba(245,158,11,0.12); }
 
-.osd-row { position: relative; display: grid; grid-template-columns: 70px 56px 1fr minmax(0, 220px) 64px; align-items: center; gap: 16px; padding: 0 28px; height: 52px; font-size: 15px; color: rgba(255,255,255,0.78); border-top: 1px solid rgba(255,255,255,0.06); }
+.osd-row { position: relative; display: grid; grid-template-columns: 70px minmax(56px, max-content) 1fr minmax(0, 220px) 64px; align-items: center; gap: 16px; padding: 0 28px; height: 52px; font-size: 15px; color: rgba(255,255,255,0.78); border-top: 1px solid rgba(255,255,255,0.06); }
 .osd-row:first-of-type { border-top: none; }
 .osd-row.now { height: 64px; margin: 8px 12px; padding: 0 16px; border-radius: 14px; background: rgba(255,244,232,0.2); color: #fff; font-size: 17px; font-weight: 600; border: none; transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1), margin 0.32s cubic-bezier(0.22, 1, 0.36, 1); }
 .osd-row-time { font-variant-numeric: tabular-nums; font-size: 13px; opacity: 0.85; }
-.osd-row-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-align: center; padding: 4px 0; border-radius: 6px; background: rgba(255,255,255,0.16); visibility: hidden; }
+.osd-row-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-align: center; padding: 4px 6px; border-radius: 6px; background: rgba(255,255,255,0.16); visibility: hidden; white-space: nowrap; }
 .osd-row.now .osd-row-tag { visibility: visible; background: var(--accent); color: #fff; }
 .osd-upcoming-inner .osd-row:first-child .osd-row-tag { visibility: visible; }
+.osd-row-tag.is-marathon {
+  visibility: visible !important;
+  background: linear-gradient(135deg, #ff4500, #ff8c00) !important;
+  color: #fff !important;
+  padding: 3px 8px !important;
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  border-radius: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.45) !important;
+  white-space: nowrap !important;
+}
 .osd-row-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .osd-row-src { font-size: 12px; opacity: 0.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .osd-row-src-live { opacity: 1; display: flex; align-items: center; gap: 8px; overflow: visible; }
@@ -1917,7 +1933,7 @@ button:focus-visible, input:focus-visible {
 .mg-link { color: rgba(255,255,255,0.7) !important; }
 
 /* Watch: more room for titles */
-.osd-row { grid-template-columns: 70px 56px minmax(0, 1fr) minmax(0, 160px) 64px; }
+.osd-row { grid-template-columns: 70px minmax(56px, max-content) minmax(0, 1fr) minmax(0, 160px) 64px; }
 
 @media (max-width: 768px) {
   /* Watch OSD: compact, readable */

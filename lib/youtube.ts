@@ -2308,6 +2308,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "CNN"
     },
     {
+      "id": "UCvJJ_dzjViJCoLf5uKUTwoA",
+      "name": "CNBC"
+    },
+    {
       "id": "UC8p1vwvWtl6T73JiExfWs1g",
       "name": "CBS News"
     },
@@ -2334,10 +2338,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UC52X5wxOL_s5yw0dQk7NtgA",
       "name": "Associated Press"
-    },
-    {
-      "id": "UCvJJ_dzjViJCoLf5uKUTwoA",
-      "name": "CNBC"
     },
     {
       "id": "UCTrQ7HXWRRxr7OsOtodr2_w",

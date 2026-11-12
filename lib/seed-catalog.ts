@@ -10711,12 +10711,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 520
       },
       {
+        "youtubeVideoId": "bOcwOqyZGNw",
+        "title": "Anthropic’s Breakneck Rise: What To Know Before The IPO",
+        "sourceChannelId": "UCvJJ_dzjViJCoLf5uKUTwoA",
+        "sourceChannelTitle": "CNBC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/bOcwOqyZGNw/hqdefault.jpg",
+        "durationSec": 394
+      },
+      {
         "youtubeVideoId": "61MTSbL6hOA",
         "title": "Everything is about to change…",
         "sourceChannelId": "UCzPpbeK8ANcNKg5aoMB0miw",
         "sourceChannelTitle": "Dylan Page",
         "thumbnailUrl": "https://i.ytimg.com/vi/61MTSbL6hOA/hqdefault.jpg",
         "durationSec": 1492
+      },
+      {
+        "youtubeVideoId": "qxB2eeHud6Q",
+        "title": "The Truth About How Data Centers Use Water And Power To Keep Cool",
+        "sourceChannelId": "UCvJJ_dzjViJCoLf5uKUTwoA",
+        "sourceChannelTitle": "CNBC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/qxB2eeHud6Q/hqdefault.jpg",
+        "durationSec": 720
       },
       {
         "youtubeVideoId": "cZdid6PVoLo",
@@ -10727,12 +10743,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 360
       },
       {
+        "youtubeVideoId": "rkDiNKDv3Cg",
+        "title": "Why investors are borrowing money to buy stocks",
+        "sourceChannelId": "UCvJJ_dzjViJCoLf5uKUTwoA",
+        "sourceChannelTitle": "CNBC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/rkDiNKDv3Cg/hqdefault.jpg",
+        "durationSec": 68
+      },
+      {
         "youtubeVideoId": "pbfskD7GRFk",
         "title": "Kornacki: How Republicans’ redistricting gamble ended up ‘firing up’ Democrats in North Carolina",
         "sourceChannelId": "UCeY0bbntWzzVIaj2z3QigXg",
         "sourceChannelTitle": "NBC News",
         "thumbnailUrl": "https://i.ytimg.com/vi/pbfskD7GRFk/hqdefault.jpg",
         "durationSec": 309
+      },
+      {
+        "youtubeVideoId": "x_iD6rni888",
+        "title": "Why Cheaper Car Sales Have Fallen",
+        "sourceChannelId": "UCvJJ_dzjViJCoLf5uKUTwoA",
+        "sourceChannelTitle": "CNBC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/x_iD6rni888/hqdefault.jpg",
+        "durationSec": 350
       },
       {
         "youtubeVideoId": "yNJ9GxietzA",
@@ -10743,12 +10775,28 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 410
       },
       {
+        "youtubeVideoId": "9YLr-qa6Qq8",
+        "title": "How 3D Printing Is Transforming The Auto Industry",
+        "sourceChannelId": "UCvJJ_dzjViJCoLf5uKUTwoA",
+        "sourceChannelTitle": "CNBC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9YLr-qa6Qq8/hqdefault.jpg",
+        "durationSec": 148
+      },
+      {
         "youtubeVideoId": "cw-X0DGpx-U",
         "title": "The World Just Got Alot More Dangerous...",
         "sourceChannelId": "UCzPpbeK8ANcNKg5aoMB0miw",
         "sourceChannelTitle": "Dylan Page",
         "thumbnailUrl": "https://i.ytimg.com/vi/cw-X0DGpx-U/hqdefault.jpg",
         "durationSec": 1400
+      },
+      {
+        "youtubeVideoId": "6Q08nql7vCA",
+        "title": "Midterms raise U.S. debt ceiling risks",
+        "sourceChannelId": "UCvJJ_dzjViJCoLf5uKUTwoA",
+        "sourceChannelTitle": "CNBC",
+        "thumbnailUrl": "https://i.ytimg.com/vi/6Q08nql7vCA/hqdefault.jpg",
+        "durationSec": 62
       },
       {
         "youtubeVideoId": "Z3OyGJbzmlY",
