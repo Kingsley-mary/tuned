@@ -1644,6 +1644,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           <button
             onClick={onCycleSleepTimer}
             className={`osd-btn${sleepTimerMode !== 'off' ? ' active' : ''}`}
+            data-sleep-active={sleepTimerMode !== 'off' ? 'true' : undefined}
             title="Cycle Sleep Timer (Off / 15m / 30m / 60m / End of Show)"
             aria-label="Sleep Timer"
           >
@@ -1732,10 +1733,16 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         onTouchStart={() => pokeOsd()}
       >
         <div className="osd-legend">
-          <button onClick={onTogglePlay}>
+          <button
+            onClick={onTogglePlay}
+            className={!isPlaying ? 'is-on' : undefined}
+          >
             {isPlaying ? 'Pause' : 'Play'} <span className="kbd-osd">SPACE</span>
           </button>
-          <button onClick={() => setIsMuted((m) => !m)}>
+          <button
+            onClick={() => setIsMuted((m) => !m)}
+            className={isMuted ? 'is-on' : undefined}
+          >
             {isMuted ? 'Unmute' : 'Mute'} <span className="kbd-osd">M</span>
           </button>
           <button
@@ -1743,10 +1750,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
               setCaptionsMenuOpen((prev) => !prev);
               pokeOsd();
             }}
+            className={captionsEnabled ? 'is-on' : undefined}
           >
             {captionsEnabled ? 'Captions On' : 'Captions'} <span className="kbd-osd">C</span>
           </button>
-          <button onClick={toggleFullscreen}>
+          <button
+            onClick={toggleFullscreen}
+            className={isFullscreen ? 'is-on' : undefined}
+          >
             {isFullscreen ? 'Exit full' : 'Fullscreen'} <span className="kbd-osd">F</span>
           </button>
           <button
@@ -1754,11 +1765,16 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             onClick={() => {
               triggerManualBreak();
             }}
+            className={isBumperActive ? 'is-on' : undefined}
             title="Preview Station ID & Bumper (B)"
           >
             Ident <span className="kbd-osd">B</span>
           </button>
-          <button onClick={openDialerWithNumpad} title="Direct Channel Tuning (0-9 or #)">
+          <button
+            onClick={openDialerWithNumpad}
+            className={dialBuffer || showDialNumpad ? 'is-on' : undefined}
+            title="Direct Channel Tuning (0-9 or #)"
+          >
             Dial <span className="kbd-osd">#</span>
           </button>
           <button onClick={onOpenGuide}>
@@ -1771,6 +1787,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           )}
           <button
             type="button"
+            className={copiedShare ? 'is-on' : undefined}
             onClick={() => {
               handleShareChannel();
               pokeOsd();

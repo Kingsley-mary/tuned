@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Category } from '../lib/types';
-import { Sparkles, Tv } from 'lucide-react';
+import { ArrowLeft, Sparkles, Tv } from 'lucide-react';
 
 interface PickInterestsScreenProps {
   categories: Category[];
@@ -85,14 +85,24 @@ export const PickInterestsScreen: React.FC<PickInterestsScreenProps> = ({
     <div className="pk-screen">
       <div className="pk-inner">
         <header className="pk-top">
-          <div>
-            <div className="brand-logo" style={{ color: '#fff' }}>
-              <span className="brand-dot" />
-              <span>tuned</span>
-            </div>
-            <div className="pk-tv">
-              <Tv size={18} strokeWidth={1.6} />
-              <span>Pick your channels</span>
+          <div className="pk-brand-wrap">
+            <button
+              type="button"
+              onClick={onBack}
+              className="pk-mobile-back"
+              aria-label="Back to power screen"
+            >
+              <ArrowLeft size={18} strokeWidth={2} />
+            </button>
+            <div>
+              <div className="brand-logo" style={{ color: '#fff' }}>
+                <span className="brand-dot" />
+                <span>tuned</span>
+              </div>
+              <div className="pk-tv">
+                <Tv size={18} strokeWidth={1.6} />
+                <span>Pick your channels</span>
+              </div>
             </div>
           </div>
 

@@ -44,17 +44,7 @@ export const TuningScreen: React.FC<TuningScreenProps> = ({
   }, [channels.length]);
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 24,
-        textAlign: 'center',
-      }}
-    >
+    <div className="tuning-screen">
       <div className="brand-logo" style={{ marginBottom: 32, color: '#fff' }}>
         <span className="brand-dot" />
         <span>tuned</span>

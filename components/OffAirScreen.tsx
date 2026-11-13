@@ -13,17 +13,7 @@ export const OffAirScreen: React.FC<OffAirScreenProps> = ({
   onTryAgain,
 }) => {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 24,
-        textAlign: 'center',
-      }}
-    >
+    <div className="offair-screen">
       {/* SMPTE Color Bars Graphic (PRD O-2) */}
       <div className="offair-wrap"><span className="offair-badge">NO SIGNAL</span><div className="smpte-bars">
         <div className="smpte-bar" style={{ background: '#dcdcdc' }} />

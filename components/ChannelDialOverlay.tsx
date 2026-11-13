@@ -43,7 +43,7 @@ export const ChannelDialOverlay: React.FC<ChannelDialOverlayProps> = ({
 
   return (
     <div
-      className={`tv-dial-hud status-${status}`}
+      className={`tv-dial-hud status-${status}${showNumpad ? ' has-numpad' : ''}`}
       onClick={(e) => e.stopPropagation()}
       style={
         {
@@ -54,60 +54,62 @@ export const ChannelDialOverlay: React.FC<ChannelDialOverlayProps> = ({
       role="dialog"
       aria-label="Direct channel dialer"
     >
-      {/* Centered Large Digits Row */}
-      <div className="tv-dial-digits-row">
-        {dialBuffer ? (
-          dialBuffer.split('').map((digit, idx) => (
-            <span key={`${idx}-${digit}`} className="tv-dial-digit">
-              {digit}
-            </span>
-          ))
-        ) : (
-          <span className="tv-dial-digit placeholder">—</span>
-        )}
-      </div>
-
-      {/* Channel Information Pill (Matches .osd-channel-name in dock) */}
-      <div className="tv-dial-meta-row">
-        {previewChannel && status !== 'invalid' && (
-          <div className="tv-dial-channel-pill">
-            <b
-              className="tv-dial-channel-badge"
-              style={{ backgroundColor: `hsl(${previewChannel.hue}, 80%, 48%)` }}
-            >
-              CH {String(chNum).padStart(2, '0')}
-            </b>
-            <span className="tv-dial-channel-name">
-              {previewChannel.categoryName}
-            </span>
-          </div>
-        )}
-
-        {status === 'invalid' && (
-          <div className="tv-dial-channel-pill invalid">
-            <span className="tv-dial-channel-error">
-              CH {dialBuffer || '—'} Unavailable (1–{totalChannels})
-            </span>
-          </div>
-        )}
-
-        {status === 'dialing' && !previewChannel && !dialBuffer && (
-          <div className="tv-dial-channel-pill placeholder">
-            <span className="tv-dial-channel-hint">Enter channel 1–{totalChannels}</span>
-          </div>
-        )}
-      </div>
-
-      {/* Minimal Countdown Progress Bar */}
-      {status === 'dialing' && dialBuffer && (
-        <div className="tv-dial-timer-track">
-          <div
-            key={timerKey}
-            className="tv-dial-timer-fill"
-            style={{ animationDuration: `${timeoutMs}ms` }}
-          />
+      <div className="tv-dial-display">
+        {/* Centered Large Digits Row */}
+        <div className="tv-dial-digits-row">
+          {dialBuffer ? (
+            dialBuffer.split('').map((digit, idx) => (
+              <span key={`${idx}-${digit}`} className="tv-dial-digit">
+                {digit}
+              </span>
+            ))
+          ) : (
+            <span className="tv-dial-digit placeholder">—</span>
+          )}
         </div>
-      )}
+
+        {/* Channel Information Pill (Matches .osd-channel-name in dock) */}
+        <div className="tv-dial-meta-row">
+          {previewChannel && status !== 'invalid' && (
+            <div className="tv-dial-channel-pill">
+              <b
+                className="tv-dial-channel-badge"
+                style={{ backgroundColor: `hsl(${previewChannel.hue}, 80%, 48%)` }}
+              >
+                CH {String(chNum).padStart(2, '0')}
+              </b>
+              <span className="tv-dial-channel-name">
+                {previewChannel.categoryName}
+              </span>
+            </div>
+          )}
+
+          {status === 'invalid' && (
+            <div className="tv-dial-channel-pill invalid">
+              <span className="tv-dial-channel-error">
+                CH {dialBuffer || '—'} Unavailable (1–{totalChannels})
+              </span>
+            </div>
+          )}
+
+          {status === 'dialing' && !previewChannel && !dialBuffer && (
+            <div className="tv-dial-channel-pill placeholder">
+              <span className="tv-dial-channel-hint">Enter channel 1–{totalChannels}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Minimal Countdown Progress Bar */}
+        {status === 'dialing' && dialBuffer && (
+          <div className="tv-dial-timer-track">
+            <div
+              key={timerKey}
+              className="tv-dial-timer-fill"
+              style={{ animationDuration: `${timeoutMs}ms` }}
+            />
+          </div>
+        )}
+      </div>
 
       {/* Optional On-Screen Keypad (for touch / mobile) */}
       {showNumpad && (

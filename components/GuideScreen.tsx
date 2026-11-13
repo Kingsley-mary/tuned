@@ -33,7 +33,7 @@ interface GuideSlot {
   isMarathon?: boolean;
 }
 
-const VIS = 7;
+const DESKTOP_VIS = 7;
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -75,15 +75,19 @@ export function GuideScreen({
 
   useEffect(() => {
     const checkViewport = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(
+        window.innerWidth <= 768 ||
+        (window.innerHeight <= 540 && window.innerWidth <= 1024)
+      );
     };
     checkViewport();
     window.addEventListener('resize', checkViewport);
     return () => window.removeEventListener('resize', checkViewport);
   }, []);
 
-  // Use 60-minute timeline window on mobile phones so program titles have plenty of room; 90 minutes on desktop
+  // Use 60-minute timeline window and 4 taller rows on mobile viewports so channels & titles stay readable
   const WIN = isMobile ? 60 : 90;
+  const VIS = isMobile ? 4 : DESKTOP_VIS;
 
   const dayStartMs = useMemo(() => getDayStartMs(nowMs), [nowMs]);
   const nowMin = (nowMs - dayStartMs) / 60000;
@@ -94,8 +98,8 @@ export function GuideScreen({
   // Selected row & time cursor for inspecting programs
   const [selRow, setSelRow] = useState<number>(safeCurrentCh);
   const [topRow, setTopRow] = useState<number>(() => {
-    if (safeCurrentCh >= VIS) {
-      return Math.min(Math.max(0, channels.length - VIS), safeCurrentCh - Math.floor(VIS / 2));
+    if (safeCurrentCh >= DESKTOP_VIS) {
+      return Math.min(Math.max(0, channels.length - DESKTOP_VIS), safeCurrentCh - Math.floor(DESKTOP_VIS / 2));
     }
     return 0;
   });
@@ -283,7 +287,7 @@ export function GuideScreen({
     if (selRow >= top + VIS) top = selRow - VIS + 1;
     const maxTop = Math.max(0, channels.length - VIS);
     return Math.max(0, Math.min(maxTop, top));
-  }, [selRow, topRow, channels.length]);
+  }, [selRow, topRow, channels.length, VIS]);
 
   useEffect(() => {
     if (fittedTop !== topRow) setTopRow(fittedTop);
@@ -384,7 +388,7 @@ export function GuideScreen({
     };
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
-  }, [channels.length, fittedTop]);
+  }, [channels.length, fittedTop, VIS]);
 
   // Mobile Touch Drag/Swipe on Guide rows (vertical = scroll channels, horizontal = scroll timeline)
   const handleRowsTouchStart = (e: React.TouchEvent) => {
@@ -450,7 +454,7 @@ export function GuideScreen({
     const end = Math.min(fittedTop + VIS, channels.length);
     for (let r = fittedTop; r < end; r++) indices.push(r);
     return indices;
-  }, [fittedTop, channels.length]);
+  }, [fittedTop, channels.length, VIS]);
 
   const nowFraction = (nowMin - w0) / WIN;
   const selChannel = channels[selRow];
@@ -473,17 +477,29 @@ export function GuideScreen({
 
       <div className="app">
         <div className="top">
-          <div>
-            <div className="lg">
-              <i />
-              tuned
-            </div>
-            <div className="tg">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="7" width="18" height="13" rx="2" />
-                <path d="M8 3l4 4 4-4" />
+          <div className="tvg-head-left">
+            <button
+              type="button"
+              className="tvg-mobile-back"
+              onClick={onBackToWatch}
+              aria-label="Back to watch"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 5l-7 7 7 7" />
               </svg>
-              TV Guide
+            </button>
+            <div className="tvg-brand-col">
+              <div className="lg">
+                <i />
+                tuned
+              </div>
+              <div className="tg">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="7" width="18" height="13" rx="2" />
+                  <path d="M8 3l4 4 4-4" />
+                </svg>
+                TV Guide
+              </div>
             </div>
           </div>
           <div className="clock">
@@ -635,6 +651,16 @@ export function GuideScreen({
                     CH {pad(selRow + 1)} · {selChannel.categoryName} · {selectedSlot.src}
                   </span>
                   <b className="bdg">{dur(selectedSlot.e - selectedSlot.s)}</b>
+                  <button
+                    type="button"
+                    className="tvg-mobile-watch"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleTune(selRow, selectedSlot);
+                    }}
+                  >
+                    Watch
+                  </button>
                 </div>
               </div>
             )}
