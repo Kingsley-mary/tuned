@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ScreenMode, Category, ChannelLineup, UserState, CustomSource } from '../lib/types';
 import { CATEGORIES, SEED_LINEUPS } from '../lib/seed-catalog';
-import { getLiveBroadcastState, advanceChannelPlayback, calibrateServerClock, getSyncedNowSec, getSyncedNowMs, getEligibleVideos } from '../lib/broadcast-clock';
+import { getLiveBroadcastState, getDailyChannelLineup, advanceChannelPlayback, calibrateServerClock, getSyncedNowSec, getSyncedNowMs, getEligibleVideos } from '../lib/broadcast-clock';
 import { registerDynamicBumpers } from '../lib/bumpers';
 import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { unlockBumperAudio } from '../lib/bumper-synth';
@@ -569,24 +569,45 @@ export default function TunedApp() {
 
   // Called when video ends naturally or is skipped on error
   const handleNextVideo = useCallback(
-    (isErrorSkip: boolean = false) => {
+    (isErrorSkip: boolean = false, failedVideoId?: string) => {
       const active = channels[currentChannelIndex];
       if (!active || !active.videos?.length) return;
 
-      const finishedVideo = active.videos[currentVideoIndex];
+      const dailyVideos = getDailyChannelLineup(active.videos, active.categoryId, getSyncedNowMs());
+      const finishedVideo = dailyVideos[currentVideoIndex];
       // Only add genuinely unplayable/Short videos to failedVideoIdsRef so naturally ended videos
       // never cause per-browser session drift away from the global broadcast clock.
-      if (isErrorSkip && finishedVideo?.youtubeVideoId) {
-        failedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
+      if (isErrorSkip) {
+        if (failedVideoId) {
+          failedVideoIdsRef.current.add(failedVideoId);
+        }
+        if (finishedVideo?.youtubeVideoId) {
+          failedVideoIdsRef.current.add(finishedVideo.youtubeVideoId);
+        }
       }
 
-      let nextIdx = (currentVideoIndex + 1) % active.videos.length;
+      const pos = resolveChannelContinuousState(active);
+      if (dailyVideos.length > 0 && pos.videoIndex !== currentVideoIndex) {
+        const nextLiveVideo = dailyVideos[pos.videoIndex];
+        if (!nextLiveVideo || !failedVideoIdsRef.current.has(nextLiveVideo.youtubeVideoId)) {
+          setCurrentVideoIndex(pos.videoIndex);
+          setStartSeconds(pos.seekSeconds);
+          currentPlaybackTimeRef.current = pos.seekSeconds;
+          setBehindLiveSeconds(0);
+          setTuneKey((k) => k + 1);
+          setIsPlaying(true);
+          return;
+        }
+      }
+
+      const list = dailyVideos.length > 0 ? dailyVideos : active.videos;
+      let nextIdx = (currentVideoIndex + 1) % list.length;
       let safety = 0;
       while (
-        safety < active.videos.length &&
-        failedVideoIdsRef.current.has(active.videos[nextIdx].youtubeVideoId)
+        safety < list.length &&
+        failedVideoIdsRef.current.has(list[nextIdx].youtubeVideoId)
       ) {
-        nextIdx = (nextIdx + 1) % active.videos.length;
+        nextIdx = (nextIdx + 1) % list.length;
         safety++;
       }
 
@@ -597,7 +618,7 @@ export default function TunedApp() {
       setTuneKey((k) => k + 1);
       setIsPlaying(true);
     },
-    [channels, currentChannelIndex, currentVideoIndex]
+    [channels, currentChannelIndex, currentVideoIndex, resolveChannelContinuousState]
   );
 
   // True Live TV resync: snaps forward to global wall-clock live position after offline/long buffer recovery
@@ -670,7 +691,7 @@ export default function TunedApp() {
   const handleShortDetected = useCallback(
     (videoId: string) => {
       failedVideoIdsRef.current.add(videoId);
-      handleNextVideo(true);
+      handleNextVideo(true, videoId);
     },
     [handleNextVideo]
   );
@@ -924,6 +945,7 @@ export default function TunedApp() {
             onSyncToLive={handleSyncToLive}
             onShortDetected={handleShortDetected}
             onProgressUpdate={handleProgressUpdate}
+            completedVideoIds={failedVideoIdsRef.current}
             onOpenGuide={() => {
               setScreenMode('guide');
             }}

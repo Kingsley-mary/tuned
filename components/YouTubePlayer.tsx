@@ -17,6 +17,31 @@ export interface CaptionTrack {
   isDefault?: boolean;
 }
 
+export type VideoQualityPreference =
+  | 'auto'
+  | 'hd2160'
+  | 'hd1440'
+  | 'hd1080'
+  | 'hd720'
+  | 'large'
+  | 'medium'
+  | 'small';
+
+export interface VideoQualityInfo {
+  actualQuality: string;
+  availableQualities: string[];
+}
+
+const VIDEO_QUALITY_ORDER: Exclude<VideoQualityPreference, 'auto'>[] = [
+  'hd2160',
+  'hd1440',
+  'hd1080',
+  'hd720',
+  'large',
+  'medium',
+  'small',
+];
+
 export interface YouTubePlayerHandle {
   seekTo: (seconds: number, allowSeekAhead?: boolean) => void;
   getCurrentTime: () => number;
@@ -39,6 +64,8 @@ interface YouTubePlayerProps {
   disableCaptions?: boolean;
   captionFontSize?: CaptionFontSize;
   captionLanguage?: string;
+  preferredQuality?: VideoQualityPreference;
+  onQualityInfoChange?: (info: VideoQualityInfo) => void;
   onCaptionTracksChange?: (tracks: CaptionTrack[]) => void;
   onPrebuffered?: (videoId: string) => void;
   onEnded: () => void;
@@ -62,6 +89,8 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     disableCaptions = false,
     captionFontSize = 0,
     captionLanguage = 'auto',
+    preferredQuality = 'auto',
+    onQualityInfoChange,
     onCaptionTracksChange,
     onPrebuffered,
     onEnded,
@@ -80,6 +109,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
   const prebufferedKeyRef = useRef<string | null>(null);
   const shortCheckDoneRef = useRef<string | null>(null);
   const endedFiredRef = useRef<string | null>(null);
+  const errorFiredRef = useRef<string | null>(null);
   const loadedVideoIdRef = useRef<string>('');
   const loadedTuneKeyRef = useRef<number>(tuneKey);
   const loadedStartSecRef = useRef<number>(Math.floor(startSeconds || 0));
@@ -152,6 +182,8 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     disableCaptions,
     captionFontSize,
     captionLanguage,
+    preferredQuality,
+    onQualityInfoChange,
     onCaptionTracksChange,
     onPrebuffered,
     onEnded,
@@ -175,6 +207,8 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
       disableCaptions,
       captionFontSize,
       captionLanguage,
+      preferredQuality,
+      onQualityInfoChange,
       onCaptionTracksChange,
       onPrebuffered,
       onEnded,
@@ -261,6 +295,59 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     } catch {}
   };
 
+  // Pick exact preferred quality or closest lower available quality when the stream tops out lower
+  const resolveTargetQuality = (player: any, preferred: VideoQualityPreference): string => {
+    if (!preferred || preferred === 'auto') return 'default';
+    let rawLevels: string[] = [];
+    try {
+      const levels = player?.getAvailableQualityLevels?.();
+      if (Array.isArray(levels)) {
+        rawLevels = levels.filter((q: any): q is Exclude<VideoQualityPreference, 'auto'> =>
+          VIDEO_QUALITY_ORDER.includes(q)
+        );
+      }
+    } catch {}
+    if (rawLevels.length === 0 || rawLevels.includes(preferred)) {
+      return preferred;
+    }
+    const idx = VIDEO_QUALITY_ORDER.indexOf(preferred);
+    const closestLower =
+      idx >= 0
+        ? VIDEO_QUALITY_ORDER.slice(idx).find((q) => rawLevels.includes(q))
+        : undefined;
+    return closestLower || rawLevels[0] || preferred;
+  };
+
+  // Apply preferred quality (or Auto) and publish current/available levels
+  const applyQualitySettings = (
+    player: any,
+    preferred: VideoQualityPreference = 'auto',
+    notify: boolean = true
+  ) => {
+    if (!player) return;
+    try {
+      const actualQuality = String(player.getPlaybackQuality?.() || '');
+      const rawLevels = player.getAvailableQualityLevels?.();
+      const availableQualities = Array.isArray(rawLevels) ? rawLevels.map(String) : [];
+
+      if (notify && !latestPropsRef.current.prebufferOnly) {
+        latestPropsRef.current.onQualityInfoChange?.({
+          actualQuality,
+          availableQualities,
+        });
+      }
+
+      if (!preferred || preferred === 'auto') {
+        player.setPlaybackQualityRange?.('default', 'highres');
+        player.setPlaybackQuality?.('default');
+      } else {
+        const target = resolveTargetQuality(player, preferred);
+        player.setPlaybackQualityRange?.(target, target);
+        player.setPlaybackQuality?.(target);
+      }
+    } catch {}
+  };
+
   // Helper to fire onEnded at most once per (videoId, tuneKey)
   const triggerEndedOnce = () => {
     const { videoId: curId, tuneKey: curKey, onEnded: handleEnded } = latestPropsRef.current;
@@ -268,6 +355,20 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     if (endedFiredRef.current === key) return;
     endedFiredRef.current = key;
     handleEnded();
+  };
+
+  // Helper to fire onError at most once per (videoId, tuneKey) and ignore stale video errors
+  const triggerErrorOnce = (errCode: number) => {
+    const { videoId: curId, tuneKey: curKey, onError: handleError } = latestPropsRef.current;
+    if (!curId) return;
+    try {
+      const playerVidId = playerRef.current?.getVideoData?.()?.video_id;
+      if (playerVidId && playerVidId !== curId) return;
+    } catch {}
+    const key = `${curId}_${curKey}`;
+    if (errorFiredRef.current === key) return;
+    errorFiredRef.current = key;
+    handleError(errCode);
   };
 
   // Initialize YT Player once API is loaded
@@ -349,11 +450,21 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                 !!cur.disableCaptions
               );
 
+              applyQualitySettings(
+                playerRef.current,
+                cur.preferredQuality ?? 'auto',
+                !cur.prebufferOnly
+              );
+
               cur.onReady?.();
 
               // If videoId changed while player was initializing, load the latest videoId
               if (cur.videoId && cur.videoId !== loadedVideoIdRef.current) {
                 const targetStart = Math.floor(cur.startSeconds || 0);
+                const suggestedQuality =
+                  cur.preferredQuality && cur.preferredQuality !== 'auto'
+                    ? cur.preferredQuality
+                    : 'default';
                 loadedVideoIdRef.current = cur.videoId;
                 loadedTuneKeyRef.current = cur.tuneKey;
                 loadedStartSecRef.current = targetStart;
@@ -365,11 +476,13 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                   playerRef.current?.loadVideoById?.({
                     videoId: cur.videoId,
                     startSeconds: targetStart,
+                    suggestedQuality,
                   });
                 } else {
                   playerRef.current?.cueVideoById?.({
                     videoId: cur.videoId,
                     startSeconds: targetStart,
+                    suggestedQuality,
                   });
                 }
               } else if (cur.videoId && (cur.isPlaying || cur.prebufferOnly)) {
@@ -440,7 +553,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                     playerRef.current?.setVolume?.(100);
                   }
                 } catch {}
-                // Re-apply caption state once playback starts so forced creator captions respect user setting
+                // Re-apply caption and quality state once playback starts so forced creator defaults respect user setting
                 applyCaptionSettings(
                   playerRef.current,
                   !!cur.captionsEnabled && !cur.disableCaptions,
@@ -448,6 +561,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                   cur.captionLanguage ?? 'auto',
                   !!cur.disableCaptions
                 );
+                applyQualitySettings(playerRef.current, cur.preferredQuality ?? 'auto', true);
                 setTimeout(() => {
                   if (!isCancelled) {
                     const latest = latestPropsRef.current;
@@ -458,6 +572,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                       latest.captionLanguage ?? 'auto',
                       !!latest.disableCaptions
                     );
+                    applyQualitySettings(playerRef.current, latest.preferredQuality ?? 'auto', true);
                   }
                 }, 600);
                 if (cur.disableCaptions) {
@@ -472,6 +587,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                 triggerEndedOnce();
               } else if (event.data === 3) {
                 cur.onBuffering(true);
+                applyQualitySettings(playerRef.current, cur.preferredQuality ?? 'auto', true);
               } else if (event.data === 5 && cur.isPlaying) {
                 try {
                   playerRef.current?.playVideo?.();
@@ -479,6 +595,15 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
               } else {
                 cur.onBuffering(false);
               }
+            },
+            onPlaybackQualityChange: () => {
+              if (isCancelled) return;
+              const cur = latestPropsRef.current;
+              applyQualitySettings(
+                playerRef.current,
+                cur.preferredQuality ?? 'auto',
+                !cur.prebufferOnly
+              );
             },
             onError: (event: any) => {
               const cur = latestPropsRef.current;
@@ -488,7 +613,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                 return;
               }
               console.warn('YouTube Player reported error:', event.data, 'for video:', cur.videoId);
-              cur.onError(event.data);
+              triggerErrorOnce(event.data);
             },
           },
         });
@@ -553,20 +678,29 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     try {
       if (latestPropsRef.current.prebufferOnly) {
         playerRef.current.mute?.();
+      } else {
+        latestPropsRef.current.onQualityInfoChange?.({ actualQuality: '', availableQualities: [] });
       }
       latestPropsRef.current.onCaptionTracksChange?.([]);
       loadedVideoIdRef.current = videoId;
       loadedTuneKeyRef.current = tuneKey;
       loadedStartSecRef.current = targetStart;
+      const suggestedQuality =
+        latestPropsRef.current.preferredQuality &&
+        latestPropsRef.current.preferredQuality !== 'auto'
+          ? latestPropsRef.current.preferredQuality
+          : 'default';
       if (shouldPlay) {
         playerRef.current.loadVideoById({
           videoId,
           startSeconds: targetStart,
+          suggestedQuality,
         });
       } else {
         playerRef.current.cueVideoById({
           videoId,
           startSeconds: targetStart,
+          suggestedQuality,
         });
       }
     } catch (e) {
@@ -586,6 +720,12 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     );
   }, [captionsEnabled, disableCaptions, captionFontSize, captionLanguage, prebufferOnly]);
 
+  // Apply video quality preference immediately when user changes it
+  useEffect(() => {
+    if (!playerRef.current || !isReadyRef.current) return;
+    applyQualitySettings(playerRef.current, preferredQuality ?? 'auto', !prebufferOnly);
+  }, [preferredQuality, prebufferOnly]);
+
   // Watchdog: If video is supposed to play actively but fails to start within 8s, skip to next video
   useEffect(() => {
     if (!videoId || !isPlaying || prebufferOnly) return;
@@ -597,7 +737,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
           const state = playerRef.current.getPlayerState?.();
           if (state === -1 || state === 5) {
             console.warn(`Video ${videoId} failed to start playing within 8s (state ${state}), auto-skipping.`);
-            latestPropsRef.current.onError(100);
+            triggerErrorOnce(100);
           }
         } catch {}
       }

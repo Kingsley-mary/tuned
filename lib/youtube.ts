@@ -1099,7 +1099,7 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     },
     {
       "id": "UCSBPzXzIiNrrQFJOdG9TVkA",
-      "name": "Talkin&#39; Bout"
+      "name": "Talkin' Bout"
     },
     {
       "id": "UCiELs1dxyTThkxGFFo7M6vA",

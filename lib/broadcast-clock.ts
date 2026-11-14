@@ -422,24 +422,54 @@ export function getLiveBroadcastState(
 
       // Case A: Show is airing
       if (offsetInSlotFloat < vidDur) {
-        // If this slot is unplayable / completed, find next playable video slot
+        // If this slot is unplayable / completed, march remaining offset sequentially across playable slots
         if ((completedIds && completedIds.has(targetVid.youtubeVideoId)) || vidDur <= 60) {
+          let rem = offsetInSlotFloat;
+          let totalPlayableDur = 0;
           for (let j = 1; j < activeVideos.length; j++) {
             const nextIdx = (i + j) % activeVideos.length;
             const nextVid = activeVideos[nextIdx];
             const nextDur = slotConfigs[nextIdx].vidDur;
             if (!completedIds?.has(nextVid.youtubeVideoId) && nextDur > 60) {
-              const deterministicSeekFloat = offsetInSlotFloat % nextDur;
-              const deterministicSeek = Math.floor(deterministicSeekFloat);
-              return {
-                videoIndex: nextIdx,
-                seekSeconds: deterministicSeek,
-                seekSecondsFloat: deterministicSeekFloat,
-                durationSec: nextDur,
-                remainingSec: Math.max(1, nextDur - deterministicSeek),
-                currentVideo: nextVid,
-                isBumperBreak: false,
-              };
+              totalPlayableDur += nextDur;
+              if (rem < nextDur) {
+                const deterministicSeekFloat = rem;
+                const deterministicSeek = Math.floor(deterministicSeekFloat);
+                return {
+                  videoIndex: nextIdx,
+                  seekSeconds: deterministicSeek,
+                  seekSecondsFloat: deterministicSeekFloat,
+                  durationSec: nextDur,
+                  remainingSec: Math.max(1, nextDur - deterministicSeek),
+                  currentVideo: nextVid,
+                  isBumperBreak: false,
+                };
+              }
+              rem -= nextDur;
+            }
+          }
+          if (totalPlayableDur > 0) {
+            rem = rem % totalPlayableDur;
+            for (let j = 1; j < activeVideos.length; j++) {
+              const nextIdx = (i + j) % activeVideos.length;
+              const nextVid = activeVideos[nextIdx];
+              const nextDur = slotConfigs[nextIdx].vidDur;
+              if (!completedIds?.has(nextVid.youtubeVideoId) && nextDur > 60) {
+                if (rem < nextDur) {
+                  const deterministicSeekFloat = rem;
+                  const deterministicSeek = Math.floor(deterministicSeekFloat);
+                  return {
+                    videoIndex: nextIdx,
+                    seekSeconds: deterministicSeek,
+                    seekSecondsFloat: deterministicSeekFloat,
+                    durationSec: nextDur,
+                    remainingSec: Math.max(1, nextDur - deterministicSeek),
+                    currentVideo: nextVid,
+                    isBumperBreak: false,
+                  };
+                }
+                rem -= nextDur;
+              }
             }
           }
         }

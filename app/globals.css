@@ -3394,6 +3394,50 @@ button:focus-visible, input:focus-visible {
   height: 28px;
   font-size: 11px;
 }
+.cc-quality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.cc-quality-btn {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  transition: all 0.12s ease;
+}
+.cc-quality-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.22);
+}
+.cc-quality-btn.on {
+  background: rgba(244, 235, 224, 0.95);
+  color: #26180f;
+  border-color: #fff;
+}
+.cc-quality-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 2px 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+}
+.cc-quality-btn.on .cc-quality-badge {
+  background: rgba(38, 24, 15, 0.14);
+  color: #26180f;
+}
+.cc-quality-btn.is-capped:not(.on) {
+  opacity: 0.65;
+}
 
 /* ================= Mobile & Touch Optimizations across Watch, Guide, Manage, and Pick ================= */
 @media (max-width: 768px) {
@@ -3585,11 +3629,13 @@ button:focus-visible, input:focus-visible {
   .osd-top .osd-btn span {
     display: none;
   }
-  .osd-top .osd-btn[data-sleep-active="true"] {
+  .osd-top .osd-btn[data-sleep-active="true"],
+  .osd-top .osd-btn[data-quality-custom="true"] {
     width: auto;
     padding: 0 11px;
   }
-  .osd-top .osd-btn[data-sleep-active="true"] span {
+  .osd-top .osd-btn[data-sleep-active="true"] span,
+  .osd-top .osd-btn[data-quality-custom="true"] span {
     display: inline;
   }
   .osd-chip {
@@ -3798,21 +3844,34 @@ button:focus-visible, input:focus-visible {
     display: none;
   }
 
-  /* Captions popover in mobile landscape */
+  /* Captions & Quality popovers in mobile landscape */
   .cc-popover {
-    width: min(370px, calc(100vw - 28px));
+    width: min(350px, calc(100vw - 28px));
     right: max(14px, env(safe-area-inset-right, 0px));
     max-height: calc(100dvh - 64px);
-    padding: 12px 14px;
-    gap: 10px;
-    border-radius: 16px;
+    padding: 9px 12px;
+    gap: 7px;
+    border-radius: 14px;
   }
   .cc-size-btn {
-    height: 36px;
+    height: 34px;
   }
   .cc-lang-btn {
-    height: 32px;
-    font-size: 11.5px;
+    height: 30px;
+    font-size: 11px;
+  }
+  .cc-quality-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .cc-quality-btn {
+    height: 30px;
+    padding: 0 6px;
+    font-size: 11px;
+    justify-content: center;
+  }
+  .cc-quality-badge {
+    display: none;
   }
 
   /* TV Guide in Mobile Landscape (preserves blurred video backdrop) */

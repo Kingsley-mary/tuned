@@ -2,7 +2,14 @@
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { ChannelLineup, Video } from '../lib/types';
-import { YouTubePlayer, YouTubePlayerHandle, CaptionFontSize, CaptionTrack } from './YouTubePlayer';
+import {
+  YouTubePlayer,
+  YouTubePlayerHandle,
+  CaptionFontSize,
+  CaptionTrack,
+  VideoQualityPreference,
+  VideoQualityInfo,
+} from './YouTubePlayer';
 import { recordVideoDuration, getVideoDuration, buildChannelSchedule, getLiveBroadcastState, getSyncedNowSec, getSyncedNowMs, getDailyChannelLineup, getMarathonScheduleLabel } from '../lib/broadcast-clock';
 import { isMobileTouchDevice, isLandscapeViewport, isDeviceFullscreen, enterAppFullscreen, exitAppFullscreen } from '../lib/device';
 import { pickNextBreak, pickBreakPackage, computeChannelTransitions, BreakPlan } from '../lib/bumpers';
@@ -32,6 +39,7 @@ import {
   Captions,
   CaptionsOff,
   Hash,
+  SlidersHorizontal,
 } from 'lucide-react';
 
 const CAPTION_PREFS_KEY = 'tuned_caption_prefs_v1';
@@ -42,6 +50,56 @@ const CAPTION_SIZES: { value: CaptionFontSize; label: string; title: string }[] 
   { value: 2, label: 'XL', title: 'Extra Large (200%)' },
   { value: 3, label: 'XXL', title: 'Huge (300%)' },
 ];
+
+const QUALITY_PREFS_KEY = 'tuned_video_quality_v1';
+const VIDEO_QUALITY_OPTIONS: {
+  value: VideoQualityPreference;
+  label: string;
+  shortLabel: string;
+  badge?: string;
+}[] = [
+  { value: 'auto', label: 'Auto', shortLabel: 'Auto', badge: 'Adaptive' },
+  { value: 'hd2160', label: '2160p', shortLabel: '4K', badge: '4K' },
+  { value: 'hd1440', label: '1440p', shortLabel: '1440p', badge: 'QHD' },
+  { value: 'hd1080', label: '1080p', shortLabel: '1080p', badge: 'HD' },
+  { value: 'hd720', label: '720p', shortLabel: '720p', badge: 'HD' },
+  { value: 'large', label: '480p', shortLabel: '480p' },
+  { value: 'medium', label: '360p', shortLabel: '360p' },
+  { value: 'small', label: '240p', shortLabel: '240p' },
+];
+const VALID_QUALITY_VALUES: VideoQualityPreference[] = [
+  'auto',
+  'hd2160',
+  'hd1440',
+  'hd1080',
+  'hd720',
+  'large',
+  'medium',
+  'small',
+];
+
+function formatYtQualityLabel(q: string): string {
+  switch (q) {
+    case 'hd2160':
+      return '2160p 4K';
+    case 'hd1440':
+      return '1440p';
+    case 'hd1080':
+      return '1080p HD';
+    case 'hd720':
+      return '720p HD';
+    case 'large':
+      return '480p';
+    case 'medium':
+      return '360p';
+    case 'small':
+      return '240p';
+    case 'tiny':
+      return '144p';
+    default:
+      return '';
+  }
+}
 
 export type SleepTimerMode = 'off' | '15m' | '30m' | '60m' | 'end';
 
@@ -62,11 +120,12 @@ interface WatchScreenProps {
   onSelectChannel: (channelIndex: number) => void;
   onRecallLastChannel: () => void;
   onTogglePlay: () => void;
-  onNextVideo: (isErrorSkip?: boolean) => void;
+  onNextVideo: (isErrorSkip?: boolean, failedVideoId?: string) => void;
   onJumpToLive?: () => void;
   onSyncToLive?: () => void;
   onShortDetected?: (videoId: string) => void;
   onProgressUpdate?: (currentTime: number, duration: number) => void;
+  completedVideoIds?: Set<string>;
   onOpenGuide: () => void;
   onOpenManage: () => void;
   onPowerOff: () => void;
@@ -94,6 +153,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   onSyncToLive,
   onShortDetected,
   onProgressUpdate,
+  completedVideoIds,
   onOpenGuide,
   onOpenManage,
   onPowerOff,
@@ -198,6 +258,32 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     } catch {}
   }, [captionsEnabled, captionFontSize, captionLanguage]);
 
+  // Video quality settings (default Auto; persists user selection across channels & sessions)
+  const [preferredQuality, setPreferredQuality] = useState<VideoQualityPreference>('auto');
+  const [qualityInfo, setQualityInfo] = useState<VideoQualityInfo>({ actualQuality: '', availableQualities: [] });
+  const [qualityMenuOpen, setQualityMenuOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(QUALITY_PREFS_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && VALID_QUALITY_VALUES.includes(parsed.quality)) {
+          setPreferredQuality(parsed.quality);
+          return;
+        }
+      }
+      localStorage.setItem(QUALITY_PREFS_KEY, JSON.stringify({ quality: 'auto' }));
+    } catch {}
+  }, []);
+
+  const handleSelectQuality = useCallback((next: VideoQualityPreference) => {
+    setPreferredQuality(next);
+    try {
+      localStorage.setItem(QUALITY_PREFS_KEY, JSON.stringify({ quality: next }));
+    } catch {}
+  }, []);
+
   const tvStageRef = useRef<HTMLDivElement>(null);
   const bumperTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const breakQueueRef = useRef<BreakPlan[]>([]);
@@ -205,6 +291,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const activeBreakPlanRef = useRef<BreakPlan | null>(null);
   const bumperStartTimeRef = useRef<number>(0);
   const deckEpochsRef = useRef<[number, number]>([0, 0]);
+  const prevTuneSigRef = useRef<string>('');
   const deckPlayerRef0 = useRef<YouTubePlayerHandle | null>(null);
   const deckPlayerRef1 = useRef<YouTubePlayerHandle | null>(null);
   const deckPlayerRefs = useRef([deckPlayerRef0, deckPlayerRef1]).current;
@@ -217,6 +304,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const onNextVideoRef = useRef(onNextVideo);
   onNextVideoRef.current = onNextVideo;
+  const completedVideoIdsRef = useRef(completedVideoIds);
+  completedVideoIdsRef.current = completedVideoIds;
+  const lastExitedVideoIndexRef = useRef<{ channelId: string; videoIndex: number; exitedAtMs: number } | null>(null);
   const advanceBreakQueueRef = useRef<() => void>(() => {});
   const startupSyncDoneRef = useRef<string | null>(null);
   const startupSeekAttemptsRef = useRef<number>(0);
@@ -290,6 +380,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   eligibleVideosRef.current = eligibleVideos;
   const activeChannelRef = useRef(activeChannel);
   activeChannelRef.current = activeChannel;
+  const currentVideoIndexRef = useRef(currentVideoIndex);
+  currentVideoIndexRef.current = currentVideoIndex;
   const isMutedRef = useRef(isMuted);
   isMutedRef.current = isMuted;
   const nextVideoRef = useRef(nextVideo);
@@ -339,7 +431,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       const live = getLiveBroadcastState(
         curEligible,
         curChannel?.categoryId || 'tech',
-        nowMs
+        nowMs,
+        completedVideoIdsRef.current
       );
 
       if (live.isBumperBreak && live.activeBreakPlans && live.activeBreakPlans.length > 0) {
@@ -391,7 +484,6 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     lastSyncSeekTimeRef.current = 0;
     setActiveMotionBreak(null);
     setStandbyTarget(null);
-    deckEpochsRef.current[curSlot] += 1;
   }, [
     currentChannelIndex,
     currentVideoIndex,
@@ -573,6 +665,14 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       setStandbyTarget(null);
     } else {
       setStandbyTarget(null);
+    }
+
+    if (chId) {
+      lastExitedVideoIndexRef.current = {
+        channelId: chId,
+        videoIndex: currentVideoIndexRef.current,
+        exitedAtMs: Date.now(),
+      };
     }
 
     onNextVideoRef.current(false);
@@ -846,7 +946,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         const live = getLiveBroadcastState(
           eligibleVideos,
           activeChannel.categoryId,
-          nowMs
+          nowMs,
+          completedVideoIdsRef.current
         );
 
         if (live.isBumperBreak && live.activeBreakPlans && live.activeBreakPlans.length > 0) {
@@ -889,8 +990,21 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         }
 
         if (live.videoIndex !== currentVideoIndex) {
-          // Program finished on the global broadcast clock — transition to next program
-          onSyncToLiveRef.current?.();
+          const exited = lastExitedVideoIndexRef.current;
+          const recentlyExited = Boolean(
+            exited &&
+            exited.channelId === activeChannel.categoryId &&
+            exited.videoIndex === live.videoIndex &&
+            Date.now() - exited.exitedAtMs < 60000
+          );
+          const targetFailed = Boolean(
+            live.currentVideo?.youtubeVideoId &&
+            completedVideoIdsRef.current?.has(live.currentVideo.youtubeVideoId)
+          );
+          if (!recentlyExited && !targetFailed) {
+            // Program finished on the global broadcast clock — transition to next program
+            onSyncToLiveRef.current?.();
+          }
         } else {
           // True floating-point live second (eliminates up to 0.99s Math.floor jitter)
           const expectedSec = live.seekSecondsFloat ?? (live.seekSeconds + subSecOffset);
@@ -1049,13 +1163,17 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const osdHoverRef = useRef<boolean>(false);
   const captionsMenuOpenRef = useRef<boolean>(false);
   captionsMenuOpenRef.current = captionsMenuOpen;
+  const qualityMenuOpenRef = useRef<boolean>(false);
+  qualityMenuOpenRef.current = qualityMenuOpen;
   const prevBumperActiveRef = useRef<boolean>(false);
 
   const pokeOsd = useCallback(() => {
     setOsdOpen(true);
     if (osdTimerRef.current) clearTimeout(osdTimerRef.current);
     osdTimerRef.current = setTimeout(() => {
-      if (!osdHoverRef.current && !captionsMenuOpenRef.current) setOsdOpen(false);
+      if (!osdHoverRef.current && !captionsMenuOpenRef.current && !qualityMenuOpenRef.current) {
+        setOsdOpen(false);
+      }
     }, 5000);
   }, []);
 
@@ -1333,10 +1451,15 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       if (e.key === 'g' || e.key === 'G') {
         e.preventDefault();
         setCaptionsMenuOpen(false);
+        setQualityMenuOpen(false);
         onOpenGuide();
       } else if (e.key === 'c' || e.key === 'C') {
         e.preventDefault();
         setCaptionsEnabled((prev) => !prev);
+      } else if (e.key === 'q' || e.key === 'Q') {
+        e.preventDefault();
+        setCaptionsMenuOpen(false);
+        setQualityMenuOpen((prev) => !prev);
       } else if (e.key === 'Escape') {
         e.preventDefault();
         if (dialBufferRef.current || showDialNumpad) {
@@ -1347,8 +1470,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           handleExitPreview();
           return;
         }
-        if (captionsMenuOpenRef.current) {
+        if (captionsMenuOpenRef.current || qualityMenuOpenRef.current) {
           setCaptionsMenuOpen(false);
+          setQualityMenuOpen(false);
         }
       } else if (e.key === 'Enter') {
         if (dialBufferRef.current) {
@@ -1358,10 +1482,12 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
         }
         e.preventDefault();
         setCaptionsMenuOpen(false);
+        setQualityMenuOpen(false);
         setOsdOpen((o) => !o);
       } else if (e.key === 'i' || e.key === 'I') {
         e.preventDefault();
         setCaptionsMenuOpen(false);
+        setQualityMenuOpen(false);
         setOsdOpen((o) => !o);
       }
     };
@@ -1421,10 +1547,26 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   const dateLabel = now.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' });
   const hue = activeChannel?.hue ?? 355;
   const rows = schedule.slice(0, 4);
+  const selectedQualityObj =
+    VIDEO_QUALITY_OPTIONS.find((o) => o.value === preferredQuality) || VIDEO_QUALITY_OPTIONS[0];
+  const actualQualityText = formatYtQualityLabel(qualityInfo.actualQuality);
+  const hasAvailableQualityList = qualityInfo.availableQualities.length > 0;
 
   // Effective fullscreen: either native browser fullscreen OR mobile in landscape orientation
   const isMobileLandscape = isMobileTouchDevice() && !isMobilePortrait;
   const isEffectiveFullscreen = isFullscreen || isMobileLandscape;
+
+  const tuneSig = `${currentChannelIndex}_${currentVideoIndex}_${tuneKey}`;
+  if (prevTuneSigRef.current !== tuneSig) {
+    prevTuneSigRef.current = tuneSig;
+    const isPromoted = Boolean(
+      promotedPrebufferedIdRef.current &&
+      activeVideo?.youtubeVideoId === promotedPrebufferedIdRef.current
+    );
+    if (!isPromoted) {
+      deckEpochsRef.current[activeSlot] += 1;
+    }
+  }
 
   return (
     <div
@@ -1497,6 +1639,8 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   disableCaptions={Boolean(activeMotionBreak)}
                   captionFontSize={captionFontSize}
                   captionLanguage={captionLanguage}
+                  preferredQuality={preferredQuality}
+                  onQualityInfoChange={isActiveDeck ? setQualityInfo : undefined}
                   onCaptionTracksChange={isActiveDeck ? setCaptionTracks : undefined}
                   onEnded={() => {
                     if (isActiveDeck) {
@@ -1504,9 +1648,19 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                     }
                   }}
                   onError={(errCode) => {
-                    if (!isActiveDeck) return;
+                    if (!isActiveDeck || !deckVideoId || deckVideoId !== activeVideo?.youtubeVideoId) return;
                     console.warn(`Video ${deckVideoId} error (${errCode}), skipping...`);
-                    onNextVideoRef.current(true);
+                    if (deckVideoId) {
+                      completedVideoIdsRef.current?.add(deckVideoId);
+                    }
+                    if (activeChannel?.categoryId) {
+                      lastExitedVideoIndexRef.current = {
+                        channelId: activeChannel.categoryId,
+                        videoIndex: currentVideoIndex,
+                        exitedAtMs: Date.now(),
+                      };
+                    }
+                    onNextVideoRef.current(true, deckVideoId);
                   }}
                   onTimeUpdate={(cur, dur) => {
                     if (isActiveDeck) {
@@ -1541,8 +1695,9 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             cancelDial();
             return;
           }
-          if (captionsMenuOpen) {
+          if (captionsMenuOpen || qualityMenuOpen) {
             setCaptionsMenuOpen(false);
+            setQualityMenuOpen(false);
             pokeOsd();
             return;
           }
@@ -1617,6 +1772,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           {!isPlaying && <span className="osd-chip">Paused</span>}
           <button
             onClick={() => {
+              setQualityMenuOpen(false);
               setCaptionsMenuOpen((prev) => !prev);
               pokeOsd();
             }}
@@ -1627,6 +1783,21 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           >
             {captionsEnabled ? <Captions size={16} /> : <CaptionsOff size={16} />}
             <span>CC</span>
+          </button>
+          <button
+            onClick={() => {
+              setCaptionsMenuOpen(false);
+              setQualityMenuOpen((prev) => !prev);
+              pokeOsd();
+            }}
+            className={`osd-btn${preferredQuality !== 'auto' || qualityMenuOpen ? ' active' : ''}`}
+            data-quality-custom={preferredQuality !== 'auto' ? 'true' : undefined}
+            aria-label="Video quality settings"
+            aria-expanded={qualityMenuOpen}
+            title="Video Quality (Q)"
+          >
+            <SlidersHorizontal size={16} />
+            <span>{selectedQualityObj.shortLabel}</span>
           </button>
           <button
             onClick={openDialerWithNumpad}
@@ -1721,6 +1892,70 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
             </div>
           </div>
         )}
+
+        {qualityMenuOpen && (
+          <div
+            className="cc-popover quality-popover"
+            onClick={(e) => e.stopPropagation()}
+            onMouseEnter={() => (osdHoverRef.current = true)}
+          >
+            <div className="cc-row">
+              <div>
+                <div className="cc-title">Video Quality</div>
+                <div className="cc-sub">
+                  {preferredQuality === 'auto'
+                    ? `Auto${actualQualityText ? ` · Playing ${actualQualityText}` : ' · Adapts to connection'}`
+                    : `Default: ${selectedQualityObj.label}${
+                        actualQualityText && !actualQualityText.startsWith(selectedQualityObj.label)
+                          ? ` · Playing ${actualQualityText}`
+                          : ' · Saved for all channels'
+                      }`}
+                </div>
+              </div>
+              <button
+                type="button"
+                className={`cc-toggle${preferredQuality === 'auto' ? ' on' : ''}`}
+                onClick={() => handleSelectQuality('auto')}
+                aria-pressed={preferredQuality === 'auto'}
+              >
+                Auto
+              </button>
+            </div>
+
+            <div className="cc-section">
+              <div className="cc-label">Resolution</div>
+              <div className="cc-quality-grid">
+                {VIDEO_QUALITY_OPTIONS.map((opt) => {
+                  const isUnavailableOnCurrentVideo =
+                    opt.value !== 'auto' &&
+                    hasAvailableQualityList &&
+                    !qualityInfo.availableQualities.includes(opt.value);
+
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      className={`cc-quality-btn${preferredQuality === opt.value ? ' on' : ''}${
+                        isUnavailableOnCurrentVideo ? ' is-capped' : ''
+                      }`}
+                      onClick={() => handleSelectQuality(opt.value)}
+                      title={
+                        isUnavailableOnCurrentVideo
+                          ? `${opt.label} is not offered on this video (plays highest available up to ${opt.label})`
+                          : opt.value === 'auto'
+                          ? 'Let YouTube adapt quality automatically'
+                          : `Default video quality to ${opt.label}`
+                      }
+                    >
+                      <span>{opt.label}</span>
+                      {opt.badge && <small className="cc-quality-badge">{opt.badge}</small>}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bottom OSD */}
@@ -1748,12 +1983,23 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
           </button>
           <button
             onClick={() => {
+              setQualityMenuOpen(false);
               setCaptionsMenuOpen((prev) => !prev);
               pokeOsd();
             }}
             className={captionsEnabled ? 'is-on' : undefined}
           >
             {captionsEnabled ? 'Captions On' : 'Captions'} <span className="kbd-osd">C</span>
+          </button>
+          <button
+            onClick={() => {
+              setCaptionsMenuOpen(false);
+              setQualityMenuOpen((prev) => !prev);
+              pokeOsd();
+            }}
+            className={preferredQuality !== 'auto' || qualityMenuOpen ? 'is-on' : undefined}
+          >
+            Quality: {selectedQualityObj.shortLabel} <span className="kbd-osd">Q</span>
           </button>
           <button
             onClick={toggleFullscreen}
