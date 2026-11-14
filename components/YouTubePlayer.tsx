@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 declare global {
   interface Window {
@@ -41,6 +41,34 @@ const VIDEO_QUALITY_ORDER: Exclude<VideoQualityPreference, 'auto'>[] = [
   'medium',
   'small',
 ];
+
+const QUALITY_VIEWPORT_DIMENSIONS: Record<Exclude<VideoQualityPreference, 'auto'>, { width: number; height: number }> = {
+  hd2160: { width: 3840, height: 2160 },
+  hd1440: { width: 2560, height: 1440 },
+  hd1080: { width: 1920, height: 1080 },
+  hd720: { width: 1280, height: 720 },
+  large: { width: 854, height: 480 },
+  medium: { width: 640, height: 360 },
+  small: { width: 426, height: 240 },
+};
+
+function readActualPlaybackQuality(player: any): string {
+  if (!player) return '';
+  try {
+    const videoData = typeof player.getVideoData === 'function' ? player.getVideoData() : null;
+    const fromVideoData = typeof videoData?.video_quality === 'string' ? videoData.video_quality : '';
+    if (fromVideoData && fromVideoData !== 'auto' && fromVideoData !== 'unknown') {
+      return fromVideoData;
+    }
+    const fromApi = typeof player.getPlaybackQuality === 'function' ? (player.getPlaybackQuality() || '') : '';
+    if (fromApi && fromApi !== 'auto' && fromApi !== 'unknown') {
+      return fromApi;
+    }
+    return fromVideoData || fromApi || '';
+  } catch {
+    return '';
+  }
+}
 
 export interface YouTubePlayerHandle {
   seekTo: (seconds: number, allowSeekAhead?: boolean) => void;
@@ -101,6 +129,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     onShortDetected,
   } = props;
 
+  const boxRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -113,6 +142,8 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
   const loadedVideoIdRef = useRef<string>('');
   const loadedTuneKeyRef = useRef<number>(tuneKey);
   const loadedStartSecRef = useRef<number>(Math.floor(startSeconds || 0));
+  const appliedQualityRef = useRef<VideoQualityPreference>(preferredQuality);
+  const lastQualityReportSigRef = useRef<string>('');
   const pendingSeekRef = useRef<{ videoId: string; tuneKey: number; startSeconds: number } | null>(
     startSeconds && startSeconds > 3
       ? { videoId, tuneKey, startSeconds: Math.floor(startSeconds) }
@@ -318,6 +349,94 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     return closestLower || rawLevels[0] || preferred;
   };
 
+  // Size and counter-scale the iframe wrapper to lock YouTube's internal viewport selector (PP.prototype.kK / yF)
+  const syncQualityViewport = useCallback(
+    (playerInstance?: any, qualityOverride?: VideoQualityPreference) => {
+      const wrapper = wrapperRef.current;
+      const box = boxRef.current;
+      if (!wrapper) return;
+
+      const p = playerInstance ?? playerRef.current;
+      const pref = qualityOverride ?? latestPropsRef.current.preferredQuality ?? 'auto';
+      const boxW = box?.clientWidth || 0;
+      const boxH = box?.clientHeight || 0;
+
+      if (!pref || pref === 'auto') {
+        wrapper.style.width = '100%';
+        wrapper.style.height = '100%';
+        wrapper.style.transform = 'none';
+        wrapper.style.transformOrigin = '0 0';
+        if (p && typeof p.setSize === 'function' && boxW > 0 && boxH > 0) {
+          try {
+            p.setSize(boxW, boxH);
+          } catch {}
+        }
+        return;
+      }
+
+      const resolvedTarget = resolveTargetQuality(p, pref);
+      const tierKey = (resolvedTarget &&
+      resolvedTarget !== 'auto' &&
+      resolvedTarget in QUALITY_VIEWPORT_DIMENSIONS
+        ? resolvedTarget
+        : pref) as Exclude<VideoQualityPreference, 'auto'>;
+      const dims = QUALITY_VIEWPORT_DIMENSIONS[tierKey] || QUALITY_VIEWPORT_DIMENSIONS.hd1080;
+      const dpr = typeof window !== 'undefined' && window.devicePixelRatio > 1 ? window.devicePixelRatio : 1;
+
+      // Use 0.88 * tier dimensions (or 1.0x for top-tier 4K) so the physical viewport:
+      // 1) Sits strictly above YouTube's 0.85 * tier floor (h.width * 0.85 < c.width)
+      // 2) Sits strictly below YouTube's html5_viewport_undersend_maximum upgrade threshold
+      //    (h.width < c.width * e -> b = a[f - 1]) and SABR server oversampling threshold.
+      const factor = tierKey === 'hd2160' ? 1.0 : 0.88;
+      const targetPhysicalW = Math.round(dims.width * factor);
+      const targetPhysicalH = Math.round(dims.height * factor);
+      const cssWidth = Math.max(200, Math.floor(targetPhysicalW / dpr));
+      const cssHeight = Math.max(112, Math.floor(targetPhysicalH / dpr));
+
+      wrapper.style.width = `${cssWidth}px`;
+      wrapper.style.height = `${cssHeight}px`;
+      wrapper.style.transformOrigin = '0 0';
+      if (boxW > 0 && boxH > 0) {
+        const scaleX = boxW / cssWidth;
+        const scaleY = boxH / cssHeight;
+        wrapper.style.transform = `scale(${scaleX}, ${scaleY})`;
+      } else {
+        wrapper.style.transform = 'none';
+      }
+      // Force synchronous layout so the iframe observes the updated clientWidth/innerWidth immediately
+      void wrapper.offsetWidth;
+
+      if (p && typeof p.setSize === 'function') {
+        try {
+          p.setSize(cssWidth, cssHeight);
+        } catch {}
+      }
+    },
+    []
+  );
+
+  // Keep virtual viewport counter-scale synchronized when stage or window resizes
+  useEffect(() => {
+    const box = boxRef.current;
+    if (!box) return;
+
+    const handleResize = () => {
+      syncQualityViewport(playerRef.current, latestPropsRef.current.preferredQuality);
+    };
+
+    let observer: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      observer = new ResizeObserver(handleResize);
+      observer.observe(box);
+    }
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [syncQualityViewport]);
+
   // Apply preferred quality (or Auto) and publish current/available levels
   const applyQualitySettings = (
     player: any,
@@ -326,11 +445,13 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
   ) => {
     if (!player) return;
     try {
-      const actualQuality = String(player.getPlaybackQuality?.() || '');
+      const actualQuality = readActualPlaybackQuality(player);
       const rawLevels = player.getAvailableQualityLevels?.();
       const availableQualities = Array.isArray(rawLevels) ? rawLevels.map(String) : [];
 
       if (notify && !latestPropsRef.current.prebufferOnly) {
+        const sig = `${actualQuality}|${availableQualities.join(',')}`;
+        lastQualityReportSigRef.current = sig;
         latestPropsRef.current.onQualityInfoChange?.({
           actualQuality,
           availableQualities,
@@ -390,6 +511,8 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
         mountNode.style.height = '100%';
         wrapperRef.current.appendChild(mountNode);
 
+        syncQualityViewport(null, initial.preferredQuality ?? 'auto');
+        appliedQualityRef.current = initial.preferredQuality ?? 'auto';
         loadedVideoIdRef.current = initial.videoId || '';
         loadedTuneKeyRef.current = initial.tuneKey;
         playerRef.current = new window.YT.Player(mountNode, {
@@ -450,6 +573,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                 !!cur.disableCaptions
               );
 
+              syncQualityViewport(event.target, cur.preferredQuality ?? 'auto');
               applyQualitySettings(
                 playerRef.current,
                 cur.preferredQuality ?? 'auto',
@@ -461,13 +585,14 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
               // If videoId changed while player was initializing, load the latest videoId
               if (cur.videoId && cur.videoId !== loadedVideoIdRef.current) {
                 const targetStart = Math.floor(cur.startSeconds || 0);
-                const suggestedQuality =
-                  cur.preferredQuality && cur.preferredQuality !== 'auto'
-                    ? cur.preferredQuality
-                    : 'default';
+                const resolved = resolveTargetQuality(playerRef.current, cur.preferredQuality ?? 'auto');
+                const suggestedQuality = resolved !== 'auto' ? resolved : 'default';
+                appliedQualityRef.current = cur.preferredQuality ?? 'auto';
+                lastQualityReportSigRef.current = '';
                 loadedVideoIdRef.current = cur.videoId;
                 loadedTuneKeyRef.current = cur.tuneKey;
                 loadedStartSecRef.current = targetStart;
+                syncQualityViewport(event.target, cur.preferredQuality ?? 'auto');
                 pendingSeekRef.current =
                   targetStart > 3
                     ? { videoId: cur.videoId, tuneKey: cur.tuneKey, startSeconds: targetStart }
@@ -561,6 +686,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                   cur.captionLanguage ?? 'auto',
                   !!cur.disableCaptions
                 );
+                syncQualityViewport(event.target, cur.preferredQuality ?? 'auto');
                 applyQualitySettings(playerRef.current, cur.preferredQuality ?? 'auto', true);
                 setTimeout(() => {
                   if (!isCancelled) {
@@ -572,6 +698,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                       latest.captionLanguage ?? 'auto',
                       !!latest.disableCaptions
                     );
+                    syncQualityViewport(playerRef.current, latest.preferredQuality ?? 'auto');
                     applyQualitySettings(playerRef.current, latest.preferredQuality ?? 'auto', true);
                   }
                 }, 600);
@@ -587,11 +714,16 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
                 triggerEndedOnce();
               } else if (event.data === 3) {
                 cur.onBuffering(true);
+                syncQualityViewport(event.target, cur.preferredQuality ?? 'auto');
                 applyQualitySettings(playerRef.current, cur.preferredQuality ?? 'auto', true);
-              } else if (event.data === 5 && cur.isPlaying) {
-                try {
-                  playerRef.current?.playVideo?.();
-                } catch {}
+              } else if (event.data === 5) {
+                syncQualityViewport(event.target, cur.preferredQuality ?? 'auto');
+                applyQualitySettings(playerRef.current, cur.preferredQuality ?? 'auto', true);
+                if (cur.isPlaying) {
+                  try {
+                    playerRef.current?.playVideo?.();
+                  } catch {}
+                }
               } else {
                 cur.onBuffering(false);
               }
@@ -599,6 +731,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
             onPlaybackQualityChange: () => {
               if (isCancelled) return;
               const cur = latestPropsRef.current;
+              syncQualityViewport(playerRef.current, cur.preferredQuality ?? 'auto');
               applyQualitySettings(
                 playerRef.current,
                 cur.preferredQuality ?? 'auto',
@@ -685,11 +818,14 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
       loadedVideoIdRef.current = videoId;
       loadedTuneKeyRef.current = tuneKey;
       loadedStartSecRef.current = targetStart;
-      const suggestedQuality =
-        latestPropsRef.current.preferredQuality &&
-        latestPropsRef.current.preferredQuality !== 'auto'
-          ? latestPropsRef.current.preferredQuality
-          : 'default';
+      appliedQualityRef.current = latestPropsRef.current.preferredQuality ?? 'auto';
+      lastQualityReportSigRef.current = '';
+      syncQualityViewport(playerRef.current, latestPropsRef.current.preferredQuality ?? 'auto');
+      const resolved = resolveTargetQuality(
+        playerRef.current,
+        latestPropsRef.current.preferredQuality ?? 'auto'
+      );
+      const suggestedQuality = resolved !== 'auto' ? resolved : 'default';
       if (shouldPlay) {
         playerRef.current.loadVideoById({
           videoId,
@@ -706,7 +842,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
     } catch (e) {
       console.warn('Error cueing/loading video:', e);
     }
-  }, [videoId, tuneKey]);
+  }, [videoId, tuneKey, syncQualityViewport]);
 
   // Update caption state (on/off, font size, language) immediately when user changes it
   useEffect(() => {
@@ -722,9 +858,60 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
 
   // Apply video quality preference immediately when user changes it
   useEffect(() => {
+    const pref = preferredQuality ?? 'auto';
+    const qualityChanged = appliedQualityRef.current !== pref;
+
+    syncQualityViewport(playerRef.current, pref);
     if (!playerRef.current || !isReadyRef.current) return;
-    applyQualitySettings(playerRef.current, preferredQuality ?? 'auto', !prebufferOnly);
-  }, [preferredQuality, prebufferOnly]);
+
+    applyQualitySettings(playerRef.current, pref, !prebufferOnly);
+
+    if (!prebufferOnly) {
+      appliedQualityRef.current = pref;
+
+      // Reload active stream at current playback position so MSE flushes old chunks
+      // and fetches segments matching the new virtual viewport quality immediately.
+      if (qualityChanged && loadedVideoIdRef.current) {
+        const p = playerRef.current;
+        const vid = loadedVideoIdRef.current;
+        let resumeSec = Math.floor(latestPropsRef.current.startSeconds || 0);
+        try {
+          const cur = typeof p.getCurrentTime === 'function' ? p.getCurrentTime() : 0;
+          if (typeof cur === 'number' && Number.isFinite(cur) && cur > 0) {
+            resumeSec = cur;
+          }
+        } catch {}
+
+        const rafId = requestAnimationFrame(() => {
+          if (!playerRef.current || !isReadyRef.current || loadedVideoIdRef.current !== vid) return;
+          syncQualityViewport(playerRef.current, pref);
+          lastQualityReportSigRef.current = '';
+          pendingSeekRef.current =
+            resumeSec > 3
+              ? { videoId: vid, tuneKey: loadedTuneKeyRef.current, startSeconds: resumeSec }
+              : null;
+          const targetQuality = resolveTargetQuality(playerRef.current, pref);
+          const payload: Record<string, unknown> = {
+            videoId: vid,
+            startSeconds: resumeSec,
+          };
+          if (targetQuality !== 'auto') {
+            payload.suggestedQuality = targetQuality;
+          }
+          try {
+            if (latestPropsRef.current.isPlaying) {
+              playerRef.current.loadVideoById(payload);
+            } else {
+              playerRef.current.cueVideoById(payload);
+            }
+          } catch (err) {
+            console.error('Error reloading video for quality change:', err);
+          }
+        });
+        return () => cancelAnimationFrame(rafId);
+      }
+    }
+  }, [preferredQuality, prebufferOnly, syncQualityViewport]);
 
   // Watchdog: If video is supposed to play actively but fails to start within 8s, skip to next video
   useEffect(() => {
@@ -812,6 +999,20 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
 
         latest.onTimeUpdate(cur, dur);
 
+        if (latest.onQualityInfoChange) {
+          const actualQuality = readActualPlaybackQuality(playerRef.current);
+          const rawLevels =
+            typeof playerRef.current.getAvailableQualityLevels === 'function'
+              ? playerRef.current.getAvailableQualityLevels()
+              : [];
+          const availableQualities = Array.isArray(rawLevels) ? rawLevels.map(String) : [];
+          const sig = `${actualQuality}|${availableQualities.join(',')}`;
+          if (sig !== lastQualityReportSigRef.current && (actualQuality || availableQualities.length > 0)) {
+            lastQualityReportSigRef.current = sig;
+            latest.onQualityInfoChange({ actualQuality, availableQualities });
+          }
+        }
+
         // YouTube Shorts auto-exclude guard: All Shorts are <= 60s or marked #shorts
         const videoData = (playerRef.current as unknown as { getVideoData?: () => { title?: string } }).getVideoData?.();
         const rawTitle = videoData?.title || '';
@@ -865,6 +1066,7 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
 
   return (
     <div
+      ref={boxRef}
       className="yt-aspect-ratio-box"
       style={{
         position: 'relative',
@@ -879,7 +1081,8 @@ export const YouTubePlayer = React.forwardRef<YouTubePlayerHandle, YouTubePlayer
         ref={wrapperRef}
         style={{
           position: 'absolute',
-          inset: 0,
+          top: 0,
+          left: 0,
           width: '100%',
           height: '100%',
         }}

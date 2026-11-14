@@ -278,6 +278,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   }, []);
 
   const handleSelectQuality = useCallback((next: VideoQualityPreference) => {
+    lastSyncSeekTimeRef.current = Date.now();
     setPreferredQuality(next);
     try {
       localStorage.setItem(QUALITY_PREFS_KEY, JSON.stringify({ quality: next }));
@@ -1906,7 +1907,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
                   {preferredQuality === 'auto'
                     ? `Auto${actualQualityText ? ` · Playing ${actualQualityText}` : ' · Adapts to connection'}`
                     : `Default: ${selectedQualityObj.label}${
-                        actualQualityText && !actualQualityText.startsWith(selectedQualityObj.label)
+                        actualQualityText
                           ? ` · Playing ${actualQualityText}`
                           : ' · Saved for all channels'
                       }`}
