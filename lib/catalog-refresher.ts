@@ -2,13 +2,19 @@ import { ChannelLineup, Video, YouTubeBumperClip } from './types';
 import { CATEGORIES, SEED_LINEUPS } from './seed-catalog';
 import { isYouTubeShort, MAX_SHORT_DURATION_SEC } from './youtube-shorts';
 
-const MAX_VIDEOS_PER_CHANNEL = 200;
+const MAX_VIDEOS_PER_CHANNEL = 650;
 const MAX_VIDEOS_PER_CREATOR = 10;
 const NEW_PER_CREATOR = 3;
 const CONCURRENCY = 20;
 const MIN_DYNAMIC_BUMPER_SEC = 15;
 const MAX_DYNAMIC_BUMPER_SEC = 300;
 const MAX_DYNAMIC_BUMPERS_PER_CATEGORY = 8;
+const YOUTUBE_PAGE_HEADERS = {
+  'User-Agent':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+  Cookie: 'SOCS=CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVuZHVpc2VydmVyXzIwMjMxMDI0LjA4X3AxGgJlbiACGgYIgJnPpwY',
+  'Accept-Language': 'en-US,en;q=0.9',
+};
 
 // Official studio, brand, trailer & animation channels sourced for fresh widescreen dynamic bumpers (15s-300s)
 export const BUMPER_SOURCE_CHANNELS: Record<string, { id: string; name: string }[]> = {
@@ -68,8 +74,10 @@ export const BUMPER_SOURCE_CHANNELS: Record<string, { id: string; name: string }
 };
 
 function parseDurationText(txt?: string | null): number {
-  if (!txt || !/^\d{1,2}:\d{2}(?::\d{2})?$/.test(txt)) return 0;
-  const parts = txt.split(':').map((n) => parseInt(n, 10));
+  if (!txt) return 0;
+  const trimmed = txt.trim();
+  if (!/^\d{1,2}:\d{2}(?::\d{2})?$/.test(trimmed)) return 0;
+  const parts = trimmed.split(':').map((n) => parseInt(n, 10));
   if (parts.some(isNaN)) return 0;
   if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
   if (parts.length === 2) return parts[0] * 60 + parts[1];
@@ -85,6 +93,25 @@ function parseIsoDuration(iso: string): number {
   return h * 3600 + mins * 60 + s;
 }
 
+function isShortTitle(title: string): boolean {
+  return /#shorts?\b|[\(\[]shorts?[\)\]]|(\bshorts\b.*#)/i.test(title);
+}
+
+function prioritizeMovieDuration(videos: Video[]): Video[] {
+  const tier = (sec: number) => (sec >= 1200 ? 2 : sec >= 300 ? 1 : 0);
+  return [...videos].sort((a, b) => tier(b.durationSec || 0) - tier(a.durationSec || 0));
+}
+
+function cleanHtmlEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .trim();
+}
+
 async function fetchPlaylistVideosViaYouTubeApi(
   playlistId: string,
   sourceChannelId: string,
@@ -92,12 +119,14 @@ async function fetchPlaylistVideosViaYouTubeApi(
   apiKey: string,
   minDurationSec: number,
   maxDurationSec: number,
-  maxResults: number
+  maxResults: number,
+  preferLongMovies: boolean = false
 ): Promise<Video[]> {
   try {
+    // Request up to 50 items so filtering out YouTube Shorts does not starve long-form slots
     const plUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet&playlistId=${encodeURIComponent(
       playlistId
-    )}&maxResults=${MAX_VIDEOS_PER_CREATOR}&key=${encodeURIComponent(apiKey)}`;
+    )}&maxResults=50&key=${encodeURIComponent(apiKey)}`;
     const plRes = await fetch(plUrl, { signal: AbortSignal.timeout(7000) });
     if (!plRes.ok) return [];
     const plData = await plRes.json();
@@ -116,7 +145,6 @@ async function fetchPlaylistVideosViaYouTubeApi(
 
     const valid: Video[] = [];
     for (const item of vidsData.items || []) {
-      if (valid.length >= maxResults) break;
       const vid = item.id as string;
       const title = item.snippet?.title || '';
       const author = item.snippet?.channelTitle || fallbackName;
@@ -129,7 +157,7 @@ async function fetchPlaylistVideosViaYouTubeApi(
 
       if (!embeddable || privacy !== 'public' || isLive) continue;
       if (durationSec < minDurationSec || durationSec > maxDurationSec) continue;
-      if (/#shorts?\b|[\(\[]shorts?[\)\]]/i.test(title)) continue;
+      if (isShortTitle(title)) continue;
       if (durationSec <= MAX_SHORT_DURATION_SEC && (await isYouTubeShort(vid))) continue;
 
       valid.push({
@@ -140,8 +168,10 @@ async function fetchPlaylistVideosViaYouTubeApi(
         thumbnailUrl: `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`,
         durationSec: Math.round(durationSec),
       });
+      if (!preferLongMovies && valid.length >= maxResults) break;
     }
-    return valid;
+    const ordered = preferLongMovies ? prioritizeMovieDuration(valid) : valid;
+    return ordered.slice(0, maxResults);
   } catch {
     return [];
   }
@@ -152,7 +182,8 @@ async function fetchLatestViaYouTubeApi(
   apiKey: string,
   minDurationSec: number,
   maxDurationSec: number = 18000,
-  maxResults: number = NEW_PER_CREATOR
+  maxResults: number = NEW_PER_CREATOR,
+  preferLongMovies: boolean = false
 ): Promise<Video[]> {
   // Convert UC channel ID -> UU uploads playlist ID (free/1 unit playlistItems.list!)
   const uploadsPlaylistId = creator.id.startsWith('UC')
@@ -165,62 +196,242 @@ async function fetchLatestViaYouTubeApi(
     apiKey,
     minDurationSec,
     maxDurationSec,
-    maxResults
+    maxResults,
+    preferLongMovies
   );
+}
+
+interface ParsedCandidate {
+  youtubeVideoId: string;
+  title: string;
+  durationSec: number;
+}
+
+/**
+ * Extracts video candidates and durations from ytInitialData (lockupViewModel & videoRenderer)
+ * embedded in YouTube /videos or /streams tab HTML.
+ */
+function extractCandidatesFromChannelTabHtml(html: string): ParsedCandidate[] {
+  const candidates: ParsedCandidate[] = [];
+  const seen = new Set<string>();
+  const addCandidate = (vid?: string, title?: string, durText?: string) => {
+    const durationSec = parseDurationText(durText);
+    const cleanTitle = title ? title.trim() : '';
+    if (!vid || !cleanTitle || !durationSec || seen.has(vid)) return;
+    seen.add(vid);
+    candidates.push({ youtubeVideoId: vid, title: cleanTitle, durationSec });
+  };
+
+  const m = html.match(/var ytInitialData = (\{[\s\S]*?\});<\/script>/);
+  if (m) {
+    try {
+      const data = JSON.parse(m[1]);
+      const walk = (obj: any) => {
+        if (!obj || typeof obj !== 'object') return;
+        if (obj.lockupViewModel) {
+          const lvm = obj.lockupViewModel;
+          const vid =
+            lvm.contentId ||
+            lvm.rendererContext?.commandContext?.onTap?.innertubeCommand?.watchEndpoint?.videoId;
+          const title = lvm.metadata?.lockupMetadataViewModel?.title?.content;
+          const overlays = lvm.contentImage?.thumbnailViewModel?.overlays || [];
+          let durText = '';
+          for (const ov of overlays) {
+            for (const b of ov.thumbnailBottomOverlayViewModel?.badges || []) {
+              const t = b.thumbnailBadgeViewModel?.text;
+              if (t && /^\d{1,2}:\d{2}(?::\d{2})?$/.test(t.trim())) {
+                durText = t.trim();
+              }
+            }
+          }
+          addCandidate(vid, title, durText);
+          return;
+        }
+        if (obj.videoRenderer && obj.videoRenderer.videoId) {
+          const vr = obj.videoRenderer;
+          const title = vr.title?.runs?.[0]?.text || vr.title?.simpleText;
+          const durText = vr.lengthText?.simpleText || '';
+          addCandidate(vr.videoId, title, durText);
+          return;
+        }
+        for (const v of Object.values(obj)) walk(v);
+      };
+      walk(data);
+      if (candidates.length > 0) return candidates;
+    } catch {
+      // Fall through to regex fallback if JSON parse fails
+    }
+  }
+
+  for (const match of html.matchAll(/"videoId":"([a-zA-Z0-9_-]{11})"/g)) {
+    const vid = match[1];
+    if (seen.has(vid)) continue;
+    const badgeMatch = html.match(
+      new RegExp(
+        `"text":"(\\d{1,2}:\\d{2}(?::\\d{2})?)","badgeStyle":"[^"]+","animationActivationTargetId":"${vid}"`
+      )
+    );
+    const durSec = parseDurationText(badgeMatch?.[1]);
+    if (durSec > 0) {
+      seen.add(vid);
+      candidates.push({ youtubeVideoId: vid, title: '', durationSec: durSec });
+    }
+  }
+  return candidates;
+}
+
+async function fetchChannelTabCandidates(channelId: string, tab: 'videos' | 'streams'): Promise<ParsedCandidate[]> {
+  try {
+    const res = await fetch(`https://www.youtube.com/channel/${channelId}/${tab}`, {
+      headers: YOUTUBE_PAGE_HEADERS,
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return [];
+    const html = await res.text();
+    return extractCandidatesFromChannelTabHtml(html);
+  } catch {
+    return [];
+  }
+}
+
+async function fetchRssWatchCandidates(
+  channelId: string,
+  excludeIds: Set<string>,
+  needed: number
+): Promise<ParsedCandidate[]> {
+  try {
+    const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, {
+      headers: { 'User-Agent': 'Tuned-Broadcaster/1.0' },
+      signal: AbortSignal.timeout(6000),
+    });
+    if (!res.ok) return [];
+    const xml = await res.text();
+    const entries = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
+    const out: ParsedCandidate[] = [];
+
+    for (const entry of entries) {
+      if (out.length >= needed * 2) break;
+      const entryText = entry[1];
+      const vid = entryText.match(/<yt:videoId>(.*?)<\/yt:videoId>/)?.[1]?.trim();
+      const rawTitle = entryText.match(/<title>(.*?)<\/title>/)?.[1]?.trim();
+      const link = entryText.match(/<link[^>]*href="([^"]+)"/)?.[1] || '';
+      const desc = entryText.match(/<media:description>([\s\S]*?)<\/media:description>/)?.[1] || '';
+      if (!vid || !rawTitle || excludeIds.has(vid)) continue;
+      if (link.includes('/shorts/') || entryText.includes('/shorts/')) continue;
+      if (isShortTitle(rawTitle) || /#shorts?\b|youtube\.com\/shorts/i.test(desc)) continue;
+
+      const watchRes = await fetch(`https://www.youtube.com/watch?v=${vid}`, {
+        headers: YOUTUBE_PAGE_HEADERS,
+        signal: AbortSignal.timeout(6000),
+      });
+      if (!watchRes.ok) continue;
+      const html = await watchRes.text();
+      if (html.includes('rel="canonical" href="https://www.youtube.com/shorts/')) continue;
+
+      const lenMatch = html.match(/"lengthSeconds":"(\d+)"/);
+      const msMatch = html.match(/"approxDurationMs":"(\d+)"/);
+      const durSec = lenMatch
+        ? parseInt(lenMatch[1], 10)
+        : msMatch
+        ? Math.round(parseInt(msMatch[1], 10) / 1000)
+        : 0;
+      if (durSec > 60) {
+        out.push({ youtubeVideoId: vid, title: cleanHtmlEntities(rawTitle), durationSec: durSec });
+      }
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
+async function verifyCandidateEmbeddable(
+  candidate: ParsedCandidate,
+  creator: { id: string; name: string }
+): Promise<Video | null> {
+  try {
+    if (candidate.title && isShortTitle(candidate.title)) return null;
+    if (candidate.durationSec <= MAX_SHORT_DURATION_SEC && (await isYouTubeShort(candidate.youtubeVideoId))) {
+      return null;
+    }
+
+    const oembedRes = await fetch(
+      `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${candidate.youtubeVideoId}&format=json`,
+      { signal: AbortSignal.timeout(5000) }
+    );
+    if (!oembedRes.ok) return null;
+    const oembed = await oembedRes.json();
+    const title = String(oembed.title || candidate.title || '').trim();
+    if (!title || isShortTitle(title)) return null;
+
+    return {
+      youtubeVideoId: candidate.youtubeVideoId,
+      title,
+      sourceChannelId: creator.id,
+      sourceChannelTitle: String(oembed.author_name || creator.name),
+      thumbnailUrl: `https://i.ytimg.com/vi/${candidate.youtubeVideoId}/hqdefault.jpg`,
+      durationSec: Math.round(candidate.durationSec),
+    };
+  } catch {
+    return null;
+  }
 }
 
 async function fetchLatestViaChannelPage(
   creator: { id: string; name: string },
   minDurationSec: number,
   maxDurationSec: number = 18000,
-  maxResults: number = NEW_PER_CREATOR
+  maxResults: number = NEW_PER_CREATOR,
+  preferLongMovies: boolean = false
 ): Promise<Video[]> {
   try {
-    const res = await fetch(`https://www.youtube.com/channel/${creator.id}/videos`, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        Cookie: 'SOCS=CAESEwgDEgk2MTQ1NzU1NDQaAmVuIAEaBgiA_LyaBg',
-        'Accept-Language': 'en-US,en;q=0.9',
-      },
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) return [];
-    const html = await res.text();
-    const candidateIds = Array.from(
-      new Set([...html.matchAll(/"videoId":"([a-zA-Z0-9_-]{11})"/g)].map((m) => m[1]))
-    ).slice(0, MAX_VIDEOS_PER_CREATOR);
+    const rawCandidates = await fetchChannelTabCandidates(creator.id, 'videos');
+    const seenIds = new Set(rawCandidates.map((c) => c.youtubeVideoId));
+
+    const filterEligible = (list: ParsedCandidate[]) =>
+      list.filter(
+        (c) =>
+          c.durationSec >= minDurationSec &&
+          c.durationSec <= maxDurationSec &&
+          (!c.title || !isShortTitle(c.title))
+      );
+
+    let eligible = filterEligible(rawCandidates);
+
+    if (eligible.length < maxResults) {
+      const streamCandidates = await fetchChannelTabCandidates(creator.id, 'streams');
+      for (const sc of streamCandidates) {
+        if (!seenIds.has(sc.youtubeVideoId)) {
+          seenIds.add(sc.youtubeVideoId);
+          rawCandidates.push(sc);
+        }
+      }
+      eligible = filterEligible(rawCandidates);
+    }
+
+    if (eligible.length < maxResults) {
+      const rssCandidates = await fetchRssWatchCandidates(
+        creator.id,
+        seenIds,
+        maxResults - eligible.length
+      );
+      rawCandidates.push(...rssCandidates);
+      eligible = filterEligible(rawCandidates);
+    }
+
+    if (preferLongMovies) {
+      const tier = (sec: number) => (sec >= 1200 ? 2 : sec >= 300 ? 1 : 0);
+      eligible = [...eligible].sort((a, b) => tier(b.durationSec) - tier(a.durationSec));
+    }
 
     const valid: Video[] = [];
-    for (const vid of candidateIds) {
-      if (valid.length >= maxResults) break;
-
-      const badgeMatch = html.match(
-        new RegExp(
-          `"text":"(\\d{1,2}:\\d{2}(?::\\d{2})?)","badgeStyle":"[^"]+","animationActivationTargetId":"${vid}"`
-        )
-      );
-      const durationSec = parseDurationText(badgeMatch?.[1]);
-      if (!durationSec || durationSec < minDurationSec || durationSec > maxDurationSec) continue;
-
-      const oembedRes = await fetch(
-        `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${vid}&format=json`,
-        { signal: AbortSignal.timeout(5000) }
-      );
-      if (!oembedRes.ok) continue;
-      const oembed = await oembedRes.json();
-      const title = String(oembed.title || '').trim();
-      if (!title || /#shorts?\b|[\(\[]shorts?[\)\]]/i.test(title)) continue;
-      if (durationSec <= MAX_SHORT_DURATION_SEC && (await isYouTubeShort(vid))) continue;
-
-      valid.push({
-        youtubeVideoId: vid,
-        title,
-        sourceChannelId: creator.id,
-        sourceChannelTitle: String(oembed.author_name || creator.name),
-        thumbnailUrl: `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`,
-        durationSec: Math.round(durationSec),
-      });
+    const batchSize = 5;
+    for (let i = 0; i < eligible.length && valid.length < maxResults; i += batchSize) {
+      const batch = eligible.slice(i, i + batchSize);
+      const verified = await Promise.all(batch.map((c) => verifyCandidateEmbeddable(c, creator)));
+      for (const v of verified) {
+        if (v && valid.length < maxResults) valid.push(v);
+      }
     }
     return valid;
   } catch {
@@ -320,15 +531,50 @@ export async function refreshAllLineups(
   const baseLineups = currentSnapshot || SEED_LINEUPS;
   const envPlaylists = parseEnvBumperPlaylists();
 
-  // Build deduplicated job list across all categories (show uploads + dynamic bumper sources)
-  const jobs: { categoryId: string; creator: { id: string; name: string }; minDur: number }[] = [];
+  // Pre-group valid existing videos per category & creator once so under-filled creators backfill to 10
+  const existingStateByCategory = new Map<
+    string,
+    { existingVideos: Video[]; perCreatorMap: Map<string, Video[]>; existingIds: Set<string> }
+  >();
+
+  // Build job list across all categories (show uploads + dynamic bumper sources)
+  const jobs: {
+    categoryId: string;
+    creator: { id: string; name: string };
+    minDur: number;
+    maxResults: number;
+    preferLongMovies: boolean;
+  }[] = [];
   const bumperJobs: { categoryId: string; sourceId: string; sourceName: string; isPlaylist: boolean }[] = [];
 
   for (const cat of CATEGORIES) {
     const creators = channelsMap[cat.id] || [];
-    const minDur = cat.id === 'movies' ? 1200 : 65;
+    const allowedCreatorIds = new Set(creators.map((c) => c.id));
+    const existingLineup = baseLineups[cat.id] || SEED_LINEUPS[cat.id];
+    const existingVideos = (existingLineup?.videos || []).filter(
+      (v) =>
+        allowedCreatorIds.has(v.sourceChannelId) &&
+        v.durationSec &&
+        v.durationSec > 60 &&
+        v.durationSec !== 600
+    );
+    const existingIds = new Set(existingVideos.map((v) => v.youtubeVideoId));
+    const perCreatorMap = new Map<string, Video[]>();
+    for (const v of existingVideos) {
+      if (!perCreatorMap.has(v.sourceChannelId)) {
+        perCreatorMap.set(v.sourceChannelId, []);
+      }
+      perCreatorMap.get(v.sourceChannelId)!.push(v);
+    }
+    existingStateByCategory.set(cat.id, { existingVideos, perCreatorMap, existingIds });
+
+    const preferLongMovies = cat.id === 'movies';
+    const minDur = 65;
     for (const creator of creators) {
-      jobs.push({ categoryId: cat.id, creator, minDur });
+      const currentCount = perCreatorMap.get(creator.id)?.length || 0;
+      const maxResults =
+        currentCount < MAX_VIDEOS_PER_CREATOR ? MAX_VIDEOS_PER_CREATOR : NEW_PER_CREATOR;
+      jobs.push({ categoryId: cat.id, creator, minDur, maxResults, preferLongMovies });
     }
 
     const bumperChannels =
@@ -361,10 +607,23 @@ export async function refreshAllLineups(
   async function worker() {
     while (cursor < jobs.length) {
       const idx = cursor++;
-      const { categoryId, creator, minDur } = jobs[idx];
+      const { categoryId, creator, minDur, maxResults, preferLongMovies } = jobs[idx];
       const vids = apiKey
-        ? await fetchLatestViaYouTubeApi(creator, apiKey, minDur)
-        : await fetchLatestViaChannelPage(creator, minDur);
+        ? await fetchLatestViaYouTubeApi(
+            creator,
+            apiKey,
+            minDur,
+            18000,
+            maxResults,
+            preferLongMovies
+          )
+        : await fetchLatestViaChannelPage(
+            creator,
+            minDur,
+            18000,
+            maxResults,
+            preferLongMovies
+          );
 
       if (vids.length > 0) {
         if (!fetchedByCategory.has(categoryId)) {
@@ -429,25 +688,8 @@ export async function refreshAllLineups(
   let dynamicBumpersFound = 0;
 
   for (const cat of CATEGORIES) {
-    const allowedCreatorIds = new Set((channelsMap[cat.id] || []).map((c) => c.id));
-    const existingLineup = baseLineups[cat.id] || SEED_LINEUPS[cat.id];
-    const existingVideos = (existingLineup?.videos || []).filter(
-      (v) =>
-        allowedCreatorIds.has(v.sourceChannelId) &&
-        v.durationSec &&
-        v.durationSec > 60 &&
-        v.durationSec !== 600
-    );
-    const existingIds = new Set(existingVideos.map((v) => v.youtubeVideoId));
-
-    // Group existing videos per creator
-    const perCreatorMap = new Map<string, Video[]>();
-    for (const v of existingVideos) {
-      if (!perCreatorMap.has(v.sourceChannelId)) {
-        perCreatorMap.set(v.sourceChannelId, []);
-      }
-      perCreatorMap.get(v.sourceChannelId)!.push(v);
-    }
+    const state = existingStateByCategory.get(cat.id)!;
+    const { existingVideos, perCreatorMap, existingIds } = state;
 
     // Prepend any newly discovered videos per creator so fresh uploads rotate into schedule first
     const freshCreators = fetchedByCategory.get(cat.id);

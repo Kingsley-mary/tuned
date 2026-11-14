@@ -159,7 +159,7 @@ export function getCalendarDaySeed(categoryId: string, nowMs: number = getSynced
   const d = new Date(nowMs);
   const dayOfWeek = d.getDay();
   let hash = 0;
-  const str = `${categoryId}_dow_${dayOfWeek}`;
+  const str = `${categoryId}_dow_${dayOfWeek}_v2`;
   for (let i = 0; i < str.length; i++) {
     hash = (hash << 5) - hash + str.charCodeAt(i);
     hash |= 0;
@@ -171,12 +171,13 @@ export function getCalendarDaySeed(categoryId: string, nowMs: number = getSynced
  * Deterministic channel time offset combining channel ID and calendar-day seed.
  */
 export function getChannelTimeOffset(categoryId: string, nowMs: number = getSyncedNowMs()): number {
+  const daySeed = getCalendarDaySeed(categoryId, nowMs);
+  const str = `${categoryId}_offset_v2_${daySeed}`;
   let hash = 0;
-  for (let i = 0; i < categoryId.length; i++) {
-    hash = (hash << 5) - hash + categoryId.charCodeAt(i);
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
     hash |= 0;
   }
-  const daySeed = getCalendarDaySeed(categoryId, nowMs);
   return (Math.abs(hash) + (daySeed % 86400)) % 86400; // Offset within a 24-hour broadcast day
 }
 
