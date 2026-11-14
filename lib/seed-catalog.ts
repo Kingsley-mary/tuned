@@ -1391,14 +1391,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1273
       },
       {
-        "youtubeVideoId": "KIQnIBi7SjU",
-        "title": "Damiani Plays Zelda: Ocarina of Time (2026) (Pt 1) - It's Been 28 Years...",
-        "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
-        "sourceChannelTitle": "Easy Allies Plays",
-        "thumbnailUrl": "https://i.ytimg.com/vi/KIQnIBi7SjU/hqdefault.jpg",
-        "durationSec": 35952
-      },
-      {
         "youtubeVideoId": "gRcy-tlNKEo",
         "title": "Hunger and \"addicting\" game design",
         "sourceChannelId": "UChRxI4p6X8u7vCaRmpHK-rw",
@@ -1719,14 +1711,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 1655
       },
       {
-        "youtubeVideoId": "AMxL-Hc8ROE",
-        "title": "Easy Allies Plays Pro Jank Footy, Phantom Blade Zero, and Queen's Domain - Stream Team",
-        "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
-        "sourceChannelTitle": "Easy Allies Plays",
-        "thumbnailUrl": "https://i.ytimg.com/vi/AMxL-Hc8ROE/hqdefault.jpg",
-        "durationSec": 7844
-      },
-      {
         "youtubeVideoId": "dAAdKizttUw",
         "title": "So... why are halo fans so obsessed with Artstyle?",
         "sourceChannelId": "UChRxI4p6X8u7vCaRmpHK-rw",
@@ -2023,14 +2007,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "durationSec": 2911
       },
       {
-        "youtubeVideoId": "kGFXjeq_nHY",
-        "title": "Damiani Plays Phantom Blade Zero",
-        "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
-        "sourceChannelTitle": "Easy Allies Plays",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kGFXjeq_nHY/hqdefault.jpg",
-        "durationSec": 29872
-      },
-      {
         "youtubeVideoId": "PTwdOveYwrY",
         "title": "Yeah, the graphics really don't matter, btw",
         "sourceChannelId": "UChRxI4p6X8u7vCaRmpHK-rw",
@@ -2245,14 +2221,6 @@ export const SEED_LINEUPS: Record<string, ChannelLineup> = {
         "sourceChannelTitle": "GameSpot Sports",
         "thumbnailUrl": "https://i.ytimg.com/vi/EsuIE09kie4/hqdefault.jpg",
         "durationSec": 6427
-      },
-      {
-        "youtubeVideoId": "xZ-S0-2zPbM",
-        "title": "Easy Allies Halloween Charity Stream 2026",
-        "sourceChannelId": "UCL7O6Onu0lBcwZ8t-YMgGcw",
-        "sourceChannelTitle": "Easy Allies Plays",
-        "thumbnailUrl": "https://i.ytimg.com/vi/xZ-S0-2zPbM/hqdefault.jpg",
-        "durationSec": 17297
       },
       {
         "youtubeVideoId": "XrxrhI-aitw",

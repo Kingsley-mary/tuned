@@ -198,10 +198,6 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
       "name": "GameSpot"
     },
     {
-      "id": "UCL7O6Onu0lBcwZ8t-YMgGcw",
-      "name": "Easy Allies"
-    },
-    {
       "id": "UCYt9E2d_GCrPzquW-5MZwmQ",
       "name": "Modern Vintage Gamer"
     },
@@ -2677,9 +2673,21 @@ export async function getLineupForCategory(categoryId: string): Promise<ChannelL
 
   // For built-in channels, read from the shared Vercel Blob catalog snapshot first (updated by daily cron),
   // falling back cleanly to SEED_LINEUPS so every browser worldwide stays 100% synchronized.
+  const allowedCreatorIds = new Set((BROADCAST_CHANNELS_MAP[categoryId] || []).map((c) => c.id));
   const blobSnapshot = await readCatalogSnapshot();
   if (blobSnapshot?.[categoryId] && blobSnapshot[categoryId].videos.length > 0) {
-    return blobSnapshot[categoryId];
+    const filteredVideos =
+      allowedCreatorIds.size > 0
+        ? blobSnapshot[categoryId].videos.filter(
+            (v) => !v.sourceChannelId || allowedCreatorIds.has(v.sourceChannelId)
+          )
+        : blobSnapshot[categoryId].videos;
+    if (filteredVideos.length > 0) {
+      return {
+        ...blobSnapshot[categoryId],
+        videos: filteredVideos,
+      };
+    }
   }
 
   if (SEED_LINEUPS[categoryId] && SEED_LINEUPS[categoryId].videos.length > 0) {
