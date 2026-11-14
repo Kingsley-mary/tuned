@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import { ChannelLineup } from '../lib/types';
 import { getLiveBroadcastState, buildChannelSchedule, getVideoDuration, getSyncedNowMs, getDailyChannelLineup, getMarathonScheduleLabel } from '../lib/broadcast-clock';
 import { computeChannelTransitions } from '../lib/bumpers';
+import { isMobileTouchDevice } from '../lib/device';
 
 export interface ChannelSavedState {
   videoIndex: number;
@@ -34,6 +35,8 @@ interface GuideSlot {
 }
 
 const DESKTOP_VIS = 7;
+const MOBILE_PXM = 4.6; // px per minute on mobile 2D scroll grid
+const MOBILE_WIN = 360; // 6-hour scrollable horizon on mobile
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -77,7 +80,8 @@ export function GuideScreen({
     const checkViewport = () => {
       setIsMobile(
         window.innerWidth <= 768 ||
-        (window.innerHeight <= 540 && window.innerWidth <= 1024)
+        (window.innerHeight <= 540 && window.innerWidth <= 1024) ||
+        (isMobileTouchDevice() && window.innerHeight <= 640 && window.innerWidth <= 1024)
       );
     };
     checkViewport();
@@ -111,6 +115,8 @@ export function GuideScreen({
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const rowsRef = useRef<HTMLDivElement | null>(null);
   const touchRef = useRef<{ x: number; y: number; startTop: number; startOffset: number } | null>(null);
+  const mobScrollRef = useRef<HTMLDivElement | null>(null);
+  const [mobScrolledFar, setMobScrolledFar] = useState<boolean>(false);
 
   // Sync highlighted/selected row whenever currentChannelIndex changes
   useEffect(() => {
@@ -119,6 +125,17 @@ export function GuideScreen({
     setSelSlotId(null);
     setWinOffsetMin(0);
   }, [currentChannelIndex, channels.length]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const el = mobScrollRef.current;
+    if (!el) return;
+    const rowH = 48; // 44px row + 4px gap
+    const targetTop = Math.max(0, safeCurrentCh * rowH - (el.clientHeight - 30) / 2 + rowH / 2);
+    el.scrollTop = targetTop;
+    el.scrollLeft = 0;
+    setMobScrolledFar(false);
+  }, [isMobile, safeCurrentCh]);
 
   const flash = useCallback((msg: string) => {
     setToastMsg(msg);
@@ -449,6 +466,16 @@ export function GuideScreen({
     return ticks;
   }, [w0, WIN, isMobile]);
 
+  const mobTimeTicks = useMemo(() => {
+    const step = 30;
+    const firstTick = Math.ceil(liveW0 / step) * step;
+    const ticks: number[] = [];
+    for (let m = firstTick; m <= liveW0 + MOBILE_WIN - 10; m += step) {
+      ticks.push(m);
+    }
+    return ticks;
+  }, [liveW0]);
+
   const visibleRowIndices = useMemo(() => {
     const indices: number[] = [];
     const end = Math.min(fittedTop + VIS, channels.length);
@@ -457,13 +484,116 @@ export function GuideScreen({
   }, [fittedTop, channels.length, VIS]);
 
   const nowFraction = (nowMin - w0) / WIN;
+  const mobNowMin = (scheduleAnchorMs - dayStartMs) / 60000;
   const selChannel = channels[selRow];
+  const selectedSlotId = selectedSlot?.id ?? null;
+
+  const mobGridRows = useMemo(() => {
+    if (!isMobile) return null;
+    const mobW1 = liveW0 + MOBILE_WIN;
+    return (
+      <div className="tvg-mob-rows">
+        {channels.map((c, r) => {
+          const isCurrentPlayingChannel = r === safeCurrentCh;
+          const isFocusedRow = r === selRow;
+          const rowSlots = (schedules[r] || []).filter(
+            (p) => p.e > liveW0 && p.s < mobW1
+          );
+
+          return (
+            <div
+              key={c.categoryId}
+              className={`tvg-mob-row row ${isCurrentPlayingChannel ? 'sel' : ''} ${isFocusedRow && !isCurrentPlayingChannel ? 'foc' : ''}`}
+            >
+              <button
+                type="button"
+                className="ch tvg-mob-ch"
+                onClick={() => {
+                  if (selRow === r) {
+                    handleTune(r);
+                  } else {
+                    setSelRow(r);
+                    setSelSlotId(null);
+                  }
+                }}
+              >
+                <span>{c.categoryName}</span>
+              </button>
+
+              <div
+                className="trk tvg-mob-trk"
+                style={{ width: `${MOBILE_WIN * MOBILE_PXM}px` }}
+              >
+                {rowSlots.map((p) => {
+                  const a = Math.max(p.s, liveW0);
+                  const b = Math.min(p.e, mobW1);
+                  const air = p.s <= mobNowMin && mobNowMin < p.e;
+                  const isOn = selectedSlotId === p.id && isFocusedRow;
+                  const cl = p.s < liveW0 - 0.5;
+                  const cr = p.e > mobW1 + 0.5;
+                  const leftPx = (a - liveW0) * MOBILE_PXM;
+                  const widthPx = Math.max(28, (b - a) * MOBILE_PXM - 4);
+
+                  return (
+                    <button
+                      key={p.id}
+                      type="button"
+                      className={`pr ${air ? 'air' : ''} ${isOn ? 'on' : ''} ${cl ? 'cl' : ''} ${cr ? 'cr' : ''} ${p.isMarathon ? 'is-marathon' : ''}`}
+                      style={{
+                        left: `${leftPx}px`,
+                        width: `${widthPx}px`,
+                      }}
+                      onClick={() => {
+                        if (selRow === r && selectedSlotId === p.id) {
+                          handleTune(r, p);
+                        } else {
+                          setSelRow(r);
+                          setSelSlotId(p.id);
+                        }
+                      }}
+                    >
+                      {p.isMarathon && (
+                        <span className="gd-marathon-badge" title={`Continuous marathon of ${p.src}`}>
+                          🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
+                        </span>
+                      )}
+                      <span>{p.t}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+
+        {mobNowMin >= liveW0 && mobNowMin <= liveW0 + MOBILE_WIN && (
+          <div
+            className="tvg-mob-nowline"
+            style={{
+              left: `calc(var(--lw) + var(--gap) + ${(mobNowMin - liveW0) * MOBILE_PXM}px)`,
+            }}
+          />
+        )}
+      </div>
+    );
+  }, [
+    isMobile,
+    channels,
+    safeCurrentCh,
+    selRow,
+    liveW0,
+    schedules,
+    selectedSlotId,
+    scheduleAnchorMs,
+    mobNowMin,
+    handleTune,
+  ]);
 
   const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement | null;
     if (!target) return;
     if (
-      target.closest('button, a, input, select, textarea, .ch, .pr, .pgb, .info, .keys > div, .keys > button')
+      target.closest('button, a, input, select, textarea, .ch, .pr, .pgb, .info, .keys > div, .keys > button, .tvg-mob-scroll, .tvg-mob-ch, .tvg-mob-nowbtn')
     ) {
       return;
     }
@@ -509,162 +639,256 @@ export function GuideScreen({
         </div>
 
         <div className="scroll">
-          <div>
-            <div className="axis">
-              <div className="today">
-                <span>Today</span>
-                {winOffsetMin > 0 && (
-                  <button
-                    type="button"
-                    className="pgb"
-                    onClick={() => {
-                      setWinOffsetMin(0);
-                      setSelSlotId(null);
-                    }}
-                  >
-                    Now
-                  </button>
-                )}
-              </div>
-              <div className="times">
-                {timeTicks.map((m) => (
-                  <span key={m} style={{ left: `${((m - w0) / WIN) * 100}%` }}>
-                    {hm(m)}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div
-              className="rows"
-              ref={rowsRef}
-              onTouchStart={handleRowsTouchStart}
-              onTouchEnd={handleRowsTouchEnd}
-            >
-              {visibleRowIndices.map((r) => {
-                const c = channels[r];
-                const isCurrentPlayingChannel = r === safeCurrentCh;
-                const isFocusedRow = r === selRow;
-                const rowSlots = (schedules[r] || []).filter(
-                  (p) => p.e > w0 && p.s < w1
-                );
-
-                return (
-                  <div
-                    key={c.categoryId}
-                    className={`row ${isCurrentPlayingChannel ? 'sel' : ''} ${isFocusedRow && !isCurrentPlayingChannel ? 'foc' : ''}`}
-                  >
-                    <button
-                      type="button"
-                      className="ch"
-                      onClick={() => handleTune(r)}
+          {isMobile ? (
+            <div className="tvg-mob-wrap">
+              <div
+                className="tvg-mob-scroll"
+                ref={mobScrollRef}
+                onScroll={(e) => {
+                  const sl = e.currentTarget.scrollLeft;
+                  const far = sl > 80;
+                  if (far !== mobScrolledFar) setMobScrolledFar(far);
+                }}
+              >
+                <div className="tvg-mob-inner">
+                  <div className="tvg-mob-axis">
+                    <div className="tvg-mob-corner">
+                      <span>Today</span>
+                      {mobScrolledFar && (
+                        <button
+                          type="button"
+                          className="pgb tvg-mob-nowbtn"
+                          onClick={() => {
+                            mobScrollRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
+                            setSelSlotId(null);
+                          }}
+                        >
+                          Now
+                        </button>
+                      )}
+                    </div>
+                    <div
+                      className="tvg-mob-times"
+                      style={{ width: `${MOBILE_WIN * MOBILE_PXM}px` }}
                     >
-                      <span>{c.categoryName}</span>
-                    </button>
-
-                    <div className="trk">
-                      {rowSlots.map((p) => {
-                        const a = Math.max(p.s, w0);
-                        const b = Math.min(p.e, w1);
-                        const air = p.s <= nowMin && nowMin < p.e;
-                        const isOn = selectedSlot?.id === p.id && isFocusedRow;
-                        const cl = p.s < w0 - 0.5;
-                        const cr = p.e > w1 + 0.5;
-                        const leftPct = ((a - w0) / WIN) * 100;
-                        const widthPct = ((b - a) / WIN) * 100;
-
-                        return (
-                          <button
-                            key={p.id}
-                            type="button"
-                            className={`pr ${air ? 'air' : ''} ${isOn ? 'on' : ''} ${cl ? 'cl' : ''} ${cr ? 'cr' : ''} ${p.isMarathon ? 'is-marathon' : ''}`}
-                            style={{
-                              left: `${leftPct}%`,
-                              width: widthPct > 0.8 ? `calc(${widthPct}% - 4px)` : `${widthPct}%`,
-                            }}
-                            onMouseEnter={() => {
-                              setSelRow(r);
-                              setSelSlotId(p.id);
-                            }}
-                            onClick={() => {
-                              if (air || (selRow === r && selectedSlot?.id === p.id)) {
-                                handleTune(r, p);
-                              } else {
-                                setSelRow(r);
-                                setSelSlotId(p.id);
-                              }
-                            }}
-                          >
-                            {p.isMarathon && (
-                              <span className="gd-marathon-badge" title={`Continuous marathon of ${p.src}`}>
-                                🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
-                              </span>
-                            )}
-                            <span>{p.t}</span>
-                          </button>
-                        );
-                      })}
+                      {mobTimeTicks.map((m) => (
+                        <span
+                          key={m}
+                          style={{ left: `${(m - liveW0) * MOBILE_PXM}px` }}
+                        >
+                          {hm(m)}
+                        </span>
+                      ))}
+                      {mobNowMin >= liveW0 && mobNowMin <= liveW0 + MOBILE_WIN && (
+                        <b
+                          className="tvg-mob-nowchip"
+                          style={{ left: `${(mobNowMin - liveW0) * MOBILE_PXM}px` }}
+                        >
+                          NOW
+                        </b>
+                      )}
                     </div>
                   </div>
-                );
-              })}
 
-              {nowFraction >= 0 && nowFraction <= 1 && (
+                  {mobGridRows}
+                </div>
+              </div>
+
+              {selChannel && selectedSlot && (
                 <div
-                  className="now"
-                  style={{ '--p': nowFraction } as React.CSSProperties}
+                  className="info"
+                  onClick={() => handleTune(selRow, selectedSlot)}
+                  style={{ cursor: 'pointer' }}
+                  title="Tap to watch this channel"
                 >
-                  <b>NOW</b>
+                  <div className="tm">
+                    {hm(selectedSlot.s)} – {hm(selectedSlot.e)}
+                  </div>
+                  <div className="tt">
+                    {selectedSlot.isMarathon && (
+                      <span className="osd-row-tag is-marathon" style={{ marginRight: '8px', verticalAlign: 'middle', display: 'inline-flex' }}>
+                        🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
+                      </span>
+                    )}
+                    {selectedSlot.t}
+                  </div>
+                  <div className="rt">
+                    <span>
+                      CH {pad(selRow + 1)} · {selChannel.categoryName} · {selectedSlot.src}
+                    </span>
+                    <b className="bdg">{dur(selectedSlot.e - selectedSlot.s)}</b>
+                    <button
+                      type="button"
+                      className="tvg-mobile-watch"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTune(selRow, selectedSlot);
+                      }}
+                    >
+                      Watch
+                    </button>
+                  </div>
                 </div>
               )}
-
-              <div className="sbar">
-                <i
-                  style={{
-                    top: `${(fittedTop / Math.max(1, channels.length)) * 100}%`,
-                    height: `${Math.min(1, VIS / Math.max(1, channels.length)) * 100}%`,
-                  }}
-                />
-              </div>
             </div>
-
-            {selChannel && selectedSlot && (
-              <div
-                className="info"
-                onClick={() => handleTune(selRow, selectedSlot)}
-                style={{ cursor: 'pointer' }}
-                title="Tap to watch this channel"
-              >
-                <div className="tm">
-                  {hm(selectedSlot.s)} – {hm(selectedSlot.e)}
-                </div>
-                <div className="tt">
-                  {selectedSlot.isMarathon && (
-                    <span className="osd-row-tag is-marathon" style={{ marginRight: '8px', verticalAlign: 'middle', display: 'inline-flex' }}>
-                      🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
-                    </span>
+          ) : (
+            <div>
+              <div className="axis">
+                <div className="today">
+                  <span>Today</span>
+                  {winOffsetMin > 0 && (
+                    <button
+                      type="button"
+                      className="pgb"
+                      onClick={() => {
+                        setWinOffsetMin(0);
+                        setSelSlotId(null);
+                      }}
+                    >
+                      Now
+                    </button>
                   )}
-                  {selectedSlot.t}
                 </div>
-                <div className="rt">
-                  <span>
-                    CH {pad(selRow + 1)} · {selChannel.categoryName} · {selectedSlot.src}
-                  </span>
-                  <b className="bdg">{dur(selectedSlot.e - selectedSlot.s)}</b>
-                  <button
-                    type="button"
-                    className="tvg-mobile-watch"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleTune(selRow, selectedSlot);
-                    }}
-                  >
-                    Watch
-                  </button>
+                <div className="times">
+                  {timeTicks.map((m) => (
+                    <span key={m} style={{ left: `${((m - w0) / WIN) * 100}%` }}>
+                      {hm(m)}
+                    </span>
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
+
+              <div
+                className="rows"
+                ref={rowsRef}
+                onTouchStart={handleRowsTouchStart}
+                onTouchEnd={handleRowsTouchEnd}
+              >
+                {visibleRowIndices.map((r) => {
+                  const c = channels[r];
+                  const isCurrentPlayingChannel = r === safeCurrentCh;
+                  const isFocusedRow = r === selRow;
+                  const rowSlots = (schedules[r] || []).filter(
+                    (p) => p.e > w0 && p.s < w1
+                  );
+
+                  return (
+                    <div
+                      key={c.categoryId}
+                      className={`row ${isCurrentPlayingChannel ? 'sel' : ''} ${isFocusedRow && !isCurrentPlayingChannel ? 'foc' : ''}`}
+                    >
+                      <button
+                        type="button"
+                        className="ch"
+                        onClick={() => handleTune(r)}
+                      >
+                        <span>{c.categoryName}</span>
+                      </button>
+
+                      <div className="trk">
+                        {rowSlots.map((p) => {
+                          const a = Math.max(p.s, w0);
+                          const b = Math.min(p.e, w1);
+                          const air = p.s <= nowMin && nowMin < p.e;
+                          const isOn = selectedSlot?.id === p.id && isFocusedRow;
+                          const cl = p.s < w0 - 0.5;
+                          const cr = p.e > w1 + 0.5;
+                          const leftPct = ((a - w0) / WIN) * 100;
+                          const widthPct = ((b - a) / WIN) * 100;
+
+                          return (
+                            <button
+                              key={p.id}
+                              type="button"
+                              className={`pr ${air ? 'air' : ''} ${isOn ? 'on' : ''} ${cl ? 'cl' : ''} ${cr ? 'cr' : ''} ${p.isMarathon ? 'is-marathon' : ''}`}
+                              style={{
+                                left: `${leftPct}%`,
+                                width: widthPct > 0.8 ? `calc(${widthPct}% - 4px)` : `${widthPct}%`,
+                              }}
+                              onMouseEnter={() => {
+                                setSelRow(r);
+                                setSelSlotId(p.id);
+                              }}
+                              onClick={() => {
+                                if (air || (selRow === r && selectedSlot?.id === p.id)) {
+                                  handleTune(r, p);
+                                } else {
+                                  setSelRow(r);
+                                  setSelSlotId(p.id);
+                                }
+                              }}
+                            >
+                              {p.isMarathon && (
+                                <span className="gd-marathon-badge" title={`Continuous marathon of ${p.src}`}>
+                                  🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
+                                </span>
+                              )}
+                              <span>{p.t}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {nowFraction >= 0 && nowFraction <= 1 && (
+                  <div
+                    className="now"
+                    style={{ '--p': nowFraction } as React.CSSProperties}
+                  >
+                    <b>NOW</b>
+                  </div>
+                )}
+
+                <div className="sbar">
+                  <i
+                    style={{
+                      top: `${(fittedTop / Math.max(1, channels.length)) * 100}%`,
+                      height: `${Math.min(1, VIS / Math.max(1, channels.length)) * 100}%`,
+                    }}
+                  />
+                </div>
+              </div>
+
+              {selChannel && selectedSlot && (
+                <div
+                  className="info"
+                  onClick={() => handleTune(selRow, selectedSlot)}
+                  style={{ cursor: 'pointer' }}
+                  title="Tap to watch this channel"
+                >
+                  <div className="tm">
+                    {hm(selectedSlot.s)} – {hm(selectedSlot.e)}
+                  </div>
+                  <div className="tt">
+                    {selectedSlot.isMarathon && (
+                      <span className="osd-row-tag is-marathon" style={{ marginRight: '8px', verticalAlign: 'middle', display: 'inline-flex' }}>
+                        🔥 {getMarathonScheduleLabel(scheduleAnchorMs) || 'MARATHON'}
+                      </span>
+                    )}
+                    {selectedSlot.t}
+                  </div>
+                  <div className="rt">
+                    <span>
+                      CH {pad(selRow + 1)} · {selChannel.categoryName} · {selectedSlot.src}
+                    </span>
+                    <b className="bdg">{dur(selectedSlot.e - selectedSlot.s)}</b>
+                    <button
+                      type="button"
+                      className="tvg-mobile-watch"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTune(selRow, selectedSlot);
+                      }}
+                    >
+                      Watch
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="keys">

@@ -1031,6 +1031,14 @@ button:focus-visible, input:focus-visible {
   pointer-events: none;
   animation: bm-stage-in 260ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
+.tv-stage.has-bumper-preview .tv-bumper {
+  z-index: 65;
+}
+.tv-stage.has-bumper-preview .osd-top,
+.tv-stage.has-bumper-preview .osd-bottom {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 .bm-three-canvas {
   position: absolute;
   inset: 0;
@@ -1132,6 +1140,20 @@ button:focus-visible, input:focus-visible {
   background: #ff2a2a;
   border-color: #ff2a2a;
   transform: scale(1.04);
+}
+.bm-exit-mobile {
+  display: none;
+}
+.bm-exit-desktop {
+  display: inline;
+}
+@media (pointer: coarse) {
+  .bm-exit-desktop {
+    display: none;
+  }
+  .bm-exit-mobile {
+    display: inline;
+  }
 }
 @keyframes bm-stage-in {
   0% { opacity: 0; }
@@ -2767,8 +2789,10 @@ button:focus-visible, input:focus-visible {
   padding-top: 2px;
   white-space: nowrap;
 }
-.tvg-guide-screen .ch:hover {
-  background: rgba(255, 255, 255, .22);
+@media (hover: hover) and (pointer: fine) {
+  .tvg-guide-screen .ch:hover {
+    background: rgba(255, 255, 255, .22);
+  }
 }
 .tvg-guide-screen .row.sel .ch {
   background: var(--cream);
@@ -2832,11 +2856,17 @@ button:focus-visible, input:focus-visible {
   vertical-align: middle;
   line-height: 1.2;
 }
-.tvg-guide-screen .pr:hover {
-  background: rgba(255, 255, 255, .2);
+@media (hover: hover) and (pointer: fine) {
+  .tvg-guide-screen .pr:hover {
+    background: rgba(255, 255, 255, .2);
+  }
+  .tvg-guide-screen .pr.on:hover {
+    background: var(--cream);
+    color: var(--cd);
+    border-color: transparent;
+  }
 }
-.tvg-guide-screen .pr.on,
-.tvg-guide-screen .pr.on:hover {
+.tvg-guide-screen .pr.on {
   background: var(--cream);
   color: var(--cd);
   border-color: transparent;
@@ -2893,6 +2923,171 @@ button:focus-visible, input:focus-visible {
   width: 4px;
   border-radius: 3px;
   background: #fff;
+}
+
+/* Mobile 2D Native Inertia Scroll Guide Grid */
+.tvg-mob-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.tvg-mob-scroll {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-x pan-y;
+  scrollbar-width: none;
+  border-radius: 10px;
+}
+.tvg-mob-scroll::-webkit-scrollbar {
+  display: none;
+}
+.tvg-mob-inner {
+  position: relative;
+  width: max-content;
+  min-width: 100%;
+  padding-bottom: 6px;
+}
+.tvg-mob-axis {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  height: 30px;
+  background: rgba(18, 16, 22, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.tvg-mob-corner {
+  position: sticky;
+  left: 0;
+  z-index: 9;
+  width: var(--lw);
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(18, 16, 22, 0.96);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tvg-guide-screen .pgb.tvg-mob-nowbtn {
+  height: 20px;
+  min-width: 0;
+  padding: 0 7px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+.tvg-mob-times {
+  position: relative;
+  height: 100%;
+  flex-shrink: 0;
+}
+.tvg-mob-times span {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+.tvg-mob-nowchip {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--cream);
+  color: var(--cd);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 3;
+  pointer-events: none;
+}
+.tvg-mob-rows {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+}
+.tvg-guide-screen .tvg-mob-row {
+  display: flex;
+  align-items: stretch;
+  gap: var(--gap);
+  height: 44px;
+  min-height: 44px;
+  margin-right: 0;
+}
+.tvg-guide-screen .tvg-mob-ch {
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  width: var(--lw);
+  flex-shrink: 0;
+  background: rgba(34, 32, 42, 0.94);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.35);
+}
+.tvg-guide-screen .tvg-mob-ch span {
+  font-size: clamp(17px, 4.4vh, 24px);
+  letter-spacing: 0.04em;
+}
+.tvg-guide-screen .tvg-mob-row.sel .tvg-mob-ch {
+  background: var(--cream);
+  color: var(--cd);
+  border-color: transparent;
+}
+.tvg-guide-screen .tvg-mob-row.foc .tvg-mob-ch {
+  background: rgba(68, 64, 82, 0.96);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.tvg-guide-screen .tvg-mob-trk {
+  flex-shrink: 0;
+  position: relative;
+  height: 100%;
+}
+.tvg-guide-screen .tvg-mob-trk .pr {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.13);
+  transition: transform 0.1s ease, background 0.12s ease;
+}
+.tvg-guide-screen .tvg-mob-trk .pr.air {
+  background: rgba(255, 255, 255, 0.22);
+}
+.tvg-guide-screen .tvg-mob-trk .pr.on {
+  background: var(--cream) !important;
+  color: var(--cd) !important;
+  border-color: transparent !important;
+}
+.tvg-guide-screen .tvg-mob-trk .pr:active,
+.tvg-guide-screen .tvg-mob-ch:active {
+  transform: scale(0.985);
+}
+.tvg-mob-nowline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--cream);
+  box-shadow: 0 0 8px rgba(247, 244, 234, 0.55);
+  z-index: 3;
+  pointer-events: none;
 }
 .tvg-guide-screen .info {
   flex-shrink: 0;
@@ -3971,7 +4166,7 @@ button:focus-visible, input:focus-visible {
    ========================================================================== */
 
 /* Hardcode the entire application layout to landscape on mobile / touch devices */
-@media (orientation: landscape) and (max-height: 640px), @media (max-width: 1024px) and (orientation: landscape) {
+@media (orientation: landscape) and (max-height: 540px), (max-width: 1024px) and (max-height: 640px) and (pointer: coarse) and (orientation: landscape) {
   html, body {
     width: 100vw;
     width: 100dvw;
@@ -4045,6 +4240,203 @@ button:focus-visible, input:focus-visible {
     padding: 6px 12px !important;
     font-size: 11px !important;
     max-width: 48vw !important;
+  }
+
+  /* Ident Preview Mobile Landscape Optimization across all 9 variants */
+  .bm-exit-desktop {
+    display: none !important;
+  }
+  .bm-exit-mobile {
+    display: inline !important;
+  }
+  .bm-preview-exit-btn {
+    top: max(10px, env(safe-area-inset-top, 0px)) !important;
+    right: max(14px, env(safe-area-inset-right, 0px)) !important;
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+    min-height: 30px !important;
+    z-index: 80 !important;
+  }
+  .bm-youtube-layer .bm-top-right-group {
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
+  }
+  .bm-youtube-layer .osd-chip {
+    max-width: 44vw !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .tv-stage.has-bumper-preview .bm-layer:not(.bm-youtube-layer) .bm-top-bar {
+    padding-right: 138px !important;
+  }
+  .tv-stage.has-bumper-preview .bm-vhs-osd-top {
+    padding-right: 138px !important;
+  }
+
+  /* 1. Ident / 6. Field / 7. Visualizer */
+  .bm-ident-layer,
+  .bm-orbital-layer,
+  .bm-cinematic-layer {
+    padding: 12px 16px !important;
+  }
+  .bm-ident-card {
+    padding: 16px 24px !important;
+    border-radius: 18px !important;
+    max-width: min(86vw, 480px) !important;
+  }
+  .bm-ident-eyebrow {
+    font-size: 9.5px !important;
+    margin-bottom: 4px !important;
+  }
+  .bm-ident-title {
+    font-size: clamp(28px, 7.8vh, 46px) !important;
+    margin: 2px 0 6px !important;
+  }
+  .bm-ident-sub {
+    font-size: 10.5px !important;
+  }
+  .bm-orbital-foot {
+    gap: 8px !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* 3. Lineup Split Schedule (override max-width: 768px 1-column stack) */
+  .bm-split {
+    grid-template-columns: 0.85fr 1.35fr !important;
+    gap: 18px !important;
+    padding: 14px 20px !important;
+    align-items: center !important;
+  }
+  .tv-stage.has-bumper-preview .bm-split {
+    padding-top: 44px !important;
+  }
+  .bm-split-left {
+    padding: 4px 0 !important;
+  }
+  .bm-call-num {
+    font-size: 11px !important;
+  }
+  .bm-call-name {
+    font-size: clamp(24px, 7vh, 42px) !important;
+  }
+  .bm-call-clock {
+    font-size: 12px !important;
+    margin-top: 2px !important;
+  }
+  .bm-split-right {
+    gap: 8px !important;
+  }
+  .bm-schedule-list {
+    gap: 8px !important;
+  }
+  .bm-schedule-item {
+    padding: 8px 12px !important;
+    gap: 10px !important;
+    border-radius: 10px !important;
+  }
+  .bm-schedule-item:nth-child(n+3) {
+    display: none !important;
+  }
+  .bm-schedule-item-thumb {
+    width: 96px !important;
+  }
+  .bm-item-body h3 {
+    font-size: 12.5px !important;
+    -webkit-line-clamp: 1 !important;
+  }
+  .bm-item-body p {
+    font-size: 11px !important;
+    margin-top: 2px !important;
+  }
+
+  /* 4. Swiss Slate */
+  .bm-slate {
+    padding: 14px 18px !important;
+  }
+  .bm-slate-center {
+    gap: 8px !important;
+    max-width: 88vw !important;
+  }
+  .bm-slate-badge {
+    padding: 4px 10px !important;
+    font-size: 9.5px !important;
+    margin-bottom: 0 !important;
+  }
+  .bm-slate-center h2 {
+    font-size: clamp(20px, 6.2vh, 34px) !important;
+  }
+  .bm-slate-sub {
+    font-size: 12.5px !important;
+  }
+  .bm-slate-foot {
+    padding-top: 10px !important;
+    font-size: 10px !important;
+  }
+
+  /* 5. Adult Swim Blackcard */
+  .bm-blackcard {
+    padding: 20px 24px !important;
+  }
+  .bm-card-lead {
+    font-size: 13px !important;
+    margin-bottom: 8px !important;
+  }
+  .bm-card-punch {
+    font-size: clamp(20px, 6vh, 32px) !important;
+  }
+  .bm-blackcard-foot {
+    left: max(16px, env(safe-area-inset-left, 0px)) !important;
+    right: max(16px, env(safe-area-inset-right, 0px)) !important;
+    bottom: max(12px, env(safe-area-inset-bottom, 0px)) !important;
+    gap: 8px !important;
+  }
+  .bm-blackcard-next {
+    font-size: 11px !important;
+    max-width: 60vw !important;
+  }
+
+  /* 8. SMPTE Testcard */
+  .bm-testcard-center {
+    top: 42% !important;
+  }
+  .bm-testcard-badge {
+    padding: 12px 22px !important;
+  }
+  .bm-testcard-callsign {
+    font-size: 10px !important;
+    margin-bottom: 4px !important;
+  }
+  .bm-testcard-ch {
+    font-size: clamp(16px, 5vh, 26px) !important;
+    margin-bottom: 4px !important;
+  }
+  .bm-testcard-status {
+    font-size: 10px !important;
+  }
+
+  /* 9. Analog VHS */
+  .bm-vhs-layer {
+    padding: 12px 16px !important;
+  }
+  .bm-vhs-osd-top {
+    top: max(10px, env(safe-area-inset-top, 0px)) !important;
+    left: max(16px, env(safe-area-inset-left, 0px)) !important;
+    right: max(16px, env(safe-area-inset-right, 0px)) !important;
+    font-size: clamp(12px, 3.6vh, 16px) !important;
+  }
+  .bm-vhs-card {
+    gap: 6px !important;
+  }
+  .bm-vhs-eyebrow {
+    font-size: 10px !important;
+  }
+  .bm-vhs-title {
+    font-size: clamp(24px, 7vh, 40px) !important;
+  }
+  .bm-vhs-sub {
+    font-size: 11px !important;
   }
 }
 

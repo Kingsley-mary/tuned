@@ -170,7 +170,9 @@ export const BumperStage: React.FC<BumperStageProps> = ({
                   title="Exit Preview (B / ESC)"
                   style={{ position: 'static' }}
                 >
-                  PREVIEW · PRESS B OR ESC TO EXIT ✕
+                  <span className="bm-exit-desktop">PREVIEW · PRESS B OR ESC TO EXIT</span>
+                  <span className="bm-exit-mobile">EXIT PREVIEW</span>
+                  <span aria-hidden="true"> ✕</span>
                 </button>
               )}
             </div>
@@ -217,7 +219,9 @@ export const BumperStage: React.FC<BumperStageProps> = ({
               onClick={onExitPreview}
               title="Exit Preview (B / ESC)"
             >
-              PREVIEW · PRESS B OR ESC TO EXIT ✕
+              <span className="bm-exit-desktop">PREVIEW · PRESS B OR ESC TO EXIT</span>
+              <span className="bm-exit-mobile">EXIT PREVIEW</span>
+              <span aria-hidden="true"> ✕</span>
             </button>
           )}
 

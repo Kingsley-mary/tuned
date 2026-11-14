@@ -800,6 +800,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
     if (!activeChannel) return;
     breakCounterRef.current += 1;
     isPreviewActiveRef.current = true;
+    setOsdOpen(false);
     const chId = activeChannel.categoryId || 'tech';
     const isMarathon = Boolean(
       activeVideo?.sourceChannelTitle &&
@@ -1428,7 +1429,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
   return (
     <div
       ref={tvStageRef}
-      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}${isEffectiveFullscreen ? ' is-fullscreen' : ''}`}
+      className={`tv-stage${osdOpen && !isHidden ? ' osd-on' : ''}${isEffectiveFullscreen ? ' is-fullscreen' : ''}${activeMotionBreak?.isPreview ? ' has-bumper-preview' : ''}`}
       style={
         {
           visibility: isHidden && !keepVideoVisible ? 'hidden' : 'visible',
@@ -1944,7 +1945,7 @@ export const WatchScreen: React.FC<WatchScreenProps> = ({
       </div>
 
       {/* Mobile Landscape Floating Fullscreen Pill (appears if native fullscreen was blocked without user gesture) */}
-      {!isHidden && isMobileTouchDevice() && !isMobilePortrait && !isFullscreen && (
+      {!isHidden && !activeMotionBreak && isMobileTouchDevice() && !isMobilePortrait && !isFullscreen && (
         <button
           type="button"
           className="tv-floating-fs-pill"

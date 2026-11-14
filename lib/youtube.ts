@@ -150,6 +150,22 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCnv0gfLQFNGPJ5MHSGuIAkw",
       "name": "HACKADAY"
+    },
+    {
+      "id": "UC8jkbVLPvztz8TuE98OYo8Q",
+      "name": "fpt."
+    },
+    {
+      "id": "UCi0_2sEpmT6FKn5-y6_W3cA",
+      "name": "Joanna Stern"
+    },
+    {
+      "id": "UCWHECOBvlhosLKVTHvw-3qw",
+      "name": "Fisayo Fosudo"
+    },
+    {
+      "id": "UCnXzIvtsAi1AOjPzLeLbu0g",
+      "name": "Unboxed by Fisayo"
     }
   ],
   "games": [
@@ -328,6 +344,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCBobmJyzsJ6Ll7UbfhI4iwQ",
       "name": "Unreal Engine"
+    },
+    {
+      "id": "UC-KM4Su6AEkUNea4TnYbBBg",
+      "name": "PlayStationGrenade"
     }
   ],
   "music": [
@@ -1152,6 +1172,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCwDxUt_GJc_dwn0xOp0zRBw",
       "name": "MTube"
+    },
+    {
+      "id": "UC1MaLhSumVa9tx_qL2BR-ug",
+      "name": "ApolloTV"
     }
   ],
   "fitness": [
@@ -1760,6 +1784,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UChdHQcTHJ8inhKivfdJsCAA",
       "name": "YAL00 at your service"
+    },
+    {
+      "id": "UCz8qTSSXpjUEhGvIxlWF3dA",
+      "name": "Guad"
     }
   ],
   "industry": [
@@ -2472,6 +2500,10 @@ export const BROADCAST_CHANNELS_MAP: Record<string, { id: string; name: string }
     {
       "id": "UCTFFhYhkLkxjhcCdwUKmQ5g",
       "name": "korty eo"
+    },
+    {
+      "id": "UCcOWHZl_mlhs2Yjo9Lyhb7g",
+      "name": "Cocoa Butter"
     }
   ]
 };
